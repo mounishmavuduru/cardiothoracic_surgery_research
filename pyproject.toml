@@ -26,7 +26,7 @@ dependencies = [
 dashboard = ["streamlit>=1.30"]
 viz3d = ["pyvista>=0.43"]
 ml = ["torch>=2.1", "shap>=0.44"]
-dev = ["pytest>=7.4", "pytest-cov>=4.1"]
+dev = ["pytest>=7.4", "pytest-cov>=4.1", "hypothesis>=6.90"]
 
 [project.scripts]
 asb = "asb.cli:main"

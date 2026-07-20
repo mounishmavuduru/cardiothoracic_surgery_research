@@ -99,3 +99,73 @@ labels, with the incremental ΔAUC (Section 2) as the test statistic.
   inducibility verdict." No FDA / VICTRE / ISCT language; nothing here is validated against
   real post-operative AF. The 2018 LA Segmentation Challenge geometries are used **only** as
   an anatomy-realism check, never as clinical validation.
+
+---
+
+## 7. Real-data addendum — FROZEN 2026-07-20, before any SFI-vs-label analysis (GM1)
+
+This section pins every real-data choice **before** the SFI↔inducibility relationship is
+inspected. It is git-tagged (`prereg-frozen-YYYYMMDD`). Any later change is a logged,
+dated deviation in `notebooks/lab_notebook.md`. The frozen synthetic `mock_ep` endpoints of
+Sections 1–6 are unchanged; this addendum instantiates them on real anatomy.
+
+### 7.1 Deviation logged: ground-truth simulator
+openCARP is **not installable** on this CPU-only ephemeral container (no apt/conda/pip
+package; a PETSc source build is out of scope) and the user defers the full openCARP sweep
+to Claude Science. The Roney archive (Zenodo 5801337) ships **no** inducibility label files,
+so published labels cannot be reused directly. Ground-truth labels are therefore generated
+by a **genuine monodomain Mitchell–Schaeffer reaction–diffusion solver**
+(`asb.labels.monodomain`, `source='monodomain_ms'`) — exactly plan §8.4's "monodomain +
+phenomenological Mitchell–Schaeffer on coarsened meshes". This is a *simulator verdict*,
+in the same category as openCARP, and is **never** clinical POAF. openCARP stays the wired,
+one-command deferred target (`asb.labels.opencarp`). Reentry here is governed by
+wavelength (CV×ERP), source–sink mismatch and unidirectional block — **never by λ₂** — so a
+predictive SFI→label link is not circular.
+
+### 7.2 Anatomy + substrate (real, frozen)
+- **Cohort:** Roney LA virtual cohort, Zenodo **5801337** (patient-derived LA surfaces).
+  Each `Mesh_<id>.vtk` carries `UAC1/UAC2` (∈[0,1]), `IIR` (LGE fibrosis proxy) and
+  `fiber_endo`/`fiber_epi`. Coordinates microns → mm. Coarsened by grid vertex-clustering
+  to **~2000 nodes**, carrying all fields.
+- **Fibrosis map (frozen):** `fibrosis = clip((IIR − 1.0)/(1.32 − 1.0), 0, 1)` — the
+  Khurram 2014 IIR healthy(1.0)→dense-scar(1.32) ramp.
+- **Grouping (CV):** each patient mesh is its own `shape_family`, so **GroupKFold =
+  patient-held-out** (the natural leakage-free grouping). Grouped **and** naive AUC both
+  reported.
+
+### 7.3 Δw diffuse uncoupling field (frozen, literature-calibrated)
+Perioperative inflammation slows atrial CV ~**20 %** (best estimate; range 10–30 %; Heida
+2021 PMID 34198544 regional; Clayton 2018 remodelled). With monodomain CV∝√D, a fractional
+CV drop `f_CV` implies a fractional conductance drop `f_D = 1 − (1 − f_CV)²`. Frozen:
+- `delta_w_mean_frac = 0.36`  (from `f_CV = 0.20` → `f_D = 1 − 0.8² = 0.36`; band 0.19–0.51),
+- `delta_w_cov = 0.5` (heterogeneity — the perioperative effect is dispersion, not uniform),
+- `fibrosis_coupling = 1.0` (larger drops in fibrotic tissue),
+- `validity_safety = 0.25` (first-order guard `‖ΔL‖ ≤ 0.25·(λ₃−λ₂)`).
+Δw = 0.36 is a **large** perturbation, likely beyond the first-order validity radius — the
+SFI feature is used as a *ranking* feature and the exact validity boundary is mapped in GM3;
+sensitivity to Δw over 0.19–0.51 is reported (E6).
+
+### 7.4 Monodomain-MS ground-truth protocol (frozen)
+Membrane (Mitchell & Schaeffer 2003, atrial-tuned): `tau_in=0.3, tau_out=6, tau_open=120,
+tau_close=110, v_gate=0.13` ms; fibrosis shortens `tau_close` by up to 50 %
+(`fibrosis_erp_shortening=0.5`). Diffusion: anisotropic conductance-weighted cotangent
+Laplacian, `d0=0.20` (healthy along-fibre CV ≈ 0.87 m/s), `w_ref=0.3`, implicit
+backward-Euler, `dt=0.05` ms. Induction battery: **burst pacing**, cycle length **150 ms**,
+6 beats, from **2** random sites; inducible iff self-sustained supra-threshold activity
+persists **≥ 650 ms** after the last stimulus (observation window 1000 ms). Verified: APD90
+218/121 ms (healthy/fibrotic), planar CV 0.4–1.2 m/s, monotone reentry vs fibrosis.
+**Calibration gate PASSED:** inducible fraction **0.33** (10–40 % band, near 26 % POAF);
+Spearman(fibrosis, sustained-reentry) = 0.75. The battery deliberately excludes the
+half-field cross-field inducer (anchors substrate-independent geometric reentry).
+
+### 7.5 GM1 head-to-head (frozen)
+- **Competitor baseline set** (must be beaten): `fibrosis_burden`, `fibrosis_spatial_entropy`,
+  `fibrosis_patch_size`, `min_cut_value`, `percolation_threshold`, `lambda2_alone`.
+- **Feature sets compared:** `{competitors}` vs `{competitors + per-region SFI}` (SFI as a
+  strict add-on/ablation), and additionally `{fibrosis-heterogeneity}` vs `{+SFI}`.
+- **Classifiers:** logistic regression **and** gradient-boosted trees, nested (inner
+  GroupKFold model selection never sees the outer test fold).
+- **Primary endpoint (unchanged):** grouped **ΔAUC ≥ 0.05 AND DeLong p < 0.05**; report
+  grouped **and** naive AUC; bootstrap/null resamples **≥ 10 000**.
+- **Accepted null (unchanged):** SFI ≡ re-encoded fibrosis is an explicitly reportable
+  outcome; we will not tune to beat the endpoint.

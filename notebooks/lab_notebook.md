@@ -116,3 +116,52 @@
 - **Next:** freeze the pre-registration (label-source reality made explicit + Δw
   calibration frozen) and git-tag it BEFORE generating any label; then E1 (real loader +
   coarsening + monodomain-MS labeler + inducible-fraction gate) → GM1 head-to-head.
+
+---
+
+### 2026-07-20 — E1 build: real loader, monodomain-MS solver, and inducible-fraction calibration (GATE PASSED)
+
+- **Goal:** build the real-anatomy substrate + a genuine nonlinear inducibility labeler
+  and calibrate the inducible fraction into the pre-registered 10–40 % band.
+- **Setup:** branch `claude/third-idea-project-plan-rmerjr`; new modules
+  `src/asb/substrate/roney.py` (VTK loader for UAC/IIR/fibre + field-preserving
+  vertex-clustering coarsening) and `src/asb/labels/monodomain.py` (monodomain
+  Mitchell–Schaeffer solver, implicit-diffusion cotangent Laplacian). 30 smallest Roney
+  meshes (Zenodo 5801337) downloaded, coarsened to ~2 000 nodes.
+- **Did:**
+  1. Verified the solver physics (E0 calculation-verification, CPU): single-cell **APD90
+     = 218 ms healthy / 121 ms fibrotic** (τ_close 110 → 55 ms); planar-wave **CV = 0.43–
+     1.24 m/s** across d0, i.e. squarely in the 0.3–1.2 m/s human-LA band (Heida 2021).
+  2. Fixed an explicit-diffusion CFL blow-up (V→1.5 on coarse meshes) by switching to
+     **implicit backward-Euler diffusion** (factorize (I−dt·A) once); peak V now ≤ 0.95.
+  3. Found the half-field cross-field inducer anchors *geometric* reentry independent of
+     substrate (induces in healthy too) → **dropped from the label battery**. Adopted
+     **burst pacing** (substrate-discriminating: rapid pacing between healthy and fibrotic
+     ERP breaks waves only where refractoriness is short/heterogeneous).
+  4. Defined inducibility as **self-sustained supra-threshold activity ≥ reentry_min_ms
+     after pacing ends** (a normal paced response transits + repolarizes well inside it).
+  5. Confirmed **monotonicity**: on one mesh, scaling fibrosis 0→0.17→0.34→0.44 gave
+     sustained reentry 224→246→599→1000 ms.
+- **Observed (24–30-mesh parallel calibration):**
+  - First pass (d0 0.12, 2 CL × 2 sites, min 600 ms): fraction **0.75** — too high (AF
+    cohort is high-fibrosis), Spearman(fib,sustained)=0.67.
+  - **Frozen pass** (d0 **0.20** ≈ healthy CV 0.87 m/s along-fibre, burst CL **150**,
+    **2 sites**, n_burst 6, reentry_min **650 ms**, coarsen 2000): **inducible fraction
+    = 0.33 (10/30)** — IN the 10–40 % gate, near ~26 %. **Spearman(fibrosis_burden,
+    sustained) = 0.748.** sustained_ms is cleanly **bimodal** (non-inducible ≤ 584 ms;
+    inducible ≥ 854 ms) so the label is robust to the exact threshold (0.33 across
+    600–850 ms).
+  - Headroom for SFI is real: highest-burden mesh (fib 0.77) is **non-inducible** while a
+    0.43-burden mesh is inducible — inducibility depends on fibrosis *pattern/geometry*,
+    not burden alone.
+- **Interpretation:** E1 gate **PASSED** — a genuine nonlinear monodomain-MS ground truth,
+  physiologically calibrated, substrate-driven, in the target prevalence band. Ready to
+  freeze the pre-registration and run GM1. Label framing: the primary endpoint is
+  "inducibility classification"; the acute perioperative Δw stress is embedded in the SFI
+  feature (fibrosis-weighted expected λ₂ drop), the label is the simulator's inducibility
+  verdict on the fibrotic substrate. Post-stress relabelling (apply the Δw field, then
+  simulate) is a wired extension.
+- **Surprises / dead ends:** explicit-diffusion CFL blow-up on coarse meshes; the
+  half-field cross-field protocol's substrate-independent geometric reentry. Both resolved.
+- **Next:** freeze pre-registration (frozen monodomain protocol + Δw = 0.36 from
+  f_CV = 0.20 → f_D = 1−0.8² and MS/IIR constants) + git-tag; scale the cohort; run GM1.
