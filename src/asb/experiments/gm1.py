@@ -216,7 +216,9 @@ def run_gm1(
     cfg = {"n_splits": n_splits, "seed": seed, "n_boot": n_boot}
 
     comparisons = {}
-    if 0 < n_ind < len(y):
+    # Require >= 2 in each class so the DeLong variance (which divides by n-1 per
+    # class) and the stratified bootstrap are both well-defined.
+    if min(n_ind, len(y) - n_ind) >= 2:
         comparisons["competitors_vs_+SFI"] = _evaluate_pair(
             X, y, groups, COMPETITOR_COLS, sfi_cols, cfg)
         comparisons["fibrosis_vs_+SFI"] = _evaluate_pair(
