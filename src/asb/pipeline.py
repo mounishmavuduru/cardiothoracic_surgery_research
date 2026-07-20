@@ -267,7 +267,8 @@ def run(cfg: Config) -> dict:
 
     metrics_path = os.path.join(outputs_dir, "metrics.json")
     with open(metrics_path, "w") as fh:
-        json.dump(metrics, fh, indent=2, default=_json_default)
+        json.dump(_sanitize(metrics), fh, indent=2, allow_nan=False,
+                  default=_json_default)
 
     report_path = os.path.join(outputs_dir, "results_report.md")
     _write_report(report_path, metrics)
@@ -275,6 +276,27 @@ def run(cfg: Config) -> dict:
     metrics["metrics_path"] = metrics_path
     metrics["report_path"] = report_path
     return metrics
+
+
+def _sanitize(obj):
+    """Recursively convert NaN/inf floats to ``None`` so metrics.json is valid JSON.
+
+    Non-finite AUCs arise legitimately when the mock_ep labels are a single class
+    (e.g. all atria inducible at high mesh resolution); emitting ``null`` keeps the
+    file strictly parseable by any JSON consumer rather than the ``NaN`` token.
+    """
+    if isinstance(obj, dict):
+        return {k: _sanitize(v) for k, v in obj.items()}
+    if isinstance(obj, (list, tuple)):
+        return [_sanitize(v) for v in obj]
+    if isinstance(obj, (float, np.floating)):
+        v = float(obj)
+        return v if np.isfinite(v) else None
+    if isinstance(obj, (np.integer,)):
+        return int(obj)
+    if isinstance(obj, (np.bool_,)):
+        return bool(obj)
+    return obj
 
 
 def _json_default(obj):

@@ -367,6 +367,11 @@ def make_cohort(cfg: CohortConfig) -> list[AtrialMesh]:
     list[AtrialMesh]
         ``n_base * n_variants`` meshes.
     """
+    # Cohort-level RNG so substrate SEVERITY varies across subjects (a real
+    # mild -> severe gradient). Without this every atrium has the same fibrosis
+    # burden and the label model cannot produce both inducible and
+    # non-inducible cases. Deterministic in cfg.seed.
+    cohort_rng = np.random.default_rng(cfg.seed + 9973)
     cohort: list[AtrialMesh] = []
     for b in range(cfg.n_base):
         family = f"family_{b}"
@@ -377,6 +382,10 @@ def make_cohort(cfg: CohortConfig) -> list[AtrialMesh]:
             # Distinct, deterministic per-(base, variant) seeds.
             vseed = (cfg.seed + b) * 10_000 + v
             mesh = base if v == 0 else shape_variant(base, seed=vseed)
-            mesh = paint_fibrosis(mesh, seed=vseed + 7)
+            burden = float(cohort_rng.uniform(0.05, 0.40))
+            n_patches = int(cohort_rng.integers(3, 8))
+            mesh = paint_fibrosis(
+                mesh, seed=vseed + 7, burden=burden, n_patches=n_patches
+            )
             cohort.append(mesh)
     return cohort

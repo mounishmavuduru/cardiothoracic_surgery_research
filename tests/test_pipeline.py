@@ -18,10 +18,13 @@ from asb.pipeline import run
 
 def _tiny_cfg(outputs_dir: str) -> Config:
     cfg = Config()
-    cfg.cohort.n_base = 3
-    cfg.cohort.n_variants = 2
-    cfg.cohort.n_nodes = 42  # nearest icosphere resolution -> tiny, fast meshes
-    cfg.eval.n_null = 50     # keep the spatial-null resampling small and fast
+    # Small but NON-degenerate: this cohort/resolution reliably yields BOTH
+    # inducible and non-inducible mock_ep labels, so the AUC/DeLong path is
+    # actually exercised (a single-class cohort silently produces NaN AUCs).
+    cfg.cohort.n_base = 5
+    cfg.cohort.n_variants = 3
+    cfg.cohort.n_nodes = 162  # icosphere level -> small, fast, but enough spread
+    cfg.eval.n_null = 50      # keep the spatial-null resampling small and fast
     cfg.eval.n_bootstrap = 50
     cfg.outputs_dir = outputs_dir
     return cfg
@@ -50,7 +53,10 @@ def test_pipeline_writes_outputs_and_valid_aucs(tmp_path):
     # --- metrics.json is valid JSON and matches the return value ----------- #
     with open(metrics_path) as fh:
         on_disk = json.load(fh)
-    assert on_disk["cohort"]["n_subjects"] == 6
+    assert on_disk["cohort"]["n_subjects"] == 15
+    # Guard the headline path: a single-class cohort makes AUC/DeLong NaN and
+    # would let a mis-calibrated label model pass silently.
+    assert on_disk["cohort"]["both_classes_present"] is True
 
     # --- AUC values are valid floats in [0, 1] ----------------------------- #
     assert set(metrics["auc"].keys()) == {"fibrosis", "fibrosis+SFI"}
@@ -69,7 +75,12 @@ def test_pipeline_writes_outputs_and_valid_aucs(tmp_path):
 
 
 def test_pipeline_deterministic_auc(tmp_path):
-    """Two runs of the same tiny config give identical AUCs."""
+    """Two runs of the same tiny config give identical, finite AUCs."""
     m1 = run(_tiny_cfg(str(tmp_path / "a")))
     m2 = run(_tiny_cfg(str(tmp_path / "b")))
-    assert m1["auc"] == m2["auc"]
+    # Both classes present => real (non-NaN) AUCs, so equality is meaningful.
+    assert m1["cohort"]["both_classes_present"] is True
+    for name in ("fibrosis", "fibrosis+SFI"):
+        for kind in ("grouped_auc", "naive_auc"):
+            assert np.isfinite(m1["auc"][name][kind])
+            assert m1["auc"][name][kind] == m2["auc"][name][kind]

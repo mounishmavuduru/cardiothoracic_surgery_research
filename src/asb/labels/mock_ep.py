@@ -68,8 +68,11 @@ _ERP_FIBROSIS_COEFF = 0.6
 _EPS = 1e-12
 #: Peak-vulnerability ratio above the healthy baseline that trips inducibility,
 #: keyed by pacing protocol (burst pacing is the more aggressive inducer).
-_REENTRY_THRESHOLD = {"S1S2": 1.30, "burst": 1.15}
-_DEFAULT_THRESHOLD = 1.30
+#: Calibrated against the synthetic cohort's reentry-index distribution so the
+#: inducible fraction lands near the pooled post-CABG POAF incidence (~26%,
+#: PMC10823463) rather than saturating: S1-S2 ~31%, burst ~46%.
+_REENTRY_THRESHOLD = {"S1S2": 2.50, "burst": 2.00}
+_DEFAULT_THRESHOLD = 2.50
 
 
 def _edge_geometry(G: AtrialGraph) -> tuple[np.ndarray, np.ndarray, np.ndarray]:
