@@ -165,3 +165,48 @@
   half-field cross-field protocol's substrate-independent geometric reentry. Both resolved.
 - **Next:** freeze pre-registration (frozen monodomain protocol + Δw = 0.36 from
   f_CV = 0.20 → f_D = 1−0.8² and MS/IIR constants) + git-tag; scale the cohort; run GM1.
+
+---
+
+### 2026-07-20 — GM1 ★ PRIMARY head-to-head — NULL on the pre-registered endpoint (reportable), with the validity-radius mechanism
+
+- **Goal:** the pre-registered primary test — does per-region SFI add grouped ΔAUC ≥ 0.05
+  with DeLong p < 0.05 over the real competitor set, on real Roney anatomy + monodomain-MS labels?
+- **Setup:** commit at `prereg-frozen-20260720` (5f5a616) frozen BEFORE this analysis.
+  N = **62** Roney patients, coarsened ~2000 nodes; **20 inducible (0.32)**, both classes;
+  patient-held-out GroupKFold (each patient its own group); classifiers LR (nested
+  GroupKFold C-selection) + GBT; DeLong + **10 000-resample** bootstrap. An independent
+  code audit (subagent) confirmed no leakage / DeLong sign-flip / bootstrap error /
+  spec_-column contamination / λ₂-circularity in the label path → the number is trustworthy.
+- **Observed (grouped = patient-held-out; naive alongside):**
+
+  | comparison | clf | grouped base | grouped +SFI | grouped **ΔAUC** | **DeLong p** | naive base | naive +SFI | boot ΔAUC [95% CI] |
+  |---|---|---|---|---|---|---|---|---|
+  | competitors (6) +SFI | LR | 0.832 | 0.802 | **−0.030** | 0.643 | 0.849 | 0.774 | −0.031 [−0.167, +0.086] |
+  | competitors (6) +SFI | GBT | 0.820 | 0.856 | **+0.036** | 0.257 | 0.804 | 0.836 | +0.035 [−0.029, +0.096] |
+  | fibrosis-het (3) +SFI | LR | 0.781 | 0.798 | +0.017 | 0.594 | 0.818 | 0.777 | +0.017 [−0.045, +0.082] |
+  | fibrosis-het (3) +SFI | GBT | 0.792 | 0.861 | **+0.069** | 0.064 | 0.776 | 0.837 | +0.069 [−0.004, +0.144] |
+
+- **Interpretation — NULL on the primary endpoint (an accepted, pre-registered outcome).**
+  Against the full 6-competitor set (which already includes λ₂-alone) SFI adds nothing
+  significant: −0.030 (LR) / +0.036 (GBT, p=0.26). The strongest signal is GBT adding SFI
+  to the fibrosis-heterogeneity-only baseline (ΔAUC +0.069, bootstrap one-sided p(Δ≤0)=0.030)
+  but DeLong p=0.064 misses <0.05 and it does not clear the *full* competitor set. This is
+  the pre-registered "SFI ≡ re-encoded fibrosis" null. **Not tuned; reported as-is.**
+- **The mechanism (this is the GM3 "honest core", arriving early and quantified):** the
+  λ₂–λ₃ **spectral gap is minuscule on real LA anatomy** (cohort gap min 2.2e-4, median
+  2.6e-3, max 5.4e-3). The frozen perioperative stress has ‖ΔL‖ ≈ 3.2–3.8, so the
+  first-order validity ratio **‖ΔL‖/(λ₃−λ₂) has median ≈ 2422 and is > the safety bound on
+  0/12 meshes checked** (`results/validity_radius_scan.txt`). The single-Fiedler-vector SFI
+  is therefore applied **thousands of times outside its perturbative regime** — λ₂ is
+  near-degenerate everywhere, the Fiedler vector is ill-conditioned, so the linear SFI
+  feature is noisy and collapses to fibrosis. This is *exactly* the pre-registered pivot:
+  "when/why does spectral fragility collapse to fibrosis?" — answered with a hard number.
+- **Surprises:** the gap is even smaller than expected on real anatomy → the validity
+  radius is violated universally, not marginally. GBT (nonlinear) extracts a little more
+  from SFI than LR, hinting SFI's residual value is in nonlinear interactions.
+- **Next (paused for PI decision):** the pre-registered fallback makes **GM3 the lead** —
+  formalize the validity radius (Weyl / Davis–Kahan) and test whether the **subspace
+  (projector) SFI**, which stays well-defined under near-degeneracy, recovers the signal the
+  single-vector SFI loses. Also available: exact-Δλ₂ / MC SFI features (valid at large ‖ΔL‖).
+  Artifacts: `results/gm1_metrics.json`, `results/gm1_report.md`, `results/validity_radius_scan.txt`.

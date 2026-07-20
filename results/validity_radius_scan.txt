@@ -1,0 +1,15 @@
+mesh                    gap(l3-l2)    ||dL||  ||dL||/gap  valid?
+Mesh_83815278.vtk          0.00330     3.664      1111.9   False
+Mesh_49769496.vtk          0.00036     3.444      9459.7   False
+Mesh_56611509.vtk          0.00395     3.223       816.9   False
+Mesh_31475951.vtk          0.00354     3.503       990.5   False
+Mesh_12928433.vtk          0.00058     3.406      5853.7   False
+Mesh_99895768.vtk          0.00163     3.558      2187.8   False
+Mesh_32198120.vtk          0.00320     3.659      1143.9   False
+Mesh_40112384.vtk          0.00127     3.388      2657.1   False
+Mesh_83335866.vtk          0.00048     3.218      6692.6   False
+Mesh_58105145.vtk          0.00022     3.582     16554.1   False
+Mesh_48813898.vtk          0.00023     3.236     14360.9   False
+Mesh_46906197.vtk          0.00410     3.777       921.0   False
+
+first-order SFI valid on 0/12 meshes; ||dL||/gap median=2422

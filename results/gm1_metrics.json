@@ -1,0 +1,120 @@
+{
+  "cohort": {
+    "n_subjects": 62,
+    "n_inducible": 20,
+    "inducible_fraction": 0.3225806451612903,
+    "n_groups": 62,
+    "n_features_total": 25,
+    "n_sfi_features": 9,
+    "both_classes": true
+  },
+  "sfi_columns": [
+    "sfi_edge_frag_max",
+    "sfi_edge_frag_mean",
+    "sfi_region_max",
+    "sfi_region_mean",
+    "sfi_region_std",
+    "sfi_top1",
+    "sfi_top2",
+    "sfi_top3",
+    "sfi_total"
+  ],
+  "competitor_columns": [
+    "fibhet_fibrosis_burden",
+    "fibhet_fibrosis_spatial_entropy",
+    "fibhet_fibrosis_patch_size",
+    "conn_min_cut_value",
+    "conn_percolation_threshold",
+    "conn_lambda2_alone"
+  ],
+  "comparisons": {
+    "competitors_vs_+SFI": {
+      "lr": {
+        "grouped_auc_base": 0.8321428571428572,
+        "grouped_auc_sfi": 0.8023809523809524,
+        "grouped_delta_auc": -0.029761904761904767,
+        "naive_auc_base": 0.8488095238095238,
+        "naive_auc_sfi": 0.7738095238095238,
+        "naive_delta_auc": -0.07499999999999996,
+        "delong_p": 0.6433881392828881,
+        "delong_z": -0.46296683536394495,
+        "bootstrap": {
+          "delta_mean": -0.03134214285714283,
+          "ci_low": -0.1666964285714286,
+          "ci_high": 0.08571428571428574,
+          "p_delta_le_0": 0.6744,
+          "n_boot_valid": 10000
+        },
+        "endpoint_met": false
+      },
+      "gbt": {
+        "grouped_auc_base": 0.8202380952380952,
+        "grouped_auc_sfi": 0.8559523809523809,
+        "grouped_delta_auc": 0.0357142857142857,
+        "naive_auc_base": 0.8035714285714285,
+        "naive_auc_sfi": 0.8357142857142857,
+        "naive_delta_auc": 0.03214285714285725,
+        "delong_p": 0.2569910042075395,
+        "delong_z": 1.1335317775981681,
+        "bootstrap": {
+          "delta_mean": 0.03516964285714286,
+          "ci_low": -0.02857142857142858,
+          "ci_high": 0.09642857142857153,
+          "p_delta_le_0": 0.137,
+          "n_boot_valid": 10000
+        },
+        "endpoint_met": false
+      }
+    },
+    "fibrosis_vs_+SFI": {
+      "lr": {
+        "grouped_auc_base": 0.7809523809523808,
+        "grouped_auc_sfi": 0.7976190476190476,
+        "grouped_delta_auc": 0.01666666666666672,
+        "naive_auc_base": 0.8178571428571428,
+        "naive_auc_sfi": 0.7773809523809523,
+        "naive_delta_auc": -0.040476190476190554,
+        "delong_p": 0.594405395692678,
+        "delong_z": 0.532462950521142,
+        "bootstrap": {
+          "delta_mean": 0.01688571428571429,
+          "ci_low": -0.04523809523809519,
+          "ci_high": 0.08214285714285696,
+          "p_delta_le_0": 0.3014,
+          "n_boot_valid": 10000
+        },
+        "endpoint_met": false
+      },
+      "gbt": {
+        "grouped_auc_base": 0.7916666666666667,
+        "grouped_auc_sfi": 0.8607142857142858,
+        "grouped_delta_auc": 0.06904761904761902,
+        "naive_auc_base": 0.7755952380952381,
+        "naive_auc_sfi": 0.8369047619047619,
+        "naive_delta_auc": 0.061309523809523814,
+        "delong_p": 0.0635463816059174,
+        "delong_z": 1.8553491652552259,
+        "bootstrap": {
+          "delta_mean": 0.06875119047619047,
+          "ci_low": -0.0035714285714285587,
+          "ci_high": 0.14404761904761898,
+          "p_delta_le_0": 0.0304,
+          "n_boot_valid": 10000
+        },
+        "endpoint_met": false
+      }
+    }
+  },
+  "spectral_gap": {
+    "min": 0.00021641108668532636,
+    "median": 0.00262850793864479,
+    "max": 0.005351158391083382
+  },
+  "config": {
+    "n_boot": 10000,
+    "n_splits": 5,
+    "seed": 0,
+    "label_source": "monodomain_ms"
+  },
+  "label_disclaimer": "Labels are monodomain Mitchell-Schaeffer simulator verdicts on real Roney LA anatomy. NOT clinical POAF; NOT openCARP (which is deferred)."
+}
