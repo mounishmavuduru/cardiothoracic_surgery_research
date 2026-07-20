@@ -1,0 +1,21 @@
+seed: 0
+outputs_dir: outputs
+sfi:
+  n_monte_carlo: 256
+  delta_w_mean_frac: 0.15
+  delta_w_cov: 0.5
+  fibrosis_coupling: 1.0
+  validity_safety: 0.25
+cohort:
+  n_base: 8
+  n_variants: 6
+  n_nodes: 1200
+  seed: 0
+labels:
+  protocol: S1S2
+  n_pacing_sites: 4
+  source: mock_ep
+eval:
+  n_splits: 5
+  n_bootstrap: 1000
+  n_null: 500
