@@ -1,0 +1,39 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "atrialspectralbench"
+version = "0.1.0"
+description = "Spectral Fragility Index: a closed-form spectral-perturbation biomarker of surgery-triggered atrial fibrillation, benchmarked entirely in silico."
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+authors = [{ name = "AtrialSpectralBench" }]
+dependencies = [
+    "numpy>=1.24",
+    "scipy>=1.10",
+    "networkx>=3.0",
+    "scikit-learn>=1.3",
+    "pandas>=2.0",
+    "matplotlib>=3.7",
+    "plotly>=5.18",
+    "pyyaml>=6.0",
+    "tqdm>=4.66",
+]
+
+[project.optional-dependencies]
+dashboard = ["streamlit>=1.30"]
+viz3d = ["pyvista>=0.43"]
+ml = ["torch>=2.1", "shap>=0.44"]
+dev = ["pytest>=7.4", "pytest-cov>=4.1"]
+
+[project.scripts]
+asb = "asb.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"
