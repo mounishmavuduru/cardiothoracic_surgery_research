@@ -54,3 +54,65 @@
 - **Surprises / dead ends:** _fill in._
 - **Next:** implement the spectral engine (Phase 1) and its analytic CI gates
   (`λ_k = 2 − 2cos(kπ/N)` for path/ring/grid).
+
+---
+
+### 2026-07-20 — STEP 1 verify engine + STEP 0 orientation; E0/E1 approach decision
+
+- **Goal:** fresh-container engine verification (pytest + synthetic end-to-end), then
+  scout the real-data + solver landscape to fix the E0/E1 approach before
+  pre-registration and before generating/looking at any inducibility label.
+- **Setup:** branch `claude/third-idea-project-plan-rmerjr`, commit at HEAD `deaa982`
+  (identical to the `...c2c2bc` branch). Python 3.11.15 CPU-only venv; editable install
+  of `[dashboard,dev]`. Config `configs/default.yaml` (seed 0). Network now open to
+  zenodo.org / opencarp.org.
+- **Did:**
+  1. Read EXPERIMENTAL_PLAN, IDEA3_PROJECT_PLAN, PRE_REGISTRATION, BUILD_SPEC and all
+     `src/asb/` compute modules. Engine matches the frozen contract.
+  2. `pytest -q` → **89 passed in 15.35 s**.
+  3. `asb run --config configs/default.yaml` → outputs/ populated (metrics.json, report,
+     5 PNGs). **Synthetic plumbing baseline (mock_ep labels — NOT a result):** 48
+     subjects / 8 shape families, 16 inducible (33.3 %, both classes present).
+     fibrosis: grouped AUC 0.859 / naive 0.861. fibrosis+SFI: grouped 0.920 / naive
+     0.910. DeLong ΔAUC = **+0.0605**, z = 1.94, **p = 0.053**. Colocalization observed
+     0.285 vs null-5th-pct 0.146 → **not passed** (p = 0.20). These come from the
+     `mock_ep` eikonal surrogate and are a PLUMBING CHECK ONLY.
+  4. Scouted the three Zenodo archives + solver install:
+     - **Roney LA virtual cohort 5801337** — 100 VTK meshes, 3.51 GB, **no separate
+       label files**. Downloaded the smallest (`Mesh_83815278.vtk`, 21.9 MB, 97 161
+       pts / 193 438 tris). Embedded arrays: **`UAC1`,`UAC2`** (∈[0,1] universal atrial
+       coords), **`IIR`** (Image-Intensity-Ratio, LGE fibrosis proxy: min 0.41 / max
+       1.59 / mean 1.08; IIR>1.2 → 19.4 % fibrotic), **`fiber_endo`,`fiber_epi`**
+       (per-cell fibre vectors). Coordinates are in microns. This is REAL patient-derived
+       LA anatomy with fibrosis + UAC + fibres — a large upgrade over synthetic icospheres.
+     - **Rodero 4506930** — 27.5 GB (won't fit the 29 GB free disk); whole-heart, not
+       LA-with-fields. Skipped in favour of Roney LA meshes.
+     - **atrialmtk 10139306** — single 872 MB zip (toolkit; bundles openCARP/meshtool).
+     - **openCARP** — not available via apt / conda / pip; no binary on PATH. A source
+       build (PETSc etc.) on 4 CPUs is out of scope for this ephemeral CPU session, and
+       the user explicitly DEFERS the full openCARP sweep to Claude Science.
+- **Observed / decision (logged before any label is generated):**
+  - The published Roney inducibility/reentry labels are **not** in the archive as files,
+    so "reuse published Roney labels" is not directly possible from 5801337. The mesh
+    arrays give anatomy+substrate only.
+  - **E1 ground-truth labeler for this session = a genuine CPU monodomain
+    Mitchell–Schaeffer reaction–diffusion solve on the (coarsened) real Roney meshes**,
+    verified (planar CV, APD restitution, spiral induction, mesh/Δt convergence) and
+    calibrated to literature CV/ERP. This is exactly the "descoped openCARP: monodomain +
+    phenomenological Mitchell–Schaeffer on coarsened meshes" of plan §8.4 — genuine
+    nonlinear excitable-media reentry, driven by wavelength/source–sink/fibrosis and
+    **independent of λ₂** (so not circular with SFI). It is labelled `source='monodomain_ms'`
+    and is NEVER called openCARP or clinical POAF. openCARP itself stays the wired,
+    one-command **deferred** target (`labels/opencarp.py`) for the Claude-Science full
+    sweep; I will attempt an opportunistic openCARP cross-check if it proves installable.
+  - **E0** in this session = calculation-verification I can do on CPU: solver
+    verification above + λ₂/label mesh-&-Δt convergence (ASME V&V-40). The openCARP
+    Niederer reproduction is wired but deferred (solver absent).
+- **Interpretation:** engine is green and faithful to the contract; the synthetic ΔAUC
+  hint (+0.06 at p≈0.05) is encouraging plumbing but scientifically inert (mock labels).
+  The real science now runs on real Roney anatomy with monodomain-MS labels.
+- **Surprises / dead ends:** Rodero too big for disk; openCARP not trivially installable;
+  Roney labels not archived as files — all resolved by the decision above.
+- **Next:** freeze the pre-registration (label-source reality made explicit + Δw
+  calibration frozen) and git-tag it BEFORE generating any label; then E1 (real loader +
+  coarsening + monodomain-MS labeler + inducible-fraction gate) → GM1 head-to-head.
