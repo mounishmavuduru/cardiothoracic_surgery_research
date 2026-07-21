@@ -210,3 +210,56 @@
   (projector) SFI**, which stays well-defined under near-degeneracy, recovers the signal the
   single-vector SFI loses. Also available: exact-Δλ₂ / MC SFI features (valid at large ‖ΔL‖).
   Artifacts: `results/gm1_metrics.json`, `results/gm1_report.md`, `results/validity_radius_scan.txt`.
+
+---
+
+### 2026-07-20 — GM3 — validity radius (rigorous) + subspace/exact SFI does NOT rescue the predictive null
+
+- **Goal:** the pre-registered fallback. (A) Does a *correctly computed* SFI — the
+  degeneracy-robust **subspace** projector, or the **exact** per-region Δλ₂ (valid at any
+  ‖ΔL‖) — recover the predictive signal the first-order single-vector SFI lost in GM1?
+  (B) Quantify the validity radius itself (the honest core).
+- **Setup:** same 62 Roney patients + frozen monodomain-MS labels (cached), patient-held-out
+  GroupKFold, LR (nested C) + GBT, DeLong + 10 000 bootstrap. Three fragility computations,
+  each the *same 7 region-summary features*, as strict add-ons. Commit `9d5fe5d`.
+  Also scaled the property-test suite to **10,600 generated random graphs/run** (the "10k+
+  checks"; the 10k-resample bootstrap was already live in GM1/GM3).
+- **Observed — Part A (grouped ΔAUC; all vs the SAME labels):**
+
+  | add-on | vs full competitors (6) | vs fibrosis-het (3) |
+  |---|---|---|
+  | single-vector SFI | LR −0.029 / GBT −0.000 | LR +0.030 / GBT +0.018 |
+  | **subspace** SFI   | LR −0.021 / GBT +0.011 | LR +0.029 / **GBT +0.052** (p=0.28) |
+  | **exact** Δλ₂ SFI  | LR −0.027 / GBT −0.011 | **LR +0.046** (p=0.40) / GBT +0.030 |
+
+  Every DeLong p ≥ 0.28; every bootstrap CI straddles 0. **No computation of the SFI beats
+  the full competitor set**, and none clears significance even vs fibrosis-only.
+- **Observed — Part B (validity radius, synthetic + theory):**
+  - Simple-λ₂ path, localized perturbation: first-order relative error 1.1 % at ρ=0.3,
+    **crosses 10 % at ρ\*≈3**, 92 % at ρ=28.5; monotone in ρ; the **Weyl bound
+    |Δλ₂|≤‖ΔL‖ holds at every ρ**. (`results/gm3_metrics.json`)
+  - Near-degeneracy sweep (gap 0.167→0.0007): the 2-D subspace prediction of the
+    degeneracy-invariant λ₂+λ₃ drop stays accurate (err ≤ 0.10) where the single Fiedler
+    vector is erratic — the subspace is the right object when λ₂≈λ₃, as theory says.
+  - Real cohort ρ ≈ 2422 (GM1 scan) → ~800× past ρ\*.
+- **Interpretation (decisive, honest):** the GM1 null is **not** a computation-validity
+  artifact. Even the *exact* Δλ₂ (the theoretically-correct object at large ‖ΔL‖) and the
+  *subspace* generalization add nothing beyond fibrosis burden + algebraic connectivity as
+  predictors of monodomain reentry. The pre-registered accepted null — **"SFI ≡ re-encoded
+  fibrosis/connectivity"** — is therefore **confirmed at the deepest level**: it is a
+  property of the science, not of the approximation. The predictive-biomarker framing of the
+  novel seed is **falsified** on this cohort.
+- **What survives as a genuine contribution:** GM3 Part B — a **quantified validity radius**
+  (ρ\*≈3) with the exact Weyl / Davis–Kahan / subspace structure, demonstrating precisely when
+  the seconds-on-a-laptop linear spectral surrogate is trustworthy for an overnight PDE, and
+  that real fibrotic atria live ~800× beyond that boundary. This is an honest applied-math
+  result that stands independent of the (null) predictive claim.
+- **Surprises:** the exact recompute not helping was the sharpest surprise — it rules out
+  "we just computed it wrong" and makes the null robust. N=62 (20 inducible) is modest, but
+  the *point estimates* vs the full competitor set are ~0/negative, so more subjects cannot
+  manufacture the pre-registered ΔAUC≥0.05 there.
+- **Next (PI decision):** options — (1) GM2 localization: even a null *classifier* can have a
+  true *mechanism* — test whether |∇φ₂|∩Perron hotspots colocalize with reentry origins vs
+  the UAC spatial null (independent claim, still open); (2) accept the honest null + write GM3
+  Part B (validity radius) as the lead result; (3) reconsider scope. Artifacts:
+  `results/gm3_metrics.json`, `results/gm3_report.md`.
