@@ -30,13 +30,17 @@ from asb.sfi import (
 )
 from asb.spectral import fiedler, perron, smallest_eigpairs
 
+# Case counts are sized so one full run generates >10,000 random graphs across the
+# five invariants (the legitimate "10,000+ checks" of the scale policy): the three
+# cheap invariants run _MANY each, the two eigensolver-heavy ones run _FAST each
+# (2*1400 + 3*2600 = 10,600 generated graphs per run).
 _FAST = settings(
-    max_examples=250,
+    max_examples=1400,
     deadline=None,
     suppress_health_check=[HealthCheck.too_slow, HealthCheck.filter_too_much],
 )
 _MANY = settings(
-    max_examples=1500,
+    max_examples=2600,
     deadline=None,
     suppress_health_check=[HealthCheck.too_slow, HealthCheck.filter_too_much],
 )
