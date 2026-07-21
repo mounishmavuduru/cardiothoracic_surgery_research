@@ -1,0 +1,97 @@
+{
+  "n_inducible_localized": 20,
+  "variants": {
+    "grad_phi2": {
+      "median_obs_mm": 48.32195727215862,
+      "median_obs_norm": 0.4721936289127878,
+      "boot_ci_norm": [
+        0.35007537337448025,
+        0.6557927137539996
+      ],
+      "null_median_p5_norm": 0.405785598598947,
+      "null_median_p50_norm": 0.522910790316415,
+      "p_median_vs_null": 0.2285,
+      "per_subject_pass_fraction": 0.15,
+      "median_origin_score_rank": 0.1679790397580373,
+      "mean_origin_score_rank": 0.28384612036720624,
+      "origin_rank_wilcoxon_p": 0.0021104812622070312,
+      "claim_verdict": "KEEP",
+      "endpoint_met": false
+    },
+    "perron": {
+      "median_obs_mm": 59.15494798682073,
+      "median_obs_norm": 0.6046655813519758,
+      "boot_ci_norm": [
+        0.5228002456928642,
+        0.6872462368195436
+      ],
+      "null_median_p5_norm": 0.40634651474500505,
+      "null_median_p50_norm": 0.518776832562978,
+      "p_median_vs_null": 0.9045,
+      "per_subject_pass_fraction": 0.05,
+      "median_origin_score_rank": 0.6738750203210675,
+      "mean_origin_score_rank": 0.651124173619584,
+      "origin_rank_wilcoxon_p": 0.9897053607638038,
+      "claim_verdict": "DELETE",
+      "endpoint_met": false
+    },
+    "combined": {
+      "median_obs_mm": 54.138374698657074,
+      "median_obs_norm": 0.5654498694499833,
+      "boot_ci_norm": [
+        0.528018038193899,
+        0.6832383650128823
+      ],
+      "null_median_p5_norm": 0.41571274601163927,
+      "null_median_p50_norm": 0.5241412448016229,
+      "p_median_vs_null": 0.7415,
+      "per_subject_pass_fraction": 0.05,
+      "median_origin_score_rank": 0.6352097897942051,
+      "mean_origin_score_rank": 0.6317419315671986,
+      "origin_rank_wilcoxon_p": 0.9874785736418171,
+      "claim_verdict": "DELETE",
+      "endpoint_met": false
+    },
+    "fibrosis": {
+      "median_obs_mm": 52.255881750069804,
+      "median_obs_norm": 0.5739567144429598,
+      "boot_ci_norm": [
+        0.4255574895287526,
+        0.6552797156536084
+      ],
+      "null_median_p5_norm": 0.4182611561355789,
+      "null_median_p50_norm": 0.5248247600906684,
+      "p_median_vs_null": 0.7805,
+      "per_subject_pass_fraction": 0.1,
+      "median_origin_score_rank": 0.2417400579836989,
+      "mean_origin_score_rank": 0.325679103420924,
+      "origin_rank_wilcoxon_p": 0.011378453429778074,
+      "claim_verdict": "KEEP",
+      "endpoint_met": false
+    },
+    "fibrosis_grad": {
+      "median_obs_mm": 69.13341360490824,
+      "median_obs_norm": 0.7273372559675624,
+      "boot_ci_norm": [
+        0.6038975904337389,
+        0.8134077634954351
+      ],
+      "null_median_p5_norm": 0.4081442514435149,
+      "null_median_p50_norm": 0.5243096705388043,
+      "p_median_vs_null": 1.0,
+      "per_subject_pass_fraction": 0.05,
+      "median_origin_score_rank": 0.8070761000782304,
+      "mean_origin_score_rank": 0.7159826319889644,
+      "origin_rank_wilcoxon_p": 0.9968679982816177,
+      "claim_verdict": "DELETE",
+      "endpoint_met": false
+    }
+  },
+  "config": {
+    "n_null": 2000,
+    "n_boot": 10000,
+    "seed": 0,
+    "label_source": "monodomain_ms"
+  },
+  "note": "Localizer argmax -> geodesic distance to the monodomain reentry origin (earliest node of the sustained circuit). Rotational/shift UAC null. Simulator verdict, not clinical POAF."
+}

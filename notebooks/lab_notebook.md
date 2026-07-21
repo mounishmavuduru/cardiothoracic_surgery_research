@@ -263,3 +263,64 @@
   the UAC spatial null (independent claim, still open); (2) accept the honest null + write GM3
   Part B (validity radius) as the lead result; (3) reconsider scope. Artifacts:
   `results/gm3_metrics.json`, `results/gm3_report.md`.
+
+---
+
+### 2026-07-20 — GM2 — localization: strict endpoint NULL, but a real keep/delete finding (|∇φ₂| KEEP, Perron DELETE)
+
+- **Goal:** the pre-registered *mechanism* half of the "one number to beat" (dossier p.39 step 7):
+  do SFI hotspots colocalize with monodomain reentry origins vs a UAC rotational/shift spatial
+  null, and — per the dossier — **keep or delete each linear-spectral claim by its measured
+  correlation**? Independent of the GM1 prediction null (a poor classifier can still be a good
+  within-atrium localizer).
+- **Setup:** 20 inducible Roney subjects (each with a cached monodomain `reentry_origin` node on
+  its ~2000-node coarsened graph), frozen labels. Localizer argmax → **geodesic** distance (mm,
+  Dijkstra on the conduction graph) to the true origin. Spatial null = torus-shift of the hotspot
+  on the UAC (3×3-tiled KD-tree), n_null=2000; 10 000-bootstrap CI. Fields tested: `grad_phi2`
+  (|∇φ₂|), `perron`, `combined`=|∇φ₂|·|Perron| (the hypothesized SFI hotspot), plus `fibrosis`
+  and `fibrosis_grad` controls. New module `src/asb/experiments/gm2.py`. Commit `dc5e5b1`.
+- **Observed — PRIMARY endpoint (median argmax geodesic error < null 5th pct): NOT MET, all fields.**
+
+  | localizer | median err (norm ×diam) | null 5th-pct | endpoint |
+  |---|---|---|---|
+  | grad_phi2 | 0.472 | 0.406 | not met |
+  | perron | 0.605 | 0.406 | not met |
+  | **combined (SFI hotspot)** | 0.565 | 0.416 | **not met** |
+  | fibrosis | 0.574 | 0.418 | not met |
+  | fibrosis_grad | 0.727 | 0.408 | not met |
+
+- **Observed — keep/delete each claim (origin score-rank = fraction of nodes scoring ≥ the
+  origin; small = origin is a hotspot; one-sided Wilcoxon vs 0.5):**
+
+  | claim | median rank | Wilcoxon p | verdict |
+  |---|---|---|---|
+  | **|∇φ₂| (Fiedler gradient)** | 0.168 | **0.0021** | **KEEP** |
+  | Perron localization | 0.674 | 0.99 | **DELETE** |
+  | |∇φ₂|∩Perron (combined hotspot) | 0.635 | 0.99 | **DELETE** |
+  | fibrosis | 0.242 | 0.011 | KEEP |
+  | fibrosis_grad | 0.807 | 0.997 | DELETE |
+
+- **Interpretation (honest, specific):** the strict pre-registered localization endpoint is
+  **null** — no field's single argmax pinpoints the reentry origin below the spatial-null 5th
+  pct, *including the SFI hotspot*. But the pre-registered keep/delete correlation test yields a
+  genuine, specific result: the **Fiedler gradient |∇φ₂| carries a real spatial association with
+  reentry origins** (origins in the top ~17–28% of |∇φ₂|, p=0.002 — comparable to fibrosis
+  p=0.011), whereas the **Perron-localization hypothesis is falsified** (p=0.99, no association).
+  Consequently the dossier's hypothesized `|∇φ₂| ∩ Perron` hotspot is **worse than |∇φ₂| alone**:
+  multiplying by the (uncorrelated) Perron factor destroys the real gradient signal. So GM2
+  simultaneously (i) fails the strict localization headline and (ii) delivers a concrete
+  mechanistic correction to the protected seed — keep the Fiedler-gradient claim, delete the
+  Perron-colocalization and combined-hotspot claims.
+- **Surprises:** the Perron factor being actively harmful was not anticipated; the seed
+  hypothesized their *product* as the hotspot. The Fiedler-gradient-alone association is the one
+  spectral claim that survives correlation testing.
+- **Both halves of the pre-registered headline are now null** (GM1 prediction + GM2 localization).
+  What stands as genuine contributions: **GM3 validity radius** (the honest core), and GM2's
+  **keep/delete mechanistic corrections**. Adversarial code audit of GM2 launched.
+- **Next (PI decision):** the atrial predictive+localization biomarker is a reported null; the
+  generational seed that survives is the **validity-radius fragility calculus (GM3)**. The
+  dossier's actual generational claim (p.38) is that this calculus *transfers to any excitable
+  network whose stability lives in a spectral gap* → **GM4**: port the fragility derivative + its
+  validity radius to a second excitable medium (epilepsy-like reaction–diffusion network) and
+  show the same validity-radius framework predicts induced instability above that medium's null.
+  Artifacts: `results/gm2_metrics.json`, `results/gm2_report.md`.
