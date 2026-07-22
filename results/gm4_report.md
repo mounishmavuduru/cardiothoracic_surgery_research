@@ -21,15 +21,24 @@
 | lesion vs +exact | lr | 0.8878 | 0.8678 | -0.0201 | 0.3802 | not met |
 | lesion vs +exact | gbt | 0.8634 | 0.8459 | -0.0175 | 0.3421 | not met |
 
-## Part B — localize the instability origin (GM2-analog, N=42)
+## Part B — localize the instability origin (GM2-analog, N=42, origin = sustained_core)
 
 | localizer | mean origin-rank | perm-null | perm p | verdict |
 | --- | --- | --- | --- | --- |
-| grad_phi2 | 0.5456 | 0.5037 | 0.8333 | **DELETE** |
-| perron | 0.3622 | 0.4974 | 0.0033 | **KEEP** |
-| combined | 0.3633 | 0.5012 | 0.0000 | **KEEP** |
-| fibrosis | 0.5991 | 0.5045 | 0.9933 | **DELETE** |
-| fibrosis_grad | 0.5212 | 0.5038 | 0.6500 | **DELETE** |
+| grad_phi2 | 0.1175 | 0.4991 | 0.0000 | **KEEP** |
+| perron | 0.7786 | 0.5016 | 1.0000 | **DELETE** |
+| combined | 0.7484 | 0.5021 | 1.0000 | **DELETE** |
+| wdegree | 0.9610 | 0.4959 | 1.0000 | **DELETE** |
+| fibrosis | 0.0874 | 0.5099 | 0.0000 | **KEEP** |
+| fibrosis_grad | 0.7301 | 0.4987 | 1.0000 | **DELETE** |
+
+### Part B robustness — origin-definition sensitivity (perm p; verdict)
+
+| origin definition | grad_phi2 | perron | wdegree |
+| --- | --- | --- | --- |
+| sustained_core | 0.0000 KEEP | 1.0000 DELETE | 1.0000 DELETE |
+| first_activation | 0.0000 KEEP | 1.0000 DELETE | 1.0000 DELETE |
+| earliest_last | 0.8233 DELETE | 0.0000 KEEP | 0.0000 KEEP |
 
 ## Part C — validity radius on the network cohort (GM3-analog)
 

@@ -237,49 +237,110 @@
   },
   "localize": {
     "n_localized": 42,
+    "origin_def": "sustained_core",
     "fields": {
       "grad_phi2": {
-        "mean_origin_rank": 0.5455672272178536,
-        "perm_null_mean": 0.5036963032577741,
-        "perm_p": 0.8333333333333334,
+        "mean_origin_rank": 0.11753359879200184,
+        "perm_null_mean": 0.49908163925278026,
+        "perm_p": 0.0,
+        "endpoint_pass_frac": 0.42857142857142855,
+        "verdict": "KEEP"
+      },
+      "perron": {
+        "mean_origin_rank": 0.778634343862375,
+        "perm_null_mean": 0.501600090695721,
+        "perm_p": 1.0,
         "endpoint_pass_frac": 0.0,
+        "verdict": "DELETE"
+      },
+      "combined": {
+        "mean_origin_rank": 0.7483633784746131,
+        "perm_null_mean": 0.5020991384108253,
+        "perm_p": 1.0,
+        "endpoint_pass_frac": 0.0,
+        "verdict": "DELETE"
+      },
+      "wdegree": {
+        "mean_origin_rank": 0.9609916014658,
+        "perm_null_mean": 0.4959407899402144,
+        "perm_p": 1.0,
+        "endpoint_pass_frac": 0.0,
+        "verdict": "DELETE"
+      },
+      "fibrosis": {
+        "mean_origin_rank": 0.08738555482981657,
+        "perm_null_mean": 0.5098794901678049,
+        "perm_p": 0.0,
+        "endpoint_pass_frac": 0.40476190476190477,
+        "verdict": "KEEP"
+      },
+      "fibrosis_grad": {
+        "mean_origin_rank": 0.7301358467443972,
+        "perm_null_mean": 0.4986926795677615,
+        "perm_p": 1.0,
+        "endpoint_pass_frac": 0.07142857142857142,
+        "verdict": "DELETE"
+      }
+    }
+  },
+  "origin_sensitivity": {
+    "sustained_core": {
+      "grad_phi2": {
+        "mean_rank": 0.11753359879200184,
+        "perm_p": 0.0,
+        "verdict": "KEEP"
+      },
+      "perron": {
+        "mean_rank": 0.778634343862375,
+        "perm_p": 1.0,
+        "verdict": "DELETE"
+      },
+      "wdegree": {
+        "mean_rank": 0.9609916014658,
+        "perm_p": 1.0,
+        "verdict": "DELETE"
+      }
+    },
+    "first_activation": {
+      "grad_phi2": {
+        "mean_rank": 0.11605235686146843,
+        "perm_p": 0.0,
+        "verdict": "KEEP"
+      },
+      "perron": {
+        "mean_rank": 0.8287235598593629,
+        "perm_p": 1.0,
+        "verdict": "DELETE"
+      },
+      "wdegree": {
+        "mean_rank": 0.9668620275509573,
+        "perm_p": 1.0,
+        "verdict": "DELETE"
+      }
+    },
+    "earliest_last": {
+      "grad_phi2": {
+        "mean_rank": 0.5455672272178536,
+        "perm_p": 0.8233333333333334,
         "verdict": "DELETE"
       },
       "perron": {
-        "mean_origin_rank": 0.36221968252944703,
-        "perm_null_mean": 0.4973726055040671,
-        "perm_p": 0.0033333333333333335,
-        "endpoint_pass_frac": 0.11904761904761904,
-        "verdict": "KEEP"
-      },
-      "combined": {
-        "mean_origin_rank": 0.3633305892250614,
-        "perm_null_mean": 0.5011916005678938,
+        "mean_rank": 0.36727891942405655,
         "perm_p": 0.0,
-        "endpoint_pass_frac": 0.047619047619047616,
         "verdict": "KEEP"
       },
-      "fibrosis": {
-        "mean_origin_rank": 0.5991260979656298,
-        "perm_null_mean": 0.5045341880099113,
-        "perm_p": 0.9933333333333333,
-        "endpoint_pass_frac": 0.0,
-        "verdict": "DELETE"
-      },
-      "fibrosis_grad": {
-        "mean_origin_rank": 0.5212420048394804,
-        "perm_null_mean": 0.5038047293642818,
-        "perm_p": 0.65,
-        "endpoint_pass_frac": 0.047619047619047616,
-        "verdict": "DELETE"
+      "wdegree": {
+        "mean_rank": 0.3344854814705373,
+        "perm_p": 0.0,
+        "verdict": "KEEP"
       }
     }
   },
   "validity_cohort": {
     "n_scanned": 24,
-    "rho_median": 1852.4387173734576,
-    "rho_min": 908.6007545936412,
-    "rho_max": 7245.585928210031,
+    "rho_median": 1852.438717373463,
+    "rho_min": 908.6007545936451,
+    "rho_max": 7245.585928210004,
     "frac_in_radius": 0.0
   },
   "validity_boundary_synthetic": {

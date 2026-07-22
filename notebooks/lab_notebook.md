@@ -397,3 +397,53 @@
 - **Caveats / next:** the Perron-KEEP in the neural medium warrants the same adversarial audit
   GM1/GM2 got (is the origin trivially a max-degree hub? is Perron just re-encoding degree?);
   audit launched. Artifacts: `results/gm4_metrics.json`, `results/gm4_report.md`.
+
+---
+
+### 2026-07-22 (later) — CORRECTION to the GM4 entry above: the "dissociation" was an origin-definition artifact; the localizer actually CONVERGES
+
+> **This entry corrects the earlier 2026-07-22 GM4 entry.** That entry reported a
+> cardiac↔neural *dissociation* (|∇φ₂| KEEP in atrium / Perron KEEP in the neural net).
+> An adversarial audit (subagent) showed that was an **artifact of the FHN origin
+> definition**, and re-analysis overturns it. Keeping both entries per append-only rule.
+
+- **What the audit found:** (1) the neural "Perron KEEP" was mechanistically **weighted-degree
+  centrality** (a simpler non-spectral baseline I had *omitted* localized as well/better), so
+  "spectral centrality" over-stated it; (2) more importantly, the shipped FHN origin was
+  "earliest *last* up-crossing among post-stim nodes" — a node that fires once early then goes
+  quiet — **at odds with its own docstring** ("earliest node of *sustained* activity"); the
+  Perron/degree KEEP appeared **only** under that flawed definition and flipped under physically
+  principled ones. Non-circularity, leakage, determinism all verified clean.
+- **Fixes (committed `2350650`):** FHN primary origin = **sustained-activity core** (node active
+  longest post-stimulus = the instability anchor); added **weighted degree** as the honest
+  non-spectral centrality control to the shared localizer set (GM2 *and* GM4); added an
+  **origin-definition sensitivity sweep**; fixed-`v0` eigsh for reproducible eigenvectors.
+- **Corrected result (full cohorts; the CONVERGENT, not dissociated, story):**
+
+  | localizer | ATRIUM reentry (N=20) | NEURAL focus (N=42) |
+  |---|---|---|
+  | `\|∇φ₂\|` Fiedler gradient | **KEEP** p<1e-3 (rank 0.284) | **KEEP** p<1e-3 (rank 0.118) |
+  | Perron centrality | DELETE (0.96) | DELETE (1.0) |
+  | weighted degree | DELETE (1.0) | DELETE (1.0) |
+  | `\|∇φ₂\|∩Perron` | DELETE (0.97) | DELETE (1.0) |
+  | fibrosis / lesion field | KEEP p<1e-3 | KEEP p<1e-3 |
+
+  **Origin-sensitivity (neural), perm-p:** `sustained_core` → grad_phi2 KEEP(0.00)/perron
+  DELETE(1.0)/wdegree DELETE(1.0); `first_activation` → same (grad_phi2 KEEP); `earliest_last`
+  (the flawed def) → grad_phi2 DELETE(0.82)/perron KEEP(0.00)/wdegree KEEP(0.00). So the
+  Fiedler-gradient KEEP holds under **both** principled definitions; the original result was
+  the outlier.
+- **Interpretation (corrected, cleaner, honest):** the **Fiedler-gradient localizer `|∇φ₂|`
+  transfers** — it localizes the instability origin above the rotational spatial null in **both**
+  cardiac and neural excitable media (p<1e-3 each) and beats the Perron/weighted-degree centrality
+  baselines in **both**; Perron, weighted degree, the ∩ hotspot, and the fibrosis gradient
+  consistently DELETE in both. Honest caveat (same as GM2): the **raw substrate field also KEEPs**
+  in both, so `|∇φ₂|` is not *uniquely* better than substrate for pure localization — its value is
+  that it is purely connectivity-derived and beats the graph-centrality controls. Part A (predict)
+  null and Part C (validity ρ≈1852) are unchanged. So the full result-pattern — null prediction +
+  `|∇φ₂|` localization + validity radius — **replicates across two independent excitable media.**
+- **Lesson for the write-up:** this is a textbook example of the pre-registered "keep/delete each
+  claim by measured correlation" methodology working: a plausible-but-wrong result (dissociation)
+  was proposed, adversarially audited, traced to a definitional artifact, and corrected in the
+  open with a full sensitivity table. Show this in the paper — it is a credibility asset, not a
+  blemish.
