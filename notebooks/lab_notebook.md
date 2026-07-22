@@ -531,3 +531,42 @@ connectivity features (λ₂-alone, min-cut, percolation). So the precise statem
 This is a more defensible and more interesting claim than "SFI = fibrosis," and it generalizes to an
 independent real cohort. Caveats: monodomain (not openCARP) labels; UW UAC is a PCA surrogate; UW
 inducibility is low so UW-only is underpowered.
+
+---
+
+## 2026-07-22 (cont.) — Novelty experiment ① (connectivity-beats-substrate): HONEST NEGATIVE + mechanistic insight
+
+Goal: show |grad phi2| localizes the instability origin at a *connectivity bottleneck* that
+fibrosis imaging misses. Built `asb.transfer.bottleneck` — two dense communities joined by a
+narrow isthmus (a Fiedler bottleneck: geometrically sparse cut, per-edge HEALTHY weight), with a
+`lesion_offset` knob moving fibrosis from the isthmus (0) to a community interior (1).
+
+**Geometry validated:** |grad phi2| peaks sharply on the isthmus (0.015 vs 0.000 elsewhere, top 1%);
+fibrosis peak sits ~0.20 away at offset=1 (dissociated). Good.
+
+**Result (FHN):** 0/10 inducible at any i_bias — the FHN epileptic-focus mechanism needs a
+hyperexcitable lesion, and by design there is none at the isthmus. No focus -> no instability.
+
+**Result (Kuramoto):** as fibrosis moves off the isthmus, BOTH localizers degrade and neither wins
+(grad_phi2 rank 0.33->0.76, fibrosis 0.30->0.73); the desync origin (max-detuned node) is driven by
+frequency outliers, not the bottleneck. Lowering frequency heterogeneity (sigma_omega=0.2, K=2.0) so
+desync is purely connectivity-driven: at offset=0 (fibrosis ON isthmus) desync nucleates on the
+isthmus (dist 0.04) and grad_phi2 nails it (rank 0.008) — but so does fibrosis (0.069), because
+fibrosis is there; at offset=1 (dissociated) the network **almost never desyncs (1/14)**.
+
+**Mechanistic insight (the real finding):** in diffusively-coupled excitable/oscillator media,
+instability vulnerability is *created by* reduced effective coupling. The Fiedler bottleneck forms at
+low-coupling cuts, and fibrosis/LGE imaging detects exactly those low-conduction regions — so the
+spectral localizer and the substrate localizer coincide **by mechanism, not coincidence**. A
+geometrically-narrow but electrically-healthy isthmus does not become an instability site (it conducts
+fine), so the hypothesized "connectivity origin dissociated from substrate" regime does not arise in
+this model class. This *explains* the GM2/GM4 "fibrosis also localizes" caveat rather than merely
+noting it: |grad phi2| is not uniquely better than substrate for localization here, for a principled
+reason.
+
+**Consequence:** ① as "connectivity uniquely beats substrate" is NOT supported by the tractable
+graph models. The only regime that could dissociate them is genuine wave-curvature source-sink block
+(monodomain reaction-diffusion with S1-S2 on a continuous healthy isthmus between scars) — a real but
+compute-heavy build, queued behind the 100k. Novelty weight shifts to (2) the rho scaling law and
+(3) the falsification-protocol framing, both tractable now. The negative + insight is itself a
+credibility asset for the honesty narrative.
