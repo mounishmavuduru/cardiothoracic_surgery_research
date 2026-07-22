@@ -235,7 +235,7 @@ def _cell_vectors_to_vertex(
 
 
 def load_roney_mesh(
-    path: str, *, shape_family: Optional[str] = None
+    path: str, *, shape_family: Optional[str] = None, iir_dense: float = IIR_DENSE,
 ) -> AtrialMesh:
     """Load one Roney LA VTK mesh into an :class:`AtrialMesh` with real fields.
 
@@ -267,7 +267,7 @@ def load_roney_mesh(
     uac = np.clip(np.stack([uac1, uac2], axis=1), 0.0, 1.0)
 
     iir = ps.get("IIR", np.ones(n))
-    fibrosis = iir_to_fibrosis(iir)
+    fibrosis = iir_to_fibrosis(iir, dense=iir_dense)
 
     fib_cell = cv.get("fiber_endo", cv.get("fiber_epi", None))
     if fib_cell is None:

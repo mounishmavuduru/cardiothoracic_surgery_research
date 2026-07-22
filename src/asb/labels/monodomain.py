@@ -117,7 +117,8 @@ class MonodomainConfig:
 # Mesh geometry: anisotropic cotangent Laplacian + lumped mass.
 # --------------------------------------------------------------------------- #
 def cotangent_operator(
-    mesh: AtrialMesh, cfg: MonodomainConfig
+    mesh: AtrialMesh, cfg: MonodomainConfig,
+    *, along: Optional[float] = None, cross: Optional[float] = None,
 ) -> Tuple[np.ndarray, np.ndarray, np.ndarray, np.ndarray]:
     r"""Build the conductance-weighted cotangent Laplacian and lumped mass.
 
@@ -163,8 +164,8 @@ def cotangent_operator(
     p0 = points[faces[:, 0]]
     p1 = points[faces[:, 1]]
     p2 = points[faces[:, 2]]
-    cross = np.cross(p1 - p0, p2 - p0)
-    area = 0.5 * np.linalg.norm(cross, axis=1)
+    tri_normal = np.cross(p1 - p0, p2 - p0)
+    area = 0.5 * np.linalg.norm(tri_normal, axis=1)
     area = np.maximum(area, 1e-12)
     for k in range(3):
         np.add.at(mass, faces[:, k], area / 3.0)
@@ -192,7 +193,13 @@ def cotangent_operator(
     cot = np.maximum(cot, 1e-4)
 
     # Relative fibre/fibrosis conductance per edge (anisotropy + fibrosis floor).
-    w = edge_weights_from_fibres(mesh, edges)
+    # ``along``/``cross`` default to the standard 1.0/0.3 anisotropy; they are exposed
+    # as overrides for the E6 fibre-field uncertainty sweep.
+    w = edge_weights_from_fibres(
+        mesh, edges,
+        along=1.0 if along is None else float(along),
+        cross=0.3 if cross is None else float(cross),
+    )
     c_rel = w / float(cfg.w_ref)
 
     T = cot * c_rel
@@ -301,6 +308,8 @@ def simulate_monodomain(
     *,
     record_activation: bool = True,
     s2_coupling: Optional[float] = None,
+    along: Optional[float] = None,
+    cross: Optional[float] = None,
 ) -> Dict[str, object]:
     r"""Run one monodomain Mitchell--Schaeffer pacing simulation.
 
@@ -327,7 +336,7 @@ def simulate_monodomain(
 
     points = np.asarray(mesh.points, dtype=float)
     n = points.shape[0]
-    edges, T, mass, _length = cotangent_operator(mesh, cfg)
+    edges, T, mass, _length = cotangent_operator(mesh, cfg, along=along, cross=cross)
     A = _diffusion_matrix(n, edges, T, mass, cfg.d0)
     # Implicit (backward-Euler) diffusion: unconditionally stable, so dt is limited
     # only by reaction accuracy, not the mesh CFL. Factorize (I - dt*A) once.
@@ -432,6 +441,7 @@ def simulate_monodomain(
 def induce_monodomain(
     mesh: AtrialMesh, cfg: MonodomainConfig, rng: np.random.Generator,
     *, burst_cls: Optional[Tuple[float, ...]] = None,
+    along: Optional[float] = None, cross: Optional[float] = None,
 ) -> InducibilityLabel:
     """Monodomain-MS inducibility verdict for one atrium (``source='monodomain_ms'``).
 
@@ -481,7 +491,8 @@ def induce_monodomain(
     detail: list = []
     for kind, acfg, site, ci in attempts:
         res = simulate_monodomain(
-            mesh, acfg, site, record_activation=False, s2_coupling=ci
+            mesh, acfg, site, record_activation=False, s2_coupling=ci,
+            along=along, cross=cross,
         )
         sm = float(res["sustained_ms"])
         best_sustained = max(best_sustained, sm)
