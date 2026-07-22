@@ -119,11 +119,14 @@ def _exact_region_delta_lambda2(
     return drops, total
 
 
-def gm3_extra_features(graph, cfg=FROZEN_SFI, *, k_dim: int = 2) -> Dict[str, float]:
+def gm3_extra_features(graph, cfg=FROZEN_SFI, *, k_dim: int = 2,
+                       include_exact: bool = True) -> Dict[str, float]:
     """Subspace-SFI (``sfisub_``) and exact-Δλ2 SFI (``sfiex_``) summary features.
 
     Both are computed on the *same* frozen expected uncoupling field as the
     single-vector ``sfi_`` block, so the three are directly comparable add-ons.
+    ``include_exact=False`` skips the (eigsh-heavy) exact per-region Δλ2 block so
+    the cheap subspace features can be extracted for very large cohorts.
     """
     G = graph
     L = _laplacian(G)
@@ -140,10 +143,11 @@ def gm3_extra_features(graph, cfg=FROZEN_SFI, *, k_dim: int = 2) -> Dict[str, fl
     feats = _region_summary(sub_regions, float(sub_edge.sum()), "sfisub_")
 
     # --- exact per-region Δλ2 under the mean field (valid at any ‖ΔL‖) ---
-    lam2_base, _ = fiedler(L)
-    ex_regions, ex_total = _exact_region_delta_lambda2(
-        L, edges, expected_dw, region, lam2_base)
-    feats.update(_region_summary(ex_regions, ex_total, "sfiex_"))
+    if include_exact:
+        lam2_base, _ = fiedler(L)
+        ex_regions, ex_total = _exact_region_delta_lambda2(
+            L, edges, expected_dw, region, lam2_base)
+        feats.update(_region_summary(ex_regions, ex_total, "sfiex_"))
     return feats
 
 

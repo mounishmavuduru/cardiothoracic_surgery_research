@@ -247,6 +247,111 @@ def _validity_scan(recs: List[dict]) -> Dict[str, object]:
             "frac_in_radius": float(np.mean(ratios <= FROZEN_SFI.validity_safety))}
 
 
+# --------------------------------------------------------------------------- #
+# Scaled cohort — thousands of networks of varied topology (density), cheap
+# features only (single-vector + subspace SFI; the exact-Δλ2 block is skipped so N
+# can be large). Strengthens the GM4 predict-null and |∇φ2| localizer at scale.
+# --------------------------------------------------------------------------- #
+_SCALED_NODES = 500
+_SCALED_RADIUS = (0.055, 0.095)   # per-network radius range -> varied degree/topology
+
+
+def _scaled_net(k: int):
+    rng = np.random.default_rng(70000 + k)
+    radius = float(rng.uniform(*_SCALED_RADIUS))
+    burden = float(rng.uniform(_BURDEN_LO, _BURDEN_HI))
+    cfg = NetworkConfig(n_nodes=_SCALED_NODES, radius=radius, n_region_grid=3)
+    return make_excitable_network(k, cfg, lesion_burden=burden), radius, burden
+
+
+def _process_network_scaled(k: int) -> Dict[str, object]:
+    G, radius, burden = _scaled_net(k)
+    label = induce_fhn(G, FROZEN_FHN)
+    feats = subject_features(G, Config(seed=0, sfi=FROZEN_SFI), np.random.default_rng(k))
+    feats.update(gm3_extra_features(G, k_dim=2, include_exact=False))  # sfisub_ only
+    return {"subject": f"snet_{k}", "shape_family": f"snet_{k}", "seed": int(k),
+            "radius": radius, "burden": burden, "n_nodes": int(G.n_nodes),
+            "features": {kk: float(v) for kk, v in feats.items()},
+            "inducible": bool(label.inducible),
+            "reentry_origin": (None if label.reentry_origin is None else int(label.reentry_origin))}
+
+
+def _localize_scaled(recs, n_null: int, seed: int) -> Dict[str, object]:
+    rng = np.random.default_rng(seed)
+    subj = [r for r in recs if r["inducible"] and r["reentry_origin"] is not None]
+    keys = ("grad_phi2", "perron", "combined", "wdegree", "fibrosis")
+    acc = {k: {"rank": [], "perm": []} for k in keys}
+    for r in subj:
+        cfg = NetworkConfig(n_nodes=_SCALED_NODES, radius=r["radius"], n_region_grid=3)
+        G = make_excitable_network(r["seed"], cfg, lesion_burden=r["burden"])
+        origin = int(r["reentry_origin"])
+        fields = localizer_fields(G)
+        n = G.n_nodes
+        for k in keys:
+            fld = fields[k]
+            acc[k]["rank"].append(float(np.mean(fld >= fld[origin])))
+            rand = rng.integers(0, n, size=min(200, n))
+            acc[k]["perm"].append([float(np.mean(fld >= fld[int(v)])) for v in rand])
+    out = {"n_localized": len(subj), "fields": {}}
+    for k in keys:
+        ranks = np.array(acc[k]["rank"], float)
+        if ranks.size == 0:
+            continue
+        mean_rank, perm_p = _perm_verdict(ranks, [np.asarray(x, float) for x in acc[k]["perm"]], rng)
+        out["fields"][k] = {"mean_origin_rank": mean_rank, "perm_p": perm_p,
+                            "verdict": "KEEP" if (np.isfinite(perm_p) and perm_p < 0.05) else "DELETE"}
+    return out
+
+
+def run_gm4_scaled(
+    n_networks: int = 2000, *, n_jobs: int = 4, n_boot: int = 10000, n_null: int = 2000,
+    n_splits: int = 5, seed: int = 0, outputs_dir: str = "outputs",
+) -> dict:
+    """Large-N GM4 robustness run (varied-topology networks, cheap features)."""
+    import pandas as pd
+
+    os.makedirs(outputs_dir, exist_ok=True)
+    cache = os.path.join(outputs_dir, f"gm4_scaled_{n_networks}.json")
+    if os.path.isfile(cache):
+        with open(cache) as fh:
+            recs = json.load(fh)
+    else:
+        print(f"[gm4-scaled] building + labelling {n_networks} networks", flush=True)
+        ks = list(range(n_networks))
+        if n_jobs > 1:
+            from multiprocessing import Pool
+            with Pool(n_jobs) as pool:
+                recs = pool.map(_process_network_scaled, ks)
+        else:
+            recs = [_process_network_scaled(k) for k in ks]
+        with open(cache, "w") as fh:
+            json.dump(recs, fh)
+
+    y = np.array([int(r["inducible"]) for r in recs], int)
+    groups = [r["shape_family"] for r in recs]
+    rows = [r["features"] for r in recs]
+    X = pd.DataFrame(rows).reindex(sorted({k for row in rows for k in row}), axis=1).fillna(0.0)
+    n_ind = int(y.sum())
+    seven = ("total", "region_max", "region_mean", "region_std", "top1", "top2", "top3")
+    variants = {"single_vector": [f"sfi_{s}" for s in seven if f"sfi_{s}" in X.columns],
+                "subspace": sorted(c for c in X.columns if c.startswith("sfisub_"))}
+    cfg = {"n_splits": n_splits, "seed": seed, "n_boot": n_boot}
+    predict = {}
+    if min(n_ind, len(y) - n_ind) >= 2:
+        for vname, cols in variants.items():
+            predict[f"competitors_vs_+{vname}"] = _evaluate_pair(X, y, groups, COMPETITOR_COLS, cols, cfg)
+    localize = _localize_scaled(recs, n_null, seed)
+    metrics = {"medium": "fhn_network (scaled, varied topology)",
+               "cohort": {"n_networks": int(len(y)), "n_unstable": n_ind,
+                          "unstable_fraction": float(n_ind / len(y)) if len(y) else 0.0,
+                          "n_nodes": _SCALED_NODES, "radius_range": list(_SCALED_RADIUS)},
+               "predict": predict, "localize": localize,
+               "label_source": "fhn_network"}
+    with open(os.path.join(outputs_dir, "gm4_scaled_metrics.json"), "w") as fh:
+        json.dump(metrics, fh, indent=2)
+    return metrics
+
+
 def run_gm4(
     *, n_jobs: int = 4, n_boot: int = 10000, n_null: int = 2000, n_splits: int = 5,
     seed: int = 0, outputs_dir: str = "outputs",
