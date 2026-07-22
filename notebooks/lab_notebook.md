@@ -570,3 +570,21 @@ graph models. The only regime that could dissociate them is genuine wave-curvatu
 compute-heavy build, queued behind the 100k. Novelty weight shifts to (2) the rho scaling law and
 (3) the falsification-protocol framing, both tractable now. The negative + insight is itself a
 credibility asset for the honesty narrative.
+
+---
+
+## 2026-07-22 (cont.) — Novelty experiment ② (rho scaling law): REAL RESULT
+
+`results/rho_scaling.json`. The validity radius rho = ||dL||/(lambda3-lambda2); the gap
+collapses with system size by Weyl's law, so rho grows lawfully with resolution.
+Measured the gap-vs-N exponent (fixed mean degree) across media:
+- 2D random-geometric: gap ~ N^-1.81
+- 3D random-geometric: gap ~ N^-0.84
+- **real atrial surface mesh (2-manifold): gap ~ N^-1.05 -- matches the Weyl 2-manifold
+  prediction (-1.0) to within 5%.**
+Honest reading: the gap collapses as a clean power law in ALL media (so rho grows lawfully,
+and the biomarker fails MORE at finer resolution -- counterintuitive but real). The real
+2-manifold nails Weyl (-1.0); the abstract random-geometric graphs collapse even faster than
+the naive 2/d, so rho grows at LEAST as fast as Weyl predicts. Do not claim exact Weyl match
+beyond the manifold case. This turns "rho ~ 2000" into a scaling law tied to system size, and
+explains why higher-fidelity meshes (used for accuracy) are further past the validity radius.
