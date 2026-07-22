@@ -43,7 +43,7 @@ from asb.substrate.roney import coarsen_mesh, load_roney_mesh
 
 __all__ = ["run_gm2", "localizer_fields", "geodesic_from"]
 
-_VARIANTS = ("grad_phi2", "perron", "combined", "fibrosis", "fibrosis_grad")
+_VARIANTS = ("grad_phi2", "perron", "combined", "wdegree", "fibrosis", "fibrosis_grad")
 
 
 def _laplacian(G) -> sp.csr_matrix:
@@ -76,10 +76,15 @@ def localizer_fields(G) -> Dict[str, np.ndarray]:
     fib = np.asarray(G.fibrosis, float).ravel()
 
     grad_phi2 = _node_grad(G, phi2)
+    # Weighted degree — the honest *non-spectral* centrality control. A "centrality
+    # localizes the origin" claim must beat plain degree, of which the Perron vector
+    # is a smooth spectral proxy.
+    wdeg = np.asarray(G.degree(), float).ravel()
     return {
         "grad_phi2": grad_phi2,
         "perron": perron_v,
         "combined": hotspot_map(G, phi2, perron_v),
+        "wdegree": wdeg,
         "fibrosis": fib,
         "fibrosis_grad": _node_grad(G, fib),
     }

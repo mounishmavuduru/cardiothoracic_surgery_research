@@ -49,7 +49,7 @@ import scipy.sparse as sp
 
 from asb.types import AtrialGraph, InducibilityLabel
 
-__all__ = ["FHNConfig", "simulate_fhn", "induce_fhn"]
+__all__ = ["FHNConfig", "simulate_fhn", "induce_fhn", "origin_variants"]
 
 
 @dataclass
@@ -113,7 +113,9 @@ def simulate_fhn(G: AtrialGraph, cfg: FHNConfig) -> Dict[str, object]:
     n_steps = int(total / dt)
     post_stim_t = cfg.stim_onset + cfg.stim_dur
 
-    activation = np.full(n, -1.0)
+    activation_last = np.full(n, -1.0)   # last up-crossing time per node
+    activation_first = np.full(n, -1.0)  # first up-crossing time per node
+    active_duration = np.zeros(n)        # total post-stimulus supra-threshold time
     prev_active = v > cfg.v_thresh
     quiescent_run = 0.0
     last_active_t = 0.0
@@ -130,10 +132,13 @@ def simulate_fhn(G: AtrialGraph, cfg: FHNConfig) -> Dict[str, object]:
 
         active = v > cfg.v_thresh
         up = active & (~prev_active)
-        activation[up] = t
+        activation_last[up] = t
+        first = up & (activation_first < 0)
+        activation_first[first] = t
         prev_active = active
 
         if t > post_stim_t:
+            active_duration[active] += dt
             frac = float(active.mean())
             if frac >= cfg.quiescent_frac:
                 last_active_t = t
@@ -146,16 +151,45 @@ def simulate_fhn(G: AtrialGraph, cfg: FHNConfig) -> Dict[str, object]:
 
     sustained_time = max(0.0, last_active_t - post_stim_t)
     inducible = bool(sustained_time >= cfg.instability_min_time)
+
+    # Primary origin = the SUSTAINED-ACTIVITY CORE (node active longest in the
+    # post-stimulus window) — the anchor of the self-sustaining instability, matching
+    # the physical "where the seizure lives" intent. Alternate definitions are exposed
+    # for the origin-sensitivity transparency sweep (GM4).
     origin: Optional[int] = None
     if inducible:
-        post = activation > post_stim_t
-        origin = (int(np.argmin(np.where(post, activation, np.inf)))
-                  if post.any() else int(np.argmax(v)))
+        origin = int(np.argmax(active_duration)) if active_duration.max() > 0 else int(np.argmax(v))
     return {
         "inducible": inducible,
         "reentry_origin": origin,
         "sustained_time": float(sustained_time),
         "terminated_at": terminated,
+        "activation_last": activation_last,
+        "activation_first": activation_first,
+        "active_duration": active_duration,
+        "post_stim_t": float(post_stim_t),
+    }
+
+
+def origin_variants(res: Dict[str, object]) -> Dict[str, Optional[int]]:
+    """Alternate instability-origin definitions from a :func:`simulate_fhn` result.
+
+    Used by GM4 to report how the localizer keep/delete verdicts depend on the
+    (inherently ambiguous) definition of an excitable-instability "origin".
+    """
+    ad = np.asarray(res["active_duration"], float)
+    af = np.asarray(res["activation_first"], float)
+    al = np.asarray(res["activation_last"], float)
+    post = float(res["post_stim_t"])
+    if ad.max() <= 0:
+        return {"sustained_core": None, "first_activation": None, "earliest_last": None}
+    post_mask = al > post
+    return {
+        "sustained_core": int(np.argmax(ad)),
+        "first_activation": (int(np.argmin(np.where(post_mask, af, np.inf)))
+                             if post_mask.any() else None),
+        "earliest_last": (int(np.argmin(np.where(post_mask, al, np.inf)))
+                          if post_mask.any() else None),
     }
 
 

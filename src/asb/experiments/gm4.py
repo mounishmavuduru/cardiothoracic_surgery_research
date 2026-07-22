@@ -52,7 +52,7 @@ FROZEN_NETWORK = NetworkConfig(n_nodes=900, radius=0.065, n_region_grid=3)
 FROZEN_FHN = FHNConfig()  # calibrated: ~0.47 unstable, Spearman(lesion,unstable)=0.68
 _N_NETWORKS = 80
 _BURDEN_LO, _BURDEN_HI = 0.05, 0.45
-_LOCALIZER_KEYS = ("grad_phi2", "perron", "combined", "fibrosis", "fibrosis_grad")
+_LOCALIZER_KEYS = ("grad_phi2", "perron", "combined", "wdegree", "fibrosis", "fibrosis_grad")
 
 
 def _laplacian(G) -> sp.csr_matrix:
@@ -84,7 +84,7 @@ def _process_network(k: int) -> Dict[str, object]:
 
 def _tag() -> str:
     payload = json.dumps({"net": asdict(FROZEN_NETWORK), "fhn": asdict(FROZEN_FHN),
-                          "sfi": asdict(FROZEN_SFI), "n": _N_NETWORKS, "v": 1},
+                          "sfi": asdict(FROZEN_SFI), "n": _N_NETWORKS, "v": 2},
                          sort_keys=True)
     return hashlib.sha1(payload.encode()).hexdigest()[:10]
 
@@ -138,7 +138,8 @@ def _localize(recs: List[dict], n_null: int, seed: int) -> Dict[str, object]:
             per_field[name]["pass"].append(
                 bool(obs <= (np.percentile(nd, 5) if nd.size else np.inf)))
 
-    out: Dict[str, object] = {"n_localized": len(subj), "fields": {}}
+    out: Dict[str, object] = {"n_localized": len(subj), "origin_def": "sustained_core",
+                              "fields": {}}
     for name in _LOCALIZER_KEYS:
         ranks = np.array(per_field[name]["origin_rank"], float)
         if ranks.size == 0:
@@ -160,6 +161,64 @@ def _localize(recs: List[dict], n_null: int, seed: int) -> Dict[str, object]:
             "verdict": "KEEP" if (np.isfinite(perm_p) and perm_p < 0.05) else "DELETE",
         }
     return out
+
+
+# --------------------------------------------------------------------------- #
+# Part B robustness — origin-definition sensitivity.
+# --------------------------------------------------------------------------- #
+def _perm_verdict(origin_ranks: np.ndarray, perm_stacks: list, rng) -> tuple:
+    """Cohort mean origin-rank + tie-robust permutation p (random-origin null)."""
+    obs = float(np.mean(origin_ranks))
+    pmin = min((a.size for a in perm_stacks), default=0)
+    if not pmin:
+        return obs, float("nan")
+    draws = min(pmin, 5000)
+    picks = np.stack([a[rng.integers(0, a.size, size=draws)] for a in perm_stacks])
+    return obs, float(np.mean(picks.mean(axis=0) <= obs))
+
+
+def _origin_sensitivity(recs: List[dict], seed: int) -> Dict[str, object]:
+    """How the keep/delete verdict depends on the (ambiguous) origin definition.
+
+    Re-simulates each unstable network, extracts three origin definitions
+    (``sustained_core`` / ``first_activation`` / ``earliest_last``), and reports the
+    permutation-null verdict of the three key localizers under each — the honest
+    transparency check the GM4 audit demanded.
+    """
+    from asb.transfer.fhn import origin_variants, simulate_fhn
+
+    rng = np.random.default_rng(seed)
+    keys = ("grad_phi2", "perron", "wdegree")
+    defs = ("sustained_core", "first_activation", "earliest_last")
+    acc = {d: {k: {"rank": [], "perm": []} for k in keys} for d in defs}
+    subj = [r for r in recs if r["inducible"]]
+    for r in subj:
+        G = make_excitable_network(r["seed"], FROZEN_NETWORK, lesion_burden=r["burden"])
+        res = simulate_fhn(G, FROZEN_FHN)
+        variants = origin_variants(res)
+        fields = localizer_fields(G)
+        n = G.n_nodes
+        for d in defs:
+            o = variants.get(d)
+            if o is None:
+                continue
+            for k in keys:
+                fld = fields[k]
+                acc[d][k]["rank"].append(float(np.mean(fld >= fld[int(o)])))
+                rand = rng.integers(0, n, size=min(300, n))
+                acc[d][k]["perm"].append([float(np.mean(fld >= fld[int(v)])) for v in rand])
+    table: Dict[str, object] = {}
+    for d in defs:
+        table[d] = {}
+        for k in keys:
+            ranks = np.array(acc[d][k]["rank"], float)
+            if ranks.size == 0:
+                continue
+            stacks = [np.asarray(x, float) for x in acc[d][k]["perm"]]
+            mean_rank, perm_p = _perm_verdict(ranks, stacks, rng)
+            table[d][k] = {"mean_rank": mean_rank, "perm_p": perm_p,
+                           "verdict": "KEEP" if (np.isfinite(perm_p) and perm_p < 0.05) else "DELETE"}
+    return table
 
 
 # --------------------------------------------------------------------------- #
@@ -219,6 +278,7 @@ def run_gm4(
                 X, y, groups, FIBHET_COLS, cols, cfg)
 
     localize = _localize(recs, n_null, seed)
+    origin_sensitivity = _origin_sensitivity(recs, seed)
     validity = _validity_scan(recs)
     sweep = validity_radius_sweep()
 
@@ -228,6 +288,7 @@ def run_gm4(
                    "unstable_fraction": float(n_ind / len(y)) if len(y) else 0.0},
         "predict": predict,
         "localize": localize,
+        "origin_sensitivity": origin_sensitivity,
         "validity_cohort": validity,
         "validity_boundary_synthetic": {"rho_star_10pct": sweep["rho_star_10pct"]},
         "config": {"n_boot": n_boot, "n_null": n_null, "label_source": "fhn_network"},
@@ -273,12 +334,24 @@ def _write_report(path: str, m: dict) -> None:
                          f"{_fmt(r['grouped_delta_auc'])} | {_fmt(r['delong_p'])} | "
                          f"{'MET' if r['endpoint_met'] else 'not met'} |")
     loc = m["localize"]
-    lines += ["", f"## Part B — localize the instability origin (GM2-analog, N={loc['n_localized']})", "",
+    lines += ["", f"## Part B — localize the instability origin (GM2-analog, N={loc['n_localized']}, "
+              f"origin = {loc.get('origin_def','sustained_core')})", "",
               "| localizer | mean origin-rank | perm-null | perm p | verdict |",
               "| --- | --- | --- | --- | --- |"]
     for name, r in loc["fields"].items():
         lines.append(f"| {name} | {_fmt(r['mean_origin_rank'])} | {_fmt(r['perm_null_mean'])} "
                      f"| {_fmt(r['perm_p'])} | **{r['verdict']}** |")
+    os_ = m.get("origin_sensitivity", {})
+    if os_:
+        lines += ["", "### Part B robustness — origin-definition sensitivity (perm p; verdict)",
+                  "", "| origin definition | grad_phi2 | perron | wdegree |",
+                  "| --- | --- | --- | --- |"]
+        for d, row in os_.items():
+            cells = []
+            for k in ("grad_phi2", "perron", "wdegree"):
+                rr = row.get(k)
+                cells.append(f"{_fmt(rr['perm_p'])} {rr['verdict']}" if rr else "n/a")
+            lines.append(f"| {d} | {cells[0]} | {cells[1]} | {cells[2]} |")
     v = m["validity_cohort"]
     lines += ["", "## Part C — validity radius on the network cohort (GM3-analog)", "",
               f"- ρ = ‖ΔL‖/(λ3−λ2): median **{_fmt(v['rho_median'])}** "

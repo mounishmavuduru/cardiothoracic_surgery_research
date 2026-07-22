@@ -88,7 +88,10 @@ def smallest_eigpairs(L, k: int = 6) -> Tuple[np.ndarray, np.ndarray]:
     use_dense = (not sp.issparse(L)) or n <= 256 or k >= n - 1
     if not use_dense:
         try:
-            vals, vecs = eigsh(L.astype(float), k=k, sigma=_SHIFT_SIGMA, which="LM")
+            # Fixed deterministic start vector so eigenvectors are reproducible
+            # across processes even when the spectrum is near-degenerate.
+            v0 = np.random.default_rng(0).standard_normal(n)
+            vals, vecs = eigsh(L.astype(float), k=k, sigma=_SHIFT_SIGMA, which="LM", v0=v0)
             order = np.argsort(vals)
             return vals[order], vecs[:, order]
         except Exception:
@@ -165,7 +168,10 @@ def perron(W) -> Tuple[float, np.ndarray]:
 
     if sp.issparse(W) and n > 256:
         try:
-            vals, vecs = eigsh(W.astype(float), k=1, which="LM")
+            # Positive start vector (Perron vector is entrywise positive) for a
+            # deterministic, well-conditioned dominant-eigenpair solve.
+            v0 = np.ones(n, dtype=float)
+            vals, vecs = eigsh(W.astype(float), k=1, which="LM", v0=v0)
             rho, v = float(vals[0]), vecs[:, 0]
         except Exception:
             A = _as_dense_symmetric(W)
