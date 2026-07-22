@@ -193,3 +193,50 @@ result instead of merely reporting a null. That is a methodological / framing co
 Presenting §9 as "a new theorem" would be false and would (rightly) collapse under expert
 questioning; presenting it as "applying a classical criterion as a biomarker screening test,
 and quantifying the violation on real tissue" is defensible and still genuinely useful.
+
+## 10. The ρ scaling law (why the failure is not incidental)
+
+§9 is a per-instance criterion. It has a *scaling* consequence that is the honest quantitative
+contribution. The gap `λ₃ − λ₂` of a diffusively-coupled medium collapses with system size by
+**Weyl's law**: for a `d`-dimensional domain the low Laplacian eigenvalues scale as
+`λ_k ~ (k/N)^{2/d}`, so the gap shrinks with `N` and therefore
+
+```
+ρ = ‖ΔL‖ / (λ₃ − λ₂)  grows lawfully with resolution.
+```
+
+**Measured** (`results/rho_scaling.json`, gap-vs-`N` at fixed mean degree):
+
+| medium | fitted gap exponent | reference |
+|---|---|---|
+| real atrial surface (2-manifold) | `N^{-1.05}` | Weyl 2-manifold `−1.0` (matched to 5 %) |
+| 2-D random-geometric | `N^{-1.81}` | (faster than naive `2/d`) |
+| 3-D random-geometric | `N^{-0.84}` | (faster than naive `2/d`) |
+
+So the biomarker does not fail by accident on one dataset — **it fails *predictably*, and *more* as the
+medium is meshed finer** (the opposite of "more resolution helps"). The real 2-manifold matches Weyl's
+`−1.0`; the abstract graphs collapse even faster, so `ρ` grows *at least* as fast as Weyl predicts.
+
+**Honest scope.** Weyl's law is classical. What is ours is (i) tying it to *biomarker validity* rather
+than PDE discretization error, (ii) measuring the gap-scaling exponent across independent media, and
+(iii) the counterintuitive corollary that higher-fidelity meshes are *further* past the validity radius.
+Only the real manifold matches the Weyl exponent exactly; we do not claim more.
+
+## 11. The falsification protocol (what actually caught the false positive)
+
+The guards are not decoration; each one, removed, manufactures a specific false positive
+(`results/falsification_protocol.json`):
+
+- **Shape-family GroupKFold** — remove it and shape-family **leakage inflates AUC by +0.117**
+  (naive random-CV 0.756 vs grouped 0.640 on a controlled replicated cohort).
+- **Effect-size gate** — remove it and the **p-value trap** fires: subspace-SFI is `p ≈ 2×10⁻²⁴` at
+  large `N`, which *looks* like a hit, but `ΔAUC = +0.003` needs `~4150` cases to detect at 80 % power
+  (clinical cohorts are ~200–1000) — statistically significant, practically useless.
+- **Spatial null (torus rotation) + keep/delete by measured correlation** — remove it and
+  spatially-smooth centrality fields "localize" the origin spuriously.
+
+**The claim.** A naive analyst (random CV + `p<0.05`, no effect-size gate, no spatial null) would have
+reported SFI as a *working* reentry biomarker. The pre-registered protocol correctly rejects it. This
+is the packageable methods contribution — a worked demonstration that standard biomarker methodology
+produces exactly the false positives this protocol is built to catch, on a candidate plausible enough
+to fool it.
