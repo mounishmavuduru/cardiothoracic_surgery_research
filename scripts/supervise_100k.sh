@@ -26,4 +26,10 @@ for attempt in $(seq 1 500); do
   echo "supervisor: builder exited code=$? $(date -u +%FT%TZ)" >> "$SUP"
   sleep 3
 done
+# Queued after the 100k completes: novelty experiment 1 (monodomain isthmus). Idempotent.
+if grep -q "AGGREGATE_DONE" "$LOG" 2>/dev/null && [ ! -f results/monodomain_isthmus_metrics.json ]; then
+  echo "supervisor: 100k done -> launching queued monodomain isthmus run $(date -u +%FT%TZ)" >> "$SUP"
+  .venv/bin/python -u scripts/run_monodomain_isthmus.py >> /tmp/monodomain_isthmus.log 2>&1
+  echo "supervisor: monodomain isthmus exit=$? $(date -u +%FT%TZ)" >> "$SUP"
+fi
 echo "supervisor END $(date -u +%FT%TZ)" >> "$SUP"
