@@ -132,3 +132,64 @@ both cardiac and neural media, p < 1e-3) and **deleted the Perron/∩ and centra
   inverse-participation-ratio flags activation localization. (`asb.spectral.perron`.)
 - Analytic gates: path/ring/grid Laplacian eigenvalues `λ_k = 2 − 2cos(kπ/N)` and the
   known single-edge-cut Δλ₂ — hard CI checks that validate the pipeline independent of data.
+
+## 9. The validity-radius criterion (stated, with derivation)
+
+Section 4 reported the validity radius empirically (ρ\* ≈ 3). Here is the statement made
+explicit. **Read §9.4 first: the mathematics below is entirely classical — this is not a new
+theorem, and must never be presented as one.**
+
+### 9.1 Setup
+`L = D − W` symmetric PSD with `0 = λ₁ < λ₂ ≤ λ₃ ≤ …`, Fiedler pair `(λ₂, φ₂)`, `φ₂` simple,
+unit-norm. `ΔL` a symmetric perturbation (our fibrosis-weighted uncoupling field is itself a
+Laplacian, so `ΔL` is symmetric PSD). The linear SFI uses `Δλ₂⁽¹⁾ = φ₂ᵀ ΔL φ₂ =
+Σ_{(i,j)} Δw_ij (φ₂,ᵢ − φ₂,ⱼ)²`.
+
+### 9.2 Second-order truth (Rayleigh–Schrödinger)
+For a simple eigenvalue,
+
+```
+Δλ₂ = φ₂ᵀΔL φ₂  +  Σ_{k≠2} |φ₂ᵀ ΔL φ_k|² / (λ₂ − λ_k)  +  O(‖ΔL‖³).
+```
+
+The `k = 3` term dominates (smallest denominator); it is negative and bounded by
+`|φ₂ᵀΔLφ₃|²/(λ₃−λ₂) ≤ ‖ΔL‖²/(λ₃−λ₂)` (unit vectors ⇒ `|φ₂ᵀΔLφ_k| ≤ ‖ΔL‖`).
+
+### 9.3 The criterion
+Writing the leading correction `S₂` and `Δλ₂⁽¹⁾ ≍ c·‖ΔL‖` (`c ∈ (0,1]` = alignment of `ΔL`
+with the `φ₂` direction), the **relative error of the first-order SFI** is
+
+```
+|Δλ₂ − Δλ₂⁽¹⁾| / |Δλ₂⁽¹⁾|  ≈  |S₂|/|Δλ₂⁽¹⁾|  ≲  (1/c)·‖ΔL‖/(λ₃−λ₂)  =  (1/c)·ρ ,
+      ρ := ‖ΔL‖ / (λ₃ − λ₂).
+```
+
+The relative error is **`Θ(ρ)`** — linear in perturbation-size / spectral-gap. GM3 measures
+exactly this: 1 % at ρ = 0.3, ≈10 % at ρ\* ≈ 3, 92 % at ρ = 28. The constant `c` is
+problem-dependent, which is **why ρ\* is calibrated empirically, not asserted**.
+
+**Eigenvector corollary (Davis–Kahan).** `sin∠(φ₂, φ₂′) ≤ √2·‖ΔL‖/(λ₃−λ₂) = √2·ρ`. For
+`ρ ≳ 1`, `φ₂` rotates into the `φ₃` direction and every `φ₂`-derived quantity (edge fragility,
+`|∇φ₂|`, single-vector SFI) is ill-posed — precisely the regime where §5's basis-independent
+subspace SFI is the only well-defined object.
+
+**In one sentence:** *a Fiedler-based spectral perturbation biomarker is trustworthy only while
+`ρ = ‖ΔL‖/(λ₃−λ₂) = O(1)`.* Real excitable media have a tiny gap, so ρ is enormous —
+**atrial-cohort median ρ ≈ 2422, neural-cohort median ρ ≈ 1852**, ~10³× past ρ\*. This is the
+mechanistic reason (not a coincidence) the linear SFI collapses to a substrate re-encoding
+(GM1 null), and it is a **screening test any spectral fragility biomarker can be subjected to**
+in any domain (seizure-focus localization, connectomics, power grids): compute ρ; if `ρ ≫ 1`,
+distrust the linear spectral biomarker regardless of in-sample correlation.
+
+### 9.4 Novelty scope (state this honestly, always)
+The mathematics in §9.1–9.3 — Weyl's inequality, Davis–Kahan, second-order Rayleigh–Schrödinger
+perturbation, and `ρ` governing when perturbation theory is valid — is **classical numerical
+linear algebra (1970s and earlier). Nothing here is a new theorem.** Any applied mathematician
+knows perturbation theory fails once the perturbation is comparable to the eigenvalue gap. The
+**contribution is not mathematical**; it is: (i) recognizing that this exact ratio is the right
+*a priori* validity check for a spectral fragility biomarker; (ii) *measuring* that real atrial
+and neural media violate it by ~10³; and (iii) using it to *mechanistically explain* a negative
+result instead of merely reporting a null. That is a methodological / framing contribution.
+Presenting §9 as "a new theorem" would be false and would (rightly) collapse under expert
+questioning; presenting it as "applying a classical criterion as a biomarker screening test,
+and quantifying the violation on real tissue" is defensible and still genuinely useful.

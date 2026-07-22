@@ -1,0 +1,32 @@
+{
+  "N": 55000,
+  "positives": 20112,
+  "clinical_reference_sizes": {
+    "typical_single_center": 200,
+    "large_multicenter": 1000
+  },
+  "variants": {
+    "single_vector": {
+      "delta_auc": 0.0006883360427649698,
+      "z_at_N": 4.328181713579973,
+      "p_at_N": 1.5034540586738927e-05,
+      "auc_base": 0.9056193636547967,
+      "auc_sfi": 0.9063076996975616,
+      "n_needed_80pct": 23044.077376925834,
+      "n_needed_90pct": 30849.494854343433,
+      "detectable_at_200": false,
+      "detectable_at_1000": false
+    },
+    "subspace": {
+      "delta_auc": 0.0028296552491098304,
+      "z_at_N": 10.1969055170517,
+      "p_at_N": 2.046905142648414e-24,
+      "auc_base": 0.9056193636547967,
+      "auc_sfi": 0.9084490189039065,
+      "n_needed_80pct": 4151.772099291133,
+      "n_needed_90pct": 5558.047298597239,
+      "detectable_at_200": false,
+      "detectable_at_1000": false
+    }
+  }
+}
