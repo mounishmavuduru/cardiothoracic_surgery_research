@@ -349,3 +349,51 @@
   incl. the SFI hotspot; the Fiedler-gradient claim is the one surviving spectral mechanism, the
   Perron-colocalization hypothesis is falsified, and the hypothesized |∇φ₂|∩Perron hotspot is
   worse than |∇φ₂| alone.
+
+---
+
+### 2026-07-22 — GM4 TRANSFER — the calculus + validity radius generalize; the localizer is mechanism-specific
+
+- **Goal:** port the fragility calculus to a SECOND excitable medium (a 2-D FitzHugh–Nagumo
+  neural network with an epileptic-focus / hyperexcitable-lesion instability; `asb.transfer`)
+  and test whether the atrial result-pattern replicates. The spectral/SFI/baseline/localizer
+  code is reused **verbatim** (an `AtrialGraph` is just a weighted graph) — a literal test of
+  medium-independence.
+- **Setup:** 80 networks (n≈900, random-geometric), FHN a=0.7/b=0.8/ε=0.08, g=4.0, lesion→
+  depolarizing bias I_bias=0.7 (calibrated). **42/80 unstable (0.53)**, each network its own
+  group. Predict = nested GroupKFold + DeLong + 10k bootstrap (reused GM1). Localize = tie-robust
+  permutation null (reused GM2). Validity = ρ scan (reused GM3). Labels `source='fhn_network'`,
+  driven by excitability+coupling, never λ₂. Literature-grounded (Epileptor/Wilson–Cowan seizure
+  mechanism; Pecora–Carroll MSF and Ghosh–Boyd dλ₂/dw credited as prior art).
+- **Observed:**
+  - **Part A (predict) — NULL REPLICATES.** No SFI computation beats the competitor set:
+    single-vector +0.006/+0.024, subspace −0.025/−0.016, exact −0.003/−0.013 (LR/GBT), all
+    DeLong p>0.2. Competitor baseline already AUC 0.86–0.89. As in the atrium, SFI ≡ substrate
+    as a *predictor*.
+  - **Part B (localize) — a clean cross-medium DISSOCIATION:**
+
+    | localizer | ATRIUM (cardiac reentry) | NEURAL (FHN focus) |
+    |---|---|---|
+    | `\|∇φ₂\|` Fiedler gradient | **KEEP** (p<0.001) | **DELETE** (p=0.83) |
+    | Perron centrality | DELETE (p=0.98) | **KEEP** (p=0.003) |
+    | `\|∇φ₂\|∩Perron` hotspot | DELETE (p=0.98) | **KEEP** (p<0.001) |
+    | lesion/fibrosis field | KEEP (p<0.001) | DELETE (p=0.99) |
+
+  - **Part C (validity) — REPLICATES.** Network ρ=‖ΔL‖/(λ₃−λ₂) median **1852** (min 909,
+    max 7246) — deep outside the ρ*≈3 boundary, exactly like the atrium (ρ≈2422).
+- **Interpretation (the honest generational synthesis):** what transfers is the *calculus*
+  and the *validity radius* (both media sit ~10³× outside ρ*, and the linear SFI collapses to
+  substrate measures as a predictor in both). What is **medium-specific is which eigen-object
+  localizes the instability**: cardiac reentry originates at partition boundaries → the
+  **Fiedler gradient** finds it; the neural seizure originates at a hyperexcitable **hub** →
+  the **Perron centrality** finds it (and the raw lesion field does not — Perron carries
+  signal beyond the substrate). So the localizing spectral feature is a *fingerprint of the
+  instability mechanism*, revealed only because we kept/deleted each claim per medium rather
+  than assuming the hypothesis. The dossier's fixed `\|∇φ₂\|∩Perron` hotspot is wrong as a
+  universal, but a spectral localizer exists in each medium — a stronger, more honest result
+  than a forced replication.
+- **Surprises:** the localizer flipping between media (Fiedler↔Perron) was not anticipated;
+  it is the most scientifically interesting finding of the project.
+- **Caveats / next:** the Perron-KEEP in the neural medium warrants the same adversarial audit
+  GM1/GM2 got (is the origin trivially a max-degree hub? is Perron just re-encoding degree?);
+  audit launched. Artifacts: `results/gm4_metrics.json`, `results/gm4_report.md`.

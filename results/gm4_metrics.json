@@ -1,0 +1,294 @@
+{
+  "medium": "fhn_network (2-D FitzHugh-Nagumo excitable network)",
+  "cohort": {
+    "n_networks": 80,
+    "n_unstable": 42,
+    "unstable_fraction": 0.525
+  },
+  "predict": {
+    "competitors_vs_+single_vector": {
+      "lr": {
+        "grouped_auc_base": 0.887844611528822,
+        "grouped_auc_sfi": 0.8941102756892231,
+        "grouped_delta_auc": 0.006265664160401085,
+        "naive_auc_base": 0.8928571428571428,
+        "naive_auc_sfi": 0.8828320802005012,
+        "naive_delta_auc": -0.010025062656641603,
+        "delong_p": 0.7419689838989914,
+        "delong_z": 0.32924702207235484,
+        "bootstrap": {
+          "delta_mean": 0.0065060776942355856,
+          "ci_low": -0.02819548872180455,
+          "ci_high": 0.04761904761904767,
+          "p_delta_le_0": 0.3864,
+          "n_boot_valid": 10000
+        },
+        "endpoint_met": false
+      },
+      "gbt": {
+        "grouped_auc_base": 0.87531328320802,
+        "grouped_auc_sfi": 0.8997493734335839,
+        "grouped_delta_auc": 0.02443609022556381,
+        "naive_auc_base": 0.8850250626566416,
+        "naive_auc_sfi": 0.8956766917293233,
+        "naive_delta_auc": 0.01065162907268169,
+        "delong_p": 0.32016540971524465,
+        "delong_z": 0.9941180275013367,
+        "bootstrap": {
+          "delta_mean": 0.024417731829573932,
+          "ci_low": -0.023809523809523836,
+          "ci_high": 0.07518796992481203,
+          "p_delta_le_0": 0.163,
+          "n_boot_valid": 10000
+        },
+        "endpoint_met": false
+      }
+    },
+    "lesion_vs_+single_vector": {
+      "lr": {
+        "grouped_auc_base": 0.8878446115288221,
+        "grouped_auc_sfi": 0.9010025062656641,
+        "grouped_delta_auc": 0.013157894736842035,
+        "naive_auc_base": 0.8734335839598998,
+        "naive_auc_sfi": 0.8803258145363408,
+        "naive_delta_auc": 0.006892230576441061,
+        "delong_p": 0.5285666919673343,
+        "delong_z": 0.6301954864678327,
+        "bootstrap": {
+          "delta_mean": 0.013044987468671679,
+          "ci_low": -0.026942355889724268,
+          "ci_high": 0.055764411027568905,
+          "p_delta_le_0": 0.2665,
+          "n_boot_valid": 10000
+        },
+        "endpoint_met": false
+      },
+      "gbt": {
+        "grouped_auc_base": 0.8634085213032581,
+        "grouped_auc_sfi": 0.8984962406015038,
+        "grouped_delta_auc": 0.03508771929824572,
+        "naive_auc_base": 0.8593358395989975,
+        "naive_auc_sfi": 0.8884711779448621,
+        "naive_delta_auc": 0.02913533834586457,
+        "delong_p": 0.210523860315303,
+        "delong_z": 1.2521262599766267,
+        "bootstrap": {
+          "delta_mean": 0.0350843984962406,
+          "ci_low": -0.020050125313283318,
+          "ci_high": 0.09085213032581463,
+          "p_delta_le_0": 0.1085,
+          "n_boot_valid": 10000
+        },
+        "endpoint_met": false
+      }
+    },
+    "competitors_vs_+subspace": {
+      "lr": {
+        "grouped_auc_base": 0.887844611528822,
+        "grouped_auc_sfi": 0.8627819548872181,
+        "grouped_delta_auc": -0.025062656641603898,
+        "naive_auc_base": 0.8928571428571428,
+        "naive_auc_sfi": 0.8439849624060151,
+        "naive_delta_auc": -0.048872180451127734,
+        "delong_p": 0.3881580612499673,
+        "delong_z": -0.8629625437302613,
+        "bootstrap": {
+          "delta_mean": -0.02491058897243107,
+          "ci_low": -0.08583959899749372,
+          "ci_high": 0.028822055137844638,
+          "p_delta_le_0": 0.8102,
+          "n_boot_valid": 10000
+        },
+        "endpoint_met": false
+      },
+      "gbt": {
+        "grouped_auc_base": 0.87531328320802,
+        "grouped_auc_sfi": 0.8590225563909774,
+        "grouped_delta_auc": -0.01629072681704269,
+        "naive_auc_base": 0.8850250626566416,
+        "naive_auc_sfi": 0.8825187969924811,
+        "naive_delta_auc": -0.0025062656641604564,
+        "delong_p": 0.45865403345770406,
+        "delong_z": -0.7410649940546744,
+        "bootstrap": {
+          "delta_mean": -0.01616434837092732,
+          "ci_low": -0.06265664160400997,
+          "ci_high": 0.02694235588972427,
+          "p_delta_le_0": 0.7689,
+          "n_boot_valid": 10000
+        },
+        "endpoint_met": false
+      }
+    },
+    "lesion_vs_+subspace": {
+      "lr": {
+        "grouped_auc_base": 0.8878446115288221,
+        "grouped_auc_sfi": 0.8765664160401003,
+        "grouped_delta_auc": -0.011278195488721776,
+        "naive_auc_base": 0.8734335839598998,
+        "naive_auc_sfi": 0.8458646616541353,
+        "naive_delta_auc": -0.027568922305764465,
+        "delong_p": 0.6011335930298018,
+        "delong_z": -0.5227710428410567,
+        "bootstrap": {
+          "delta_mean": -0.011258646616541353,
+          "ci_low": -0.05639097744360899,
+          "ci_high": 0.03132832080200498,
+          "p_delta_le_0": 0.7028,
+          "n_boot_valid": 10000
+        },
+        "endpoint_met": false
+      },
+      "gbt": {
+        "grouped_auc_base": 0.8634085213032581,
+        "grouped_auc_sfi": 0.8640350877192983,
+        "grouped_delta_auc": 0.0006265664160401974,
+        "naive_auc_base": 0.8593358395989975,
+        "naive_auc_sfi": 0.8762531328320803,
+        "naive_delta_auc": 0.016917293233082775,
+        "delong_p": 0.9827188221504559,
+        "delong_z": 0.021660438143600635,
+        "bootstrap": {
+          "delta_mean": 0.0008026942355889737,
+          "ci_low": -0.057644110275689275,
+          "ci_high": 0.05701754385964897,
+          "p_delta_le_0": 0.4865,
+          "n_boot_valid": 10000
+        },
+        "endpoint_met": false
+      }
+    },
+    "competitors_vs_+exact": {
+      "lr": {
+        "grouped_auc_base": 0.887844611528822,
+        "grouped_auc_sfi": 0.8847117794486216,
+        "grouped_delta_auc": -0.0031328320802004317,
+        "naive_auc_base": 0.8928571428571428,
+        "naive_auc_sfi": 0.8809523809523809,
+        "naive_delta_auc": -0.011904761904761862,
+        "delong_p": 0.8775460018380634,
+        "delong_z": -0.15408083174568446,
+        "bootstrap": {
+          "delta_mean": -0.0029209899749373476,
+          "ci_low": -0.04072681704260661,
+          "ci_high": 0.040100250626566414,
+          "p_delta_le_0": 0.5836,
+          "n_boot_valid": 10000
+        },
+        "endpoint_met": false
+      },
+      "gbt": {
+        "grouped_auc_base": 0.87531328320802,
+        "grouped_auc_sfi": 0.862781954887218,
+        "grouped_delta_auc": -0.01253132832080206,
+        "naive_auc_base": 0.8850250626566416,
+        "naive_auc_sfi": 0.8784461152882206,
+        "naive_delta_auc": -0.006578947368421018,
+        "delong_p": 0.24293861286718332,
+        "delong_z": -1.1676731955162476,
+        "bootstrap": {
+          "delta_mean": -0.012478320802005012,
+          "ci_low": -0.036340852130325785,
+          "ci_high": 0.010025062656641492,
+          "p_delta_le_0": 0.8711,
+          "n_boot_valid": 10000
+        },
+        "endpoint_met": false
+      }
+    },
+    "lesion_vs_+exact": {
+      "lr": {
+        "grouped_auc_base": 0.8878446115288221,
+        "grouped_auc_sfi": 0.8677944862155389,
+        "grouped_delta_auc": -0.020050125313283207,
+        "naive_auc_base": 0.8734335839598998,
+        "naive_auc_sfi": 0.8759398496240601,
+        "naive_delta_auc": 0.0025062656641603454,
+        "delong_p": 0.3802183526770603,
+        "delong_z": -0.8774940436378277,
+        "bootstrap": {
+          "delta_mean": -0.02003182957393484,
+          "ci_low": -0.06829573934837085,
+          "ci_high": 0.025062656641603898,
+          "p_delta_le_0": 0.8092,
+          "n_boot_valid": 10000
+        },
+        "endpoint_met": false
+      },
+      "gbt": {
+        "grouped_auc_base": 0.8634085213032581,
+        "grouped_auc_sfi": 0.8458646616541354,
+        "grouped_delta_auc": -0.01754385964912264,
+        "naive_auc_base": 0.8593358395989975,
+        "naive_auc_sfi": 0.849937343358396,
+        "naive_delta_auc": -0.009398496240601517,
+        "delong_p": 0.34214247777847573,
+        "delong_z": -0.9499405171617069,
+        "bootstrap": {
+          "delta_mean": -0.0174765664160401,
+          "ci_low": -0.057644110275689164,
+          "ci_high": 0.01754385964912286,
+          "p_delta_le_0": 0.8341,
+          "n_boot_valid": 10000
+        },
+        "endpoint_met": false
+      }
+    }
+  },
+  "localize": {
+    "n_localized": 42,
+    "fields": {
+      "grad_phi2": {
+        "mean_origin_rank": 0.5455672272178536,
+        "perm_null_mean": 0.5036963032577741,
+        "perm_p": 0.8333333333333334,
+        "endpoint_pass_frac": 0.0,
+        "verdict": "DELETE"
+      },
+      "perron": {
+        "mean_origin_rank": 0.36221968252944703,
+        "perm_null_mean": 0.4973726055040671,
+        "perm_p": 0.0033333333333333335,
+        "endpoint_pass_frac": 0.11904761904761904,
+        "verdict": "KEEP"
+      },
+      "combined": {
+        "mean_origin_rank": 0.3633305892250614,
+        "perm_null_mean": 0.5011916005678938,
+        "perm_p": 0.0,
+        "endpoint_pass_frac": 0.047619047619047616,
+        "verdict": "KEEP"
+      },
+      "fibrosis": {
+        "mean_origin_rank": 0.5991260979656298,
+        "perm_null_mean": 0.5045341880099113,
+        "perm_p": 0.9933333333333333,
+        "endpoint_pass_frac": 0.0,
+        "verdict": "DELETE"
+      },
+      "fibrosis_grad": {
+        "mean_origin_rank": 0.5212420048394804,
+        "perm_null_mean": 0.5038047293642818,
+        "perm_p": 0.65,
+        "endpoint_pass_frac": 0.047619047619047616,
+        "verdict": "DELETE"
+      }
+    }
+  },
+  "validity_cohort": {
+    "n_scanned": 24,
+    "rho_median": 1852.4387173734576,
+    "rho_min": 908.6007545936412,
+    "rho_max": 7245.585928210031,
+    "frac_in_radius": 0.0
+  },
+  "validity_boundary_synthetic": {
+    "rho_star_10pct": 2.9998846240069104
+  },
+  "config": {
+    "n_boot": 10000,
+    "n_null": 2000,
+    "label_source": "fhn_network"
+  },
+  "label_disclaimer": "FitzHugh-Nagumo excitable-network instability, a nonlinear simulator verdict on an abstract neural medium. Not clinical."
+}
