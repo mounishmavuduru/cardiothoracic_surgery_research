@@ -22,7 +22,7 @@ nonlinear excitable-media instability, and what genuinely transfers."**
 | **GM1 — predict** | SFI beats competitors on inducibility (ΔAUC≥0.05, DeLong p<0.05) | grouped ΔAUC ≈ 0/negative vs full competitor set; exact & subspace SFI do **not** rescue it | **NULL (robust)** |
 | **GM2 — localize** | `\|∇φ₂\|∩Perron` finds reentry origin < spatial-null 5th pct | strict endpoint **null**; but **KEEP `\|∇φ₂\|`** (perm p<1e-3), **DELETE Perron & the ∩ hotspot** | **partial positive** |
 | **GM3 — validity radius** | quantify where the linear surrogate holds | ρ\*≈3 (first-order 10% error), Weyl bound holds, subspace handles degeneracy; **real atria at ρ≈2422** | **HOLDS (lead result)** |
-| **GM4 — transfer** | fragility calculus generalizes to a 2nd excitable medium | _(FHN neural network; results being finalized — see §1)_ | **in progress** |
+| **GM4 — transfer** | fragility calculus generalizes to a 2nd excitable medium | full pattern replicates in an FHN neural net: predictive **null** + `\|∇φ₂\|` **localizer KEEP** (p<1e-3, beats Perron/degree) + validity radius (ρ≈1852) | **HOLDS (convergent)** |
 
 **Three genuine contributions** the write-up defends:
 1. **The validity radius (GM3)** — a quantified, theory-matched boundary (Weyl /
@@ -32,9 +32,16 @@ nonlinear excitable-media instability, and what genuinely transfers."**
 2. **A measured mechanism correction (GM2)** — the Fiedler gradient `|∇φ₂|` genuinely
    localizes reentry origins, but the hypothesized Perron co-localization is *falsified*
    and actively hurts. We kept/deleted each claim by measured correlation, as promised.
-3. **Cross-medium generality (GM4)** — whether the *pattern* (null prediction + `|∇φ₂|`
-   localization + the same validity structure) replicates in an independent excitable
-   medium, establishing the calculus as graph-universal rather than cardiac-specific.
+3. **Cross-medium generality (GM4)** — the *pattern* replicates in an independent
+   excitable medium (a FitzHugh–Nagumo neural network with an epileptic-focus
+   instability): the linear SFI is a null *predictor*, the **Fiedler gradient `|∇φ₂|`
+   localizes** the instability origin above the spatial null in *both* media (p<1e-3,
+   beating Perron/weighted-degree centrality controls), and the validity radius is the
+   same (ρ≈1852 ≫ ρ*≈3). Establishes the calculus as graph-universal, not
+   cardiac-specific. *(An initial GM4 run suggested a cardiac↔neural localizer
+   dissociation; adversarial audit traced it to an origin-definition artifact and the
+   corrected analysis shows convergence — the correction is logged in the notebook and is
+   itself a credibility asset.)*
 
 **Honesty guardrails locked in** (never violate in the write-up): labels are simulator
 verdicts, never clinical POAF; no FDA/VICTRE/in-silico-clinical-trial language; the
