@@ -324,3 +324,28 @@
   validity radius to a second excitable medium (epilepsy-like reaction–diffusion network) and
   show the same validity-radius framework predicts induced instability above that medium's null.
   Artifacts: `results/gm2_metrics.json`, `results/gm2_report.md`.
+
+---
+
+### 2026-07-22 — GM2 verification + tie-robust refinement (audit: TRUSTWORTHY)
+
+- **Adversarial code audit (subagent) of GM2:** no invalidating bug. Coarsening deterministic
+  (byte-identical points across re-coarsening, cached `n_nodes` reproduced 20/20 → the cached
+  `reentry_origin` indexes the same physical node GM2 uses); 0 infinite geodesics / 44 466
+  distances; the torus-shift null is fair (returns the true origin only 0.06 % ≈ chance);
+  `combined == grad_phi2·|perron|` exactly, and it DELETEs because the ~7× peakier Perron field
+  (IPR 0.031 vs 0.004; Spearman(grad_phi2,perron) −0.34) dominates the argmax. **grad_phi2 KEEP
+  survives every stress test** — leave-one-out Wilcoxon p ∈ [0.0004, 0.0041]; restricting to
+  interior (degree ≥ 6) origins *strengthens* it to p = 0.00012; not outlier-driven (16/20 ranks
+  < 0.5). No leakage/circularity (origins come from the λ₂-independent monodomain solve).
+- **Refinement the audit motivated:** the Wilcoxon-vs-0.5 baseline is mis-specified for tie-heavy
+  fields (fibrosis has ~325 zero-fibrosis nodes/subject → its no-association mean rank is 0.52,
+  not 0.50). Added a **tie-robust permutation null** (random origins drawn from each field's own
+  random-node rank sample) as the primary keep/delete statistic. Verdicts unchanged and now
+  exact: grad_phi2 **perm p = 0.0000** (null mean 0.510), fibrosis perm p = 0.0000 (null 0.524),
+  perron 0.983 / combined 0.980 / fibrosis_grad 1.000 → **KEEP grad_phi2 & fibrosis; DELETE
+  perron, combined, fibrosis_grad.** Committed to `src/asb/experiments/gm2.py`.
+- **Bottom line unchanged, now bulletproof:** strict localization endpoint NULL for all fields
+  incl. the SFI hotspot; the Fiedler-gradient claim is the one surviving spectral mechanism, the
+  Perron-colocalization hypothesis is falsified, and the hypothesized |∇φ₂|∩Perron hotspot is
+  worse than |∇φ₂| alone.

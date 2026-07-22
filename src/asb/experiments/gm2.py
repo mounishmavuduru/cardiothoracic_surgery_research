@@ -139,13 +139,20 @@ def _subject_localization(path: str, origin: int, n_null: int, seed: int) -> Dic
 
     out: Dict[str, object] = {"subject": os.path.basename(path), "diam_mm": diam,
                               "n_nodes": G.n_nodes, "variants": {}}
+    n = G.n_nodes
     for name, field in fields.items():
         hot = int(np.argmax(field))
         obs = float(geo[hot])
         null_nodes = _torus_shift_null_nodes(G.uac, hot, n_null, rng)
         null_d = geo[null_nodes]
         null_d = null_d[np.isfinite(null_d)]
-        origin_rank = float(np.mean(field >= field[int(origin)]))  # small = origin is a hotspot
+        # Score-rank of the origin (fraction of nodes scoring >= it; small = origin is a
+        # hotspot). Its no-association baseline is NOT 0.5 for tie-heavy fields, so we
+        # also store the score-ranks of a sample of RANDOM nodes: the tie-robust
+        # permutation-null distribution of the origin rank for this field.
+        origin_rank = float(np.mean(field >= field[int(origin)]))
+        rand_nodes = rng.integers(0, n, size=min(300, n))
+        perm_ranks = np.array([np.mean(field >= field[int(v)]) for v in rand_nodes], float)
         out["variants"][name] = {
             "obs_mm": obs,
             "obs_norm": obs / diam if diam > 0 else float("nan"),
@@ -153,6 +160,7 @@ def _subject_localization(path: str, origin: int, n_null: int, seed: int) -> Dic
             "null_p5_mm": float(np.percentile(null_d, 5)) if null_d.size else float("nan"),
             "percentile_vs_null": float(np.mean(null_d <= obs)) if null_d.size else float("nan"),
             "origin_score_rank": origin_rank,
+            "perm_rank_sample": perm_ranks.tolist(),
         }
     return out
 
@@ -212,6 +220,23 @@ def run_gm2(
         except Exception:
             wilcox_p = float("nan")
 
+        # Tie-robust PERMUTATION null (primary keep/delete statistic): the observed
+        # cohort-mean origin rank vs the distribution of cohort-mean ranks under random
+        # origins (drawn per subject from this field's own random-node rank sample). This
+        # uses each field's true no-association baseline, correcting the Wilcoxon-vs-0.5
+        # mis-specification for tie-heavy fields (e.g. fibrosis).
+        obs_mean_rank = float(np.mean(origin_ranks))
+        perm_stacks = [np.asarray(s["variants"][name]["perm_rank_sample"], float) for s in subj]
+        pmin = min((a.size for a in perm_stacks), default=0)
+        if pmin > 0:
+            draws = min(pmin, 5000)
+            picks = np.stack([a[rng.integers(0, a.size, size=draws)] for a in perm_stacks])
+            perm_means = picks.mean(axis=0)
+            perm_p = float(np.mean(perm_means <= obs_mean_rank))
+            perm_null_mean = float(np.mean(perm_means))
+        else:
+            perm_p, perm_null_mean = float("nan"), float("nan")
+
         results[name] = {
             "median_obs_mm": float(np.median(obs_mm)),
             "median_obs_norm": obs_median,
@@ -223,9 +248,12 @@ def run_gm2(
                 s["variants"][name]["obs_mm"] <= s["variants"][name]["null_p5_mm"]
                 for s in subj])),
             "median_origin_score_rank": float(np.median(origin_ranks)),
-            "mean_origin_score_rank": float(np.mean(origin_ranks)),
+            "mean_origin_score_rank": obs_mean_rank,
             "origin_rank_wilcoxon_p": wilcox_p,
-            "claim_verdict": ("KEEP" if (np.isfinite(wilcox_p) and wilcox_p < 0.05)
+            "origin_rank_perm_p": perm_p,
+            "perm_null_mean_rank": perm_null_mean,
+            # Verdict uses the tie-robust permutation p (primary); Wilcoxon reported too.
+            "claim_verdict": ("KEEP" if (np.isfinite(perm_p) and perm_p < 0.05)
                               else "DELETE"),
             # Pre-registered PRIMARY endpoint: observed cohort median geodesic error
             # below the spatial-null median's 5th percentile.
@@ -284,10 +312,11 @@ def _write_report(path: str, m: dict) -> None:
               "Origin score-rank = fraction of nodes scoring ≥ the reentry origin (small ⇒ "
               "origin is a hotspot). One-sided Wilcoxon vs the no-association median 0.5.",
               "",
-              "| claim (localizer) | median rank | Wilcoxon p | verdict |",
-              "| --- | --- | --- | --- |"]
+              "| claim (localizer) | mean rank | perm-null mean | **perm p** | Wilcoxon p | verdict |",
+              "| --- | --- | --- | --- | --- | --- |"]
     for name, r in m["variants"].items():
-        lines.append(f"| {name} | {_fmt(r['median_origin_score_rank'])} | "
+        lines.append(f"| {name} | {_fmt(r['mean_origin_score_rank'])} | "
+                     f"{_fmt(r.get('perm_null_mean_rank'))} | {_fmt(r.get('origin_rank_perm_p'))} | "
                      f"{_fmt(r['origin_rank_wilcoxon_p'])} | **{r['claim_verdict']}** |")
     lines += ["", "Interpretation: the strict localization endpoint (argmax below the "
               "spatial-null 5th pct) is not met by any field. But the keep/delete test shows "
