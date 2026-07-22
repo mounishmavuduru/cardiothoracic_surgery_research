@@ -167,8 +167,10 @@ Science runs it with a single call. None changes the code's logic — only scale
   intervals (partial pooling), to formalize "no incremental value" with a posterior.
 
 ### 3.4 Scale the cohort + GM4 generality
-- Grow to **hundreds** of anatomies (Rodero SSM via atrialmtk; PCA-resampled variants
-  tagged to parent shape-family for grouped CV) → tightens every CI.
+- Grow to **hundreds of distinct real anatomies** — verified candidate datasets are catalogued
+  in **`docs/DATASETS.md`**; add the **UW/Boyle Dryad set** (`10.5061/dryad.kkwh70sg0`, ~82
+  distinct real patients with LGE fibrosis, `.vtk`) first (nearly triples distinct real N), then
+  the Nagel bi-atrial SSM. Tag patient = group for grouped CV (variants of one shape ≈ 1 group).
 - GM4 at scale: more networks and **more topologies** (small-world Watts–Strogatz,
   scale-free) + a second neural model (Wilson–Cowan / Epileptor node) to show the transfer
   is not FHN-specific.
