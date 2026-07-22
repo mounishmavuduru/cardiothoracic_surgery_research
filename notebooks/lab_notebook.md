@@ -588,3 +588,18 @@ and the biomarker fails MORE at finer resolution -- counterintuitive but real). 
 the naive 2/d, so rho grows at LEAST as fast as Weyl predicts. Do not claim exact Weyl match
 beyond the manifold case. This turns "rho ~ 2000" into a scaling law tied to system size, and
 explains why higher-fidelity meshes (used for accuracy) are further past the validity radius.
+
+---
+
+## 2026-07-22 (cont.) — Novelty experiment ③ (falsification protocol): REAL RESULT
+
+`results/falsification_protocol.json`. Each guard in the protocol, when REMOVED, manufactures a
+specific false positive that the guard catches:
+- **Grouping guard (leakage):** replicated shape-family cohort — naive random-CV AUC=0.756 vs
+  grouped-CV AUC=0.640 => **+0.117 AUC inflation** purely from shape-family leakage.
+- **Effect-size guard (p-value trap):** subspace-SFI at N=55k gives p=2e-24 ("it works!") but
+  dAUC=+0.0028, needing ~4152 cases for 80% power => clinically useless.
+So a naive analyst (random CV + p<0.05, no effect-size gate) would have reported SFI as a working
+biomarker; the pre-registered protocol correctly rejects it. This is the packageable methods
+contribution: a demonstration that standard biomarker methodology produces exactly the false
+positives this protocol is built to catch.

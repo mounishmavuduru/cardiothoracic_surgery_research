@@ -1,0 +1,19 @@
+{
+  "leakage_guard": {
+    "n_base": 12,
+    "n_rep": 6,
+    "n_rows": 72,
+    "positives": 42,
+    "auc_naive_random_cv": 0.7563492063492063,
+    "auc_grouped_cv": 0.6396825396825396,
+    "leakage_inflation": 0.1166666666666667
+  },
+  "effect_size_guard": {
+    "naive_conclusion": "subspace-SFI improves prediction, p=2.0e-24 at N=55000 -> 'it works'",
+    "rigorous_conclusion": "effect size dAUC=+0.0028; needs ~4152 cases for 80% power; clinical cohorts ~200-1000 -> undetectable, useless",
+    "delta_auc": 0.0028296552491098304,
+    "p_at_N": 2.046905142648414e-24,
+    "n_needed_80pct": 4151.772099291133
+  },
+  "summary": "A naive analyst (random CV + p-value threshold, no effect-size gate) would report SFI as a working biomarker. The pre-registered protocol (shape-family GroupKFold + DeLong + effect-size gate + spatial nulls) correctly rejects it. Each guard, removed, manufactures a specific false positive."
+}
