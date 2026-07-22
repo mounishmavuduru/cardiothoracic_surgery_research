@@ -8,11 +8,15 @@ if __name__ == "__main__":
     m = run_gm1_expanded(n_jobs=2, n_boot=10000)
     print(f"=== UW EXPANDED GM1 DONE in {time.time() - t0:.0f}s ===", flush=True)
     for name, c in m["cohorts"].items():
-        line = (f"[{name:9s}] n={c['n_subjects']:>3} inducible={c.get('n_inducible', 0):>3} "
-                f"({c.get('inducible_fraction', 0):.2f})")
-        cv = c.get("competitors_vs_+SFI")
-        if cv:
-            line += (f"  competitors_vs_+SFI: grouped dAUC={cv['grouped_delta_auc']:+.3f} "
-                     f"DeLong_p={cv['delong_p']:.4f} {'MET' if cv['endpoint_met'] else 'no'}")
-        print(line, flush=True)
+        print(f"[{name:9s}] n={c['n_subjects']:>3} inducible={c.get('n_inducible', 0):>3} "
+              f"({c.get('inducible_fraction', 0):.2f})", flush=True)
+        for cmp in ("competitors_vs_+SFI", "fibrosis_vs_+SFI"):
+            cv = c.get(cmp)
+            if not cv:
+                continue
+            for clf in ("lr", "gbt"):
+                d = cv[clf]
+                print(f"    {cmp:22s} {clf}: base={d['grouped_auc_base']:.3f} "
+                      f"+SFI={d['grouped_auc_sfi']:.3f} dAUC={d['grouped_delta_auc']:+.3f} "
+                      f"p={d['delong_p']:.3f} {'MET' if d['endpoint_met'] else 'null'}", flush=True)
     print("=== UW_DONE ===", flush=True)

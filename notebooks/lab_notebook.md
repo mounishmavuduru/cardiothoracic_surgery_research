@@ -489,3 +489,45 @@
   computed inline, sharded 5000/shard to `outputs/scaled100k/` (resumable across restarts). Measured
   480 ms/net on 4 cores → ~13h for 100k. `aggregate()` reports a scaling ladder (2k→100k) with
   shrinking CIs. [running]
+
+---
+
+## 2026-07-22 (cont.) — Expanded GM1 on the UW/Boyle real cohort (external generalization)
+
+`results/gm1_expanded_metrics.json` (1628s). 82 UW pre-ablation meshes labelled by the frozen
+monodomain protocol: **inducible 6/82 (7%)** — much lower than Roney's 20/62 (32%). Combined = 144
+patients, 26 inducible (18%).
+
+**PRIMARY — competitors_vs_+SFI (does SFI beat the *full* competitor set?):**
+
+| cohort | lr dAUC (p) | gbt dAUC (p) | base AUC (lr/gbt) | verdict |
+|--------|-------------|--------------|-------------------|---------|
+| Roney (62) | −0.030 (0.64) | +0.036 (0.26) | 0.83/0.82 | **null** |
+| UW (82) | −0.057 (0.29) | +0.104 (0.66) | 0.58/0.38 | **null (underpowered)** |
+| Combined (144) | −0.004 (0.92) | +0.051 (0.16) | 0.86/0.74 | **null** |
+
+→ The GM1 predictive null **replicates on 82 brand-new real patients and on the combined cohort**:
+SFI adds no significant predictive value over the full competitor set anywhere. UW-*only* is
+underpowered (6 positives; base AUCs 0.38–0.58 ≈ chance → nothing predicts, SFI included), so the
+meaningful external test is the **combined 144-patient cohort**, which is cleanly null.
+
+**SECONDARY — fibrosis_vs_+SFI (does SFI beat fibrosis-heterogeneity *alone*?):**
+
+| cohort | lr dAUC (p) | gbt dAUC (p) |
+|--------|-------------|--------------|
+| Roney | +0.017 (0.59) | +0.069 (0.064) |
+| UW | −0.002 (0.96) | +0.340 (0.026)* |
+| Combined | +0.050 (0.32) | **+0.103 (0.009)** |
+
+→ SFI **does** add over fibrosis-only features (combined GBT p=0.009; base 0.68→0.79). *UW gbt base
+AUC 0.116 is sub-chance noise from 6 positives — ignore that cell.*
+
+**Refined, honest synthesis (important for the paper):** the two tests together sharpen the null.
+SFI is **not merely re-encoded fibrosis** — it beats a fibrosis-only baseline (combined GBT,
+p=0.009), i.e. it carries genuine *connectivity* information beyond the substrate. But SFI is **not
+uniquely predictive** — it adds nothing over the full competitor set, which already contains other
+connectivity features (λ₂-alone, min-cut, percolation). So the precise statement is:
+**SFI ≡ connectivity information already available from standard graph features, not ≡ fibrosis.**
+This is a more defensible and more interesting claim than "SFI = fibrosis," and it generalizes to an
+independent real cohort. Caveats: monodomain (not openCARP) labels; UW UAC is a PCA surrogate; UW
+inducibility is low so UW-only is underpowered.
