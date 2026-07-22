@@ -5,7 +5,8 @@ from asb.experiments.gm4_scale import aggregate, run_100k
 
 if __name__ == "__main__":
     t0 = time.time()
-    run_100k(n_total=100_000, shard=5000, n_jobs=4, out="outputs/scaled100k")
+    print("[100k] starting (n_total=100000, shard=2500, n_jobs=4)", flush=True)
+    run_100k(n_total=100_000, shard=2500, n_jobs=4, out="outputs/scaled100k")
     print(f"=== BUILD DONE in {time.time() - t0:.0f}s ===", flush=True)
     aggregate(out="outputs/scaled100k",
               ladder=(2000, 5000, 10000, 25000, 50000, 100000),
