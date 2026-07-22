@@ -1,0 +1,36 @@
+{
+  "n_meshes": 8,
+  "morris_r": 4,
+  "morris_mu_star": {
+    "d0": 500.7,
+    "iir_dense": 147.8,
+    "cross": 146.3
+  },
+  "morris_sigma": {
+    "d0": 126.9,
+    "iir_dense": 136.4,
+    "cross": 211.5
+  },
+  "gp_surrogate_loo_r2": 0.34849745922094577,
+  "dw_sensitivity_gm1_grouped_dAUC": {
+    "0.18": {
+      "lr": -0.03,
+      "lr_p": 0.64,
+      "gbt": 0.033,
+      "gbt_p": 0.3
+    },
+    "0.36": {
+      "lr": -0.03,
+      "lr_p": 0.64,
+      "gbt": 0.036,
+      "gbt_p": 0.26
+    },
+    "0.54": {
+      "lr": -0.03,
+      "lr_p": 0.64,
+      "gbt": 0.036,
+      "gbt_p": 0.26
+    }
+  },
+  "conclusion": "GM1 predictive null robust to uncoupling strength; label driven mostly by d0 (diffusion), then fibrosis density and transverse conductivity."
+}

@@ -1,0 +1,15 @@
+[gm4-scaled] building + labelling 2000 networks
+
+=== GM4-SCALED DONE in 1543s ===
+cohort: 2000 networks (n_nodes=500, radius [0.055, 0.095]), 704 unstable (0.35)
+[Part A predict]
+  competitors_vs_+single_vector lr: dAUC=+0.002 DeLong_p=0.1390 no
+  competitors_vs_+single_vector gbt: dAUC=+0.000 DeLong_p=0.7397 no
+  competitors_vs_+subspace   lr: dAUC=+0.003 DeLong_p=0.1214 no
+  competitors_vs_+subspace   gbt: dAUC=+0.000 DeLong_p=0.6546 no
+[Part B localize]
+  grad_phi2 : rank=0.180 perm_p=0.0000 KEEP
+  perron    : rank=0.832 perm_p=1.0000 DELETE
+  combined  : rank=0.803 perm_p=1.0000 DELETE
+  wdegree   : rank=0.971 perm_p=1.0000 DELETE
+  fibrosis  : rank=0.099 perm_p=0.0000 KEEP

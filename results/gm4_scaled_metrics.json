@@ -1,0 +1,61 @@
+{
+  "n_networks": 2000,
+  "n_nodes": 500,
+  "radius": [
+    0.055,
+    0.095
+  ],
+  "n_unstable": 704,
+  "frac_unstable": 0.352,
+  "predict": {
+    "single_vector": {
+      "lr": {
+        "dAUC": 0.002,
+        "delong_p": 0.139
+      },
+      "gbt": {
+        "dAUC": 0.0,
+        "delong_p": 0.7397
+      }
+    },
+    "subspace": {
+      "lr": {
+        "dAUC": 0.003,
+        "delong_p": 0.1214
+      },
+      "gbt": {
+        "dAUC": 0.0,
+        "delong_p": 0.6546
+      }
+    },
+    "verdict": "null: SFI adds no predictive value over competitors at N=2000"
+  },
+  "localize": {
+    "grad_phi2": {
+      "rank": 0.18,
+      "perm_p": 0.0,
+      "verdict": "KEEP"
+    },
+    "perron": {
+      "rank": 0.832,
+      "perm_p": 1.0,
+      "verdict": "DELETE"
+    },
+    "combined": {
+      "rank": 0.803,
+      "perm_p": 1.0,
+      "verdict": "DELETE"
+    },
+    "wdegree": {
+      "rank": 0.971,
+      "perm_p": 1.0,
+      "verdict": "DELETE"
+    },
+    "fibrosis": {
+      "rank": 0.099,
+      "perm_p": 0.0,
+      "verdict": "KEEP"
+    }
+  },
+  "conclusion": "At N=2000 across topology sweep: predictive null replicates; Fiedler-gradient localizer (grad_phi2) transfers cardiac->neural and beats spatial null (p<1e-3)."
+}

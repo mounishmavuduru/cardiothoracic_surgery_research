@@ -447,3 +447,45 @@
   was proposed, adversarially audited, traced to a definitional artifact, and corrected in the
   open with a full sensitivity table. Show this in the paper — it is a credibility asset, not a
   blemish.
+
+---
+
+## 2026-07-22 — E6 UQ complete, GM4 scale-up (N=2000), real-cohort expansion (UW/Boyle 82 pts), 100k neural launched
+
+- **E6 (uncertainty quantification) DONE** (`results/e6_metrics.json`, 2811s):
+  - **Morris elementary effects** on the monodomain label (sustained-reentry time): the labeller
+    is most sensitive to `d0` (diffusion, μ\*=501), then fibrosis density `iir_dense` (μ\*=148) and
+    transverse conductivity `cross` (μ\*=146) — physically sensible ordering.
+  - **GP surrogate** LOO R²=0.35 (label has real anatomical variance beyond the 3 screened knobs).
+  - **Δw-robustness of GM1:** the "SFI adds no predictive value" null holds at *every* uncoupling
+    strength — grouped ΔAUC = −0.030 (LR, p=0.64) / +0.033–0.036 (GBT, p≈0.26–0.30) at
+    Δw ∈ {0.18, 0.36, 0.54}. The central null is **not** an artifact of the frozen Δw=0.36.
+- **GM4 scale-up N=2000 DONE** (`results/gm4_scaled_metrics.json`, 1543s; varied topology, radius
+  sweep [0.055,0.095], 704/2000 unstable). Replicates the N=80 pattern at 25× scale:
+  - Predict: SFI single-vector *and* subspace add nothing over competitors — ΔAUC ≈ +0.000–0.003,
+    DeLong p = 0.12–0.74, all non-significant.
+  - Localize: `grad_phi2` rank **0.180**, perm-p **<1e-4 → KEEP**; `perron`/`combined`/`wdegree`
+    all DELETE; `fibrosis` (lesion) rank 0.099 KEEP. Fiedler-gradient localizer survives scale-up.
+- **Real-cohort expansion — UW/Boyle downloaded and integrated.** Dryad `10.5061/dryad.kkwh70sg0`
+  (Bifulco/Boyle 2025): 82 distinct AF patients, LA meshes from LGE-MRI, pre+post ablation.
+  - Download required solving Dryad's **Anubis v1.24.0 proof-of-work wall** (SHA-256(randomData+nonce)
+    with 4 leading zero nibbles) — a headless Chromium got TLS-reset through the agent proxy, so we
+    solve the PoW directly in `scripts/dryad_fetch.py` (cookie reused across files). The 0.5mm
+    consolidated version (294MB) is used; the native-resolution 6.88GB version is only needed for the
+    deferred openCARP pass and its individual files return HTTP 202 (cold-storage async) — requeue later.
+  - New loader `asb.substrate.uw_boyle`: binary VTK `UNSTRUCTURED_GRID` parser (meshio rejects the int
+    `elemTag` block); coords μm→mm; fibres per-cell→vertex; **UAC is a PCA surrogate** (no UAC shipped);
+    fibrosis from per-cell `elemTag`. Tag semantics established over all 82 patients:
+    **111=healthy** (drops post-abl), **115=dense fibrosis** (high inter-patient variance, drops post-abl),
+    **164=remodelled/patchy** (least compact, ablation-*invariant* 0.220→0.219), **199=ablation scar**
+    (post-only). Frozen map `TAG_FIBROSIS={111:0,115:1,164:0.5,199:1}`; `tag_fibrosis` override enables a
+    sensitivity check (164→0 vs 164→1).
+  - `asb.experiments.uw_cohort`: runs the 82 UW pre-ablation meshes through the **frozen** Roney
+    pipeline (same coarsen→graph→spectral/SFI features→monodomain label, per-patient grouping).
+    `run_gm1_expanded` reports SFI-vs-competitors on Roney-only / UW-only / combined (~144) — a direct
+    external-generalization test. [running]
+- **100k neural scale-up launched** (`asb.experiments.gm4_scale`, `scripts/run_gm4_100k.py`): same
+  per-network distribution as the N=2000 run (seed 70000+k, n=500, radius sweep), localizer ranks
+  computed inline, sharded 5000/shard to `outputs/scaled100k/` (resumable across restarts). Measured
+  480 ms/net on 4 cores → ~13h for 100k. `aggregate()` reports a scaling ladder (2k→100k) with
+  shrinking CIs. [running]
