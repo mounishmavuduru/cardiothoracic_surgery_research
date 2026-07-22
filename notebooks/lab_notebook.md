@@ -603,3 +603,18 @@ So a naive analyst (random CV + p<0.05, no effect-size gate) would have reported
 biomarker; the pre-registered protocol correctly rejects it. This is the packageable methods
 contribution: a demonstration that standard biomarker methodology produces exactly the false
 positives this protocol is built to catch.
+
+---
+
+## 2026-07-22 (cont.) — GM4 third medium (Kuramoto, N=500): transfer replicates across a 3rd dynamical class
+
+`results/gm4_kuramoto_metrics.json`. 500 oscillator networks, 243 desync (49%).
+- Predict (SFI vs competitors): all NULL (dAUC <= +0.0036, p 0.38-0.66). SFI non-predictive here too.
+- Localize (vs spatial null): grad_phi2 rank=0.091 p<1e-4 KEEP; perron/combined/wdegree DELETE;
+  fibrosis rank=0.147 KEEP.
+So the whole GM4 pattern (predict-null + |grad phi2| KEEP) now replicates across THREE media spanning
+excitable AND oscillator dynamics: cardiac monodomain, FHN excitable networks, Kuramoto oscillators.
+Note grad_phi2 (0.091) is a SHARPER localizer than the raw fibrosis field (0.147) here -- but per
+experiment (1)'s insight this is sharper localization of the SAME low-coupling site, not a dissociated
+one. Honest framing: |grad phi2| localizes the instability origin more precisely than substrate in the
+oscillator medium; it does not find a site substrate misses.
