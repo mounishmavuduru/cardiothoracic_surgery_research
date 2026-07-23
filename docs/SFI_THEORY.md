@@ -66,6 +66,19 @@ Reducing a conductance `w_ij` by a small `Δw_ij ≥ 0` (uncoupling) therefore *
 > enclosure** proves the true eigenvalue is within `~4×10⁻⁴⁰` of the computed `λ₂`; (P6) `λ₂`/`φ₂`
 > agree across **scipy + networkx + a hand-rolled inverse iteration** (spread `2.5×10⁻¹⁵`), ruling
 > out an implementation bug in any single solver.
+>
+> **Kernel-checked in a proof assistant** (`formal/sfi_edge_identity_Q.v`, Coq 8.18): the algebraic
+> core is re-proved inside Coq and checked by its small trusted kernel — a level of assurance
+> above a computer-algebra system. Theorems: **T1** the rank-one quadratic form `φᵀ(vvᵀ)φ = (v·φ)²`;
+> **T2** the edge vector `(e_i−e_j)·φ = φ_i−φ_j`; **T3** the SFI edge sensitivity `φᵀE_ijφ = (φ_i−φ_j)²`;
+> **T4/T5** each SFI term and the aggregate are non-negative (the SFI is a genuine Dirichlet energy;
+> the Laplacian form is PSD). The proof is over the **exact rationals `Q`**, so `Print Assumptions`
+> reports *"Closed under the global context"* — **zero axioms** (the R-valued companion
+> `formal/sfi_edge_identity.v` is identical mathematically but inherits Coq's two standard
+> real-number axioms). The analytic Hellmann–Feynman step (differentiability of a simple eigenvalue)
+> is the classical cited result (Ghosh–Boyd 2006); it is *not* re-proved here and is not claimed to be.
+> Lean/Mathlib was attempted but its toolchain binaries are GitHub release assets blocked by the
+> compute environment's egress policy; Coq provides the equivalent kernel-checked guarantee.
 
 ## 3. Per-region aggregation → the SFI
 

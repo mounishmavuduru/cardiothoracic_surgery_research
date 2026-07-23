@@ -6,3 +6,11 @@ outputs/
 .pytest_cache/
 .ipynb_checkpoints/
 data/
+
+# Coq compiled artifacts
+*.vo
+*.vok
+*.vos
+*.glob
+.*.aux
+.lia.cache

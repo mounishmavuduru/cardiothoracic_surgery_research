@@ -4,7 +4,8 @@
 LA models and demonstrably hold the linked 1-year recurrence outcomes (34/99 recurred). A UW/Boyle
 variant is below. Keep it short, honest, specific, and low-effort for them to say yes to.*
 
-**To:** [corresponding author — e.g., Dr Caroline Roney / the CEMRG contact listed on cemrg.com]
+**To:** Dr Caroline Roney &lt;c.roney@qmul.ac.uk&gt; (Reader in Computational Medicine, QMUL School of
+Engineering & Materials Science; email verified against the QMUL staff page 2026-07-23 — re-confirm before sending)
 **Cc:** [your mentor / supervising teacher, if any]
 **Subject:** Student research request: per-patient recurrence labels for the 100 public LA models (CIRCEP 2022)
 
@@ -50,7 +51,8 @@ Best regards,
 ## UW/Boyle variant (secondary)
 
 Same body, retargeted:
-- **To:** [Prof. Patrick Boyle / corresponding author, University of Washington]
+- **To:** Prof. Patrick M. Boyle &lt;pmjboyle@uw.edu&gt; (Associate Professor of Bioengineering, CardSS Lab,
+  University of Washington; email verified against the UW Bioengineering page 2026-07-23 — re-confirm before sending)
 - **Subject:** Student request: per-patient recurrence labels for the Dryad atrial-mesh cohort (Comms Med 2025)
 - Swap the dataset sentence for: *"I've been working with your publicly released atrial meshes
   (Dryad doi:10.5061/dryad.kkwh70sg0; Communications Medicine 2025, doi:10.1038/s43856-025-01058-4),
