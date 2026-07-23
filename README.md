@@ -13,11 +13,15 @@ The pre-registered primary endpoint (SFI adds ΔAUC ≥ 0.05 with DeLong p<0.05)
 and per `docs/PRE_REGISTRATION.md` §1, reporting this null is an *accepted success of the protocol*.
 The full writeup is **`docs/paper/PREPRINT.md`**; every number traces to `results/*.json`.
 
-- **Predictive null**, replicated on two real cohorts (Roney n=62, UW/Boyle n=82) and up to
-  **100,000** synthetic excitable networks: SFI adds no practically meaningful signal (ΔAUC ≈ +0.003;
-  significant only at N≥10⁴, an effect needing **~4,150 patients** to detect — clinically undetectable).
-- **Validity radius (why it fails):** the first-order SFI is valid only while `ρ = ‖ΔL‖/(λ₃−λ₂) = O(1)`;
-  real atria have **ρ ≈ 2422** (~10³× past), so the linear biomarker provably cannot work.
+- **Predictive result:** *clean null at synthetic scale* (up to **100,000** networks; SFI ΔAUC ≈ +0.003,
+  needing ~4,150 cases to detect — clinically undetectable *there*), with the mechanism being **feature
+  redundancy** (even the exact Δλ₂ SFI adds nothing). On the two real cohorts (Roney n=62, UW/Boyle n=82)
+  the result is **underpowered/inconclusive, not a demonstrated null** (combined GBT point estimate +0.051
+  *exceeds* the 0.05 endpoint but fails significance, p=0.155).
+- **Estimator-validity boundary:** the *single-vector* first-order SFI is valid only while
+  `ρ = ‖ΔL‖/(λ₃−λ₂) = O(1)`; real atria have **ρ ≈ 2422**, so by Davis–Kahan `φ₂` is provably
+  ill-conditioned. (ρ bounds estimator accuracy, **not** predictive content — it does not by itself prove
+  non-predictiveness.)
 - **ρ scaling law:** the spectral gap collapses `∝ N⁻¹·⁰⁵` on the real atrial surface (Weyl −1.0), so ρ
   grows lawfully with resolution — the failure is structural, not incidental.
 - **Transfer:** the Fiedler-gradient localizer `|∇φ₂|` locates the instability origin above a spatial

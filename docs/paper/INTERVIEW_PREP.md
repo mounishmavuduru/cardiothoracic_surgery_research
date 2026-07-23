@@ -23,18 +23,27 @@ can run before trusting such a marker. A negative result with a mechanism and a 
 is more useful than another over-claimed positive.
 
 **Q. You got p < 10⁻⁴ for the subspace SFI at large N. So it works, right?**
-No — and this is the most important number in the project. p < 10⁻⁴ only because I have 55,000+
-networks. The *effect size* is ΔAUC = +0.003 on a base of 0.91. To detect that in humans at 80% power
-needs ~4,150 patients; the largest real AF imaging cohorts are ~1,000. It is statistically significant
-and clinically meaningless. That gap between significance and effect size is exactly the trap this
-project is built to expose: with enough data, useless effects look real. Effect size, not p, decides.
+No — and I have to be precise about *which* cohort. That p<10⁻⁴ is in my **synthetic** cohort of
+55,000+ networks; the effect size there is ΔAUC = +0.003 on a base of 0.91 (needs ~4,150 cases to
+detect — statistically significant, clinically meaningless in that regime). That is the trap the
+project exposes: with enough data, useless effects look real; effect size, not p, decides. **But I
+will not oversell the real-anatomy result** — on my two real cohorts (n=144 combined) the point
+estimate is actually +0.05, which *touches* my pre-registered 0.05 threshold and fails only on
+significance (p=0.155). So on real hearts the honest verdict is **underpowered/inconclusive, not a
+demonstrated null**. The clean null is the synthetic regime; the real regime cannot yet exclude a
+moderate effect. I keep those two statements separate.
 
 **Q. What is your single weakest point?**
-The labels are a monodomain simulator's inducibility verdict, not clinical outcomes and not the
-openCARP gold standard. I'm explicit about it everywhere. It's a limitation of fidelity, not of logic:
-the *methodology* (pre-registration, grouping, effect-size gate, spatial null, cross-medium transfer)
-is label-agnostic, and the validity-radius argument is analytical and independent of the labeller.
-The deferred openCARP pass would raise label fidelity, not change the ρ ≈ 2422 verdict.
+My own convergence study found it, and I'll state it before you do: the labeller **over-calls
+inducibility at the operating mesh resolution.** On Roney the inducible rate falls from 58% at 1,500
+nodes toward ~20% by ≥3,000 nodes, and my main results ran at 2,000 nodes — in the over-calling zone.
+So every *absolute* number (inducibility rate, competitor AUC, localizer origins) is
+coarse-mesh-provisional until the deferred openCARP validation. What this does **not** touch is what I
+lead with: (a) the *relative* SFI-vs-competitors comparison, since both arms score the same labels, so
+label bias cancels; and (b) the label-free estimator-validity argument (ρ is computed from the graph
+Laplacian). It refuted its own worst case, though — the rate converges to ~20%, it does *not* collapse
+to zero, so the phenomenon is real, just resolution-sensitive. Fidelity limitation, not a logic flaw —
+but a real one, and I don't hide it.
 
 **Q. Why should synthetic networks tell me anything about a real heart?**
 They aren't a substitute for the heart — the real cohorts (Roney n=62, UW/Boyle n=82) are. The

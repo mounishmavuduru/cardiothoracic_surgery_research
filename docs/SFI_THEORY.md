@@ -91,9 +91,17 @@ and 92% at ρ = 28 — monotone in ρ, with Weyl holding throughout. `asb.sfi.va
 enforces `‖ΔL‖ ≤ safety · (λ₃ − λ₂)` as a runtime guard.
 
 **On real excitable media the gap is tiny**, so ρ is enormous: atrial cohort median
-ρ ≈ 2422, neural-network cohort median ρ ≈ 1852 — both ~10³× past ρ\*. The linear SFI is thus
-provably outside its validity radius on real anatomy, which is *why* it collapses to a
-substrate re-encoding as a predictor (GM1 null). This is the project's central, honest result.
+ρ ≈ 2422 — ~10³× past ρ\*. The single-vector linear SFI is thus provably outside its validity
+radius on real anatomy: by Davis–Kahan `φ₂` is ill-conditioned and the first-order Δλ₂ *magnitude*
+is unreliable. **This does NOT by itself explain the predictive null.** ρ bounds estimator accuracy,
+not the classification content of a monotone ranking feature; and the **exact** Δλ₂ SFI (no ρ
+limitation, §6) is *also* non-predictive (GM1), so the null is a *feature-redundancy* result —
+SFI's information is already carried by the standard connectivity features — which is label-dependent
+and separate from ρ. Two honest caveats on ρ itself: its numerator `‖ΔL‖` carries the
+fibrosis-weighted Δw (so only the denominator `λ₃−λ₂` is label-free), and ρ\*≈3 is a path-graph
+constant, so "10³× past" is order-of-magnitude. The label-free content of this section is precisely:
+*the single-vector estimator is numerically invalid on real tissue* — a real, portable a-priori
+screen — not "the biomarker provably cannot predict."
 
 ## 5. Near-degeneracy → the subspace (projector) SFI
 
