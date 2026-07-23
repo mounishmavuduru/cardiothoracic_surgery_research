@@ -1,0 +1,40 @@
+{
+  "n_records": 51,
+  "resolutions": [
+    1500,
+    3000,
+    6000
+  ],
+  "n_subjects": 24,
+  "inducibility_rate_by_res": {
+    "1500": {
+      "rate": 0.083,
+      "n": 24
+    },
+    "3000": {
+      "rate": 0.042,
+      "n": 24
+    },
+    "6000": {
+      "rate": 0.0,
+      "n": 3
+    }
+  },
+  "consecutive_pair_agreement": [
+    {
+      "res_a": 1500,
+      "res_b": 3000,
+      "n_subjects": 24,
+      "verdict_agreement": 0.9583333333333334
+    },
+    {
+      "res_a": 3000,
+      "res_b": 6000,
+      "n_subjects": 3,
+      "verdict_agreement": 1.0
+    }
+  ],
+  "fully_consistent_subjects": 3,
+  "subjects_with_ge3_res": 3,
+  "interpretation": "verdict_agreement climbing toward 1.0 at the fine end => the labeller converges (coarse-mesh artifacts, not phenomenon instability); staying low => the inducibility phenomenon itself is resolution-sensitive and needs a validated fine-resolution solver (openCARP)."
+}
