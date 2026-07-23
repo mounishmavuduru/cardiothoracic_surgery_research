@@ -37,3 +37,23 @@ Real over SSM/Variant (100 000 variants of one shape ≈ 1 effective group — s
   needed (LGE→fibrosis map; rule-based fibres via a Laplace–Dirichlet field; UAC surrogate).
 - Each new *dataset* is a natural extra GroupKFold stratum; keep patient = group.
 - Deferred to Claude Science where the full atrialmtk→UAC→fibre→openCARP pipeline runs at scale.
+
+## Real clinical-outcome labels (recurrence / POAF) — availability audit (2026-07-23)
+
+**Verdict: no public dataset ties usable atrial geometry to a real clinical outcome label in a
+single open deposit.** Mesh deposits are released *because* outcome labels were stripped for
+confidentiality. Implications for a "predict real recurrence" pivot: not feasible off-the-shelf.
+
+| dataset | geometry | real outcome in public download? | note |
+|---|---|---|---|
+| UW/Boyle Dryad `10.5061/dryad.kkwh70sg0` | 82 pts, LGE meshes ✓ | **NO** — recurrence WITHHELD ("protecting confidential patient information"); code repo ships an empty template | paper Comms Med 2025 `10.1038/s43856-025-01058-4`, model AUROC 0.80 |
+| Roney/CEMRG 100 LA models (cemrg.com) | 100 pts, meshes+fibres+UAC ✓ | **NO in download**, but outcome EXISTS in study (34/99 recurred, 1 yr) | best target for an author **request**; paper `10.1161/CIRCEP.121.010253` (PMC8845531) |
+| UK Biobank cardiac MRI | LA from cine CMR (no LGE/fibrosis) | **YES** — incident AF/stroke via linked records | application-gated + fee; different question (new-onset, not recurrence/POAF) |
+| AtriaSeg 2018, LAScarQS 2022 | LGE + masks/scar ✓ | **NO** — segmentation benchmarks only | — |
+| Zenodo SSM/atlas meshes (4309957, 5801337, 3890033, …) | meshes ✓ | **NO** — shape-model/atlas instances | — |
+
+**Only realistic paths to real outcomes + atrial geometry:** (1) email the Roney/CEMRG or Boyle
+groups requesting recurrence labels keyed to their already-public meshes (highest value; geometry is
+ML-ready and they demonstrably hold the labels); (2) UK Biobank application (real outcomes at scale,
+but gated, no fibrosis, incident-AF not recurrence); (3) a formal data-use agreement / clinical
+collaboration. None is a same-day download.
