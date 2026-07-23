@@ -7,6 +7,30 @@ after diffuse perioperative stress, using a single closed-form spectral-perturba
 result as an interpretable add-on feature inside an otherwise established
 cohort → feature → inducibility-classifier pipeline.
 
+## Status & headline results (honest outcome)
+
+The pre-registered primary endpoint (SFI adds ΔAUC ≥ 0.05 with DeLong p<0.05) is **not met** —
+and per `docs/PRE_REGISTRATION.md` §1, reporting this null is an *accepted success of the protocol*.
+The full writeup is **`docs/paper/PREPRINT.md`**; every number traces to `results/*.json`.
+
+- **Predictive null**, replicated on two real cohorts (Roney n=62, UW/Boyle n=82) and up to
+  **100,000** synthetic excitable networks: SFI adds no practically meaningful signal (ΔAUC ≈ +0.003;
+  significant only at N≥10⁴, an effect needing **~4,150 patients** to detect — clinically undetectable).
+- **Validity radius (why it fails):** the first-order SFI is valid only while `ρ = ‖ΔL‖/(λ₃−λ₂) = O(1)`;
+  real atria have **ρ ≈ 2422** (~10³× past), so the linear biomarker provably cannot work.
+- **ρ scaling law:** the spectral gap collapses `∝ N⁻¹·⁰⁵` on the real atrial surface (Weyl −1.0), so ρ
+  grows lawfully with resolution — the failure is structural, not incidental.
+- **Transfer:** the Fiedler-gradient localizer `|∇φ₂|` locates the instability origin above a spatial
+  null across **three** dynamical media (cardiac, FitzHugh–Nagumo, Kuramoto) — though not uniquely
+  better than substrate imaging, for a reason made precise.
+- **Falsification protocol:** naive methodology would have called SFI a working biomarker; our
+  pre-registered guards correctly reject it.
+
+**Honest limitations:** labels are a monodomain simulator (not clinical, not the deferred openCARP
+gold standard); see `docs/paper/PREPRINT.md` §4 and the openCARP validation in `ROADMAP.md` §3.1.
+Read order: `docs/PRE_REGISTRATION.md` → `docs/SFI_THEORY.md` → `docs/paper/PREPRINT.md` →
+`notebooks/lab_notebook.md`. Reproduce via `docs/paper/REPRODUCE.md`.
+
 ## The protected novel seed
 
 The load-bearing contribution is the closed-form sensitivity of the atrial algebraic
