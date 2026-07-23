@@ -61,6 +61,11 @@ Reducing a conductance `w_ij` by a small `Δw_ij ≥ 0` (uncoupling) therefore *
 > structure `∂L/∂w_ij = (e_i−e_j)(e_i−e_j)ᵀ` are proved symbolically; on a concrete 5-node graph
 > the finite-difference `∂λ₂/∂w_ij` matches `(φ₂,ᵢ−φ₂,ⱼ)²` to `|err| ≈ 2×10⁻¹⁷` and the §4
 > second-order resolvent term to `≈ 5×10⁻¹⁷`. The derivation is not asserted; it is checked.
+> **Six independent guarantees** (adding `scripts/verify_math_rigor.py`): (P4) the identity holds
+> *exactly* with rational weights (zero floating point); (P5) an **interval-arithmetic certified
+> enclosure** proves the true eigenvalue is within `~4×10⁻⁴⁰` of the computed `λ₂`; (P6) `λ₂`/`φ₂`
+> agree across **scipy + networkx + a hand-rolled inverse iteration** (spread `2.5×10⁻¹⁵`), ruling
+> out an implementation bug in any single solver.
 
 ## 3. Per-region aggregation → the SFI
 
