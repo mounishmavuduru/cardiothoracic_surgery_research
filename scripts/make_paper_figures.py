@@ -69,7 +69,8 @@ def fig_predictive_null():
     ax.axvline(0.0, color=GREY, lw=1)
     ax.set_yticks(y); ax.set_yticklabels([r[0] for r in rows], fontsize=9)
     ax.set_xlabel("SFI incremental ΔAUC vs full competitor set")
-    ax.set_title("SFI adds no meaningful prediction — endpoint never met")
+    ax.set_title("Incremental predictive value of SFI\n"
+                 "(pre-registered endpoint not met)", fontsize=11)
     ax.legend(fontsize=8, frameon=False, loc="lower right")
     fig.tight_layout(); fig.savefig(f"{OUT}/fig_predictive_null.png"); plt.close(fig)
     print("wrote fig_predictive_null.png")
@@ -140,7 +141,8 @@ def fig_falsification():
     ax.annotate(f"+{lk['leakage_inflation']:.3f}\nleakage inflation",
                 xy=(0, lk["auc_naive_random_cv"]), xytext=(0.5, 0.80),
                 ha="center", fontsize=10, color=RED, fontweight="bold")
-    ax.set_ylabel("AUC"); ax.set_title("Remove the grouping guard → leakage manufactures a false positive")
+    ax.set_ylabel("AUC")
+    ax.set_title("Removing the grouping guard\ninflates AUC through leakage", fontsize=11)
     fig.tight_layout(); fig.savefig(f"{OUT}/fig_falsification.png"); plt.close(fig)
     print("wrote fig_falsification.png")
 
@@ -158,7 +160,8 @@ def fig_localizer_ladder():
     ax.semilogx(Ns, ranks, "o-", color=BLUE, lw=2)
     ax.axhline(0.5, color=GREY, ls=":", label="chance")
     ax.set_xlabel("networks N"); ax.set_ylabel("grad_φ₂ origin rank")
-    ax.set_title(f"Localizer converges + tightens (all p<1e-4) up to N={max(Ns):,}")
+    ax.set_title(f"Localizer origin-rank stable across scale\n"
+                 f"(all $p<10^{{-4}}$ up to N={max(Ns):,})", fontsize=11)
     ax.legend(fontsize=9, frameon=False)
     fig.tight_layout(); fig.savefig(f"{OUT}/fig_localizer_ladder.png"); plt.close(fig)
     print("wrote fig_localizer_ladder.png")

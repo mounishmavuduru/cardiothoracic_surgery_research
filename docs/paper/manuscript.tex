@@ -55,38 +55,36 @@ in-silico computational-cardiology project. Author and affiliation are
 placeholders to be completed before submission. Correspondence and full
 source: see the project repository.}}
 
-\date{July 2026 --- working preprint}
+\date{July 2026 (working preprint)}
 
 \begin{document}
 \maketitle
 
 \begin{abstract}
 \noindent
-We ask whether a closed-form spectral graph biomarker --- the \textbf{Spectral
-Fragility Index (SFI)}, the Fiedler-value sensitivity
-$\partial\lam_2/\partial w_{ij}=(\phii_i-\phii_j)^2$ aggregated under a
-fibrosis-weighted conduction-uncoupling field --- predicts reentry
+We ask whether a closed-form spectral graph biomarker predicts reentry
 inducibility in atrial tissue beyond established fibrosis and connectivity
-features. Pre-registered before any labels were seen, the primary endpoint was
-$\dAUC\geq 0.05$ with a DeLong paired $p<0.05$ on shape-family-held-out folds.
-\emph{The endpoint is not met --- but the strength of the negative differs by
-regime, and we separate them.} On up to $100{,}000$ synthetic excitable
-networks SFI adds no practically meaningful predictive value (subspace
-$\dAUC\approx+0.003$; $\sim\!4{,}150$ cases needed at $80\%$ power --- real only
-because $N$ is huge, hence \emph{clinically undetectable} there). On the two
-real cohorts (Roney $n=62$, UW/Boyle $n=82$) the result is
-\textbf{underpowered and inconclusive, not a clean null}: the combined
-gradient-boosting point estimate is $+0.051$ (which \emph{exceeds} the $0.05$
-threshold) but fails paired significance (DeLong $p=0.155$), so real anatomy
-cannot \emph{exclude} a moderate effect. Where the null \emph{is} clean (the
-synthetic cohort), the mechanism is \textbf{feature redundancy}: the exact
-per-region $\Delta\lam_2$ SFI --- which has no first-order approximation error
---- also adds nothing over the competitor set. A separate, label-free result
-explains why the \emph{single-vector} SFI is additionally ill-conditioned on
-real tissue: it is valid only while $\rhoval=\lVert\Delta L\rVert/(\lam_3-\lam_2)=O(1)$,
-and real atria have $\rhoval\approx 2422$ ($\sim\!10^3\times$ past the empirical
-$\rhoval^\ast\approx 3$), so by Davis--Kahan the Fiedler vector is unstable. We
-do \textbf{not} claim $\rhoval$ proves non-predictiveness --- it bounds the
+features. The biomarker is the \textbf{Spectral Fragility Index (SFI)}, the
+Fiedler-value sensitivity $\partial\lam_2/\partial w_{ij}=(\phii_i-\phii_j)^2$
+aggregated under a fibrosis-weighted conduction-uncoupling field. Pre-registered
+before any labels were seen, the primary endpoint was $\dAUC\geq 0.05$ with a
+DeLong paired $p<0.05$ on shape-family-held-out folds. \emph{The endpoint is not
+met, but the strength of the negative differs by regime, and we separate them.} On up to $100{,}000$ synthetic excitable networks SFI adds no practically
+meaningful predictive value (subspace $\dAUC\approx+0.003$; $\sim\!4{,}150$ cases
+needed at $80\%$ power, resolvable only because $N$ is huge, and so
+\emph{clinically undetectable} there). On the two real cohorts (Roney $n=62$,
+UW/Boyle $n=82$) the result is \textbf{underpowered and inconclusive, not a clean
+null}: the combined gradient-boosting point estimate is $+0.051$, which
+\emph{exceeds} the $0.05$ threshold, but it fails paired significance (DeLong
+$p=0.155$), so real anatomy cannot \emph{exclude} a moderate effect. Where the
+null \emph{is} clean, in the synthetic cohort, the mechanism is \textbf{feature
+redundancy}: the exact per-region $\Delta\lam_2$ SFI, which has no first-order
+approximation error, also adds nothing over the competitor set. A separate,
+label-free result explains why the \emph{single-vector} SFI is also
+ill-conditioned on real tissue. It is valid only while
+$\rhoval=\lVert\Delta L\rVert/(\lam_3-\lam_2)=O(1)$, and real atria have
+$\rhoval\approx 2422$ ($\sim\!10^3\times$ past the empirical
+$\rhoval^\ast\approx 3$), so by Davis--Kahan the Fiedler vector is unstable. We do \textbf{not} claim $\rhoval$ proves non-predictiveness; it bounds the
 accuracy of the $\Delta\lam_2$ \emph{magnitude}, not the classification content
 of a ranking feature. The spectral gap collapses as $N^{-1.05}$ on the real
 atrial surface (the 2-manifold Weyl exponent), so $\rhoval$ grows lawfully with
@@ -94,15 +92,15 @@ resolution. One component partially survives: the Fiedler-gradient localizer
 $\lvert\nabla\phii_2\rvert$ is a weak but real rank localizer (origin in the top
 $\sim\!18\%$) that beats graph-centrality baselines and transfers across three
 dynamical media, though it \emph{coincides with}, and does not beat, substrate
-imaging, by a mechanism we make precise. Finally, naive methodology (random CV,
+imaging, by a mechanism we make precise. Naive methodology (random CV,
 $p$-value thresholds, no effect-size gate) would have reported SFI as working;
-our pre-registered protocol rejects it. A key limitation surfaced by our own
-convergence study: the inducibility labeller over-calls at the operating mesh
+our pre-registered protocol rejects it. Our own convergence study surfaces a key
+limitation: the inducibility labeller over-calls at the operating mesh
 resolution and, on a completed six-tier study ($1500$--$48000$ nodes, $n=24$),
 does not converge within the tested window. The contribution is a
 rigorously-scoped negative with its mechanism, a label-free estimator-validity
-criterion, a scaling characterization, and a worked demonstration of the false
-positives standard methodology produces.
+criterion, a scaling characterization, and a demonstration of the false
+positives that standard methodology produces.
 \end{abstract}
 
 \noindent\textbf{Keywords:} algebraic connectivity; Fiedler value; spectral
@@ -121,9 +119,9 @@ outcomes. All numbers trace to \code{results/*.json} and
 \section{Introduction}
 %======================================================================
 Algebraic connectivity $\lam_2$ (Fiedler 1973~\cite{fiedler1973}) governs the
-stability of coupled excitable and oscillator networks --- the
+stability of coupled excitable and oscillator networks (the
 master-stability-function result~\cite{pecora1998} and the synchronizability
-eigenratio $\lam_N/\lam_2$~\cite{barahona2002} --- and has been used as a
+eigenratio $\lam_N/\lam_2$~\cite{barahona2002}), and has been used as a
 real-time seizure detector~\cite{bomela2020}. The per-edge sensitivity
 \begin{equation}
 \frac{\partial\lam_2}{\partial w_{ij}}=(\phii_{2,i}-\phii_{2,j})^2
@@ -133,8 +131,8 @@ is a classical identity underlying Fiedler-vector edge-editing
 heuristics~\cite{ghosh2006}. It is therefore natural to hypothesize that
 aggregating this sensitivity over a fibrosis-weighted perioperative uncoupling
 field yields a per-region biomarker of atrial-fibrillation (AF) reentry
-fragility. We test this hypothesis and, crucially, \emph{pre-register the null}
---- ``SFI merely re-encodes fibrosis'' --- as an accepted, reportable outcome,
+fragility. We test this hypothesis and \emph{pre-register the null}
+(``SFI merely re-encodes fibrosis'') as an accepted, reportable outcome,
 so that a negative result is a success of the protocol rather than a
 file-drawer casualty.
 
@@ -164,7 +162,7 @@ inconclusive signal for a working biomarker.
 \section{Theory: the Spectral Fragility Index}
 \label{sec:theory}
 %======================================================================
-The load-bearing mathematics is classical numerical linear algebra; the
+The core mathematics is classical numerical linear algebra; the
 contribution is its \emph{use}. We state each result with its prior art
 (Section~\ref{sec:credits}) and make the validity boundary explicit
 (Section~\ref{sec:validity}).
@@ -206,7 +204,7 @@ $\lvert\text{err}\rvert\approx 2\times10^{-17}$ (mpmath, $40$ digits). Exactness
 the identity holds \emph{exactly} with rational weights (zero floating point);
 an interval-arithmetic enclosure certifies the true $\lam_2$ to within
 $\sim\!4\times10^{-40}$; and $\lam_2/\phii_2$ agree across scipy, networkx, and a
-hand-rolled inverse iteration (spread $2.5\times10^{-15}$). Finally, the
+hand-rolled inverse iteration (spread $2.5\times10^{-15}$). The
 algebraic core is \textbf{kernel-checked in the Coq proof assistant} over the
 exact rationals, axiom-free (Appendix~\ref{app:formal}). The analytic
 Hellmann--Feynman step (differentiability of a simple eigenvalue) is the cited
@@ -246,7 +244,7 @@ two different things (a common error is to use Weyl for both):
       $\lvert\Delta\lam_2\rvert\leq\lVert\Delta L\rVert$.
 \item \textbf{Davis--Kahan / Bauer--Fike}~\cite{daviskahan1970} bound the
       \emph{eigenvector} move, which scales like
-      $\lVert\Delta L\rVert/(\lam_3-\lam_2)$. This --- not Weyl --- governs when
+      $\lVert\Delta L\rVert/(\lam_3-\lam_2)$. This, not Weyl, governs when
       $\phii_2$ (hence the single-vector SFI) degrades.
 \end{itemize}
 Define the \emph{validity radius}
@@ -266,7 +264,7 @@ $\rhoval^\ast$.
 \textbf{What $\rhoval$ proves, and what it does not.} It proves the
 \emph{single-vector} first-order SFI is a numerically \emph{invalid estimator of
 $\Delta\lam_2$} on real tissue, and that $\phii_2$ is ill-conditioned
-(Davis--Kahan) --- a label-free statement about the estimator. It does
+(Davis--Kahan), a label-free statement about the estimator. It does
 \textbf{not} prove SFI is non-predictive: $\rhoval$ bounds the accuracy of the
 $\Delta\lam_2$ \emph{magnitude}, not the classification content of a monotone
 ranking feature; indeed the \emph{exact} $\Delta\lam_2$ SFI (no $\rhoval$
@@ -313,8 +311,8 @@ reaction--diffusion inducibility verdict~\cite{mitchell2003} (self-sustained
 reentry $\geq 650$~ms after burst pacing at cycle length $150$~ms from random
 sites), run on each real anatomy with an anisotropic conductance-weighted
 cotangent Laplacian and implicit time stepping. Reentry here is governed by
-wavelength (CV$\times$ERP), source--sink mismatch, and unidirectional block ---
-\emph{never} by $\lam_2$ --- so a predictive SFI$\to$label link is not circular.
+wavelength (CV$\times$ERP), source--sink mismatch, and unidirectional block,
+\emph{never} by $\lam_2$, so a predictive SFI$\to$label link is not circular.
 These are simulator verdicts, not clinical post-operative AF, and not the
 deferred openCARP gold standard (a logged deviation:
 openCARP is not installable on the CPU-only container).
@@ -381,37 +379,36 @@ underpowered rather than a demonstrated null.}
 \label{fig:null}
 \end{figure}
 
-\textbf{The negative is not uniform, and we separate the regimes.} On the
+The negative is not uniform, and we separate the regimes. On the
 \emph{synthetic} cohorts (up to $100{,}000$ networks) the null is clean: the
 effect converges to $\dAUC\approx+0.003$, statistically resolvable only because
-$N$ is enormous. On the \emph{real} cohorts it is underpowered and inconclusive:
-the combined gradient-boosting point estimate is $+0.051$ --- which
-\emph{exceeds} the pre-registered $0.05$ threshold --- and is declared not met
+$N$ is enormous. On the \emph{real} cohorts it is underpowered and inconclusive.
+The combined gradient-boosting point estimate is $+0.051$, which
+\emph{exceeds} the pre-registered $0.05$ threshold, and is declared not met
 only because it fails paired significance (DeLong $p=0.155$, bootstrap CI
 straddling $0$). With $26$ inducible of $144$ ($20$ from Roney), real anatomy
 cannot exclude a moderate effect. The UW cohort is uninformative rather than
-null ($6$ positives, competitor base AUC $\approx$ chance), so it functions as an
+null ($6$ positives, competitor base AUC $\approx$ chance), so it is an
 underpowered external check of the \emph{labeller}, not of SFI.
 
-\textbf{Where the clean null comes from --- feature redundancy, not the validity
-radius.} The \emph{exact} per-region $\Delta\lam_2$ SFI, which carries no
-first-order approximation error and is immune to the $\rhoval$ argument, also
-adds nothing over the competitor set. So the mechanism of the null is that SFI's
-information is already present in standard connectivity features
-($\lam_2$-alone, min-cut, percolation) --- a label-dependent finding, separate
-from $\rhoval$.
+The clean null comes from feature redundancy, not the validity radius. The
+\emph{exact} per-region $\Delta\lam_2$ SFI, which carries no first-order
+approximation error and is immune to the $\rhoval$ argument, also adds nothing
+over the competitor set. The mechanism of the null is that SFI's information is
+already present in standard connectivity features ($\lam_2$-alone, min-cut,
+percolation), a label-dependent finding, separate from $\rhoval$.
 
-\textbf{Secondary endpoint (pre-specified), with multiple-comparisons
-disclosure.} SFI beats a \emph{fibrosis-heterogeneity-only} baseline (combined
-GBT $\dAUC=+0.103$, $p=0.009$): it is \emph{not merely re-encoded fibrosis} and
-carries connectivity information beyond the substrate. This is one of $\sim\!30$
-DeLong comparisons; treating \code{fibrosis\_vs\_+SFI} as a single pre-specified
-secondary endpoint, its $p=0.009$ against a family-wise threshold
-$\approx 0.05/12$--$0.05/30$ is \emph{suggestive, not confirmatory}.
+\paragraph{Secondary endpoint (pre-specified).} SFI beats a
+\emph{fibrosis-heterogeneity-only} baseline (combined GBT $\dAUC=+0.103$,
+$p=0.009$): it is \emph{not merely re-encoded fibrosis} and carries connectivity
+information beyond the substrate. This is one of $\sim\!30$ DeLong comparisons;
+treating \code{fibrosis\_vs\_+SFI} as a single pre-specified secondary endpoint,
+its $p=0.009$ against a family-wise threshold $\approx 0.05/12$--$0.05/30$ is
+\emph{suggestive, not confirmatory}.
 
-\textbf{Power analysis.} In the synthetic cohort the subspace effect ($+0.0028$)
-needs $\sim\!4{,}150$ cases for $80\%$ power and the single-vector effect
-($+0.0007$) $\sim\!23{,}000$ --- clinically undetectable \emph{there}. We do
+\paragraph{Power analysis.} In the synthetic cohort the subspace effect
+($+0.0028$) needs $\sim\!4{,}150$ cases for $80\%$ power and the single-vector
+effect ($+0.0007$) $\sim\!23{,}000$, clinically undetectable \emph{there}. We do
 \textbf{not} transport ``clinically undetectable'' to the real cohorts, whose
 $+0.036$--$0.051$ estimates are compatible with a detectable effect we are simply
 underpowered to confirm.
@@ -421,7 +418,7 @@ The relative error of the first-order SFI scales as $\Theta(\rhoval)$ and crosse
 $10\%$ at $\rhoval^\ast\approx3$; real atria sit at median $\rhoval\approx2422$.
 This proves the single-vector estimator is numerically invalid on real tissue
 and $\phii_2$ is ill-conditioned, but (as boxed in Section~\ref{sec:validity})
-it does not by itself prove non-predictiveness --- the feature-redundancy null of
+it does not by itself prove non-predictiveness; the feature-redundancy null of
 Section~\ref{sec:null} is the separate, label-dependent reason.
 
 \subsection{The \texorpdfstring{$\rhoval$}{rho} scaling law}
@@ -451,7 +448,7 @@ real atrial surface (2-manifold) & $N^{-1.05}$ & Weyl 2-manifold $-1.0$ (within 
 \centering
 \includegraphics[width=0.82\linewidth]{fig_rho_scaling.png}
 \caption{The gap collapses with mesh resolution, so the estimator degrades
-\emph{more}, predictably, as the medium is meshed finer --- the opposite of
+\emph{more}, predictably, as the medium is meshed finer, the opposite of
 ``more resolution helps.'' Only the real atrial 2-manifold cleanly matches the
 Weyl exponent ($-1.05$ vs.\ $-1.0$); the random-geometric exponents are reported
 as ``at least as fast as Weyl,'' not law confirmations, and use the unweighted
@@ -464,8 +461,8 @@ combinatorial Laplacian.}
 The \emph{strict} pre-registered localization endpoint is null for every field,
 including $\lvert\nabla\phii_2\rvert$ (median argmax-geodesic error $0.472$ is
 \emph{not} below the spatial-null 5th percentile $0.406$). What survives is
-weaker: $\lvert\nabla\phii_2\rvert$ is a \emph{rank} localizer --- the true origin
-sits in its top $\sim\!18\%$ --- that beats graph-centrality baselines (Perron,
+weaker: $\lvert\nabla\phii_2\rvert$ is a \emph{rank} localizer (the true origin
+sits in its top $\sim\!18\%$) that beats graph-centrality baselines (Perron,
 weighted degree, deleted by measured correlation) and holds across media.
 
 \begin{table}[H]
@@ -497,11 +494,11 @@ cardiac monodomain       & $\sim0.28$ & $<10^{-3}$ & (co-localizes) & only $\sim
   \caption{transfer across media}
 \end{subfigure}
 \caption{The weak-rank localization pattern replicates across excitable
-\emph{and} oscillator dynamics. Three honesties apply: (i)~the strict endpoint is
+\emph{and} oscillator dynamics. Three caveats apply: (i)~the strict endpoint is
 null, so $\lvert\nabla\phii_2\rvert$ is \emph{not} a precise localizer; (ii)~the
 substrate field co-localizes, and a controlled dissociation experiment shows
-why --- in a diffusively-coupled medium the Fiedler bottleneck \emph{is} the
-low-conduction lesion --- so $\lvert\nabla\phii_2\rvert$ matches, and does not
+why (in a diffusively-coupled medium the Fiedler bottleneck \emph{is} the
+low-conduction lesion), so $\lvert\nabla\phii_2\rvert$ matches, and does not
 beat, substrate imaging; (iii)~the cardiac arm rests on only $\sim\!20$ origins.}
 \label{fig:localize}
 \end{figure}
@@ -510,10 +507,10 @@ beat, substrate imaging; (iii)~the cardiac arm rests on only $\sim\!20$ origins.
 \label{sec:falsify}
 Each guard, removed, manufactures a specific false positive
 (\code{results/\allowbreak falsification\_\allowbreak protocol.json}). Shape-family leakage inflates AUC
-by \textbf{$+0.117$} (naive random-CV $0.756$ vs.\ grouped $0.640$ on a
-controlled replicated cohort); the effect-size gate catches the \textbf{$p$-value
-trap} (subspace-SFI $p\approx2\times10^{-24}$ at $N=55{,}000$, yet
-$\dAUC=+0.003$ needs $\sim\!4{,}150$ cases to detect --- statistically
+by $+0.117$ (naive random-CV $0.756$ vs.\ grouped $0.640$ on a
+controlled replicated cohort); the effect-size gate catches the $p$-value
+trap (subspace-SFI $p\approx2\times10^{-24}$ at $N=55{,}000$, yet
+$\dAUC=+0.003$ needs $\sim\!4{,}150$ cases to detect: statistically
 significant, practically useless).
 
 \begin{figure}[H]
@@ -537,7 +534,7 @@ Morris elementary-effects screening (\code{results/e6\_metrics.json}) finds the
 label most sensitive to diffusion $d_0$ ($\mu^\ast=500.7$), then fibrosis density
 ($147.8$) and transverse conductivity ($146.3$). A Gaussian-process surrogate has
 leave-one-out $R^2=0.35$ (large residual anatomical/label variance beyond the
-screened knobs --- a label-noise caveat, not a positive). The synthetic null is
+screened knobs, a label-noise caveat, not a positive). The synthetic null is
 robust across uncoupling strengths $\Delta w\in\{0.18,0.36,0.54\}$ (grouped GBT
 $\dAUC=0.033$--$0.036$, all $p\geq0.26$).
 
@@ -546,13 +543,13 @@ Clinically observed AF inducibility spans $\sim\!5\%$ to $\sim\!85\%$ depending 
 population, protocol aggressiveness, and the sustained-AF definition (Kumar et
 al.\ 2012~\cite{kumar2012} report burst-sustained $14.8\%$ vs.\
 decremental-sustained $41.2\%$ \emph{in the same patients}). Our labeller's Roney
-$\sim\!20$--$32\%$ sits in the moderate-burst band --- Marquardt et al.\
-2018~\cite{marquardt2018} report $30.6\%$ in patients without prior AF --- between
+$\sim\!20$--$32\%$ sits in the moderate-burst band (Marquardt et al.\
+2018~\cite{marquardt2018} report $30.6\%$ in patients without prior AF), between
 the no-AF-control floor ($5\%$, Oral et al.\ 2008~\cite{oral2008}) and the
 AF/aggressive ceiling ($51\%$, Kawai et al.\ 2019~\cite{kawai2019}), consistent
 with $\sim\!42\%$ post-ablation (Liu et al.\ 2020~\cite{liu2020}). The UW
-$\sim\!7\%$ is at/below the control floor for a cohort that \emph{is} AF patients
---- correctly flagged as anomalous and attributable to the surrogate substrate and
+$\sim\!7\%$ is at/below the control floor for a cohort that \emph{is} AF patients,
+correctly flagged as anomalous and attributable to the surrogate substrate and
 an under-aggressive in-silico inducer, not biology. This is a base-rate
 \emph{plausibility check, not clinical validation}.
 
@@ -564,7 +561,7 @@ before a reader finds it. On a completed six-tier study (Roney, $n=24$ at each o
 \code{results/\allowbreak convergence\_summary\_roney.json}), the inducibility rate crashes
 from the coarse mesh ($58.3\%$ at $1500$) to $16.7\%$ at $3000$, then is
 \emph{non-monotone} across the fine tiers ($25.0\%$, $20.8\%$, $25.0\%$) and rises
-again to \textbf{$37.5\%$ at the finest affordable tier ($\sim\!50$k nodes)} --- a
+again to $37.5\%$ at the finest affordable tier ($\sim\!50$k nodes), a
 $17$-percentage-point spread over the last three tiers, so it has \emph{not}
 settled.
 
@@ -597,7 +594,7 @@ still drifts. Only $7/24$ subjects are fully consistent across all six tiers.}
 
 \begin{scopebox}
 \textbf{What convergence does and does not undermine.} The rate does \emph{not}
-collapse to zero --- the phenomenon is real; it is the \emph{magnitude} that is
+collapse to zero; the phenomenon is real; it is the \emph{magnitude} that is
 resolution-sensitive up to $\sim\!50$k nodes. Because the main results ran at
 $2{,}000$ nodes, every \emph{absolute} number (inducibility rate, competitor AUC,
 localizer origins) is coarse-mesh-provisional pending the deferred openCARP
@@ -611,14 +608,14 @@ labels at all).
 %======================================================================
 \section{Discussion}
 %======================================================================
-\paragraph{What is genuinely contributed.}
+\paragraph{What the paper contributes.}
 (1)~A pre-registered, leakage-controlled, effect-size-gated evaluation of a
 plausible spectral biomarker: a clean null at synthetic scale ($10^5$ networks)
-with its mechanism (feature redundancy --- even the exact $\Delta\lam_2$ SFI adds
+with its mechanism (feature redundancy: even the exact $\Delta\lam_2$ SFI adds
 nothing), and an honest inconclusive/underpowered verdict on real anatomy.
-(2)~A label-free validity criterion $\rhoval$ for the single-vector estimator ---
+(2)~A label-free validity criterion $\rhoval$ for the single-vector estimator:
 it proves $\phii_2$ is ill-conditioned on real tissue ($\rhoval\approx2422\gg
-\rhoval^\ast\approx3$), a portable a-priori check for any Fiedler-based marker ---
+\rhoval^\ast\approx3$), a portable a-priori check for any Fiedler-based marker,
 with the honest scope that $\rhoval$ bounds estimator accuracy, not predictive
 content. (3)~A weak-but-real, purely connectivity-derived rank localizer that
 equals substrate localization and beats centrality baselines across three media.
@@ -633,9 +630,9 @@ $\rhoval\gg1$, the first-order spectral marker is outside its validity radius an
 its in-sample correlations cannot be trusted.
 
 \paragraph{What is NOT claimed.} The mathematics is classical; no new theorem.
-$\rhoval$ does \emph{not} prove SFI is non-predictive --- only that the
+$\rhoval$ does \emph{not} prove SFI is non-predictive, only that the
 single-vector estimator is ill-conditioned; the null is separately due to feature
-redundancy. The real-cohort result is \emph{not} a demonstrated null --- it is
+redundancy. The real-cohort result is \emph{not} a demonstrated null; it is
 underpowered. The localizer is \emph{not} precise (strict endpoint null) and does
 \emph{not} beat substrate imaging. The $\rhoval$ scaling ``law'' is a clean match
 to Weyl only on the real atrial 2-manifold. Labels are a monodomain simulator,
@@ -671,8 +668,8 @@ A closed-form spectral fragility index does not add practically meaningful
 reentry-inducibility prediction beyond existing features at synthetic scale (a
 clean, feature-redundancy null), and on real anatomy the evidence is
 inconclusive rather than a demonstrated null. Independently, the single-vector
-estimator is provably ill-conditioned on real tissue ($\rhoval\gg1$). The honest
-core is not a discovery but a carefully-scoped boundary --- where a Fiedler-based
+estimator is provably ill-conditioned on real tissue ($\rhoval\gg1$). The core
+result is not a discovery but a carefully-scoped boundary: where a Fiedler-based
 estimator is numerically valid, why real tissue lies far outside it, and how
 easily naive methodology would have mistaken redundant, inconclusive signal for a
 working biomarker. The absolute claims await the openCARP validation.
@@ -683,7 +680,7 @@ working biomarker. The absolute claims await the openCARP validation.
 \label{app:formal}
 %======================================================================
 The algebraic core of the SFI edge-sensitivity identity is re-proved inside the
-Coq 8.18 proof assistant and checked by its small trusted kernel --- an assurance
+Coq 8.18 proof assistant and checked by its small trusted kernel, an assurance
 level above a computer-algebra system. The primary file
 (\code{formal/sfi\_edge\_identity\_Q.v}) works over the exact rationals
 $\mathbb{Q}$, so \code{Print Assumptions} reports \emph{``Closed under the global
