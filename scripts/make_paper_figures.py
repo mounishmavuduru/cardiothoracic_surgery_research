@@ -102,8 +102,15 @@ def fig_localizer_transfer():
     media = []
     def _fields(m):
         loc = m.get("localize", {})
-        f = loc.get("fields", loc)  # kuramoto nests under 'fields'; scaled is flat
-        return {k: v for k, v in f.items() if isinstance(v, dict) and "mean_origin_rank" in v}
+        f = loc.get("fields", loc)  # kuramoto/100k nest under 'fields'; scaled is flat
+        out = {}
+        for k, v in f.items():
+            if not isinstance(v, dict):
+                continue
+            r = v.get("mean_origin_rank", v.get("rank"))  # gm4_scaled uses 'rank'
+            if r is not None:
+                out[k] = {"mean_origin_rank": r}
+        return out
     sc = _load("results/gm4_scaled_metrics.json")
     if sc:
         media.append(("FHN (excitable)", _fields(sc)))
