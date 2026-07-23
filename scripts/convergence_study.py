@@ -51,6 +51,18 @@ def _run_one(path, res):
             "seconds": round(time.time() - t0, 1)}
 
 
+def _work(args):
+    """Top-level (picklable) worker: run one pair, write its result JSON."""
+    p, r = args
+    try:
+        rec = _run_one(p, r)
+    except Exception as e:  # noqa: BLE001
+        rec = {"subject": os.path.basename(p), "target_res": r, "error": str(e)}
+    with open(os.path.join(OUTDIR, _key(p, r) + ".json"), "w") as fh:
+        json.dump(rec, fh)
+    return rec
+
+
 def main():
     os.makedirs(OUTDIR, exist_ok=True)
     todo = [(p, r) for (p, r) in _pairs()
@@ -58,16 +70,6 @@ def main():
     print(f"[convergence] {len(todo)} (subject,res) pairs to run "
           f"(res={RES}, {N_SUBJECTS} subjects)", flush=True)
     from multiprocessing import Pool
-
-    def _work(args):
-        p, r = args
-        try:
-            rec = _run_one(p, r)
-        except Exception as e:  # noqa: BLE001
-            rec = {"subject": os.path.basename(p), "target_res": r, "error": str(e)}
-        with open(os.path.join(OUTDIR, _key(p, r) + ".json"), "w") as fh:
-            json.dump(rec, fh)
-        return rec
 
     with Pool(4) as pool:
         for rec in pool.imap_unordered(_work, todo):
