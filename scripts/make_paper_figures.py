@@ -37,7 +37,8 @@ def fig_rho_scaling():
                   label=f"real atrial mesh  (N^{am['fitted_exponent']:.2f}; Weyl −1.0)")
     ax.set_xlabel("system size N (nodes)")
     ax.set_ylabel(r"spectral gap  $\lambda_3-\lambda_2$")
-    ax.set_title("The gap collapses lawfully with size → ρ grows with resolution")
+    ax.set_title("Spectral gap collapses with mesh size\n"
+                 r"($\rho$ grows lawfully with resolution)", fontsize=10.5)
     ax.legend(fontsize=8.5, frameon=False)
     fig.tight_layout(); fig.savefig(f"{OUT}/fig_rho_scaling.png"); plt.close(fig)
     print("wrote fig_rho_scaling.png")

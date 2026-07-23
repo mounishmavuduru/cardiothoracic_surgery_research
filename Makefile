@@ -6,7 +6,7 @@ VENV   := .venv
 BIN    := $(VENV)/bin
 CONFIG ?= configs/default.yaml
 
-.PHONY: venv install test run dashboard clean
+.PHONY: venv install test run dashboard paper clean
 
 ## venv: create the local virtual environment
 venv:
@@ -28,6 +28,10 @@ run:
 ## dashboard: launch the Streamlit dashboard (needs the [dashboard] extra)
 dashboard:
 	$(BIN)/streamlit run src/asb/dashboard/app.py
+
+## paper: compile the LaTeX manuscript to docs/paper/manuscript.pdf (needs a TeX install)
+paper:
+	cd docs/paper && latexmk -pdf -interaction=nonstopmode manuscript.tex
 
 ## clean: remove build/venv/cache artifacts
 clean:

@@ -14,3 +14,16 @@ data/
 *.glob
 .*.aux
 .lia.cache
+
+# LaTeX build artifacts (the .tex source and compiled .pdf are tracked; these are not)
+*.aux
+*.log
+*.out
+*.toc
+*.lof
+*.lot
+*.fls
+*.fdb_latexmk
+*.synctex.gz
+*.bbl
+*.blg
