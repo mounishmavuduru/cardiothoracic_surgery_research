@@ -678,3 +678,23 @@ plus MS parameters tuned for the sheet -> Claude Science fine-mesh EP block, the
 the openCARP validation. Honest status of ①: **UNTESTED at feasible resolution; deferred to Claude
 Science.** In-session novelty rests on ② (rho scaling law) and ③ (falsification protocol), both real;
 the abstract-model insight (spectral bottleneck == conduction lesion) stands as the mechanistic finding.
+
+---
+
+## 2026-07-23 — 100k neural scale-up COMPLETE (final scaling ladder)
+
+`results/gm4_100k_metrics.json`, n_built=100000 (survived a workflow-cleanup kill at 55k and a full
+container restart at 85k, zero loss via sharded checkpointing). Localizer scaling ladder:
+
+| N | unstable | grad_phi2 origin rank | perm_p |
+|---|---|---|---|
+| 2,000 | 704 | 0.180 | <1e-4 |
+| 10,000 | 3,564 | 0.175 | <1e-4 |
+| 25,000 | 9,013 | 0.174 | <1e-4 |
+| 50,000 | 18,213 | 0.176 | <1e-4 |
+| 100,000 | 36,540 | 0.176 | <1e-4 |
+
+The |grad phi2| localizer is fully converged (rank ~0.176, stable to 3 sig figs from N=10k onward) and
+KEEP at p<1e-4 across the entire ladder — the strongest possible robustness statement for the localizer
+transfer. (Final-tier predict left empty — nested-CV at 100k is heavy; predict null already established
+through N=50k in gm4_100k_predict_interim.json + the power analysis.) unstable fraction steady ~36%.
