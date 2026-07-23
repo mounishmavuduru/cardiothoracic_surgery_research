@@ -158,6 +158,28 @@ Science runs it with a single call. None changes the code's logic — only scale
 - **Label-concordance cross-check**: agreement of `monodomain_ms` vs `opencarp` on a
   subset (Cohen's κ) — quantifies how good the CPU surrogate was.
 
+**Why this is #1 (honest framing — added 2026-07-23).** openCARP validation is *defense*,
+not offense: it upgrades "my simulator says so" → "the standard simulator says so." But the
+precise exposure is narrower than "it discounts everything":
+  - The **predictive null is the most robust part** to label fidelity, not the most exposed —
+    reentry is a nonlinear threshold event in *any* faithful solver, and a linear first-order
+    SFI cannot capture it; a richer openCARP label should make SFI *less* predictive, not more.
+  - The **validity-radius + ρ scaling spine is label-independent** (ρ is computed from the graph
+    Laplacian; ρ ≈ 2422 is a fact about the anatomy, not the labeller). The core argument routes
+    *around* the answer key entirely.
+  - **Most exposed = the positive localization claims** (`|∇φ₂|` KEEP), which lean on the
+    labeller placing the origin correctly. openCARP is the fix for those.
+  Interim bridges that NARROW (not close) the gap, runnable without Claude Science:
+  **(1)** resolution-convergence of the labeller (`scripts/labeller_convergence.py`,
+  `results/labeller_convergence.json`) — verdict stability across coarsening ⇒ not a coarse-mesh
+  artifact; **(2)** external-rate anchor — Roney inducibility ~32% sits in the clinical 30–70%
+  range; **(3)** lead the writeup with the label-independent spine (§9–§10 of `SFI_THEORY.md`).
+  These are **additive**; none substitutes for the openCARP verdict-agreement check.
+
+  NB: the monodomain **S1–S2 healthy-isthmus experiment** (`scripts/run_monodomain_isthmus.py`,
+  novelty ①) is a *different* use of monodomain — a localizer experiment, NOT this label
+  validation. Do not conflate them.
+
 ### 3.2 Full UQ at scale
 - Full **Morris + Sobol/GP** over the 4-D parameter box with openCARP labels (thousands of
   PDE evals) — the compute-heavy version of §2.2.
