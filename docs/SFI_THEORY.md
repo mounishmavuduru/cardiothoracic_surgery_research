@@ -56,6 +56,12 @@ Applied to the Fiedler pair:
 Reducing a conductance `w_ij` by a small `Δw_ij ≥ 0` (uncoupling) therefore **lowers**
 `λ₂` by `Δw_ij (φ₂,ᵢ − φ₂,ⱼ)²` to first order. (`asb.sfi.edge_fragility`.)
 
+> **Machine-verified** (`scripts/verify_sfi_identity.py`, sympy + mpmath at 40 digits): the
+> first-order edge identity `φᵀ(e_i−e_j)(e_i−e_j)ᵀφ = (φ_i−φ_j)²` and the Laplacian edge
+> structure `∂L/∂w_ij = (e_i−e_j)(e_i−e_j)ᵀ` are proved symbolically; on a concrete 5-node graph
+> the finite-difference `∂λ₂/∂w_ij` matches `(φ₂,ᵢ−φ₂,ⱼ)²` to `|err| ≈ 2×10⁻¹⁷` and the §4
+> second-order resolvent term to `≈ 5×10⁻¹⁷`. The derivation is not asserted; it is checked.
+
 ## 3. Per-region aggregation → the SFI
 
 Model diffuse perioperative stress as a distribution of small, non-negative, fibrosis-
