@@ -661,3 +661,20 @@ Localizer converged (~0.176) and KEEP at p<1e-5 across all scales; predict is th
 ~4150 cases to detect). Note: I stopped the pipeline's slow rigorous 100k aggregate (nested GBT +
 bootstrap) mid-run because it blocked novelty experiment 1 for marginal value (the null is already
 established + converged to 50k); computed the light ladder directly instead. Build is durable on disk.
+
+---
+
+## 2026-07-23 — Novelty ① (real cardiac model, monodomain isthmus): UNTESTED (could not induce at feasible resolution)
+
+`results/monodomain_isthmus_metrics.json`. Crossfield S1-S2 monodomain on the healthy-isthmus sheet,
+27 configs (isthmus width {4,6,8}mm x vertical offset {-6,0,+6}mm x S2 coupling {160,190,220}ms).
+**Result: 0/27 inducible. Max sustained = 238ms, median 207ms — all below the 600ms reentry threshold.**
+The protocol fires (consistent ~200ms post-stimulus activity) but reentry initiates and dies; it never
+sustains into a stable rotor. So grad_phi2-vs-fibrosis localization could not be measured (no origin to
+localize). This is NOT a refutation of connectivity-beats-substrate; it is a resolution/compute
+limitation — at 0.8mm spacing the wavelength does not fit the isthmus circuit and numerical dissipation
+kills the rotor. A proper test needs ~0.2mm resolution (~10x more nodes, hours of sim across the sweep)
+plus MS parameters tuned for the sheet -> Claude Science fine-mesh EP block, the same compute class as
+the openCARP validation. Honest status of ①: **UNTESTED at feasible resolution; deferred to Claude
+Science.** In-session novelty rests on ② (rho scaling law) and ③ (falsification protocol), both real;
+the abstract-model insight (spectral bottleneck == conduction lesion) stands as the mechanistic finding.

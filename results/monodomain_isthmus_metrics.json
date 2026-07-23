@@ -1,0 +1,199 @@
+{
+  "records": [
+    {
+      "isthmus_w": 4.0,
+      "dy": -6.0,
+      "s2_ci": 160.0,
+      "inducible": false,
+      "sustained_ms": 237.55
+    },
+    {
+      "isthmus_w": 4.0,
+      "dy": -6.0,
+      "s2_ci": 190.0,
+      "inducible": false,
+      "sustained_ms": 207.55
+    },
+    {
+      "isthmus_w": 4.0,
+      "dy": -6.0,
+      "s2_ci": 220.0,
+      "inducible": false,
+      "sustained_ms": 177.55
+    },
+    {
+      "isthmus_w": 4.0,
+      "dy": 0.0,
+      "s2_ci": 160.0,
+      "inducible": false,
+      "sustained_ms": 235.45000000000005
+    },
+    {
+      "isthmus_w": 4.0,
+      "dy": 0.0,
+      "s2_ci": 190.0,
+      "inducible": false,
+      "sustained_ms": 205.45000000000005
+    },
+    {
+      "isthmus_w": 4.0,
+      "dy": 0.0,
+      "s2_ci": 220.0,
+      "inducible": false,
+      "sustained_ms": 175.45000000000005
+    },
+    {
+      "isthmus_w": 4.0,
+      "dy": 6.0,
+      "s2_ci": 160.0,
+      "inducible": false,
+      "sustained_ms": 237.425
+    },
+    {
+      "isthmus_w": 4.0,
+      "dy": 6.0,
+      "s2_ci": 190.0,
+      "inducible": false,
+      "sustained_ms": 207.425
+    },
+    {
+      "isthmus_w": 4.0,
+      "dy": 6.0,
+      "s2_ci": 220.0,
+      "inducible": false,
+      "sustained_ms": 177.425
+    },
+    {
+      "isthmus_w": 6.0,
+      "dy": -6.0,
+      "s2_ci": 160.0,
+      "inducible": false,
+      "sustained_ms": 237.52500000000003
+    },
+    {
+      "isthmus_w": 6.0,
+      "dy": -6.0,
+      "s2_ci": 190.0,
+      "inducible": false,
+      "sustained_ms": 207.52500000000003
+    },
+    {
+      "isthmus_w": 6.0,
+      "dy": -6.0,
+      "s2_ci": 220.0,
+      "inducible": false,
+      "sustained_ms": 177.52500000000003
+    },
+    {
+      "isthmus_w": 6.0,
+      "dy": 0.0,
+      "s2_ci": 160.0,
+      "inducible": false,
+      "sustained_ms": 233.875
+    },
+    {
+      "isthmus_w": 6.0,
+      "dy": 0.0,
+      "s2_ci": 190.0,
+      "inducible": false,
+      "sustained_ms": 203.875
+    },
+    {
+      "isthmus_w": 6.0,
+      "dy": 0.0,
+      "s2_ci": 220.0,
+      "inducible": false,
+      "sustained_ms": 173.875
+    },
+    {
+      "isthmus_w": 6.0,
+      "dy": 6.0,
+      "s2_ci": 160.0,
+      "inducible": false,
+      "sustained_ms": 237.40000000000003
+    },
+    {
+      "isthmus_w": 6.0,
+      "dy": 6.0,
+      "s2_ci": 190.0,
+      "inducible": false,
+      "sustained_ms": 207.40000000000003
+    },
+    {
+      "isthmus_w": 6.0,
+      "dy": 6.0,
+      "s2_ci": 220.0,
+      "inducible": false,
+      "sustained_ms": 177.40000000000003
+    },
+    {
+      "isthmus_w": 8.0,
+      "dy": -6.0,
+      "s2_ci": 160.0,
+      "inducible": false,
+      "sustained_ms": 237.45000000000005
+    },
+    {
+      "isthmus_w": 8.0,
+      "dy": -6.0,
+      "s2_ci": 190.0,
+      "inducible": false,
+      "sustained_ms": 207.45000000000005
+    },
+    {
+      "isthmus_w": 8.0,
+      "dy": -6.0,
+      "s2_ci": 220.0,
+      "inducible": false,
+      "sustained_ms": 177.45000000000005
+    },
+    {
+      "isthmus_w": 8.0,
+      "dy": 0.0,
+      "s2_ci": 160.0,
+      "inducible": false,
+      "sustained_ms": 231.75
+    },
+    {
+      "isthmus_w": 8.0,
+      "dy": 0.0,
+      "s2_ci": 190.0,
+      "inducible": false,
+      "sustained_ms": 201.75
+    },
+    {
+      "isthmus_w": 8.0,
+      "dy": 0.0,
+      "s2_ci": 220.0,
+      "inducible": false,
+      "sustained_ms": 171.75
+    },
+    {
+      "isthmus_w": 8.0,
+      "dy": 6.0,
+      "s2_ci": 160.0,
+      "inducible": false,
+      "sustained_ms": 237.3
+    },
+    {
+      "isthmus_w": 8.0,
+      "dy": 6.0,
+      "s2_ci": 190.0,
+      "inducible": false,
+      "sustained_ms": 207.3
+    },
+    {
+      "isthmus_w": 8.0,
+      "dy": 6.0,
+      "s2_ci": 220.0,
+      "inducible": false,
+      "sustained_ms": 177.3
+    }
+  ],
+  "summary": {
+    "n_configs": 27,
+    "n_inducible_localized": 0
+  },
+  "elapsed_s": 379.2741017341614,
+  "note": "crossfield monodomain on a healthy-isthmus sheet; scar non-conducting"
+}
