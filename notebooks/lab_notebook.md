@@ -732,3 +732,39 @@ preprint; corrected all of them (`docs/paper/PREPRINT.md`), `results/fidelity_de
 ~20% for >=3000 nodes; the operating 2000-node resolution is in the OVER-CALLING zone. So all absolute
 rates/AUCs are coarse-mesh-provisional; the RELATIVE SFI-vs-competitors comparison (same labels both
 arms) and the label-free rho/estimator argument are the resolution-invariant claims to lead with.
+
+---
+
+## 2026-07-23 — Convergence study COMPLETED (all 144) + correction; Coq formal proof; contacts
+
+**Convergence study now COMPLETE** (Roney, n=24 at each of 1500/3000/6000/12000/24000/48000 = 144
+sims). This REVISES the previous "converges to ~20%" note, which was written on incomplete data (24000
+had only n=8, 48000 did not exist yet). Full corrected rates:
+
+  1500=58.3%  3000=16.7%  6000=25.0%  12000=20.8%  24000=25.0%  **48000=37.5%**
+
+The rate crashes off the coarse mesh but is **NON-MONOTONE across the fine tiers and RISES to 37.5% at
+the finest affordable tier (~50k nodes)** — a 17-pp spread over the last three tiers. **The labeller
+does NOT converge in the tested window.** It does NOT collapse to zero (phenomenon is real) but stays
+resolution-sensitive up to ~50k. Consecutive per-subject verdict agreement climbs (50%→75%→71%→62%→
+**79%** for 24k→48k) yet only **7/24** subjects are fully consistent across all six tiers.
+Honest verdict: absolute numbers (rates, competitor AUCs, localizer origins) are coarse-mesh-
+provisional pending openCARP; the RELATIVE SFI-vs-competitor comparison (same labels both arms) and
+the label-free rho argument are the resolution-invariant claims to lead with.
+
+**Bug caught + fixed:** `scripts/convergence_analyze.py` hard-coded `outputs/convergence/` (a stale UW
+pilot) and ignored its cohort arg, so it reported garbage (8%/4%/12%). Rewrote it cohort-aware
+(reads `outputs/convergence_<cohort>/`, writes `results/convergence_summary_<cohort>.json`, emits the
+figure). Corrected `results/convergence_summary_roney.json`, `docs/paper/figures/fig_convergence.png`,
+PREPRINT §Abstract + §Limitations, and INTERVIEW_PREP weakest-point answer to the non-converged story.
+
+**Formal proof (Coq 8.18):** `formal/sfi_edge_identity_Q.v` proves the SFI algebraic core over exact
+rationals Q — `Print Assumptions` = "Closed under the global context" (ZERO axioms). T1 rank-one
+quadratic form, T2 edge dot, **T3 phi^T E_ij phi = (phi_i-phi_j)^2**, T4/T5 nonnegativity (Dirichlet
+energy / PSD). R-valued companion `formal/sfi_edge_identity.v` (inherits the 2 standard R-library
+axioms). This is the 7th independent verification of the identity, first kernel-checked. Lean was
+blocked: its toolchain ships only as GitHub release assets, which the egress policy 403s.
+
+**Data-request contacts verified (2026-07-23):** Dr Caroline Roney <c.roney@qmul.ac.uk> (Reader in
+Computational Medicine, QMUL SEMS); Prof. Patrick M. Boyle <pmjboyle@uw.edu> (Assoc. Prof.
+Bioengineering, CardSS Lab, UW). Filled into `docs/outreach/data_request_email.md`.

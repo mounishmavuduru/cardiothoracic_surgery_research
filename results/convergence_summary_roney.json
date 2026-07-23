@@ -5,8 +5,11 @@
     3000,
     6000,
     12000,
-    24000
+    24000,
+    48000
   ],
+  "n_records": 144,
+  "n_subjects": 24,
   "inducibility_rate": {
     "1500": {
       "rate": 0.583,
@@ -26,7 +29,11 @@
     },
     "24000": {
       "rate": 0.25,
-      "n": 8
+      "n": 24
+    },
+    "48000": {
+      "rate": 0.375,
+      "n": 24
     }
   },
   "consecutive_agreement": [
@@ -51,9 +58,21 @@
     {
       "a": 12000,
       "b": 24000,
-      "agreement": 0.5,
-      "n": 8
+      "agreement": 0.625,
+      "n": 24
+    },
+    {
+      "a": 24000,
+      "b": 48000,
+      "agreement": 0.792,
+      "n": 24
     }
   ],
-  "finding": "over-calls at coarse (58% at 1500) -> converges to ~15-20% at >=3000 (does NOT collapse to zero); operating 2000-node resolution over-calls, so absolute rates/AUCs are coarse-mesh-provisional."
+  "fully_consistent_subjects": 7,
+  "subjects_with_ge3_res": 24,
+  "finest_res": 48000,
+  "finest_rate": 0.375,
+  "fine_end_settled": false,
+  "fine_end_pair_agreement": 0.792,
+  "finding": "Coarse mesh over-calls (58% at 1500). The rate drops sharply then is NON-MONOTONE across the fine tiers (17%@3000, 25%@6000, 21%@12000, 25%@24000, 38%@48000); the finest affordable tier (48000 nodes) sits at 38%, ABOVE the mid tiers. Conclusion: the labeller does NOT collapse to zero (the phenomenon is real) but it has NOT converged in the tested window either \u2014 inducibility remains resolution-sensitive up to ~50k nodes. Every ABSOLUTE number (rates, competitor AUCs, localizer origins) at the 2000-node operating resolution is coarse-mesh-provisional pending a validated fine-resolution solver (openCARP). The RELATIVE SFI-vs-competitor comparison (same labels both arms) and the label-free rho argument are unaffected."
 }

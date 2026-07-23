@@ -36,8 +36,12 @@ protocol rejects it. The contribution is a rigorously-scoped negative with its m
 redundancy), a label-free validity criterion for the single-vector estimator, a scaling
 characterization, and a worked demonstration of the false positives standard methodology produces.
 **A key limitation surfaced by our own convergence study: the labeller over-calls inducibility at the
-operating mesh resolution (converging to ~20% by ≥3000 nodes), so all absolute rates and AUCs are
-coarse-mesh-provisional pending the deferred openCARP validation.**
+operating mesh resolution and, on the completed 6-tier study (1500–48000 nodes, n=24), does not
+converge within the tested window — the inducibility rate falls sharply from the coarse mesh (58% at
+1500) but stays resolution-sensitive and even rises again at the finest affordable tier (37.5% at
+~50k nodes). So all absolute rates and AUCs are coarse-mesh-provisional pending the deferred openCARP
+validation; the relative SFI-vs-competitor comparison (same labels both arms) and the label-free
+validity argument are unaffected.**
 
 ## 1. Introduction
 
@@ -232,10 +236,17 @@ The localizer is **not** precise (strict endpoint null) and does **not** beat su
 ρ scaling "law" is a clean match to Weyl only on the real atrial 2-manifold. Labels are a monodomain
 simulator, not clinical outcomes and not openCARP.
 
-**Limitations.** (a) **The labeller over-calls inducibility at the operating mesh resolution** — our
-own convergence study shows the Roney inducibility rate falls from 58% (1500 nodes) toward ~20%
-(≥3000 nodes), and the main results ran at 2000 nodes, so all *absolute* rates and AUCs are
-coarse-mesh-provisional pending the deferred openCARP validation. (b) Simulator, not clinical, labels
+**Limitations.** (a) **The labeller over-calls inducibility at the operating mesh resolution, and does
+not converge in the tested window** — our completed 6-tier convergence study (Roney, n=24 at each of
+1500/3000/6000/12000/24000/48000 nodes) shows the inducibility rate drops sharply from the coarse mesh
+(58% at 1500) to 17% at 3000, but is then non-monotone across the fine tiers (25%, 21%, 25%) and rises
+to **37.5% at the finest affordable tier (~50k nodes)** — a 17-percentage-point spread over the last
+three tiers, so it has *not* settled. Per-subject verdict agreement between adjacent tiers does climb
+(50%→79% by 24k→48k) and only 7/24 subjects are fully consistent across all six tiers; the rate does
+*not* collapse to zero (the phenomenon is real) but remains resolution-sensitive up to ~50k nodes. The
+main results ran at 2000 nodes, so all *absolute* rates and AUCs are coarse-mesh-provisional pending
+the deferred openCARP validation (the *relative* SFI-vs-competitor comparison scores the same labels
+in both arms, so this bias cancels there). (b) Simulator, not clinical, labels
 (the pre-registered openCARP ground truth was substituted with monodomain Mitchell–Schaeffer — a
 logged deviation). (c) The UW cohort uses PCA-surrogate UAC and rule-based fibres, and is only ~7%
 inducible (at/below the no-AF-control clinical floor), so its predictive test is uninformative. (d)

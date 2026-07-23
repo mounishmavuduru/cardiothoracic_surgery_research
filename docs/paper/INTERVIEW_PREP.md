@@ -35,15 +35,20 @@ moderate effect. I keep those two statements separate.
 
 **Q. What is your single weakest point?**
 My own convergence study found it, and I'll state it before you do: the labeller **over-calls
-inducibility at the operating mesh resolution.** On Roney the inducible rate falls from 58% at 1,500
-nodes toward ~20% by ≥3,000 nodes, and my main results ran at 2,000 nodes — in the over-calling zone.
-So every *absolute* number (inducibility rate, competitor AUC, localizer origins) is
-coarse-mesh-provisional until the deferred openCARP validation. What this does **not** touch is what I
-lead with: (a) the *relative* SFI-vs-competitors comparison, since both arms score the same labels, so
-label bias cancels; and (b) the label-free estimator-validity argument (ρ is computed from the graph
-Laplacian). It refuted its own worst case, though — the rate converges to ~20%, it does *not* collapse
-to zero, so the phenomenon is real, just resolution-sensitive. Fidelity limitation, not a logic flaw —
-but a real one, and I don't hide it.
+inducibility at the operating mesh resolution, and it does not converge in the range I could test.**
+My completed 6-tier study on Roney (n=24 at 1,500 / 3,000 / 6,000 / 12,000 / 24,000 / 48,000 nodes)
+shows the inducible rate crash from 58% at 1,500 to 17% at 3,000 — but then it's non-monotone across
+the fine tiers (25%, 21%, 25%) and actually climbs back to **37.5% at the finest tier I could afford
+(~50k nodes, ~15 min/sim)**. That's a 17-point spread over the last three tiers, so I will *not* claim
+convergence — I claim the opposite, honestly: inducibility stays resolution-sensitive up to ~50k
+nodes. My main results ran at 2,000 nodes, so every *absolute* number (inducibility rate, competitor
+AUC, localizer origins) is coarse-mesh-provisional until the deferred openCARP validation. What this
+does **not** touch is what I lead with: (a) the *relative* SFI-vs-competitors comparison, since both
+arms score the *same* labels, so this bias cancels there; and (b) the label-free estimator-validity
+argument (ρ is computed from the graph Laplacian, no labels at all). The one thing the study does
+settle is that the rate does *not* collapse to zero — the phenomenon is real, it's the *magnitude*
+that's resolution-dependent. Fidelity limitation, not a logic flaw — but a real one, and the finest
+data point makes it worse than a coarse reading would suggest, so I lead with it rather than hide it.
 
 **Q. Why should synthetic networks tell me anything about a real heart?**
 They aren't a substitute for the heart — the real cohorts (Roney n=62, UW/Boyle n=82) are. The
