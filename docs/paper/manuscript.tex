@@ -29,11 +29,6 @@
 \theoremstyle{definition}
 \newtheorem{definition}{Definition}
 
-% lightweight, compile-safe "scope" callout
-\newenvironment{scopebox}
-  {\par\smallskip\noindent\begin{tabular}{@{\hspace{2pt}}!{\color{gray!60}\vrule width 2pt}@{\hspace{8pt}}p{0.955\linewidth}@{}}}
-  {\end{tabular}\smallskip\par}
-
 \newcommand{\lam}{\lambda}
 \newcommand{\phii}{\varphi}
 \newcommand{\rhoval}{\rho}
@@ -72,18 +67,18 @@ met, but the strength of the negative differs by regime, and we separate them.} 
 meaningful predictive value (subspace $\dAUC\approx+0.003$; $\sim\!4{,}150$ cases
 needed at $80\%$ power, resolvable only because $N$ is huge, and so
 \emph{clinically undetectable} there). On the two real cohorts (Roney $n=62$,
-UW/Boyle $n=82$) the result is \textbf{underpowered and inconclusive, not a clean
-null}: the combined gradient-boosting point estimate is $+0.051$, which
+UW/Boyle $n=82$) the result is underpowered and inconclusive, not a clean
+null: the combined gradient-boosting point estimate is $+0.051$, which
 \emph{exceeds} the $0.05$ threshold, but it fails paired significance (DeLong
 $p=0.155$), so real anatomy cannot \emph{exclude} a moderate effect. Where the
-null \emph{is} clean (in the synthetic cohort), the mechanism is \textbf{feature
-redundancy}: the exact per-region $\Delta\lam_2$ SFI, which has no first-order
+null \emph{is} clean (in the synthetic cohort), the mechanism is feature
+redundancy: the exact per-region $\Delta\lam_2$ SFI, which has no first-order
 approximation error, also adds nothing over the competitor set. A separate,
 label-free result explains why the \emph{single-vector} SFI is also
 ill-conditioned on real tissue. It is valid only while
 $\rhoval=\lVert\Delta L\rVert/(\lam_3-\lam_2)=O(1)$, and real atria have
 $\rhoval\approx 2422$ ($\sim\!10^3\times$ past the empirical
-$\rhoval^\ast\approx 3$), so by Davis--Kahan the Fiedler vector is unstable. We do \textbf{not} claim $\rhoval$ proves non-predictiveness; it bounds the
+$\rhoval^\ast\approx 3$), so by Davis--Kahan the Fiedler vector is unstable. We do \emph{not} claim $\rhoval$ proves non-predictiveness; it bounds the
 accuracy of the $\Delta\lam_2$ \emph{magnitude}, not the classification content
 of a ranking feature. The spectral gap collapses as $N^{-1.05}$ on the real
 atrial surface (the 2-manifold Weyl exponent), so $\rhoval$ grows lawfully with
@@ -96,10 +91,10 @@ $p$-value thresholds, no effect-size gate) would have reported SFI as working;
 our pre-registered protocol rejects it. Our own convergence study surfaces a key
 limitation: the inducibility labeller over-calls at the operating mesh
 resolution and, on a completed six-tier study ($1500$--$48000$ nodes, $n=24$),
-does not converge within the tested window. The contribution is a
-rigorously-scoped negative with its mechanism, a label-free estimator-validity
-criterion, a scaling characterization, and a demonstration of the false
-positives that standard methodology produces.
+does not converge within the tested window. Our contribution is a carefully
+bounded negative result: the mechanism behind it, a label-free criterion for the
+estimator's validity, a characterization of how it scales, and a demonstration of
+the false positives that standard methodology produces.
 \end{abstract}
 
 \noindent\textbf{Keywords:} algebraic connectivity; Fiedler value; spectral
@@ -135,7 +130,7 @@ fragility. We test this hypothesis and \emph{pre-register the null}
 so that a negative result is a success of the protocol rather than a
 file-drawer casualty.
 
-The mathematics we use is classical; we claim no new theorem. What is ours is
+The mathematics we use is classical; we claim no new theorem. Our contributions are
 (i)~a leakage-controlled incremental test of SFI against real competitors and a
 spatial null on real anatomy; (ii)~a validity criterion and a Weyl scaling law
 that explain the failure and predict it for the whole class of spectral
@@ -144,18 +139,16 @@ component that generalizes; and (iv)~a falsification-protocol demonstration
 showing that standard methodology would have manufactured exactly the false
 positive this protocol catches.
 
-\begin{scopebox}
-\textbf{What this paper claims, in one paragraph.} A closed-form spectral
+In brief, a closed-form spectral
 fragility index does \emph{not} add practically meaningful reentry-inducibility
 prediction beyond existing features at synthetic scale (a clean,
 feature-redundancy null); on real anatomy the evidence is
 \emph{inconclusive/underpowered}, not a demonstrated null. Independently, the
 single-vector estimator is provably ill-conditioned on real tissue
-($\rhoval\gg 1$). The honest core is not a discovery but a carefully-scoped
+($\rhoval\gg 1$). What we report is not a discovery but a carefully drawn
 boundary: where a Fiedler-based estimator is numerically valid, why real tissue
-lies far outside it, and how easily naive methodology mistakes redundant,
+lies far outside it, and how readily naive methodology mistakes redundant,
 inconclusive signal for a working biomarker.
-\end{scopebox}
 
 %======================================================================
 \section{Theory: the Spectral Fragility Index}
@@ -194,8 +187,7 @@ non-negative per-edge \emph{fragility}. Reducing a conductance $w_{ij}$ by a
 small $\Delta w_{ij}\geq 0$ (uncoupling) lowers $\lam_2$ by
 $\Delta w_{ij}(\phii_{2,i}-\phii_{2,j})^2$ to first order.
 
-\begin{scopebox}
-\textbf{The identity is verified, not asserted (seven independent ways).}
+The identity is verified in seven independent ways rather than merely asserted.
 Computer algebra: sympy proves Eqs.~\eqref{eq:edge}--\eqref{eq:dL} symbolically,
 and on a concrete $5$-node graph the finite-difference
 $\partial\lam_2/\partial w_{ij}$ matches $(\phii_{2,i}-\phii_{2,j})^2$ to
@@ -204,11 +196,10 @@ the identity holds \emph{exactly} with rational weights (zero floating point);
 an interval-arithmetic enclosure certifies the true $\lam_2$ to within
 $\sim\!4\times10^{-40}$; and $\lam_2/\phii_2$ agree across scipy, networkx, and a
 hand-rolled inverse iteration (spread $2.5\times10^{-15}$). The
-algebraic core is \textbf{kernel-checked in the Coq proof assistant} over the
+algebraic core is kernel-checked in the Coq proof assistant over the
 exact rationals, axiom-free (Appendix~\ref{app:formal}). The analytic
 Hellmann--Feynman step (differentiability of a simple eigenvalue) is the cited
 classical result~\cite{ghosh2006}, not re-proved here.
-\end{scopebox}
 
 \subsection{Per-region aggregation: the SFI}
 Model diffuse perioperative stress as a distribution of small, non-negative,
@@ -229,19 +220,19 @@ eigenvalue degeneracy ($\lam_2\approx\lam_3$) the single $\phii_2$ is an
 arbitrary rotation in the low invariant subspace, so we use a basis-independent
 \emph{subspace (projector) SFI}: with $P=\sum_c\phii_c\phii_c^{\!\top}$ over the
 clustered subspace, $s_{ij}^{\!\top}Ps_{ij}=\sum_c(\phii_{c,i}-\phii_{c,j})^2$
-($s_{ij}=e_i-e_j$) is well-defined. For genuinely discrete edits (Maze lesion,
+($s_{ij}=e_i-e_j$) is well-defined. For discrete edits (Maze lesion,
 atriotomy) the expansion is abandoned and $\lam_2$ is recomputed \emph{exactly}
 after the rank-one edit.
 
-\subsection{The validity radius (the honest core)}
+\subsection{The validity radius (the central caveat)}
 \label{sec:validity}
 The first-order form is trustworthy only while the perturbation is small
 \emph{relative to the spectral gap} $\lam_3-\lam_2$. Two different tools bound
 two different things (a common error is to use Weyl for both):
 \begin{itemize}[nosep,leftmargin=1.4em]
-\item \textbf{Weyl's inequality} bounds the \emph{eigenvalue} move:
+\item Weyl's inequality bounds the \emph{eigenvalue} move:
       $\lvert\Delta\lam_2\rvert\leq\lVert\Delta L\rVert$.
-\item \textbf{Davis--Kahan / Bauer--Fike}~\cite{daviskahan1970} bound the
+\item Davis--Kahan / Bauer--Fike~\cite{daviskahan1970} bound the
       \emph{eigenvector} move, which scales like
       $\lVert\Delta L\rVert/(\lam_3-\lam_2)$. This, not Weyl, governs when
       $\phii_2$ (hence the single-vector SFI) degrades.
@@ -255,16 +246,15 @@ first-order $\Delta\lam_2$ prediction is $\Theta(\rhoval)$, and the Fiedler
 vector rotates by $\sin\angle(\phii_2,\phii_2')\leq\sqrt{2}\,\rhoval$
 (Davis--Kahan). Empirically the error is $1\%$ at $\rhoval=0.3$, crosses $10\%$
 at $\rhoval^\ast\approx 3$, and reaches $92\%$ at $\rhoval=28$, with Weyl holding
-throughout. \textbf{On real excitable media the gap is tiny, so $\rhoval$ is
-enormous: atrial-cohort median $\rhoval\approx 2422$}, about $10^3\times$ past
+throughout. On real excitable media the gap is tiny, so $\rhoval$ is
+enormous: atrial-cohort median $\rhoval\approx 2422$, about $10^3\times$ past
 $\rhoval^\ast$.
 
-\begin{scopebox}
-\textbf{What $\rhoval$ proves, and what it does not.} It proves the
+The criterion $\rhoval$ proves that the
 \emph{single-vector} first-order SFI is a numerically \emph{invalid estimator of
 $\Delta\lam_2$} on real tissue, and that $\phii_2$ is ill-conditioned
 (Davis--Kahan), a label-free statement about the estimator. It does
-\textbf{not} prove SFI is non-predictive: $\rhoval$ bounds the accuracy of the
+\emph{not} prove SFI is non-predictive: $\rhoval$ bounds the accuracy of the
 $\Delta\lam_2$ \emph{magnitude}, not the classification content of a monotone
 ranking feature; indeed the \emph{exact} $\Delta\lam_2$ SFI (no $\rhoval$
 limitation) is \emph{also} non-predictive (Section~\ref{sec:null}), so the
@@ -273,7 +263,6 @@ predictive null is separately due to feature redundancy. Two caveats:
 its denominator $\lam_3-\lam_2$ is truly label-free; (ii)~$\rhoval^\ast\approx3$
 is calibrated on a $16$-node path graph with a problem-dependent constant, so
 ``$10^3\times$ past $\rhoval^\ast$'' is order-of-magnitude, not exact.
-\end{scopebox}
 
 \subsection{Prior art (this is not new mathematics)}
 \label{sec:credits}
@@ -284,7 +273,7 @@ excitable/oscillator stability is Pecora \& Carroll
 (2002)~\cite{barahona2002}; Weyl's law, Davis--Kahan, and second-order
 perturbation theory are classical (1970s and earlier). No result in
 Section~\ref{sec:theory} is a new theorem, and none is presented as one. The
-contribution is recognizing that $\rhoval$ is the right \emph{a-priori}
+contribution is recognizing that $\rhoval$ is the right \emph{a priori}
 validity screen for a spectral fragility biomarker, measuring its violation on
 real tissue, and using it to \emph{mechanistically explain} a negative result.
 
@@ -305,7 +294,7 @@ fibrosis proxy mapped to a fibrosis field by the Khurram healthy-to-scar
 ramp~\cite{khurram2014}, and fibre fields. Meshes are coarsened to
 $\sim\!2000$-node graphs by field-preserving vertex clustering.
 
-\paragraph{Labels.} Ground truth is a genuine monodomain Mitchell--Schaeffer
+\paragraph{Labels.} Ground truth is a monodomain Mitchell--Schaeffer
 reaction--diffusion inducibility verdict~\cite{mitchell2003} (self-sustained
 reentry $\geq 650$~ms after burst pacing at cycle length $150$~ms from random
 sites), run on each real anatomy with an anisotropic conductance-weighted
@@ -408,7 +397,7 @@ its $p=0.009$ against a family-wise threshold $\approx 0.05/12$--$0.05/30$ is
 \paragraph{Power analysis.} In the synthetic cohort the subspace effect
 ($+0.0028$) needs $\sim\!4{,}150$ cases for $80\%$ power and the single-vector
 effect ($+0.0007$) $\sim\!23{,}000$, clinically undetectable \emph{there}. We do
-\textbf{not} transport ``clinically undetectable'' to the real cohorts, whose
+\emph{not} transport ``clinically undetectable'' to the real cohorts, whose
 $+0.036$--$0.051$ estimates are compatible with a detectable effect we are simply
 underpowered to confirm.
 
@@ -591,8 +580,8 @@ still drifts. Only $7/24$ subjects are fully consistent across all six tiers.}
 \label{fig:convergence}
 \end{figure}
 
-\begin{scopebox}
-\textbf{What convergence does and does not undermine.} The rate does \emph{not}
+The convergence finding limits the absolute numbers but not the comparative
+claims. The rate does \emph{not}
 collapse to zero; the phenomenon is real; it is the \emph{magnitude} that is
 resolution-sensitive up to $\sim\!50$k nodes. Because the main results ran at
 $2{,}000$ nodes, every \emph{absolute} number (inducibility rate, competitor AUC,
@@ -602,33 +591,33 @@ validation. What this does \emph{not} touch is what we lead with: (a)~the
 \emph{same} labels, so this bias cancels; and (b)~the label-free
 estimator-validity argument ($\rhoval$ is computed from the graph Laplacian, no
 labels at all).
-\end{scopebox}
 
 %======================================================================
 \section{Discussion}
 %======================================================================
-\paragraph{What the paper contributes.}
+This work makes four contributions.
 (1)~A pre-registered, leakage-controlled, effect-size-gated evaluation of a
 plausible spectral biomarker: a clean null at synthetic scale ($10^5$ networks)
 with its mechanism (feature redundancy: even the exact $\Delta\lam_2$ SFI adds
-nothing), and an honest inconclusive/underpowered verdict on real anatomy.
+nothing), and an inconclusive, underpowered verdict on real anatomy.
 (2)~A label-free validity criterion $\rhoval$ for the single-vector estimator:
 it proves $\phii_2$ is ill-conditioned on real tissue ($\rhoval\approx2422\gg
-\rhoval^\ast\approx3$), a portable a-priori check for any Fiedler-based marker,
-with the honest scope that $\rhoval$ bounds estimator accuracy, not predictive
+\rhoval^\ast\approx3$), a portable a priori check for any Fiedler-based marker,
+with the caveat that $\rhoval$ bounds estimator accuracy, not predictive
 content. (3)~A weak-but-real, purely connectivity-derived rank localizer that
 equals substrate localization and beats centrality baselines across three media.
 (4)~A demonstration that standard methodology manufactures the exact false
 positives this protocol catches (leakage $+0.117$ AUC; the $p$-value trap).
 
-\paragraph{Generalization beyond cardiology.} The validity screen is
+The validity screen is
 domain-general. Spectral-graph fragility markers are used for seizure-focus
 localization, brain connectomics, and power-grid vulnerability. The same
 precondition applies: compute $\rhoval=\lVert\Delta L\rVert/(\lam_3-\lam_2)$; if
 $\rhoval\gg1$, the first-order spectral marker is outside its validity radius and
 its in-sample correlations cannot be trusted.
 
-\paragraph{What is NOT claimed.} The mathematics is classical; no new theorem.
+We are equally explicit about what we do not claim. The mathematics is
+classical; no new theorem.
 $\rhoval$ does \emph{not} prove SFI is non-predictive, only that the
 single-vector estimator is ill-conditioned; the null is separately due to feature
 redundancy. The real-cohort result is \emph{not} a demonstrated null; it is
@@ -641,8 +630,8 @@ not clinical outcomes and not openCARP.
 \section{Limitations}
 %======================================================================
 \begin{enumerate}[leftmargin=1.5em]
-\item \textbf{The labeller over-calls inducibility at the operating mesh
-resolution and does not converge in the tested window} (Section~\ref{sec:convergence}):
+\item The labeller over-calls inducibility at the operating mesh
+resolution and does not converge in the tested window (Section~\ref{sec:convergence}):
 the rate drops from $58\%$ at $1500$ nodes to $17\%$ at $3000$, is non-monotone
 across the fine tiers, and rises to $37.5\%$ at $\sim\!50$k nodes; only $7/24$
 subjects are fully consistent across all six tiers. All \emph{absolute} rates and
@@ -683,7 +672,7 @@ Coq 8.18 proof assistant and checked by its small trusted kernel, an assurance
 level above a computer-algebra system. The primary file
 (\code{formal/sfi\_edge\_identity\_Q.v}) works over the exact rationals
 $\mathbb{Q}$, so \code{Print Assumptions} reports \emph{``Closed under the global
-context''} for every theorem: \textbf{zero axioms}. A mathematically identical
+context''} for every theorem: zero axioms. A mathematically identical
 companion over the reals $\mathbb{R}$ (\code{formal/sfi\_edge\_identity.v})
 inherits Coq's two standard real-number-library axioms and is kept only to show
 the statements hold over $\mathbb{R}$.
