@@ -1,0 +1,254 @@
+{
+  "n_built": 100000,
+  "ladder": [
+    {
+      "N": 2000,
+      "n_unstable": 704,
+      "predict_subspace_lr": {
+        "dAUC": 0.002617319023569209,
+        "delong_p": 0.07086627270982301,
+        "auc_base": 0.8978741407126822,
+        "auc_sfi": 0.9004914597362514
+      },
+      "localize": {
+        "n_localized": 704,
+        "fields": {
+          "grad_phi2": {
+            "mean_origin_rank": 0.17958966192342485,
+            "perm_p": 0.0,
+            "verdict": "KEEP"
+          },
+          "perron": {
+            "mean_origin_rank": 0.8319929559952296,
+            "perm_p": 1.0,
+            "verdict": "DELETE"
+          },
+          "combined": {
+            "mean_origin_rank": 0.8030090388469842,
+            "perm_p": 1.0,
+            "verdict": "DELETE"
+          },
+          "wdegree": {
+            "mean_origin_rank": 0.971484305634754,
+            "perm_p": 1.0,
+            "verdict": "DELETE"
+          },
+          "fibrosis": {
+            "mean_origin_rank": 0.09886741987436883,
+            "perm_p": 0.0,
+            "verdict": "KEEP"
+          }
+        }
+      }
+    },
+    {
+      "N": 5000,
+      "n_unstable": 1771,
+      "predict_subspace_lr": {
+        "dAUC": 0.001496705726040437,
+        "delong_p": 0.05407286056090308,
+        "auc_base": 0.9008731045705745,
+        "auc_sfi": 0.9023698102966149
+      },
+      "localize": {
+        "n_localized": 1771,
+        "fields": {
+          "grad_phi2": {
+            "mean_origin_rank": 0.1771226396913759,
+            "perm_p": 0.0,
+            "verdict": "KEEP"
+          },
+          "perron": {
+            "mean_origin_rank": 0.834707564163286,
+            "perm_p": 1.0,
+            "verdict": "DELETE"
+          },
+          "combined": {
+            "mean_origin_rank": 0.8059753036929079,
+            "perm_p": 1.0,
+            "verdict": "DELETE"
+          },
+          "wdegree": {
+            "mean_origin_rank": 0.9716453828317573,
+            "perm_p": 1.0,
+            "verdict": "DELETE"
+          },
+          "fibrosis": {
+            "mean_origin_rank": 0.0995796526800465,
+            "perm_p": 0.0,
+            "verdict": "KEEP"
+          }
+        }
+      }
+    },
+    {
+      "N": 10000,
+      "n_unstable": 3564,
+      "predict_subspace_lr": {
+        "dAUC": 0.0027543929035538373,
+        "delong_p": 7.598345118206549e-06,
+        "auc_base": 0.9028536783482921,
+        "auc_sfi": 0.905608071251846
+      },
+      "localize": {
+        "n_localized": 3564,
+        "fields": {
+          "grad_phi2": {
+            "mean_origin_rank": 0.1748377053069738,
+            "perm_p": 0.0,
+            "verdict": "KEEP"
+          },
+          "perron": {
+            "mean_origin_rank": 0.8358110012688906,
+            "perm_p": 1.0,
+            "verdict": "DELETE"
+          },
+          "combined": {
+            "mean_origin_rank": 0.8062251534956665,
+            "perm_p": 1.0,
+            "verdict": "DELETE"
+          },
+          "wdegree": {
+            "mean_origin_rank": 0.9714988140277033,
+            "perm_p": 1.0,
+            "verdict": "DELETE"
+          },
+          "fibrosis": {
+            "mean_origin_rank": 0.09897993400809592,
+            "perm_p": 0.0,
+            "verdict": "KEEP"
+          }
+        }
+      }
+    },
+    {
+      "N": 25000,
+      "n_unstable": 9013,
+      "predict_subspace_lr": {
+        "dAUC": 0.0027629932955275383,
+        "delong_p": 9.523093519253164e-13,
+        "auc_base": 0.9062391693750452,
+        "auc_sfi": 0.9090021626705728
+      },
+      "localize": {
+        "n_localized": 9013,
+        "fields": {
+          "grad_phi2": {
+            "mean_origin_rank": 0.17421679437609444,
+            "perm_p": 0.0,
+            "verdict": "KEEP"
+          },
+          "perron": {
+            "mean_origin_rank": 0.8317440668608796,
+            "perm_p": 1.0,
+            "verdict": "DELETE"
+          },
+          "combined": {
+            "mean_origin_rank": 0.8018232895815194,
+            "perm_p": 1.0,
+            "verdict": "DELETE"
+          },
+          "wdegree": {
+            "mean_origin_rank": 0.9705982507891531,
+            "perm_p": 1.0,
+            "verdict": "DELETE"
+          },
+          "fibrosis": {
+            "mean_origin_rank": 0.09864549123916791,
+            "perm_p": 0.0,
+            "verdict": "KEEP"
+          }
+        }
+      }
+    },
+    {
+      "N": 50000,
+      "n_unstable": 18213,
+      "predict_subspace_lr": {
+        "dAUC": 0.0027616874013280945,
+        "delong_p": 1.3482760772825175e-22,
+        "auc_base": 0.9060769226053689,
+        "auc_sfi": 0.908838610006697
+      },
+      "localize": {
+        "n_localized": 18213,
+        "fields": {
+          "grad_phi2": {
+            "mean_origin_rank": 0.17558024514101234,
+            "perm_p": 0.0,
+            "verdict": "KEEP"
+          },
+          "perron": {
+            "mean_origin_rank": 0.8309955325430082,
+            "perm_p": 1.0,
+            "verdict": "DELETE"
+          },
+          "combined": {
+            "mean_origin_rank": 0.8008849064258372,
+            "perm_p": 1.0,
+            "verdict": "DELETE"
+          },
+          "wdegree": {
+            "mean_origin_rank": 0.9705702012902304,
+            "perm_p": 1.0,
+            "verdict": "DELETE"
+          },
+          "fibrosis": {
+            "mean_origin_rank": 0.09918769162343616,
+            "perm_p": 0.0,
+            "verdict": "KEEP"
+          }
+        }
+      }
+    },
+    {
+      "N": 100000,
+      "n_unstable": 36540,
+      "predict_subspace_lr": {
+        "dAUC": 0.003082661916681717,
+        "delong_p": 3.5055815428308176e-48,
+        "auc_base": 0.9049036901566325,
+        "auc_sfi": 0.9079863520733142
+      },
+      "localize": {
+        "n_localized": 36540,
+        "fields": {
+          "grad_phi2": {
+            "mean_origin_rank": 0.17583332345420727,
+            "perm_p": 0.0,
+            "verdict": "KEEP"
+          },
+          "perron": {
+            "mean_origin_rank": 0.8329493402174492,
+            "perm_p": 1.0,
+            "verdict": "DELETE"
+          },
+          "combined": {
+            "mean_origin_rank": 0.8030345241288821,
+            "perm_p": 1.0,
+            "verdict": "DELETE"
+          },
+          "wdegree": {
+            "mean_origin_rank": 0.9706713900942602,
+            "perm_p": 1.0,
+            "verdict": "DELETE"
+          },
+          "fibrosis": {
+            "mean_origin_rank": 0.09935484771761974,
+            "perm_p": 0.0,
+            "verdict": "KEEP"
+          }
+        }
+      }
+    }
+  ],
+  "distribution": {
+    "n_nodes": 500,
+    "radius_range": [
+      0.055,
+      0.095
+    ],
+    "seed_base": 70000
+  },
+  "note": "light predict (single GroupKFold LR + DeLong); rigorous nested predict up to 50k in gm4_100k_predict_interim.json"
+}

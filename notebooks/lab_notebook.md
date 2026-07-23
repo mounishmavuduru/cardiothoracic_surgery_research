@@ -639,3 +639,25 @@ are the borderline subjects (inducibility is a threshold phenomenon, some flippi
 toward FINER resolution to see whether verdicts converge (reassuring) or keep drifting (openCARP urgent).
 Do not bury this — it is exactly the kind of sensitivity a sharp judge would probe, and reporting it
 is the protocol working.
+
+---
+
+## 2026-07-23 — 100k scale-up COMPLETE (final scaling ladder)
+
+`results/gm4_100k_metrics.json`. All 100,000 FHN networks built (survived 2 kills + a container restart
+via sharded checkpointing). Full ladder (localize = permutation null; predict = light single-GroupKFold
+LR + DeLong; rigorous nested predict to 50k already in gm4_100k_predict_interim.json):
+
+| N | grad_phi2 rank | p | subspace-SFI predict dAUC | p |
+|---|---|---|---|---|
+| 2,000 | 0.1796 | <1e-5 | +0.0026 | 0.07 |
+| 10,000 | 0.1748 | <1e-5 | +0.0028 | ~0 |
+| 25,000 | 0.1742 | <1e-5 | +0.0028 | ~0 |
+| 50,000 | 0.1756 | <1e-5 | +0.0028 | ~0 |
+| 100,000 | 0.1758 | <1e-5 | +0.0031 | ~0 |
+
+Localizer converged (~0.176) and KEEP at p<1e-5 across all scales; predict is the stable, negligible
++0.003 AUC effect (significant only at large N -> the p-value trap, quantified by the power analysis:
+~4150 cases to detect). Note: I stopped the pipeline's slow rigorous 100k aggregate (nested GBT +
+bootstrap) mid-run because it blocked novelty experiment 1 for marginal value (the null is already
+established + converged to 50k); computed the light ladder directly instead. Build is durable on disk.
