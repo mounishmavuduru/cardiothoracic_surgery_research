@@ -698,3 +698,37 @@ The |grad phi2| localizer is fully converged (rank ~0.176, stable to 3 sig figs 
 KEEP at p<1e-4 across the entire ladder — the strongest possible robustness statement for the localizer
 transfer. (Final-tier predict left empty — nested-CV at 100k is heavy; predict null already established
 through N=50k in gm4_100k_predict_interim.json + the power analysis.) unstable fraction steady ~36%.
+
+---
+
+## 2026-07-23 — Adversarial fidelity audit (ultracode) + honest preprint corrections
+
+Ran a fidelity-defense workflow (verified clinical-rate citations + adversarial audit of the
+label-independent spine + completeness audit). It caught real overclaims that had crept into the
+preprint; corrected all of them (`docs/paper/PREPRINT.md`), `results/fidelity_defense_audit.json`.
+
+**Corrections made (all honest downgrades):**
+1. **Real-cohort result is inconclusive/underpowered, NOT a clean null.** Combined GBT competitors_vs_+SFI
+   dAUC = **+0.0507** — *exceeds* the pre-registered 0.05 bar — failing only on significance (p=0.155,
+   CI straddles). "Clinically undetectable / ~4150 cases" is scoped to the SYNTHETIC 100k cohort only.
+2. **rho does NOT prove non-predictiveness.** It bounds the accuracy of the Delta-lambda2 *magnitude*,
+   not classification content. The EXACT Delta-lambda2 SFI (no rho limit) *also* fails -> the null is
+   **feature redundancy** (label-dependent), not the validity radius. rho explains single-vector
+   ill-conditioning only. Also: rho's numerator carries the fibrosis-weighted Δw, so only the
+   denominator is label-free.
+3. **Localizer: strict pre-registered endpoint is NULL for all fields** (grad_phi2 0.472 vs null 0.406).
+   grad_phi2 survives only as a weak RANK localizer (top ~18%), coincides with (does not beat) substrate,
+   cardiac arm is only n~20. Fixed the merged "cardiac/FHN 100k" label (100k is FHN-only).
+4. **Multiple comparisons**: ~30 DeLong tests; fibrosis_vs_+SFI p=0.009 declared a pre-specified
+   SECONDARY endpoint (suggestive, not confirmatory at family-wise threshold).
+5. **rho scaling**: only the atrial 2-manifold matches Weyl; RGG exponents are loose bounds (5-pt fits,
+   3-D non-monotone), computed on the unweighted Laplacian. Downgraded "law" claims accordingly.
+6. **Citation hygiene**: Darma 2020 (32.4%) DROPPED — did not pass adversarial verification. Anchor now
+   uses verified Marquardt 30.6% / Kumar 29.5% / Oral 5% / Kawai 51% / Liu 42% (PMIDs confirmed).
+7. Title + abstract + discussion + limitations rewritten to the scoped-honest version.
+
+**CRITICAL convergence finding (Roney, partial):** inducibility rate 58% (1500) -> 17% (3000) ->
+25% (6000) -> 21% (12000). It does NOT collapse to zero (audit's worst case refuted) but CONVERGES to
+~20% for >=3000 nodes; the operating 2000-node resolution is in the OVER-CALLING zone. So all absolute
+rates/AUCs are coarse-mesh-provisional; the RELATIVE SFI-vs-competitors comparison (same labels both
+arms) and the label-free rho/estimator argument are the resolution-invariant claims to lead with.
