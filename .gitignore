@@ -27,3 +27,5 @@ data/
 *.synctex.gz
 *.bbl
 *.blg
+# Overleaf upload bundle (regenerate with `make overleaf-zip`; duplicates tracked files)
+docs/paper/*_overleaf.zip

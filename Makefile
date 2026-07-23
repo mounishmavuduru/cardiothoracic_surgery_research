@@ -6,7 +6,7 @@ VENV   := .venv
 BIN    := $(VENV)/bin
 CONFIG ?= configs/default.yaml
 
-.PHONY: venv install test run dashboard paper clean
+.PHONY: venv install test run dashboard paper overleaf-zip clean
 
 ## venv: create the local virtual environment
 venv:
@@ -32,6 +32,11 @@ dashboard:
 ## paper: compile the LaTeX manuscript to docs/paper/manuscript.pdf (needs a TeX install)
 paper:
 	cd docs/paper && latexmk -pdf -interaction=nonstopmode manuscript.tex
+
+## overleaf-zip: bundle manuscript.tex + figures/ (top-level) for Overleaf "Upload Project"
+overleaf-zip:
+	cd docs/paper && rm -f AtrialSpectralBench_overleaf.zip && \
+	  zip -r AtrialSpectralBench_overleaf.zip manuscript.tex figures/ -x "figures/.*"
 
 ## clean: remove build/venv/cache artifacts
 clean:
