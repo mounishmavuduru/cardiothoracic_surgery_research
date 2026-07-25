@@ -15,7 +15,7 @@ BLUE, ORANGE, GREEN, RED, GREY = "#2a6f97", "#e08214", "#2a9d54", "#c0392b", "#8
 
 
 def _load(p):
-    return json.load(open(p)) if os.path.exists(p) else None
+    return json.load(open(p, encoding="utf-8")) if os.path.exists(p) else None
 
 
 def fig_rho_scaling():

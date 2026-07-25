@@ -77,7 +77,7 @@ def uw_cohort_records(
     cache_path = os.path.join(cache_dir, f"uw_cohort_records_{_config_tag()}.json")
     cached: Dict[str, dict] = {}
     if os.path.isfile(cache_path):
-        with open(cache_path) as fh:
+        with open(cache_path, encoding="utf-8") as fh:
             cached = {r["subject"]: r for r in json.load(fh)}
 
     todo = [p for p in paths if "uw_" + os.path.basename(p) not in cached]
@@ -92,7 +92,7 @@ def uw_cohort_records(
             results = [_process_one_uw(p) for p in todo]
         for r in results:
             cached[r["subject"]] = r
-        with open(cache_path, "w") as fh:
+        with open(cache_path, "w", encoding="utf-8") as fh:
             json.dump(list(cached.values()), fh)
 
     records = []
@@ -152,6 +152,6 @@ def run_gm1_expanded(
                               "anatomy (Roney + UW/Boyle). NOT clinical POAF; NOT "
                               "openCARP. UW UAC is a PCA surrogate.")}
     os.makedirs(os.path.dirname(metrics_path), exist_ok=True)
-    with open(metrics_path, "w") as fh:
+    with open(metrics_path, "w", encoding="utf-8") as fh:
         json.dump(metrics, fh, indent=2)
     return metrics

@@ -266,7 +266,7 @@ def run(cfg: Config) -> dict:
     }
 
     metrics_path = os.path.join(outputs_dir, "metrics.json")
-    with open(metrics_path, "w") as fh:
+    with open(metrics_path, "w", encoding="utf-8") as fh:
         json.dump(_sanitize(metrics), fh, indent=2, allow_nan=False,
                   default=_json_default)
 
@@ -390,7 +390,7 @@ def _write_report(path: str, metrics: dict) -> None:
         lines.append(f"- `{name}`: `{os.path.basename(p)}`")
     lines.append("")
 
-    with open(path, "w") as fh:
+    with open(path, "w", encoding="utf-8") as fh:
         fh.write("\n".join(lines))
 
 

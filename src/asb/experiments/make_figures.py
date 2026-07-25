@@ -27,7 +27,7 @@ def _load(name: str) -> Optional[dict]:
     path = os.path.join(_RESULTS, name)
     if not os.path.isfile(path):
         return None
-    with open(path) as fh:
+    with open(path, encoding="utf-8") as fh:
         return json.load(fh)
 
 

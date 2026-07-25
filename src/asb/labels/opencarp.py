@@ -98,13 +98,13 @@ def write_carp_mesh(mesh: AtrialMesh, out_dir: str) -> dict:
     lon_path = os.path.abspath(os.path.join(out_dir, "mesh.lon"))
 
     # --- .pts ---
-    with open(pts_path, "w") as fh:
+    with open(pts_path, "w", encoding="utf-8") as fh:
         fh.write(f"{n_points}\n")
         for x, y, z in points:
             fh.write(f"{x:.9g} {y:.9g} {z:.9g}\n")
 
     # --- .elem ---
-    with open(elem_path, "w") as fh:
+    with open(elem_path, "w", encoding="utf-8") as fh:
         fh.write(f"{n_elems}\n")
         for tri in faces:
             v0, v1, v2 = int(tri[0]), int(tri[1]), int(tri[2])
@@ -112,7 +112,7 @@ def write_carp_mesh(mesh: AtrialMesh, out_dir: str) -> dict:
             fh.write(f"Tr {v0} {v1} {v2} {tag}\n")
 
     # --- .lon ---
-    with open(lon_path, "w") as fh:
+    with open(lon_path, "w", encoding="utf-8") as fh:
         fh.write("1\n")
         for tri in faces:
             f = fibres[tri].mean(axis=0)

@@ -114,7 +114,7 @@ def main() -> None:
               f"{s['mean_fibrosis']:>9.3f} {s['mean_fibre_spread']:>11.3f}")
 
     os.makedirs("results", exist_ok=True)
-    with open(a.out, "w") as fh:
+    with open(a.out, "w", encoding="utf-8") as fh:
         json.dump({
             "description": "destroy ONLY the fibre field on a cohort that has one",
             "control_arm": "R_A_real_fibres",

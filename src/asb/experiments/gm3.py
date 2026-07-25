@@ -174,7 +174,7 @@ def _cohort_extra_features(
     cache_path = os.path.join(cache_dir, f"gm3_features_{_gm3_tag(k_dim)}.json")
     cached: Dict[str, dict] = {}
     if os.path.isfile(cache_path):
-        with open(cache_path) as fh:
+        with open(cache_path, encoding="utf-8") as fh:
             cached = {r["subject"]: r["features"] for r in json.load(fh)}
     todo = [os.path.join(roney_dir, s) for s in subjects if s not in cached]
     if todo:
@@ -187,7 +187,7 @@ def _cohort_extra_features(
             results = [_extra_for_path(p, k_dim) for p in todo]
         for r in results:
             cached[r["subject"]] = r["features"]
-        with open(cache_path, "w") as fh:
+        with open(cache_path, "w", encoding="utf-8") as fh:
             json.dump([{"subject": s, "features": f} for s, f in cached.items()], fh)
     return cached
 
@@ -455,5 +455,5 @@ def _write_report(path: str, m: dict) -> None:
             lines.append(f"| {_fmt(r['bridge'])} | {_fmt(r['gap23'])} | "
                          f"{_fmt(r['err_single_vec'])} | {_fmt(r['err_subspace'])} |")
         lines.append("")
-    with open(path, "w") as fh:
+    with open(path, "w", encoding="utf-8") as fh:
         fh.write("\n".join(lines))

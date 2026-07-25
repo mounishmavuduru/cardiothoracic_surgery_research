@@ -59,5 +59,5 @@ for name, cols in variants.items():
           f"n_needed(80%)={rec['n_needed_80pct']:.0f} n_needed(90%)={rec['n_needed_90pct']:.0f}",
           flush=True)
 
-json.dump(out, open("results/power_analysis.json", "w"), indent=2)
+json.dump(out, open("results/power_analysis.json", "w", encoding="utf-8"), indent=2)
 print("POWER_DONE", flush=True)

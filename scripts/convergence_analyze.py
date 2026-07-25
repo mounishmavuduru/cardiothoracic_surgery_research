@@ -23,7 +23,7 @@ def main():
     outdir = f"outputs/convergence_{cohort}"
     recs = []
     for f in glob.glob(f"{outdir}/*.json"):
-        d = json.load(open(f))
+        d = json.load(open(f, encoding="utf-8"))
         if "error" not in d and "inducible" in d:
             recs.append(d)
     if not recs:
@@ -84,7 +84,7 @@ def main():
         ),
     }
     os.makedirs("results", exist_ok=True)
-    json.dump(summary, open(f"results/convergence_summary_{cohort}.json", "w"), indent=2)
+    json.dump(summary, open(f"results/convergence_summary_{cohort}.json", "w", encoding="utf-8"), indent=2)
 
     # ---- reproducible figure: rate vs resolution + consecutive verdict agreement ----
     try:

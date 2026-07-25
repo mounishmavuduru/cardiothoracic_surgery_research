@@ -87,7 +87,7 @@ def run_100k(n_total: int = 100_000, *, shard: int = 5000, n_jobs: int = 4,
         else:
             recs = [_process_big(k) for k in range(lo, hi)]
         tmp = path + ".tmp"
-        with open(tmp, "w") as fh:
+        with open(tmp, "w", encoding="utf-8") as fh:
             json.dump(recs, fh)
         os.replace(tmp, path)
         n_ind = sum(int(r["inducible"]) for r in recs)
@@ -164,6 +164,6 @@ def aggregate(out: str = "outputs/scaled100k", *, ladder=(2000, 5000, 10000, 250
               "distribution": {"n_nodes": 500, "radius_range": [0.055, 0.095],
                                "seed_base": 70000}}
     os.makedirs(os.path.dirname(metrics_path), exist_ok=True)
-    with open(metrics_path, "w") as fh:
+    with open(metrics_path, "w", encoding="utf-8") as fh:
         json.dump(result, fh, indent=2)
     return result

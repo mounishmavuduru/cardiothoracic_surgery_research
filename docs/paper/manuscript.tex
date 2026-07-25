@@ -648,10 +648,13 @@ meshes have a \emph{degenerate} fibre field --- the \code{VECTORS fiber} array i
 present but equals a constant $(1,0,0)$ for every element of all $164$ meshes, so
 the anisotropy the solver applies is a fixed coordinate bias rather than anatomy.
 Separately, we had been mapping element tag $164$ to half-fibrotic tissue when it
-is in fact the set of caps over the four pulmonary veins and the mitral valve
-(five components, each a topological disc; zero adjacency to fibrotic elements;
-removing them leaves Euler characteristic $-3$, i.e.\ exactly five openings), so
-activation could cross those orifices instead of circling them. Repairing both
+is in fact the set of caps over the pulmonary veins and the mitral valve. Across
+all $82$ meshes it resolves into four to six large components, each a topological
+disc --- five in $75$ meshes, four in five of them and six in two, which is the
+usual variation in pulmonary-vein anatomy --- and it borders fibrotic elements on
+only $\sim\!0.08\%$ of its incident edges against a chance expectation of
+$14$--$20\%$. Removing it opens the surface, by a median of seven boundary loops.
+Left in, it lets activation cross those orifices instead of circling them. Repairing both
 raises inducibility from $6/82$ to $14/82$ ($7.3\%\to17.1\%$), the two acting
 super-additively. We are careful not to overclaim this: the change does not reach
 paired significance (McNemar exact $p=0.077$), it closes only $39\%$ of the gap to

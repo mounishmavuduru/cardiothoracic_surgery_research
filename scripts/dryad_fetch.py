@@ -98,7 +98,7 @@ def download(s, url, dest):
 def _load_pairs():
     if len(sys.argv) >= 3 and sys.argv[1] == "--from-file":
         pairs = []
-        for line in open(sys.argv[2]):
+        for line in open(sys.argv[2], encoding="utf-8"):
             line = line.strip()
             if line:
                 fid, dest = line.split(None, 1)

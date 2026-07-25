@@ -169,7 +169,7 @@ def cohort_records(
     cache_path = os.path.join(cache_dir, f"cohort_records_{_config_tag()}.json")
     cached: Dict[str, dict] = {}
     if os.path.isfile(cache_path):
-        with open(cache_path) as fh:
+        with open(cache_path, encoding="utf-8") as fh:
             cached = {r["subject"]: r for r in json.load(fh)}
 
     todo = [p for p in paths if os.path.basename(p) not in cached]
@@ -188,7 +188,7 @@ def cohort_records(
         for r in results:
             cached[r["subject"]] = r
         # Persist the full cache.
-        with open(cache_path, "w") as fh:
+        with open(cache_path, "w", encoding="utf-8") as fh:
             json.dump(list(cached.values()), fh)
 
     records = []

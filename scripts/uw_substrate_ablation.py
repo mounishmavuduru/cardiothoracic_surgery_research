@@ -6,9 +6,11 @@ substrate could each explain that, and this script separates them by brute force
 rather than by argument.
 
 Factor 1 -- OPENINGS. Element tag 164 is not myocardium: it is the set of caps sealing
-the four pulmonary veins and the mitral valve (five components, each a topological disc;
-zero adjacency to fibrotic tag 115; unchanged by ablation; removing it opens exactly five
-boundary loops, Euler characteristic 2 - 5 = -3). The frozen loader mapped it to
+the pulmonary veins and the mitral valve. Census over all 82 meshes: four to six large
+components, each a topological disc (five in 75 meshes, four in five, six in two -- the
+usual pulmonary-vein variation); borders fibrotic tag 115 on only ~0.08% of its incident
+edges against 14-20% by chance; unchanged by ablation; removing it opens the surface by a
+median of 7 boundary loops. The frozen loader mapped it to
 fibrosis 0.5, i.e. half-conducting tissue, which seals the atrium's orifices so activation
 crosses them instead of circling them -- and reentry anchored on those orifices is a
 principal AF mechanism.
@@ -155,7 +157,7 @@ def main() -> None:
               f"{s['mean_fibrosis']:>9.3f} {s['mean_fibre_spread']:>11.3f}")
 
     os.makedirs("results", exist_ok=True)
-    with open(a.out, "w") as fh:
+    with open(a.out, "w", encoding="utf-8") as fh:
         json.dump({
             "description": "2x2 substrate ablation isolating why the UW cohort is ~7% inducible",
             "reference_roney": {"n": 62, "n_inducible": 20, "inducible_fraction": 20 / 62},

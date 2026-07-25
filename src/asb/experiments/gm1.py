@@ -293,5 +293,5 @@ def _write_report(path: str, m: dict) -> None:
                 f"| {_fmt(b['delta_mean'])} [{_fmt(b['ci_low'])}, {_fmt(b['ci_high'])}] "
                 f"| {'MET' if r['endpoint_met'] else 'not met'} |")
         lines.append("")
-    with open(path, "w") as fh:
+    with open(path, "w", encoding="utf-8") as fh:
         fh.write("\n".join(lines))

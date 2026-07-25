@@ -79,7 +79,7 @@ def read_vtk_polydata_full(
         ``points`` (n, 3) float, ``faces`` (f, 3) int, ``point_scalars``
         {name: (n,) float}, ``cell_vectors`` {name: (f, 3) float}.
     """
-    with open(path) as fh:
+    with open(path, encoding="utf-8") as fh:
         lines = fh.read().splitlines()
 
     points = np.zeros((0, 3), dtype=float)

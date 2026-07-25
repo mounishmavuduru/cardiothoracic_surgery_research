@@ -51,7 +51,7 @@ def test_pipeline_writes_outputs_and_valid_aucs(tmp_path):
         assert os.path.isfile(os.path.join(out, fig)), fig
 
     # --- metrics.json is valid JSON and matches the return value ----------- #
-    with open(metrics_path) as fh:
+    with open(metrics_path, encoding="utf-8") as fh:
         on_disk = json.load(fh)
     assert on_disk["cohort"]["n_subjects"] == 15
     # Guard the headline path: a single-class cohort makes AUC/DeLong NaN and
@@ -68,7 +68,7 @@ def test_pipeline_writes_outputs_and_valid_aucs(tmp_path):
             assert 0.0 <= val <= 1.0, f"{name}/{kind}={val} out of range"
 
     # --- The report is non-empty and carries the mock_ep disclaimer -------- #
-    with open(report_path) as fh:
+    with open(report_path, encoding="utf-8") as fh:
         report = fh.read()
     assert "AtrialSpectralBench" in report
     assert "mock_ep" in report

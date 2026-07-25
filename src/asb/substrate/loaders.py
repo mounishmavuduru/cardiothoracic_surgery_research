@@ -84,7 +84,7 @@ def _read_vtk_polydata(path: Path) -> tuple[np.ndarray, np.ndarray]:
     is supported; richer attributes are ignored.
     """
     tokens: list[str] = []
-    with open(path) as fh:
+    with open(path, encoding="utf-8") as fh:
         text = fh.read()
     lines = text.splitlines()
 
@@ -139,7 +139,7 @@ def _read_carp(
     faces  : (f, 3) int   (triangular surface elements, tag 'Tr')
     fibres : (f, 3) float or None   per-element fibre direction from ``.lon``.
     """
-    with open(pts_path) as fh:
+    with open(pts_path, encoding="utf-8") as fh:
         n = int(fh.readline().split()[0])
         pts = np.array(
             [[float(x) for x in fh.readline().split()[:3]] for _ in range(n)],
@@ -147,7 +147,7 @@ def _read_carp(
         )
 
     faces: list[list[int]] = []
-    with open(elem_path) as fh:
+    with open(elem_path, encoding="utf-8") as fh:
         n_el = int(fh.readline().split()[0])
         for _ in range(n_el):
             parts = fh.readline().split()
@@ -160,7 +160,7 @@ def _read_carp(
     fibres: np.ndarray | None = None
     if lon_path is not None and lon_path.exists():
         rows: list[list[float]] = []
-        with open(lon_path) as fh:
+        with open(lon_path, encoding="utf-8") as fh:
             first = fh.readline().split()
             # Some .lon files start with a header count; skip if non-numeric-vec.
             if len(first) >= 3:

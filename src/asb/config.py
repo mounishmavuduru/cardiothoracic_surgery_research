@@ -67,7 +67,7 @@ class Config:
 
     @classmethod
     def load(cls, path: str) -> "Config":
-        with open(path) as fh:
+        with open(path, encoding="utf-8") as fh:
             raw: dict[str, Any] = yaml.safe_load(fh) or {}
         return cls(
             seed=raw.get("seed", 0),
@@ -79,5 +79,5 @@ class Config:
         )
 
     def to_yaml(self, path: str) -> None:
-        with open(path, "w") as fh:
+        with open(path, "w", encoding="utf-8") as fh:
             yaml.safe_dump(asdict(self), fh, sort_keys=False)

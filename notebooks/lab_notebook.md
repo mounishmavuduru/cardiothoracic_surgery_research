@@ -793,12 +793,24 @@ The Dryad README documents no tag semantics. An earlier revision of `uw_boyle.py
 "remodelled / patchy tissue, distributed (least compact)" and `TAG_FIBROSIS` mapped it to 0.5.
 Measured directly (`scripts/` ad-hoc geometry, reproduced in the DROP_TAGS docstring):
 
-  * exactly **five** connected components, each topologically a **disc (χ = 1)**, 11–42 mm
-    across, at 0.47–0.82 of the atrial radius from the centroid;
-  * **zero** edge-adjacency to fibrotic tag 115 anywhere (enrichment ×0.00) — which kills the
+  * **four to six large connected components** (≥1% of the region) in all 82 meshes — five
+    in 75, four in five, six in two — each topologically a **disc (χ = 1)**, 11–42 mm across,
+    at 0.47–0.82 of the atrial radius. That spread is the usual variation in pulmonary-vein
+    anatomy: a left common trunk gives four, a right middle vein gives six;
+  * borders fibrotic tag 115 on only **~0.08% of its incident edges** (median 27 edges)
+    against a chance expectation of 14–20% — a >100-fold depletion, which kills the
     border-zone reading that fibrosis = 0.5 implies;
   * 20.0% of elements pre-ablation, 19.9% post — ablation-invariant;
-  * deleting it leaves χ = **−3** = 2 − 5, i.e. it was sealing exactly **five** openings.
+  * deleting it **opens the surface**: Euler characteristic falls by a median of 7 (range
+    2–12), i.e. five large orifices plus small fragments.
+
+**Correction logged the same day.** The first version of this entry claimed "exactly five
+components", "zero edge-adjacency" and "χ = −3, exactly five openings". Each was generalised
+from a single mesh (ID001) or from a mean fraction rounded to three decimals. The census over
+all 82 meshes above is what the data supports; the conclusion is unchanged and the component
+spread actually strengthens it, but the specific figures were wrong. **ID040 and ID049** are
+topologically pathological (χ before removal −16 and −18) and behave differently. Guards
+pinned in `tests/test_uw_boyle.py`.
 
 That is the four pulmonary veins and the mitral valve. Treating them as half-conducting tissue
 did more than distort fibrosis: it **sealed the atrium's orifices**, so activation could cross

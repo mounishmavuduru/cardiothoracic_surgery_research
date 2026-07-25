@@ -95,7 +95,7 @@ def main():
                       "report SFI as a working biomarker. The pre-registered protocol "
                       "(shape-family GroupKFold + DeLong + effect-size gate + spatial nulls) "
                       "correctly rejects it. Each guard, removed, manufactures a specific false positive.")
-    json.dump(out, open("results/falsification_protocol.json", "w"), indent=2)
+    json.dump(out, open("results/falsification_protocol.json", "w", encoding="utf-8"), indent=2)
     print("FALSIFICATION_DONE", flush=True)
 
 

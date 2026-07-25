@@ -109,14 +109,14 @@ def _morris_screen(paths: List[str], seed: int, n_jobs: int, cache_dir: str) -> 
     cache = os.path.join(cache_dir, f"e6_morris_{_tag(paths)}.json")
     evals: Dict[str, dict] = {}
     if os.path.isfile(cache):
-        with open(cache) as fh:
+        with open(cache, encoding="utf-8") as fh:
             evals = json.load(fh)
 
     def ev(u: np.ndarray) -> Dict[str, float]:
         key = ",".join(f"{x:.4f}" for x in u)
         if key not in evals:
             evals[key] = _label_outcome(u, paths, seed, n_jobs)
-            with open(cache, "w") as fh:
+            with open(cache, "w", encoding="utf-8") as fh:
                 json.dump(evals, fh)
         return evals[key]
 
@@ -270,5 +270,5 @@ def _write_report(path: str, m: dict) -> None:
         lines.append(f"| {dw} | {_fmt(lr.get('grouped_delta_auc'))} / {_fmt(gbt.get('grouped_delta_auc'))} "
                      f"| {_fmt(lr.get('delong_p'))} / {_fmt(gbt.get('delong_p'))} |")
     lines.append("")
-    with open(path, "w") as fh:
+    with open(path, "w", encoding="utf-8") as fh:
         fh.write("\n".join(lines))

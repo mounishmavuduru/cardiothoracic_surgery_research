@@ -93,7 +93,7 @@ def _build_cohort(n_jobs: int, cache_dir: str, verbose: bool) -> List[dict]:
     os.makedirs(cache_dir, exist_ok=True)
     cache = os.path.join(cache_dir, f"gm4_cohort_{_tag()}.json")
     if os.path.isfile(cache):
-        with open(cache) as fh:
+        with open(cache, encoding="utf-8") as fh:
             return json.load(fh)
     if verbose:
         print(f"[gm4] building + FHN-labelling {_N_NETWORKS} networks", flush=True)
@@ -104,7 +104,7 @@ def _build_cohort(n_jobs: int, cache_dir: str, verbose: bool) -> List[dict]:
             recs = pool.map(_process_network, ks)
     else:
         recs = [_process_network(k) for k in ks]
-    with open(cache, "w") as fh:
+    with open(cache, "w", encoding="utf-8") as fh:
         json.dump(recs, fh)
     return recs
 
@@ -313,7 +313,7 @@ def run_gm4_scaled(
     os.makedirs(outputs_dir, exist_ok=True)
     cache = os.path.join(outputs_dir, f"gm4_scaled_{n_networks}.json")
     if os.path.isfile(cache):
-        with open(cache) as fh:
+        with open(cache, encoding="utf-8") as fh:
             recs = json.load(fh)
     else:
         print(f"[gm4-scaled] building + labelling {n_networks} networks", flush=True)
@@ -324,7 +324,7 @@ def run_gm4_scaled(
                 recs = pool.map(_process_network_scaled, ks)
         else:
             recs = [_process_network_scaled(k) for k in ks]
-        with open(cache, "w") as fh:
+        with open(cache, "w", encoding="utf-8") as fh:
             json.dump(recs, fh)
 
     y = np.array([int(r["inducible"]) for r in recs], int)
@@ -463,5 +463,5 @@ def _write_report(path: str, m: dict) -> None:
               f"(min {_fmt(v['rho_min'])}, max {_fmt(v['rho_max'])}) over {v['n_scanned']} networks.",
               f"- Synthetic validity boundary ρ* (first-order 10% error) ≈ "
               f"{m['validity_boundary_synthetic']['rho_star_10pct']}.", ""]
-    with open(path, "w") as fh:
+    with open(path, "w", encoding="utf-8") as fh:
         fh.write("\n".join(lines))

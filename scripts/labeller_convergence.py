@@ -50,7 +50,7 @@ if __name__ == "__main__":
            "inducibility_rate_by_resolution": {str(k): v for k, v in rate.items()},
            "records": recs}
     os.makedirs("results", exist_ok=True)
-    json.dump(out, open("results/labeller_convergence.json", "w"), indent=2)
+    json.dump(out, open("results/labeller_convergence.json", "w", encoding="utf-8"), indent=2)
     print(f"verdict consistent across {RES}: {consistent}/{len(bysub)} subjects "
           f"({consistent / max(1,len(bysub)):.0%})", flush=True)
     print("inducibility rate by resolution:", {k: round(v, 2) for k, v in rate.items()}, flush=True)

@@ -64,7 +64,7 @@ if __name__ == "__main__":
     out = {"medium": "kuramoto_network", "dynamical_class": "phase_oscillator",
            "N": N, "n_unstable": n_ind, "n_nodes": NET.n_nodes,
            "predict": pred, "localize": loc}
-    json.dump(out, open("results/gm4_kuramoto_metrics.json", "w"), indent=2)
+    json.dump(out, open("results/gm4_kuramoto_metrics.json", "w", encoding="utf-8"), indent=2)
 
     print("[predict — SFI vs competitors]", flush=True)
     for v, r in pred.items():

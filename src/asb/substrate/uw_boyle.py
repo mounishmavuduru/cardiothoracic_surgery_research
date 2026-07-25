@@ -25,9 +25,9 @@ Format differences from the Roney loader (``asb.substrate.roney``)
   =======  =========================  ======================================
   111      healthy myocardium         dominant; 59.0 % → 47.3 % post-ablation
   115      dense (LGE) fibrosis       high inter-patient variance; 20.9 % → 14.9 %
-  164      **not myocardium** — the   exactly 5 components, each a disc (χ=1),
-           caps over the 4 pulmonary  11–42 mm across; ZERO adjacency to tag 115;
-           veins and mitral valve     20.0 % → 19.9 %, i.e. ablation-invariant
+  164      **not myocardium** — the   4–6 large components (5 in 75/82), each a disc
+           caps over the pulmonary    (χ=1), 11–42 mm; borders tag 115 on ~0.08 %
+           veins and mitral valve     of edges vs 14–20 % by chance; 20.0 % → 19.9 %
   199      ablation scar              post-ablation only, 17.9 %
   =======  =========================  ======================================
 
@@ -86,16 +86,23 @@ DEGENERATE_FIBRE_SPREAD: float = 1.0e-6
 #:
 #: Tag 164 was identified geometrically on 2026-07-24 (the Dryad README does not
 #: document the tag values). Across every mesh examined it:
-#:   * forms exactly FIVE large connected components -- the four pulmonary veins and
-#:     the mitral valve;
+#:   * resolves into FOUR TO SIX large connected components (>=1% of the region) in all
+#:     82 meshes -- five in 75, four in five, six in two. That is the usual variation in
+#:     pulmonary-vein anatomy: a left common trunk gives four, a right middle vein six;
 #:   * each component is topologically a disc (Euler characteristic chi = 1), i.e. a
 #:     cap sealing an opening, 11-42 mm across, sitting 0.5-0.8 of the atrial radius
 #:     from the centroid;
-#:   * has EXACTLY ZERO edge-adjacency to fibrotic tag-115 elements (enrichment x0.00),
-#:     which rules out the "fibrosis border zone" reading that ``TAG_FIBROSIS[164]=0.5``
-#:     implies;
+#:   * borders fibrotic tag-115 elements on only ~0.08% of its incident edges (median 27
+#:     edges) against a chance expectation of 14-20% -- a >100-fold depletion, which rules
+#:     out the "fibrosis border zone" reading that ``TAG_FIBROSIS[164]=0.5`` implies;
 #:   * occupies 20.0 % of elements pre-ablation and 19.9 % post -- untouched by the
-#:     procedure, as anatomy is and as tissue is not.
+#:     procedure, as anatomy is and as tissue is not;
+#:   * removing it opens the surface: Euler characteristic falls by a median of 7
+#:     (range 2-12). ID040 and ID049 are topologically pathological and go the other way.
+#:
+#: An earlier revision of this comment claimed "exactly five components", "EXACTLY ZERO
+#: adjacency" and "chi = -3". Those were generalised from one mesh and from a rounded mean;
+#: the census figures above replace them. See ``tests/test_uw_boyle.py``.
 #:
 #: Leaving these caps in as half-conducting tissue does more than distort fibrosis: it
 #: seals the atrium's openings, so activation can cross the mitral valve and the vein

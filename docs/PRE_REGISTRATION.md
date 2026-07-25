@@ -327,6 +327,21 @@ prediction from baseline substrate; the post-ablation mesh encodes the delivered
   resolution tiers). An earlier draft of amendment (b) called the fibre defect "the leading
   explanation" for the 7 %. The measurement does not support that phrasing and it has been
   withdrawn here and in the manuscript.
+- **Amendment 2026-07-24 (d): census confirming the tag-164 identification, and a second
+  self-correction.** The identification was initially made on one mesh. Repeated over all 82:
+  tag 164 resolves into **four to six large components** (five in 75 meshes, four in five,
+  six in two — the usual pulmonary-vein variation, a left common trunk giving four and a
+  right middle vein six), each a topological disc; it borders fibrotic elements on **~0.08 %
+  of its incident edges** against **14–20 % by chance**; and removing it opens the surface by
+  a median of **7** boundary loops. Two meshes, **ID040 and ID049**, are topologically
+  pathological (χ before removal −16 and −18).
+
+  Earlier same-day drafts of this section and of `notebooks/lab_notebook.md` claimed "exactly
+  five components", "**zero** adjacency to fibrosis" and "χ = −3, exactly five openings".
+  Those were generalisations from mesh ID001 and from a mean fraction rounded to three
+  decimals; all three are withdrawn. The identification itself stands and is better supported
+  than before, since the component spread matches known anatomy. Guards are pinned in
+  `tests/test_uw_boyle.py`, which is what caught the error.
 - **Benchmark context.** The source study reports ROC AUC **0.80 ± 0.04** using 89 features
   including EHR/clinical risk factors that we do not hold. We are **not** claiming to beat
   that model, and will not present our mesh-only AUC as if it were comparable.

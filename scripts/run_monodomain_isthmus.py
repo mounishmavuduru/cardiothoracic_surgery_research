@@ -110,7 +110,7 @@ def main():
     out = {"records": recs, "summary": summary, "elapsed_s": time.time() - t0,
            "note": "crossfield monodomain on a healthy-isthmus sheet; scar non-conducting"}
     os.makedirs("results", exist_ok=True)
-    json.dump(out, open(OUT, "w"), indent=2)
+    json.dump(out, open(OUT, "w", encoding="utf-8"), indent=2)
     print(f"MONODOMAIN_ISTHMUS_DONE  {summary}", flush=True)
 
 

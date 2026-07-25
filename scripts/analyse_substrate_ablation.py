@@ -24,7 +24,7 @@ def main() -> None:
     ap.add_argument("--write", action="store_true", help="write the stats back into the JSON")
     a = ap.parse_args()
 
-    d = json.load(open(a.src))
+    d = json.load(open(a.src, encoding="utf-8"))
     rows = d["rows"]
     arms = list(dict.fromkeys(r["arm"] for r in rows))
     by = {arm: {r["subject"]: bool(r["inducible"]) for r in rows if r["arm"] == arm}
@@ -75,7 +75,7 @@ def main() -> None:
             "baseline_positives_retained_in_full_fix": sum(
                 by[arms[0]][s] and by[arms[-1]][s] for s in subs),
         }
-        json.dump(d, open(a.src, "w"), indent=2)
+        json.dump(d, open(a.src, "w", encoding="utf-8"), indent=2)
         print(f"\nwrote paired_stats into {a.src}")
 
 

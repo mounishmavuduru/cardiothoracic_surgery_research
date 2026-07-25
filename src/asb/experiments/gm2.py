@@ -330,5 +330,5 @@ def _write_report(path: str, m: dict) -> None:
               "|∇φ₂|∩Perron hotspot is *worse* than |∇φ₂| alone (the Perron factor is "
               "uncorrelated). Fibrosis localizes comparably; spectral-radius (a scalar) is "
               "not a localizer.", ""]
-    with open(path, "w") as fh:
+    with open(path, "w", encoding="utf-8") as fh:
         fh.write("\n".join(lines))

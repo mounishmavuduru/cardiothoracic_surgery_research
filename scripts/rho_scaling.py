@@ -118,7 +118,7 @@ def main():
         out["atrial_mesh"] = {"error": str(e)}
         print(f"[atrial mesh] skipped: {e}", flush=True)
 
-    json.dump(out, open("results/rho_scaling.json", "w"), indent=2)
+    json.dump(out, open("results/rho_scaling.json", "w", encoding="utf-8"), indent=2)
     print("RHO_SCALING_DONE", flush=True)
 
 
