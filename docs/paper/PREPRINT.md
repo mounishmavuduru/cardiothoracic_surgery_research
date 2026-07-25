@@ -1,8 +1,26 @@
 # AtrialSpectralBench: a pre-registered test of a spectral fragility biomarker for atrial reentry — a feature-redundancy null, an estimator-validity boundary, and the false positives naive methodology would have produced
 
-*Working preprint draft. All numbers trace to `results/*.json` and `notebooks/lab_notebook.md`.
-This is an in-silico computational study; labels are electrophysiology-simulator verdicts, never
-clinical outcomes.*
+> ## ⚠ SUPERSEDED — read `manuscript.tex` instead
+>
+> **`docs/paper/manuscript.tex` is the canonical paper.** This Markdown draft is kept for
+> history only. It predates the substrate audit of 2026-07-24/25 and several of its headline
+> numbers were computed on a defective substrate. Specifically, in the sections below:
+>
+> - the real-cohort rows use **Roney n=62** (it is now n=100, all released meshes) and a
+>   **UW substrate whose atrial orifices were sealed** by a mis-read element tag;
+> - the **combined ΔAUC = +0.051 (p = 0.155)** that "exceeds the 0.05 threshold" has been
+>   recomputed to **+0.012 (p = 0.449)** on n=182 and no longer approaches the gate;
+> - the secondary endpoint **ΔAUC = +0.103, p = 0.009** ("not merely re-encoded fibrosis")
+>   has been **withdrawn**: it is +0.017 (p = 0.452) with the full cohort;
+> - the framing "underpowered and inconclusive, not a clean null" is therefore obsolete;
+>   the real-anatomy result is now a measured null.
+>
+> Corrected values, the audit that found the defect, and the three controls that failed to
+> explain the residual are in `manuscript.tex` and `docs/PRE_REGISTRATION.md` §8.6. Individual
+> superseded numbers below are flagged inline; nothing here should be cited.
+
+*Working preprint draft (SUPERSEDED, see above). This is an in-silico computational study;
+labels are electrophysiology-simulator verdicts, never clinical outcomes.*
 
 ## Abstract
 
@@ -14,11 +32,12 @@ endpoint was ΔAUC ≥ 0.05 with DeLong p < 0.05 on shape-family-held-out folds.
 met — but the strength of the negative differs by regime, and we are careful to separate them.** On
 up to 100,000 synthetic excitable networks SFI adds no practically meaningful predictive value
 (subspace ΔAUC ≈ +0.003; ~4,150 cases needed at 80% power — statistically real only because N is
-huge, so *clinically undetectable* in that cohort). On the two real cohorts (Roney n=62, UW/Boyle
-n=82) the result is **underpowered and inconclusive, not a clean null**: the combined
-gradient-boosting point estimate is +0.051 (which *exceeds* the 0.05 threshold) but fails paired
-significance (DeLong p=0.155, bootstrap CI straddling), so real anatomy cannot *exclude* a moderate
-effect. Where the null *is* clean (the synthetic cohort), the mechanism is **feature redundancy**:
+huge, so *clinically undetectable* in that cohort). On two real cohorts (182 patients: Roney
+n=100, UW/Boyle n=82) the combined gradient-boosting estimate is **+0.012** with a bootstrap
+interval [−0.017, +0.044] that excludes the threshold, so the real-anatomy result is a measured
+null rather than a shortfall of power. (An earlier draft reported +0.051 here and called the
+real-cohort evidence inconclusive; that figure was an artefact of a defect in one cohort's
+released substrate — see the banner at the top of this file.) Where the null *is* clean (the synthetic cohort), the mechanism is **feature redundancy**:
 the exact per-region Δλ₂ SFI — which has no first-order approximation error — also adds nothing over
 the competitor set, so SFI's information is already carried by standard connectivity features. A
 separate, label-free result explains why the *single-vector* SFI is additionally ill-conditioned on
@@ -90,23 +109,34 @@ Kuramoto phase-oscillator networks (a different dynamical class), where `λ₂` 
 
 | cohort / medium | N | SFI ΔAUC vs full competitors (lr / gbt) | verdict |
 |---|---|---|---|
-| Roney (real) | 62 | −0.030 / **+0.036** (p 0.64 / 0.26) | endpoint not met; **underpowered** |
-| UW/Boyle (real) | 82 | −0.057 / +0.104 (p 0.29 / 0.66) | **uninformative** (6 positives; base AUC ≈ chance) |
-| Combined real | 144 | −0.004 / **+0.051** (p 0.92 / **0.155**) | not met but **inconclusive** — see below |
+| Roney (real) | 100 | −0.021 / +0.009 (p 0.444 / 0.625) | endpoint not met (34/100 inducible) |
+| UW/Boyle (real) | 82 | +0.000 / +0.035 (p 1.000 / 0.669) | uninformative (8 positives, 9.8%) |
+| Combined real | 182 | −0.007 / **+0.012** (p 0.704 / 0.449) | endpoint not met; no longer near the gate |
+
+> *Superseded rows, kept for the record:* Roney 62, −0.030/+0.036 (p 0.64/0.26);
+> UW/Boyle 82, −0.057/+0.104 (p 0.29/0.66) on 6 positives; Combined 144, −0.004/**+0.051**
+> (p 0.92/0.155). These were computed with the UW atrial orifices sealed by a mis-read
+> element tag and with only 62 of the 100 Roney meshes on disk.
 | FHN networks | 2,000 | ≤ +0.003 (p ≥ 0.12) | clean null |
 | FHN networks | up to 100,000 | subspace +0.0028 (p<10⁻⁴ at N≥10⁴) | clean null (effect negligible) |
 | Kuramoto networks | 500 | ≤ +0.0036 (p ≥ 0.38) | clean null |
 
-**The negative is not uniform, and we separate the regimes honestly.** On the *synthetic* cohorts
+**The negative is not uniform, and we separate the regimes.** On the *synthetic* cohorts
 (up to 100,000 networks) the null is clean: the effect converges to ΔAUC ≈ +0.003, statistically
-resolvable only because N is enormous. On the *real* cohorts it is **underpowered and inconclusive,
-not a demonstrated null**: the combined gradient-boosting point estimate is **+0.051 — which
-*exceeds* the pre-registered 0.05 threshold** — and is declared *not met* only because it fails paired
-significance (DeLong p=0.155, bootstrap CI straddling 0). With 26 inducible of 144 (20 of them from
-Roney), real anatomy cannot *exclude* a moderate effect; "SFI does not help" is warranted for the
-synthetic regime and "inconclusive" for the real one. The UW cohort is uninformative rather than null
-(6 positives, competitor base AUC ≈ chance), so it functions as an underpowered external check of the
-*labeller*, not of SFI.
+resolvable only because N is enormous. On the *real* cohorts the combined gradient-boosting
+estimate is **+0.012** (DeLong p=0.449, bootstrap CI [−0.017, +0.044]), roughly a quarter of the
+pre-registered 0.05 threshold and with an interval that excludes it. With 42 inducible of 182 this
+is the largest real-anatomy arm in the study, and the null here is a measurement rather than a
+shortfall of power. The UW cohort remains uninformative rather than null (8 positives), so it
+functions as an underpowered external check of the *labeller*, not of SFI.
+
+> *Superseded framing, kept for the record:* this paragraph previously read "underpowered and
+> inconclusive, not a demonstrated null", on the basis of a combined estimate of **+0.051**
+> (p=0.155) with 26 inducible of 144. That estimate was an artefact of the sealed-orifice UW
+> substrate; correcting it gives +0.036 at the original cohort size and +0.012 with all 100
+> Roney meshes. The claim that real anatomy "cannot exclude a moderate effect" no longer holds.
+> Note also that the phrase "competitor base AUC ≈ chance" for UW was simply wrong: the measured
+> competitor base AUC is 0.834 (lr) / 0.748 (gbt). Only the *fibrosis-only* baseline is 0.562.
 
 **Where the clean (synthetic) null comes from — feature redundancy, not the validity radius.** The
 **exact** per-region Δλ₂ SFI — which carries *no* first-order approximation error and is immune to the
@@ -114,18 +144,25 @@ synthetic regime and "inconclusive" for the real one. The UW cohort is uninforma
 SFI's information is already present in standard connectivity features (λ₂-alone, min-cut, percolation),
 a label-dependent finding, not a consequence of ρ.
 
-**Secondary endpoint (pre-specified), with multiple-comparisons disclosure.** SFI beats a
-*fibrosis-heterogeneity-only* baseline (combined GBT ΔAUC +0.103, p=0.009) — i.e. it is **not merely
-re-encoded fibrosis**; it carries connectivity information beyond the substrate. This is one of ~30
-DeLong comparisons across {LR,GBT}×{competitors,fibrosis}×{single,subspace,exact}×{cohorts}; we treat
-`fibrosis_vs_+SFI` as a single pre-specified secondary endpoint and judge its p=0.009 at that level
-(family-wise threshold ≈ 0.05/12–0.05/30 ≈ 0.004–0.0017 — so it is suggestive, not confirmatory).
+**Secondary endpoint (pre-specified) — WITHDRAWN.** This section previously reported that SFI
+beats a *fibrosis-heterogeneity-only* baseline (combined GBT ΔAUC **+0.103, p=0.009**) and read
+that as showing SFI is **not merely re-encoded fibrosis**. That result does not survive and the
+claim is withdrawn. Correcting the UW substrate at the original cohort size leaves it largely
+intact (+0.093, p=0.013), so it was not principally a substrate artefact; extending the Roney arm
+from 62 to all 100 released meshes collapses it to **+0.017 (p=0.452)**. An effect that disappears
+when 38 further real subjects are added was a small-sample fluctuation, and it was one of ~30
+DeLong comparisons besides. The discarded estimate was carried by the UW arm, which under the
+sealed substrate returned +0.340 (p=0.026) on six positives — a value that should not have been
+believed at the time. On the full cohort no comparison, primary or secondary, shows SFI adding
+information beyond either baseline.
 
 **Power analysis (`results/power_analysis.json`).** In the *synthetic* cohort the subspace effect
 (+0.0028) needs ~4,150 cases for 80% power and the single-vector effect (+0.0007) ~23,000 — clinically
-undetectable *there*. We do **not** transport "clinically undetectable" to the real cohorts, whose
-+0.036–0.051 point estimates are compatible with a detectable effect that we are simply underpowered
-to confirm.
+undetectable *there*. We do **not** transport "clinically undetectable" to the real cohorts, which
+are a separate regime. On the corrected substrate their point estimates are +0.009 (Roney, n=100)
+and +0.012 (combined, n=182), both with intervals that contain zero and exclude the 0.05 gate.
+(An earlier draft cited +0.036–0.051 here as "compatible with a detectable effect that we are
+simply underpowered to confirm"; those estimates are superseded and that reading no longer holds.)
 
 ### 3.2 The validity radius (why it fails) — `docs/SFI_THEORY.md` §4, §9
 
@@ -209,9 +246,11 @@ report 30.6% in patients without prior AF; Kumar 29.5% (sustained); between the 
 (Oral et al. 2008, *JCE*, PMID 18266669: 5% in controls) and the AF/aggressive ceiling (Kawai et al.
 2019, *J Arrhythm*, PMID 31007786: 51% persistent AF; Oral 84% with isoproterenol), consistent with
 ~42% post-ablation (Liu et al. 2020, *JAHA*, PMID 32654581). The **UW ~7%** is at/below the control
-floor for a cohort that *is* AF patients — correctly flagged as anomalous and attributable to the
-surrogate substrate (rule-based fibres, PCA-UAC) and an under-aggressive in-silico inducer, not
-biology. These are in-silico verdicts with a simulator-scaled ≥650 ms cutoff, so this is a base-rate
+floor for a cohort that *is* AF patients — flagged as anomalous and attributable to the substrate
+rather than to biology. ("Rule-based fibres" in an earlier draft was a euphemism: the released
+meshes carry a *constant* fibre vector, not a rule-based field. Repairing that and the sealed
+orifices lifts the rate to 17.1%, still short of the 32.3% seen on fibre-carrying anatomy, so the
+anomaly is only partly accounted for and the in-silico inducer may also be under-aggressive.) These are in-silico verdicts with a simulator-scaled ≥650 ms cutoff, so this is a base-rate
 **plausibility check, not clinical validation.** (One candidate source, Darma et al. 2020, is *not*
 cited: its adversarial citation check did not verify.)
 
@@ -219,8 +258,8 @@ cited: its adversarial citation check did not verify.)
 
 **What is genuinely contributed.** (1) A pre-registered, leakage-controlled, effect-size-gated
 evaluation of a plausible spectral biomarker: a **clean null at synthetic scale** (10⁵ networks) with
-its mechanism (**feature redundancy** — even the exact Δλ₂ SFI adds nothing), and an honest
-**inconclusive/underpowered** verdict on real anatomy (point estimates +0.036–0.051, not significant).
+its mechanism (**feature redundancy** — even the exact Δλ₂ SFI adds nothing), and a **measured
+null** on 182 patients of real anatomy (combined +0.012, CI [−0.017, +0.044]).
 (2) A **label-free validity criterion** `ρ` for the single-vector estimator — it proves `φ₂` is
 ill-conditioned on real tissue (ρ ≈ 2422 ≫ ρ*≈3, Davis–Kahan), a portable a-priori check for any
 Fiedler-based marker — with the honest scope that ρ bounds estimator accuracy, *not* predictive
@@ -248,20 +287,26 @@ main results ran at 2000 nodes, so all *absolute* rates and AUCs are coarse-mesh
 the deferred openCARP validation (the *relative* SFI-vs-competitor comparison scores the same labels
 in both arms, so this bias cancels there). (b) Simulator, not clinical, labels
 (the pre-registered openCARP ground truth was substituted with monodomain Mitchell–Schaeffer — a
-logged deviation). (c) The UW cohort uses PCA-surrogate UAC and rule-based fibres, and is only ~7%
-inducible (at/below the no-AF-control clinical floor), so its predictive test is uninformative. (d)
-~30 DeLong comparisons were run; the one positive (fibrosis_vs_+SFI p=0.009) is a pre-specified
-secondary, suggestive not confirmatory. (e) ρ* and the random-geometric gap exponents are empirical.
+logged deviation). (c) The UW cohort uses PCA-surrogate UAC; its released meshes carry a *degenerate*
+fibre field (a constant vector in all 164) and an element tag we mis-read as tissue when it is the
+caps over the atrial orifices. Repairing both raises inducibility only from 6/82 to 14/82, and all
+three candidate explanations for its low rate are now excluded by direct control, so the cohort's
+predictive test is uninformative and the anomaly is an open problem. (d) ~30 DeLong comparisons were
+run; the one apparent positive (fibrosis_vs_+SFI, +0.103 at p=0.009) has since been **withdrawn** —
+it is +0.017 (p=0.452) on the full cohort. (e) ρ* and the random-geometric gap exponents are
+empirical. (f) The inducibility label is reproducible in aggregate but unstable per subject, which
+attenuates every ΔAUC reported here.
 
 ## 5. Conclusion
 
 A closed-form spectral fragility index does not add practically meaningful reentry-inducibility
-prediction beyond existing features at synthetic scale (a clean, feature-redundancy null), and on
-real anatomy the evidence is inconclusive rather than a demonstrated null. Independently, we show the
-single-vector estimator is provably ill-conditioned on real tissue (ρ ≫ 1). The honest core is not a
-discovery but a carefully-scoped boundary — where a Fiedler-based estimator is numerically valid, why
-real tissue lies far outside it, and how easily naive methodology would have mistaken redundant,
-inconclusive signal for a working biomarker. The absolute claims await the openCARP validation.
+prediction beyond existing features, either at synthetic scale or on 182 patients of real anatomy,
+and the mechanism is feature redundancy. Independently, we show the single-vector estimator is
+provably ill-conditioned on real tissue (ρ ≫ 1). The core is not a discovery but a carefully-scoped
+boundary — where a Fiedler-based estimator is numerically valid, why real tissue lies far outside
+it, and how easily naive methodology would have mistaken redundant signal for a working biomarker.
+This project produced such a false positive itself (+0.103 at p=0.009) and its own protocol
+withdrew it. The absolute rates await the openCARP validation, which is now feasible.
 
 ## References (all classical / established; verify formatting before submission)
 
