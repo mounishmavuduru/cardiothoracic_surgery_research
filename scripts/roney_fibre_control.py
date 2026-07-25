@@ -19,9 +19,12 @@ Arms::
     R_A_real_fibres       untouched Roney            <- control; must reproduce 20/62
     R_B_constant_fibres   fibres := (1, 0, 0)        <- UW's degenerate field, same anatomy
 
-If R_B collapses toward the UW cohort's 7%, fibre degeneracy alone is sufficient to
-explain the anomaly. If R_B stays near 32%, fibres are not the driver and the sealed
-atrial openings (UW tag 164) carry the blame instead.
+RESULT (2026-07-24): R_A 20/62 = 32.3%, reproducing the recorded frozen value exactly.
+R_B 20/62 = 32.3% -- identical in count (McNemar b=5, c=5, p=1.0). Fibre degeneracy does
+NOT drive the inducibility rate. Removing the fibre field does perturb the dynamics --
+sustained-reentry duration moves on 50/62 subjects, by up to 661 ms, and 10/62 verdicts
+flip -- so the label is stable in aggregate and unstable per subject. See
+results/roney_fibre_control.json and PRE_REGISTRATION.md amendment 8.6 (e).
 
 Labels here are simulator verdicts. They are never joined to the clinical outcome column.
 

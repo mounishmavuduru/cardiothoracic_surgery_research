@@ -1,0 +1,1271 @@
+{
+  "description": "destroy ONLY the fibre field on a cohort that has one",
+  "control_arm": "R_A_real_fibres",
+  "recorded_frozen_result": {
+    "n": 62,
+    "n_inducible": 20
+  },
+  "uw_reference": {
+    "n": 82,
+    "n_inducible": 6,
+    "note": "degenerate fibres AND sealed orifices"
+  },
+  "summary": {
+    "R_A_real_fibres": {
+      "n": 62,
+      "n_inducible": 20,
+      "inducible_fraction": 0.3225806451612903,
+      "mean_fibrosis": 0.33276885169214576,
+      "mean_fibre_spread": 0.954043529984772
+    },
+    "R_B_constant_fibres": {
+      "n": 62,
+      "n_inducible": 20,
+      "inducible_fraction": 0.3225806451612903,
+      "mean_fibrosis": 0.33276885169214576,
+      "mean_fibre_spread": 0.0
+    }
+  },
+  "rows": [
+    {
+      "arm": "R_A_real_fibres",
+      "subject": "Mesh_83815278.vtk",
+      "n_nodes": 2023,
+      "inducible": false,
+      "sustained_ms": 277.95000000000005,
+      "fibrosis_mean": 0.33933044699110154,
+      "fibre_spread": 0.9489328033634089,
+      "seconds": 25.4
+    },
+    {
+      "arm": "R_A_real_fibres",
+      "subject": "Mesh_49769496.vtk",
+      "n_nodes": 2277,
+      "inducible": false,
+      "sustained_ms": 373.9000000000001,
+      "fibrosis_mean": 0.5785584005903607,
+      "fibre_spread": 0.9657185118151038,
+      "seconds": 31.3
+    },
+    {
+      "arm": "R_A_real_fibres",
+      "subject": "Mesh_56611509.vtk",
+      "n_nodes": 2197,
+      "inducible": false,
+      "sustained_ms": 222.75,
+      "fibrosis_mean": 0.23694501431674986,
+      "fibre_spread": 0.9218854985040428,
+      "seconds": 27.4
+    },
+    {
+      "arm": "R_A_real_fibres",
+      "subject": "Mesh_31475951.vtk",
+      "n_nodes": 2175,
+      "inducible": false,
+      "sustained_ms": 235.6500000000001,
+      "fibrosis_mean": 0.20110217703806557,
+      "fibre_spread": 0.9763675699311983,
+      "seconds": 27.8
+    },
+    {
+      "arm": "R_A_real_fibres",
+      "subject": "Mesh_12928433.vtk",
+      "n_nodes": 2179,
+      "inducible": true,
+      "sustained_ms": 999.95,
+      "fibrosis_mean": 0.49100709834520184,
+      "fibre_spread": 0.9493104430701877,
+      "seconds": 44.4
+    },
+    {
+      "arm": "R_A_real_fibres",
+      "subject": "Mesh_99895768.vtk",
+      "n_nodes": 2223,
+      "inducible": false,
+      "sustained_ms": 286.10000000000014,
+      "fibrosis_mean": 0.3800564467275557,
+      "fibre_spread": 0.9523578188692565,
+      "seconds": 30.3
+    },
+    {
+      "arm": "R_A_real_fibres",
+      "subject": "Mesh_32198120.vtk",
+      "n_nodes": 2271,
+      "inducible": true,
+      "sustained_ms": 999.95,
+      "fibrosis_mean": 0.3694893207058757,
+      "fibre_spread": 0.9602448498070135,
+      "seconds": 40.0
+    },
+    {
+      "arm": "R_A_real_fibres",
+      "subject": "Mesh_40112384.vtk",
+      "n_nodes": 2015,
+      "inducible": true,
+      "sustained_ms": 999.95,
+      "fibrosis_mean": 0.46526990342057173,
+      "fibre_spread": 0.9269884357470013,
+      "seconds": 44.4
+    },
+    {
+      "arm": "R_A_real_fibres",
+      "subject": "Mesh_83335866.vtk",
+      "n_nodes": 2045,
+      "inducible": true,
+      "sustained_ms": 999.95,
+      "fibrosis_mean": 0.6681006441326224,
+      "fibre_spread": 0.9678617386977441,
+      "seconds": 41.8
+    },
+    {
+      "arm": "R_A_real_fibres",
+      "subject": "Mesh_58105145.vtk",
+      "n_nodes": 2295,
+      "inducible": true,
+      "sustained_ms": 999.95,
+      "fibrosis_mean": 0.5139592263300419,
+      "fibre_spread": 0.9543282127993764,
+      "seconds": 50.2
+    },
+    {
+      "arm": "R_A_real_fibres",
+      "subject": "Mesh_48813898.vtk",
+      "n_nodes": 2110,
+      "inducible": true,
+      "sustained_ms": 675.45,
+      "fibrosis_mean": 0.6141442218047588,
+      "fibre_spread": 0.9414932983921503,
+      "seconds": 39.3
+    },
+    {
+      "arm": "R_A_real_fibres",
+      "subject": "Mesh_46906197.vtk",
+      "n_nodes": 2071,
+      "inducible": false,
+      "sustained_ms": 240.9000000000001,
+      "fibrosis_mean": 0.06672589912744309,
+      "fibre_spread": 0.9589840790259608,
+      "seconds": 29.7
+    },
+    {
+      "arm": "R_A_real_fibres",
+      "subject": "Mesh_94908860.vtk",
+      "n_nodes": 2144,
+      "inducible": false,
+      "sustained_ms": 245.1500000000001,
+      "fibrosis_mean": 0.31874335536713166,
+      "fibre_spread": 0.9557392715531433,
+      "seconds": 32.3
+    },
+    {
+      "arm": "R_A_real_fibres",
+      "subject": "Mesh_16736494.vtk",
+      "n_nodes": 2012,
+      "inducible": false,
+      "sustained_ms": 216.10000000000002,
+      "fibrosis_mean": 0.07583142299800155,
+      "fibre_spread": 0.9681066877672101,
+      "seconds": 28.9
+    },
+    {
+      "arm": "R_A_real_fibres",
+      "subject": "Mesh_13142315.vtk",
+      "n_nodes": 2269,
+      "inducible": true,
+      "sustained_ms": 999.95,
+      "fibrosis_mean": 0.4070393972404391,
+      "fibre_spread": 0.9552961647782187,
+      "seconds": 53.3
+    },
+    {
+      "arm": "R_A_real_fibres",
+      "subject": "Mesh_92062041.vtk",
+      "n_nodes": 2066,
+      "inducible": false,
+      "sustained_ms": 319.20000000000005,
+      "fibrosis_mean": 0.2788842830792184,
+      "fibre_spread": 0.9666446660328913,
+      "seconds": 33.1
+    },
+    {
+      "arm": "R_A_real_fibres",
+      "subject": "Mesh_68827202.vtk",
+      "n_nodes": 2137,
+      "inducible": true,
+      "sustained_ms": 999.95,
+      "fibrosis_mean": 0.5277679224317231,
+      "fibre_spread": 0.9801337338693846,
+      "seconds": 45.6
+    },
+    {
+      "arm": "R_A_real_fibres",
+      "subject": "Mesh_84215961.vtk",
+      "n_nodes": 2038,
+      "inducible": false,
+      "sustained_ms": 338.75,
+      "fibrosis_mean": 0.48846484003106283,
+      "fibre_spread": 0.9439781800487921,
+      "seconds": 32.0
+    },
+    {
+      "arm": "R_A_real_fibres",
+      "subject": "Mesh_26694297.vtk",
+      "n_nodes": 2283,
+      "inducible": false,
+      "sustained_ms": 503.95000000000005,
+      "fibrosis_mean": 0.33634412575156014,
+      "fibre_spread": 0.9563602141945854,
+      "seconds": 42.3
+    },
+    {
+      "arm": "R_A_real_fibres",
+      "subject": "Mesh_28678406.vtk",
+      "n_nodes": 2050,
+      "inducible": false,
+      "sustained_ms": 313.4000000000001,
+      "fibrosis_mean": 0.3252787666784484,
+      "fibre_spread": 0.9525447375607204,
+      "seconds": 34.0
+    },
+    {
+      "arm": "R_A_real_fibres",
+      "subject": "Mesh_44772464.vtk",
+      "n_nodes": 2208,
+      "inducible": true,
+      "sustained_ms": 999.95,
+      "fibrosis_mean": 0.7699765850973415,
+      "fibre_spread": 0.9581820071121541,
+      "seconds": 48.4
+    },
+    {
+      "arm": "R_A_real_fibres",
+      "subject": "Mesh_40849519.vtk",
+      "n_nodes": 2126,
+      "inducible": true,
+      "sustained_ms": 999.95,
+      "fibrosis_mean": 0.4816595546621659,
+      "fibre_spread": 0.953322263709778,
+      "seconds": 50.6
+    },
+    {
+      "arm": "R_A_real_fibres",
+      "subject": "Mesh_86031279.vtk",
+      "n_nodes": 2202,
+      "inducible": false,
+      "sustained_ms": 506.70000000000005,
+      "fibrosis_mean": 0.25365197535062917,
+      "fibre_spread": 0.9466581087293346,
+      "seconds": 38.4
+    },
+    {
+      "arm": "R_A_real_fibres",
+      "subject": "Mesh_49286233.vtk",
+      "n_nodes": 2191,
+      "inducible": true,
+      "sustained_ms": 999.95,
+      "fibrosis_mean": 0.4716312124567218,
+      "fibre_spread": 0.9791670527464467,
+      "seconds": 46.9
+    },
+    {
+      "arm": "R_A_real_fibres",
+      "subject": "Mesh_26925075.vtk",
+      "n_nodes": 2071,
+      "inducible": false,
+      "sustained_ms": 292.75,
+      "fibrosis_mean": 0.3754472645817558,
+      "fibre_spread": 0.9586026092385822,
+      "seconds": 34.2
+    },
+    {
+      "arm": "R_A_real_fibres",
+      "subject": "Mesh_26572048.vtk",
+      "n_nodes": 2186,
+      "inducible": false,
+      "sustained_ms": 461.6500000000001,
+      "fibrosis_mean": 0.4286764872494669,
+      "fibre_spread": 0.9474565088784829,
+      "seconds": 41.6
+    },
+    {
+      "arm": "R_A_real_fibres",
+      "subject": "Mesh_88859337.vtk",
+      "n_nodes": 2222,
+      "inducible": true,
+      "sustained_ms": 999.95,
+      "fibrosis_mean": 0.31165760139839643,
+      "fibre_spread": 0.9643723427042129,
+      "seconds": 45.5
+    },
+    {
+      "arm": "R_A_real_fibres",
+      "subject": "Mesh_85161463.vtk",
+      "n_nodes": 2166,
+      "inducible": false,
+      "sustained_ms": 237.4000000000001,
+      "fibrosis_mean": 0.2506532412233763,
+      "fibre_spread": 0.9567752855501581,
+      "seconds": 34.3
+    },
+    {
+      "arm": "R_A_real_fibres",
+      "subject": "Mesh_77855463.vtk",
+      "n_nodes": 2076,
+      "inducible": true,
+      "sustained_ms": 999.95,
+      "fibrosis_mean": 0.42216515373638075,
+      "fibre_spread": 0.9583318563051486,
+      "seconds": 45.9
+    },
+    {
+      "arm": "R_A_real_fibres",
+      "subject": "Mesh_45275287.vtk",
+      "n_nodes": 2143,
+      "inducible": false,
+      "sustained_ms": 232.95000000000005,
+      "fibrosis_mean": 0.10470140312419786,
+      "fibre_spread": 0.9630735538546856,
+      "seconds": 35.1
+    },
+    {
+      "arm": "R_A_real_fibres",
+      "subject": "Mesh_90918124.vtk",
+      "n_nodes": 1999,
+      "inducible": false,
+      "sustained_ms": 235.9000000000001,
+      "fibrosis_mean": 0.26864288038879464,
+      "fibre_spread": 0.9511488401093738,
+      "seconds": 32.7
+    },
+    {
+      "arm": "R_A_real_fibres",
+      "subject": "Mesh_41949257.vtk",
+      "n_nodes": 2044,
+      "inducible": false,
+      "sustained_ms": 268.0,
+      "fibrosis_mean": 0.1996688902663094,
+      "fibre_spread": 0.9497368720622288,
+      "seconds": 33.6
+    },
+    {
+      "arm": "R_A_real_fibres",
+      "subject": "Mesh_13711934.vtk",
+      "n_nodes": 2120,
+      "inducible": false,
+      "sustained_ms": 221.9000000000001,
+      "fibrosis_mean": 0.14883933202277405,
+      "fibre_spread": 0.9309992342327117,
+      "seconds": 36.0
+    },
+    {
+      "arm": "R_A_real_fibres",
+      "subject": "Mesh_71206673.vtk",
+      "n_nodes": 2081,
+      "inducible": false,
+      "sustained_ms": 226.70000000000005,
+      "fibrosis_mean": 0.3050167993348866,
+      "fibre_spread": 0.9554704329140684,
+      "seconds": 36.2
+    },
+    {
+      "arm": "R_A_real_fibres",
+      "subject": "Mesh_79851394.vtk",
+      "n_nodes": 2077,
+      "inducible": false,
+      "sustained_ms": 226.10000000000002,
+      "fibrosis_mean": 0.19139910550696815,
+      "fibre_spread": 0.9702255554288961,
+      "seconds": 33.5
+    },
+    {
+      "arm": "R_A_real_fibres",
+      "subject": "Mesh_15589148.vtk",
+      "n_nodes": 2209,
+      "inducible": false,
+      "sustained_ms": 284.6500000000001,
+      "fibrosis_mean": 0.2748018617859724,
+      "fibre_spread": 0.9258736541941839,
+      "seconds": 37.7
+    },
+    {
+      "arm": "R_A_real_fibres",
+      "subject": "Mesh_61961067.vtk",
+      "n_nodes": 2104,
+      "inducible": false,
+      "sustained_ms": 292.29999999999995,
+      "fibrosis_mean": 0.17657108428482637,
+      "fibre_spread": 0.9578262129971945,
+      "seconds": 37.6
+    },
+    {
+      "arm": "R_A_real_fibres",
+      "subject": "Mesh_31977459.vtk",
+      "n_nodes": 2195,
+      "inducible": true,
+      "sustained_ms": 999.95,
+      "fibrosis_mean": 0.36423485852199267,
+      "fibre_spread": 0.9432591763976738,
+      "seconds": 55.7
+    },
+    {
+      "arm": "R_A_real_fibres",
+      "subject": "Mesh_45708510.vtk",
+      "n_nodes": 2104,
+      "inducible": false,
+      "sustained_ms": 439.1500000000001,
+      "fibrosis_mean": 0.28826482134563175,
+      "fibre_spread": 0.938587213631865,
+      "seconds": 41.2
+    },
+    {
+      "arm": "R_A_real_fibres",
+      "subject": "Mesh_14451346.vtk",
+      "n_nodes": 2289,
+      "inducible": false,
+      "sustained_ms": 274.70000000000005,
+      "fibrosis_mean": 0.20001699852257337,
+      "fibre_spread": 0.9701594222649687,
+      "seconds": 37.9
+    },
+    {
+      "arm": "R_A_real_fibres",
+      "subject": "Mesh_70843325.vtk",
+      "n_nodes": 2172,
+      "inducible": true,
+      "sustained_ms": 999.95,
+      "fibrosis_mean": 0.5678580180368871,
+      "fibre_spread": 0.9244178528659761,
+      "seconds": 49.5
+    },
+    {
+      "arm": "R_A_real_fibres",
+      "subject": "Mesh_57863767.vtk",
+      "n_nodes": 2208,
+      "inducible": false,
+      "sustained_ms": 288.70000000000005,
+      "fibrosis_mean": 0.28196022622418554,
+      "fibre_spread": 0.9561177360312663,
+      "seconds": 35.9
+    },
+    {
+      "arm": "R_A_real_fibres",
+      "subject": "Mesh_12305955.vtk",
+      "n_nodes": 2019,
+      "inducible": false,
+      "sustained_ms": 369.4000000000001,
+      "fibrosis_mean": 0.2575268884936945,
+      "fibre_spread": 0.9671386222375108,
+      "seconds": 34.9
+    },
+    {
+      "arm": "R_A_real_fibres",
+      "subject": "Mesh_37026619.vtk",
+      "n_nodes": 2246,
+      "inducible": false,
+      "sustained_ms": 271.55000000000007,
+      "fibrosis_mean": 0.2489430009343494,
+      "fibre_spread": 0.9539862191039001,
+      "seconds": 34.2
+    },
+    {
+      "arm": "R_A_real_fibres",
+      "subject": "Mesh_10954794.vtk",
+      "n_nodes": 2008,
+      "inducible": false,
+      "sustained_ms": 430.1500000000001,
+      "fibrosis_mean": 0.31140474810107205,
+      "fibre_spread": 0.9394313692605175,
+      "seconds": 29.7
+    },
+    {
+      "arm": "R_A_real_fibres",
+      "subject": "Mesh_28914168.vtk",
+      "n_nodes": 2084,
+      "inducible": false,
+      "sustained_ms": 291.20000000000005,
+      "fibrosis_mean": 0.23734526399338213,
+      "fibre_spread": 0.9516498964595441,
+      "seconds": 28.9
+    },
+    {
+      "arm": "R_A_real_fibres",
+      "subject": "Mesh_42412446.vtk",
+      "n_nodes": 2021,
+      "inducible": false,
+      "sustained_ms": 261.1500000000001,
+      "fibrosis_mean": 0.2072400740102586,
+      "fibre_spread": 0.9433454572206453,
+      "seconds": 28.9
+    },
+    {
+      "arm": "R_A_real_fibres",
+      "subject": "Mesh_82949971.vtk",
+      "n_nodes": 2139,
+      "inducible": false,
+      "sustained_ms": 328.6500000000001,
+      "fibrosis_mean": 0.2837968075747433,
+      "fibre_spread": 0.9473911566828669,
+      "seconds": 35.8
+    },
+    {
+      "arm": "R_A_real_fibres",
+      "subject": "Mesh_48373495.vtk",
+      "n_nodes": 2042,
+      "inducible": false,
+      "sustained_ms": 287.25,
+      "fibrosis_mean": 0.22985550717034306,
+      "fibre_spread": 0.9504218915332621,
+      "seconds": 36.7
+    },
+    {
+      "arm": "R_A_real_fibres",
+      "subject": "Mesh_29613176.vtk",
+      "n_nodes": 2068,
+      "inducible": true,
+      "sustained_ms": 999.95,
+      "fibrosis_mean": 0.39810547357375076,
+      "fibre_spread": 0.9729190422261793,
+      "seconds": 56.0
+    },
+    {
+      "arm": "R_A_real_fibres",
+      "subject": "Mesh_64966753.vtk",
+      "n_nodes": 2073,
+      "inducible": false,
+      "sustained_ms": 257.55000000000007,
+      "fibrosis_mean": 0.23187763763757951,
+      "fibre_spread": 0.9321857127188274,
+      "seconds": 36.5
+    },
+    {
+      "arm": "R_A_real_fibres",
+      "subject": "Mesh_42551385.vtk",
+      "n_nodes": 2123,
+      "inducible": false,
+      "sustained_ms": 258.0,
+      "fibrosis_mean": 0.1489753425524807,
+      "fibre_spread": 0.9533043415087297,
+      "seconds": 35.6
+    },
+    {
+      "arm": "R_A_real_fibres",
+      "subject": "Mesh_13013612.vtk",
+      "n_nodes": 2116,
+      "inducible": true,
+      "sustained_ms": 999.95,
+      "fibrosis_mean": 0.19927774750972987,
+      "fibre_spread": 0.9616094332012617,
+      "seconds": 50.7
+    },
+    {
+      "arm": "R_A_real_fibres",
+      "subject": "Mesh_55927776.vtk",
+      "n_nodes": 2152,
+      "inducible": false,
+      "sustained_ms": 472.60000000000014,
+      "fibrosis_mean": 0.4075162412234992,
+      "fibre_spread": 0.9458564976997645,
+      "seconds": 41.3
+    },
+    {
+      "arm": "R_A_real_fibres",
+      "subject": "Mesh_92326261.vtk",
+      "n_nodes": 2052,
+      "inducible": false,
+      "sustained_ms": 343.4000000000001,
+      "fibrosis_mean": 0.3967816860542475,
+      "fibre_spread": 0.9580121293904282,
+      "seconds": 38.6
+    },
+    {
+      "arm": "R_A_real_fibres",
+      "subject": "Mesh_95775921.vtk",
+      "n_nodes": 2073,
+      "inducible": false,
+      "sustained_ms": 319.70000000000005,
+      "fibrosis_mean": 0.32577757774400545,
+      "fibre_spread": 0.9495893374766966,
+      "seconds": 38.0
+    },
+    {
+      "arm": "R_A_real_fibres",
+      "subject": "Mesh_75204275.vtk",
+      "n_nodes": 2270,
+      "inducible": false,
+      "sustained_ms": 293.60000000000014,
+      "fibrosis_mean": 0.2590695515133671,
+      "fibre_spread": 0.9409250658393156,
+      "seconds": 38.4
+    },
+    {
+      "arm": "R_A_real_fibres",
+      "subject": "Mesh_99978327.vtk",
+      "n_nodes": 2004,
+      "inducible": true,
+      "sustained_ms": 719.3500000000001,
+      "fibrosis_mean": 0.4335171261383815,
+      "fibre_spread": 0.9541708968058308,
+      "seconds": 44.5
+    },
+    {
+      "arm": "R_A_real_fibres",
+      "subject": "Mesh_88422001.vtk",
+      "n_nodes": 2038,
+      "inducible": true,
+      "sustained_ms": 999.95,
+      "fibrosis_mean": 0.18979852942909262,
+      "fibre_spread": 0.9869264751763205,
+      "seconds": 44.5
+    },
+    {
+      "arm": "R_A_real_fibres",
+      "subject": "Mesh_44771637.vtk",
+      "n_nodes": 2289,
+      "inducible": false,
+      "sustained_ms": 308.6500000000001,
+      "fibrosis_mean": 0.26188294045049604,
+      "fibre_spread": 0.9703937543787625,
+      "seconds": 38.0
+    },
+    {
+      "arm": "R_A_real_fibres",
+      "subject": "Mesh_66899331.vtk",
+      "n_nodes": 2034,
+      "inducible": true,
+      "sustained_ms": 999.95,
+      "fibrosis_mean": 0.5276525272313665,
+      "fibre_spread": 0.958334644039344,
+      "seconds": 49.6
+    },
+    {
+      "arm": "R_A_real_fibres",
+      "subject": "Mesh_31333640.vtk",
+      "n_nodes": 2138,
+      "inducible": false,
+      "sustained_ms": 311.4000000000001,
+      "fibrosis_mean": 0.2547858653470286,
+      "fibre_spread": 0.9500662083093765,
+      "seconds": 34.6
+    },
+    {
+      "arm": "R_B_constant_fibres",
+      "subject": "Mesh_83815278.vtk",
+      "n_nodes": 2023,
+      "inducible": false,
+      "sustained_ms": 296.9000000000001,
+      "fibrosis_mean": 0.33933044699110154,
+      "fibre_spread": 0.0,
+      "seconds": 28.4
+    },
+    {
+      "arm": "R_B_constant_fibres",
+      "subject": "Mesh_49769496.vtk",
+      "n_nodes": 2277,
+      "inducible": true,
+      "sustained_ms": 999.95,
+      "fibrosis_mean": 0.5785584005903607,
+      "fibre_spread": 0.0,
+      "seconds": 50.1
+    },
+    {
+      "arm": "R_B_constant_fibres",
+      "subject": "Mesh_56611509.vtk",
+      "n_nodes": 2197,
+      "inducible": false,
+      "sustained_ms": 282.20000000000005,
+      "fibrosis_mean": 0.23694501431674986,
+      "fibre_spread": 0.0,
+      "seconds": 29.6
+    },
+    {
+      "arm": "R_B_constant_fibres",
+      "subject": "Mesh_31475951.vtk",
+      "n_nodes": 2175,
+      "inducible": false,
+      "sustained_ms": 277.5,
+      "fibrosis_mean": 0.20110217703806557,
+      "fibre_spread": 0.0,
+      "seconds": 29.9
+    },
+    {
+      "arm": "R_B_constant_fibres",
+      "subject": "Mesh_12928433.vtk",
+      "n_nodes": 2179,
+      "inducible": true,
+      "sustained_ms": 999.95,
+      "fibrosis_mean": 0.49100709834520184,
+      "fibre_spread": 0.0,
+      "seconds": 45.4
+    },
+    {
+      "arm": "R_B_constant_fibres",
+      "subject": "Mesh_99895768.vtk",
+      "n_nodes": 2223,
+      "inducible": false,
+      "sustained_ms": 325.1500000000001,
+      "fibrosis_mean": 0.3800564467275557,
+      "fibre_spread": 0.0,
+      "seconds": 30.9
+    },
+    {
+      "arm": "R_B_constant_fibres",
+      "subject": "Mesh_32198120.vtk",
+      "n_nodes": 2271,
+      "inducible": false,
+      "sustained_ms": 418.70000000000005,
+      "fibrosis_mean": 0.3694893207058757,
+      "fibre_spread": 0.0,
+      "seconds": 32.9
+    },
+    {
+      "arm": "R_B_constant_fibres",
+      "subject": "Mesh_40112384.vtk",
+      "n_nodes": 2015,
+      "inducible": true,
+      "sustained_ms": 702.9000000000001,
+      "fibrosis_mean": 0.46526990342057173,
+      "fibre_spread": 0.0,
+      "seconds": 37.3
+    },
+    {
+      "arm": "R_B_constant_fibres",
+      "subject": "Mesh_83335866.vtk",
+      "n_nodes": 2045,
+      "inducible": true,
+      "sustained_ms": 999.95,
+      "fibrosis_mean": 0.6681006441326224,
+      "fibre_spread": 0.0,
+      "seconds": 40.7
+    },
+    {
+      "arm": "R_B_constant_fibres",
+      "subject": "Mesh_58105145.vtk",
+      "n_nodes": 2295,
+      "inducible": true,
+      "sustained_ms": 999.95,
+      "fibrosis_mean": 0.5139592263300419,
+      "fibre_spread": 0.0,
+      "seconds": 48.4
+    },
+    {
+      "arm": "R_B_constant_fibres",
+      "subject": "Mesh_48813898.vtk",
+      "n_nodes": 2110,
+      "inducible": true,
+      "sustained_ms": 999.95,
+      "fibrosis_mean": 0.6141442218047588,
+      "fibre_spread": 0.0,
+      "seconds": 46.0
+    },
+    {
+      "arm": "R_B_constant_fibres",
+      "subject": "Mesh_46906197.vtk",
+      "n_nodes": 2071,
+      "inducible": false,
+      "sustained_ms": 243.4000000000001,
+      "fibrosis_mean": 0.06672589912744309,
+      "fibre_spread": 0.0,
+      "seconds": 28.1
+    },
+    {
+      "arm": "R_B_constant_fibres",
+      "subject": "Mesh_94908860.vtk",
+      "n_nodes": 2144,
+      "inducible": false,
+      "sustained_ms": 302.60000000000014,
+      "fibrosis_mean": 0.31874335536713166,
+      "fibre_spread": 0.0,
+      "seconds": 32.8
+    },
+    {
+      "arm": "R_B_constant_fibres",
+      "subject": "Mesh_16736494.vtk",
+      "n_nodes": 2012,
+      "inducible": false,
+      "sustained_ms": 277.04999999999995,
+      "fibrosis_mean": 0.07583142299800155,
+      "fibre_spread": 0.0,
+      "seconds": 29.3
+    },
+    {
+      "arm": "R_B_constant_fibres",
+      "subject": "Mesh_13142315.vtk",
+      "n_nodes": 2269,
+      "inducible": true,
+      "sustained_ms": 999.95,
+      "fibrosis_mean": 0.4070393972404391,
+      "fibre_spread": 0.0,
+      "seconds": 47.3
+    },
+    {
+      "arm": "R_B_constant_fibres",
+      "subject": "Mesh_92062041.vtk",
+      "n_nodes": 2066,
+      "inducible": false,
+      "sustained_ms": 295.20000000000005,
+      "fibrosis_mean": 0.2788842830792184,
+      "fibre_spread": 0.0,
+      "seconds": 32.7
+    },
+    {
+      "arm": "R_B_constant_fibres",
+      "subject": "Mesh_68827202.vtk",
+      "n_nodes": 2137,
+      "inducible": true,
+      "sustained_ms": 999.95,
+      "fibrosis_mean": 0.5277679224317231,
+      "fibre_spread": 0.0,
+      "seconds": 51.8
+    },
+    {
+      "arm": "R_B_constant_fibres",
+      "subject": "Mesh_84215961.vtk",
+      "n_nodes": 2038,
+      "inducible": true,
+      "sustained_ms": 999.95,
+      "fibrosis_mean": 0.48846484003106283,
+      "fibre_spread": 0.0,
+      "seconds": 48.2
+    },
+    {
+      "arm": "R_B_constant_fibres",
+      "subject": "Mesh_26694297.vtk",
+      "n_nodes": 2283,
+      "inducible": true,
+      "sustained_ms": 999.95,
+      "fibrosis_mean": 0.33634412575156014,
+      "fibre_spread": 0.0,
+      "seconds": 61.6
+    },
+    {
+      "arm": "R_B_constant_fibres",
+      "subject": "Mesh_28678406.vtk",
+      "n_nodes": 2050,
+      "inducible": false,
+      "sustained_ms": 288.95000000000005,
+      "fibrosis_mean": 0.3252787666784484,
+      "fibre_spread": 0.0,
+      "seconds": 35.4
+    },
+    {
+      "arm": "R_B_constant_fibres",
+      "subject": "Mesh_44772464.vtk",
+      "n_nodes": 2208,
+      "inducible": true,
+      "sustained_ms": 999.95,
+      "fibrosis_mean": 0.7699765850973415,
+      "fibre_spread": 0.0,
+      "seconds": 59.1
+    },
+    {
+      "arm": "R_B_constant_fibres",
+      "subject": "Mesh_40849519.vtk",
+      "n_nodes": 2126,
+      "inducible": true,
+      "sustained_ms": 999.95,
+      "fibrosis_mean": 0.4816595546621659,
+      "fibre_spread": 0.0,
+      "seconds": 55.5
+    },
+    {
+      "arm": "R_B_constant_fibres",
+      "subject": "Mesh_86031279.vtk",
+      "n_nodes": 2202,
+      "inducible": false,
+      "sustained_ms": 463.75,
+      "fibrosis_mean": 0.25365197535062917,
+      "fibre_spread": 0.0,
+      "seconds": 43.3
+    },
+    {
+      "arm": "R_B_constant_fibres",
+      "subject": "Mesh_49286233.vtk",
+      "n_nodes": 2191,
+      "inducible": true,
+      "sustained_ms": 999.95,
+      "fibrosis_mean": 0.4716312124567218,
+      "fibre_spread": 0.0,
+      "seconds": 57.4
+    },
+    {
+      "arm": "R_B_constant_fibres",
+      "subject": "Mesh_26925075.vtk",
+      "n_nodes": 2071,
+      "inducible": false,
+      "sustained_ms": 333.54999999999995,
+      "fibrosis_mean": 0.3754472645817558,
+      "fibre_spread": 0.0,
+      "seconds": 40.9
+    },
+    {
+      "arm": "R_B_constant_fibres",
+      "subject": "Mesh_26572048.vtk",
+      "n_nodes": 2186,
+      "inducible": false,
+      "sustained_ms": 485.35000000000014,
+      "fibrosis_mean": 0.4286764872494669,
+      "fibre_spread": 0.0,
+      "seconds": 47.9
+    },
+    {
+      "arm": "R_B_constant_fibres",
+      "subject": "Mesh_88859337.vtk",
+      "n_nodes": 2222,
+      "inducible": false,
+      "sustained_ms": 348.9000000000001,
+      "fibrosis_mean": 0.31165760139839643,
+      "fibre_spread": 0.0,
+      "seconds": 43.3
+    },
+    {
+      "arm": "R_B_constant_fibres",
+      "subject": "Mesh_85161463.vtk",
+      "n_nodes": 2166,
+      "inducible": false,
+      "sustained_ms": 287.79999999999995,
+      "fibrosis_mean": 0.2506532412233763,
+      "fibre_spread": 0.0,
+      "seconds": 34.8
+    },
+    {
+      "arm": "R_B_constant_fibres",
+      "subject": "Mesh_77855463.vtk",
+      "n_nodes": 2076,
+      "inducible": false,
+      "sustained_ms": 394.95000000000005,
+      "fibrosis_mean": 0.42216515373638075,
+      "fibre_spread": 0.0,
+      "seconds": 34.7
+    },
+    {
+      "arm": "R_B_constant_fibres",
+      "subject": "Mesh_45275287.vtk",
+      "n_nodes": 2143,
+      "inducible": false,
+      "sustained_ms": 246.45000000000005,
+      "fibrosis_mean": 0.10470140312419786,
+      "fibre_spread": 0.0,
+      "seconds": 32.0
+    },
+    {
+      "arm": "R_B_constant_fibres",
+      "subject": "Mesh_90918124.vtk",
+      "n_nodes": 1999,
+      "inducible": false,
+      "sustained_ms": 276.54999999999995,
+      "fibrosis_mean": 0.26864288038879464,
+      "fibre_spread": 0.0,
+      "seconds": 31.2
+    },
+    {
+      "arm": "R_B_constant_fibres",
+      "subject": "Mesh_41949257.vtk",
+      "n_nodes": 2044,
+      "inducible": false,
+      "sustained_ms": 294.95000000000005,
+      "fibrosis_mean": 0.1996688902663094,
+      "fibre_spread": 0.0,
+      "seconds": 32.5
+    },
+    {
+      "arm": "R_B_constant_fibres",
+      "subject": "Mesh_13711934.vtk",
+      "n_nodes": 2120,
+      "inducible": false,
+      "sustained_ms": 247.95000000000005,
+      "fibrosis_mean": 0.14883933202277405,
+      "fibre_spread": 0.0,
+      "seconds": 33.0
+    },
+    {
+      "arm": "R_B_constant_fibres",
+      "subject": "Mesh_71206673.vtk",
+      "n_nodes": 2081,
+      "inducible": false,
+      "sustained_ms": 265.5,
+      "fibrosis_mean": 0.3050167993348866,
+      "fibre_spread": 0.0,
+      "seconds": 31.9
+    },
+    {
+      "arm": "R_B_constant_fibres",
+      "subject": "Mesh_79851394.vtk",
+      "n_nodes": 2077,
+      "inducible": false,
+      "sustained_ms": 260.85,
+      "fibrosis_mean": 0.19139910550696815,
+      "fibre_spread": 0.0,
+      "seconds": 30.8
+    },
+    {
+      "arm": "R_B_constant_fibres",
+      "subject": "Mesh_15589148.vtk",
+      "n_nodes": 2209,
+      "inducible": false,
+      "sustained_ms": 411.70000000000005,
+      "fibrosis_mean": 0.2748018617859724,
+      "fibre_spread": 0.0,
+      "seconds": 34.8
+    },
+    {
+      "arm": "R_B_constant_fibres",
+      "subject": "Mesh_61961067.vtk",
+      "n_nodes": 2104,
+      "inducible": false,
+      "sustained_ms": 449.1500000000001,
+      "fibrosis_mean": 0.17657108428482637,
+      "fibre_spread": 0.0,
+      "seconds": 36.1
+    },
+    {
+      "arm": "R_B_constant_fibres",
+      "subject": "Mesh_31977459.vtk",
+      "n_nodes": 2195,
+      "inducible": true,
+      "sustained_ms": 999.95,
+      "fibrosis_mean": 0.36423485852199267,
+      "fibre_spread": 0.0,
+      "seconds": 53.5
+    },
+    {
+      "arm": "R_B_constant_fibres",
+      "subject": "Mesh_45708510.vtk",
+      "n_nodes": 2104,
+      "inducible": true,
+      "sustained_ms": 999.95,
+      "fibrosis_mean": 0.28826482134563175,
+      "fibre_spread": 0.0,
+      "seconds": 53.5
+    },
+    {
+      "arm": "R_B_constant_fibres",
+      "subject": "Mesh_14451346.vtk",
+      "n_nodes": 2289,
+      "inducible": false,
+      "sustained_ms": 259.55000000000007,
+      "fibrosis_mean": 0.20001699852257337,
+      "fibre_spread": 0.0,
+      "seconds": 38.0
+    },
+    {
+      "arm": "R_B_constant_fibres",
+      "subject": "Mesh_70843325.vtk",
+      "n_nodes": 2172,
+      "inducible": true,
+      "sustained_ms": 999.95,
+      "fibrosis_mean": 0.5678580180368871,
+      "fibre_spread": 0.0,
+      "seconds": 53.4
+    },
+    {
+      "arm": "R_B_constant_fibres",
+      "subject": "Mesh_57863767.vtk",
+      "n_nodes": 2208,
+      "inducible": false,
+      "sustained_ms": 263.95000000000005,
+      "fibrosis_mean": 0.28196022622418554,
+      "fibre_spread": 0.0,
+      "seconds": 34.0
+    },
+    {
+      "arm": "R_B_constant_fibres",
+      "subject": "Mesh_12305955.vtk",
+      "n_nodes": 2019,
+      "inducible": false,
+      "sustained_ms": 334.6500000000001,
+      "fibrosis_mean": 0.2575268884936945,
+      "fibre_spread": 0.0,
+      "seconds": 33.3
+    },
+    {
+      "arm": "R_B_constant_fibres",
+      "subject": "Mesh_37026619.vtk",
+      "n_nodes": 2246,
+      "inducible": false,
+      "sustained_ms": 277.9000000000001,
+      "fibrosis_mean": 0.2489430009343494,
+      "fibre_spread": 0.0,
+      "seconds": 35.1
+    },
+    {
+      "arm": "R_B_constant_fibres",
+      "subject": "Mesh_10954794.vtk",
+      "n_nodes": 2008,
+      "inducible": false,
+      "sustained_ms": 349.45000000000005,
+      "fibrosis_mean": 0.31140474810107205,
+      "fibre_spread": 0.0,
+      "seconds": 36.9
+    },
+    {
+      "arm": "R_B_constant_fibres",
+      "subject": "Mesh_28914168.vtk",
+      "n_nodes": 2084,
+      "inducible": false,
+      "sustained_ms": 301.45000000000005,
+      "fibrosis_mean": 0.23734526399338213,
+      "fibre_spread": 0.0,
+      "seconds": 37.5
+    },
+    {
+      "arm": "R_B_constant_fibres",
+      "subject": "Mesh_42412446.vtk",
+      "n_nodes": 2021,
+      "inducible": false,
+      "sustained_ms": 295.60000000000014,
+      "fibrosis_mean": 0.2072400740102586,
+      "fibre_spread": 0.0,
+      "seconds": 37.6
+    },
+    {
+      "arm": "R_B_constant_fibres",
+      "subject": "Mesh_82949971.vtk",
+      "n_nodes": 2139,
+      "inducible": false,
+      "sustained_ms": 319.0,
+      "fibrosis_mean": 0.2837968075747433,
+      "fibre_spread": 0.0,
+      "seconds": 40.0
+    },
+    {
+      "arm": "R_B_constant_fibres",
+      "subject": "Mesh_48373495.vtk",
+      "n_nodes": 2042,
+      "inducible": false,
+      "sustained_ms": 280.04999999999995,
+      "fibrosis_mean": 0.22985550717034306,
+      "fibre_spread": 0.0,
+      "seconds": 32.5
+    },
+    {
+      "arm": "R_B_constant_fibres",
+      "subject": "Mesh_29613176.vtk",
+      "n_nodes": 2068,
+      "inducible": true,
+      "sustained_ms": 999.95,
+      "fibrosis_mean": 0.39810547357375076,
+      "fibre_spread": 0.0,
+      "seconds": 43.8
+    },
+    {
+      "arm": "R_B_constant_fibres",
+      "subject": "Mesh_64966753.vtk",
+      "n_nodes": 2073,
+      "inducible": false,
+      "sustained_ms": 286.5,
+      "fibrosis_mean": 0.23187763763757951,
+      "fibre_spread": 0.0,
+      "seconds": 32.6
+    },
+    {
+      "arm": "R_B_constant_fibres",
+      "subject": "Mesh_42551385.vtk",
+      "n_nodes": 2123,
+      "inducible": false,
+      "sustained_ms": 240.75,
+      "fibrosis_mean": 0.1489753425524807,
+      "fibre_spread": 0.0,
+      "seconds": 30.4
+    },
+    {
+      "arm": "R_B_constant_fibres",
+      "subject": "Mesh_13013612.vtk",
+      "n_nodes": 2116,
+      "inducible": false,
+      "sustained_ms": 557.95,
+      "fibrosis_mean": 0.19927774750972987,
+      "fibre_spread": 0.0,
+      "seconds": 31.5
+    },
+    {
+      "arm": "R_B_constant_fibres",
+      "subject": "Mesh_55927776.vtk",
+      "n_nodes": 2152,
+      "inducible": true,
+      "sustained_ms": 999.95,
+      "fibrosis_mean": 0.4075162412234992,
+      "fibre_spread": 0.0,
+      "seconds": 37.2
+    },
+    {
+      "arm": "R_B_constant_fibres",
+      "subject": "Mesh_92326261.vtk",
+      "n_nodes": 2052,
+      "inducible": false,
+      "sustained_ms": 366.0,
+      "fibrosis_mean": 0.3967816860542475,
+      "fibre_spread": 0.0,
+      "seconds": 28.5
+    },
+    {
+      "arm": "R_B_constant_fibres",
+      "subject": "Mesh_95775921.vtk",
+      "n_nodes": 2073,
+      "inducible": false,
+      "sustained_ms": 336.0,
+      "fibrosis_mean": 0.32577757774400545,
+      "fibre_spread": 0.0,
+      "seconds": 27.5
+    },
+    {
+      "arm": "R_B_constant_fibres",
+      "subject": "Mesh_75204275.vtk",
+      "n_nodes": 2270,
+      "inducible": false,
+      "sustained_ms": 287.5,
+      "fibrosis_mean": 0.2590695515133671,
+      "fibre_spread": 0.0,
+      "seconds": 28.9
+    },
+    {
+      "arm": "R_B_constant_fibres",
+      "subject": "Mesh_99978327.vtk",
+      "n_nodes": 2004,
+      "inducible": true,
+      "sustained_ms": 694.0,
+      "fibrosis_mean": 0.4335171261383815,
+      "fibre_spread": 0.0,
+      "seconds": 33.0
+    },
+    {
+      "arm": "R_B_constant_fibres",
+      "subject": "Mesh_88422001.vtk",
+      "n_nodes": 2038,
+      "inducible": false,
+      "sustained_ms": 515.1500000000001,
+      "fibrosis_mean": 0.18979852942909262,
+      "fibre_spread": 0.0,
+      "seconds": 30.9
+    },
+    {
+      "arm": "R_B_constant_fibres",
+      "subject": "Mesh_44771637.vtk",
+      "n_nodes": 2289,
+      "inducible": false,
+      "sustained_ms": 325.29999999999995,
+      "fibrosis_mean": 0.26188294045049604,
+      "fibre_spread": 0.0,
+      "seconds": 29.4
+    },
+    {
+      "arm": "R_B_constant_fibres",
+      "subject": "Mesh_66899331.vtk",
+      "n_nodes": 2034,
+      "inducible": true,
+      "sustained_ms": 999.95,
+      "fibrosis_mean": 0.5276525272313665,
+      "fibre_spread": 0.0,
+      "seconds": 28.1
+    },
+    {
+      "arm": "R_B_constant_fibres",
+      "subject": "Mesh_31333640.vtk",
+      "n_nodes": 2138,
+      "inducible": false,
+      "sustained_ms": 347.5,
+      "fibrosis_mean": 0.2547858653470286,
+      "fibre_spread": 0.0,
+      "seconds": 20.8
+    }
+  ]
+}

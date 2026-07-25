@@ -342,6 +342,34 @@ prediction from baseline substrate; the post-ablation mesh encodes the delivered
   decimals; all three are withdrawn. The identification itself stands and is better supported
   than before, since the component spread matches known anatomy. Guards are pinned in
   `tests/test_uw_boyle.py`, which is what caught the error.
+- **Amendment 2026-07-24 (e): the fibre hypothesis is REFUTED by direct control, and the
+  label is noisy per subject.** `scripts/roney_fibre_control.py` destroyed only the fibre
+  field on the Roney cohort — which ships a real one — holding anatomy, fibrosis and every
+  solver parameter fixed:
+
+  | arm | inducible | rate | mean fibre spread |
+  |---|---|---|---|
+  | real fibres (control) | **20/62** | 32.3 % | 0.954 |
+  | fibres set to a constant | **20/62** | 32.3 % | 0.000 |
+
+  The control arm reproduces the recorded 20/62 exactly. The treatment arm is *identical in
+  count* (McNemar b=5, c=5, **p = 1.0**). Fibre degeneracy therefore **does not drive the
+  inducibility rate**, and amendment (b)'s framing of it as the explanation for the UW
+  cohort's 7 % is withdrawn in full. It remains a genuine data-quality defect in the public
+  deposit, worth reporting to the provider, but it is not the cause of the anomaly. The
+  +4-subject fibre effect seen in the UW 2×2 (amendment (c)) is best read as the same churn
+  described below rather than as a fibre effect; it was already non-significant (p = 0.69).
+
+  **The more consequential finding is what the control exposes about the labeller.** Removing
+  the fibre field changes the *dynamics* substantially — sustained-reentry duration moves on
+  50/62 subjects, by up to 661 ms — and flips 10/62 individual verdicts, yet leaves the
+  aggregate rate untouched. Combined with the UW repair retaining only 2 of 6 positives, and
+  with the mesh-convergence study's 7/24 subjects consistent across six resolutions, the
+  monodomain-MS inducibility label is **stable in aggregate and unstable per subject**. Since
+  the §2/§7.5 predictive endpoint is scored on per-subject labels, non-differential label
+  noise biases ΔAUC toward zero. The in-silico null must therefore be reported as partly a
+  statement about the labeller, not only about SFI. This does **not** affect the §8 clinical
+  endpoint, which uses real outcomes and no simulator label.
 - **Benchmark context.** The source study reports ROC AUC **0.80 ± 0.04** using 89 features
   including EHR/clinical risk factors that we do not hold. We are **not** claiming to beat
   that model, and will not present our mesh-only AUC as if it were comparable.
