@@ -9,7 +9,7 @@ Real over SSM/Variant (100 000 variants of one shape ≈ 1 effective group — s
 | # | Dataset | Content (N distinct / format / fibrosis / fibres / UAC) | Access | License | Distinctness |
 |---|---|---|---|---|---|
 | — | **Roney LA virtual cohort** (in use) | 100 patient LA; `.vtk`; IIR-fibrosis ✓; fibres ✓; UAC ✓ | Zenodo 5801337 | CC-BY-4.0 | Real (100) |
-| 1★ | **UW/Boyle LGE-MRI LA meshes** | **82 distinct patients** ×2 (pre/post-ablation) = 164 `.vtk`; LGE fibrosis/scar ✓; fibres ✗; UAC ✗ | Dryad `10.5061/dryad.kkwh70sg0` | CC0 (default) | **Real (82)** |
+| 1★ | **UW/Boyle LGE-MRI LA meshes** | **82 distinct patients** ×2 (pre/post-ablation) = 164 `.vtk`; LGE fibrosis/scar ✓ (categorical `elemTag`, not continuous like Roney's IIR; `elemTag 164` is the PV/mitral-valve caps, not tissue); fibres ✗; UAC ✗ | Dryad `10.5061/dryad.kkwh70sg0` | CC0 (default) | **Real (82)** |
 | 2 | **Nagel/Karlsruhe bi-atrial SSM** | ~195 bi-atrial volumetric `.vtk`; fibres ✓; wall thickness/bridges ✓; fibrosis ✗ (add rule-based) | Zenodo 4309957 → 5571925 | CC-BY-4.0 | SSM |
 | 3 | **LAScarQS 2022** (MICCAI) | 194 LGE-MRIs (LA + scar masks, NIfTI; **not meshes**); no fibres/UAC | zmiclab.github.io/projects/lascarqs22 (registration) | Challenge terms | Real (needs meshing) |
 | 4 | **2018 LA Segmentation Challenge** | 154 LGE-MRIs (100 train + 54 test); `.nrrd` images + LA masks (**not meshes**) | cardiacatlas.org/atriaseg2018 (register + cite) | Registration | Real (needs meshing) — **anatomy-realism check (E7)** |
@@ -33,8 +33,13 @@ Real over SSM/Variant (100 000 variants of one shape ≈ 1 effective group — s
 
 ## Integration notes
 - The Roney loader (`asb.substrate.roney`) already parses `.vtk` POLYDATA + point arrays; the
-  Dryad meshes are `.vtk` but lack the `UAC1/UAC2/IIR/fiber_*` arrays, so a small adapter is
-  needed (LGE→fibrosis map; rule-based fibres via a Laplace–Dirichlet field; UAC surrogate).
+  Dryad meshes are `.vtk` but lack `UAC1/UAC2/IIR`, so a small adapter is needed (LGE→fibrosis
+  map; UAC surrogate). They *do* ship a `VECTORS fiber` array, but it is degenerate — a single
+  constant `(1,0,0)` direction mesh-wide (measured directional spread 0.000, vs 0.945–0.979 for
+  Roney) — so anisotropy relative to a local fibre direction collapses to a fixed coordinate
+  bias; the rule-based Laplace–Dirichlet fibres were never implemented, the shipped degenerate
+  array was consumed as-is. Note also that `elemTag 164` is not tissue but the caps sealing the
+  pulmonary veins and mitral valve, and must be dropped before any field is derived.
 - Each new *dataset* is a natural extra GroupKFold stratum; keep patient = group.
 - Deferred to Claude Science where the full atrialmtk→UAC→fibre→openCARP pipeline runs at scale.
 

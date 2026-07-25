@@ -20,8 +20,9 @@ per-cell to per-vertex (endocardial layer). Regions are a coarse UAC grid so the
 per-region SFI aggregation is well defined.
 
 This module *does* read files, so it lives in the substrate/loader layer (never
-imported by the pure compute modules). It is deterministic in its inputs; the only
-randomness is the tie-break seed in :func:`coarsen_mesh`.
+imported by the pure compute modules). It is deterministic in its inputs;
+:func:`coarsen_mesh` retains a ``seed`` argument for signature compatibility only --
+grid vertex clustering is fully determined by the geometry, so there is no randomness.
 """
 from __future__ import annotations
 

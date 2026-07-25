@@ -264,7 +264,7 @@ prediction from baseline substrate; the post-ablation mesh encodes the delivered
 
 ### 8.6 Known substrate limitations of the UW meshes — disclosed before analysis
 - **Fibrosis is categorical, not continuous.** UW files carry a per-*cell* `elemTag`
-  (`{111:0.0, 115:1.0, 164:0.5, 199:1.0}`, `uw_boyle.py:68`) averaged onto vertices, whereas
+  (`{111:0.0, 115:1.0, 164:0.5, 199:1.0}`, `uw_boyle.py:82`) averaged onto vertices, whereas
   the Roney cohort carries continuous LGE `IIR`. The fibrosis competitors are therefore
   **measured more coarsely here than in §7.5**.
 - **This biases the comparison toward SFI**, because a degraded baseline is easier to beat.
@@ -272,7 +272,7 @@ prediction from baseline substrate; the post-ablation mesh encodes the delivered
   compare it against the source study's published fibrosis-derived performance. If our
   baseline is materially weaker than theirs, any ΔAUC we observe will be reported as
   **confounded by baseline degradation**, not as a win for SFI.
-- **UAC is a PCA surrogate**, not anatomical (`uw_boyle.py:180-192`), so any region-based or
+- **UAC is a PCA surrogate**, not anatomical (`uw_boyle.py:226-238`), so any region-based or
   localization claim on this cohort is weaker than on Roney and will be labelled as such.
 - **Amendment 2026-07-24 (same day, still before any label join): the tag map is probably
   wrong, and this blocks the analysis.** Having downloaded the meshes, they contain a per-cell
@@ -282,10 +282,16 @@ prediction from baseline substrate; the post-ablation mesh encodes the delivered
   final bullet below.)* Measured over all 164 meshes: tag 111 59.0 % → 47.3 % (pre → post ablation), 115 20.9 % →
   14.9 %, 199 absent → 17.9 %, and **164 20.0 % → 19.9 %**. Tag 164 is untouched by ablation,
   which is not fibrosis behaviour; it is far more consistent with a non-myocardial structure
-  (mitral annulus / PV sleeves). The loader nevertheless assigns it `fibrosis = 0.5`
-  (`uw_boyle.py:68`), injecting a near-constant ~20 % pseudo-fibrosis into every patient —
-  which both inflates `fibrosis_burden` and *shrinks its between-patient variance*, weakening
-  the very baseline SFI must beat, and corrupts the Δw field SFI is computed from.
+  (mitral annulus / PV sleeves). The loader at the time nevertheless assigned it
+  `fibrosis = 0.5` (`uw_boyle.py:82`), injecting a near-constant ~20 % pseudo-fibrosis into
+  every patient — which both inflates `fibrosis_burden` and *shrinks its between-patient
+  variance*, weakening the very baseline SFI must beat, and corrupts the Δw field SFI is
+  computed from.
+  *(Superseded by amendment (d): tag 164 is now dropped by default
+  (`DROP_TAGS = (164,)`, `uw_boyle.py:114`) before any field is derived, so it no longer
+  contributes fibrosis; the 0.5 mapping is retained only so the discredited behaviour can be
+  reproduced with `drop_tags=()`. The identification of tag 164 is also no longer merely
+  "probably wrong" — amendment (d) reports it as better supported than before.)*
   **The confirmatory analysis will not be run until the tag semantics are confirmed with the
   data provider** (`docs/outreach/boyle_reply_followup.md`, Q2). This correction is being made
   blind to the outcome column, which has still never been joined to any feature.
@@ -312,9 +318,11 @@ prediction from baseline substrate; the post-ablation mesh encodes the delivered
   | orifices opened | 8/82 (9.8 %) | **14/82 (17.1 %)** |
 
   The sealed/constant arm **reproduces the recorded 6/82 exactly**, which validates the setup.
-  Each defect alone converts ~4 subjects; together they convert 8, so the two are
-  **super-additive** (interaction +4) — consistent with reentry needing both an anatomical
-  obstacle and anisotropic heterogeneity to anchor.
+  Each defect alone converts ~2 subjects; together they convert 8, so the two are
+  **super-additive** (interaction +4).
+  *(The mechanistic reading first offered here — that reentry needs both an anatomical
+  obstacle and anisotropic heterogeneity to anchor — is withdrawn by amendment (e): the fibre
+  arm does not move the rate at all on a cohort that ships real fibres, McNemar p = 1.0.)*
 
   Three cautions are recorded so that no stronger claim is made later than the data supports:
   (i) **the change is not significant** — the strongest contrast, sealed/constant vs
@@ -332,8 +340,8 @@ prediction from baseline substrate; the post-ablation mesh encodes the delivered
   tag 164 resolves into **four to six large components** (five in 75 meshes, four in five,
   six in two — the usual pulmonary-vein variation, a left common trunk giving four and a
   right middle vein six), each a topological disc; it borders fibrotic elements on **~0.08 %
-  of its incident edges** against **14–20 % by chance**; and removing it opens the surface by
-  a median of **7** boundary loops. Two meshes, **ID040 and ID049**, are topologically
+  of its incident edges** against **14–20 % by chance**; and removing it drops the Euler
+  characteristic by a median of **7** (range 2–12). Two meshes, **ID040 and ID049**, are topologically
   pathological (χ before removal −16 and −18).
 
   Earlier same-day drafts of this section and of `notebooks/lab_notebook.md` claimed "exactly
@@ -410,7 +418,8 @@ prediction from baseline substrate; the post-ablation mesh encodes the delivered
   inducibility rate**, and amendment (b)'s framing of it as the explanation for the UW
   cohort's 7 % is withdrawn in full. It remains a genuine data-quality defect in the public
   deposit, worth reporting to the provider, but it is not the cause of the anomaly. The
-  +4-subject fibre effect seen in the UW 2×2 (amendment (c)) is best read as the same churn
+  +2-subject fibre effect seen in the UW 2×2 (amendment (c), sealed-orifice contrast 6/82 →
+  8/82) is best read as the same churn
   described below rather than as a fibre effect; it was already non-significant (p = 0.69).
 
   **The more consequential finding is what the control exposes about the labeller.** Removing

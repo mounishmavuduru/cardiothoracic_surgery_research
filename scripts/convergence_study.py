@@ -1,7 +1,8 @@
 """Large resolution-convergence study: do inducibility verdicts converge as the mesh is refined?
 
 Usage: python scripts/convergence_study.py [roney|uw]   (default roney — the informative cohort;
-UW is only ~7% inducible so it has too few borderline cases to stress-test convergence).
+UW is only 9.8% inducible (8/82, corrected substrate) so it has too few borderline cases to
+stress-test convergence).
 
 The n=8 pilot showed only 50% verdict agreement across {1500,2000,3000} on Roney. This pushes toward
 FINER resolution on more subjects to answer: do verdicts STABILIZE as resolution rises (convergence),

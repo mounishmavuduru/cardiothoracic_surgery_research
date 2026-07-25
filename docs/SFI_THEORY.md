@@ -152,8 +152,9 @@ reference for the derivative-identity finite-difference test.
 
 Reentry/instability **initiation** was hypothesized at `|∇φ₂| ∩ Perron` (`asb.sfi.hotspot_map`,
 with `|∇φ₂|` the edge-averaged Fiedler gradient and the Perron vector the dominant nonnegative
-adjacency eigenpair). GM2/GM4 **kept `|∇φ₂|`** (localizes the origin above a spatial null in
-both cardiac and neural media, p < 1e-3) and **deleted the Perron/∩ and centrality claims**
+adjacency eigenpair). GM2/GM4 **kept `|∇φ₂|`** as a weak **rank** localizer (tie-robust
+permutation p < 1e-3 in both cardiac and neural media) while the strict rotational-spatial-null
+endpoint is **null for every field**, and **deleted the Perron/∩ and centrality claims**
 (they do not correlate). The keep/delete was decided by measured correlation, never assumed.
 
 ## 8. Supporting classical facts (used, not claimed as new)
@@ -207,10 +208,11 @@ subspace SFI is the only well-defined object.
 
 **In one sentence:** *a Fiedler-based spectral perturbation biomarker is trustworthy only while
 `ρ = ‖ΔL‖/(λ₃−λ₂) = O(1)`.* Real excitable media have a tiny gap, so ρ is enormous —
-**atrial-cohort median ρ ≈ 2422, neural-cohort median ρ ≈ 1852**, ~10³× past ρ\*. This is the
-mechanistic reason (not a coincidence) the linear SFI collapses to a substrate re-encoding
-(GM1 null), and it is a **screening test any spectral fragility biomarker can be subjected to**
-in any domain (seizure-focus localization, connectomics, power grids): compute ρ; if `ρ ≫ 1`,
+**atrial-cohort median ρ ≈ 2422, neural-cohort median ρ ≈ 1852**, ~10³× past ρ\*. This proves
+the single-vector estimator is numerically invalid on real tissue; it does **not** explain the
+GM1 predictive null, which is separately a feature-redundancy result (§4 — the exact Δλ₂ SFI,
+immune to ρ, is also non-predictive). It *is* a **screening test any spectral fragility
+biomarker can be subjected to** in any domain (seizure-focus localization, connectomics, power grids): compute ρ; if `ρ ≫ 1`,
 distrust the linear spectral biomarker regardless of in-sample correlation.
 
 ### 9.4 Novelty scope (state this honestly, always)

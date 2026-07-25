@@ -910,3 +910,13 @@ appeared anywhere in the paper before today.
 **openCARP feasibility.** WSL Ubuntu 26.04 (8 cores, 15 GB) is present; the openCARP v19.0
 AppImage runs there without root after `--appimage-extract`. `-buildinfo` returns cleanly.
 Recorded as feasibility only; switching labellers mid-analysis is not being done.
+
+---
+
+## 2026-07-25 (later) — CORRECTION to the 2026-07-23 monodomain-isthmus entry: the cutoff is 650 ms, not 600
+
+> The entry "Novelty ① (real cardiac model, monodomain isthmus)" above reports the 27 configs as
+> "all below the 600ms reentry threshold". The frozen threshold is **650 ms** (E1 calibration,
+> 2026-07-20) — the same 600 ms slip that was corrected in `PREPRINT.md`. The result is unaffected
+> (max sustained 238 ms, median 207 ms, so 0/27 inducible under either cutoff); only the stated
+> number was wrong. Keeping both entries per the append-only rule.

@@ -10,6 +10,12 @@
 #
 # Launch fully detached so it is not torn down with the shell that started it:
 #   setsid nohup bash scripts/supervise_100k.sh >/dev/null 2>&1 </dev/null &
+#
+# PLATFORM: this script is POSIX/container-only. It was written for the now-retired
+# Linux agent container, and the absolute repo path, the .venv/bin interpreter and the
+# /tmp log paths below all assume that container. On the current checkout none of them
+# exist (the venv here is .venv/Scripts), so the cd silently fails and the supervisor
+# no-ops; edit the three paths before running it anywhere else.
 set -u
 cd /home/user/cardiothoracic_surgery_research
 LOG=/tmp/run_100k.log

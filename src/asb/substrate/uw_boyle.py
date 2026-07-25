@@ -33,9 +33,12 @@ Format differences from the Roney loader (``asb.substrate.roney``)
 
   An earlier revision of this file read tag 164 as "remodelled / patchy tissue,
   distributed (least compact)" and :data:`TAG_FIBROSIS` still maps it to 0.5.
-  That reading is wrong: the region is maximally compact (five pieces, one per
-  orifice) and never touches fibrosis. :data:`DROP_TAGS` therefore removes tag 164
-  before any field is derived, which restores the atrium's five openings.
+  That reading is wrong: the region is maximally compact -- four to six large
+  components (five in 75 of the 82 meshes, four in five, six in two, matching normal
+  pulmonary-vein variation) -- and it borders fibrosis on only ~0.08% of its incident
+  edges against a 14-20% chance rate. :data:`DROP_TAGS` therefore removes tag 164
+  before any field is derived, which reopens the venous and mitral orifices (Euler
+  characteristic falls by a median of 7, range 2-12).
   ``TAG_FIBROSIS[164]`` is retained only so the discredited mapping can still be
   reproduced via ``drop_tags=()`` for the record.
   :func:`load_uw_mesh` accepts ``tag_fibrosis`` overrides so the SFI-vs-fibrosis
@@ -303,7 +306,12 @@ def load_uw_mesh(
     # and hence reentry initiation -- disappears. Measured contribution: see
     # results/uw_substrate_ablation.json. Repairing this AND the sealed orifices together
     # lifts inducibility 6/82 -> 14/82, but that is not significant (McNemar p=0.077) and
-    # closes only 39% of the gap to Roney's 32.3%, so it is a contributor, not the cause.
+    # closes only 39% of the gap to Roney's 32.3%. The direct control settles the fibre
+    # half: results/roney_fibre_control.json swaps the real Roney fibres for a constant
+    # field and inducibility is 20/62 either way (McNemar p=1.0), so the fibre field does
+    # not drive the aggregate rate at all -- though per-subject dynamics do move (sustained
+    # duration differs on 50/62 subjects, 10/62 verdicts flip). The degenerate fibres are a
+    # fidelity defect, not an established cause of the low UW rate, which remains open.
     fib_cell = fib_cell_raw
     if fib_cell is None:
         fibres = np.tile(np.array([1.0, 0.0, 0.0]), (n, 1))

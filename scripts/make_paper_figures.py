@@ -168,7 +168,7 @@ def fig_localizer_ladder():
     ax.axhline(0.5, color=GREY, ls=":", label="chance")
     ax.set_xlabel("networks N"); ax.set_ylabel("grad_φ₂ origin rank")
     ax.set_title(f"Localizer origin-rank stable across scale\n"
-                 f"(all $p<10^{{-4}}$ up to N={max(Ns):,})", fontsize=11)
+                 f"(below every random-origin null draw, up to N={max(Ns):,})", fontsize=11)
     ax.legend(fontsize=9, frameon=False)
     fig.tight_layout(); fig.savefig(f"{OUT}/fig_localizer_ladder.png"); plt.close(fig)
     print("wrote fig_localizer_ladder.png")

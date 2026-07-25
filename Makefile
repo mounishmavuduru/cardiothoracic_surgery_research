@@ -1,9 +1,12 @@
 # AtrialSpectralBench — developer convenience targets.
-# Uses a local .venv (Python 3.11, CPU-only). All stochastic code is seeded.
+# Uses a local .venv (Python >=3.10; 3.12 here, CPU-only). All stochastic code is seeded.
+# venv/install/test/run/dashboard work on Windows too (the Scripts/ venv layout is
+# detected below); overleaf-zip and clean still need a POSIX shell with zip/find.
 
-PYTHON ?= python3
+WINDOWS := $(filter Windows_NT,$(OS))
+PYTHON ?= $(if $(WINDOWS),python,python3)
 VENV   := .venv
-BIN    := $(VENV)/bin
+BIN    := $(if $(WINDOWS),$(VENV)/Scripts,$(VENV)/bin)
 CONFIG ?= configs/default.yaml
 
 .PHONY: venv install test run dashboard paper overleaf-zip clean

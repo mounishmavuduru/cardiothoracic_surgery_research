@@ -61,7 +61,7 @@ contribution is the *spatial-localization use* and its *transfer*, not the formu
   **property-based tests generating 10,600 random graphs/run** plus ~100 example tests.
   All green.
 - **E1 real substrate:** real Roney LA cohort loader (Zenodo 5801337; UAC + IIR-fibrosis
-  + fibre arrays), field-preserving coarsening. 62 patients labelled.
+  + fibre arrays), field-preserving coarsening. 100 patients labelled (34 inducible, 34.0%).
 - **Ground-truth labeller:** a genuine **monodomain Mitchell–Schaeffer** reaction–diffusion
   solver (cotangent-Laplacian diffusion), calibrated (inducible ≈0.32, Spearman(fibrosis,
   reentry)=0.75), `source='monodomain_ms'`.
@@ -171,8 +171,10 @@ precise exposure is narrower than "it discounts everything":
     labeller placing the origin correctly. openCARP is the fix for those.
   Interim bridges that NARROW (not close) the gap, runnable without Claude Science:
   **(1)** resolution-convergence of the labeller (`scripts/labeller_convergence.py`,
-  `results/labeller_convergence.json`) — verdict stability across coarsening ⇒ not a coarse-mesh
-  artifact; **(2)** external-rate anchor — Roney inducibility ~32% sits in the clinical 30–70%
+  `results/labeller_convergence.json`) — **RUN AND NEGATIVE**: only 7/24 subjects are consistent
+  across all six mesh tiers, so the labeller does *not* converge in the tested window and every
+  absolute rate is coarse-mesh-provisional — this raises, not lowers, the priority of the openCARP
+  check; **(2)** external-rate anchor — Roney inducibility ~34% sits in the clinical 30–70%
   range; **(3)** lead the writeup with the label-independent spine (§9–§10 of `SFI_THEORY.md`).
   These are **additive**; none substitutes for the openCARP verdict-agreement check.
 
@@ -190,9 +192,10 @@ precise exposure is narrower than "it discounts everything":
 
 ### 3.4 Scale the cohort + GM4 generality
 - Grow to **hundreds of distinct real anatomies** — verified candidate datasets are catalogued
-  in **`docs/DATASETS.md`**; add the **UW/Boyle Dryad set** (`10.5061/dryad.kkwh70sg0`, ~82
-  distinct real patients with LGE fibrosis, `.vtk`) first (nearly triples distinct real N), then
-  the Nagel bi-atrial SSM. Tag patient = group for grouped CV (variants of one shape ≈ 1 group).
+  in **`docs/DATASETS.md`**; the **UW/Boyle Dryad set** (`10.5061/dryad.kkwh70sg0`, 82
+  distinct real patients with LGE fibrosis, `.vtk`) is **DONE** — integrated and labelled
+  (8/82 inducible; combined real N = 182), with the elemTag-164 caps dropped and a degenerate
+  constant-(1,0,0) fibre field found on integration; next the Nagel bi-atrial SSM. Tag patient = group for grouped CV (variants of one shape ≈ 1 group).
 - GM4 at scale: more networks and **more topologies** (small-world Watts–Strogatz,
   scale-free) + a second neural model (Wilson–Cowan / Epileptor node) to show the transfer
   is not FHN-specific.
@@ -228,7 +231,7 @@ Target: an open preprint (arXiv/bioRxiv) + the ISEF board. Suggested structure:
    `|∇φ₂|` still *localizes*; the validity radius as the reusable contribution; what the
    openCARP re-run (Claude Science) would confirm.
 6. **Limitations** — simulator verdict not clinical POAF; monodomain-MS not openCARP
-   (deferred); N=62; single fibre model; Δw calibration uncertainty (with the E6
+   (deferred); N=182 (Roney 100 + UW 82); single fibre model; Δw calibration uncertainty (with the E6
    sensitivity).
 7. **Reproducibility** — repo, seeds, configs, commit hashes, dated notebook, one-command
    `run_gm*`.
@@ -262,8 +265,8 @@ and the same behavior replicates in a neural excitable medium."*
 
 - [x] Engine, tests (10.6k property graphs), pre-registration + tag, E1 substrate,
       monodomain-MS labeller, GM1, GM2, GM3.
-- [ ] **GM4 finish + verify** (running).
-- [ ] E6 UQ (Morris + GP + Δw sensitivity) — `experiments/e6_uq.py`.
+- [x] **GM4 finish + verify** (done).
+- [x] E6 UQ (Morris + GP + Δw sensitivity) — `experiments/e6_uq.py` (`results/e6_metrics.json`).
 - [ ] E7 credibility (literature ranges, 2018 LA-Challenge realism, VMR generalization,
       convergence study) — `experiments/e7_credibility.py`.
 - [ ] Figures 1–7 — `experiments/make_figures.py`.

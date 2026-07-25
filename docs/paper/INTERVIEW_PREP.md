@@ -27,11 +27,17 @@ No — and I have to be precise about *which* cohort. That p<10⁻⁴ is in my *
 55,000+ networks; the effect size there is ΔAUC = +0.003 on a base of 0.91 (needs ~4,150 cases to
 detect — statistically significant, clinically meaningless in that regime). That is the trap the
 project exposes: with enough data, useless effects look real; effect size, not p, decides. **But I
-will not oversell the real-anatomy result** — on my two real cohorts (n=144 combined) the point
-estimate is actually +0.05, which *touches* my pre-registered 0.05 threshold and fails only on
-significance (p=0.155). So on real hearts the honest verdict is **underpowered/inconclusive, not a
-demonstrated null**. The clean null is the synthetic regime; the real regime cannot yet exclude a
-moderate effect. I keep those two statements separate.
+will not oversell the real-anatomy result** — on my two real cohorts (n=182 combined) the point
+estimate is **+0.012** (DeLong p=0.449, CI [−0.017, +0.044]): well short of my pre-registered 0.05
+gate, with an interval that excludes it. So on real hearts the verdict is a **measured null**, not
+merely a failure of power.
+
+> **If asked about the earlier +0.051:** say so plainly. An earlier version of this work did report a
+> combined +0.051 that touched the 0.05 gate and failed only on significance. It was an artefact of a
+> defect in the UW released substrate — an element tag I had mis-read as tissue when it is the caps
+> sealing the pulmonary veins and mitral valve, which let simulated activation cross the mitral valve
+> instead of circling it. Correcting that and extending Roney from 62 to all 100 released meshes drops
+> the estimate to +0.012. I found it myself, before submission, and the paper reports it.
 
 **Q. What is your single weakest point?**
 My own convergence study found it, and I'll state it before you do: the labeller **over-calls
@@ -51,7 +57,7 @@ that's resolution-dependent. Fidelity limitation, not a logic flaw — but a rea
 data point makes it worse than a coarse reading would suggest, so I lead with it rather than hide it.
 
 **Q. Why should synthetic networks tell me anything about a real heart?**
-They aren't a substitute for the heart — the real cohorts (Roney n=62, UW/Boyle n=82) are. The
+They aren't a substitute for the heart — the real cohorts (Roney n=100, UW/Boyle n=82) are. The
 synthetic networks do two things the real cohorts can't: they let me push N to 100,000 so the effect
 size and its confidence interval converge (which is how I can state "+0.003, needs 4,150 cases"), and
 they let me test whether the *pattern transfers to other excitable and oscillator media* — which

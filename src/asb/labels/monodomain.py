@@ -37,9 +37,11 @@ Dimensionless transmembrane potential :math:`V\in[0,1]`, gating variable
                                    -h/\tau_{close}  & V \ge V_{gate}\end{cases}
 
 Diffusion is discretised with the (conductance-weighted, fibrosis-attenuated)
-cotangent Laplacian and barycentric lumped mass, integrated by explicit forward
-Euler with reaction/diffusion operator splitting. All randomness (pacing-site
-choice) comes from the caller's ``rng``.
+cotangent Laplacian and barycentric lumped mass, integrated by an explicit
+reaction half-step and an implicit (backward-Euler) diffusion half-step under
+Godunov operator splitting; the diffusion solve is unconditionally stable, so
+``dt`` is limited by reaction accuracy rather than the mesh CFL condition. All
+randomness (pacing-site choice) comes from the caller's ``rng``.
 """
 from __future__ import annotations
 
@@ -110,6 +112,9 @@ class MonodomainConfig:
     # Inducible iff self-sustained supra-threshold activity persists at least this
     # long AFTER the last stimulus (>= ~2-3 reentrant rotations). A normal paced
     # response transits + repolarizes and quiesces well inside this window.
+    # NOTE: the frozen protocol value is 650 ms (``realcohort.FROZEN_MONO``), and
+    # every reported run overrides this class default with it; the 600 ms here is
+    # the pre-freeze default, kept only for signature/back-compat stability.
     reentry_min_ms: float = 600.0
 
 
@@ -595,7 +600,10 @@ def measure_planar_cv(
         uac=np.zeros((n, 2)), fibrosis=np.zeros(n), region=np.zeros(n, dtype=np.int64),
         shape_family="strip",
     )
-    # One S1 beat from the x=0 end; short observation.
+    # One S1 beat from the x=0 end, followed by the 'S1S2' protocol's S2 at the
+    # ``s2_coupling`` interval; short observation. ``activation`` keeps the LAST
+    # upstroke per node, so the CV returned below is that of the S2 beat, not of a
+    # fully recovered S1.
     scfg = MonodomainConfig(
         **{**cfg.__dict__, "protocol": "S1S2", "n_s1": 1, "n_pacing_sites": 1,
            "observe_after": 120.0, "s1_cycle_length": 400.0, "stim_radius_mm": dx_mm * 1.5}

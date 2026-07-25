@@ -1,6 +1,6 @@
 """Machine-verified derivation of the SFI perturbation identities (sympy + mpmath).
 
-Turns "we claim these formulas" into "here is the symbolic proof and a 30-digit numerical
+Turns "we claim these formulas" into "here is the symbolic proof and a 40-digit numerical
 confirmation". Three independent checks:
   P1  symbolic  : phi^T (e_i-e_j)(e_i-e_j)^T phi  ==  (phi_i - phi_j)^2   (the SFI edge term)
   P2  symbolic  : dL/dw_ij == (e_i-e_j)(e_i-e_j)^T  (rank-one edge structure of the Laplacian)

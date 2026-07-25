@@ -15,9 +15,12 @@ The full writeup is **`docs/paper/PREPRINT.md`**; every number traces to `result
 
 - **Predictive result:** *clean null at synthetic scale* (up to **100,000** networks; SFI ΔAUC ≈ +0.003,
   needing ~4,150 cases to detect — clinically undetectable *there*), with the mechanism being **feature
-  redundancy** (even the exact Δλ₂ SFI adds nothing). On the two real cohorts (Roney n=62, UW/Boyle n=82)
-  the result is **underpowered/inconclusive, not a demonstrated null** (combined GBT point estimate +0.051
-  *exceeds* the 0.05 endpoint but fails significance, p=0.155).
+  redundancy** (even the exact Δλ₂ SFI adds nothing). On two real cohorts (**182 patients**: Roney
+  n=100, UW/Boyle n=82) the combined GBT point estimate is **+0.012** (DeLong p=0.449, bootstrap CI
+  [−0.017, +0.044]) — well short of the 0.05 endpoint, with an interval that excludes it, so this is a
+  measured null rather than a shortfall of power. *(An earlier version reported +0.051 here and called
+  the real-cohort evidence inconclusive; that figure was an artefact of a defect in the UW released
+  substrate, found and corrected 2026-07-24/25.)*
 - **Estimator-validity boundary:** the *single-vector* first-order SFI is valid only while
   `ρ = ‖ΔL‖/(λ₃−λ₂) = O(1)`; real atria have **ρ ≈ 2422**, so by Davis–Kahan `φ₂` is provably
   ill-conditioned. (ρ bounds estimator accuracy, **not** predictive content — it does not by itself prove
@@ -62,28 +65,36 @@ generalization keeps SFI well-defined when λ₂ is near-degenerate.
 
 ## In-silico, no-patient framing
 
-This project is **100% in silico**: zero patients, zero IRB (only a documented
-human-data *exemption* determination for public de-identified geometries). Ground-truth
-inducibility labels come from an EP simulator's verdict — **openCARP** when available, and
-an in-repo `mock_ep` excitable-media stand-in otherwise.
+The simulation work is **100% in silico**: no patient is simulated from identifiable data (only a
+documented human-data *exemption* determination for public de-identified geometries). Since
+2026-07-24 the project additionally holds **restricted-use, non-redistributable** 2-year
+recurrence outcomes for the 82 UW patients (48 events: 34 NR / 35 AF / 13 AFL) under a
+data-custody agreement (see `docs/PRE_REGISTRATION.md` §8); those labels are gitignored, must
+never be committed, and the pre-registered analysis has not yet been run. Ground-truth
+inducibility labels come from the in-repo **monodomain Mitchell–Schaeffer** solver
+(`source='monodomain_ms'`); openCARP is validated as runnable here but is **not yet used as
+ground truth** — the substitution is a logged deviation — and `mock_ep` is a development-only
+plumbing stand-in.
 
 The `mock_ep` labels are a **development convenience and are never clinical POAF**. Every
 public surface that emits or consumes them says so. Claims are scoped to "a cheap spectral
 surrogate for a specific EP-simulator's inducibility verdict" — there is no FDA/VICTRE/ISCT
 language, and nothing here is validated against real post-operative AF.
 
-## Real data & openCARP are deferred / network-gated
+## Real data is loaded; openCARP labels are deferred
 
-The build environment has **no network access** (zenodo.org / opencarp.org / GitHub are
-blocked by policy). Accordingly:
+Both real cohorts are downloaded and processed locally (Roney 100 meshes, UW/Boyle 164
+meshes). Accordingly:
 
 - Real-data loaders (Rodero Zenodo 4506930, Roney Zenodo 5801337, Fibre Atlas Zenodo
   3764917) and the openCARP runner are written as clean, documented interfaces that raise
   an informative `DataUnavailableError` / `OpenCARPUnavailableError` if the data or binary
-  is absent. **They are not executed here.**
+  is absent. **The real-data loaders are executed here** (Roney 100 patients, UW/Boyle 82
+  patients labelled) and are the basis of every real-cohort number reported; only the openCARP
+  runner still raises `OpenCARPUnavailableError`.
 - The heavy openCARP inducibility sweep and final publication figures are a **deferred**
-  phase; until then the synthetic cohort plus `mock_ep` labels exercise the full pipeline
-  end to end, so it is one config-run away from real labels.
+  phase; until then the two real cohorts with monodomain Mitchell–Schaeffer labels exercise the
+  full pipeline end to end, so it is one config-run away from openCARP labels.
 
 ## Quickstart
 

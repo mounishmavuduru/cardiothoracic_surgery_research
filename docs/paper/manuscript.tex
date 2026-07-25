@@ -437,9 +437,12 @@ not a finding.
 \paragraph{Power analysis.} In the synthetic cohort the subspace effect
 ($+0.0028$) needs $\sim\!4{,}150$ cases for $80\%$ power and the single-vector
 effect ($+0.0007$) $\sim\!23{,}000$, clinically undetectable \emph{there}. We do
-\emph{not} transport ``clinically undetectable'' to the real cohorts, whose
-$+0.036$--$0.051$ estimates are compatible with a detectable effect we are simply
-underpowered to confirm.
+\emph{not} transport ``clinically undetectable'' to the real cohorts, which are a
+separate regime. On the corrected substrate their estimates are $+0.009$ (Roney,
+$n=100$) and $+0.012$ (combined, $n=182$), with intervals that contain zero and
+exclude the $0.05$ gate. An earlier version read the then-current
+$+0.036$--$0.051$ as compatible with a detectable effect we were underpowered to
+confirm; those estimates are superseded and that reading no longer holds.
 
 \subsection{Region definition and the patient-level reduction}
 \label{sec:regions}
@@ -537,9 +540,13 @@ Roney.
 \paragraph{Control 1: repairing the substrate.} Opening the orifices and
 supplying a spatially varying fibre field, in a $2\times2$ design over all $82$
 subjects (Fig.~\ref{fig:substrate}a), raises inducibility from $6/82$ to
-$14/82$. The two act super-additively, each converting about four subjects alone
-and eight together, which is consistent with reentry needing both an anatomical
-obstacle and anisotropic heterogeneity. We do not present this as a fix. The
+$14/82$. The two act super-additively: either repair alone converts two subjects
+($6\to8$ in both single-factor arms), yet together they convert eight, so the
+interaction term is $+4$ and is larger than either simple effect. We resist the
+obvious mechanistic reading of that interaction --- that reentry needs both an
+anatomical obstacle and anisotropic heterogeneity --- because Control~2 below
+shows the fibre factor does not move the rate at all on a cohort that has a real
+fibre field. We do not present this as a fix. The
 strongest contrast does not reach paired significance (McNemar exact
 $p=0.077$), it closes only $39\%$ of the distance to Roney, and only two of the
 original six positives survive the repair. The varying fibre field is moreover a
@@ -906,9 +913,12 @@ only $2$ of its $6$ original positives. That compounds the mesh-convergence
 instability above, where just $7/24$ subjects were consistent across six
 resolutions. Non-differential label noise biases incremental AUC toward zero, so the
 null we report is partly a statement about the labeller and not only about SFI.
-\item $\sim\!30$ DeLong comparisons were run; the one positive
-(\code{fibrosis\_vs\_+SFI}, $p=0.009$) is a pre-specified secondary, suggestive
-not confirmatory.
+\item $\sim\!30$ DeLong comparisons were run and, on the corrected substrate,
+\emph{none} is significant at any threshold. The smallest is $p=0.121$
+(\code{fibrosis\_vs\_+SFI}, gradient boosting, UW), and that one sits on a base AUC
+of $0.562$ with eight positives, so it is uninformative rather than borderline. An
+earlier version reported this family's combined estimate as the study's one
+positive at $p=0.009$; it is withdrawn (Section~ef{sec:corrections}).
 \item $\rhoval^\ast$ and the random-geometric gap exponents are empirical; only
 the real atrial 2-manifold cleanly matches the Weyl exponent.
 \end{enumerate}
