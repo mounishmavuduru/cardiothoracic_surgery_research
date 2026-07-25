@@ -7,6 +7,12 @@ outputs/
 .ipynb_checkpoints/
 data/
 
+# Human-subject outcome data (shared under restricted terms; never redistribute).
+# data/ is already ignored above; these are belt-and-braces rules so a stray copy
+# anywhere in the tree cannot be committed.
+**/af_recurrence_outcomes*.csv
+**/*_outcomes_shareable.csv
+
 # Coq compiled artifacts
 *.vo
 *.vok

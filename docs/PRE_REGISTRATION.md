@@ -169,3 +169,124 @@ half-field cross-field inducer (anchors substrate-independent geometric reentry)
   grouped **and** naive AUC; bootstrap/null resamples **≥ 10 000**.
 - **Accepted null (unchanged):** SFI ≡ re-encoded fibrosis is an explicitly reportable
   outcome; we will not tune to beat the endpoint.
+
+---
+
+## 8. Real *clinical outcome* addendum — FROZEN 2026-07-24, before any label-linked analysis
+
+**What changed.** On 2026-07-24 Prof. Patrick M. Boyle (UW) shared per-patient 2-year
+post-ablation arrhythmia-recurrence outcomes for the 82-patient UW cohort whose LA meshes
+are public on Dryad (`10.5061/dryad.kkwh70sg0`). `docs/DATASETS.md:49` had recorded these
+labels as **withheld**; that is no longer true. Sections 1–7 govern *simulator* endpoints
+and are unchanged. This section governs the **clinical** endpoint and is written before any
+feature↔outcome association has been computed, inspected, or plotted.
+
+**Integrity statement.** At the time of freezing, the only properties of the outcome column
+that have been examined are its **marginal counts** and their split across the publisher's
+predefined cohorts (below). Marginals are required to compute power and are not a
+feature–outcome association. No SFI value, no fibrosis value, and no mesh-derived quantity
+has been placed alongside the outcome column.
+
+### 8.1 Data provenance and custody
+- **Labels:** `Patient_ID, Recurrence_Rhythm_2yr` ∈ {`NR`, `AF`, `AFL`}, n = 82,
+  IDs 1–15 and 21–87. `NR` = no recurrence within the 2-year follow-up; `AF`/`AFL` = first
+  documented recurrence rhythm was fibrillation / flutter respectively.
+- **Anatomy:** the matching public Dryad meshes (`ID001–ID015` holdout, `ID021–ID087`
+  training; pre- and post-ablation per patient). The ID sets match the label file exactly.
+- **Custody:** the label file is **human-subject outcome data shared under restricted
+  terms**, not covered by the CC0 that applies to the meshes. It lives under the gitignored
+  `data/` tree and is additionally protected by explicit `.gitignore` rules. It **will not be
+  committed, redistributed, or included in any release artifact** unless Prof. Boyle
+  explicitly permits it in writing. Derived aggregate statistics may be published; the
+  per-patient column may not.
+
+### 8.2 Observed marginals (the only thing inspected pre-freeze)
+
+| Cohort | n | NR | AF | AFL | recurrence |
+|---|---|---|---|---|---|
+| All | 82 | 34 | 35 | 13 | 48 (58.5 %) |
+| Dryad holdout `ID001–015` | 15 | 7 | 6 | 2 | 8 (53.3 %) |
+| Dryad training `ID021–087` | 67 | 27 | 29 | 11 | 40 (59.7 %) |
+
+### 8.3 Power — computed from these marginals *before* the analysis
+Paired binormal ROC simulation (4 000 replicates, DeLong two-sided, α = 0.05, n₁ = 48,
+n₀ = 34), sweeping the shared-noise correlation `r` between the nested baseline and
+baseline+SFI scores. Power to detect an incremental ΔAUC:
+
+| base AUC | r | Δ=+0.03 | Δ=+0.05 | Δ=+0.07 | Δ=+0.10 | Δ=+0.15 |
+|---|---|---|---|---|---|---|
+| 0.70 | 0.80 | 0.11 | 0.24 | 0.43 | 0.75 | 0.99 |
+| 0.75 | 0.80 | 0.12 | 0.27 | 0.49 | 0.82 | 0.99 |
+| 0.70 | 0.50 | 0.09 | 0.13 | 0.22 | 0.41 | 0.79 |
+| 0.75 | 0.50 | 0.08 | 0.14 | 0.26 | 0.48 | 0.87 |
+
+**Consequence, stated in advance.** At n = 82 this study has roughly **25 % power** at the
+ΔAUC ≥ 0.05 threshold used for the simulator endpoint in §2/§7.5. That threshold is
+therefore **not reused here** — at this sample size it would be effectively unfalsifiable,
+and a null against it would carry almost no information. The **minimum detectable effect is
+ΔAUC ≈ 0.10** (optimistic, strongly correlated nested models) to **≈ 0.15** (conservative).
+A null result below that band will be reported as **inconclusive — underpowered**, never as
+evidence that SFI adds nothing. This is fixed now precisely so it cannot be renegotiated
+after seeing the answer.
+
+### 8.4 Primary endpoint (clinical)
+Binary outcome `recurrence = (rhythm ≠ NR)`, i.e. AF and AFL both count as events — matching
+the source study's definition of recurrent atrial arrhythmia.
+
+Features are computed from the **pre-ablation mesh only** (the clinically useful question is
+prediction from baseline substrate; the post-ablation mesh encodes the delivered treatment).
+
+- **Baseline set:** the §7.5 competitors recomputed on UW anatomy — `fibrosis_burden`,
+  `fibrosis_spatial_entropy`, `fibrosis_patch_size`, `min_cut_value`,
+  `percolation_threshold`, `lambda2_alone`.
+- **Test set:** baseline **+ per-region SFI** as a strict add-on.
+- **Estimation:** patient-held-out cross-validation over all 82 (each patient its own group),
+  nested model selection, logistic regression and gradient-boosted trees, ≥ 10 000 bootstrap
+  resamples. All 82 are used for the primary because §8.3 shows the study is already at the
+  edge of detectability; splitting further would forfeit power we cannot spare.
+- **Declared met iff:** ΔAUC ≥ 0.10 **and** DeLong paired p < 0.05 (Holm-adjusted, §8.7).
+- SFI parameters remain the §7.3 frozen values. SFI is closed-form and never fitted to the
+  outcome, so it contributes no tuning degrees of freedom.
+
+### 8.5 Pre-specified secondary analyses (fixed list, no additions later)
+1. **Publisher's split, honoured.** Fit on `ID021–087` (n = 67), evaluate **once** on the
+   untouched `ID001–015` (n = 15). With 8 events this is **descriptive only** — reported with
+   a confidence interval and explicitly not powered. Its value is that the split was chosen
+   by someone else, before we existed.
+2. **Ablation-induced spectral change.** Δ(SFI) = post-ablation − pre-ablation, testing
+   whether the lesion set's effect on spectral fragility predicts recurrence. This is the
+   SFI-native analogue of the source study's finding that post-ablation substrate carries
+   signal.
+3. **Mechanism split (exploratory).** Among the 48 recurrers, does SFI separate `AF` (35)
+   from `AFL` (13)? SFI indexes distributed reentry vulnerability, whereas flutter is
+   typically macro-reentrant and often right-atrial — so a *negative* result here is
+   mechanistically informative. Labelled exploratory; n = 13 in the smaller arm.
+
+### 8.6 Known substrate limitations of the UW meshes — disclosed before analysis
+- **Fibrosis is categorical, not continuous.** UW files carry a per-*cell* `elemTag`
+  (`{111:0.0, 115:1.0, 164:0.5, 199:1.0}`, `uw_boyle.py:68`) averaged onto vertices, whereas
+  the Roney cohort carries continuous LGE `IIR`. The fibrosis competitors are therefore
+  **measured more coarsely here than in §7.5**.
+- **This biases the comparison toward SFI**, because a degraded baseline is easier to beat.
+  Mitigation, fixed now: we will report the absolute AUC of the fibrosis-only baseline and
+  compare it against the source study's published fibrosis-derived performance. If our
+  baseline is materially weaker than theirs, any ΔAUC we observe will be reported as
+  **confounded by baseline degradation**, not as a win for SFI.
+- **UAC is a PCA surrogate**, not anatomical (`uw_boyle.py:180-192`), so any region-based or
+  localization claim on this cohort is weaker than on Roney and will be labelled as such.
+- **Benchmark context.** The source study reports ROC AUC **0.80 ± 0.04** using 89 features
+  including EHR/clinical risk factors that we do not hold. We are **not** claiming to beat
+  that model, and will not present our mesh-only AUC as if it were comparable.
+
+### 8.7 Multiplicity, stopping rule, and accepted null
+- **Three** confirmatory tests are pre-specified (§8.4 primary, §8.5.1, §8.5.2). Holm
+  correction across those three. §8.5.3 is exploratory and reported unadjusted, labelled.
+- **The confirmatory analysis is run once.** The pipeline will be built, unit-tested, and
+  dry-run end-to-end on *shuffled* labels before the real column is ever joined. Any change
+  after the real join is a logged, dated deviation in `notebooks/lab_notebook.md` and
+  demotes the affected test to exploratory.
+- **Accepted reportable null (unchanged in spirit).** "SFI adds no incremental clinical
+  predictive value beyond fibrosis and geometry" is an explicitly accepted, publishable
+  outcome. Given §8.3, the most likely honest verdict is *inconclusive at this sample size*,
+  and we commit in advance to reporting exactly that rather than reaching for a subgroup
+  that reaches significance.

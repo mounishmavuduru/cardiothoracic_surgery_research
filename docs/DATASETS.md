@@ -40,13 +40,21 @@ Real over SSM/Variant (100 000 variants of one shape ≈ 1 effective group — s
 
 ## Real clinical-outcome labels (recurrence / POAF) — availability audit (2026-07-23)
 
+> **UPDATE 2026-07-24 — superseded for the UW/Boyle row.** Prof. Patrick M. Boyle responded to
+> the outreach request and shared the per-patient 2-year recurrence outcomes for all 82 UW
+> patients (`NR` / `AF` / `AFL`, keyed to the public Dryad mesh IDs). The verdict below —
+> "no public dataset ties usable atrial geometry to a real clinical outcome" — remains true
+> of *public downloads*, but is no longer true of this project: the author-request path (1)
+> worked. The labels are restricted-use and are **not** redistributable; see
+> `docs/PRE_REGISTRATION.md` §8 for the custody terms and the frozen analysis plan.
+
 **Verdict: no public dataset ties usable atrial geometry to a real clinical outcome label in a
 single open deposit.** Mesh deposits are released *because* outcome labels were stripped for
 confidentiality. Implications for a "predict real recurrence" pivot: not feasible off-the-shelf.
 
 | dataset | geometry | real outcome in public download? | note |
 |---|---|---|---|
-| UW/Boyle Dryad `10.5061/dryad.kkwh70sg0` | 82 pts, LGE meshes ✓ | **NO** — recurrence WITHHELD ("protecting confidential patient information"); code repo ships an empty template | paper Comms Med 2025 `10.1038/s43856-025-01058-4`, model AUROC 0.80 |
+| UW/Boyle Dryad `10.5061/dryad.kkwh70sg0` | 82 pts, LGE meshes ✓ | **NO in public download** — recurrence withheld ("protecting confidential patient information"); code repo ships an empty template. **Obtained 2026-07-24 by author request** (restricted use, not redistributable) | paper Comms Med 2025 `10.1038/s43856-025-01058-4`, model AUROC 0.80 |
 | Roney/CEMRG 100 LA models (cemrg.com) | 100 pts, meshes+fibres+UAC ✓ | **NO in download**, but outcome EXISTS in study (34/99 recurred, 1 yr) | best target for an author **request**; paper `10.1161/CIRCEP.121.010253` (PMC8845531) |
 | UK Biobank cardiac MRI | LA from cine CMR (no LGE/fibrosis) | **YES** — incident AF/stroke via linked records | application-gated + fee; different question (new-onset, not recurrence/POAF) |
 | AtriaSeg 2018, LAScarQS 2022 | LGE + masks/scar ✓ | **NO** — segmentation benchmarks only | — |
