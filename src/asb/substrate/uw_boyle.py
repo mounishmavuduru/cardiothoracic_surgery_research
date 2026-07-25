@@ -293,8 +293,10 @@ def load_uw_mesh(
     # anisotropic (along 1.0 / cross 0.3) relative to the local fibre direction: with one
     # global direction the anisotropy becomes a fixed coordinate bias with no anatomical
     # meaning, and all fibre heterogeneity -- a primary substrate for unidirectional block
-    # and hence reentry initiation -- disappears. Leading suspect for this cohort's
-    # anomalous ~7% inducibility against ~32% on Roney, which ships real fibre fields.
+    # and hence reentry initiation -- disappears. Measured contribution: see
+    # results/uw_substrate_ablation.json. Repairing this AND the sealed orifices together
+    # lifts inducibility 6/82 -> 14/82, but that is not significant (McNemar p=0.077) and
+    # closes only 39% of the gap to Roney's 32.3%, so it is a contributor, not the cause.
     fib_cell = fib_cell_raw
     if fib_cell is None:
         fibres = np.tile(np.array([1.0, 0.0, 0.0]), (n, 1))

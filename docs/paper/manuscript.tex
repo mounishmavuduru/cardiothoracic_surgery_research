@@ -537,10 +537,11 @@ the no-AF-control floor ($5\%$, Oral et al.\ 2008~\cite{oral2008}) and the
 AF/aggressive ceiling ($51\%$, Kawai et al.\ 2019~\cite{kawai2019}), consistent
 with $\sim\!42\%$ post-ablation (Liu et al.\ 2020~\cite{liu2020}). The UW
 $\sim\!7\%$ is at/below the control floor for a cohort that \emph{is} AF patients.
-We flag it as anomalous and attribute it to the substrate rather than to biology:
-the released UW meshes carry a constant fibre vector, which removes the fibre
-heterogeneity that seeds unidirectional block, and the in-silico inducer is
-under-aggressive. This is a base-rate
+We flag it as anomalous and attribute it to the substrate rather than to biology.
+Two substrate defects are documented in the Limitations, and repairing both lifts
+the rate to $17.1\%$ --- more than double, though still short of the $32.3\%$ seen
+on fibre-carrying anatomy, so the anomaly is only partly accounted for and the
+in-silico inducer may also be under-aggressive. This is a base-rate
 \emph{plausibility check, not clinical validation}.
 
 \subsection{Resolution convergence: the labeller does not converge in the tested window}
@@ -641,14 +642,24 @@ AUCs are coarse-mesh-provisional; the \emph{relative} comparison scores the same
 labels in both arms, so this bias cancels there.
 \item Simulator, not clinical, labels: the pre-registered openCARP ground truth
 was substituted with monodomain Mitchell--Schaeffer, a logged deviation.
-\item The UW cohort uses a PCA-surrogate universal-atrial-coordinate map, and the
-released meshes carry a \emph{degenerate} fibre field: the \code{VECTORS fiber}
-array is present but equals a constant $(1,0,0)$ for every element of all $164$
-meshes, so the anisotropy our solver applies is a fixed coordinate bias rather
-than anatomy. Since fibre heterogeneity is a principal substrate for
-unidirectional block, this is the most likely reason the cohort is only
-$\sim\!7\%$ inducible, at or below the no-AF-control clinical floor. Its
-predictive test is therefore uninformative about SFI.
+\item The UW cohort uses a PCA-surrogate universal-atrial-coordinate map, and its
+substrate carries two defects we identified only after the fact. The released
+meshes have a \emph{degenerate} fibre field --- the \code{VECTORS fiber} array is
+present but equals a constant $(1,0,0)$ for every element of all $164$ meshes, so
+the anisotropy the solver applies is a fixed coordinate bias rather than anatomy.
+Separately, we had been mapping element tag $164$ to half-fibrotic tissue when it
+is in fact the set of caps over the four pulmonary veins and the mitral valve
+(five components, each a topological disc; zero adjacency to fibrotic elements;
+removing them leaves Euler characteristic $-3$, i.e.\ exactly five openings), so
+activation could cross those orifices instead of circling them. Repairing both
+raises inducibility from $6/82$ to $14/82$ ($7.3\%\to17.1\%$), the two acting
+super-additively. We are careful not to overclaim this: the change does not reach
+paired significance (McNemar exact $p=0.077$), it closes only $39\%$ of the gap to
+the fibre-carrying Roney cohort ($32.3\%$), and only $2$ of the original $6$
+positives survive the repair, so per-subject verdicts churn heavily. The residual
+is unexplained; the categorical three-level fibrosis of these meshes, against
+Roney's continuous $276$--$1071$-level LGE field, is the obvious remaining
+suspect. Either way the cohort's predictive test is uninformative about SFI.
 \item $\sim\!30$ DeLong comparisons were run; the one positive
 (\code{fibrosis\_vs\_+SFI}, $p=0.009$) is a pre-specified secondary, suggestive
 not confirmatory.

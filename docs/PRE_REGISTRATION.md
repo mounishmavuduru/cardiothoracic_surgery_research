@@ -289,21 +289,44 @@ prediction from baseline substrate; the post-ablation mesh encodes the delivered
   **The confirmatory analysis will not be run until the tag semantics are confirmed with the
   data provider** (`docs/outreach/boyle_reply_followup.md`, Q2). This correction is being made
   blind to the outcome column, which has still never been joined to any feature.
-- **Amendment 2026-07-24 (b): the released fibre field is degenerate, and this probably
-  explains the cohort's anomalous inducibility.** All 164 meshes carry a `VECTORS fiber`
+- **Amendment 2026-07-24 (b): the released fibre field is degenerate.** All 164 meshes carry a `VECTORS fiber`
   array whose value is a constant `(1, 0, 0)` for every element — measured mean directional
   spread is exactly `0.0`. `edge_weights_from_fibres` makes conduction anisotropic
   (along 1.0 / cross 0.3) *relative to the local fibre direction*, so a single global
   direction reduces the anisotropy to a fixed coordinate bias with no anatomical content and
   removes all fibre heterogeneity — a principal substrate for unidirectional block and hence
-  for reentry initiation. This is the leading explanation for the UW cohort scoring
-  **6/82 (7.3 %) inducible** against **20/62 (32.3 %)** on Roney, which ships real
-  `fiber_endo`/`fiber_epi`, under an identical frozen protocol. `uw_boyle.py` now measures
-  the spread, records `fibres_are_degenerate` in mesh metadata, and raises a `RuntimeWarning`,
-  so the condition can no longer pass unnoticed. Note this is **upstream data**, not a local
-  bug: the defect is in the public Dryad deposit. It does not affect the §8 clinical endpoint,
-  which uses real outcomes and needs no simulator label — but it does affect every existing
-  in-silico result that includes UW subjects.
+  for reentry initiation. `uw_boyle.py` now measures the spread, records
+  `fibres_are_degenerate` in mesh metadata, and raises a `RuntimeWarning`, so the condition can
+  no longer pass unnoticed. Note this is **upstream data**, not a local bug: the defect is in
+  the public Dryad deposit. It does not affect the §8 clinical endpoint, which uses real
+  outcomes and needs no simulator label — but it does affect every existing in-silico result
+  that includes UW subjects.
+- **Amendment 2026-07-24 (c): measured attribution — both defects matter, neither explains the
+  anomaly.** `scripts/uw_substrate_ablation.py` ran the 2×2 (orifices sealed/open × fibres
+  constant/varying) over all 82 subjects under the otherwise-frozen protocol;
+  `scripts/analyse_substrate_ablation.py` does the paired statistics. Results:
+
+  | | constant fibres | varying fibres |
+  |---|---|---|
+  | orifices sealed (as released) | **6/82 (7.3 %)** | 8/82 (9.8 %) |
+  | orifices opened | 8/82 (9.8 %) | **14/82 (17.1 %)** |
+
+  The sealed/constant arm **reproduces the recorded 6/82 exactly**, which validates the setup.
+  Each defect alone converts ~4 subjects; together they convert 8, so the two are
+  **super-additive** (interaction +4) — consistent with reentry needing both an anatomical
+  obstacle and anisotropic heterogeneity to anchor.
+
+  Three cautions are recorded so that no stronger claim is made later than the data supports:
+  (i) **the change is not significant** — the strongest contrast, sealed/constant vs
+  open/varying, gives McNemar exact **p = 0.077**; (ii) it closes only **39 %** of the gap to
+  Roney's 32.3 %, so most of the discrepancy is still unexplained, with the categorical
+  three-level fibrosis (against Roney's continuous 276–1071-level IIR) the obvious remaining
+  suspect; (iii) **only 2 of the original 6 positives survive the repair** while 12 new ones
+  appear, i.e. per-subject verdicts churn heavily — consistent with the labeller instability
+  already documented in the mesh-convergence study (only 7/24 subjects consistent across six
+  resolution tiers). An earlier draft of amendment (b) called the fibre defect "the leading
+  explanation" for the 7 %. The measurement does not support that phrasing and it has been
+  withdrawn here and in the manuscript.
 - **Benchmark context.** The source study reports ROC AUC **0.80 ± 0.04** using 89 features
   including EHR/clinical risk factors that we do not hold. We are **not** claiming to beat
   that model, and will not present our mesh-only AUC as if it were comparable.

@@ -1,0 +1,3371 @@
+{
+  "description": "2x2 substrate ablation isolating why the UW cohort is ~7% inducible",
+  "reference_roney": {
+    "n": 62,
+    "n_inducible": 20,
+    "inducible_fraction": 0.3225806451612903
+  },
+  "frozen_arm": "A_caps_kept_constant_fibres",
+  "recorded_frozen_result": {
+    "n": 82,
+    "n_inducible": 6
+  },
+  "caveat": "the 'varying' fibre field is a non-anatomical probe, not a correction",
+  "summary": {
+    "A_caps_kept_constant_fibres": {
+      "n": 82,
+      "n_inducible": 6,
+      "inducible_fraction": 0.07317073170731707,
+      "mean_fibrosis": 0.3067630102417873,
+      "mean_fibre_spread": 0.0
+    },
+    "B_caps_dropped_constant_fibres": {
+      "n": 82,
+      "n_inducible": 8,
+      "inducible_fraction": 0.0975609756097561,
+      "mean_fibrosis": 0.24824763702023642,
+      "mean_fibre_spread": 0.0
+    },
+    "C_caps_kept_varying_fibres": {
+      "n": 82,
+      "n_inducible": 8,
+      "inducible_fraction": 0.0975609756097561,
+      "mean_fibrosis": 0.3067630102417873,
+      "mean_fibre_spread": 0.6616562426659626
+    },
+    "D_caps_dropped_varying_fibres": {
+      "n": 82,
+      "n_inducible": 14,
+      "inducible_fraction": 0.17073170731707318,
+      "mean_fibrosis": 0.24824763702023642,
+      "mean_fibre_spread": 0.6667618783744383
+    }
+  },
+  "rows": [
+    {
+      "arm": "A_caps_kept_constant_fibres",
+      "subject": "uw_ID001_PreAbl_rev1.vtk",
+      "n_nodes": 2276,
+      "inducible": false,
+      "sustained_ms": 296.95000000000005,
+      "fibrosis_mean": 0.17384844970762864,
+      "fibre_spread": 0.0,
+      "seconds": 15.0
+    },
+    {
+      "arm": "A_caps_kept_constant_fibres",
+      "subject": "uw_ID002_PreAbl_rev1.vtk",
+      "n_nodes": 2200,
+      "inducible": false,
+      "sustained_ms": 261.0,
+      "fibrosis_mean": 0.22483199007373125,
+      "fibre_spread": 0.0,
+      "seconds": 14.5
+    },
+    {
+      "arm": "A_caps_kept_constant_fibres",
+      "subject": "uw_ID003_PreAbl_rev1.vtk",
+      "n_nodes": 2140,
+      "inducible": false,
+      "sustained_ms": 312.04999999999995,
+      "fibrosis_mean": 0.269776579389151,
+      "fibre_spread": 0.0,
+      "seconds": 14.0
+    },
+    {
+      "arm": "A_caps_kept_constant_fibres",
+      "subject": "uw_ID004_PreAbl_rev1.vtk",
+      "n_nodes": 2131,
+      "inducible": false,
+      "sustained_ms": 346.60000000000014,
+      "fibrosis_mean": 0.14195208338268883,
+      "fibre_spread": 0.0,
+      "seconds": 14.4
+    },
+    {
+      "arm": "A_caps_kept_constant_fibres",
+      "subject": "uw_ID005_PreAbl_rev1.vtk",
+      "n_nodes": 2149,
+      "inducible": true,
+      "sustained_ms": 999.95,
+      "fibrosis_mean": 0.4798002535055126,
+      "fibre_spread": 0.0,
+      "seconds": 21.4
+    },
+    {
+      "arm": "A_caps_kept_constant_fibres",
+      "subject": "uw_ID006_PreAbl_rev1.vtk",
+      "n_nodes": 2003,
+      "inducible": false,
+      "sustained_ms": 443.45000000000005,
+      "fibrosis_mean": 0.3811749272888093,
+      "fibre_spread": 0.0,
+      "seconds": 14.8
+    },
+    {
+      "arm": "A_caps_kept_constant_fibres",
+      "subject": "uw_ID007_PreAbl_rev1.vtk",
+      "n_nodes": 2058,
+      "inducible": false,
+      "sustained_ms": 498.0500000000002,
+      "fibrosis_mean": 0.3839045269524968,
+      "fibre_spread": 0.0,
+      "seconds": 15.9
+    },
+    {
+      "arm": "A_caps_kept_constant_fibres",
+      "subject": "uw_ID008_PreAbl_rev1.vtk",
+      "n_nodes": 2075,
+      "inducible": false,
+      "sustained_ms": 280.25,
+      "fibrosis_mean": 0.2403447858882502,
+      "fibre_spread": 0.0,
+      "seconds": 13.6
+    },
+    {
+      "arm": "A_caps_kept_constant_fibres",
+      "subject": "uw_ID009_PreAbl_rev1.vtk",
+      "n_nodes": 2092,
+      "inducible": false,
+      "sustained_ms": 236.1500000000001,
+      "fibrosis_mean": 0.22143046809502087,
+      "fibre_spread": 0.0,
+      "seconds": 12.6
+    },
+    {
+      "arm": "A_caps_kept_constant_fibres",
+      "subject": "uw_ID010_PreAbl_rev1.vtk",
+      "n_nodes": 2237,
+      "inducible": false,
+      "sustained_ms": 422.6500000000001,
+      "fibrosis_mean": 0.3204478224502065,
+      "fibre_spread": 0.0,
+      "seconds": 15.8
+    },
+    {
+      "arm": "A_caps_kept_constant_fibres",
+      "subject": "uw_ID011_PreAbl_rev1.vtk",
+      "n_nodes": 2092,
+      "inducible": false,
+      "sustained_ms": 525.45,
+      "fibrosis_mean": 0.32816032535191136,
+      "fibre_spread": 0.0,
+      "seconds": 15.4
+    },
+    {
+      "arm": "A_caps_kept_constant_fibres",
+      "subject": "uw_ID012_PreAbl_rev1.vtk",
+      "n_nodes": 2129,
+      "inducible": false,
+      "sustained_ms": 349.45000000000005,
+      "fibrosis_mean": 0.3596031656269095,
+      "fibre_spread": 0.0,
+      "seconds": 14.3
+    },
+    {
+      "arm": "A_caps_kept_constant_fibres",
+      "subject": "uw_ID013_PreAbl_rev1.vtk",
+      "n_nodes": 2133,
+      "inducible": false,
+      "sustained_ms": 345.35000000000014,
+      "fibrosis_mean": 0.3121081955352665,
+      "fibre_spread": 0.0,
+      "seconds": 14.1
+    },
+    {
+      "arm": "A_caps_kept_constant_fibres",
+      "subject": "uw_ID014_PreAbl_rev1.vtk",
+      "n_nodes": 2130,
+      "inducible": false,
+      "sustained_ms": 415.10000000000014,
+      "fibrosis_mean": 0.37896788927920827,
+      "fibre_spread": 0.0,
+      "seconds": 14.5
+    },
+    {
+      "arm": "A_caps_kept_constant_fibres",
+      "subject": "uw_ID015_PreAbl_rev1.vtk",
+      "n_nodes": 2177,
+      "inducible": false,
+      "sustained_ms": 243.9000000000001,
+      "fibrosis_mean": 0.24939625090626677,
+      "fibre_spread": 0.0,
+      "seconds": 14.0
+    },
+    {
+      "arm": "A_caps_kept_constant_fibres",
+      "subject": "uw_ID021_PreAbl_rev1.vtk",
+      "n_nodes": 2086,
+      "inducible": false,
+      "sustained_ms": 368.4000000000001,
+      "fibrosis_mean": 0.2992241566905974,
+      "fibre_spread": 0.0,
+      "seconds": 14.2
+    },
+    {
+      "arm": "A_caps_kept_constant_fibres",
+      "subject": "uw_ID022_PreAbl_rev1.vtk",
+      "n_nodes": 2109,
+      "inducible": false,
+      "sustained_ms": 291.6500000000001,
+      "fibrosis_mean": 0.42221567045277236,
+      "fibre_spread": 0.0,
+      "seconds": 14.0
+    },
+    {
+      "arm": "A_caps_kept_constant_fibres",
+      "subject": "uw_ID023_PreAbl_rev1.vtk",
+      "n_nodes": 2271,
+      "inducible": false,
+      "sustained_ms": 214.10000000000002,
+      "fibrosis_mean": 0.1718687119829931,
+      "fibre_spread": 0.0,
+      "seconds": 13.1
+    },
+    {
+      "arm": "A_caps_kept_constant_fibres",
+      "subject": "uw_ID024_PreAbl_rev1.vtk",
+      "n_nodes": 2156,
+      "inducible": false,
+      "sustained_ms": 307.10000000000014,
+      "fibrosis_mean": 0.3605241651707071,
+      "fibre_spread": 0.0,
+      "seconds": 15.1
+    },
+    {
+      "arm": "A_caps_kept_constant_fibres",
+      "subject": "uw_ID025_PreAbl_rev1.vtk",
+      "n_nodes": 2149,
+      "inducible": false,
+      "sustained_ms": 339.25,
+      "fibrosis_mean": 0.22758600629886844,
+      "fibre_spread": 0.0,
+      "seconds": 15.9
+    },
+    {
+      "arm": "A_caps_kept_constant_fibres",
+      "subject": "uw_ID026_PreAbl_rev1.vtk",
+      "n_nodes": 2197,
+      "inducible": false,
+      "sustained_ms": 258.80000000000007,
+      "fibrosis_mean": 0.2637897548187755,
+      "fibre_spread": 0.0,
+      "seconds": 17.7
+    },
+    {
+      "arm": "A_caps_kept_constant_fibres",
+      "subject": "uw_ID027_PreAbl_rev1.vtk",
+      "n_nodes": 2166,
+      "inducible": false,
+      "sustained_ms": 243.55000000000007,
+      "fibrosis_mean": 0.2457818117981351,
+      "fibre_spread": 0.0,
+      "seconds": 26.3
+    },
+    {
+      "arm": "A_caps_kept_constant_fibres",
+      "subject": "uw_ID028_PreAbl_rev1.vtk",
+      "n_nodes": 2134,
+      "inducible": false,
+      "sustained_ms": 385.4000000000001,
+      "fibrosis_mean": 0.296847567475056,
+      "fibre_spread": 0.0,
+      "seconds": 28.2
+    },
+    {
+      "arm": "A_caps_kept_constant_fibres",
+      "subject": "uw_ID029_PreAbl_rev1.vtk",
+      "n_nodes": 2160,
+      "inducible": false,
+      "sustained_ms": 288.35000000000014,
+      "fibrosis_mean": 0.2644425194379138,
+      "fibre_spread": 0.0,
+      "seconds": 27.4
+    },
+    {
+      "arm": "A_caps_kept_constant_fibres",
+      "subject": "uw_ID030_PreAbl_rev1.vtk",
+      "n_nodes": 2103,
+      "inducible": false,
+      "sustained_ms": 409.29999999999995,
+      "fibrosis_mean": 0.34840594853713824,
+      "fibre_spread": 0.0,
+      "seconds": 27.6
+    },
+    {
+      "arm": "A_caps_kept_constant_fibres",
+      "subject": "uw_ID031_PreAbl_rev1.vtk",
+      "n_nodes": 2294,
+      "inducible": true,
+      "sustained_ms": 911.8000000000002,
+      "fibrosis_mean": 0.3574313541732751,
+      "fibre_spread": 0.0,
+      "seconds": 35.6
+    },
+    {
+      "arm": "A_caps_kept_constant_fibres",
+      "subject": "uw_ID032_PreAbl_rev1.vtk",
+      "n_nodes": 2219,
+      "inducible": false,
+      "sustained_ms": 314.79999999999995,
+      "fibrosis_mean": 0.35460451726363534,
+      "fibre_spread": 0.0,
+      "seconds": 27.6
+    },
+    {
+      "arm": "A_caps_kept_constant_fibres",
+      "subject": "uw_ID033_PreAbl_rev1.vtk",
+      "n_nodes": 2151,
+      "inducible": false,
+      "sustained_ms": 302.85000000000014,
+      "fibrosis_mean": 0.3398278345683208,
+      "fibre_spread": 0.0,
+      "seconds": 23.5
+    },
+    {
+      "arm": "A_caps_kept_constant_fibres",
+      "subject": "uw_ID034_PreAbl_rev1.vtk",
+      "n_nodes": 2039,
+      "inducible": false,
+      "sustained_ms": 302.70000000000005,
+      "fibrosis_mean": 0.1703516054229908,
+      "fibre_spread": 0.0,
+      "seconds": 14.4
+    },
+    {
+      "arm": "A_caps_kept_constant_fibres",
+      "subject": "uw_ID035_PreAbl_rev1.vtk",
+      "n_nodes": 2195,
+      "inducible": false,
+      "sustained_ms": 316.54999999999995,
+      "fibrosis_mean": 0.15753642523998976,
+      "fibre_spread": 0.0,
+      "seconds": 15.0
+    },
+    {
+      "arm": "A_caps_kept_constant_fibres",
+      "subject": "uw_ID036_PreAbl_rev1.vtk",
+      "n_nodes": 2265,
+      "inducible": false,
+      "sustained_ms": 343.85000000000014,
+      "fibrosis_mean": 0.2768567644052905,
+      "fibre_spread": 0.0,
+      "seconds": 16.1
+    },
+    {
+      "arm": "A_caps_kept_constant_fibres",
+      "subject": "uw_ID037_PreAbl_rev1.vtk",
+      "n_nodes": 2189,
+      "inducible": false,
+      "sustained_ms": 410.60000000000014,
+      "fibrosis_mean": 0.3938203414879551,
+      "fibre_spread": 0.0,
+      "seconds": 16.3
+    },
+    {
+      "arm": "A_caps_kept_constant_fibres",
+      "subject": "uw_ID038_PreAbl_rev1.vtk",
+      "n_nodes": 2268,
+      "inducible": false,
+      "sustained_ms": 465.04999999999995,
+      "fibrosis_mean": 0.393442106079818,
+      "fibre_spread": 0.0,
+      "seconds": 17.1
+    },
+    {
+      "arm": "A_caps_kept_constant_fibres",
+      "subject": "uw_ID039_PreAbl_rev1.vtk",
+      "n_nodes": 2250,
+      "inducible": false,
+      "sustained_ms": 333.0,
+      "fibrosis_mean": 0.14830480341792948,
+      "fibre_spread": 0.0,
+      "seconds": 16.1
+    },
+    {
+      "arm": "A_caps_kept_constant_fibres",
+      "subject": "uw_ID040_PreAbl_rev1.vtk",
+      "n_nodes": 2001,
+      "inducible": false,
+      "sustained_ms": 439.95000000000005,
+      "fibrosis_mean": 0.35597724821341165,
+      "fibre_spread": 0.0,
+      "seconds": 15.7
+    },
+    {
+      "arm": "A_caps_kept_constant_fibres",
+      "subject": "uw_ID041_PreAbl_rev1.vtk",
+      "n_nodes": 2015,
+      "inducible": false,
+      "sustained_ms": 337.95000000000005,
+      "fibrosis_mean": 0.2511902537062875,
+      "fibre_spread": 0.0,
+      "seconds": 14.6
+    },
+    {
+      "arm": "A_caps_kept_constant_fibres",
+      "subject": "uw_ID042_PreAbl_rev1.vtk",
+      "n_nodes": 2125,
+      "inducible": false,
+      "sustained_ms": 496.75,
+      "fibrosis_mean": 0.4330635191068023,
+      "fibre_spread": 0.0,
+      "seconds": 16.1
+    },
+    {
+      "arm": "A_caps_kept_constant_fibres",
+      "subject": "uw_ID043_PreAbl_rev1.vtk",
+      "n_nodes": 2052,
+      "inducible": false,
+      "sustained_ms": 317.75,
+      "fibrosis_mean": 0.423417364754916,
+      "fibre_spread": 0.0,
+      "seconds": 14.7
+    },
+    {
+      "arm": "A_caps_kept_constant_fibres",
+      "subject": "uw_ID044_PreAbl_rev1.vtk",
+      "n_nodes": 2225,
+      "inducible": false,
+      "sustained_ms": 252.4000000000001,
+      "fibrosis_mean": 0.3280402319559123,
+      "fibre_spread": 0.0,
+      "seconds": 14.8
+    },
+    {
+      "arm": "A_caps_kept_constant_fibres",
+      "subject": "uw_ID045_PreAbl_rev1.vtk",
+      "n_nodes": 2254,
+      "inducible": false,
+      "sustained_ms": 420.04999999999995,
+      "fibrosis_mean": 0.3603261937567421,
+      "fibre_spread": 0.0,
+      "seconds": 17.4
+    },
+    {
+      "arm": "A_caps_kept_constant_fibres",
+      "subject": "uw_ID046_PreAbl_rev1.vtk",
+      "n_nodes": 2022,
+      "inducible": false,
+      "sustained_ms": 418.20000000000005,
+      "fibrosis_mean": 0.3547584536033968,
+      "fibre_spread": 0.0,
+      "seconds": 13.9
+    },
+    {
+      "arm": "A_caps_kept_constant_fibres",
+      "subject": "uw_ID047_PreAbl_rev1.vtk",
+      "n_nodes": 2108,
+      "inducible": true,
+      "sustained_ms": 999.95,
+      "fibrosis_mean": 0.36811224263301545,
+      "fibre_spread": 0.0,
+      "seconds": 20.7
+    },
+    {
+      "arm": "A_caps_kept_constant_fibres",
+      "subject": "uw_ID048_PreAbl_rev1.vtk",
+      "n_nodes": 2012,
+      "inducible": false,
+      "sustained_ms": 334.70000000000005,
+      "fibrosis_mean": 0.3642136080870345,
+      "fibre_spread": 0.0,
+      "seconds": 13.5
+    },
+    {
+      "arm": "A_caps_kept_constant_fibres",
+      "subject": "uw_ID049_PreAbl_rev1.vtk",
+      "n_nodes": 2090,
+      "inducible": false,
+      "sustained_ms": 279.75,
+      "fibrosis_mean": 0.21921546011662335,
+      "fibre_spread": 0.0,
+      "seconds": 13.6
+    },
+    {
+      "arm": "A_caps_kept_constant_fibres",
+      "subject": "uw_ID050_PreAbl_rev1.vtk",
+      "n_nodes": 2013,
+      "inducible": false,
+      "sustained_ms": 279.75,
+      "fibrosis_mean": 0.2681606882330117,
+      "fibre_spread": 0.0,
+      "seconds": 13.2
+    },
+    {
+      "arm": "A_caps_kept_constant_fibres",
+      "subject": "uw_ID051_PreAbl_rev1.vtk",
+      "n_nodes": 2164,
+      "inducible": false,
+      "sustained_ms": 351.0,
+      "fibrosis_mean": 0.3856201205907111,
+      "fibre_spread": 0.0,
+      "seconds": 15.7
+    },
+    {
+      "arm": "A_caps_kept_constant_fibres",
+      "subject": "uw_ID052_PreAbl_rev1.vtk",
+      "n_nodes": 2135,
+      "inducible": false,
+      "sustained_ms": 279.10000000000014,
+      "fibrosis_mean": 0.15383964988867252,
+      "fibre_spread": 0.0,
+      "seconds": 13.9
+    },
+    {
+      "arm": "A_caps_kept_constant_fibres",
+      "subject": "uw_ID053_PreAbl_rev1.vtk",
+      "n_nodes": 2266,
+      "inducible": false,
+      "sustained_ms": 556.6000000000001,
+      "fibrosis_mean": 0.22816392672206257,
+      "fibre_spread": 0.0,
+      "seconds": 18.8
+    },
+    {
+      "arm": "A_caps_kept_constant_fibres",
+      "subject": "uw_ID054_PreAbl_rev1.vtk",
+      "n_nodes": 2024,
+      "inducible": false,
+      "sustained_ms": 329.6500000000001,
+      "fibrosis_mean": 0.395095025276722,
+      "fibre_spread": 0.0,
+      "seconds": 13.9
+    },
+    {
+      "arm": "A_caps_kept_constant_fibres",
+      "subject": "uw_ID055_PreAbl_rev1.vtk",
+      "n_nodes": 2080,
+      "inducible": true,
+      "sustained_ms": 999.95,
+      "fibrosis_mean": 0.4033021567940601,
+      "fibre_spread": 0.0,
+      "seconds": 22.2
+    },
+    {
+      "arm": "A_caps_kept_constant_fibres",
+      "subject": "uw_ID056_PreAbl_rev1.vtk",
+      "n_nodes": 2042,
+      "inducible": false,
+      "sustained_ms": 378.5,
+      "fibrosis_mean": 0.40372719460529516,
+      "fibre_spread": 0.0,
+      "seconds": 14.8
+    },
+    {
+      "arm": "A_caps_kept_constant_fibres",
+      "subject": "uw_ID057_PreAbl_rev1.vtk",
+      "n_nodes": 2109,
+      "inducible": false,
+      "sustained_ms": 422.70000000000005,
+      "fibrosis_mean": 0.41390679974724126,
+      "fibre_spread": 0.0,
+      "seconds": 15.1
+    },
+    {
+      "arm": "A_caps_kept_constant_fibres",
+      "subject": "uw_ID058_PreAbl_rev1.vtk",
+      "n_nodes": 2039,
+      "inducible": false,
+      "sustained_ms": 296.5,
+      "fibrosis_mean": 0.22830164315929072,
+      "fibre_spread": 0.0,
+      "seconds": 13.3
+    },
+    {
+      "arm": "A_caps_kept_constant_fibres",
+      "subject": "uw_ID059_PreAbl_rev1.vtk",
+      "n_nodes": 2276,
+      "inducible": false,
+      "sustained_ms": 294.10000000000014,
+      "fibrosis_mean": 0.3460977612368288,
+      "fibre_spread": 0.0,
+      "seconds": 14.7
+    },
+    {
+      "arm": "A_caps_kept_constant_fibres",
+      "subject": "uw_ID060_PreAbl_rev1.vtk",
+      "n_nodes": 2056,
+      "inducible": true,
+      "sustained_ms": 713.95,
+      "fibrosis_mean": 0.23083224948306705,
+      "fibre_spread": 0.0,
+      "seconds": 17.2
+    },
+    {
+      "arm": "A_caps_kept_constant_fibres",
+      "subject": "uw_ID061_PreAbl_rev1.vtk",
+      "n_nodes": 2024,
+      "inducible": true,
+      "sustained_ms": 999.95,
+      "fibrosis_mean": 0.34867268720816885,
+      "fibre_spread": 0.0,
+      "seconds": 18.0
+    },
+    {
+      "arm": "A_caps_kept_constant_fibres",
+      "subject": "uw_ID062_PreAbl_rev1.vtk",
+      "n_nodes": 2163,
+      "inducible": false,
+      "sustained_ms": 239.6500000000001,
+      "fibrosis_mean": 0.19475445006980938,
+      "fibre_spread": 0.0,
+      "seconds": 13.3
+    },
+    {
+      "arm": "A_caps_kept_constant_fibres",
+      "subject": "uw_ID063_PreAbl_rev1.vtk",
+      "n_nodes": 2172,
+      "inducible": false,
+      "sustained_ms": 446.35000000000014,
+      "fibrosis_mean": 0.29333593945202596,
+      "fibre_spread": 0.0,
+      "seconds": 16.3
+    },
+    {
+      "arm": "A_caps_kept_constant_fibres",
+      "subject": "uw_ID064_PreAbl_rev1.vtk",
+      "n_nodes": 2118,
+      "inducible": false,
+      "sustained_ms": 271.5,
+      "fibrosis_mean": 0.3400563357653228,
+      "fibre_spread": 0.0,
+      "seconds": 13.4
+    },
+    {
+      "arm": "A_caps_kept_constant_fibres",
+      "subject": "uw_ID065_PreAbl_rev1.vtk",
+      "n_nodes": 2246,
+      "inducible": false,
+      "sustained_ms": 638.95,
+      "fibrosis_mean": 0.4206776430331131,
+      "fibre_spread": 0.0,
+      "seconds": 19.7
+    },
+    {
+      "arm": "A_caps_kept_constant_fibres",
+      "subject": "uw_ID066_PreAbl_rev1.vtk",
+      "n_nodes": 2293,
+      "inducible": false,
+      "sustained_ms": 427.35000000000014,
+      "fibrosis_mean": 0.2627604137844137,
+      "fibre_spread": 0.0,
+      "seconds": 17.3
+    },
+    {
+      "arm": "A_caps_kept_constant_fibres",
+      "subject": "uw_ID067_PreAbl_rev1.vtk",
+      "n_nodes": 2215,
+      "inducible": false,
+      "sustained_ms": 365.95000000000005,
+      "fibrosis_mean": 0.4157131104449997,
+      "fibre_spread": 0.0,
+      "seconds": 15.9
+    },
+    {
+      "arm": "A_caps_kept_constant_fibres",
+      "subject": "uw_ID068_PreAbl_rev1.vtk",
+      "n_nodes": 2049,
+      "inducible": false,
+      "sustained_ms": 333.25,
+      "fibrosis_mean": 0.46950234364496335,
+      "fibre_spread": 0.0,
+      "seconds": 13.8
+    },
+    {
+      "arm": "A_caps_kept_constant_fibres",
+      "subject": "uw_ID069_PreAbl_rev1.vtk",
+      "n_nodes": 2173,
+      "inducible": false,
+      "sustained_ms": 445.35000000000014,
+      "fibrosis_mean": 0.2917138365202184,
+      "fibre_spread": 0.0,
+      "seconds": 16.1
+    },
+    {
+      "arm": "A_caps_kept_constant_fibres",
+      "subject": "uw_ID070_PreAbl_rev1.vtk",
+      "n_nodes": 2043,
+      "inducible": false,
+      "sustained_ms": 331.75,
+      "fibrosis_mean": 0.3089156003939668,
+      "fibre_spread": 0.0,
+      "seconds": 12.9
+    },
+    {
+      "arm": "A_caps_kept_constant_fibres",
+      "subject": "uw_ID071_PreAbl_rev1.vtk",
+      "n_nodes": 2021,
+      "inducible": false,
+      "sustained_ms": 383.6500000000001,
+      "fibrosis_mean": 0.30664256272681056,
+      "fibre_spread": 0.0,
+      "seconds": 13.1
+    },
+    {
+      "arm": "A_caps_kept_constant_fibres",
+      "subject": "uw_ID072_PreAbl_rev1.vtk",
+      "n_nodes": 2168,
+      "inducible": false,
+      "sustained_ms": 340.29999999999995,
+      "fibrosis_mean": 0.26545020750035014,
+      "fibre_spread": 0.0,
+      "seconds": 14.6
+    },
+    {
+      "arm": "A_caps_kept_constant_fibres",
+      "subject": "uw_ID073_PreAbl_rev1.vtk",
+      "n_nodes": 2034,
+      "inducible": false,
+      "sustained_ms": 580.6000000000001,
+      "fibrosis_mean": 0.5064336787656185,
+      "fibre_spread": 0.0,
+      "seconds": 17.0
+    },
+    {
+      "arm": "A_caps_kept_constant_fibres",
+      "subject": "uw_ID074_PreAbl_rev1.vtk",
+      "n_nodes": 2291,
+      "inducible": false,
+      "sustained_ms": 394.95000000000005,
+      "fibrosis_mean": 0.3245609183455579,
+      "fibre_spread": 0.0,
+      "seconds": 16.3
+    },
+    {
+      "arm": "A_caps_kept_constant_fibres",
+      "subject": "uw_ID075_PreAbl_rev1.vtk",
+      "n_nodes": 2179,
+      "inducible": false,
+      "sustained_ms": 230.35000000000002,
+      "fibrosis_mean": 0.21101894735257676,
+      "fibre_spread": 0.0,
+      "seconds": 12.9
+    },
+    {
+      "arm": "A_caps_kept_constant_fibres",
+      "subject": "uw_ID076_PreAbl_rev1.vtk",
+      "n_nodes": 2241,
+      "inducible": false,
+      "sustained_ms": 356.35000000000014,
+      "fibrosis_mean": 0.2712698977441692,
+      "fibre_spread": 0.0,
+      "seconds": 14.9
+    },
+    {
+      "arm": "A_caps_kept_constant_fibres",
+      "subject": "uw_ID077_PreAbl_rev1.vtk",
+      "n_nodes": 2012,
+      "inducible": false,
+      "sustained_ms": 271.55000000000007,
+      "fibrosis_mean": 0.3387677820903101,
+      "fibre_spread": 0.0,
+      "seconds": 12.7
+    },
+    {
+      "arm": "A_caps_kept_constant_fibres",
+      "subject": "uw_ID078_PreAbl_rev1.vtk",
+      "n_nodes": 2225,
+      "inducible": false,
+      "sustained_ms": 441.5,
+      "fibrosis_mean": 0.3255420596928475,
+      "fibre_spread": 0.0,
+      "seconds": 16.7
+    },
+    {
+      "arm": "A_caps_kept_constant_fibres",
+      "subject": "uw_ID079_PreAbl_rev1.vtk",
+      "n_nodes": 2087,
+      "inducible": false,
+      "sustained_ms": 368.60000000000014,
+      "fibrosis_mean": 0.37455097943962457,
+      "fibre_spread": 0.0,
+      "seconds": 13.5
+    },
+    {
+      "arm": "A_caps_kept_constant_fibres",
+      "subject": "uw_ID080_PreAbl_rev1.vtk",
+      "n_nodes": 2241,
+      "inducible": false,
+      "sustained_ms": 351.35000000000014,
+      "fibrosis_mean": 0.22858123652930032,
+      "fibre_spread": 0.0,
+      "seconds": 18.5
+    },
+    {
+      "arm": "A_caps_kept_constant_fibres",
+      "subject": "uw_ID081_PreAbl_rev1.vtk",
+      "n_nodes": 2152,
+      "inducible": false,
+      "sustained_ms": 236.30000000000007,
+      "fibrosis_mean": 0.280579826901774,
+      "fibre_spread": 0.0,
+      "seconds": 19.3
+    },
+    {
+      "arm": "A_caps_kept_constant_fibres",
+      "subject": "uw_ID082_PreAbl_rev1.vtk",
+      "n_nodes": 2293,
+      "inducible": false,
+      "sustained_ms": 330.54999999999995,
+      "fibrosis_mean": 0.24749308870873565,
+      "fibre_spread": 0.0,
+      "seconds": 25.9
+    },
+    {
+      "arm": "A_caps_kept_constant_fibres",
+      "subject": "uw_ID083_PreAbl_rev1.vtk",
+      "n_nodes": 2074,
+      "inducible": false,
+      "sustained_ms": 345.6500000000001,
+      "fibrosis_mean": 0.3347652236421498,
+      "fibre_spread": 0.0,
+      "seconds": 24.7
+    },
+    {
+      "arm": "A_caps_kept_constant_fibres",
+      "subject": "uw_ID084_PreAbl_rev1.vtk",
+      "n_nodes": 2157,
+      "inducible": false,
+      "sustained_ms": 296.4000000000001,
+      "fibrosis_mean": 0.2166196074183657,
+      "fibre_spread": 0.0,
+      "seconds": 25.9
+    },
+    {
+      "arm": "A_caps_kept_constant_fibres",
+      "subject": "uw_ID085_PreAbl_rev1.vtk",
+      "n_nodes": 2285,
+      "inducible": false,
+      "sustained_ms": 318.9000000000001,
+      "fibrosis_mean": 0.23329811881427598,
+      "fibre_spread": 0.0,
+      "seconds": 47.1
+    },
+    {
+      "arm": "A_caps_kept_constant_fibres",
+      "subject": "uw_ID086_PreAbl_rev1.vtk",
+      "n_nodes": 2106,
+      "inducible": false,
+      "sustained_ms": 290.20000000000005,
+      "fibrosis_mean": 0.28703471323685026,
+      "fibre_spread": 0.0,
+      "seconds": 63.6
+    },
+    {
+      "arm": "A_caps_kept_constant_fibres",
+      "subject": "uw_ID087_PreAbl_rev1.vtk",
+      "n_nodes": 2189,
+      "inducible": false,
+      "sustained_ms": 280.70000000000005,
+      "fibrosis_mean": 0.18188406077391644,
+      "fibre_spread": 0.0,
+      "seconds": 75.0
+    },
+    {
+      "arm": "B_caps_dropped_constant_fibres",
+      "subject": "uw_ID001_PreAbl_rev1.vtk",
+      "n_nodes": 2177,
+      "inducible": false,
+      "sustained_ms": 312.45000000000005,
+      "fibrosis_mean": 0.15604572138448966,
+      "fibre_spread": 0.0,
+      "seconds": 74.1
+    },
+    {
+      "arm": "B_caps_dropped_constant_fibres",
+      "subject": "uw_ID002_PreAbl_rev1.vtk",
+      "n_nodes": 2151,
+      "inducible": false,
+      "sustained_ms": 283.70000000000005,
+      "fibrosis_mean": 0.15178491096597208,
+      "fibre_spread": 0.0,
+      "seconds": 70.9
+    },
+    {
+      "arm": "B_caps_dropped_constant_fibres",
+      "subject": "uw_ID003_PreAbl_rev1.vtk",
+      "n_nodes": 2058,
+      "inducible": false,
+      "sustained_ms": 273.35000000000014,
+      "fibrosis_mean": 0.17833952420921656,
+      "fibre_spread": 0.0,
+      "seconds": 68.4
+    },
+    {
+      "arm": "B_caps_dropped_constant_fibres",
+      "subject": "uw_ID004_PreAbl_rev1.vtk",
+      "n_nodes": 2252,
+      "inducible": false,
+      "sustained_ms": 299.60000000000014,
+      "fibrosis_mean": 0.03366637843403167,
+      "fibre_spread": 0.0,
+      "seconds": 77.8
+    },
+    {
+      "arm": "B_caps_dropped_constant_fibres",
+      "subject": "uw_ID005_PreAbl_rev1.vtk",
+      "n_nodes": 2090,
+      "inducible": true,
+      "sustained_ms": 907.5,
+      "fibrosis_mean": 0.4596751063516298,
+      "fibre_spread": 0.0,
+      "seconds": 98.1
+    },
+    {
+      "arm": "B_caps_dropped_constant_fibres",
+      "subject": "uw_ID006_PreAbl_rev1.vtk",
+      "n_nodes": 2182,
+      "inducible": false,
+      "sustained_ms": 484.9000000000001,
+      "fibrosis_mean": 0.33861692687626305,
+      "fibre_spread": 0.0,
+      "seconds": 79.5
+    },
+    {
+      "arm": "B_caps_dropped_constant_fibres",
+      "subject": "uw_ID007_PreAbl_rev1.vtk",
+      "n_nodes": 2146,
+      "inducible": false,
+      "sustained_ms": 478.95000000000005,
+      "fibrosis_mean": 0.3301342999282075,
+      "fibre_spread": 0.0,
+      "seconds": 74.3
+    },
+    {
+      "arm": "B_caps_dropped_constant_fibres",
+      "subject": "uw_ID008_PreAbl_rev1.vtk",
+      "n_nodes": 2131,
+      "inducible": false,
+      "sustained_ms": 281.6500000000001,
+      "fibrosis_mean": 0.1833862585519927,
+      "fibre_spread": 0.0,
+      "seconds": 65.0
+    },
+    {
+      "arm": "B_caps_dropped_constant_fibres",
+      "subject": "uw_ID009_PreAbl_rev1.vtk",
+      "n_nodes": 2264,
+      "inducible": false,
+      "sustained_ms": 239.4000000000001,
+      "fibrosis_mean": 0.11209282368446233,
+      "fibre_spread": 0.0,
+      "seconds": 63.7
+    },
+    {
+      "arm": "B_caps_dropped_constant_fibres",
+      "subject": "uw_ID010_PreAbl_rev1.vtk",
+      "n_nodes": 2272,
+      "inducible": false,
+      "sustained_ms": 432.95000000000005,
+      "fibrosis_mean": 0.26721672677639474,
+      "fibre_spread": 0.0,
+      "seconds": 75.7
+    },
+    {
+      "arm": "B_caps_dropped_constant_fibres",
+      "subject": "uw_ID011_PreAbl_rev1.vtk",
+      "n_nodes": 2135,
+      "inducible": false,
+      "sustained_ms": 585.9000000000001,
+      "fibrosis_mean": 0.261630279511868,
+      "fibre_spread": 0.0,
+      "seconds": 77.9
+    },
+    {
+      "arm": "B_caps_dropped_constant_fibres",
+      "subject": "uw_ID012_PreAbl_rev1.vtk",
+      "n_nodes": 2054,
+      "inducible": false,
+      "sustained_ms": 449.04999999999995,
+      "fibrosis_mean": 0.3065381546677607,
+      "fibre_spread": 0.0,
+      "seconds": 60.6
+    },
+    {
+      "arm": "B_caps_dropped_constant_fibres",
+      "subject": "uw_ID013_PreAbl_rev1.vtk",
+      "n_nodes": 2199,
+      "inducible": false,
+      "sustained_ms": 305.6500000000001,
+      "fibrosis_mean": 0.2333160412986836,
+      "fibre_spread": 0.0,
+      "seconds": 59.0
+    },
+    {
+      "arm": "B_caps_dropped_constant_fibres",
+      "subject": "uw_ID014_PreAbl_rev1.vtk",
+      "n_nodes": 2205,
+      "inducible": false,
+      "sustained_ms": 469.45000000000005,
+      "fibrosis_mean": 0.3231043348351841,
+      "fibre_spread": 0.0,
+      "seconds": 63.6
+    },
+    {
+      "arm": "B_caps_dropped_constant_fibres",
+      "subject": "uw_ID015_PreAbl_rev1.vtk",
+      "n_nodes": 2243,
+      "inducible": false,
+      "sustained_ms": 228.55000000000007,
+      "fibrosis_mean": 0.19143175315522623,
+      "fibre_spread": 0.0,
+      "seconds": 58.8
+    },
+    {
+      "arm": "B_caps_dropped_constant_fibres",
+      "subject": "uw_ID021_PreAbl_rev1.vtk",
+      "n_nodes": 2014,
+      "inducible": false,
+      "sustained_ms": 271.05000000000007,
+      "fibrosis_mean": 0.21846622180332406,
+      "fibre_spread": 0.0,
+      "seconds": 53.9
+    },
+    {
+      "arm": "B_caps_dropped_constant_fibres",
+      "subject": "uw_ID022_PreAbl_rev1.vtk",
+      "n_nodes": 2247,
+      "inducible": false,
+      "sustained_ms": 256.55000000000007,
+      "fibrosis_mean": 0.4024907171658984,
+      "fibre_spread": 0.0,
+      "seconds": 58.6
+    },
+    {
+      "arm": "B_caps_dropped_constant_fibres",
+      "subject": "uw_ID023_PreAbl_rev1.vtk",
+      "n_nodes": 2194,
+      "inducible": false,
+      "sustained_ms": 536.3500000000001,
+      "fibrosis_mean": 0.08116993563755695,
+      "fibre_spread": 0.0,
+      "seconds": 64.3
+    },
+    {
+      "arm": "B_caps_dropped_constant_fibres",
+      "subject": "uw_ID024_PreAbl_rev1.vtk",
+      "n_nodes": 2291,
+      "inducible": false,
+      "sustained_ms": 276.20000000000005,
+      "fibrosis_mean": 0.29517817189781864,
+      "fibre_spread": 0.0,
+      "seconds": 63.2
+    },
+    {
+      "arm": "B_caps_dropped_constant_fibres",
+      "subject": "uw_ID025_PreAbl_rev1.vtk",
+      "n_nodes": 2175,
+      "inducible": false,
+      "sustained_ms": 363.95000000000005,
+      "fibrosis_mean": 0.16207480918819447,
+      "fibre_spread": 0.0,
+      "seconds": 64.0
+    },
+    {
+      "arm": "B_caps_dropped_constant_fibres",
+      "subject": "uw_ID026_PreAbl_rev1.vtk",
+      "n_nodes": 2219,
+      "inducible": false,
+      "sustained_ms": 288.25,
+      "fibrosis_mean": 0.2014478238686566,
+      "fibre_spread": 0.0,
+      "seconds": 61.7
+    },
+    {
+      "arm": "B_caps_dropped_constant_fibres",
+      "subject": "uw_ID027_PreAbl_rev1.vtk",
+      "n_nodes": 2099,
+      "inducible": false,
+      "sustained_ms": 235.75,
+      "fibrosis_mean": 0.16082631718455312,
+      "fibre_spread": 0.0,
+      "seconds": 56.1
+    },
+    {
+      "arm": "B_caps_dropped_constant_fibres",
+      "subject": "uw_ID028_PreAbl_rev1.vtk",
+      "n_nodes": 1999,
+      "inducible": false,
+      "sustained_ms": 357.29999999999995,
+      "fibrosis_mean": 0.24085854315841032,
+      "fibre_spread": 0.0,
+      "seconds": 59.4
+    },
+    {
+      "arm": "B_caps_dropped_constant_fibres",
+      "subject": "uw_ID029_PreAbl_rev1.vtk",
+      "n_nodes": 2225,
+      "inducible": false,
+      "sustained_ms": 271.75,
+      "fibrosis_mean": 0.1886498594207489,
+      "fibre_spread": 0.0,
+      "seconds": 61.4
+    },
+    {
+      "arm": "B_caps_dropped_constant_fibres",
+      "subject": "uw_ID030_PreAbl_rev1.vtk",
+      "n_nodes": 2172,
+      "inducible": false,
+      "sustained_ms": 330.85000000000014,
+      "fibrosis_mean": 0.3008418850183336,
+      "fibre_spread": 0.0,
+      "seconds": 61.8
+    },
+    {
+      "arm": "B_caps_dropped_constant_fibres",
+      "subject": "uw_ID031_PreAbl_rev1.vtk",
+      "n_nodes": 2164,
+      "inducible": true,
+      "sustained_ms": 717.9000000000001,
+      "fibrosis_mean": 0.32174186431068835,
+      "fibre_spread": 0.0,
+      "seconds": 57.9
+    },
+    {
+      "arm": "B_caps_dropped_constant_fibres",
+      "subject": "uw_ID032_PreAbl_rev1.vtk",
+      "n_nodes": 2122,
+      "inducible": false,
+      "sustained_ms": 293.4000000000001,
+      "fibrosis_mean": 0.3248696890770964,
+      "fibre_spread": 0.0,
+      "seconds": 51.8
+    },
+    {
+      "arm": "B_caps_dropped_constant_fibres",
+      "subject": "uw_ID033_PreAbl_rev1.vtk",
+      "n_nodes": 2018,
+      "inducible": false,
+      "sustained_ms": 312.4000000000001,
+      "fibrosis_mean": 0.2992804545203525,
+      "fibre_spread": 0.0,
+      "seconds": 51.0
+    },
+    {
+      "arm": "B_caps_dropped_constant_fibres",
+      "subject": "uw_ID034_PreAbl_rev1.vtk",
+      "n_nodes": 2147,
+      "inducible": false,
+      "sustained_ms": 322.04999999999995,
+      "fibrosis_mean": 0.08155406817290654,
+      "fibre_spread": 0.0,
+      "seconds": 49.8
+    },
+    {
+      "arm": "B_caps_dropped_constant_fibres",
+      "subject": "uw_ID035_PreAbl_rev1.vtk",
+      "n_nodes": 2207,
+      "inducible": false,
+      "sustained_ms": 304.1500000000001,
+      "fibrosis_mean": 0.06393072488065549,
+      "fibre_spread": 0.0,
+      "seconds": 47.9
+    },
+    {
+      "arm": "B_caps_dropped_constant_fibres",
+      "subject": "uw_ID036_PreAbl_rev1.vtk",
+      "n_nodes": 2002,
+      "inducible": false,
+      "sustained_ms": 334.85000000000014,
+      "fibrosis_mean": 0.20974250935290686,
+      "fibre_spread": 0.0,
+      "seconds": 39.1
+    },
+    {
+      "arm": "B_caps_dropped_constant_fibres",
+      "subject": "uw_ID037_PreAbl_rev1.vtk",
+      "n_nodes": 2003,
+      "inducible": false,
+      "sustained_ms": 409.1500000000001,
+      "fibrosis_mean": 0.3627215796011006,
+      "fibre_spread": 0.0,
+      "seconds": 26.2
+    },
+    {
+      "arm": "B_caps_dropped_constant_fibres",
+      "subject": "uw_ID038_PreAbl_rev1.vtk",
+      "n_nodes": 2078,
+      "inducible": false,
+      "sustained_ms": 388.1500000000001,
+      "fibrosis_mean": 0.3561182923627392,
+      "fibre_spread": 0.0,
+      "seconds": 14.7
+    },
+    {
+      "arm": "B_caps_dropped_constant_fibres",
+      "subject": "uw_ID039_PreAbl_rev1.vtk",
+      "n_nodes": 2112,
+      "inducible": false,
+      "sustained_ms": 264.80000000000007,
+      "fibrosis_mean": 0.06967722051694089,
+      "fibre_spread": 0.0,
+      "seconds": 13.0
+    },
+    {
+      "arm": "B_caps_dropped_constant_fibres",
+      "subject": "uw_ID040_PreAbl_rev1.vtk",
+      "n_nodes": 2170,
+      "inducible": false,
+      "sustained_ms": 408.6500000000001,
+      "fibrosis_mean": 0.31483130801972947,
+      "fibre_spread": 0.0,
+      "seconds": 15.6
+    },
+    {
+      "arm": "B_caps_dropped_constant_fibres",
+      "subject": "uw_ID041_PreAbl_rev1.vtk",
+      "n_nodes": 2206,
+      "inducible": false,
+      "sustained_ms": 319.29999999999995,
+      "fibrosis_mean": 0.18505148394807136,
+      "fibre_spread": 0.0,
+      "seconds": 15.2
+    },
+    {
+      "arm": "B_caps_dropped_constant_fibres",
+      "subject": "uw_ID042_PreAbl_rev1.vtk",
+      "n_nodes": 2199,
+      "inducible": true,
+      "sustained_ms": 999.95,
+      "fibrosis_mean": 0.41327982909615624,
+      "fibre_spread": 0.0,
+      "seconds": 21.8
+    },
+    {
+      "arm": "B_caps_dropped_constant_fibres",
+      "subject": "uw_ID043_PreAbl_rev1.vtk",
+      "n_nodes": 2143,
+      "inducible": false,
+      "sustained_ms": 299.5,
+      "fibrosis_mean": 0.3907802123079629,
+      "fibre_spread": 0.0,
+      "seconds": 13.0
+    },
+    {
+      "arm": "B_caps_dropped_constant_fibres",
+      "subject": "uw_ID044_PreAbl_rev1.vtk",
+      "n_nodes": 2169,
+      "inducible": false,
+      "sustained_ms": 251.0,
+      "fibrosis_mean": 0.24748727879355265,
+      "fibre_spread": 0.0,
+      "seconds": 13.0
+    },
+    {
+      "arm": "B_caps_dropped_constant_fibres",
+      "subject": "uw_ID045_PreAbl_rev1.vtk",
+      "n_nodes": 2120,
+      "inducible": true,
+      "sustained_ms": 715.1000000000001,
+      "fibrosis_mean": 0.32035908974508054,
+      "fibre_spread": 0.0,
+      "seconds": 17.8
+    },
+    {
+      "arm": "B_caps_dropped_constant_fibres",
+      "subject": "uw_ID046_PreAbl_rev1.vtk",
+      "n_nodes": 2257,
+      "inducible": false,
+      "sustained_ms": 361.45000000000005,
+      "fibrosis_mean": 0.2972266345782914,
+      "fibre_spread": 0.0,
+      "seconds": 14.2
+    },
+    {
+      "arm": "B_caps_dropped_constant_fibres",
+      "subject": "uw_ID047_PreAbl_rev1.vtk",
+      "n_nodes": 2280,
+      "inducible": false,
+      "sustained_ms": 446.60000000000014,
+      "fibrosis_mean": 0.327649682693753,
+      "fibre_spread": 0.0,
+      "seconds": 16.5
+    },
+    {
+      "arm": "B_caps_dropped_constant_fibres",
+      "subject": "uw_ID048_PreAbl_rev1.vtk",
+      "n_nodes": 2000,
+      "inducible": false,
+      "sustained_ms": 325.0,
+      "fibrosis_mean": 0.33109905316872984,
+      "fibre_spread": 0.0,
+      "seconds": 13.3
+    },
+    {
+      "arm": "B_caps_dropped_constant_fibres",
+      "subject": "uw_ID049_PreAbl_rev1.vtk",
+      "n_nodes": 2164,
+      "inducible": false,
+      "sustained_ms": 292.1500000000001,
+      "fibrosis_mean": 0.14643005592609382,
+      "fibre_spread": 0.0,
+      "seconds": 13.2
+    },
+    {
+      "arm": "B_caps_dropped_constant_fibres",
+      "subject": "uw_ID050_PreAbl_rev1.vtk",
+      "n_nodes": 2214,
+      "inducible": false,
+      "sustained_ms": 254.9000000000001,
+      "fibrosis_mean": 0.21603207120982967,
+      "fibre_spread": 0.0,
+      "seconds": 13.4
+    },
+    {
+      "arm": "B_caps_dropped_constant_fibres",
+      "subject": "uw_ID051_PreAbl_rev1.vtk",
+      "n_nodes": 2234,
+      "inducible": false,
+      "sustained_ms": 358.70000000000005,
+      "fibrosis_mean": 0.35666962080521347,
+      "fibre_spread": 0.0,
+      "seconds": 15.1
+    },
+    {
+      "arm": "B_caps_dropped_constant_fibres",
+      "subject": "uw_ID052_PreAbl_rev1.vtk",
+      "n_nodes": 2186,
+      "inducible": false,
+      "sustained_ms": 304.10000000000014,
+      "fibrosis_mean": 0.09413486720309912,
+      "fibre_spread": 0.0,
+      "seconds": 13.3
+    },
+    {
+      "arm": "B_caps_dropped_constant_fibres",
+      "subject": "uw_ID053_PreAbl_rev1.vtk",
+      "n_nodes": 2079,
+      "inducible": false,
+      "sustained_ms": 374.6500000000001,
+      "fibrosis_mean": 0.14995817578329773,
+      "fibre_spread": 0.0,
+      "seconds": 13.5
+    },
+    {
+      "arm": "B_caps_dropped_constant_fibres",
+      "subject": "uw_ID054_PreAbl_rev1.vtk",
+      "n_nodes": 2026,
+      "inducible": false,
+      "sustained_ms": 299.35000000000014,
+      "fibrosis_mean": 0.36688475421389016,
+      "fibre_spread": 0.0,
+      "seconds": 12.0
+    },
+    {
+      "arm": "B_caps_dropped_constant_fibres",
+      "subject": "uw_ID055_PreAbl_rev1.vtk",
+      "n_nodes": 2140,
+      "inducible": false,
+      "sustained_ms": 442.60000000000014,
+      "fibrosis_mean": 0.35886216563430445,
+      "fibre_spread": 0.0,
+      "seconds": 14.3
+    },
+    {
+      "arm": "B_caps_dropped_constant_fibres",
+      "subject": "uw_ID056_PreAbl_rev1.vtk",
+      "n_nodes": 2152,
+      "inducible": false,
+      "sustained_ms": 361.6500000000001,
+      "fibrosis_mean": 0.3738814437746174,
+      "fibre_spread": 0.0,
+      "seconds": 13.2
+    },
+    {
+      "arm": "B_caps_dropped_constant_fibres",
+      "subject": "uw_ID057_PreAbl_rev1.vtk",
+      "n_nodes": 1998,
+      "inducible": false,
+      "sustained_ms": 343.45000000000005,
+      "fibrosis_mean": 0.38061986137509546,
+      "fibre_spread": 0.0,
+      "seconds": 12.4
+    },
+    {
+      "arm": "B_caps_dropped_constant_fibres",
+      "subject": "uw_ID058_PreAbl_rev1.vtk",
+      "n_nodes": 2288,
+      "inducible": false,
+      "sustained_ms": 264.95000000000005,
+      "fibrosis_mean": 0.14474449663688305,
+      "fibre_spread": 0.0,
+      "seconds": 12.9
+    },
+    {
+      "arm": "B_caps_dropped_constant_fibres",
+      "subject": "uw_ID059_PreAbl_rev1.vtk",
+      "n_nodes": 2087,
+      "inducible": true,
+      "sustained_ms": 999.95,
+      "fibrosis_mean": 0.2702074488044864,
+      "fibre_spread": 0.0,
+      "seconds": 15.7
+    },
+    {
+      "arm": "B_caps_dropped_constant_fibres",
+      "subject": "uw_ID060_PreAbl_rev1.vtk",
+      "n_nodes": 2025,
+      "inducible": false,
+      "sustained_ms": 364.25,
+      "fibrosis_mean": 0.18861807563687275,
+      "fibre_spread": 0.0,
+      "seconds": 13.3
+    },
+    {
+      "arm": "B_caps_dropped_constant_fibres",
+      "subject": "uw_ID061_PreAbl_rev1.vtk",
+      "n_nodes": 2097,
+      "inducible": false,
+      "sustained_ms": 341.29999999999995,
+      "fibrosis_mean": 0.3097371478212557,
+      "fibre_spread": 0.0,
+      "seconds": 13.8
+    },
+    {
+      "arm": "B_caps_dropped_constant_fibres",
+      "subject": "uw_ID062_PreAbl_rev1.vtk",
+      "n_nodes": 2221,
+      "inducible": false,
+      "sustained_ms": 262.25,
+      "fibrosis_mean": 0.06948262470617121,
+      "fibre_spread": 0.0,
+      "seconds": 13.2
+    },
+    {
+      "arm": "B_caps_dropped_constant_fibres",
+      "subject": "uw_ID063_PreAbl_rev1.vtk",
+      "n_nodes": 2039,
+      "inducible": false,
+      "sustained_ms": 370.75,
+      "fibrosis_mean": 0.2423467211046743,
+      "fibre_spread": 0.0,
+      "seconds": 13.4
+    },
+    {
+      "arm": "B_caps_dropped_constant_fibres",
+      "subject": "uw_ID064_PreAbl_rev1.vtk",
+      "n_nodes": 2263,
+      "inducible": false,
+      "sustained_ms": 293.20000000000005,
+      "fibrosis_mean": 0.27447229193101924,
+      "fibre_spread": 0.0,
+      "seconds": 13.2
+    },
+    {
+      "arm": "B_caps_dropped_constant_fibres",
+      "subject": "uw_ID065_PreAbl_rev1.vtk",
+      "n_nodes": 2000,
+      "inducible": false,
+      "sustained_ms": 575.1000000000001,
+      "fibrosis_mean": 0.3908481850798248,
+      "fibre_spread": 0.0,
+      "seconds": 12.7
+    },
+    {
+      "arm": "B_caps_dropped_constant_fibres",
+      "subject": "uw_ID066_PreAbl_rev1.vtk",
+      "n_nodes": 2177,
+      "inducible": false,
+      "sustained_ms": 366.04999999999995,
+      "fibrosis_mean": 0.21255679359538748,
+      "fibre_spread": 0.0,
+      "seconds": 14.2
+    },
+    {
+      "arm": "B_caps_dropped_constant_fibres",
+      "subject": "uw_ID067_PreAbl_rev1.vtk",
+      "n_nodes": 2155,
+      "inducible": true,
+      "sustained_ms": 999.95,
+      "fibrosis_mean": 0.36759622526487484,
+      "fibre_spread": 0.0,
+      "seconds": 16.6
+    },
+    {
+      "arm": "B_caps_dropped_constant_fibres",
+      "subject": "uw_ID068_PreAbl_rev1.vtk",
+      "n_nodes": 1997,
+      "inducible": false,
+      "sustained_ms": 380.70000000000005,
+      "fibrosis_mean": 0.43878708365868896,
+      "fibre_spread": 0.0,
+      "seconds": 12.9
+    },
+    {
+      "arm": "B_caps_dropped_constant_fibres",
+      "subject": "uw_ID069_PreAbl_rev1.vtk",
+      "n_nodes": 2153,
+      "inducible": true,
+      "sustained_ms": 999.95,
+      "fibrosis_mean": 0.2327224987234586,
+      "fibre_spread": 0.0,
+      "seconds": 21.0
+    },
+    {
+      "arm": "B_caps_dropped_constant_fibres",
+      "subject": "uw_ID070_PreAbl_rev1.vtk",
+      "n_nodes": 2275,
+      "inducible": false,
+      "sustained_ms": 286.5,
+      "fibrosis_mean": 0.259137148873106,
+      "fibre_spread": 0.0,
+      "seconds": 13.4
+    },
+    {
+      "arm": "B_caps_dropped_constant_fibres",
+      "subject": "uw_ID071_PreAbl_rev1.vtk",
+      "n_nodes": 2147,
+      "inducible": false,
+      "sustained_ms": 408.54999999999995,
+      "fibrosis_mean": 0.2596949616176562,
+      "fibre_spread": 0.0,
+      "seconds": 14.2
+    },
+    {
+      "arm": "B_caps_dropped_constant_fibres",
+      "subject": "uw_ID072_PreAbl_rev1.vtk",
+      "n_nodes": 2072,
+      "inducible": false,
+      "sustained_ms": 423.1500000000001,
+      "fibrosis_mean": 0.2200291278866473,
+      "fibre_spread": 0.0,
+      "seconds": 12.9
+    },
+    {
+      "arm": "B_caps_dropped_constant_fibres",
+      "subject": "uw_ID073_PreAbl_rev1.vtk",
+      "n_nodes": 2149,
+      "inducible": true,
+      "sustained_ms": 999.95,
+      "fibrosis_mean": 0.5011508217385283,
+      "fibre_spread": 0.0,
+      "seconds": 21.5
+    },
+    {
+      "arm": "B_caps_dropped_constant_fibres",
+      "subject": "uw_ID074_PreAbl_rev1.vtk",
+      "n_nodes": 2184,
+      "inducible": false,
+      "sustained_ms": 445.75,
+      "fibrosis_mean": 0.27530298651234303,
+      "fibre_spread": 0.0,
+      "seconds": 14.5
+    },
+    {
+      "arm": "B_caps_dropped_constant_fibres",
+      "subject": "uw_ID075_PreAbl_rev1.vtk",
+      "n_nodes": 2046,
+      "inducible": false,
+      "sustained_ms": 323.85000000000014,
+      "fibrosis_mean": 0.11928599978534989,
+      "fibre_spread": 0.0,
+      "seconds": 11.1
+    },
+    {
+      "arm": "B_caps_dropped_constant_fibres",
+      "subject": "uw_ID076_PreAbl_rev1.vtk",
+      "n_nodes": 2045,
+      "inducible": false,
+      "sustained_ms": 312.45000000000005,
+      "fibrosis_mean": 0.20046103309354335,
+      "fibre_spread": 0.0,
+      "seconds": 11.7
+    },
+    {
+      "arm": "B_caps_dropped_constant_fibres",
+      "subject": "uw_ID077_PreAbl_rev1.vtk",
+      "n_nodes": 2002,
+      "inducible": false,
+      "sustained_ms": 291.85000000000014,
+      "fibrosis_mean": 0.29970525044525936,
+      "fibre_spread": 0.0,
+      "seconds": 11.6
+    },
+    {
+      "arm": "B_caps_dropped_constant_fibres",
+      "subject": "uw_ID078_PreAbl_rev1.vtk",
+      "n_nodes": 2032,
+      "inducible": false,
+      "sustained_ms": 410.1500000000001,
+      "fibrosis_mean": 0.2716040681145121,
+      "fibre_spread": 0.0,
+      "seconds": 13.0
+    },
+    {
+      "arm": "B_caps_dropped_constant_fibres",
+      "subject": "uw_ID079_PreAbl_rev1.vtk",
+      "n_nodes": 2002,
+      "inducible": false,
+      "sustained_ms": 390.5,
+      "fibrosis_mean": 0.3236585111273268,
+      "fibre_spread": 0.0,
+      "seconds": 12.2
+    },
+    {
+      "arm": "B_caps_dropped_constant_fibres",
+      "subject": "uw_ID080_PreAbl_rev1.vtk",
+      "n_nodes": 2199,
+      "inducible": false,
+      "sustained_ms": 334.60000000000014,
+      "fibrosis_mean": 0.106327622173003,
+      "fibre_spread": 0.0,
+      "seconds": 13.1
+    },
+    {
+      "arm": "B_caps_dropped_constant_fibres",
+      "subject": "uw_ID081_PreAbl_rev1.vtk",
+      "n_nodes": 2217,
+      "inducible": false,
+      "sustained_ms": 245.80000000000007,
+      "fibrosis_mean": 0.20773977261393736,
+      "fibre_spread": 0.0,
+      "seconds": 12.9
+    },
+    {
+      "arm": "B_caps_dropped_constant_fibres",
+      "subject": "uw_ID082_PreAbl_rev1.vtk",
+      "n_nodes": 2165,
+      "inducible": false,
+      "sustained_ms": 286.79999999999995,
+      "fibrosis_mean": 0.13560116044743256,
+      "fibre_spread": 0.0,
+      "seconds": 12.0
+    },
+    {
+      "arm": "B_caps_dropped_constant_fibres",
+      "subject": "uw_ID083_PreAbl_rev1.vtk",
+      "n_nodes": 2079,
+      "inducible": false,
+      "sustained_ms": 299.10000000000014,
+      "fibrosis_mean": 0.28277090556058265,
+      "fibre_spread": 0.0,
+      "seconds": 13.4
+    },
+    {
+      "arm": "B_caps_dropped_constant_fibres",
+      "subject": "uw_ID084_PreAbl_rev1.vtk",
+      "n_nodes": 2214,
+      "inducible": false,
+      "sustained_ms": 270.30000000000007,
+      "fibrosis_mean": 0.1455844429166702,
+      "fibre_spread": 0.0,
+      "seconds": 13.1
+    },
+    {
+      "arm": "B_caps_dropped_constant_fibres",
+      "subject": "uw_ID085_PreAbl_rev1.vtk",
+      "n_nodes": 2149,
+      "inducible": false,
+      "sustained_ms": 266.5,
+      "fibrosis_mean": 0.13691518134909136,
+      "fibre_spread": 0.0,
+      "seconds": 11.8
+    },
+    {
+      "arm": "B_caps_dropped_constant_fibres",
+      "subject": "uw_ID086_PreAbl_rev1.vtk",
+      "n_nodes": 2111,
+      "inducible": false,
+      "sustained_ms": 290.10000000000014,
+      "fibrosis_mean": 0.22676625007238677,
+      "fibre_spread": 0.0,
+      "seconds": 12.6
+    },
+    {
+      "arm": "B_caps_dropped_constant_fibres",
+      "subject": "uw_ID087_PreAbl_rev1.vtk",
+      "n_nodes": 2074,
+      "inducible": false,
+      "sustained_ms": 246.35000000000002,
+      "fibrosis_mean": 0.10259388232137609,
+      "fibre_spread": 0.0,
+      "seconds": 12.4
+    },
+    {
+      "arm": "C_caps_kept_varying_fibres",
+      "subject": "uw_ID001_PreAbl_rev1.vtk",
+      "n_nodes": 2276,
+      "inducible": false,
+      "sustained_ms": 304.35000000000014,
+      "fibrosis_mean": 0.17384844970762864,
+      "fibre_spread": 0.7154108012523474,
+      "seconds": 14.3
+    },
+    {
+      "arm": "C_caps_kept_varying_fibres",
+      "subject": "uw_ID002_PreAbl_rev1.vtk",
+      "n_nodes": 2200,
+      "inducible": false,
+      "sustained_ms": 250.75,
+      "fibrosis_mean": 0.22483199007373125,
+      "fibre_spread": 0.6667752589861593,
+      "seconds": 13.6
+    },
+    {
+      "arm": "C_caps_kept_varying_fibres",
+      "subject": "uw_ID003_PreAbl_rev1.vtk",
+      "n_nodes": 2140,
+      "inducible": false,
+      "sustained_ms": 311.75,
+      "fibrosis_mean": 0.269776579389151,
+      "fibre_spread": 0.6993295097741111,
+      "seconds": 12.7
+    },
+    {
+      "arm": "C_caps_kept_varying_fibres",
+      "subject": "uw_ID004_PreAbl_rev1.vtk",
+      "n_nodes": 2131,
+      "inducible": false,
+      "sustained_ms": 346.5,
+      "fibrosis_mean": 0.14195208338268883,
+      "fibre_spread": 0.6716566826937675,
+      "seconds": 14.2
+    },
+    {
+      "arm": "C_caps_kept_varying_fibres",
+      "subject": "uw_ID005_PreAbl_rev1.vtk",
+      "n_nodes": 2149,
+      "inducible": true,
+      "sustained_ms": 999.95,
+      "fibrosis_mean": 0.4798002535055126,
+      "fibre_spread": 0.6329851205923487,
+      "seconds": 19.8
+    },
+    {
+      "arm": "C_caps_kept_varying_fibres",
+      "subject": "uw_ID006_PreAbl_rev1.vtk",
+      "n_nodes": 2003,
+      "inducible": false,
+      "sustained_ms": 519.3500000000001,
+      "fibrosis_mean": 0.3811749272888093,
+      "fibre_spread": 0.6381961425237903,
+      "seconds": 13.8
+    },
+    {
+      "arm": "C_caps_kept_varying_fibres",
+      "subject": "uw_ID007_PreAbl_rev1.vtk",
+      "n_nodes": 2058,
+      "inducible": false,
+      "sustained_ms": 482.95000000000005,
+      "fibrosis_mean": 0.3839045269524968,
+      "fibre_spread": 0.7242353649240104,
+      "seconds": 15.3
+    },
+    {
+      "arm": "C_caps_kept_varying_fibres",
+      "subject": "uw_ID008_PreAbl_rev1.vtk",
+      "n_nodes": 2075,
+      "inducible": false,
+      "sustained_ms": 284.60000000000014,
+      "fibrosis_mean": 0.2403447858882502,
+      "fibre_spread": 0.6966695925584202,
+      "seconds": 12.9
+    },
+    {
+      "arm": "C_caps_kept_varying_fibres",
+      "subject": "uw_ID009_PreAbl_rev1.vtk",
+      "n_nodes": 2092,
+      "inducible": false,
+      "sustained_ms": 268.55000000000007,
+      "fibrosis_mean": 0.22143046809502087,
+      "fibre_spread": 0.6681968744255187,
+      "seconds": 12.2
+    },
+    {
+      "arm": "C_caps_kept_varying_fibres",
+      "subject": "uw_ID010_PreAbl_rev1.vtk",
+      "n_nodes": 2237,
+      "inducible": false,
+      "sustained_ms": 481.3000000000002,
+      "fibrosis_mean": 0.3204478224502065,
+      "fibre_spread": 0.68814883243271,
+      "seconds": 16.7
+    },
+    {
+      "arm": "C_caps_kept_varying_fibres",
+      "subject": "uw_ID011_PreAbl_rev1.vtk",
+      "n_nodes": 2092,
+      "inducible": false,
+      "sustained_ms": 471.5,
+      "fibrosis_mean": 0.32816032535191136,
+      "fibre_spread": 0.678820444309195,
+      "seconds": 16.4
+    },
+    {
+      "arm": "C_caps_kept_varying_fibres",
+      "subject": "uw_ID012_PreAbl_rev1.vtk",
+      "n_nodes": 2129,
+      "inducible": false,
+      "sustained_ms": 375.29999999999995,
+      "fibrosis_mean": 0.3596031656269095,
+      "fibre_spread": 0.703495408725562,
+      "seconds": 14.1
+    },
+    {
+      "arm": "C_caps_kept_varying_fibres",
+      "subject": "uw_ID013_PreAbl_rev1.vtk",
+      "n_nodes": 2133,
+      "inducible": false,
+      "sustained_ms": 312.85000000000014,
+      "fibrosis_mean": 0.3121081955352665,
+      "fibre_spread": 0.6618803382978614,
+      "seconds": 32.0
+    },
+    {
+      "arm": "C_caps_kept_varying_fibres",
+      "subject": "uw_ID014_PreAbl_rev1.vtk",
+      "n_nodes": 2130,
+      "inducible": false,
+      "sustained_ms": 305.0,
+      "fibrosis_mean": 0.37896788927920827,
+      "fibre_spread": 0.6717481242301631,
+      "seconds": 32.6
+    },
+    {
+      "arm": "C_caps_kept_varying_fibres",
+      "subject": "uw_ID015_PreAbl_rev1.vtk",
+      "n_nodes": 2177,
+      "inducible": false,
+      "sustained_ms": 238.0,
+      "fibrosis_mean": 0.24939625090626677,
+      "fibre_spread": 0.6572768665867722,
+      "seconds": 30.5
+    },
+    {
+      "arm": "C_caps_kept_varying_fibres",
+      "subject": "uw_ID021_PreAbl_rev1.vtk",
+      "n_nodes": 2086,
+      "inducible": true,
+      "sustained_ms": 707.1000000000001,
+      "fibrosis_mean": 0.2992241566905974,
+      "fibre_spread": 0.65687640849142,
+      "seconds": 45.0
+    },
+    {
+      "arm": "C_caps_kept_varying_fibres",
+      "subject": "uw_ID022_PreAbl_rev1.vtk",
+      "n_nodes": 2109,
+      "inducible": false,
+      "sustained_ms": 435.29999999999995,
+      "fibrosis_mean": 0.42221567045277236,
+      "fibre_spread": 0.6817472752983169,
+      "seconds": 50.9
+    },
+    {
+      "arm": "C_caps_kept_varying_fibres",
+      "subject": "uw_ID023_PreAbl_rev1.vtk",
+      "n_nodes": 2271,
+      "inducible": false,
+      "sustained_ms": 222.35000000000002,
+      "fibrosis_mean": 0.1718687119829931,
+      "fibre_spread": 0.7057076496896473,
+      "seconds": 54.5
+    },
+    {
+      "arm": "C_caps_kept_varying_fibres",
+      "subject": "uw_ID024_PreAbl_rev1.vtk",
+      "n_nodes": 2156,
+      "inducible": false,
+      "sustained_ms": 293.20000000000005,
+      "fibrosis_mean": 0.3605241651707071,
+      "fibre_spread": 0.6757979987104109,
+      "seconds": 59.0
+    },
+    {
+      "arm": "C_caps_kept_varying_fibres",
+      "subject": "uw_ID025_PreAbl_rev1.vtk",
+      "n_nodes": 2149,
+      "inducible": false,
+      "sustained_ms": 307.10000000000014,
+      "fibrosis_mean": 0.22758600629886844,
+      "fibre_spread": 0.6607225707082602,
+      "seconds": 57.4
+    },
+    {
+      "arm": "C_caps_kept_varying_fibres",
+      "subject": "uw_ID026_PreAbl_rev1.vtk",
+      "n_nodes": 2197,
+      "inducible": true,
+      "sustained_ms": 999.95,
+      "fibrosis_mean": 0.2637897548187755,
+      "fibre_spread": 0.7000964929384689,
+      "seconds": 80.4
+    },
+    {
+      "arm": "C_caps_kept_varying_fibres",
+      "subject": "uw_ID027_PreAbl_rev1.vtk",
+      "n_nodes": 2166,
+      "inducible": false,
+      "sustained_ms": 233.9000000000001,
+      "fibrosis_mean": 0.2457818117981351,
+      "fibre_spread": 0.6737009153745949,
+      "seconds": 54.4
+    },
+    {
+      "arm": "C_caps_kept_varying_fibres",
+      "subject": "uw_ID028_PreAbl_rev1.vtk",
+      "n_nodes": 2134,
+      "inducible": false,
+      "sustained_ms": 371.20000000000005,
+      "fibrosis_mean": 0.296847567475056,
+      "fibre_spread": 0.6464214952631375,
+      "seconds": 63.6
+    },
+    {
+      "arm": "C_caps_kept_varying_fibres",
+      "subject": "uw_ID029_PreAbl_rev1.vtk",
+      "n_nodes": 2160,
+      "inducible": false,
+      "sustained_ms": 260.1500000000001,
+      "fibrosis_mean": 0.2644425194379138,
+      "fibre_spread": 0.6335839645039814,
+      "seconds": 59.5
+    },
+    {
+      "arm": "C_caps_kept_varying_fibres",
+      "subject": "uw_ID030_PreAbl_rev1.vtk",
+      "n_nodes": 2103,
+      "inducible": false,
+      "sustained_ms": 375.54999999999995,
+      "fibrosis_mean": 0.34840594853713824,
+      "fibre_spread": 0.6702032574299891,
+      "seconds": 61.3
+    },
+    {
+      "arm": "C_caps_kept_varying_fibres",
+      "subject": "uw_ID031_PreAbl_rev1.vtk",
+      "n_nodes": 2294,
+      "inducible": true,
+      "sustained_ms": 784.1500000000001,
+      "fibrosis_mean": 0.3574313541732751,
+      "fibre_spread": 0.6172799536312074,
+      "seconds": 93.3
+    },
+    {
+      "arm": "C_caps_kept_varying_fibres",
+      "subject": "uw_ID032_PreAbl_rev1.vtk",
+      "n_nodes": 2219,
+      "inducible": false,
+      "sustained_ms": 352.10000000000014,
+      "fibrosis_mean": 0.35460451726363534,
+      "fibre_spread": 0.6609753710637898,
+      "seconds": 70.2
+    },
+    {
+      "arm": "C_caps_kept_varying_fibres",
+      "subject": "uw_ID033_PreAbl_rev1.vtk",
+      "n_nodes": 2151,
+      "inducible": false,
+      "sustained_ms": 327.6500000000001,
+      "fibrosis_mean": 0.3398278345683208,
+      "fibre_spread": 0.6708403450431435,
+      "seconds": 63.9
+    },
+    {
+      "arm": "C_caps_kept_varying_fibres",
+      "subject": "uw_ID034_PreAbl_rev1.vtk",
+      "n_nodes": 2039,
+      "inducible": false,
+      "sustained_ms": 326.45000000000005,
+      "fibrosis_mean": 0.1703516054229908,
+      "fibre_spread": 0.6526404584980576,
+      "seconds": 63.7
+    },
+    {
+      "arm": "C_caps_kept_varying_fibres",
+      "subject": "uw_ID035_PreAbl_rev1.vtk",
+      "n_nodes": 2195,
+      "inducible": false,
+      "sustained_ms": 367.60000000000014,
+      "fibrosis_mean": 0.15753642523998976,
+      "fibre_spread": 0.6818105335353564,
+      "seconds": 67.8
+    },
+    {
+      "arm": "C_caps_kept_varying_fibres",
+      "subject": "uw_ID036_PreAbl_rev1.vtk",
+      "n_nodes": 2265,
+      "inducible": false,
+      "sustained_ms": 308.4000000000001,
+      "fibrosis_mean": 0.2768567644052905,
+      "fibre_spread": 0.6392392879676284,
+      "seconds": 69.4
+    },
+    {
+      "arm": "C_caps_kept_varying_fibres",
+      "subject": "uw_ID037_PreAbl_rev1.vtk",
+      "n_nodes": 2189,
+      "inducible": false,
+      "sustained_ms": 432.6500000000001,
+      "fibrosis_mean": 0.3938203414879551,
+      "fibre_spread": 0.6723247921365261,
+      "seconds": 71.0
+    },
+    {
+      "arm": "C_caps_kept_varying_fibres",
+      "subject": "uw_ID038_PreAbl_rev1.vtk",
+      "n_nodes": 2268,
+      "inducible": false,
+      "sustained_ms": 422.60000000000014,
+      "fibrosis_mean": 0.393442106079818,
+      "fibre_spread": 0.6651158119204017,
+      "seconds": 70.6
+    },
+    {
+      "arm": "C_caps_kept_varying_fibres",
+      "subject": "uw_ID039_PreAbl_rev1.vtk",
+      "n_nodes": 2250,
+      "inducible": false,
+      "sustained_ms": 293.25,
+      "fibrosis_mean": 0.14830480341792948,
+      "fibre_spread": 0.6639999067374217,
+      "seconds": 63.7
+    },
+    {
+      "arm": "C_caps_kept_varying_fibres",
+      "subject": "uw_ID040_PreAbl_rev1.vtk",
+      "n_nodes": 2001,
+      "inducible": false,
+      "sustained_ms": 459.95000000000005,
+      "fibrosis_mean": 0.35597724821341165,
+      "fibre_spread": 0.6581337106354076,
+      "seconds": 63.9
+    },
+    {
+      "arm": "C_caps_kept_varying_fibres",
+      "subject": "uw_ID041_PreAbl_rev1.vtk",
+      "n_nodes": 2015,
+      "inducible": false,
+      "sustained_ms": 359.4000000000001,
+      "fibrosis_mean": 0.2511902537062875,
+      "fibre_spread": 0.6220938110657159,
+      "seconds": 60.0
+    },
+    {
+      "arm": "C_caps_kept_varying_fibres",
+      "subject": "uw_ID042_PreAbl_rev1.vtk",
+      "n_nodes": 2125,
+      "inducible": true,
+      "sustained_ms": 999.95,
+      "fibrosis_mean": 0.4330635191068023,
+      "fibre_spread": 0.6353353993919643,
+      "seconds": 80.8
+    },
+    {
+      "arm": "C_caps_kept_varying_fibres",
+      "subject": "uw_ID043_PreAbl_rev1.vtk",
+      "n_nodes": 2052,
+      "inducible": false,
+      "sustained_ms": 312.6500000000001,
+      "fibrosis_mean": 0.423417364754916,
+      "fibre_spread": 0.708155670301599,
+      "seconds": 61.5
+    },
+    {
+      "arm": "C_caps_kept_varying_fibres",
+      "subject": "uw_ID044_PreAbl_rev1.vtk",
+      "n_nodes": 2225,
+      "inducible": false,
+      "sustained_ms": 295.54999999999995,
+      "fibrosis_mean": 0.3280402319559123,
+      "fibre_spread": 0.7201251415543766,
+      "seconds": 61.8
+    },
+    {
+      "arm": "C_caps_kept_varying_fibres",
+      "subject": "uw_ID045_PreAbl_rev1.vtk",
+      "n_nodes": 2254,
+      "inducible": false,
+      "sustained_ms": 582.8000000000002,
+      "fibrosis_mean": 0.3603261937567421,
+      "fibre_spread": 0.6093277785914362,
+      "seconds": 76.9
+    },
+    {
+      "arm": "C_caps_kept_varying_fibres",
+      "subject": "uw_ID046_PreAbl_rev1.vtk",
+      "n_nodes": 2022,
+      "inducible": true,
+      "sustained_ms": 999.95,
+      "fibrosis_mean": 0.3547584536033968,
+      "fibre_spread": 0.6510384795394336,
+      "seconds": 74.8
+    },
+    {
+      "arm": "C_caps_kept_varying_fibres",
+      "subject": "uw_ID047_PreAbl_rev1.vtk",
+      "n_nodes": 2108,
+      "inducible": true,
+      "sustained_ms": 999.95,
+      "fibrosis_mean": 0.36811224263301545,
+      "fibre_spread": 0.6172719184347865,
+      "seconds": 99.3
+    },
+    {
+      "arm": "C_caps_kept_varying_fibres",
+      "subject": "uw_ID048_PreAbl_rev1.vtk",
+      "n_nodes": 2012,
+      "inducible": false,
+      "sustained_ms": 363.1500000000001,
+      "fibrosis_mean": 0.3642136080870345,
+      "fibre_spread": 0.6634582796031578,
+      "seconds": 56.9
+    },
+    {
+      "arm": "C_caps_kept_varying_fibres",
+      "subject": "uw_ID049_PreAbl_rev1.vtk",
+      "n_nodes": 2090,
+      "inducible": false,
+      "sustained_ms": 281.85000000000014,
+      "fibrosis_mean": 0.21921546011662335,
+      "fibre_spread": 0.6418712424642103,
+      "seconds": 57.7
+    },
+    {
+      "arm": "C_caps_kept_varying_fibres",
+      "subject": "uw_ID050_PreAbl_rev1.vtk",
+      "n_nodes": 2013,
+      "inducible": false,
+      "sustained_ms": 302.45000000000005,
+      "fibrosis_mean": 0.2681606882330117,
+      "fibre_spread": 0.6182916734442486,
+      "seconds": 56.5
+    },
+    {
+      "arm": "C_caps_kept_varying_fibres",
+      "subject": "uw_ID051_PreAbl_rev1.vtk",
+      "n_nodes": 2164,
+      "inducible": false,
+      "sustained_ms": 338.75,
+      "fibrosis_mean": 0.3856201205907111,
+      "fibre_spread": 0.6742992719235683,
+      "seconds": 65.1
+    },
+    {
+      "arm": "C_caps_kept_varying_fibres",
+      "subject": "uw_ID052_PreAbl_rev1.vtk",
+      "n_nodes": 2135,
+      "inducible": false,
+      "sustained_ms": 271.1,
+      "fibrosis_mean": 0.15383964988867252,
+      "fibre_spread": 0.6374828970070935,
+      "seconds": 61.9
+    },
+    {
+      "arm": "C_caps_kept_varying_fibres",
+      "subject": "uw_ID053_PreAbl_rev1.vtk",
+      "n_nodes": 2266,
+      "inducible": false,
+      "sustained_ms": 559.0500000000002,
+      "fibrosis_mean": 0.22816392672206257,
+      "fibre_spread": 0.6605024448761648,
+      "seconds": 83.2
+    },
+    {
+      "arm": "C_caps_kept_varying_fibres",
+      "subject": "uw_ID054_PreAbl_rev1.vtk",
+      "n_nodes": 2024,
+      "inducible": false,
+      "sustained_ms": 324.1500000000001,
+      "fibrosis_mean": 0.395095025276722,
+      "fibre_spread": 0.6669153570872153,
+      "seconds": 64.2
+    },
+    {
+      "arm": "C_caps_kept_varying_fibres",
+      "subject": "uw_ID055_PreAbl_rev1.vtk",
+      "n_nodes": 2080,
+      "inducible": false,
+      "sustained_ms": 394.85000000000014,
+      "fibrosis_mean": 0.4033021567940601,
+      "fibre_spread": 0.6318088361659124,
+      "seconds": 69.0
+    },
+    {
+      "arm": "C_caps_kept_varying_fibres",
+      "subject": "uw_ID056_PreAbl_rev1.vtk",
+      "n_nodes": 2042,
+      "inducible": false,
+      "sustained_ms": 349.4000000000001,
+      "fibrosis_mean": 0.40372719460529516,
+      "fibre_spread": 0.6043425172341644,
+      "seconds": 64.8
+    },
+    {
+      "arm": "C_caps_kept_varying_fibres",
+      "subject": "uw_ID057_PreAbl_rev1.vtk",
+      "n_nodes": 2109,
+      "inducible": false,
+      "sustained_ms": 329.5,
+      "fibrosis_mean": 0.41390679974724126,
+      "fibre_spread": 0.6904445559782761,
+      "seconds": 64.6
+    },
+    {
+      "arm": "C_caps_kept_varying_fibres",
+      "subject": "uw_ID058_PreAbl_rev1.vtk",
+      "n_nodes": 2039,
+      "inducible": false,
+      "sustained_ms": 303.45000000000005,
+      "fibrosis_mean": 0.22830164315929072,
+      "fibre_spread": 0.6849815744563749,
+      "seconds": 61.7
+    },
+    {
+      "arm": "C_caps_kept_varying_fibres",
+      "subject": "uw_ID059_PreAbl_rev1.vtk",
+      "n_nodes": 2276,
+      "inducible": false,
+      "sustained_ms": 309.29999999999995,
+      "fibrosis_mean": 0.3460977612368288,
+      "fibre_spread": 0.6717975776377334,
+      "seconds": 64.1
+    },
+    {
+      "arm": "C_caps_kept_varying_fibres",
+      "subject": "uw_ID060_PreAbl_rev1.vtk",
+      "n_nodes": 2056,
+      "inducible": true,
+      "sustained_ms": 741.0500000000002,
+      "fibrosis_mean": 0.23083224948306705,
+      "fibre_spread": 0.6530245787785981,
+      "seconds": 73.3
+    },
+    {
+      "arm": "C_caps_kept_varying_fibres",
+      "subject": "uw_ID061_PreAbl_rev1.vtk",
+      "n_nodes": 2024,
+      "inducible": false,
+      "sustained_ms": 391.35000000000014,
+      "fibrosis_mean": 0.34867268720816885,
+      "fibre_spread": 0.6673150207371691,
+      "seconds": 62.7
+    },
+    {
+      "arm": "C_caps_kept_varying_fibres",
+      "subject": "uw_ID062_PreAbl_rev1.vtk",
+      "n_nodes": 2163,
+      "inducible": false,
+      "sustained_ms": 261.6,
+      "fibrosis_mean": 0.19475445006980938,
+      "fibre_spread": 0.6306094537517967,
+      "seconds": 57.3
+    },
+    {
+      "arm": "C_caps_kept_varying_fibres",
+      "subject": "uw_ID063_PreAbl_rev1.vtk",
+      "n_nodes": 2172,
+      "inducible": false,
+      "sustained_ms": 452.6500000000001,
+      "fibrosis_mean": 0.29333593945202596,
+      "fibre_spread": 0.6413466533128234,
+      "seconds": 72.6
+    },
+    {
+      "arm": "C_caps_kept_varying_fibres",
+      "subject": "uw_ID064_PreAbl_rev1.vtk",
+      "n_nodes": 2118,
+      "inducible": false,
+      "sustained_ms": 298.79999999999995,
+      "fibrosis_mean": 0.3400563357653228,
+      "fibre_spread": 0.6579994734657258,
+      "seconds": 59.0
+    },
+    {
+      "arm": "C_caps_kept_varying_fibres",
+      "subject": "uw_ID065_PreAbl_rev1.vtk",
+      "n_nodes": 2246,
+      "inducible": false,
+      "sustained_ms": 597.45,
+      "fibrosis_mean": 0.4206776430331131,
+      "fibre_spread": 0.633887162166927,
+      "seconds": 83.0
+    },
+    {
+      "arm": "C_caps_kept_varying_fibres",
+      "subject": "uw_ID066_PreAbl_rev1.vtk",
+      "n_nodes": 2293,
+      "inducible": false,
+      "sustained_ms": 446.9000000000001,
+      "fibrosis_mean": 0.2627604137844137,
+      "fibre_spread": 0.6442663170307344,
+      "seconds": 78.6
+    },
+    {
+      "arm": "C_caps_kept_varying_fibres",
+      "subject": "uw_ID067_PreAbl_rev1.vtk",
+      "n_nodes": 2215,
+      "inducible": false,
+      "sustained_ms": 347.25,
+      "fibrosis_mean": 0.4157131104449997,
+      "fibre_spread": 0.6304043275981901,
+      "seconds": 69.4
+    },
+    {
+      "arm": "C_caps_kept_varying_fibres",
+      "subject": "uw_ID068_PreAbl_rev1.vtk",
+      "n_nodes": 2049,
+      "inducible": false,
+      "sustained_ms": 341.70000000000005,
+      "fibrosis_mean": 0.46950234364496335,
+      "fibre_spread": 0.6788170726725189,
+      "seconds": 63.5
+    },
+    {
+      "arm": "C_caps_kept_varying_fibres",
+      "subject": "uw_ID069_PreAbl_rev1.vtk",
+      "n_nodes": 2173,
+      "inducible": false,
+      "sustained_ms": 454.9000000000001,
+      "fibrosis_mean": 0.2917138365202184,
+      "fibre_spread": 0.6538606588650914,
+      "seconds": 73.2
+    },
+    {
+      "arm": "C_caps_kept_varying_fibres",
+      "subject": "uw_ID070_PreAbl_rev1.vtk",
+      "n_nodes": 2043,
+      "inducible": false,
+      "sustained_ms": 308.20000000000005,
+      "fibrosis_mean": 0.3089156003939668,
+      "fibre_spread": 0.6744592283731632,
+      "seconds": 58.0
+    },
+    {
+      "arm": "C_caps_kept_varying_fibres",
+      "subject": "uw_ID071_PreAbl_rev1.vtk",
+      "n_nodes": 2021,
+      "inducible": false,
+      "sustained_ms": 385.35000000000014,
+      "fibrosis_mean": 0.30664256272681056,
+      "fibre_spread": 0.6347797432748009,
+      "seconds": 61.4
+    },
+    {
+      "arm": "C_caps_kept_varying_fibres",
+      "subject": "uw_ID072_PreAbl_rev1.vtk",
+      "n_nodes": 2168,
+      "inducible": false,
+      "sustained_ms": 342.5,
+      "fibrosis_mean": 0.26545020750035014,
+      "fibre_spread": 0.6644392461455345,
+      "seconds": 66.3
+    },
+    {
+      "arm": "C_caps_kept_varying_fibres",
+      "subject": "uw_ID073_PreAbl_rev1.vtk",
+      "n_nodes": 2034,
+      "inducible": false,
+      "sustained_ms": 478.4000000000001,
+      "fibrosis_mean": 0.5064336787656185,
+      "fibre_spread": 0.642488377582161,
+      "seconds": 68.0
+    },
+    {
+      "arm": "C_caps_kept_varying_fibres",
+      "subject": "uw_ID074_PreAbl_rev1.vtk",
+      "n_nodes": 2291,
+      "inducible": false,
+      "sustained_ms": 403.0,
+      "fibrosis_mean": 0.3245609183455579,
+      "fibre_spread": 0.6422184869574543,
+      "seconds": 72.0
+    },
+    {
+      "arm": "C_caps_kept_varying_fibres",
+      "subject": "uw_ID075_PreAbl_rev1.vtk",
+      "n_nodes": 2179,
+      "inducible": false,
+      "sustained_ms": 216.20000000000005,
+      "fibrosis_mean": 0.21101894735257676,
+      "fibre_spread": 0.6619613103915611,
+      "seconds": 57.4
+    },
+    {
+      "arm": "C_caps_kept_varying_fibres",
+      "subject": "uw_ID076_PreAbl_rev1.vtk",
+      "n_nodes": 2241,
+      "inducible": false,
+      "sustained_ms": 384.1500000000001,
+      "fibrosis_mean": 0.2712698977441692,
+      "fibre_spread": 0.6831430926306351,
+      "seconds": 68.7
+    },
+    {
+      "arm": "C_caps_kept_varying_fibres",
+      "subject": "uw_ID077_PreAbl_rev1.vtk",
+      "n_nodes": 2012,
+      "inducible": false,
+      "sustained_ms": 306.04999999999995,
+      "fibrosis_mean": 0.3387677820903101,
+      "fibre_spread": 0.6775783843547186,
+      "seconds": 58.4
+    },
+    {
+      "arm": "C_caps_kept_varying_fibres",
+      "subject": "uw_ID078_PreAbl_rev1.vtk",
+      "n_nodes": 2225,
+      "inducible": false,
+      "sustained_ms": 408.75,
+      "fibrosis_mean": 0.3255420596928475,
+      "fibre_spread": 0.6450128571340825,
+      "seconds": 72.9
+    },
+    {
+      "arm": "C_caps_kept_varying_fibres",
+      "subject": "uw_ID079_PreAbl_rev1.vtk",
+      "n_nodes": 2087,
+      "inducible": false,
+      "sustained_ms": 361.5,
+      "fibrosis_mean": 0.37455097943962457,
+      "fibre_spread": 0.701870947865642,
+      "seconds": 61.9
+    },
+    {
+      "arm": "C_caps_kept_varying_fibres",
+      "subject": "uw_ID080_PreAbl_rev1.vtk",
+      "n_nodes": 2241,
+      "inducible": false,
+      "sustained_ms": 360.0,
+      "fibrosis_mean": 0.22858123652930032,
+      "fibre_spread": 0.640964574882006,
+      "seconds": 68.4
+    },
+    {
+      "arm": "C_caps_kept_varying_fibres",
+      "subject": "uw_ID081_PreAbl_rev1.vtk",
+      "n_nodes": 2152,
+      "inducible": false,
+      "sustained_ms": 269.30000000000007,
+      "fibrosis_mean": 0.280579826901774,
+      "fibre_spread": 0.6834355408131154,
+      "seconds": 59.5
+    },
+    {
+      "arm": "C_caps_kept_varying_fibres",
+      "subject": "uw_ID082_PreAbl_rev1.vtk",
+      "n_nodes": 2293,
+      "inducible": false,
+      "sustained_ms": 286.70000000000005,
+      "fibrosis_mean": 0.24749308870873565,
+      "fibre_spread": 0.6585181322421004,
+      "seconds": 65.9
+    },
+    {
+      "arm": "C_caps_kept_varying_fibres",
+      "subject": "uw_ID083_PreAbl_rev1.vtk",
+      "n_nodes": 2074,
+      "inducible": false,
+      "sustained_ms": 336.6500000000001,
+      "fibrosis_mean": 0.3347652236421498,
+      "fibre_spread": 0.6605524550751293,
+      "seconds": 64.4
+    },
+    {
+      "arm": "C_caps_kept_varying_fibres",
+      "subject": "uw_ID084_PreAbl_rev1.vtk",
+      "n_nodes": 2157,
+      "inducible": false,
+      "sustained_ms": 317.10000000000014,
+      "fibrosis_mean": 0.2166196074183657,
+      "fibre_spread": 0.6661412965282429,
+      "seconds": 65.4
+    },
+    {
+      "arm": "C_caps_kept_varying_fibres",
+      "subject": "uw_ID085_PreAbl_rev1.vtk",
+      "n_nodes": 2285,
+      "inducible": false,
+      "sustained_ms": 286.75,
+      "fibrosis_mean": 0.23329811881427598,
+      "fibre_spread": 0.6833991597268654,
+      "seconds": 67.1
+    },
+    {
+      "arm": "C_caps_kept_varying_fibres",
+      "subject": "uw_ID086_PreAbl_rev1.vtk",
+      "n_nodes": 2106,
+      "inducible": false,
+      "sustained_ms": 320.20000000000005,
+      "fibrosis_mean": 0.28703471323685026,
+      "fibre_spread": 0.6252807748516689,
+      "seconds": 69.0
+    },
+    {
+      "arm": "C_caps_kept_varying_fibres",
+      "subject": "uw_ID087_PreAbl_rev1.vtk",
+      "n_nodes": 2189,
+      "inducible": false,
+      "sustained_ms": 293.0,
+      "fibrosis_mean": 0.18188406077391644,
+      "fibre_spread": 0.6464495827531378,
+      "seconds": 72.0
+    },
+    {
+      "arm": "D_caps_dropped_varying_fibres",
+      "subject": "uw_ID001_PreAbl_rev1.vtk",
+      "n_nodes": 2177,
+      "inducible": false,
+      "sustained_ms": 260.25,
+      "fibrosis_mean": 0.15604572138448966,
+      "fibre_spread": 0.7264951130861667,
+      "seconds": 68.8
+    },
+    {
+      "arm": "D_caps_dropped_varying_fibres",
+      "subject": "uw_ID002_PreAbl_rev1.vtk",
+      "n_nodes": 2151,
+      "inducible": false,
+      "sustained_ms": 270.85,
+      "fibrosis_mean": 0.15178491096597208,
+      "fibre_spread": 0.6705183440744718,
+      "seconds": 66.0
+    },
+    {
+      "arm": "D_caps_dropped_varying_fibres",
+      "subject": "uw_ID003_PreAbl_rev1.vtk",
+      "n_nodes": 2058,
+      "inducible": false,
+      "sustained_ms": 247.1500000000001,
+      "fibrosis_mean": 0.17833952420921656,
+      "fibre_spread": 0.7109689839090306,
+      "seconds": 63.1
+    },
+    {
+      "arm": "D_caps_dropped_varying_fibres",
+      "subject": "uw_ID004_PreAbl_rev1.vtk",
+      "n_nodes": 2252,
+      "inducible": false,
+      "sustained_ms": 315.54999999999995,
+      "fibrosis_mean": 0.03366637843403167,
+      "fibre_spread": 0.6704023355766453,
+      "seconds": 76.5
+    },
+    {
+      "arm": "D_caps_dropped_varying_fibres",
+      "subject": "uw_ID005_PreAbl_rev1.vtk",
+      "n_nodes": 2090,
+      "inducible": true,
+      "sustained_ms": 654.25,
+      "fibrosis_mean": 0.4596751063516298,
+      "fibre_spread": 0.639112853541573,
+      "seconds": 89.5
+    },
+    {
+      "arm": "D_caps_dropped_varying_fibres",
+      "subject": "uw_ID006_PreAbl_rev1.vtk",
+      "n_nodes": 2182,
+      "inducible": true,
+      "sustained_ms": 999.95,
+      "fibrosis_mean": 0.33861692687626305,
+      "fibre_spread": 0.6368811000389347,
+      "seconds": 113.9
+    },
+    {
+      "arm": "D_caps_dropped_varying_fibres",
+      "subject": "uw_ID007_PreAbl_rev1.vtk",
+      "n_nodes": 2146,
+      "inducible": true,
+      "sustained_ms": 999.95,
+      "fibrosis_mean": 0.3301342999282075,
+      "fibre_spread": 0.7404408568828401,
+      "seconds": 99.1
+    },
+    {
+      "arm": "D_caps_dropped_varying_fibres",
+      "subject": "uw_ID008_PreAbl_rev1.vtk",
+      "n_nodes": 2131,
+      "inducible": false,
+      "sustained_ms": 256.5,
+      "fibrosis_mean": 0.1833862585519927,
+      "fibre_spread": 0.7144261877160433,
+      "seconds": 68.4
+    },
+    {
+      "arm": "D_caps_dropped_varying_fibres",
+      "subject": "uw_ID009_PreAbl_rev1.vtk",
+      "n_nodes": 2264,
+      "inducible": false,
+      "sustained_ms": 209.95000000000005,
+      "fibrosis_mean": 0.11209282368446233,
+      "fibre_spread": 0.6782200976892987,
+      "seconds": 67.3
+    },
+    {
+      "arm": "D_caps_dropped_varying_fibres",
+      "subject": "uw_ID010_PreAbl_rev1.vtk",
+      "n_nodes": 2272,
+      "inducible": true,
+      "sustained_ms": 999.95,
+      "fibrosis_mean": 0.26721672677639474,
+      "fibre_spread": 0.6926322233325521,
+      "seconds": 103.1
+    },
+    {
+      "arm": "D_caps_dropped_varying_fibres",
+      "subject": "uw_ID011_PreAbl_rev1.vtk",
+      "n_nodes": 2135,
+      "inducible": false,
+      "sustained_ms": 461.85000000000014,
+      "fibrosis_mean": 0.261630279511868,
+      "fibre_spread": 0.694565181387727,
+      "seconds": 80.7
+    },
+    {
+      "arm": "D_caps_dropped_varying_fibres",
+      "subject": "uw_ID012_PreAbl_rev1.vtk",
+      "n_nodes": 2054,
+      "inducible": false,
+      "sustained_ms": 440.10000000000014,
+      "fibrosis_mean": 0.3065381546677607,
+      "fibre_spread": 0.7166420061668773,
+      "seconds": 75.9
+    },
+    {
+      "arm": "D_caps_dropped_varying_fibres",
+      "subject": "uw_ID013_PreAbl_rev1.vtk",
+      "n_nodes": 2199,
+      "inducible": false,
+      "sustained_ms": 279.9000000000001,
+      "fibrosis_mean": 0.2333160412986836,
+      "fibre_spread": 0.6615786729386927,
+      "seconds": 67.4
+    },
+    {
+      "arm": "D_caps_dropped_varying_fibres",
+      "subject": "uw_ID014_PreAbl_rev1.vtk",
+      "n_nodes": 2205,
+      "inducible": false,
+      "sustained_ms": 354.79999999999995,
+      "fibrosis_mean": 0.3231043348351841,
+      "fibre_spread": 0.6721177017810965,
+      "seconds": 70.4
+    },
+    {
+      "arm": "D_caps_dropped_varying_fibres",
+      "subject": "uw_ID015_PreAbl_rev1.vtk",
+      "n_nodes": 2243,
+      "inducible": false,
+      "sustained_ms": 223.35000000000002,
+      "fibrosis_mean": 0.19143175315522623,
+      "fibre_spread": 0.6567601386911083,
+      "seconds": 63.8
+    },
+    {
+      "arm": "D_caps_dropped_varying_fibres",
+      "subject": "uw_ID021_PreAbl_rev1.vtk",
+      "n_nodes": 2014,
+      "inducible": false,
+      "sustained_ms": 275.54999999999995,
+      "fibrosis_mean": 0.21846622180332406,
+      "fibre_spread": 0.6635583735332454,
+      "seconds": 56.4
+    },
+    {
+      "arm": "D_caps_dropped_varying_fibres",
+      "subject": "uw_ID022_PreAbl_rev1.vtk",
+      "n_nodes": 2247,
+      "inducible": false,
+      "sustained_ms": 276.6500000000001,
+      "fibrosis_mean": 0.4024907171658984,
+      "fibre_spread": 0.6958019836590754,
+      "seconds": 63.3
+    },
+    {
+      "arm": "D_caps_dropped_varying_fibres",
+      "subject": "uw_ID023_PreAbl_rev1.vtk",
+      "n_nodes": 2194,
+      "inducible": false,
+      "sustained_ms": 542.3500000000001,
+      "fibrosis_mean": 0.08116993563755695,
+      "fibre_spread": 0.7238403424188268,
+      "seconds": 68.0
+    },
+    {
+      "arm": "D_caps_dropped_varying_fibres",
+      "subject": "uw_ID024_PreAbl_rev1.vtk",
+      "n_nodes": 2291,
+      "inducible": false,
+      "sustained_ms": 245.6500000000001,
+      "fibrosis_mean": 0.29517817189781864,
+      "fibre_spread": 0.692889976131866,
+      "seconds": 63.7
+    },
+    {
+      "arm": "D_caps_dropped_varying_fibres",
+      "subject": "uw_ID025_PreAbl_rev1.vtk",
+      "n_nodes": 2175,
+      "inducible": false,
+      "sustained_ms": 316.35000000000014,
+      "fibrosis_mean": 0.16207480918819447,
+      "fibre_spread": 0.6613755219987425,
+      "seconds": 65.2
+    },
+    {
+      "arm": "D_caps_dropped_varying_fibres",
+      "subject": "uw_ID026_PreAbl_rev1.vtk",
+      "n_nodes": 2219,
+      "inducible": false,
+      "sustained_ms": 373.25,
+      "fibrosis_mean": 0.2014478238686566,
+      "fibre_spread": 0.7219314643649044,
+      "seconds": 70.5
+    },
+    {
+      "arm": "D_caps_dropped_varying_fibres",
+      "subject": "uw_ID027_PreAbl_rev1.vtk",
+      "n_nodes": 2099,
+      "inducible": false,
+      "sustained_ms": 224.30000000000007,
+      "fibrosis_mean": 0.16082631718455312,
+      "fibre_spread": 0.6653182089738794,
+      "seconds": 61.5
+    },
+    {
+      "arm": "D_caps_dropped_varying_fibres",
+      "subject": "uw_ID028_PreAbl_rev1.vtk",
+      "n_nodes": 1999,
+      "inducible": false,
+      "sustained_ms": 334.29999999999995,
+      "fibrosis_mean": 0.24085854315841032,
+      "fibre_spread": 0.6391385538955424,
+      "seconds": 64.2
+    },
+    {
+      "arm": "D_caps_dropped_varying_fibres",
+      "subject": "uw_ID029_PreAbl_rev1.vtk",
+      "n_nodes": 2225,
+      "inducible": false,
+      "sustained_ms": 242.60000000000002,
+      "fibrosis_mean": 0.1886498594207489,
+      "fibre_spread": 0.6118414228723013,
+      "seconds": 65.9
+    },
+    {
+      "arm": "D_caps_dropped_varying_fibres",
+      "subject": "uw_ID030_PreAbl_rev1.vtk",
+      "n_nodes": 2172,
+      "inducible": false,
+      "sustained_ms": 343.4000000000001,
+      "fibrosis_mean": 0.3008418850183336,
+      "fibre_spread": 0.6758158617252382,
+      "seconds": 68.9
+    },
+    {
+      "arm": "D_caps_dropped_varying_fibres",
+      "subject": "uw_ID031_PreAbl_rev1.vtk",
+      "n_nodes": 2164,
+      "inducible": true,
+      "sustained_ms": 723.1000000000001,
+      "fibrosis_mean": 0.32174186431068835,
+      "fibre_spread": 0.6178607595697395,
+      "seconds": 88.8
+    },
+    {
+      "arm": "D_caps_dropped_varying_fibres",
+      "subject": "uw_ID032_PreAbl_rev1.vtk",
+      "n_nodes": 2122,
+      "inducible": false,
+      "sustained_ms": 304.75,
+      "fibrosis_mean": 0.3248696890770964,
+      "fibre_spread": 0.6572534792105703,
+      "seconds": 62.0
+    },
+    {
+      "arm": "D_caps_dropped_varying_fibres",
+      "subject": "uw_ID033_PreAbl_rev1.vtk",
+      "n_nodes": 2018,
+      "inducible": false,
+      "sustained_ms": 367.5,
+      "fibrosis_mean": 0.2992804545203525,
+      "fibre_spread": 0.6814006694140586,
+      "seconds": 60.7
+    },
+    {
+      "arm": "D_caps_dropped_varying_fibres",
+      "subject": "uw_ID034_PreAbl_rev1.vtk",
+      "n_nodes": 2147,
+      "inducible": false,
+      "sustained_ms": 286.20000000000005,
+      "fibrosis_mean": 0.08155406817290654,
+      "fibre_spread": 0.6446354514569073,
+      "seconds": 60.2
+    },
+    {
+      "arm": "D_caps_dropped_varying_fibres",
+      "subject": "uw_ID035_PreAbl_rev1.vtk",
+      "n_nodes": 2207,
+      "inducible": false,
+      "sustained_ms": 329.29999999999995,
+      "fibrosis_mean": 0.06393072488065549,
+      "fibre_spread": 0.684686726630532,
+      "seconds": 62.2
+    },
+    {
+      "arm": "D_caps_dropped_varying_fibres",
+      "subject": "uw_ID036_PreAbl_rev1.vtk",
+      "n_nodes": 2002,
+      "inducible": false,
+      "sustained_ms": 297.85000000000014,
+      "fibrosis_mean": 0.20974250935290686,
+      "fibre_spread": 0.6488567706985693,
+      "seconds": 55.0
+    },
+    {
+      "arm": "D_caps_dropped_varying_fibres",
+      "subject": "uw_ID037_PreAbl_rev1.vtk",
+      "n_nodes": 2003,
+      "inducible": false,
+      "sustained_ms": 397.04999999999995,
+      "fibrosis_mean": 0.3627215796011006,
+      "fibre_spread": 0.6802221059899684,
+      "seconds": 56.7
+    },
+    {
+      "arm": "D_caps_dropped_varying_fibres",
+      "subject": "uw_ID038_PreAbl_rev1.vtk",
+      "n_nodes": 2078,
+      "inducible": false,
+      "sustained_ms": 364.75,
+      "fibrosis_mean": 0.3561182923627392,
+      "fibre_spread": 0.6668747753656317,
+      "seconds": 59.3
+    },
+    {
+      "arm": "D_caps_dropped_varying_fibres",
+      "subject": "uw_ID039_PreAbl_rev1.vtk",
+      "n_nodes": 2112,
+      "inducible": false,
+      "sustained_ms": 295.20000000000005,
+      "fibrosis_mean": 0.06967722051694089,
+      "fibre_spread": 0.6586097557418376,
+      "seconds": 53.7
+    },
+    {
+      "arm": "D_caps_dropped_varying_fibres",
+      "subject": "uw_ID040_PreAbl_rev1.vtk",
+      "n_nodes": 2170,
+      "inducible": false,
+      "sustained_ms": 413.5,
+      "fibrosis_mean": 0.31483130801972947,
+      "fibre_spread": 0.6696298337022755,
+      "seconds": 64.7
+    },
+    {
+      "arm": "D_caps_dropped_varying_fibres",
+      "subject": "uw_ID041_PreAbl_rev1.vtk",
+      "n_nodes": 2206,
+      "inducible": false,
+      "sustained_ms": 324.29999999999995,
+      "fibrosis_mean": 0.18505148394807136,
+      "fibre_spread": 0.6237801525539244,
+      "seconds": 60.6
+    },
+    {
+      "arm": "D_caps_dropped_varying_fibres",
+      "subject": "uw_ID042_PreAbl_rev1.vtk",
+      "n_nodes": 2199,
+      "inducible": true,
+      "sustained_ms": 999.95,
+      "fibrosis_mean": 0.41327982909615624,
+      "fibre_spread": 0.6450123283854411,
+      "seconds": 85.4
+    },
+    {
+      "arm": "D_caps_dropped_varying_fibres",
+      "subject": "uw_ID043_PreAbl_rev1.vtk",
+      "n_nodes": 2143,
+      "inducible": false,
+      "sustained_ms": 297.60000000000014,
+      "fibrosis_mean": 0.3907802123079629,
+      "fibre_spread": 0.7231549456982569,
+      "seconds": 55.7
+    },
+    {
+      "arm": "D_caps_dropped_varying_fibres",
+      "subject": "uw_ID044_PreAbl_rev1.vtk",
+      "n_nodes": 2169,
+      "inducible": false,
+      "sustained_ms": 276.75,
+      "fibrosis_mean": 0.24748727879355265,
+      "fibre_spread": 0.7342309518906258,
+      "seconds": 56.1
+    },
+    {
+      "arm": "D_caps_dropped_varying_fibres",
+      "subject": "uw_ID045_PreAbl_rev1.vtk",
+      "n_nodes": 2120,
+      "inducible": true,
+      "sustained_ms": 999.95,
+      "fibrosis_mean": 0.32035908974508054,
+      "fibre_spread": 0.620174803707784,
+      "seconds": 87.1
+    },
+    {
+      "arm": "D_caps_dropped_varying_fibres",
+      "subject": "uw_ID046_PreAbl_rev1.vtk",
+      "n_nodes": 2257,
+      "inducible": false,
+      "sustained_ms": 367.35000000000014,
+      "fibrosis_mean": 0.2972266345782914,
+      "fibre_spread": 0.6508260061465656,
+      "seconds": 63.4
+    },
+    {
+      "arm": "D_caps_dropped_varying_fibres",
+      "subject": "uw_ID047_PreAbl_rev1.vtk",
+      "n_nodes": 2280,
+      "inducible": false,
+      "sustained_ms": 451.04999999999995,
+      "fibrosis_mean": 0.327649682693753,
+      "fibre_spread": 0.6090632907211064,
+      "seconds": 70.8
+    },
+    {
+      "arm": "D_caps_dropped_varying_fibres",
+      "subject": "uw_ID048_PreAbl_rev1.vtk",
+      "n_nodes": 2000,
+      "inducible": false,
+      "sustained_ms": 328.4000000000001,
+      "fibrosis_mean": 0.33109905316872984,
+      "fibre_spread": 0.6547660838380639,
+      "seconds": 57.0
+    },
+    {
+      "arm": "D_caps_dropped_varying_fibres",
+      "subject": "uw_ID049_PreAbl_rev1.vtk",
+      "n_nodes": 2164,
+      "inducible": false,
+      "sustained_ms": 281.29999999999995,
+      "fibrosis_mean": 0.14643005592609382,
+      "fibre_spread": 0.6478857335512636,
+      "seconds": 58.2
+    },
+    {
+      "arm": "D_caps_dropped_varying_fibres",
+      "subject": "uw_ID050_PreAbl_rev1.vtk",
+      "n_nodes": 2214,
+      "inducible": false,
+      "sustained_ms": 264.1,
+      "fibrosis_mean": 0.21603207120982967,
+      "fibre_spread": 0.6336381867402372,
+      "seconds": 57.1
+    },
+    {
+      "arm": "D_caps_dropped_varying_fibres",
+      "subject": "uw_ID051_PreAbl_rev1.vtk",
+      "n_nodes": 2234,
+      "inducible": false,
+      "sustained_ms": 361.1500000000001,
+      "fibrosis_mean": 0.35666962080521347,
+      "fibre_spread": 0.6586243844378465,
+      "seconds": 64.2
+    },
+    {
+      "arm": "D_caps_dropped_varying_fibres",
+      "subject": "uw_ID052_PreAbl_rev1.vtk",
+      "n_nodes": 2186,
+      "inducible": false,
+      "sustained_ms": 308.79999999999995,
+      "fibrosis_mean": 0.09413486720309912,
+      "fibre_spread": 0.6356629685355047,
+      "seconds": 59.3
+    },
+    {
+      "arm": "D_caps_dropped_varying_fibres",
+      "subject": "uw_ID053_PreAbl_rev1.vtk",
+      "n_nodes": 2079,
+      "inducible": true,
+      "sustained_ms": 650.0500000000002,
+      "fibrosis_mean": 0.14995817578329773,
+      "fibre_spread": 0.6618748811223146,
+      "seconds": 71.3
+    },
+    {
+      "arm": "D_caps_dropped_varying_fibres",
+      "subject": "uw_ID054_PreAbl_rev1.vtk",
+      "n_nodes": 2026,
+      "inducible": false,
+      "sustained_ms": 299.0,
+      "fibrosis_mean": 0.36688475421389016,
+      "fibre_spread": 0.6836719581392825,
+      "seconds": 54.6
+    },
+    {
+      "arm": "D_caps_dropped_varying_fibres",
+      "subject": "uw_ID055_PreAbl_rev1.vtk",
+      "n_nodes": 2140,
+      "inducible": false,
+      "sustained_ms": 427.29999999999995,
+      "fibrosis_mean": 0.35886216563430445,
+      "fibre_spread": 0.5952947468362912,
+      "seconds": 62.0
+    },
+    {
+      "arm": "D_caps_dropped_varying_fibres",
+      "subject": "uw_ID056_PreAbl_rev1.vtk",
+      "n_nodes": 2152,
+      "inducible": false,
+      "sustained_ms": 414.79999999999995,
+      "fibrosis_mean": 0.3738814437746174,
+      "fibre_spread": 0.6103902909798712,
+      "seconds": 61.4
+    },
+    {
+      "arm": "D_caps_dropped_varying_fibres",
+      "subject": "uw_ID057_PreAbl_rev1.vtk",
+      "n_nodes": 1998,
+      "inducible": false,
+      "sustained_ms": 335.95000000000005,
+      "fibrosis_mean": 0.38061986137509546,
+      "fibre_spread": 0.6982621589392454,
+      "seconds": 53.5
+    },
+    {
+      "arm": "D_caps_dropped_varying_fibres",
+      "subject": "uw_ID058_PreAbl_rev1.vtk",
+      "n_nodes": 2288,
+      "inducible": false,
+      "sustained_ms": 259.95000000000005,
+      "fibrosis_mean": 0.14474449663688305,
+      "fibre_spread": 0.6937160258122369,
+      "seconds": 58.9
+    },
+    {
+      "arm": "D_caps_dropped_varying_fibres",
+      "subject": "uw_ID059_PreAbl_rev1.vtk",
+      "n_nodes": 2087,
+      "inducible": false,
+      "sustained_ms": 393.25,
+      "fibrosis_mean": 0.2702074488044864,
+      "fibre_spread": 0.6664039439004431,
+      "seconds": 56.7
+    },
+    {
+      "arm": "D_caps_dropped_varying_fibres",
+      "subject": "uw_ID060_PreAbl_rev1.vtk",
+      "n_nodes": 2025,
+      "inducible": false,
+      "sustained_ms": 369.54999999999995,
+      "fibrosis_mean": 0.18861807563687275,
+      "fibre_spread": 0.6557483563741804,
+      "seconds": 58.3
+    },
+    {
+      "arm": "D_caps_dropped_varying_fibres",
+      "subject": "uw_ID061_PreAbl_rev1.vtk",
+      "n_nodes": 2097,
+      "inducible": false,
+      "sustained_ms": 376.45000000000005,
+      "fibrosis_mean": 0.3097371478212557,
+      "fibre_spread": 0.6724662370082216,
+      "seconds": 62.7
+    },
+    {
+      "arm": "D_caps_dropped_varying_fibres",
+      "subject": "uw_ID062_PreAbl_rev1.vtk",
+      "n_nodes": 2221,
+      "inducible": false,
+      "sustained_ms": 222.05000000000007,
+      "fibrosis_mean": 0.06948262470617121,
+      "fibre_spread": 0.6788515484824833,
+      "seconds": 55.8
+    },
+    {
+      "arm": "D_caps_dropped_varying_fibres",
+      "subject": "uw_ID063_PreAbl_rev1.vtk",
+      "n_nodes": 2039,
+      "inducible": true,
+      "sustained_ms": 999.95,
+      "fibrosis_mean": 0.2423467211046743,
+      "fibre_spread": 0.6512750046634976,
+      "seconds": 75.9
+    },
+    {
+      "arm": "D_caps_dropped_varying_fibres",
+      "subject": "uw_ID064_PreAbl_rev1.vtk",
+      "n_nodes": 2263,
+      "inducible": false,
+      "sustained_ms": 286.29999999999995,
+      "fibrosis_mean": 0.27447229193101924,
+      "fibre_spread": 0.6579454277933243,
+      "seconds": 59.2
+    },
+    {
+      "arm": "D_caps_dropped_varying_fibres",
+      "subject": "uw_ID065_PreAbl_rev1.vtk",
+      "n_nodes": 2000,
+      "inducible": true,
+      "sustained_ms": 999.95,
+      "fibrosis_mean": 0.3908481850798248,
+      "fibre_spread": 0.647924662224227,
+      "seconds": 84.2
+    },
+    {
+      "arm": "D_caps_dropped_varying_fibres",
+      "subject": "uw_ID066_PreAbl_rev1.vtk",
+      "n_nodes": 2177,
+      "inducible": false,
+      "sustained_ms": 396.1500000000001,
+      "fibrosis_mean": 0.21255679359538748,
+      "fibre_spread": 0.6374629655025078,
+      "seconds": 62.4
+    },
+    {
+      "arm": "D_caps_dropped_varying_fibres",
+      "subject": "uw_ID067_PreAbl_rev1.vtk",
+      "n_nodes": 2155,
+      "inducible": true,
+      "sustained_ms": 999.95,
+      "fibrosis_mean": 0.36759622526487484,
+      "fibre_spread": 0.6461535129732722,
+      "seconds": 73.6
+    },
+    {
+      "arm": "D_caps_dropped_varying_fibres",
+      "subject": "uw_ID068_PreAbl_rev1.vtk",
+      "n_nodes": 1997,
+      "inducible": false,
+      "sustained_ms": 327.4000000000001,
+      "fibrosis_mean": 0.43878708365868896,
+      "fibre_spread": 0.6633743557630986,
+      "seconds": 53.6
+    },
+    {
+      "arm": "D_caps_dropped_varying_fibres",
+      "subject": "uw_ID069_PreAbl_rev1.vtk",
+      "n_nodes": 2153,
+      "inducible": false,
+      "sustained_ms": 573.8500000000001,
+      "fibrosis_mean": 0.2327224987234586,
+      "fibre_spread": 0.6577078046983178,
+      "seconds": 73.1
+    },
+    {
+      "arm": "D_caps_dropped_varying_fibres",
+      "subject": "uw_ID070_PreAbl_rev1.vtk",
+      "n_nodes": 2275,
+      "inducible": false,
+      "sustained_ms": 243.4000000000001,
+      "fibrosis_mean": 0.259137148873106,
+      "fibre_spread": 0.6811394395662831,
+      "seconds": 60.2
+    },
+    {
+      "arm": "D_caps_dropped_varying_fibres",
+      "subject": "uw_ID071_PreAbl_rev1.vtk",
+      "n_nodes": 2147,
+      "inducible": false,
+      "sustained_ms": 376.04999999999995,
+      "fibrosis_mean": 0.2596949616176562,
+      "fibre_spread": 0.6425774571364882,
+      "seconds": 59.3
+    },
+    {
+      "arm": "D_caps_dropped_varying_fibres",
+      "subject": "uw_ID072_PreAbl_rev1.vtk",
+      "n_nodes": 2072,
+      "inducible": false,
+      "sustained_ms": 378.45000000000005,
+      "fibrosis_mean": 0.2200291278866473,
+      "fibre_spread": 0.6589709960695782,
+      "seconds": 64.0
+    },
+    {
+      "arm": "D_caps_dropped_varying_fibres",
+      "subject": "uw_ID073_PreAbl_rev1.vtk",
+      "n_nodes": 2149,
+      "inducible": false,
+      "sustained_ms": 455.85000000000014,
+      "fibrosis_mean": 0.5011508217385283,
+      "fibre_spread": 0.6392792843344898,
+      "seconds": 72.8
+    },
+    {
+      "arm": "D_caps_dropped_varying_fibres",
+      "subject": "uw_ID074_PreAbl_rev1.vtk",
+      "n_nodes": 2184,
+      "inducible": true,
+      "sustained_ms": 999.95,
+      "fibrosis_mean": 0.27530298651234303,
+      "fibre_spread": 0.6443837195673787,
+      "seconds": 86.3
+    },
+    {
+      "arm": "D_caps_dropped_varying_fibres",
+      "subject": "uw_ID075_PreAbl_rev1.vtk",
+      "n_nodes": 2046,
+      "inducible": false,
+      "sustained_ms": 272.9000000000001,
+      "fibrosis_mean": 0.11928599978534989,
+      "fibre_spread": 0.6785497759602164,
+      "seconds": 53.9
+    },
+    {
+      "arm": "D_caps_dropped_varying_fibres",
+      "subject": "uw_ID076_PreAbl_rev1.vtk",
+      "n_nodes": 2045,
+      "inducible": false,
+      "sustained_ms": 353.35000000000014,
+      "fibrosis_mean": 0.20046103309354335,
+      "fibre_spread": 0.6989101877116871,
+      "seconds": 56.3
+    },
+    {
+      "arm": "D_caps_dropped_varying_fibres",
+      "subject": "uw_ID077_PreAbl_rev1.vtk",
+      "n_nodes": 2002,
+      "inducible": false,
+      "sustained_ms": 259.25,
+      "fibrosis_mean": 0.29970525044525936,
+      "fibre_spread": 0.6956347692976206,
+      "seconds": 54.9
+    },
+    {
+      "arm": "D_caps_dropped_varying_fibres",
+      "subject": "uw_ID078_PreAbl_rev1.vtk",
+      "n_nodes": 2032,
+      "inducible": false,
+      "sustained_ms": 350.60000000000014,
+      "fibrosis_mean": 0.2716040681145121,
+      "fibre_spread": 0.6685635142952017,
+      "seconds": 62.0
+    },
+    {
+      "arm": "D_caps_dropped_varying_fibres",
+      "subject": "uw_ID079_PreAbl_rev1.vtk",
+      "n_nodes": 2002,
+      "inducible": false,
+      "sustained_ms": 434.5,
+      "fibrosis_mean": 0.3236585111273268,
+      "fibre_spread": 0.725132522012419,
+      "seconds": 59.3
+    },
+    {
+      "arm": "D_caps_dropped_varying_fibres",
+      "subject": "uw_ID080_PreAbl_rev1.vtk",
+      "n_nodes": 2199,
+      "inducible": true,
+      "sustained_ms": 999.95,
+      "fibrosis_mean": 0.106327622173003,
+      "fibre_spread": 0.6276588955356446,
+      "seconds": 79.2
+    },
+    {
+      "arm": "D_caps_dropped_varying_fibres",
+      "subject": "uw_ID081_PreAbl_rev1.vtk",
+      "n_nodes": 2217,
+      "inducible": false,
+      "sustained_ms": 265.9000000000001,
+      "fibrosis_mean": 0.20773977261393736,
+      "fibre_spread": 0.6786707057069137,
+      "seconds": 60.8
+    },
+    {
+      "arm": "D_caps_dropped_varying_fibres",
+      "subject": "uw_ID082_PreAbl_rev1.vtk",
+      "n_nodes": 2165,
+      "inducible": false,
+      "sustained_ms": 267.70000000000005,
+      "fibrosis_mean": 0.13560116044743256,
+      "fibre_spread": 0.6700597481023324,
+      "seconds": 57.3
+    },
+    {
+      "arm": "D_caps_dropped_varying_fibres",
+      "subject": "uw_ID083_PreAbl_rev1.vtk",
+      "n_nodes": 2079,
+      "inducible": false,
+      "sustained_ms": 291.0,
+      "fibrosis_mean": 0.28277090556058265,
+      "fibre_spread": 0.664428616118517,
+      "seconds": 58.7
+    },
+    {
+      "arm": "D_caps_dropped_varying_fibres",
+      "subject": "uw_ID084_PreAbl_rev1.vtk",
+      "n_nodes": 2214,
+      "inducible": false,
+      "sustained_ms": 286.60000000000014,
+      "fibrosis_mean": 0.1455844429166702,
+      "fibre_spread": 0.6853692434112566,
+      "seconds": 56.8
+    },
+    {
+      "arm": "D_caps_dropped_varying_fibres",
+      "subject": "uw_ID085_PreAbl_rev1.vtk",
+      "n_nodes": 2149,
+      "inducible": false,
+      "sustained_ms": 265.35,
+      "fibrosis_mean": 0.13691518134909136,
+      "fibre_spread": 0.7023993244652618,
+      "seconds": 53.1
+    },
+    {
+      "arm": "D_caps_dropped_varying_fibres",
+      "subject": "uw_ID086_PreAbl_rev1.vtk",
+      "n_nodes": 2111,
+      "inducible": false,
+      "sustained_ms": 286.95000000000005,
+      "fibrosis_mean": 0.22676625007238677,
+      "fibre_spread": 0.606602026193967,
+      "seconds": 43.5
+    },
+    {
+      "arm": "D_caps_dropped_varying_fibres",
+      "subject": "uw_ID087_PreAbl_rev1.vtk",
+      "n_nodes": 2074,
+      "inducible": true,
+      "sustained_ms": 999.95,
+      "fibrosis_mean": 0.10259388232137609,
+      "fibre_spread": 0.64749624963248,
+      "seconds": 41.2
+    }
+  ],
+  "paired_stats": {
+    "counts": {
+      "A_caps_kept_constant_fibres": 6,
+      "B_caps_dropped_constant_fibres": 8,
+      "C_caps_kept_varying_fibres": 8,
+      "D_caps_dropped_varying_fibres": 14
+    },
+    "mcnemar": {
+      "A_caps_kept_constant_fibres vs B_caps_dropped_constant_fibres": {
+        "only_first": 4,
+        "only_second": 6,
+        "p": 0.75390625
+      },
+      "A_caps_kept_constant_fibres vs C_caps_kept_varying_fibres": {
+        "only_first": 2,
+        "only_second": 4,
+        "p": 0.6875
+      },
+      "A_caps_kept_constant_fibres vs D_caps_dropped_varying_fibres": {
+        "only_first": 4,
+        "only_second": 12,
+        "p": 0.076812744140625
+      },
+      "B_caps_dropped_constant_fibres vs C_caps_kept_varying_fibres": {
+        "only_first": 5,
+        "only_second": 5,
+        "p": 1.0
+      },
+      "B_caps_dropped_constant_fibres vs D_caps_dropped_varying_fibres": {
+        "only_first": 3,
+        "only_second": 9,
+        "p": 0.14599609375
+      },
+      "C_caps_kept_varying_fibres vs D_caps_dropped_varying_fibres": {
+        "only_first": 5,
+        "only_second": 11,
+        "p": 0.210113525390625
+      }
+    },
+    "effect_open_orifices": 4.0,
+    "effect_vary_fibres": 4.0,
+    "interaction": 4,
+    "fraction_of_roney_gap_closed": 0.3911671924290222,
+    "baseline_positives_retained_in_full_fix": 2
+  }
+}
