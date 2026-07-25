@@ -35,3 +35,6 @@ data/
 *.blg
 # Overleaf upload bundle (regenerate with `make overleaf-zip`; duplicates tracked files)
 docs/paper/*_overleaf.zip
+
+# Local TeX toolchain (tectonic.exe, ~20 MB binary; see docs/paper/README_BUILD.md)
+tools/

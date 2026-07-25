@@ -22,7 +22,41 @@ Everything the paper needs is already in the repo, so the import is one step and
 then it just compiles. (If you import the whole repo rather than just
 `docs/paper/`, point Overleaf's main document at `docs/paper/manuscript.tex`.)
 
-## Option B — local
+## Option B — local, Windows (no TeX install required)
+
+[Tectonic](https://tectonic-typesetting.github.io/) is a single self-contained
+executable that downloads only the TeX packages the document actually uses. It needs
+no admin rights, which is why it is the path used on the Windows workstation.
+
+```
+# one-off: fetch the binary into tools/ (gitignored, ~20 MB)
+python - <<'PY'
+import requests, zipfile, io, os
+u = ("https://github.com/tectonic-typesetting/tectonic/releases/download/"
+     "tectonic%400.16.9/tectonic-0.16.9-x86_64-pc-windows-msvc.zip")
+os.makedirs("tools", exist_ok=True)
+zipfile.ZipFile(io.BytesIO(requests.get(u, timeout=300).content)).extractall("tools")
+PY
+
+# then, from the repo root:
+tools/tectonic.exe -X compile docs/paper/manuscript.tex --outdir docs/paper --keep-logs
+```
+
+The first run downloads fonts and packages (a minute or so); later runs are fast.
+Verify the build with:
+
+```
+grep -cE '^! ' docs/paper/manuscript.log            # errors            -> 0
+grep -cE '^(Overfull|Underfull)' docs/paper/manuscript.log   # bad boxes -> 0
+grep -cE 'LaTeX Warning' docs/paper/manuscript.log  # warnings          -> 0
+```
+
+Note that tectonic drives **XeTeX**, whereas Overleaf and `latexmk` below default to
+**pdfTeX**. The content is identical but line breaking differs slightly, so the page
+count can differ by one between engines. Overleaf's pdfTeX build is the one to treat
+as authoritative for submission.
+
+## Option C — local, Linux/macOS (full TeX Live)
 
 ```
 # one-off dependencies (Debian/Ubuntu):

@@ -16,28 +16,38 @@ Format differences from the Roney loader (``asb.substrate.roney``)
   ``celltype 5``), big-endian, not ASCII ``POLYDATA``. :func:`read_vtk_unstructured_bin`
   parses them directly (``meshio`` rejects the int ``elemTag`` block).
 - Fibrosis is **categorical** via the per-cell ``elemTag`` field, not a
-  continuous IIR. Tag semantics, established empirically over all 82 patients
-  (variance across patients + invariance pre/post ablation, see
-  ``notebooks/lab_notebook.md``):
+  continuous IIR. The Dryad README does not document the tag values; the semantics
+  below were established by direct measurement over the released meshes
+  (2026-07-24, ``notebooks/lab_notebook.md``):
 
-  =======  ==========================  =====================================
-  elemTag  tissue                      evidence
-  =======  ==========================  =====================================
-  111      healthy myocardium          dominant; drops post-ablation
-  115      dense (LGE) fibrosis         high inter-patient variance; drops post-abl
-  164      remodelled / patchy tissue  distributed (least compact); ablation-invariant
-  199      ablation scar               post-ablation only
-  =======  ==========================  =====================================
+  =======  =========================  ======================================
+  elemTag  tissue                     evidence
+  =======  =========================  ======================================
+  111      healthy myocardium         dominant; 59.0 % → 47.3 % post-ablation
+  115      dense (LGE) fibrosis       high inter-patient variance; 20.9 % → 14.9 %
+  164      **not myocardium** — the   exactly 5 components, each a disc (χ=1),
+           caps over the 4 pulmonary  11–42 mm across; ZERO adjacency to tag 115;
+           veins and mitral valve     20.0 % → 19.9 %, i.e. ablation-invariant
+  199      ablation scar              post-ablation only, 17.9 %
+  =======  =========================  ======================================
 
-  The frozen mapping :data:`TAG_FIBROSIS` sends healthy→0, dense fibrosis→1,
-  remodelled→0.5, scar→1. :func:`load_uw_mesh` accepts ``tag_fibrosis`` overrides
-  so the SFI-vs-fibrosis conclusion can be sensitivity-tested against the tag
-  interpretation (e.g. 164→0 or 164→1).
+  An earlier revision of this file read tag 164 as "remodelled / patchy tissue,
+  distributed (least compact)" and :data:`TAG_FIBROSIS` still maps it to 0.5.
+  That reading is wrong: the region is maximally compact (five pieces, one per
+  orifice) and never touches fibrosis. :data:`DROP_TAGS` therefore removes tag 164
+  before any field is derived, which restores the atrium's five openings.
+  ``TAG_FIBROSIS[164]`` is retained only so the discredited mapping can still be
+  reproduced via ``drop_tags=()`` for the record.
+  :func:`load_uw_mesh` accepts ``tag_fibrosis`` overrides so the SFI-vs-fibrosis
+  conclusion can be sensitivity-tested against the tag interpretation.
 - **No UAC and no per-cell UAC** are shipped, so ``uac`` is a *surrogate*: the
   top-2 principal axes of the surface coordinates, min-max normalised to
   ``[0, 1]``. This is a smooth 2-D chart adequate for region binning and the
   spatial null; it is NOT anatomically registered UAC. Flagged in ``meta``.
-- Fibres **are** shipped (per-cell unit vectors) and are mapped to vertices.
+- A per-cell ``fiber`` array **is** shipped, but in all 164 released meshes it is a
+  constant ``(1, 0, 0)``: measured mean directional spread is exactly ``0.0``. The
+  anisotropy the solver then applies is a fixed coordinate bias, not anatomy. See
+  :data:`DEGENERATE_FIBRE_SPREAD`; the condition is flagged in ``meta`` and warned about.
 
 Coordinates are microns (LA span ~10 cm) → mm via :data:`MICRON_TO_MM`.
 """
@@ -47,7 +57,7 @@ import glob
 import os
 import warnings
 from pathlib import Path
-from typing import Dict, List, Mapping, Optional
+from typing import Dict, List, Mapping, Optional, Sequence, Tuple
 
 import numpy as np
 
@@ -71,6 +81,27 @@ TAG_FIBROSIS: Dict[int, float] = {111: 0.0, 115: 1.0, 164: 0.5, 199: 1.0}
 #: Mean per-vertex deviation from the mean fibre direction, below which the field is
 #: treated as degenerate (no anatomical anisotropy). The released UW meshes score ~0.
 DEGENERATE_FIBRE_SPREAD: float = 1.0e-6
+
+#: Element tags that are NOT myocardium and must be removed before simulation.
+#:
+#: Tag 164 was identified geometrically on 2026-07-24 (the Dryad README does not
+#: document the tag values). Across every mesh examined it:
+#:   * forms exactly FIVE large connected components -- the four pulmonary veins and
+#:     the mitral valve;
+#:   * each component is topologically a disc (Euler characteristic chi = 1), i.e. a
+#:     cap sealing an opening, 11-42 mm across, sitting 0.5-0.8 of the atrial radius
+#:     from the centroid;
+#:   * has EXACTLY ZERO edge-adjacency to fibrotic tag-115 elements (enrichment x0.00),
+#:     which rules out the "fibrosis border zone" reading that ``TAG_FIBROSIS[164]=0.5``
+#:     implies;
+#:   * occupies 20.0 % of elements pre-ablation and 19.9 % post -- untouched by the
+#:     procedure, as anatomy is and as tissue is not.
+#:
+#: Leaving these caps in as half-conducting tissue does more than distort fibrosis: it
+#: seals the atrium's openings, so activation can cross the mitral valve and the vein
+#: ostia instead of travelling around them. Reentry anchored on those orifices -- a
+#: principal atrial-fibrillation mechanism -- then cannot form at all.
+DROP_TAGS: Tuple[int, ...] = (164,)
 
 
 # --------------------------------------------------------------------------- #
@@ -212,6 +243,7 @@ def _uac_regions(uac: np.ndarray, n_alpha: int = 3, n_beta: int = 3) -> np.ndarr
 def load_uw_mesh(
     path: str, *, shape_family: Optional[str] = None,
     tag_fibrosis: Mapping[int, float] = TAG_FIBROSIS,
+    drop_tags: Sequence[int] = DROP_TAGS,
 ) -> AtrialMesh:
     """Load one UW/Boyle VTK mesh into an :class:`AtrialMesh` with real fields.
 
@@ -219,6 +251,10 @@ def load_uw_mesh(
     ``tag_fibrosis`` mapped to vertices, fibres per-cell→per-vertex, UAC a PCA
     surrogate, regions a 3×3 grid over the surrogate UAC. ``shape_family``
     defaults to ``uw_<stem>`` (one group per patient/model).
+
+    ``drop_tags`` removes element classes that are not myocardium before anything
+    else is derived; see :data:`DROP_TAGS`. Pass ``drop_tags=()`` to reproduce the
+    pre-2026-07-24 behaviour in which the openings were left in as conducting tissue.
     """
     parsed = read_vtk_unstructured_bin(path)
     points = np.asarray(parsed["points"], dtype=float) * MICRON_TO_MM
@@ -227,7 +263,26 @@ def load_uw_mesh(
     cs: Dict[str, np.ndarray] = parsed["cell_scalars"]  # type: ignore[assignment]
     cv: Dict[str, np.ndarray] = parsed["cell_vectors"]  # type: ignore[assignment]
 
-    tags = cs.get("elemTag", np.full(faces.shape[0], 111.0))
+    tags = np.asarray(cs.get("elemTag", np.full(faces.shape[0], 111.0)))
+    fib_cell_raw = cv.get("fiber", None)
+
+    # Drop non-myocardial elements (the caps over the PV and mitral-valve openings)
+    # BEFORE deriving any field, then compact the vertex indexing.
+    n_dropped = 0
+    if len(drop_tags):
+        keep = ~np.isin(tags.astype(int), np.asarray(drop_tags, dtype=int))
+        n_dropped = int((~keep).sum())
+        if n_dropped:
+            faces, tags = faces[keep], tags[keep]
+            if fib_cell_raw is not None:
+                fib_cell_raw = np.asarray(fib_cell_raw)[keep]
+            used = np.unique(faces)
+            remap = np.full(n, -1, dtype=np.int64)
+            remap[used] = np.arange(used.size)
+            faces = remap[faces]
+            points = points[used]
+            n = used.size
+
     fibrosis = tags_to_fibrosis(tags, faces, n, mapping=tag_fibrosis)
 
     # Fibre field. Verified 2026-07-24 across all 164 released meshes: the ``VECTORS
@@ -240,7 +295,7 @@ def load_uw_mesh(
     # meaning, and all fibre heterogeneity -- a primary substrate for unidirectional block
     # and hence reentry initiation -- disappears. Leading suspect for this cohort's
     # anomalous ~7% inducibility against ~32% on Roney, which ships real fibre fields.
-    fib_cell = cv.get("fiber", None)
+    fib_cell = fib_cell_raw
     if fib_cell is None:
         fibres = np.tile(np.array([1.0, 0.0, 0.0]), (n, 1))
         fibre_spread = 0.0
@@ -268,6 +323,8 @@ def load_uw_mesh(
         meta={"source": "uw_boyle_dryad_kkwh70sg0", "path": os.path.abspath(path),
               "uac_is_surrogate": True, "fibrosis_from": "elemTag",
               "fibres_are_degenerate": fibres_are_degenerate,
+              "dropped_tags": tuple(int(t) for t in drop_tags),
+              "n_cells_dropped": int(n_dropped),
               "fibre_spread": fibre_spread,
               "tag_fractions": {int(a): float(b / c.sum()) for a, b in zip(u, c)},
               "fibrosis_mean": float(np.mean(fibrosis)), "n_full": int(n)},

@@ -32,39 +32,38 @@ Four clarifications would materially improve the work:
    right reading of your terms, or is there a form of sharing you would prefer? I am happy to
    sign a DUA or route this through UW's process.
 
-2. **What does `elemTag` mean?** This is my most important question. The released meshes carry
-   one array, a per-element `elemTag`, and the README does not define its values. Measuring
-   across all 164 meshes I see:
+2. **Confirming the `elemTag` values.** The README does not define them, so I worked them out
+   geometrically. Element fractions across all 164 meshes:
 
-   | tag | pre-ablation | post-ablation |
-   |---|---|---|
-   | 111 | 59.0 % | 47.3 % |
-   | 115 | 20.9 % | 14.9 % |
-   | 164 | 20.0 % | 19.9 % |
-   | 199 | absent | 17.9 % |
+   | tag | pre-ablation | post-ablation | my reading |
+   |---|---|---|---|
+   | 111 | 59.0 % | 47.3 % | healthy myocardium |
+   | 115 | 20.9 % | 14.9 % | fibrosis |
+   | 164 | 20.0 % | 19.9 % | the caps over the four PVs and the mitral valve |
+   | 199 | absent | 17.9 % | ablation lesion |
 
-   My reading is 111 = healthy myocardium, 115 = fibrotic, 199 = ablation lesion, and 164 =
-   some non-myocardial structure (mitral annulus / PV sleeves?) — since 164 is essentially
-   unchanged by ablation while everything else moves. Is that right? I ask because my current
-   loader treats 164 as *half-fibrotic*, which if 164 is really valve tissue would inject a
-   spurious ~20 % fibrosis into every patient and corrupt both my baseline and my method.
+   I am fairly confident about 164 specifically: it forms exactly five connected components,
+   each topologically a disc, 11–42 mm across; it has *zero* edge-adjacency to tag 115
+   anywhere; and deleting it leaves a surface of Euler characteristic −3, i.e. exactly five
+   boundary loops. Could you confirm? I ask because my loader had been treating 164 as
+   half-fibrotic tissue, which not only added ~20 % spurious fibrosis to every patient but
+   sealed the atrium's orifices, so activation could cross the mitral valve rather than
+   circle it.
 
-3. **Continuous fibrosis, and fibres.** Related: is the underlying continuous LGE
-   intensity-ratio (IIR) field per vertex something you could share? A binary fibrotic/not tag
-   weakens the fibrosis baseline I am trying to beat, which biases my comparison in my own
-   favour — I would rather remove that confound than disclose it.
+3. **Continuous fibrosis.** Is the underlying continuous LGE intensity-ratio (IIR) field per
+   vertex something you could share? A binary fibrotic/not tag weakens the fibrosis baseline
+   I am trying to beat, which biases my comparison in my own favour — I would rather remove
+   that confound than disclose it.
 
-4. **The released fibre field looks degenerate — this one may matter to you.** Each mesh does
+4. **The released fibre field is degenerate — this one may matter to you.** Each mesh does
    contain a `VECTORS fiber` array, but in all 164 files it is a constant `(1, 0, 0)` for
    every element: mean directional spread is exactly 0. I suspect fibres did not survive the
-   downsampling to 0.5 mm edge length described in the README. It matters because anyone
-   running the reaction–diffusion simulations the README recommends would get globally
-   uniform anisotropy rather than atrial fibre architecture. In my own pipeline this cohort
-   comes out only ~7 % inducible against ~32 % on a fibre-carrying cohort under an identical
-   protocol, which is what led me to look. Would it be possible to share the fibre field, or
-   is there a re-export that preserves it?
+   downsampling to 0.5 mm average edge length described in the README. It matters because
+   anyone following the README's suggestion to run reaction–diffusion simulations on these
+   meshes gets globally uniform anisotropy rather than atrial fibre architecture. Would it be
+   possible to share the fibre field, or is there a re-export that preserves it?
 
-4. **Follow-up completeness.** For the `NR` patients, were all of them followed the full two
+5. **Follow-up completeness.** For the `NR` patients, were all of them followed the full two
    years, or are some censored early / lost to follow-up? And was a standard 90-day blanking
    period applied before counting recurrence? This changes whether I treat the outcome as
    binary or time-to-event.
