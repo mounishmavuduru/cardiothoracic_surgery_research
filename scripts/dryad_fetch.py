@@ -8,14 +8,18 @@ cookie. One solve yields a domain-wide auth cookie reused for every file.
 """
 import hashlib
 import json
+import os
 import re
 import sys
 import time
 
 import requests
 
-PROXY = "http://127.0.0.1:33255"
-CA = "/root/.ccr/ca-bundle.crt"
+# The original Linux agent container reached the network through a local MITM proxy with
+# its own CA bundle. Off that container (e.g. a Windows workstation) there is no proxy and
+# the system trust store is correct, so both default to unset and are env-overridable.
+PROXY = os.environ.get("ASB_HTTP_PROXY") or None
+CA = os.environ.get("ASB_CA_BUNDLE") or None
 UA = ("Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 "
       "(KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.36")
 REFERER = "https://datadryad.org/dataset/doi:10.5061/dryad.kkwh70sg0"
@@ -25,8 +29,10 @@ CHALLENGE_RE = re.compile(r'id="anubis_challenge"[^>]*>(.*?)</script>', re.S)
 
 def _session():
     s = requests.Session()
-    s.proxies = {"http": PROXY, "https": PROXY}
-    s.verify = CA
+    if PROXY:
+        s.proxies = {"http": PROXY, "https": PROXY}
+    if CA:
+        s.verify = CA
     s.headers.update({"User-Agent": UA, "Referer": REFERER,
                       "Accept": "*/*", "Accept-Language": "en-US,en;q=0.9"})
     return s
