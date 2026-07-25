@@ -174,6 +174,99 @@ def fig_localizer_ladder():
     print("wrote fig_localizer_ladder.png")
 
 
+def fig_substrate_audit():
+    """Three substrate controls that together locate -- and fail to locate -- the anomaly.
+
+    Colour: two categorical series only, BLUE/ORANGE. That pair was checked rather than
+    eyeballed: OKLab dE 30.6 under normal vision, worst case 22.2 across protanopia,
+    deuteranopia and tritanopia, and a greyscale luminance gap of 0.178 for print.
+    GREEN/RED (dE 6.9 under deuteranopia) and BLUE/RED (greyscale dY 0.002) are avoided
+    for fills; RED appears only as a DASHED reference line, so line style and not hue
+    carries it. The second series is hatched so the encoding survives greyscale printing.
+    """
+    ab = _load("results/uw_substrate_ablation.json")
+    fc = _load("results/roney_fibre_control.json")
+    qz = _load("results/roney_fibrosis_quantization.json")
+    if not ab:
+        print("(substrate ablation not ready - skipping substrate-audit figure)")
+        return
+
+    RONEY_REF = 20 / 62
+    fig, axes = plt.subplots(1, 3, figsize=(12.6, 4.3))
+
+    def _bar(ax, x, c, color, hatch=None, width=0.32):
+        ax.bar(x, 100 * c["inducible_fraction"], width, color=color, hatch=hatch, zorder=3,
+               edgecolor="white", linewidth=1.2)
+        ax.text(x, 100 * c["inducible_fraction"] + 1.1, f"{c['n_inducible']}/{c['n']}",
+                ha="center", va="bottom", fontsize=9.5)
+
+    # (a) UW 2x2
+    ax = axes[0]
+    S = ab["summary"]
+    for key, x, col, hat in (
+            ("A_caps_kept_constant_fibres", -0.17, BLUE, None),
+            ("C_caps_kept_varying_fibres", 0.83, BLUE, None),
+            ("B_caps_dropped_constant_fibres", 0.17, ORANGE, "//"),
+            ("D_caps_dropped_varying_fibres", 1.17, ORANGE, "//")):
+        _bar(ax, x, S[key], col, hat)
+    ref = ax.axhline(100 * RONEY_REF, color=RED, ls="--", lw=1.5, zorder=2)
+    ax.set_xticks([0, 1])
+    ax.set_xticklabels(["constant fibres", "varying fibres"])
+    ax.set_ylabel("inducible (%)")
+    ax.set_ylim(0, 44)
+    ax.set_title("(a) UW substrate repair" + "\n" + r"strongest contrast McNemar $p=0.077$",
+                 fontsize=10.5)
+    ax.legend([plt.Rectangle((0, 0), 1, 1, color=BLUE),
+               plt.Rectangle((0, 0), 1, 1, color=ORANGE, hatch="//"), ref],
+              ["orifices sealed (as released)", "orifices opened",
+               "Roney reference (32.3%)"],
+              fontsize=8.2, frameon=False, loc="upper left")
+
+    # (b) fibre control on Roney
+    ax = axes[1]
+    if fc:
+        F = fc["summary"]
+        _bar(ax, 0, F["R_A_real_fibres"], BLUE, None, width=0.5)
+        _bar(ax, 1, F["R_B_constant_fibres"], ORANGE, "//", width=0.5)
+        ax.set_xticks([0, 1])
+        ax.set_xticklabels(["real fibres", "fibres destroyed"])
+        ax.set_ylim(0, 44)
+        ax.set_ylabel("inducible (%)")
+        ax.annotate("identical rate" + "\n" + r"McNemar $p=1.0$" + "\n"
+                    + "(10/62 verdicts still flip)",
+                    xy=(0.5, 0.88), xycoords="axes fraction", ha="center", va="top", fontsize=9.5)
+        ax.set_title("(b) fibre control on Roney" + "\n"
+                     + "degeneracy does not move the rate", fontsize=10.5)
+    else:
+        ax.set_axis_off()
+
+    # (c) fibrosis gradation on Roney
+    ax = axes[2]
+    if qz:
+        Q = qz["summary"]
+        keys = ("Q_A_continuous", "Q_B_binary_half", "Q_C_binary_matched")
+        cols = (BLUE, ORANGE, ORANGE)
+        hats = (None, "//", "//")
+        for i, k in enumerate(keys):
+            _bar(ax, i, Q[k], cols[i], hats[i], width=0.5)
+        ax.set_xticks([0, 1, 2])
+        ax.set_xticklabels(["continuous" + "\n" + "(as shipped)",
+                            "binary" + "\n" + r"$f>0.5$",
+                            "binary" + "\n" + "burden matched"], fontsize=9)
+        ax.set_ylim(0, 44)
+        ax.set_ylabel("inducible (%)")
+        ax.set_title("(c) fibrosis gradation on Roney" + "\n"
+                     + "coarsening the fibrosis field", fontsize=10.5)
+    else:
+        ax.set_axis_off()
+        ax.set_title("(c) fibrosis gradation" + "\n" + "(pending)", fontsize=10.5)
+
+    fig.tight_layout()
+    fig.savefig(f"{OUT}/fig_substrate_audit.png")
+    plt.close(fig)
+    print("wrote fig_substrate_audit.png")
+
+
 if __name__ == "__main__":
     fig_rho_scaling()
     fig_predictive_null()
@@ -181,4 +274,5 @@ if __name__ == "__main__":
     fig_localizer_transfer()
     fig_falsification()
     fig_localizer_ladder()
+    fig_substrate_audit()
     print("FIGURES_DONE")

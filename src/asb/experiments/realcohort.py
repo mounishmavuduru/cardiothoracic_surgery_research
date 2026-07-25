@@ -26,6 +26,7 @@ from asb.features import subject_features
 from asb.labels.monodomain import MonodomainConfig, induce_monodomain
 from asb.substrate.mesh import mesh_to_graph
 from asb.substrate.roney import coarsen_mesh, load_roney_mesh
+from asb.substrate.uw_boyle import DROP_TAGS as UW_DROP_TAGS
 
 __all__ = [
     "FROZEN_SFI",
@@ -84,7 +85,11 @@ def _config_tag() -> str:
             "mono": asdict(FROZEN_MONO),
             "burst_cls": list(FROZEN_BURST_CLS),
             "coarsen": COARSEN_NODES,
-            "v": 1,
+            # Substrate preparation is part of the frozen configuration: dropping the
+            # UW cap elements (tag 164) changes the mesh the solver sees, so a cache
+            # written before that fix must NOT be reused. v bumped 1 -> 2 on 2026-07-24.
+            "uw_drop_tags": list(UW_DROP_TAGS),
+            "v": 2,
         },
         sort_keys=True,
     )
