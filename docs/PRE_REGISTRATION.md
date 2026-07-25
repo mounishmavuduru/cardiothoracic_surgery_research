@@ -274,6 +274,19 @@ prediction from baseline substrate; the post-ablation mesh encodes the delivered
   **confounded by baseline degradation**, not as a win for SFI.
 - **UAC is a PCA surrogate**, not anatomical (`uw_boyle.py:180-192`), so any region-based or
   localization claim on this cohort is weaker than on Roney and will be labelled as such.
+- **Amendment 2026-07-24 (same day, still before any label join): the tag map is probably
+  wrong, and this blocks the analysis.** Having downloaded the meshes, the *only* array they
+  contain is a per-cell `elemTag`; there is no continuous LGE field and no fibre array.
+  Measured over all 164 meshes: tag 111 59.0 % → 47.3 % (pre → post ablation), 115 20.9 % →
+  14.9 %, 199 absent → 17.9 %, and **164 20.0 % → 19.9 %**. Tag 164 is untouched by ablation,
+  which is not fibrosis behaviour; it is far more consistent with a non-myocardial structure
+  (mitral annulus / PV sleeves). The loader nevertheless assigns it `fibrosis = 0.5`
+  (`uw_boyle.py:68`), injecting a near-constant ~20 % pseudo-fibrosis into every patient —
+  which both inflates `fibrosis_burden` and *shrinks its between-patient variance*, weakening
+  the very baseline SFI must beat, and corrupts the Δw field SFI is computed from.
+  **The confirmatory analysis will not be run until the tag semantics are confirmed with the
+  data provider** (`docs/outreach/boyle_reply_followup.md`, Q2). This correction is being made
+  blind to the outcome column, which has still never been joined to any feature.
 - **Benchmark context.** The source study reports ROC AUC **0.80 ± 0.04** using 89 features
   including EHR/clinical risk factors that we do not hold. We are **not** claiming to beat
   that model, and will not present our mesh-only AUC as if it were comparable.

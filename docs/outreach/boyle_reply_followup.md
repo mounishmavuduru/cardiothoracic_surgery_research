@@ -32,16 +32,29 @@ Four clarifications would materially improve the work:
    right reading of your terms, or is there a form of sharing you would prefer? I am happy to
    sign a DUA or route this through UW's process.
 
-2. **Fibrosis fidelity.** The Dryad `.vtk` files carry a per-element `elemTag` (I read
-   111 / 115 / 164 / 199 as healthy / fibrotic / boundary-or-scar). My method needs a
-   *continuous* fibrosis field, and using the categorical tag measurably weakens the fibrosis
-   baseline I am trying to beat — which would bias my result in my own favour. Is the
-   underlying continuous LGE intensity-ratio (IIR) field per vertex something you could share,
-   or is the tag the intended fidelity for these released meshes?
+2. **What does `elemTag` mean?** This is my most important question. The released meshes carry
+   one array, a per-element `elemTag`, and the README does not define its values. Measuring
+   across all 164 meshes I see:
 
-3. **Cohort split.** Am I right that `ID001–ID015` is the holdout and `ID021–ID087` the
-   training cohort from the paper, and that IDs 16–20 were excluded upstream? I would like to
-   honour your original split rather than invent my own.
+   | tag | pre-ablation | post-ablation |
+   |---|---|---|
+   | 111 | 59.0 % | 47.3 % |
+   | 115 | 20.9 % | 14.9 % |
+   | 164 | 20.0 % | 19.9 % |
+   | 199 | absent | 17.9 % |
+
+   My reading is 111 = healthy myocardium, 115 = fibrotic, 199 = ablation lesion, and 164 =
+   some non-myocardial structure (mitral annulus / PV sleeves?) — since 164 is essentially
+   unchanged by ablation while everything else moves. Is that right? I ask because my current
+   loader treats 164 as *half-fibrotic*, which if 164 is really valve tissue would inject a
+   spurious ~20 % fibrosis into every patient and corrupt both my baseline and my method.
+
+3. **Continuous fibrosis, and fibres.** Related: is the underlying continuous LGE
+   intensity-ratio (IIR) field per vertex something you could share? A binary fibrotic/not tag
+   weakens the fibrosis baseline I am trying to beat, which biases my comparison in my own
+   favour — I would rather remove that confound than disclose it. Separately, the README
+   describes fibre orientations surviving the `meshtool` conversion to `.lon`, but I find no
+   fibre array in the `vtk_bin` files; were fibres dropped in the released version?
 
 4. **Follow-up completeness.** For the `NR` patients, were all of them followed the full two
    years, or are some censored early / lost to follow-up? And was a standard 90-day blanking
@@ -67,11 +80,17 @@ Best regards,
   these labels as withheld "protecting confidential patient information", so the CC0 covering
   the meshes clearly does not extend to them. Default to non-redistribution until he says
   otherwise, in writing.
-- **Q2** is the technical blocker. Per `src/asb/substrate/uw_boyle.py:68` the loader maps
-  `elemTag` to fibrosis in {0.0, 0.5, 1.0}. Compared with the Roney cohort's continuous `IIR`
-  ramp, that is a coarse substrate. It degrades the competitor baseline more than it degrades
-  SFI, which inflates ΔAUC in our favour — pre-registration §8.6 discloses this and commits to
-  reporting it as a confound. A continuous IIR field would remove the confound entirely.
-- **Q3** costs nothing to ask and lets secondary analysis 8.5.1 be a genuinely external test.
+- **Q2 is the real blocker, and it is a likely bug in our own loader.**
+  `src/asb/substrate/uw_boyle.py:68` maps `elemTag` → fibrosis as
+  `{111:0.0, 115:1.0, 164:0.5, 199:1.0}`. The measured tag fractions say 164 occupies
+  20.0 % of cells pre-ablation and 19.9 % post — i.e. **ablation does not touch it**, which is
+  not how fibrosis behaves and is exactly how a valve annulus or PV sleeve behaves. If that is
+  right, the 0.5 mapping adds a near-constant ~20 % pseudo-fibrosis to every patient. That
+  does two bad things: it inflates `fibrosis_burden` while *shrinking its between-patient
+  variance* (weakening the competitor baseline), and it corrupts the Δw uncoupling field that
+  SFI itself is built from. Do not run the confirmatory analysis until this is resolved.
+- **Q3** removes the last substrate-fidelity confound. Note the cohort-split question was
+  dropped: the Dryad README already confirms `ID001–015` = holdout, `ID021–087` = original
+  cohort, so secondary analysis §8.5.1 can honour their split without asking.
 - **Q4** decides binary logistic vs. Cox. If NR includes patients lost at, say, 8 months, the
   binary outcome is biased toward NR and every AUC is optimistic in an uncontrolled way.
