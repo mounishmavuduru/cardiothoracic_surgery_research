@@ -813,7 +813,7 @@ This work makes four contributions.
 (1)~A pre-registered, leakage-controlled, effect-size-gated evaluation of a
 plausible spectral biomarker: a clean null at synthetic scale ($10^5$ networks)
 with its mechanism (feature redundancy: even the exact $\Delta\lam_2$ SFI adds
-nothing), and an inconclusive, underpowered verdict on real anatomy.
+nothing), and a measured null on $182$ patients of real anatomy.
 (2)~A label-free validity criterion $\rhoval$ for the single-vector estimator:
 it proves $\phii_2$ is ill-conditioned on real tissue ($\rhoval\approx2422\gg
 \rhoval^\ast\approx3$), a portable a priori check for any Fiedler-based marker,
@@ -822,6 +822,43 @@ content. (3)~A weak-but-real, purely connectivity-derived rank localizer that
 equals substrate localization and beats centrality baselines across three media.
 (4)~A demonstration that standard methodology manufactures the exact false
 positives this protocol catches (leakage $+0.117$ AUC; the $p$-value trap).
+
+\subsection{Three corrections, and what caught each}
+\label{sec:corrections}
+
+Three claims in earlier versions of this work did not survive, and because they
+are referred to individually where they arise, we set them out together here.
+
+The first was a positive result. A pre-specified secondary endpoint reported that
+SFI beat a fibrosis-heterogeneity baseline on the combined real cohort
+($\dAUC=+0.103$, $p=0.009$), which we read as showing SFI is not merely
+re-encoded fibrosis. Extending the Roney arm from $62$ to all $100$ released
+meshes reduced it to $+0.017$ ($p=0.452$). What caught it was more data, and what
+made the original vulnerable was that it rested largely on one cohort's
+$+0.340$ over a near-chance baseline on six events.
+
+The second was a causal attribution. We reported that the degenerate fibre field
+in the UW release was the likely reason that cohort is so rarely inducible. What
+caught it was a direct control: destroying the fibre field on a cohort that has an
+intact one left the inducibility rate at exactly $20/62$, $p=1.0$. The
+explanation was plausible, mechanistically motivated, and wrong, and no amount of
+further argument would have revealed that.
+
+The third was a set of geometric figures. We stated that element tag $164$ formed
+exactly five components, had exactly zero adjacency to fibrosis, and left Euler
+characteristic $-3$ on removal. All three were generalised from a single mesh or
+from a rounded mean. What caught them was writing regression tests over the whole
+cohort, two of which failed on first run. The identification of tag $164$ itself
+survived and is better supported by the census than by the original figures.
+
+We note the pattern rather than each instance. Every one was caught by a control,
+a larger sample, or a test that this project designed and ran against its own
+results before submission; none was found by a reader. The first correction is
+also a worked example of what the paper argues elsewhere. Naive methodology --- a
+$p<0.05$ threshold with no effect-size gate, no multiplicity accounting and no
+replication on more data --- would have reported $\dAUC=+0.103$ at $p=0.009$ as a
+finding. It was produced by our own pipeline and it was false, and the protocol
+that rejected it is the same one applied to the primary endpoint throughout.
 
 The validity screen is
 domain-general. Spectral-graph fragility markers are used for seizure-focus
@@ -853,31 +890,15 @@ AUCs are coarse-mesh-provisional; the \emph{relative} comparison scores the same
 labels in both arms, so this bias cancels there.
 \item Simulator, not clinical, labels: the pre-registered openCARP ground truth
 was substituted with monodomain Mitchell--Schaeffer, a logged deviation.
-\item The UW cohort uses a PCA-surrogate universal-atrial-coordinate map, and its
-substrate carries two defects we identified only after the fact. The released
-meshes have a \emph{degenerate} fibre field --- the \code{VECTORS fiber} array is
-present but equals a constant $(1,0,0)$ for every element of all $164$ meshes, so
-the anisotropy the solver applies is a fixed coordinate bias rather than anatomy.
-Separately, we had been mapping element tag $164$ to half-fibrotic tissue when it
-is in fact the set of caps over the pulmonary veins and the mitral valve. Across
-all $82$ meshes it resolves into four to six large components, each a topological
-disc --- five in $75$ meshes, four in five of them and six in two, which is the
-usual variation in pulmonary-vein anatomy --- and it borders fibrotic elements on
-only $\sim\!0.08\%$ of its incident edges against a chance expectation of
-$14$--$20\%$. Removing it opens the surface, by a median of seven boundary loops.
-Left in, it lets activation cross those orifices instead of circling them.
-Repairing both raises inducibility from $6/82$ to $14/82$ ($7.3\%\to17.1\%$), which
-does not reach paired significance (McNemar exact $p=0.077$) and closes only $39\%$
-of the gap to the fibre-carrying Roney cohort ($32.3\%$). A direct control settles
-the fibre half of that and overturns our first reading of it: destroying the fibre
-field on the Roney cohort, which ships a real one, leaves the inducibility rate
-\emph{exactly unchanged} at $20/62$ (McNemar $p=1.0$), while still perturbing the
-dynamics --- sustained-reentry duration moves on $50/62$ subjects, by up to
-$661$~ms. Fibre degeneracy therefore does not drive the inducibility \emph{rate},
-and our initial attribution of the UW anomaly to it was wrong. The anomaly stands
-unexplained. The categorical three-level fibrosis of these meshes, against Roney's
-continuous $276$--$1071$-level LGE field, is the leading remaining candidate.
-Either way the cohort's predictive test is uninformative about SFI.
+\item The UW cohort's released substrate carries two defects, detailed with their
+controls in Section~\ref{sec:substrate}: a fibre field that is a constant vector
+in all $164$ meshes, and element tag $164$, which is the caps over the atrial
+orifices and which we had been treating as half-fibrotic tissue. Repairing both
+raises inducibility only from $6/82$ to $14/82$, and all three candidate
+explanations for the cohort's low rate are now excluded by direct control. Its
+regions additionally rest on a PCA surrogate rather than registered atrial
+coordinates. The cohort's predictive test is uninformative about SFI, and why it
+is so rarely inducible is an open problem rather than a solved one.
 \item The inducibility label is stable in aggregate but noisy per subject, which
 attenuates every $\dAUC$ we report. Destroying the Roney fibre field holds the rate
 at $20/62$ yet flips $10/62$ individual verdicts; repairing the UW substrate retains
