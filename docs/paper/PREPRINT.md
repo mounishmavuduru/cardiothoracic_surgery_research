@@ -70,7 +70,7 @@ LGE-MRI cohort (Dryad 10.5061/dryad.kkwh70sg0, 82 distinct AF patients). Meshes 
 ~2000-node graphs by field-preserving vertex clustering.
 
 **Labels.** Ground truth is a monodomain Mitchell–Schaeffer reaction–diffusion inducibility verdict
-(self-sustained reentry ≥ 600 ms after pacing), run on each real anatomy. These are simulator
+(self-sustained reentry ≥ 650 ms after pacing), run on each real anatomy. These are simulator
 verdicts, not clinical POAF, and not the deferred openCARP gold standard.
 
 **SFI.** Per-region `SFI(R) ≈ Σ_{(i,j)∈R} E[Δw_ij](φ₂,ᵢ − φ₂,ⱼ)²` (first order); a basis-independent
@@ -211,7 +211,7 @@ report 30.6% in patients without prior AF; Kumar 29.5% (sustained); between the 
 ~42% post-ablation (Liu et al. 2020, *JAHA*, PMID 32654581). The **UW ~7%** is at/below the control
 floor for a cohort that *is* AF patients — correctly flagged as anomalous and attributable to the
 surrogate substrate (rule-based fibres, PCA-UAC) and an under-aggressive in-silico inducer, not
-biology. These are in-silico verdicts with a simulator-scaled ≥600 ms cutoff, so this is a base-rate
+biology. These are in-silico verdicts with a simulator-scaled ≥650 ms cutoff, so this is a base-rate
 **plausibility check, not clinical validation.** (One candidate source, Darma et al. 2020, is *not*
 cited: its adversarial citation check did not verify.)
 
