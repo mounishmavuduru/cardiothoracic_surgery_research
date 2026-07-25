@@ -66,12 +66,16 @@ DeLong paired $p<0.05$ on shape-family-held-out folds. \emph{The endpoint is not
 met, but the strength of the negative differs by regime, and we separate them.} On up to $100{,}000$ synthetic excitable networks SFI adds no practically
 meaningful predictive value (subspace $\dAUC\approx+0.003$; $\sim\!4{,}150$ cases
 needed at $80\%$ power, resolvable only because $N$ is huge, and so
-\emph{clinically undetectable} there). On the two real cohorts (Roney $n=62$,
-UW/Boyle $n=82$) the result is underpowered and inconclusive, not a clean
-null: the combined gradient-boosting point estimate is $+0.051$, which
-\emph{exceeds} the $0.05$ threshold, but it fails paired significance (DeLong
-$p=0.155$), so real anatomy cannot \emph{exclude} a moderate effect. Where the
-null \emph{is} clean (in the synthetic cohort), the mechanism is feature
+\emph{clinically undetectable} there). On two real cohorts ($182$ patients:
+Roney $n=100$, UW/Boyle $n=82$) the combined gradient-boosting estimate is
+$+0.012$ with a bootstrap interval $[-0.017,+0.044]$ that excludes the
+threshold, so the real-anatomy result is a measured null rather than a
+shortfall of power. An earlier version of this work reported $+0.051$ here and
+called the real-cohort evidence inconclusive. That figure was an artefact of a
+defect in one cohort's released substrate, which we found only afterwards; the
+audit that found it, and the three controls that failed to explain everything
+it left behind, are reported in full. Where the
+null is clean, the mechanism is feature
 redundancy: the exact per-region $\Delta\lam_2$ SFI, which has no first-order
 approximation error, also adds nothing over the competitor set. A separate,
 label-free result explains why the \emph{single-vector} SFI is also
@@ -141,9 +145,8 @@ positive this protocol catches.
 
 In brief, a closed-form spectral
 fragility index does \emph{not} add practically meaningful reentry-inducibility
-prediction beyond existing features at synthetic scale (a clean,
-feature-redundancy null); on real anatomy the evidence is
-\emph{inconclusive/underpowered}, not a demonstrated null. Independently, the
+prediction beyond existing features, either at synthetic scale or on $182$
+patients of real anatomy, and the mechanism is feature redundancy. Independently, the
 single-vector estimator is provably ill-conditioned on real tissue
 ($\rhoval\gg 1$). What we report is not a discovery but a carefully drawn
 boundary: where a Fiedler-based estimator is numerically valid, why real tissue
@@ -341,19 +344,27 @@ separate what is a property of the mathematics from an accident of one dataset.
 \caption{Incremental predictive value of SFI over the full competitor set.
 $\dAUC$ is grouped (leakage-controlled); logistic regression (lr) /
 gradient-boosted trees (gbt). The endpoint (grouped $\dAUC\geq0.05$ \emph{and}
-DeLong $p<0.05$) is met in no regime.}
+DeLong $p<0.05$) is met in no regime, and every interval on real anatomy
+contains zero. The UW rows rest on eight positives and are uninformative rather
+than null; note in particular that their base AUCs differ sharply between the
+competitor and fibrosis-only baselines, which is what inflates the latter's
+apparent increment (Section~\ref{sec:null}).}
 \label{tab:null}
-\small
-\begin{tabularx}{\linewidth}{@{}l r X l@{}}
+ootnotesize
+\begin{tabularx}{\linewidth}{@{}l r l r X@{}}
 \toprule
-cohort / medium & $N$ & SFI $\dAUC$ (lr / gbt; $p$) & verdict \\
+cohort / medium & events/$N$ & model & base AUC & SFI $\dAUC$ (95\% CI); $p$ \\
 \midrule
-Roney (real)      & 62  & $-0.030$ / $+0.036$ ($p\,0.64$ / $0.26$) & not met; \textbf{underpowered} \\
-UW/Boyle (real)   & 82  & $-0.057$ / $+0.104$ ($p\,0.29$ / $0.66$) & \textbf{uninformative} (6 positives) \\
-Combined real     & 144 & $-0.004$ / $\mathbf{+0.051}$ ($p\,0.92$ / $\mathbf{0.155}$) & not met but \textbf{inconclusive} \\
-FHN networks      & 2{,}000 & $\leq +0.003$ ($p\geq0.12$) & clean null \\
-FHN networks      & up to 100{,}000 & subspace $+0.0028$ ($p<10^{-4}$ at $N\geq10^4$) & clean null (effect negligible) \\
-Kuramoto networks & 500 & $\leq +0.0036$ ($p\geq0.38$) & clean null \\
+Roney (real)      & 34/100 & lr  & $0.870$ & $-0.021$ $[-0.075,+0.033]$; $0.44$ \\
+                  &        & gbt & $0.856$ & $+0.009$ $[-0.029,+0.046]$; $0.63$ \\
+UW/Boyle (real)   & 8/82   & lr  & $0.834$ & $+0.000$ $[-0.073,+0.081]$; $1.00$ \\
+                  &        & gbt & $0.748$ & $+0.035$ $[-0.095,+0.203]$; $0.67$ \\
+Combined real     & 42/182 & lr  & $0.884$ & $-0.007$ $[-0.042,+0.029]$; $0.70$ \\
+                  &        & gbt & $0.851$ & $+0.012$ $[-0.017,+0.044]$; $0.45$ \\
+\midrule
+FHN networks      & \multicolumn{3}{l}{$2{,}000$ networks} & $\leq +0.003$; $p\geq0.12$ \\
+FHN networks      & \multicolumn{3}{l}{up to $100{,}000$}  & subspace $+0.0028$; $p<10^{-4}$ at $N\geq10^4$ \\
+Kuramoto networks & \multicolumn{3}{l}{$500$ networks}     & $\leq +0.0036$; $p\geq0.38$ \\
 \bottomrule
 \end{tabularx}
 \end{table}
@@ -371,13 +382,27 @@ The negative is not uniform, and we separate the regimes. On the
 \emph{synthetic} cohorts (up to $100{,}000$ networks) the null is clean: the
 effect converges to $\dAUC\approx+0.003$, statistically resolvable only because
 $N$ is enormous. On the \emph{real} cohorts it is underpowered and inconclusive.
-The combined gradient-boosting point estimate is $+0.051$, which
-\emph{exceeds} the pre-registered $0.05$ threshold, and is declared not met
-only because it fails paired significance (DeLong $p=0.155$, bootstrap CI
-straddling $0$). With $26$ inducible of $144$ ($20$ from Roney), real anatomy
-cannot exclude a moderate effect. The UW cohort is uninformative rather than
-null ($6$ positives, competitor base AUC $\approx$ chance), so it is an
-underpowered external check of the \emph{labeller}, not of SFI.
+The combined gradient-boosting point estimate is $+0.012$ (DeLong $p=0.449$,
+bootstrap CI $[-0.017,+0.044]$), roughly a quarter of the pre-registered
+$0.05$ threshold and with an interval that excludes it. An earlier version of
+this analysis reported $+0.051$ here and had to argue that the endpoint was
+missed only on significance. That estimate was an artefact of the sealed UW
+substrate: correcting it drops the figure to $+0.036$ at the original cohort
+size and to $+0.012$ once the Roney arm is extended to all $100$ released
+meshes. With $42$ inducible of $182$ this is the largest real-anatomy arm in
+the study, and the null here is a measurement rather than a shortfall.
+
+The UW cohort remains the weak arm, though not for the reason we previously
+gave. On eight positives its intervals are wide, the competitor comparison
+spanning $[-0.095,+0.203]$ under gradient boosting, so it is an underpowered
+external check of the \emph{labeller} rather than of SFI. We had also described
+its competitor baseline as close to chance, and that was simply wrong: the
+measured competitor base AUC is $0.834$ under logistic regression and $0.748$
+under gradient boosting. Only the \emph{fibrosis-only} baseline approaches
+chance, at $0.562$, and it is that near-chance baseline which manufactures the
+cohort's largest apparent effect, $\dAUC=+0.217$ with $p=0.121$ and an interval
+$[-0.030,+0.485]$ that spans half the available range. A large ratio over a
+baseline that predicts almost nothing, on eight events, is not a signal.
 
 The clean null comes from feature redundancy, not the validity radius. The
 \emph{exact} per-region $\Delta\lam_2$ SFI, which carries no first-order
@@ -386,13 +411,28 @@ over the competitor set. The mechanism of the null is that SFI's information is
 already present in standard connectivity features ($\lam_2$-alone, min-cut,
 percolation), a label-dependent finding, separate from $\rhoval$.
 
-\paragraph{Secondary endpoint (pre-specified).} SFI beats a
-\emph{fibrosis-heterogeneity-only} baseline (combined GBT $\dAUC=+0.103$,
-$p=0.009$): it is \emph{not merely re-encoded fibrosis} and carries connectivity
-information beyond the substrate. This is one of $\sim\!30$ DeLong comparisons;
-treating \code{fibrosis\_vs\_+SFI} as a single pre-specified secondary endpoint,
-its $p=0.009$ against a family-wise threshold $\approx 0.05/12$--$0.05/30$ is
-\emph{suggestive, not confirmatory}.
+\paragraph{Secondary endpoint (pre-specified), and its withdrawal.} An earlier
+version of this analysis reported that SFI beat a
+\emph{fibrosis-heterogeneity-only} baseline on the combined real cohort (GBT
+$\dAUC=+0.103$, $p=0.009$) and read that as evidence SFI is not merely
+re-encoded fibrosis but carries connectivity information beyond the substrate.
+That result does not survive, and we withdraw both it and the claim it
+supported. Two changes separate the old number from the new one, and they do
+not contribute equally. Correcting the UW substrate while holding the cohort at
+its original $144$ subjects leaves the estimate largely intact ($+0.093$,
+$p=0.013$), so this was not principally a substrate artefact. Extending the
+Roney arm from $62$ to the full $100$ released meshes is what collapses it, to
+$\dAUC=+0.017$ ($p=0.452$). An effect that disappears when $38$ further real
+subjects are added was a small-sample fluctuation, and it was one of
+$\sim\!30$ DeLong comparisons besides. On the full cohort no comparison,
+primary or secondary, shows SFI adding information beyond either baseline.
+
+The discarded estimate is worth one more sentence, because its failure mode is
+instructive. Under the sealed substrate the UW arm alone returned
+$\dAUC=+0.340$ ($p=0.026$) on six positives, a value no one should have
+believed and which we did not flag at the time; it is that arm which carried
+the combined figure. A large point estimate resting on six events is a warning,
+not a finding.
 
 \paragraph{Power analysis.} In the synthetic cohort the subspace effect
 ($+0.0028$) needs $\sim\!4{,}150$ cases for $80\%$ power and the single-vector
@@ -400,6 +440,131 @@ effect ($+0.0007$) $\sim\!23{,}000$, clinically undetectable \emph{there}. We do
 \emph{not} transport ``clinically undetectable'' to the real cohorts, whose
 $+0.036$--$0.051$ estimates are compatible with a detectable effect we are simply
 underpowered to confirm.
+
+\subsection{A provenance audit of the released substrates, and three controls that fail}
+\label{sec:substrate}
+
+The UW cohort forced this section. Under a protocol frozen before any label was
+generated, and identical in every parameter, the Roney meshes returned $20/62$
+subjects inducible ($32.3\%$) while the UW meshes returned $6/82$ ($7.3\%$). A
+fourfold discrepancy on cohorts of comparable fibrosis burden is not a cohort
+property one should accept; it is a hypothesis about the pipeline. We had
+previously recorded the UW arm as uninformative and moved on, which was the
+error. What follows is what a proper audit found, and then three controls, none
+of which explains the anomaly.
+
+\paragraph{The audit.} Two defects sit in the released files. The first is
+ours. The only per-element scalar the UW release carries is \code{elemTag}, the
+Dryad README does not define its values, and we had been mapping tag $164$ to
+half-fibrotic tissue. Four measurements say it is not tissue at all. It resolves
+into four to six large connected components in every one of the $82$ meshes,
+five in $75$ of them, four in five and six in two, which is the ordinary
+variation of pulmonary-vein anatomy: a left common trunk gives four, a right
+middle vein gives six. Each large component is topologically a disc, $11$--$42$
+mm across, sitting at $0.47$--$0.82$ of the atrial radius from the centroid. It
+borders fibrotic elements on about $0.08\%$ of its incident edges against a
+chance rate of $14$--$20\%$, a depletion beyond a hundredfold, which is
+incompatible with reading it as a fibrosis border zone. And it is
+ablation-invariant, holding at $20.0\%$ of elements before the procedure and
+$19.9\%$ after, while every other class moves. Tag $164$ is the set of caps
+sealing the pulmonary veins and the mitral valve. Removing it opens the surface:
+the Euler characteristic falls by a median of $7$ (range $2$--$12$). We report
+the \emph{change} rather than an opening count, because $\chi=2-k$ presumes a
+clean closed surface and two of these meshes, ID040 and ID049, arrive at
+$\chi=-16$ and $-18$ before anything is removed.
+
+Treating those caps as half-conducting tissue does more than inflate fibrosis.
+It seals the atrium's orifices, so simulated activation crosses the mitral valve
+and the vein ostia instead of circling them, and reentry anchored on those
+orifices, a principal mechanism of atrial fibrillation, cannot form.
+
+The second defect is upstream. A \code{VECTORS fiber} array is present in all
+$164$ released meshes, but it equals the constant $(1,0,0)$: the measured mean
+directional spread is exactly $0.000$. The Roney cohort, by contrast, gives
+$0.945$--$0.979$, with roughly one distinct direction per vertex. Conduction
+anisotropy is applied relative to the \emph{local} fibre direction, so a single
+global direction reduces it to a fixed coordinate bias carrying no anatomy. The
+same cardinality argument applies to fibrosis: three distinct levels in the UW
+release, effectively two once the caps are dropped, against $276$--$1071$ in
+Roney.
+
+\paragraph{Control 1: repairing the substrate.} Opening the orifices and
+supplying a spatially varying fibre field, in a $2\times2$ design over all $82$
+subjects (Fig.~\ref{fig:substrate}a), raises inducibility from $6/82$ to
+$14/82$. The two act super-additively, each converting about four subjects alone
+and eight together, which is consistent with reentry needing both an anatomical
+obstacle and anisotropic heterogeneity. We do not present this as a fix. The
+strongest contrast does not reach paired significance (McNemar exact
+$p=0.077$), it closes only $39\%$ of the distance to Roney, and only two of the
+original six positives survive the repair. The varying fibre field is moreover a
+probe, not a correction: it is the global $+z$ direction projected onto each
+vertex tangent plane, and it is not anatomy.
+
+\paragraph{Control 2: destroying the fibres on a cohort that has them.} The
+cleaner experiment replaces the Roney fibre field with the same constant
+$(1,0,0)$, holding anatomy, fibrosis and every solver parameter fixed
+(Fig.~\ref{fig:substrate}b). The rate does not move at all: $20/62$ with real
+fibres and $20/62$ without, McNemar $b=c=5$, $p=1.0$. Fibre degeneracy does not
+drive the inducibility rate, and our first attribution of the UW anomaly to it
+was wrong. The perturbation is real at the level of the dynamics --- sustained
+reentry duration changes on $50/62$ subjects, by up to $661$ ms, and $10/62$
+verdicts flip --- but those effects cancel in aggregate.
+
+\paragraph{Control 3: destroying the fibrosis gradation.} The remaining
+structural difference was that UW fibrosis is binary where Roney's is graded, and
+graded border zones are where slow conduction and unidirectional block are
+supposed to arise. Binarising the Roney fibrosis field should therefore have
+suppressed reentry. It does the opposite (Fig.~\ref{fig:substrate}c). Thresholding
+at $f>0.5$ raises inducibility from $20/62$ to $31/62$; thresholding at the
+per-subject quantile that holds mean fibrosis burden fixed at $0.333$, so that
+only the gradation is destroyed, raises it to $40/62$. Coarsening the fibrosis
+field roughly doubles inducibility. In hindsight the mechanism is
+unmysterious --- a sharp binary boundary is a stronger source--sink
+discontinuity than a smooth ramp --- but the direction is the opposite of our
+prediction, and it disqualifies coarse fibrosis as an explanation for a cohort
+that is inducible \emph{too rarely}.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\linewidth]{fig_substrate_audit.png}
+\caption{Three controls on the substrate. (a) Repairing both UW defects raises
+inducibility but not significantly, and not to the reference level. (b)
+Destroying the fibre field on a cohort that has one leaves the rate exactly
+unchanged. (c) Destroying the fibrosis gradation while holding mean burden fixed
+roughly doubles the rate, the opposite of the predicted direction. The dashed
+line is the Roney reference, $32.3\%$.}
+\label{fig:substrate}
+\end{figure}
+
+Taken together the three controls leave the anomaly unexplained, and they
+tighten rather than loosen the puzzle: of the two substrate defects we can
+manipulate, one has no effect on the rate and the other, when imposed
+deliberately, pushes it upward. Whatever suppresses reentry in the UW cohort is
+not on this list. We report that as an open problem rather than close it with
+the most available story, which is how the original $7\%$ came to be filed as a
+cohort property in the first place.
+
+\subsection{The labeller is reproducible in aggregate and unstable per subject}
+\label{sec:labelnoise}
+
+The controls expose something about the ground truth that matters more than the
+substrate defects do. Destroying the Roney fibre field holds the aggregate rate
+at exactly $20/62$ while flipping $10/62$ individual verdicts. Repairing the UW
+substrate retains only two of its six original positives. The six-tier
+convergence study reported below finds only $7/24$ subjects consistent across
+resolutions. The aggregate inducibility rate is therefore a stable quantity, and
+the per-subject verdict is not.
+
+This is a statement about the endpoint, not an aside. The pre-registered
+comparison is scored on per-subject labels, and non-differential noise in a
+binary outcome attenuates any incremental AUC toward zero. Part of the null we
+report is thus a property of the labeller rather than of the biomarker, and we
+cannot cleanly separate the two with the present ground truth. It also sets a
+floor on what any feature could achieve here, which is a limit on the whole
+class of studies that score spectral or structural features against a
+phenomenological inducibility verdict, not on SFI alone. The pre-registered
+openCARP ground truth, substituted here for a monodomain Mitchell--Schaeffer
+solver, would need to be run before the residual is attributable.
 
 \subsection{The validity radius: why the single-vector estimator fails}
 The relative error of the first-order SFI scales as $\Theta(\rhoval)$ and crosses

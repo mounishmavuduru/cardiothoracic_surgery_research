@@ -1,0 +1,2 @@
+C:\Users\vijay\cardiothoracic_surgery_research\scripts\accuracy_campaign.py:9: SyntaxWarning: invalid escape sequence '\.'
+  Run:  .\.venv\Scripts\python.exe scripts\accuracy_campaign.py

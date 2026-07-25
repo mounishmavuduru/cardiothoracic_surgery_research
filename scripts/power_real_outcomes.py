@@ -56,6 +56,50 @@ def power(auc_base: float, delta: float, r: float, rng: np.random.Generator) -> 
     return hits / NSIM
 
 
+def required_n(delta: float, r: float, rng: np.random.Generator,
+               target: float = 0.80, event_fraction: float = None) -> int:
+    """Smallest total cohort size reaching ``target`` power, holding the event rate fixed.
+
+    Answers the question a reader will ask about an underpowered null: not "was this
+    study big enough" (it was not) but "how big would it have to be". The event
+    fraction is held at the observed 48/82 so the answer is about THIS population.
+    """
+    if event_fraction is None:
+        event_fraction = N_EVENTS / (N_EVENTS + N_NONEVENTS)
+    lo, hi = 40, 4000
+    best = hi
+    while lo <= hi:
+        mid = (lo + hi) // 2
+        n1 = max(int(round(mid * event_fraction)), 2)
+        n0 = max(mid - n1, 2)
+        pw = _power_at(n1, n0, 0.70, delta, r, rng)
+        if pw >= target:
+            best = mid
+            hi = mid - 1
+        else:
+            lo = mid + 1
+    return best
+
+
+def _power_at(n1: int, n0: int, auc_base: float, delta: float, r: float,
+              rng: np.random.Generator, nsim: int = 800) -> float:
+    """Power at an arbitrary (n1, n0); a lighter-weight sibling of :func:`power`."""
+    y = np.concatenate([np.ones(n1), np.zeros(n0)])
+    n = y.size
+    mu_b, mu_a = _mu_for_auc(auc_base), _mu_for_auc(auc_base + delta)
+    shared, indep = np.sqrt(r), np.sqrt(1.0 - r)
+    hits = 0
+    for _ in range(nsim):
+        z = rng.standard_normal(n)
+        base = mu_b * y + shared * z + indep * rng.standard_normal(n)
+        aug = mu_a * y + shared * z + indep * rng.standard_normal(n)
+        res = delong_test(y, aug, base)
+        p = res.get("p_value", res.get("p"))
+        if p is not None and p < ALPHA:
+            hits += 1
+    return hits / nsim
+
+
 def main() -> None:
     rng = np.random.default_rng(SEED)
     print(f"n_events={N_EVENTS}  n_nonevents={N_NONEVENTS}  total={N_EVENTS + N_NONEVENTS}"
@@ -68,6 +112,15 @@ def main() -> None:
             row = [power(auc_base, d, r, rng) for d in DELTAS]
             print(f"{auc_base:>9.2f} " + " ".join(f"{v:>8.2f}" for v in row))
         print()
+
+    print("cohort size needed for 80% power, holding the observed event rate "
+          f"({N_EVENTS}/{N_EVENTS + N_NONEVENTS} = "
+          f"{N_EVENTS / (N_EVENTS + N_NONEVENTS):.1%}) fixed:")
+    print(f"{'target dAUC':>12} {'r=0.80':>10} {'r=0.50':>10}")
+    for d in (0.05, 0.07, 0.10):
+        row = [required_n(d, r, rng) for r in (0.80, 0.50)]
+        print(f"{d:>12.2f} {row[0]:>10,} {row[1]:>10,}")
+    print(f"\n(this study has n = {N_EVENTS + N_NONEVENTS})")
 
 
 if __name__ == "__main__":

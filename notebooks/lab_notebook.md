@@ -867,3 +867,46 @@ the manuscript builds on Windows without a TeX install: 0 errors, 0 warnings, 0 
 Note tectonic drives XeTeX vs Overleaf's pdfTeX, so page count can differ by one; Overleaf
 remains authoritative. Added pandas/scikit-learn to the Windows venv. Corrected `PREPRINT.md`,
 which quoted a 600 ms reentry cutoff where the frozen config and manuscript both say 650 ms.
+
+
+---
+
+## 2026-07-25 — Recompute lands; all three explanations for the UW anomaly are refuted
+
+**Recompute on the corrected substrate.** Two runs, because the full recompute changed both
+the substrate and the Roney cohort size (62 → 100 meshes, all now on disk).
+`scripts/gm1_matched_n.py` isolates the substrate fix by capping Roney back at 62:
+
+  matched n=144, competitors_vs_+SFI dAUC lr / gbt
+    roney     20/62    -0.030 / +0.036   [previously -0.030 / +0.036]  ← UNCHANGED, the control
+    uw         8/82    +0.000 / +0.035   [previously -0.057 / +0.104]
+    combined  28/144   -0.005 / +0.036   [previously -0.004 / +0.051, p 0.155 → 0.110]
+
+Roney reproducing to three decimals validates the pipeline: a UW-only fix must leave it
+untouched, and it does. Full recompute (Roney 100 + UW 82 = 182): combined gbt **+0.012**,
+p 0.449, CI [-0.017,+0.044]. The +0.051 that was the paper's closest approach to the
+pre-registered gate is gone.
+
+**The paper's one positive is also gone.** The secondary endpoint claimed SFI beats a
+fibrosis-only baseline (combined GBT +0.103, p=0.009) and therefore "is not merely
+re-encoded fibrosis". Confirmed from git that the old file held exactly +0.103 / p=0.0092.
+On the corrected substrate at matched n it is +0.093 (p=0.013); with the full Roney arm it
+is **+0.017 (p=0.452)**. So the substrate fix is NOT the main cause here — adding 38 further
+real subjects is. An effect that vanishes on more data was a small-sample fluctuation.
+Withdrawn in the manuscript. The old UW arm alone had returned +0.340 (p=0.026) on six
+positives, which nobody should have believed and which we did not flag at the time.
+
+**Third control: fibrosis gradation. Refuted, in the wrong direction.**
+Q_A continuous 20/62 (32.3%); Q_B binary f>0.5 31/62 (50.0%); Q_C binary burden-matched
+40/62 (64.5%). Coarsening fibrosis roughly DOUBLES inducibility. All three candidate
+explanations for the UW anomaly are dead, and two of them push upward.
+
+**Also corrected:** the manuscript claimed the UW competitor base AUC was "≈ chance". It is
+0.834 (lr) / 0.748 (gbt); only the fibrosis-only gbt baseline is 0.562, and it is that
+near-chance baseline which manufactures the cohort's +0.217. The results table now prints
+base AUC, bootstrap CI and event counts, none of which it previously carried — no interval
+appeared anywhere in the paper before today.
+
+**openCARP feasibility.** WSL Ubuntu 26.04 (8 cores, 15 GB) is present; the openCARP v19.0
+AppImage runs there without root after `--appimage-extract`. `-buildinfo` returns cleanly.
+Recorded as feasibility only; switching labellers mid-analysis is not being done.

@@ -1,0 +1,10 @@
+[
+  {
+    "tag": "control_sigma1.0",
+    "sigma": 1.0,
+    "rwf": false,
+    "rel_l2": 0.00048425021824037795,
+    "final_loss": 1.5849798694701547e-06,
+    "seconds": 1305.2
+  }
+]

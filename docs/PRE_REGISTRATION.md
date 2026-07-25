@@ -342,6 +342,40 @@ prediction from baseline substrate; the post-ablation mesh encodes the delivered
   decimals; all three are withdrawn. The identification itself stands and is better supported
   than before, since the component spread matches known anatomy. Guards are pinned in
   `tests/test_uw_boyle.py`, which is what caught the error.
+- **Amendment 2026-07-25 (f): the third and last candidate is refuted too, in the wrong
+  direction.** `scripts/roney_fibrosis_quantization.py` destroyed the fibrosis *gradation*
+  on Roney while holding anatomy, fibres and every solver parameter fixed:
+
+  | arm | inducible | rate | mean burden | distinct levels |
+  |---|---|---|---|---|
+  | continuous, as shipped (control) | 20/62 | 32.3 % | 0.333 | 1318 |
+  | binary at f > 0.5 | 31/62 | 50.0 % | 0.290 | 2 |
+  | binary, burden held fixed | **40/62** | **64.5 %** | 0.333 | 2 |
+
+  The control reproduces 20/62. The prediction was that coarsening fibrosis would *suppress*
+  reentry by removing graded border zones, and so explain the UW cohort's low rate.
+  It does the opposite: coarsening roughly **doubles** inducibility, and the burden-matched
+  arm — which changes nothing but the gradation — is the strongest of the three. A sharp
+  binary boundary is evidently a stronger source–sink discontinuity than a smooth ramp.
+
+  **Consequence.** All three candidate explanations for the UW anomaly are now dead:
+  sealed orifices (+2/82, n.s.), degenerate fibres (no effect on the rate, p = 1.0), and
+  coarse fibrosis (wrong direction). Two of the three, imposed deliberately on a clean
+  cohort, would *raise* the rate. The anomaly is unexplained and is reported as an open
+  problem. No further explanation will be offered in any document without a control
+  behind it.
+
+- **Amendment 2026-07-25 (g): openCARP is now installable, and the substitution is no longer
+  forced.** §7.1 recorded openCARP as uninstallable on the then-current container, which is
+  why the monodomain Mitchell–Schaeffer solver was substituted. On the current machine a WSL
+  Ubuntu 26.04 environment (8 cores, 15 GB) is available, and the openCARP v19.0 AppImage
+  runs there without root once extracted (`--appimage-extract`; FUSE is present but
+  `libfuse.so.2` is not). `openCARP -buildinfo` returns cleanly. This is recorded as
+  *feasibility only*. Switching the ground-truth labeller is a major protocol change that
+  would invalidate every in-silico number in the manuscript, and it is not being made
+  mid-analysis. It is the single highest-value change available, given amendment (e)'s
+  finding that per-subject labels are noisy, and it should be scheduled deliberately with
+  its own re-validation.
 - **Amendment 2026-07-24 (e): the fibre hypothesis is REFUTED by direct control, and the
   label is noisy per subject.** `scripts/roney_fibre_control.py` destroyed only the fibre
   field on the Roney cohort — which ships a real one — holding anatomy, fibrosis and every
