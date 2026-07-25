@@ -768,3 +768,90 @@ blocked: its toolchain ships only as GitHub release assets, which the egress pol
 **Data-request contacts verified (2026-07-23):** Dr Caroline Roney <c.roney@qmul.ac.uk> (Reader in
 Computational Medicine, QMUL SEMS); Prof. Patrick M. Boyle <pmjboyle@uw.edu> (Assoc. Prof.
 Bioengineering, CardSS Lab, UW). Filled into `docs/outreach/data_request_email.md`.
+
+---
+
+## 2026-07-24 — Real clinical outcomes arrive; two substrate defects found in the UW cohort
+
+**Prof. Boyle shared the outcome column.** `Patient_ID, Recurrence_Rhythm_2yr` ∈ {NR, AF, AFL},
+n=82, IDs 1–15 and 21–87 — exactly the ID set of the public Dryad meshes. Marginals: 34 NR,
+35 AF, 13 AFL, so 48 events (58.5%); Dryad holdout ID001–015 has 8/15, the ID021–087 cohort
+40/67. `docs/DATASETS.md:49` had these recorded as WITHHELD; that is superseded. The file is
+restricted-use human-subject data, is NOT covered by the CC0 on the meshes, lives under the
+gitignored `data/` tree with two extra `.gitignore` rules, and must not be redistributed
+without written permission.
+
+**Pre-registration §8 written and git-tagged `prereg-real-outcomes-20260724` BEFORE any join.**
+Power computed from marginals alone (`scripts/power_real_outcomes.py`): at n=82 the study has
+only ~25% power at the ΔAUC ≥ 0.05 threshold used for the simulator endpoint, so that threshold
+is explicitly not reused. Minimum detectable effect is ΔAUC ≈ 0.10 (optimistic) to 0.15
+(conservative); a null below that is pre-declared *inconclusive*, not negative.
+
+### Deviation 1 — elemTag 164 is not tissue. It is the caps over the atrial openings.
+
+The Dryad README documents no tag semantics. An earlier revision of `uw_boyle.py` read 164 as
+"remodelled / patchy tissue, distributed (least compact)" and `TAG_FIBROSIS` mapped it to 0.5.
+Measured directly (`scripts/` ad-hoc geometry, reproduced in the DROP_TAGS docstring):
+
+  * exactly **five** connected components, each topologically a **disc (χ = 1)**, 11–42 mm
+    across, at 0.47–0.82 of the atrial radius from the centroid;
+  * **zero** edge-adjacency to fibrotic tag 115 anywhere (enrichment ×0.00) — which kills the
+    border-zone reading that fibrosis = 0.5 implies;
+  * 20.0% of elements pre-ablation, 19.9% post — ablation-invariant;
+  * deleting it leaves χ = **−3** = 2 − 5, i.e. it was sealing exactly **five** openings.
+
+That is the four pulmonary veins and the mitral valve. Treating them as half-conducting tissue
+did more than distort fibrosis: it **sealed the atrium's orifices**, so activation could cross
+the mitral valve and the vein ostia instead of circling them. Reentry anchored on those
+orifices is a principal AF mechanism and could not form. `DROP_TAGS = (164,)` now removes them
+before any field is derived; `drop_tags=()` reproduces the old behaviour for the record.
+
+### Deviation 2 — the released fibre field is degenerate (upstream data, not our bug)
+
+All 164 released meshes carry a `VECTORS fiber` array whose value is a constant `(1,0,0)`;
+measured mean directional spread is exactly **0.0**. Verified contrast against Roney 5801337:
+
+  field                      Roney              UW/Boyle
+  fibre directional spread   0.945 – 0.979      0.000 exactly
+  distinct fibre directions  ~one per vertex    ONE, mesh-wide
+  fibrosis representation    continuous IIR,    categorical elemTag,
+                             276–1071 levels    3 levels
+
+`edge_weights_from_fibres` applies anisotropy relative to the LOCAL fibre direction, so one
+global direction degenerates it into a fixed coordinate bias and removes the fibre
+heterogeneity that seeds unidirectional block. `uw_boyle.py` now measures the spread, records
+`fibres_are_degenerate`/`fibre_spread` in `meta`, and raises a `RuntimeWarning`. It cannot be
+fixed locally — only a re-export from UW can restore it. Asked in
+`docs/outreach/boyle_reply_followup.md` Q4.
+
+**Manuscript correction.** The Limitations item called this "rule-based fibres", which reads as
+a modelling choice we made rather than a defect we inherited and had not diagnosed. Corrected
+in both the Limitations list and the base-rate plausibility passage.
+
+### Attribution experiments (running)
+
+`scripts/uw_substrate_ablation.py` — 2×2 over all 82 UW meshes: caps kept/dropped × constant/
+varying fibres. Arm A must reproduce the recorded 6/82 as a control.
+`scripts/roney_fibre_control.py` — the cleaner test: destroy ONLY the fibre field on Roney,
+which has one. Arm R_A must reproduce 20/62.
+
+Until these land, no causal claim about the 7% is asserted in any document.
+
+### Consequence for the reported combined result
+
+`results/gm1_expanded_metrics.json` and Table `tab:null` report Roney 62 (gbt +0.036), UW 82
+(gbt +0.104), Combined 144 (gbt **+0.051**, p 0.155). The combined figure is the closest the
+paper comes to clearing the pre-registered 0.05 gate, and it is pulled over that line by the
+UW arm — the cohort now known to have been simulated on a sealed atrium with a constant fibre
+field. The combined row must be recomputed on the corrected substrate or withdrawn.
+
+### Infrastructure
+
+`scripts/dryad_fetch.py` had the old Linux container's MITM proxy and CA bundle hardcoded; now
+env-overridable and defaulting to unset. Re-downloaded the 164 UW meshes (294 MB) and the 100
+Roney meshes (3.3 GB, `scripts/zenodo_fetch.py`) — both were lost with the container, along
+with the entire `outputs/` label cache. Installed tectonic 0.16.9 into `tools/` (gitignored) so
+the manuscript builds on Windows without a TeX install: 0 errors, 0 warnings, 0 bad boxes.
+Note tectonic drives XeTeX vs Overleaf's pdfTeX, so page count can differ by one; Overleaf
+remains authoritative. Added pandas/scikit-learn to the Windows venv. Corrected `PREPRINT.md`,
+which quoted a 600 ms reentry cutoff where the frozen config and manuscript both say 650 ms.
