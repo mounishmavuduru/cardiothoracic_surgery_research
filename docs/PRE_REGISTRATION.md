@@ -275,9 +275,11 @@ prediction from baseline substrate; the post-ablation mesh encodes the delivered
 - **UAC is a PCA surrogate**, not anatomical (`uw_boyle.py:180-192`), so any region-based or
   localization claim on this cohort is weaker than on Roney and will be labelled as such.
 - **Amendment 2026-07-24 (same day, still before any label join): the tag map is probably
-  wrong, and this blocks the analysis.** Having downloaded the meshes, the *only* array they
-  contain is a per-cell `elemTag`; there is no continuous LGE field and no fibre array.
-  Measured over all 164 meshes: tag 111 59.0 % → 47.3 % (pre → post ablation), 115 20.9 % →
+  wrong, and this blocks the analysis.** Having downloaded the meshes, they contain a per-cell
+  `elemTag` and a `VECTORS fiber` array, and no continuous LGE field.
+  *(Correction, same day: an earlier draft of this amendment said there was no fibre array.
+  That was wrong — the array is present; it is its **contents** that are degenerate, see the
+  final bullet below.)* Measured over all 164 meshes: tag 111 59.0 % → 47.3 % (pre → post ablation), 115 20.9 % →
   14.9 %, 199 absent → 17.9 %, and **164 20.0 % → 19.9 %**. Tag 164 is untouched by ablation,
   which is not fibrosis behaviour; it is far more consistent with a non-myocardial structure
   (mitral annulus / PV sleeves). The loader nevertheless assigns it `fibrosis = 0.5`
@@ -287,6 +289,21 @@ prediction from baseline substrate; the post-ablation mesh encodes the delivered
   **The confirmatory analysis will not be run until the tag semantics are confirmed with the
   data provider** (`docs/outreach/boyle_reply_followup.md`, Q2). This correction is being made
   blind to the outcome column, which has still never been joined to any feature.
+- **Amendment 2026-07-24 (b): the released fibre field is degenerate, and this probably
+  explains the cohort's anomalous inducibility.** All 164 meshes carry a `VECTORS fiber`
+  array whose value is a constant `(1, 0, 0)` for every element — measured mean directional
+  spread is exactly `0.0`. `edge_weights_from_fibres` makes conduction anisotropic
+  (along 1.0 / cross 0.3) *relative to the local fibre direction*, so a single global
+  direction reduces the anisotropy to a fixed coordinate bias with no anatomical content and
+  removes all fibre heterogeneity — a principal substrate for unidirectional block and hence
+  for reentry initiation. This is the leading explanation for the UW cohort scoring
+  **6/82 (7.3 %) inducible** against **20/62 (32.3 %)** on Roney, which ships real
+  `fiber_endo`/`fiber_epi`, under an identical frozen protocol. `uw_boyle.py` now measures
+  the spread, records `fibres_are_degenerate` in mesh metadata, and raises a `RuntimeWarning`,
+  so the condition can no longer pass unnoticed. Note this is **upstream data**, not a local
+  bug: the defect is in the public Dryad deposit. It does not affect the §8 clinical endpoint,
+  which uses real outcomes and needs no simulator label — but it does affect every existing
+  in-silico result that includes UW subjects.
 - **Benchmark context.** The source study reports ROC AUC **0.80 ± 0.04** using 89 features
   including EHR/clinical risk factors that we do not hold. We are **not** claiming to beat
   that model, and will not present our mesh-only AUC as if it were comparable.

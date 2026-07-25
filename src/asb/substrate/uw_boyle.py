@@ -45,6 +45,7 @@ from __future__ import annotations
 
 import glob
 import os
+import warnings
 from pathlib import Path
 from typing import Dict, List, Mapping, Optional
 
@@ -66,6 +67,10 @@ MICRON_TO_MM: float = 1.0e-3
 
 #: Frozen per-cell ``elemTag`` -> fibrosis-fraction map (see module docstring).
 TAG_FIBROSIS: Dict[int, float] = {111: 0.0, 115: 1.0, 164: 0.5, 199: 1.0}
+
+#: Mean per-vertex deviation from the mean fibre direction, below which the field is
+#: treated as degenerate (no anatomical anisotropy). The released UW meshes score ~0.
+DEGENERATE_FIBRE_SPREAD: float = 1.0e-6
 
 
 # --------------------------------------------------------------------------- #
@@ -225,11 +230,32 @@ def load_uw_mesh(
     tags = cs.get("elemTag", np.full(faces.shape[0], 111.0))
     fibrosis = tags_to_fibrosis(tags, faces, n, mapping=tag_fibrosis)
 
+    # Fibre field. Verified 2026-07-24 across all 164 released meshes: the ``VECTORS
+    # fiber`` array IS present, but it is a constant (1, 0, 0) for every element of every
+    # mesh -- i.e. the public Dryad deposit carries a degenerate fibre field, apparently
+    # lost when the meshes were downsampled for release. This is upstream data, not a
+    # local fallback. It matters because ``edge_weights_from_fibres`` makes conduction
+    # anisotropic (along 1.0 / cross 0.3) relative to the local fibre direction: with one
+    # global direction the anisotropy becomes a fixed coordinate bias with no anatomical
+    # meaning, and all fibre heterogeneity -- a primary substrate for unidirectional block
+    # and hence reentry initiation -- disappears. Leading suspect for this cohort's
+    # anomalous ~7% inducibility against ~32% on Roney, which ships real fibre fields.
     fib_cell = cv.get("fiber", None)
     if fib_cell is None:
         fibres = np.tile(np.array([1.0, 0.0, 0.0]), (n, 1))
+        fibre_spread = 0.0
     else:
         fibres = _cell_vectors_to_vertex(n, faces, np.asarray(fib_cell, dtype=float))
+        fibre_spread = float(np.mean(np.linalg.norm(fibres - fibres.mean(axis=0), axis=1)))
+    fibres_are_degenerate = bool(fibre_spread < DEGENERATE_FIBRE_SPREAD)
+    if fibres_are_degenerate:
+        warnings.warn(
+            f"{Path(path).name}: fibre field is degenerate (directional spread "
+            f"{fibre_spread:.2e}); every element shares one direction. Anisotropy is a "
+            "fixed coordinate bias, not anatomy -- do not report inducibility from this "
+            "substrate as a measurement of the patient.",
+            RuntimeWarning, stacklevel=2,
+        )
 
     uac = _pca_uac_surrogate(points)
     region = _uac_regions(uac)
@@ -241,6 +267,8 @@ def load_uw_mesh(
         fibrosis=fibrosis, region=region, shape_family=fam,
         meta={"source": "uw_boyle_dryad_kkwh70sg0", "path": os.path.abspath(path),
               "uac_is_surrogate": True, "fibrosis_from": "elemTag",
+              "fibres_are_degenerate": fibres_are_degenerate,
+              "fibre_spread": fibre_spread,
               "tag_fractions": {int(a): float(b / c.sum()) for a, b in zip(u, c)},
               "fibrosis_mean": float(np.mean(fibrosis)), "n_full": int(n)},
     )

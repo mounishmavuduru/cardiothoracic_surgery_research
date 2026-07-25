@@ -52,9 +52,17 @@ Four clarifications would materially improve the work:
 3. **Continuous fibrosis, and fibres.** Related: is the underlying continuous LGE
    intensity-ratio (IIR) field per vertex something you could share? A binary fibrotic/not tag
    weakens the fibrosis baseline I am trying to beat, which biases my comparison in my own
-   favour — I would rather remove that confound than disclose it. Separately, the README
-   describes fibre orientations surviving the `meshtool` conversion to `.lon`, but I find no
-   fibre array in the `vtk_bin` files; were fibres dropped in the released version?
+   favour — I would rather remove that confound than disclose it.
+
+4. **The released fibre field looks degenerate — this one may matter to you.** Each mesh does
+   contain a `VECTORS fiber` array, but in all 164 files it is a constant `(1, 0, 0)` for
+   every element: mean directional spread is exactly 0. I suspect fibres did not survive the
+   downsampling to 0.5 mm edge length described in the README. It matters because anyone
+   running the reaction–diffusion simulations the README recommends would get globally
+   uniform anisotropy rather than atrial fibre architecture. In my own pipeline this cohort
+   comes out only ~7 % inducible against ~32 % on a fibre-carrying cohort under an identical
+   protocol, which is what led me to look. Would it be possible to share the fibre field, or
+   is there a re-export that preserves it?
 
 4. **Follow-up completeness.** For the `NR` patients, were all of them followed the full two
    years, or are some censored early / lost to follow-up? And was a standard 90-day blanking
