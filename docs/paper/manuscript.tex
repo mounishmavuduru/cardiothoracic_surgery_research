@@ -441,6 +441,52 @@ effect ($+0.0007$) $\sim\!23{,}000$, clinically undetectable \emph{there}. We do
 $+0.036$--$0.051$ estimates are compatible with a detectable effect we are simply
 underpowered to confirm.
 
+\subsection{Region definition and the patient-level reduction}
+\label{sec:regions}
+
+The per-region SFI of Eq.~(2) is stated over a region $R$, and until now we had
+left $R$ implicit. Since the partition and the reduction that follows it are
+what actually produce the feature block whose incremental $\dAUC$ is the primary
+endpoint, we give both explicitly.
+
+\paragraph{Partition.} Regions are a $3\times3$ grid over the universal atrial
+coordinates. With $(\alpha,\beta)\in[0,1]^2$ per vertex, a vertex is assigned
+$r=3\lfloor 3\beta\rfloor+\lfloor 3\alpha\rfloor \in\{0,\dots,8\}$, so every mesh
+carries exactly nine regions regardless of its vertex count. An \emph{edge} is
+assigned region $r$ only when both endpoints carry $r$; edges straddling two
+regions go to a tenth bucket, $r=-1$, which is retained rather than discarded so
+that the per-edge sensitivities sum to the global total. The rule is shared by
+the closed-form and Monte-Carlo estimators so their region keys coincide.
+
+This is where the two cohorts differ in kind and not only in degree. The Roney
+meshes carry anatomically registered universal atrial coordinates, so their nine
+regions are anatomical. The UW release ships none, so we substitute the top two
+principal axes of the surface coordinates, min-max normalised. That surrogate is
+a smooth two-dimensional chart adequate for binning, but it is not registered to
+anatomy, and any region-level or localization claim on the UW cohort is
+correspondingly weaker. The substitution is recorded in the mesh metadata rather
+than left to the reader to infer.
+
+\paragraph{Reduction to the patient.} The classification target is one binary
+verdict per patient, so the nine per-region values must be reduced. Nine scalars
+enter the design matrix, all in the \code{sfi\_} namespace: the global
+\code{total} (the sum of expected per-edge $\lam_2$ drop over all edges);
+\code{region\_max}, \code{region\_mean} and \code{region\_std} over the region
+values; the three largest region values in descending order,
+\code{top1}--\code{top3}; and \code{edge\_frag\_max} and \code{edge\_frag\_mean}
+over the raw per-edge fragilities $(\phii_{2,i}-\phii_{2,j})^2$. The order
+statistics are included because a fragility biomarker is a claim about the
+\emph{worst} region rather than the average one, and reporting only a mean would
+have made the hypothesis untestable in its own terms.
+
+Two properties of this construction matter for reading the null. First, the
+competitor features are patient-level scalars already, so no analogous reduction
+is applied to them; the comparison is between a nine-column add-on and a
+six-column baseline, which if anything favours the add-on. Second, none of the
+nine columns is fitted to the outcome. SFI is closed-form given the mesh and the
+frozen uncoupling field, so it contributes no tuning degrees of freedom, and the
+null cannot be attributed to a failure of feature selection.
+
 \subsection{A provenance audit of the released substrates, and three controls that fail}
 \label{sec:substrate}
 

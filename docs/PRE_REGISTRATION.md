@@ -376,6 +376,25 @@ prediction from baseline substrate; the post-ablation mesh encodes the delivered
   mid-analysis. It is the single highest-value change available, given amendment (e)'s
   finding that per-subject labels are noisy, and it should be scheduled deliberately with
   its own re-validation.
+
+  **Validation completed 2026-07-25** (`scripts/opencarp_validate.sh`, reproducible):
+  the binary runs; **MitchellSchaeffer is among the 58 available ionic models**, i.e. the
+  *same membrane model* as `asb.labels.monodomain`, so a switch is like-for-like rather
+  than a change of physics; single-cell gives **APD90 = 246 ms** against the in-house
+  solver's 218 ms; and a tissue run propagates a planar wave across a 10,201-node slab
+  (0 → 544 → 1526 → … → 10,201 activated nodes). Two gotchas are recorded so the next
+  run does not rediscover them: the AppImage must be `--appimage-extract`ed because
+  `libfuse.so.2` is absent even though `fusermount` is present, and MitchellSchaeffer is
+  a **normalised** model (Vm ≈ 0–1), so a physiological 250 µA/cm² stimulus makes the
+  parabolic solve diverge with NaN — 60 works.
+
+  **One design risk is flagged now, before it is designed in.** openCARP assigns
+  conductivity through discrete `gregion` element tags, so a continuous fibrosis field
+  must be binned to be used. Amendment (f) established that binarising fibrosis roughly
+  *doubles* inducibility on this pipeline. A coarse binning would therefore import
+  precisely the artefact we just characterised. Any openCARP labeller must use enough
+  bins to approximate the continuous field, and must demonstrate insensitivity to the bin
+  count before its labels are used for anything.
 - **Amendment 2026-07-24 (e): the fibre hypothesis is REFUTED by direct control, and the
   label is noisy per subject.** `scripts/roney_fibre_control.py` destroyed only the fibre
   field on the Roney cohort — which ships a real one — holding anatomy, fibrosis and every
