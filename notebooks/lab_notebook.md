@@ -920,3 +920,90 @@ Recorded as feasibility only; switching labellers mid-analysis is not being done
 > 2026-07-20) — the same 600 ms slip that was corrected in `PREPRINT.md`. The result is unaffected
 > (max sustained 238 ms, median 207 ms, so 0/27 inducible under either cutoff); only the stated
 > number was wrong. Keeping both entries per the append-only rule.
+
+
+---
+
+## 2026-07-26 — The UW anomaly is solved, and openCARP passes its gate on the third attempt
+
+### The anomaly was fibrosis burden, not any substrate defect
+
+Three substrate hypotheses were already dead. The geometry audit
+(`scripts/cohort_geometry_audit.py`) then measured what none of them covered: at the frozen
+2000-node coarsening, mean fibrosis is **0.349 on Roney and 0.244 on UW** — about 30 % less
+— with the fraction above half-fibrotic 0.310 against 0.239. UW meshes are also 18 % larger
+in area and 7 % coarser at fixed node count. The frozen protocol's own calibration reports
+Spearman(fibrosis, sustained reentry) = 0.75, so less fibrosis should mean less
+inducibility. That is the labeller working, not failing.
+
+`scripts/fibrosis_burden_swap.py` tested it in both directions, rescaling multiplicatively
+so the spatial pattern and gradation are preserved and only the level moves:
+
+    R_A roney native     20/62  32.3%   burden 0.333
+    R_B roney at UW      1/62    1.6%   burden 0.241   Fisher p = 4.0e-06
+    U_A uw native         8/82   9.8%   burden 0.248
+    U_B uw at Roney      21/82  25.6%   burden 0.284   Fisher p = 0.013
+
+Both controls reproduce their native rates exactly. **At matched burden the ordering
+reverses** — Roney at 0.241 gives 1.6 % while UW at 0.248 gives 9.8 % — so UW is not
+resistant to reentry; given comparable fibrosis it is slightly *more* inducible. The
+anomaly was a property of the two released datasets, not of the pipeline.
+
+Lesson worth keeping: an out-of-range aggregate is a hypothesis about the pipeline, but it
+is a hypothesis about the **inputs** first. Three controls went hunting for something broken
+before anyone checked whether the two cohorts were comparable.
+
+### openCARP: three gate attempts, two failures, each diagnosed
+
+Attempt 1 — 90 % inducible both cohorts, Spearman **−0.261** / −0.162, concordance 18.3 %.
+A negative fibrosis–verdict correlation is the signature of rate-dependent block, not
+reentry.
+
+Attempt 2 — added fibrosis-dependent ERP. openCARP's `MitchellSchaeffer` defaults are
+`tau_close` 150 / `tau_out` 5 (APD90 277 ms); the frozen monodomain uses 110 / 6 and also
+shortens ERP with fibrosis (`fibrosis_erp_shortening = 0.5`), which my configuration did
+not. Measured on this build: `tau_close` 150 → 277 ms, 110 → 209 ms, 55 → 113 ms, so
+`tau_close = 115 × (1 − 0.5 f)` reproduces the frozen 218/121 ms within ~2 %. Result:
+76.7 % / 93.3 %, Spearman −0.244 / −0.033, concordance 26.7 %. Better, still failing — so
+the diagnosis was only partly right.
+
+Attempt 3 — **conduction velocity had never been calibrated.** Wavelength = CV × APD decides
+whether a circuit fits in the tissue. Measured on a 2 cm strip: `g_il` 0.174 (the shipped
+default) → **0.344 m/s**, against the in-house band of 0.4–1.2 and its ~0.87 target. That is
+a ~75 mm wavelength in an atrium of ~110 mm characteristic length, which makes reentry
+trivially easy. A second trap on the way: CV appeared to saturate, 9× `g_il` buying only
+1.9× CV, because the monodomain conductivity is the **harmonic mean** of intra- and
+extracellular — raising `g_i` alone asymptotes at `g_e`. With both scaled:
+`g_il` 0.174 → 0.344, 0.50 → 0.594, **1.00 → 0.852**, 2.00 → 1.307 m/s. Adopted
+`g_il 1.05, g_it 0.315, g_el 3.78, g_et 1.134`, transverse at 0.3× longitudinal to match the
+in-house along/cross weighting rather than openCARP's ~9:1 ventricular anisotropy.
+
+    cohort   inducible   rate    Spearman   gate      (full 182-subject run)
+    roney    22/100      22.0%   +0.404     PASS
+    uw        4/82        4.9%   +0.079     FAIL (band)
+
+Concordance with monodomain on all 182: **156/182 = 85.7 %** (both 21, openCARP only 5,
+monodomain only 21). openCARP totals 26/182 against monodomain's 42/182, so it is the more
+conservative solver. That is the robustness statement worth having: the phenomenological
+stand-in every in-silico result rests on is **not over-calling** relative to a standard
+reaction–diffusion solver.
+
+**Discipline note.** All three attempts were anchored to independent physiological targets
+(APD90, then CV). No endpoint parameter — `reentry_min_ms`, `max_depol_fraction`,
+`min_reactivating_nodes` — was touched at any point, which is why the gate stayed able to
+fail, and did, twice, on configurations that produced confident-looking labels. Tuning
+those instead would have made attempt 1 "pass" and put 90 %-inducible garbage into the
+concordance number.
+
+UW's 4.9 % sits below the band but its correlation is now positive, and the band was
+calibrated on Roney in §7.4. Given the burden result, a low UW rate is the prediction rather
+than an anomaly; `scripts/opencarp_uw_burden_check.py` tests that directly rather than
+asserting it.
+
+### Decision recorded
+
+openCARP runs **alongside** monodomain as a robustness check, never replacing it
+(pre-registration amendment (i)). Switching would invalidate every in-silico number at once
+on the strength of a just-recalibrated solver, and would destroy the one thing running both
+produces: a measured agreement rate. openCARP labels remain barred from every endpoint until
+the bin-sensitivity sweep also passes.
