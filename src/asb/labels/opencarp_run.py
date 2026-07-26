@@ -83,9 +83,27 @@ class OpenCARPConfig:
     """Frozen openCARP protocol. Mirrors ``FROZEN_MONO`` where the two overlap."""
 
     imp: str = "MitchellSchaeffer"
-    #: Longitudinal / transverse intracellular conductivity of HEALTHY tissue (S/m).
-    g_il: float = 0.174
-    g_it: float = 0.019
+    #: Conductivities of HEALTHY tissue (S/m), calibrated on this build so that planar
+    #: conduction velocity matches the in-house solver rather than openCARP's textbook
+    #: ventricular defaults. This is not cosmetic. Wavelength = CV x APD sets how easily
+    #: reentry forms, and the shipped defaults (g_il 0.174) give CV = 0.344 m/s, a ~75 mm
+    #: wavelength against an atrium of ~110 mm characteristic length -- reentry becomes
+    #: trivially easy, which is what produced 90 % "inducible" in the first gate attempt.
+    #:
+    #: Measured CV sweep (2 cm strip, 100 um, tau_close 115):
+    #:     g_il 0.174 -> 0.344 m/s      g_il 1.00 -> 0.852 m/s
+    #:     g_il 0.50  -> 0.594 m/s      g_il 2.00 -> 1.307 m/s
+    #: The extracellular conductivities must be scaled with the intracellular ones: the
+    #: monodomain conductivity is their harmonic mean, so raising g_i alone saturates
+    #: (9x g_il bought only 1.9x CV before g_el was added).
+    #:
+    #: Transverse is 0.3 x longitudinal, matching the in-house along/cross weighting,
+    #: rather than openCARP's ~9:1 ventricular anisotropy.
+    g_il: float = 1.05
+    g_it: float = 0.315
+    #: Extracellular, held at 3.6 x the intracellular values.
+    g_el: float = 3.78
+    g_et: float = 1.134
     #: Fibrosis attenuates conductivity by (1 - f), floored so scar still conducts a little.
     fibrosis_floor: float = 0.05
     #: Number of conductivity bins the continuous fibrosis field is discretised into.
@@ -259,7 +277,10 @@ def build_par(export: Dict, cfg: OpenCARPConfig, stim_centres_um: Sequence[np.nd
                   f"gregion[{k}].ID[0] = {t}",
                   f"gregion[{k}].g_il = {cfg.g_il * scale:.6f}",
                   f"gregion[{k}].g_it = {cfg.g_it * scale:.6f}",
-                  f"gregion[{k}].g_in = {cfg.g_it * scale:.6f}"]
+                  f"gregion[{k}].g_in = {cfg.g_it * scale:.6f}",
+                  f"gregion[{k}].g_el = {cfg.g_el * scale:.6f}",
+                  f"gregion[{k}].g_et = {cfg.g_et * scale:.6f}",
+                  f"gregion[{k}].g_en = {cfg.g_et * scale:.6f}"]
 
     lines += ["", f"num_stim = {len(stim_centres_um)}"]
     for i, c in enumerate(stim_centres_um):
