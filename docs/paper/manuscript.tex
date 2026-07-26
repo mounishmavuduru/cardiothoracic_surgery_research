@@ -73,8 +73,8 @@ threshold, so the real-anatomy result is a measured null rather than a
 shortfall of power. An earlier version of this work reported $+0.051$ here and
 called the real-cohort evidence inconclusive. That figure was an artefact of a
 defect in one cohort's released substrate, which we found only afterwards; the
-audit that found it, and the three controls that failed to explain everything
-it left behind, are reported in full. Where the
+audit that found it, and the four controls that located the real cause, are
+reported in full. Where the
 null is clean, the mechanism is feature
 redundancy: the exact per-region $\Delta\lam_2$ SFI, which has no first-order
 approximation error, also adds nothing over the competitor set. A separate,
@@ -490,7 +490,7 @@ nine columns is fitted to the outcome. SFI is closed-form given the mesh and the
 frozen uncoupling field, so it contributes no tuning degrees of freedom, and the
 null cannot be attributed to a failure of feature selection.
 
-\subsection{A provenance audit of the released substrates, and three controls that fail}
+\subsection{A provenance audit of the released substrates, and four controls}
 \label{sec:substrate}
 
 The UW cohort forced this section. Under a protocol frozen before any label was
@@ -580,22 +580,52 @@ that is inducible \emph{too rarely}.
 \begin{figure}[H]
 \centering
 \includegraphics[width=\linewidth]{fig_substrate_audit.png}
-\caption{Three controls on the substrate. (a) Repairing both UW defects raises
+\caption{Four controls on the substrate. (a) Repairing both UW defects raises
 inducibility but not significantly, and not to the reference level. (b)
 Destroying the fibre field on a cohort that has one leaves the rate exactly
 unchanged. (c) Destroying the fibrosis gradation while holding mean burden fixed
-roughly doubles the rate, the opposite of the predicted direction. The dashed
-line is the Roney reference, $32.3\%$.}
+roughly doubles the rate, the opposite of the predicted direction. Panels (a)--(c)
+therefore exclude every substrate defect. (d) Swapping fibrosis \emph{burden}
+between the cohorts moves the rate in both directions and resolves the anomaly:
+Roney at UW's burden collapses to $1/62$, UW at Roney's rises to $21/82$. The
+dashed line is the Roney reference, $32.3\%$.}
 \label{fig:substrate}
 \end{figure}
 
-Taken together the three controls leave the anomaly unexplained, and they
-tighten rather than loosen the puzzle: of the two substrate defects we can
-manipulate, one has no effect on the rate and the other, when imposed
-deliberately, pushes it upward. Whatever suppresses reentry in the UW cohort is
-not on this list. We report that as an open problem rather than close it with
-the most available story, which is how the original $7\%$ came to be filed as a
-cohort property in the first place.
+Taken together the three substrate controls leave the anomaly unexplained, and
+they tighten rather than loosen it: of the two defects we can manipulate, one
+does not move the rate at all and the other, imposed deliberately, moves it
+upward. Whatever suppresses reentry in the UW cohort is not a substrate defect.
+That conclusion is what redirected the search.
+
+\paragraph{Control 4: the cohorts do not carry comparable fibrosis.} Having
+exhausted the defects, we measured what the solver is actually given. Coarsened
+to the same $2000$ nodes, mean fibrosis is $0.349$ on Roney and $0.244$ on UW,
+and the fraction of tissue above half-fibrotic is $0.310$ against $0.239$. The
+UW cohort carries roughly $30\%$ less fibrosis. The frozen protocol's own
+calibration reports a rank correlation of $0.75$ between fibrosis and sustained
+reentry, so a cohort with less of it should be less inducible. That is not an
+anomaly; it is the labeller behaving as specified.
+
+Swapping the burden between cohorts confirms it in both directions
+(Fig.~\ref{fig:substrate}d). Rescaling Roney's fibrosis multiplicatively to UW's
+level, which preserves the spatial pattern and the gradation and moves only the
+level, collapses inducibility from $20/62$ to $1/62$ (Fisher exact
+$p=4.0\times10^{-6}$). Rescaling UW's upward toward Roney's raises it from
+$8/82$ to $21/82$ ($p=0.013$). Both control arms reproduce their native rates
+exactly. The effect is large, symmetric, and an order of magnitude better
+supported than any of the three substrate hypotheses.
+
+One detail is worth stating because it inverts the original question. At
+matched burden the ordering reverses: Roney at $0.241$ gives $1.6\%$ while UW at
+$0.248$ gives $9.8\%$. So the UW cohort is not intrinsically resistant to
+reentry --- given comparable fibrosis it is somewhat \emph{more} inducible than
+Roney. The entire apparent anomaly was a difference in how much fibrosis the two
+released datasets contain, and the three substrate defects, real as they are,
+were never the explanation. We had spent three controls looking for something
+broken before checking whether the two cohorts were comparable in the first
+place, which is the more general lesson: an out-of-range aggregate is a
+hypothesis about the pipeline, but it is a hypothesis about the inputs first.
 
 \subsection{The labeller is reproducible in aggregate and unstable per subject}
 \label{sec:labelnoise}
@@ -918,7 +948,8 @@ null we report is partly a statement about the labeller and not only about SFI.
 (\code{fibrosis\_vs\_+SFI}, gradient boosting, UW), and that one sits on a base AUC
 of $0.562$ with eight positives, so it is uninformative rather than borderline. An
 earlier version reported this family's combined estimate as the study's one
-positive at $p=0.009$; it is withdrawn (Section~ef{sec:corrections}).
+positive at $p=0.009$; it is withdrawn (Section~
+ef{sec:corrections}).
 \item $\rhoval^\ast$ and the random-geometric gap exponents are empirical; only
 the real atrial 2-manifold cleanly matches the Weyl exponent.
 \end{enumerate}

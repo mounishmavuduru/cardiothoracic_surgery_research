@@ -1,0 +1,1173 @@
+{
+  "description": "openCARP calibration gate and monodomain concordance",
+  "gate_band": [
+    0.1,
+    0.4
+  ],
+  "gate": {
+    "roney": {
+      "n": 30,
+      "n_inducible": 27,
+      "inducible_fraction": 0.9,
+      "spearman_fibrosis": -0.26140155728587317,
+      "gate_passed": false
+    },
+    "uw": {
+      "n": 30,
+      "n_inducible": 27,
+      "inducible_fraction": 0.9,
+      "spearman_fibrosis": -0.1621802002224694,
+      "gate_passed": false
+    }
+  },
+  "concordance_with_monodomain": {
+    "n_compared": 60,
+    "agreement": 0.18333333333333332,
+    "both_inducible": 10,
+    "only_opencarp": 44,
+    "only_monodomain": 5
+  },
+  "n_errors": 0,
+  "rows": [
+    {
+      "cohort": "roney",
+      "subject": "Mesh_83815278.vtk",
+      "inducible": true,
+      "fib_burden": 0.33933044699110154,
+      "seconds": 17.2,
+      "sustained_ms": 1000.0,
+      "max_active_nodes": 1017,
+      "min_depolarised_fraction": 0.35590706870983685,
+      "repolarises": true,
+      "n_nodes_reactivating": 1759,
+      "reactivates": true,
+      "imp": "MitchellSchaeffer",
+      "n_bins": 20,
+      "pacing_sites": [
+        143,
+        538
+      ]
+    },
+    {
+      "cohort": "roney",
+      "subject": "Mesh_49769496.vtk",
+      "inducible": true,
+      "fib_burden": 0.5785584005903607,
+      "seconds": 19.8,
+      "sustained_ms": 1000.0,
+      "max_active_nodes": 744,
+      "min_depolarised_fraction": 0.13746157224418093,
+      "repolarises": true,
+      "n_nodes_reactivating": 1037,
+      "reactivates": true,
+      "imp": "MitchellSchaeffer",
+      "n_bins": 20,
+      "pacing_sites": [
+        190,
+        15
+      ]
+    },
+    {
+      "cohort": "roney",
+      "subject": "Mesh_56611509.vtk",
+      "inducible": true,
+      "fib_burden": 0.23694501431674986,
+      "seconds": 19.0,
+      "sustained_ms": 1000.0,
+      "max_active_nodes": 1366,
+      "min_depolarised_fraction": 0.350022758306782,
+      "repolarises": true,
+      "n_nodes_reactivating": 2148,
+      "reactivates": true,
+      "imp": "MitchellSchaeffer",
+      "n_bins": 20,
+      "pacing_sites": [
+        1512,
+        1022
+      ]
+    },
+    {
+      "cohort": "roney",
+      "subject": "Mesh_31475951.vtk",
+      "inducible": true,
+      "fib_burden": 0.20110217703806557,
+      "seconds": 17.9,
+      "sustained_ms": 1000.0,
+      "max_active_nodes": 1217,
+      "min_depolarised_fraction": 0.3967816091954023,
+      "repolarises": true,
+      "n_nodes_reactivating": 2164,
+      "reactivates": true,
+      "imp": "MitchellSchaeffer",
+      "n_bins": 20,
+      "pacing_sites": [
+        1302,
+        827
+      ]
+    },
+    {
+      "cohort": "roney",
+      "subject": "Mesh_12928433.vtk",
+      "inducible": false,
+      "fib_burden": 0.49100709834520184,
+      "seconds": 13.4,
+      "sustained_ms": 0.0,
+      "max_active_nodes": 0,
+      "min_depolarised_fraction": 0.0,
+      "repolarises": true,
+      "n_nodes_reactivating": 0,
+      "reactivates": false,
+      "imp": "MitchellSchaeffer",
+      "n_bins": 20,
+      "pacing_sites": [
+        745,
+        2124
+      ]
+    },
+    {
+      "cohort": "roney",
+      "subject": "Mesh_99895768.vtk",
+      "inducible": true,
+      "fib_burden": 0.3800564467275557,
+      "seconds": 15.6,
+      "sustained_ms": 1000.0,
+      "max_active_nodes": 1172,
+      "min_depolarised_fraction": 0.40620782726045884,
+      "repolarises": true,
+      "n_nodes_reactivating": 2053,
+      "reactivates": true,
+      "imp": "MitchellSchaeffer",
+      "n_bins": 20,
+      "pacing_sites": [
+        1751,
+        563
+      ]
+    },
+    {
+      "cohort": "roney",
+      "subject": "Mesh_32198120.vtk",
+      "inducible": true,
+      "fib_burden": 0.3694893207058757,
+      "seconds": 15.6,
+      "sustained_ms": 1000.0,
+      "max_active_nodes": 1139,
+      "min_depolarised_fraction": 0.34081902245706736,
+      "repolarises": true,
+      "n_nodes_reactivating": 1941,
+      "reactivates": true,
+      "imp": "MitchellSchaeffer",
+      "n_bins": 20,
+      "pacing_sites": [
+        2026,
+        584
+      ]
+    },
+    {
+      "cohort": "roney",
+      "subject": "Mesh_40112384.vtk",
+      "inducible": false,
+      "fib_burden": 0.46526990342057173,
+      "seconds": 13.3,
+      "sustained_ms": 885.0,
+      "max_active_nodes": 384,
+      "min_depolarised_fraction": 0.0,
+      "repolarises": true,
+      "n_nodes_reactivating": 11,
+      "reactivates": false,
+      "imp": "MitchellSchaeffer",
+      "n_bins": 20,
+      "pacing_sites": [
+        1598,
+        1028
+      ]
+    },
+    {
+      "cohort": "roney",
+      "subject": "Mesh_83335866.vtk",
+      "inducible": true,
+      "fib_burden": 0.6681006441326224,
+      "seconds": 13.5,
+      "sustained_ms": 1000.0,
+      "max_active_nodes": 436,
+      "min_depolarised_fraction": 0.12469437652811736,
+      "repolarises": true,
+      "n_nodes_reactivating": 733,
+      "reactivates": true,
+      "imp": "MitchellSchaeffer",
+      "n_bins": 20,
+      "pacing_sites": [
+        180,
+        1409
+      ]
+    },
+    {
+      "cohort": "roney",
+      "subject": "Mesh_58105145.vtk",
+      "inducible": true,
+      "fib_burden": 0.5139592263300419,
+      "seconds": 15.7,
+      "sustained_ms": 1000.0,
+      "max_active_nodes": 845,
+      "min_depolarised_fraction": 0.2644880174291939,
+      "repolarises": true,
+      "n_nodes_reactivating": 1501,
+      "reactivates": true,
+      "imp": "MitchellSchaeffer",
+      "n_bins": 20,
+      "pacing_sites": [
+        800,
+        1814
+      ]
+    },
+    {
+      "cohort": "roney",
+      "subject": "Mesh_48813898.vtk",
+      "inducible": true,
+      "fib_burden": 0.6141442218047588,
+      "seconds": 14.0,
+      "sustained_ms": 1000.0,
+      "max_active_nodes": 599,
+      "min_depolarised_fraction": 0.07345971563981042,
+      "repolarises": true,
+      "n_nodes_reactivating": 682,
+      "reactivates": true,
+      "imp": "MitchellSchaeffer",
+      "n_bins": 20,
+      "pacing_sites": [
+        904,
+        1812
+      ]
+    },
+    {
+      "cohort": "roney",
+      "subject": "Mesh_46906197.vtk",
+      "inducible": true,
+      "fib_burden": 0.06672589912744309,
+      "seconds": 13.5,
+      "sustained_ms": 1000.0,
+      "max_active_nodes": 1225,
+      "min_depolarised_fraction": 0.3790439401255432,
+      "repolarises": true,
+      "n_nodes_reactivating": 2069,
+      "reactivates": true,
+      "imp": "MitchellSchaeffer",
+      "n_bins": 20,
+      "pacing_sites": [
+        1960,
+        2004
+      ]
+    },
+    {
+      "cohort": "roney",
+      "subject": "Mesh_94908860.vtk",
+      "inducible": true,
+      "fib_burden": 0.31874335536713166,
+      "seconds": 51.7,
+      "sustained_ms": 1000.0,
+      "max_active_nodes": 1022,
+      "min_depolarised_fraction": 0.32276119402985076,
+      "repolarises": true,
+      "n_nodes_reactivating": 1907,
+      "reactivates": true,
+      "imp": "MitchellSchaeffer",
+      "n_bins": 20,
+      "pacing_sites": [
+        1754,
+        1103
+      ]
+    },
+    {
+      "cohort": "roney",
+      "subject": "Mesh_16736494.vtk",
+      "inducible": true,
+      "fib_burden": 0.07583142299800155,
+      "seconds": 50.9,
+      "sustained_ms": 1000.0,
+      "max_active_nodes": 1111,
+      "min_depolarised_fraction": 0.44930417495029823,
+      "repolarises": true,
+      "n_nodes_reactivating": 2005,
+      "reactivates": true,
+      "imp": "MitchellSchaeffer",
+      "n_bins": 20,
+      "pacing_sites": [
+        624,
+        1577
+      ]
+    },
+    {
+      "cohort": "roney",
+      "subject": "Mesh_13142315.vtk",
+      "inducible": true,
+      "fib_burden": 0.4070393972404391,
+      "seconds": 17.3,
+      "sustained_ms": 1000.0,
+      "max_active_nodes": 978,
+      "min_depolarised_fraction": 0.3115910092551785,
+      "repolarises": true,
+      "n_nodes_reactivating": 1665,
+      "reactivates": true,
+      "imp": "MitchellSchaeffer",
+      "n_bins": 20,
+      "pacing_sites": [
+        679,
+        1900
+      ]
+    },
+    {
+      "cohort": "roney",
+      "subject": "Mesh_92062041.vtk",
+      "inducible": true,
+      "fib_burden": 0.2788842830792184,
+      "seconds": 15.3,
+      "sustained_ms": 1000.0,
+      "max_active_nodes": 936,
+      "min_depolarised_fraction": 0.15634075508228462,
+      "repolarises": true,
+      "n_nodes_reactivating": 1050,
+      "reactivates": true,
+      "imp": "MitchellSchaeffer",
+      "n_bins": 20,
+      "pacing_sites": [
+        268,
+        117
+      ]
+    },
+    {
+      "cohort": "roney",
+      "subject": "Mesh_68827202.vtk",
+      "inducible": true,
+      "fib_burden": 0.5277679224317231,
+      "seconds": 15.0,
+      "sustained_ms": 1000.0,
+      "max_active_nodes": 454,
+      "min_depolarised_fraction": 0.14272344408048665,
+      "repolarises": true,
+      "n_nodes_reactivating": 738,
+      "reactivates": true,
+      "imp": "MitchellSchaeffer",
+      "n_bins": 20,
+      "pacing_sites": [
+        1904,
+        838
+      ]
+    },
+    {
+      "cohort": "roney",
+      "subject": "Mesh_84215961.vtk",
+      "inducible": true,
+      "fib_burden": 0.48846484003106283,
+      "seconds": 14.1,
+      "sustained_ms": 1000.0,
+      "max_active_nodes": 739,
+      "min_depolarised_fraction": 0.21933267909715407,
+      "repolarises": true,
+      "n_nodes_reactivating": 1487,
+      "reactivates": true,
+      "imp": "MitchellSchaeffer",
+      "n_bins": 20,
+      "pacing_sites": [
+        594,
+        12
+      ]
+    },
+    {
+      "cohort": "roney",
+      "subject": "Mesh_26694297.vtk",
+      "inducible": true,
+      "fib_burden": 0.33634412575156014,
+      "seconds": 18.1,
+      "sustained_ms": 1000.0,
+      "max_active_nodes": 958,
+      "min_depolarised_fraction": 0.3241349102058695,
+      "repolarises": true,
+      "n_nodes_reactivating": 1864,
+      "reactivates": true,
+      "imp": "MitchellSchaeffer",
+      "n_bins": 20,
+      "pacing_sites": [
+        1230,
+        306
+      ]
+    },
+    {
+      "cohort": "roney",
+      "subject": "Mesh_28678406.vtk",
+      "inducible": true,
+      "fib_burden": 0.3252787666784484,
+      "seconds": 15.6,
+      "sustained_ms": 1000.0,
+      "max_active_nodes": 1092,
+      "min_depolarised_fraction": 0.32146341463414635,
+      "repolarises": true,
+      "n_nodes_reactivating": 1781,
+      "reactivates": true,
+      "imp": "MitchellSchaeffer",
+      "n_bins": 20,
+      "pacing_sites": [
+        1583,
+        1819
+      ]
+    },
+    {
+      "cohort": "roney",
+      "subject": "Mesh_44772464.vtk",
+      "inducible": false,
+      "fib_burden": 0.7699765850973415,
+      "seconds": 14.8,
+      "sustained_ms": 650.0,
+      "max_active_nodes": 77,
+      "min_depolarised_fraction": 0.0,
+      "repolarises": true,
+      "n_nodes_reactivating": 0,
+      "reactivates": false,
+      "imp": "MitchellSchaeffer",
+      "n_bins": 20,
+      "pacing_sites": [
+        1313,
+        229
+      ]
+    },
+    {
+      "cohort": "roney",
+      "subject": "Mesh_40849519.vtk",
+      "inducible": true,
+      "fib_burden": 0.4816595546621659,
+      "seconds": 14.6,
+      "sustained_ms": 1000.0,
+      "max_active_nodes": 774,
+      "min_depolarised_fraction": 0.19661335841956726,
+      "repolarises": true,
+      "n_nodes_reactivating": 1231,
+      "reactivates": true,
+      "imp": "MitchellSchaeffer",
+      "n_bins": 20,
+      "pacing_sites": [
+        764,
+        2079
+      ]
+    },
+    {
+      "cohort": "roney",
+      "subject": "Mesh_86031279.vtk",
+      "inducible": true,
+      "fib_burden": 0.25365197535062917,
+      "seconds": 14.5,
+      "sustained_ms": 1000.0,
+      "max_active_nodes": 906,
+      "min_depolarised_fraction": 0.33651226158038144,
+      "repolarises": true,
+      "n_nodes_reactivating": 1717,
+      "reactivates": true,
+      "imp": "MitchellSchaeffer",
+      "n_bins": 20,
+      "pacing_sites": [
+        107,
+        1934
+      ]
+    },
+    {
+      "cohort": "roney",
+      "subject": "Mesh_49286233.vtk",
+      "inducible": true,
+      "fib_burden": 0.4716312124567218,
+      "seconds": 14.5,
+      "sustained_ms": 1000.0,
+      "max_active_nodes": 805,
+      "min_depolarised_fraction": 0.24737562756732087,
+      "repolarises": true,
+      "n_nodes_reactivating": 1294,
+      "reactivates": true,
+      "imp": "MitchellSchaeffer",
+      "n_bins": 20,
+      "pacing_sites": [
+        2174,
+        289
+      ]
+    },
+    {
+      "cohort": "roney",
+      "subject": "Mesh_26925075.vtk",
+      "inducible": true,
+      "fib_burden": 0.3754472645817558,
+      "seconds": 14.3,
+      "sustained_ms": 1000.0,
+      "max_active_nodes": 924,
+      "min_depolarised_fraction": 0.18976339932399808,
+      "repolarises": true,
+      "n_nodes_reactivating": 1243,
+      "reactivates": true,
+      "imp": "MitchellSchaeffer",
+      "n_bins": 20,
+      "pacing_sites": [
+        736,
+        1612
+      ]
+    },
+    {
+      "cohort": "roney",
+      "subject": "Mesh_26572048.vtk",
+      "inducible": true,
+      "fib_burden": 0.4286764872494669,
+      "seconds": 15.5,
+      "sustained_ms": 1000.0,
+      "max_active_nodes": 765,
+      "min_depolarised_fraction": 0.21271729185727356,
+      "repolarises": true,
+      "n_nodes_reactivating": 1273,
+      "reactivates": true,
+      "imp": "MitchellSchaeffer",
+      "n_bins": 20,
+      "pacing_sites": [
+        2050,
+        278
+      ]
+    },
+    {
+      "cohort": "roney",
+      "subject": "Mesh_88859337.vtk",
+      "inducible": true,
+      "fib_burden": 0.31165760139839643,
+      "seconds": 17.7,
+      "sustained_ms": 1000.0,
+      "max_active_nodes": 1105,
+      "min_depolarised_fraction": 0.2740774077407741,
+      "repolarises": true,
+      "n_nodes_reactivating": 1772,
+      "reactivates": true,
+      "imp": "MitchellSchaeffer",
+      "n_bins": 20,
+      "pacing_sites": [
+        2084,
+        783
+      ]
+    },
+    {
+      "cohort": "roney",
+      "subject": "Mesh_85161463.vtk",
+      "inducible": true,
+      "fib_burden": 0.2506532412233763,
+      "seconds": 16.8,
+      "sustained_ms": 1000.0,
+      "max_active_nodes": 1097,
+      "min_depolarised_fraction": 0.18513388734995384,
+      "repolarises": true,
+      "n_nodes_reactivating": 988,
+      "reactivates": true,
+      "imp": "MitchellSchaeffer",
+      "n_bins": 20,
+      "pacing_sites": [
+        723,
+        334
+      ]
+    },
+    {
+      "cohort": "roney",
+      "subject": "Mesh_77855463.vtk",
+      "inducible": true,
+      "fib_burden": 0.42216515373638075,
+      "seconds": 19.2,
+      "sustained_ms": 1000.0,
+      "max_active_nodes": 814,
+      "min_depolarised_fraction": 0.1893063583815029,
+      "repolarises": true,
+      "n_nodes_reactivating": 1115,
+      "reactivates": true,
+      "imp": "MitchellSchaeffer",
+      "n_bins": 20,
+      "pacing_sites": [
+        1871,
+        1331
+      ]
+    },
+    {
+      "cohort": "roney",
+      "subject": "Mesh_45275287.vtk",
+      "inducible": true,
+      "fib_burden": 0.10470140312419786,
+      "seconds": 22.6,
+      "sustained_ms": 1000.0,
+      "max_active_nodes": 1272,
+      "min_depolarised_fraction": 0.29258049463369107,
+      "repolarises": true,
+      "n_nodes_reactivating": 2123,
+      "reactivates": true,
+      "imp": "MitchellSchaeffer",
+      "n_bins": 20,
+      "pacing_sites": [
+        233,
+        1940
+      ]
+    },
+    {
+      "cohort": "uw",
+      "subject": "uw_ID001_PreAbl_rev1.vtk",
+      "inducible": true,
+      "fib_burden": 0.15604572138448966,
+      "seconds": 26.9,
+      "sustained_ms": 1000.0,
+      "max_active_nodes": 1090,
+      "min_depolarised_fraction": 0.32338079926504365,
+      "repolarises": true,
+      "n_nodes_reactivating": 1938,
+      "reactivates": true,
+      "imp": "MitchellSchaeffer",
+      "n_bins": 20,
+      "pacing_sites": [
+        1259,
+        1572
+      ]
+    },
+    {
+      "cohort": "uw",
+      "subject": "uw_ID002_PreAbl_rev1.vtk",
+      "inducible": true,
+      "fib_burden": 0.15178491096597208,
+      "seconds": 23.6,
+      "sustained_ms": 1000.0,
+      "max_active_nodes": 1129,
+      "min_depolarised_fraction": 0.4119014411901441,
+      "repolarises": true,
+      "n_nodes_reactivating": 2057,
+      "reactivates": true,
+      "imp": "MitchellSchaeffer",
+      "n_bins": 20,
+      "pacing_sites": [
+        430,
+        711
+      ]
+    },
+    {
+      "cohort": "uw",
+      "subject": "uw_ID003_PreAbl_rev1.vtk",
+      "inducible": true,
+      "fib_burden": 0.17833952420921656,
+      "seconds": 26.9,
+      "sustained_ms": 1000.0,
+      "max_active_nodes": 1119,
+      "min_depolarised_fraction": 0.35422740524781343,
+      "repolarises": true,
+      "n_nodes_reactivating": 1944,
+      "reactivates": true,
+      "imp": "MitchellSchaeffer",
+      "n_bins": 20,
+      "pacing_sites": [
+        979,
+        1147
+      ]
+    },
+    {
+      "cohort": "uw",
+      "subject": "uw_ID004_PreAbl_rev1.vtk",
+      "inducible": true,
+      "fib_burden": 0.03366637843403167,
+      "seconds": 30.5,
+      "sustained_ms": 1000.0,
+      "max_active_nodes": 896,
+      "min_depolarised_fraction": 0.291740674955595,
+      "repolarises": true,
+      "n_nodes_reactivating": 1237,
+      "reactivates": true,
+      "imp": "MitchellSchaeffer",
+      "n_bins": 20,
+      "pacing_sites": [
+        2166,
+        1427
+      ]
+    },
+    {
+      "cohort": "uw",
+      "subject": "uw_ID005_PreAbl_rev1.vtk",
+      "inducible": false,
+      "fib_burden": 0.4596751063516298,
+      "seconds": 19.7,
+      "sustained_ms": 390.0,
+      "max_active_nodes": 13,
+      "min_depolarised_fraction": 0.0,
+      "repolarises": true,
+      "n_nodes_reactivating": 0,
+      "reactivates": false,
+      "imp": "MitchellSchaeffer",
+      "n_bins": 20,
+      "pacing_sites": [
+        1879,
+        1676
+      ]
+    },
+    {
+      "cohort": "uw",
+      "subject": "uw_ID006_PreAbl_rev1.vtk",
+      "inducible": true,
+      "fib_burden": 0.33861692687626305,
+      "seconds": 19.2,
+      "sustained_ms": 1000.0,
+      "max_active_nodes": 208,
+      "min_depolarised_fraction": 0.053620531622364805,
+      "repolarises": true,
+      "n_nodes_reactivating": 125,
+      "reactivates": true,
+      "imp": "MitchellSchaeffer",
+      "n_bins": 20,
+      "pacing_sites": [
+        1096,
+        1511
+      ]
+    },
+    {
+      "cohort": "uw",
+      "subject": "uw_ID007_PreAbl_rev1.vtk",
+      "inducible": true,
+      "fib_burden": 0.3301342999282075,
+      "seconds": 16.2,
+      "sustained_ms": 1000.0,
+      "max_active_nodes": 1011,
+      "min_depolarised_fraction": 0.1691519105312209,
+      "repolarises": true,
+      "n_nodes_reactivating": 1153,
+      "reactivates": true,
+      "imp": "MitchellSchaeffer",
+      "n_bins": 20,
+      "pacing_sites": [
+        159,
+        1157
+      ]
+    },
+    {
+      "cohort": "uw",
+      "subject": "uw_ID008_PreAbl_rev1.vtk",
+      "inducible": true,
+      "fib_burden": 0.1833862585519927,
+      "seconds": 16.9,
+      "sustained_ms": 1000.0,
+      "max_active_nodes": 998,
+      "min_depolarised_fraction": 0.29235100891600185,
+      "repolarises": true,
+      "n_nodes_reactivating": 1505,
+      "reactivates": true,
+      "imp": "MitchellSchaeffer",
+      "n_bins": 20,
+      "pacing_sites": [
+        1701,
+        1612
+      ]
+    },
+    {
+      "cohort": "uw",
+      "subject": "uw_ID009_PreAbl_rev1.vtk",
+      "inducible": true,
+      "fib_burden": 0.11209282368446233,
+      "seconds": 20.5,
+      "sustained_ms": 1000.0,
+      "max_active_nodes": 1392,
+      "min_depolarised_fraction": 0.28975265017667845,
+      "repolarises": true,
+      "n_nodes_reactivating": 2249,
+      "reactivates": true,
+      "imp": "MitchellSchaeffer",
+      "n_bins": 20,
+      "pacing_sites": [
+        1958,
+        878
+      ]
+    },
+    {
+      "cohort": "uw",
+      "subject": "uw_ID010_PreAbl_rev1.vtk",
+      "inducible": true,
+      "fib_burden": 0.26721672677639474,
+      "seconds": 20.4,
+      "sustained_ms": 1000.0,
+      "max_active_nodes": 472,
+      "min_depolarised_fraction": 0.13468309859154928,
+      "repolarises": true,
+      "n_nodes_reactivating": 698,
+      "reactivates": true,
+      "imp": "MitchellSchaeffer",
+      "n_bins": 20,
+      "pacing_sites": [
+        545,
+        255
+      ]
+    },
+    {
+      "cohort": "uw",
+      "subject": "uw_ID011_PreAbl_rev1.vtk",
+      "inducible": true,
+      "fib_burden": 0.261630279511868,
+      "seconds": 16.9,
+      "sustained_ms": 1000.0,
+      "max_active_nodes": 871,
+      "min_depolarised_fraction": 0.19437939110070257,
+      "repolarises": true,
+      "n_nodes_reactivating": 1321,
+      "reactivates": true,
+      "imp": "MitchellSchaeffer",
+      "n_bins": 20,
+      "pacing_sites": [
+        2053,
+        683
+      ]
+    },
+    {
+      "cohort": "uw",
+      "subject": "uw_ID012_PreAbl_rev1.vtk",
+      "inducible": true,
+      "fib_burden": 0.3065381546677607,
+      "seconds": 15.6,
+      "sustained_ms": 1000.0,
+      "max_active_nodes": 639,
+      "min_depolarised_fraction": 0.16504381694255113,
+      "repolarises": true,
+      "n_nodes_reactivating": 728,
+      "reactivates": true,
+      "imp": "MitchellSchaeffer",
+      "n_bins": 20,
+      "pacing_sites": [
+        1513,
+        677
+      ]
+    },
+    {
+      "cohort": "uw",
+      "subject": "uw_ID013_PreAbl_rev1.vtk",
+      "inducible": true,
+      "fib_burden": 0.2333160412986836,
+      "seconds": 18.9,
+      "sustained_ms": 1000.0,
+      "max_active_nodes": 1088,
+      "min_depolarised_fraction": 0.25284220100045474,
+      "repolarises": true,
+      "n_nodes_reactivating": 1801,
+      "reactivates": true,
+      "imp": "MitchellSchaeffer",
+      "n_bins": 20,
+      "pacing_sites": [
+        2030,
+        99
+      ]
+    },
+    {
+      "cohort": "uw",
+      "subject": "uw_ID014_PreAbl_rev1.vtk",
+      "inducible": true,
+      "fib_burden": 0.3231043348351841,
+      "seconds": 18.5,
+      "sustained_ms": 1000.0,
+      "max_active_nodes": 898,
+      "min_depolarised_fraction": 0.06575963718820861,
+      "repolarises": true,
+      "n_nodes_reactivating": 429,
+      "reactivates": true,
+      "imp": "MitchellSchaeffer",
+      "n_bins": 20,
+      "pacing_sites": [
+        1874,
+        428
+      ]
+    },
+    {
+      "cohort": "uw",
+      "subject": "uw_ID015_PreAbl_rev1.vtk",
+      "inducible": true,
+      "fib_burden": 0.19143175315522623,
+      "seconds": 19.3,
+      "sustained_ms": 1000.0,
+      "max_active_nodes": 1134,
+      "min_depolarised_fraction": 0.3089612126616139,
+      "repolarises": true,
+      "n_nodes_reactivating": 2011,
+      "reactivates": true,
+      "imp": "MitchellSchaeffer",
+      "n_bins": 20,
+      "pacing_sites": [
+        1192,
+        743
+      ]
+    },
+    {
+      "cohort": "uw",
+      "subject": "uw_ID021_PreAbl_rev1.vtk",
+      "inducible": true,
+      "fib_burden": 0.21846622180332406,
+      "seconds": 17.3,
+      "sustained_ms": 1000.0,
+      "max_active_nodes": 856,
+      "min_depolarised_fraction": 0.2810327706057597,
+      "repolarises": true,
+      "n_nodes_reactivating": 1523,
+      "reactivates": true,
+      "imp": "MitchellSchaeffer",
+      "n_bins": 20,
+      "pacing_sites": [
+        412,
+        552
+      ]
+    },
+    {
+      "cohort": "uw",
+      "subject": "uw_ID022_PreAbl_rev1.vtk",
+      "inducible": true,
+      "fib_burden": 0.4024907171658984,
+      "seconds": 21.1,
+      "sustained_ms": 1000.0,
+      "max_active_nodes": 1019,
+      "min_depolarised_fraction": 0.19715175789942144,
+      "repolarises": true,
+      "n_nodes_reactivating": 1539,
+      "reactivates": true,
+      "imp": "MitchellSchaeffer",
+      "n_bins": 20,
+      "pacing_sites": [
+        1091,
+        1089
+      ]
+    },
+    {
+      "cohort": "uw",
+      "subject": "uw_ID023_PreAbl_rev1.vtk",
+      "inducible": true,
+      "fib_burden": 0.08116993563755695,
+      "seconds": 21.0,
+      "sustained_ms": 1000.0,
+      "max_active_nodes": 1235,
+      "min_depolarised_fraction": 0.304922515952598,
+      "repolarises": true,
+      "n_nodes_reactivating": 2129,
+      "reactivates": true,
+      "imp": "MitchellSchaeffer",
+      "n_bins": 20,
+      "pacing_sites": [
+        1144,
+        1919
+      ]
+    },
+    {
+      "cohort": "uw",
+      "subject": "uw_ID024_PreAbl_rev1.vtk",
+      "inducible": true,
+      "fib_burden": 0.29517817189781864,
+      "seconds": 20.0,
+      "sustained_ms": 1000.0,
+      "max_active_nodes": 922,
+      "min_depolarised_fraction": 0.07900480139676996,
+      "repolarises": true,
+      "n_nodes_reactivating": 584,
+      "reactivates": true,
+      "imp": "MitchellSchaeffer",
+      "n_bins": 20,
+      "pacing_sites": [
+        931,
+        1010
+      ]
+    },
+    {
+      "cohort": "uw",
+      "subject": "uw_ID025_PreAbl_rev1.vtk",
+      "inducible": true,
+      "fib_burden": 0.16207480918819447,
+      "seconds": 18.3,
+      "sustained_ms": 1000.0,
+      "max_active_nodes": 785,
+      "min_depolarised_fraction": 0.1825287356321839,
+      "repolarises": true,
+      "n_nodes_reactivating": 467,
+      "reactivates": true,
+      "imp": "MitchellSchaeffer",
+      "n_bins": 20,
+      "pacing_sites": [
+        868,
+        1099
+      ]
+    },
+    {
+      "cohort": "uw",
+      "subject": "uw_ID026_PreAbl_rev1.vtk",
+      "inducible": true,
+      "fib_burden": 0.2014478238686566,
+      "seconds": 18.2,
+      "sustained_ms": 1000.0,
+      "max_active_nodes": 1066,
+      "min_depolarised_fraction": 0.2663361874718342,
+      "repolarises": true,
+      "n_nodes_reactivating": 1593,
+      "reactivates": true,
+      "imp": "MitchellSchaeffer",
+      "n_bins": 20,
+      "pacing_sites": [
+        1846,
+        925
+      ]
+    },
+    {
+      "cohort": "uw",
+      "subject": "uw_ID027_PreAbl_rev1.vtk",
+      "inducible": true,
+      "fib_burden": 0.16082631718455312,
+      "seconds": 16.7,
+      "sustained_ms": 1000.0,
+      "max_active_nodes": 1128,
+      "min_depolarised_fraction": 0.35302525011910435,
+      "repolarises": true,
+      "n_nodes_reactivating": 1858,
+      "reactivates": true,
+      "imp": "MitchellSchaeffer",
+      "n_bins": 20,
+      "pacing_sites": [
+        1664,
+        1573
+      ]
+    },
+    {
+      "cohort": "uw",
+      "subject": "uw_ID028_PreAbl_rev1.vtk",
+      "inducible": false,
+      "fib_burden": 0.24085854315841032,
+      "seconds": 15.5,
+      "sustained_ms": 1000.0,
+      "max_active_nodes": 186,
+      "min_depolarised_fraction": 0.016008004002001,
+      "repolarises": true,
+      "n_nodes_reactivating": 0,
+      "reactivates": false,
+      "imp": "MitchellSchaeffer",
+      "n_bins": 20,
+      "pacing_sites": [
+        386,
+        1245
+      ]
+    },
+    {
+      "cohort": "uw",
+      "subject": "uw_ID029_PreAbl_rev1.vtk",
+      "inducible": true,
+      "fib_burden": 0.1886498594207489,
+      "seconds": 17.9,
+      "sustained_ms": 1000.0,
+      "max_active_nodes": 1055,
+      "min_depolarised_fraction": 0.35235955056179774,
+      "repolarises": true,
+      "n_nodes_reactivating": 2096,
+      "reactivates": true,
+      "imp": "MitchellSchaeffer",
+      "n_bins": 20,
+      "pacing_sites": [
+        1598,
+        1061
+      ]
+    },
+    {
+      "cohort": "uw",
+      "subject": "uw_ID030_PreAbl_rev1.vtk",
+      "inducible": true,
+      "fib_burden": 0.3008418850183336,
+      "seconds": 16.8,
+      "sustained_ms": 1000.0,
+      "max_active_nodes": 882,
+      "min_depolarised_fraction": 0.2283609576427256,
+      "repolarises": true,
+      "n_nodes_reactivating": 1217,
+      "reactivates": true,
+      "imp": "MitchellSchaeffer",
+      "n_bins": 20,
+      "pacing_sites": [
+        1917,
+        566
+      ]
+    },
+    {
+      "cohort": "uw",
+      "subject": "uw_ID031_PreAbl_rev1.vtk",
+      "inducible": false,
+      "fib_burden": 0.32174186431068835,
+      "seconds": 15.6,
+      "sustained_ms": 355.0,
+      "max_active_nodes": 29,
+      "min_depolarised_fraction": 0.0,
+      "repolarises": true,
+      "n_nodes_reactivating": 0,
+      "reactivates": false,
+      "imp": "MitchellSchaeffer",
+      "n_bins": 20,
+      "pacing_sites": [
+        794,
+        328
+      ]
+    },
+    {
+      "cohort": "uw",
+      "subject": "uw_ID032_PreAbl_rev1.vtk",
+      "inducible": true,
+      "fib_burden": 0.3248696890770964,
+      "seconds": 16.2,
+      "sustained_ms": 1000.0,
+      "max_active_nodes": 761,
+      "min_depolarised_fraction": 0.2582469368520264,
+      "repolarises": true,
+      "n_nodes_reactivating": 1346,
+      "reactivates": true,
+      "imp": "MitchellSchaeffer",
+      "n_bins": 20,
+      "pacing_sites": [
+        1623,
+        1559
+      ]
+    },
+    {
+      "cohort": "uw",
+      "subject": "uw_ID033_PreAbl_rev1.vtk",
+      "inducible": true,
+      "fib_burden": 0.2992804545203525,
+      "seconds": 15.1,
+      "sustained_ms": 1000.0,
+      "max_active_nodes": 740,
+      "min_depolarised_fraction": 0.22794846382556988,
+      "repolarises": true,
+      "n_nodes_reactivating": 1000,
+      "reactivates": true,
+      "imp": "MitchellSchaeffer",
+      "n_bins": 20,
+      "pacing_sites": [
+        1700,
+        1780
+      ]
+    },
+    {
+      "cohort": "uw",
+      "subject": "uw_ID034_PreAbl_rev1.vtk",
+      "inducible": true,
+      "fib_burden": 0.08155406817290654,
+      "seconds": 16.6,
+      "sustained_ms": 1000.0,
+      "max_active_nodes": 881,
+      "min_depolarised_fraction": 0.18630647414997673,
+      "repolarises": true,
+      "n_nodes_reactivating": 901,
+      "reactivates": true,
+      "imp": "MitchellSchaeffer",
+      "n_bins": 20,
+      "pacing_sites": [
+        1761,
+        1855
+      ]
+    },
+    {
+      "cohort": "uw",
+      "subject": "uw_ID035_PreAbl_rev1.vtk",
+      "inducible": true,
+      "fib_burden": 0.06393072488065549,
+      "seconds": 16.8,
+      "sustained_ms": 1000.0,
+      "max_active_nodes": 917,
+      "min_depolarised_fraction": 0.2437698232895333,
+      "repolarises": true,
+      "n_nodes_reactivating": 1321,
+      "reactivates": true,
+      "imp": "MitchellSchaeffer",
+      "n_bins": 20,
+      "pacing_sites": [
+        2205,
+        291
+      ]
+    }
+  ]
+}

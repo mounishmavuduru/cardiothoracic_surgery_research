@@ -1,0 +1,2921 @@
+{
+  "description": "swap fibrosis burden between cohorts, both directions",
+  "roney_mean": 0.349,
+  "uw_mean": 0.244,
+  "controls": {
+    "R_A_roney_native": "must reproduce 20/62",
+    "U_A_uw_native": "must reproduce 8/82"
+  },
+  "summary": {
+    "R_A_roney_native": {
+      "n": 62,
+      "n_inducible": 20,
+      "inducible_fraction": 0.3225806451612903,
+      "mean_burden_before": 0.33276885169214576,
+      "mean_burden_after": 0.33276885169214576
+    },
+    "R_B_roney_at_uw": {
+      "n": 62,
+      "n_inducible": 1,
+      "inducible_fraction": 0.016129032258064516,
+      "mean_burden_before": 0.33276885169214576,
+      "mean_burden_after": 0.24140011861138813
+    },
+    "U_A_uw_native": {
+      "n": 82,
+      "n_inducible": 8,
+      "inducible_fraction": 0.0975609756097561,
+      "mean_burden_before": 0.24824763702023642,
+      "mean_burden_after": 0.24824763702023642
+    },
+    "U_B_uw_at_roney": {
+      "n": 82,
+      "n_inducible": 21,
+      "inducible_fraction": 0.25609756097560976,
+      "mean_burden_before": 0.24824763702023642,
+      "mean_burden_after": 0.2839666749657078
+    }
+  },
+  "rows": [
+    {
+      "arm": "R_A_roney_native",
+      "cohort": "roney",
+      "subject": "Mesh_83815278.vtk",
+      "inducible": false,
+      "sustained_ms": 277.95000000000005,
+      "fibrosis_before": 0.33933044699110154,
+      "fibrosis_after": 0.33933044699110154,
+      "seconds": 10.1
+    },
+    {
+      "arm": "R_A_roney_native",
+      "cohort": "roney",
+      "subject": "Mesh_49769496.vtk",
+      "inducible": false,
+      "sustained_ms": 373.9000000000001,
+      "fibrosis_before": 0.5785584005903607,
+      "fibrosis_after": 0.5785584005903607,
+      "seconds": 12.9
+    },
+    {
+      "arm": "R_A_roney_native",
+      "cohort": "roney",
+      "subject": "Mesh_56611509.vtk",
+      "inducible": false,
+      "sustained_ms": 222.75,
+      "fibrosis_before": 0.23694501431674986,
+      "fibrosis_after": 0.23694501431674986,
+      "seconds": 11.1
+    },
+    {
+      "arm": "R_A_roney_native",
+      "cohort": "roney",
+      "subject": "Mesh_31475951.vtk",
+      "inducible": false,
+      "sustained_ms": 235.6500000000001,
+      "fibrosis_before": 0.20110217703806557,
+      "fibrosis_after": 0.20110217703806557,
+      "seconds": 11.4
+    },
+    {
+      "arm": "R_A_roney_native",
+      "cohort": "roney",
+      "subject": "Mesh_12928433.vtk",
+      "inducible": true,
+      "sustained_ms": 999.95,
+      "fibrosis_before": 0.49100709834520184,
+      "fibrosis_after": 0.49100709834520184,
+      "seconds": 17.4
+    },
+    {
+      "arm": "R_A_roney_native",
+      "cohort": "roney",
+      "subject": "Mesh_99895768.vtk",
+      "inducible": false,
+      "sustained_ms": 286.10000000000014,
+      "fibrosis_before": 0.3800564467275557,
+      "fibrosis_after": 0.3800564467275557,
+      "seconds": 11.9
+    },
+    {
+      "arm": "R_A_roney_native",
+      "cohort": "roney",
+      "subject": "Mesh_32198120.vtk",
+      "inducible": true,
+      "sustained_ms": 999.95,
+      "fibrosis_before": 0.3694893207058757,
+      "fibrosis_after": 0.3694893207058757,
+      "seconds": 15.3
+    },
+    {
+      "arm": "R_A_roney_native",
+      "cohort": "roney",
+      "subject": "Mesh_40112384.vtk",
+      "inducible": true,
+      "sustained_ms": 999.95,
+      "fibrosis_before": 0.46526990342057173,
+      "fibrosis_after": 0.46526990342057173,
+      "seconds": 16.5
+    },
+    {
+      "arm": "R_A_roney_native",
+      "cohort": "roney",
+      "subject": "Mesh_83335866.vtk",
+      "inducible": true,
+      "sustained_ms": 999.95,
+      "fibrosis_before": 0.6681006441326224,
+      "fibrosis_after": 0.6681006441326224,
+      "seconds": 16.5
+    },
+    {
+      "arm": "R_A_roney_native",
+      "cohort": "roney",
+      "subject": "Mesh_58105145.vtk",
+      "inducible": true,
+      "sustained_ms": 999.95,
+      "fibrosis_before": 0.5139592263300419,
+      "fibrosis_after": 0.5139592263300419,
+      "seconds": 19.6
+    },
+    {
+      "arm": "R_A_roney_native",
+      "cohort": "roney",
+      "subject": "Mesh_48813898.vtk",
+      "inducible": true,
+      "sustained_ms": 675.45,
+      "fibrosis_before": 0.6141442218047588,
+      "fibrosis_after": 0.6141442218047588,
+      "seconds": 15.3
+    },
+    {
+      "arm": "R_A_roney_native",
+      "cohort": "roney",
+      "subject": "Mesh_46906197.vtk",
+      "inducible": false,
+      "sustained_ms": 240.9000000000001,
+      "fibrosis_before": 0.06672589912744309,
+      "fibrosis_after": 0.06672589912744309,
+      "seconds": 11.3
+    },
+    {
+      "arm": "R_A_roney_native",
+      "cohort": "roney",
+      "subject": "Mesh_94908860.vtk",
+      "inducible": false,
+      "sustained_ms": 245.1500000000001,
+      "fibrosis_before": 0.31874335536713166,
+      "fibrosis_after": 0.31874335536713166,
+      "seconds": 12.1
+    },
+    {
+      "arm": "R_A_roney_native",
+      "cohort": "roney",
+      "subject": "Mesh_16736494.vtk",
+      "inducible": false,
+      "sustained_ms": 216.10000000000002,
+      "fibrosis_before": 0.07583142299800155,
+      "fibrosis_after": 0.07583142299800155,
+      "seconds": 11.0
+    },
+    {
+      "arm": "R_A_roney_native",
+      "cohort": "roney",
+      "subject": "Mesh_13142315.vtk",
+      "inducible": true,
+      "sustained_ms": 999.95,
+      "fibrosis_before": 0.4070393972404391,
+      "fibrosis_after": 0.4070393972404391,
+      "seconds": 19.8
+    },
+    {
+      "arm": "R_A_roney_native",
+      "cohort": "roney",
+      "subject": "Mesh_92062041.vtk",
+      "inducible": false,
+      "sustained_ms": 319.20000000000005,
+      "fibrosis_before": 0.2788842830792184,
+      "fibrosis_after": 0.2788842830792184,
+      "seconds": 12.3
+    },
+    {
+      "arm": "R_A_roney_native",
+      "cohort": "roney",
+      "subject": "Mesh_68827202.vtk",
+      "inducible": true,
+      "sustained_ms": 999.95,
+      "fibrosis_before": 0.5277679224317231,
+      "fibrosis_after": 0.5277679224317231,
+      "seconds": 16.5
+    },
+    {
+      "arm": "R_A_roney_native",
+      "cohort": "roney",
+      "subject": "Mesh_84215961.vtk",
+      "inducible": false,
+      "sustained_ms": 338.75,
+      "fibrosis_before": 0.48846484003106283,
+      "fibrosis_after": 0.48846484003106283,
+      "seconds": 11.5
+    },
+    {
+      "arm": "R_A_roney_native",
+      "cohort": "roney",
+      "subject": "Mesh_26694297.vtk",
+      "inducible": false,
+      "sustained_ms": 503.95000000000005,
+      "fibrosis_before": 0.33634412575156014,
+      "fibrosis_after": 0.33634412575156014,
+      "seconds": 15.1
+    },
+    {
+      "arm": "R_A_roney_native",
+      "cohort": "roney",
+      "subject": "Mesh_28678406.vtk",
+      "inducible": false,
+      "sustained_ms": 313.4000000000001,
+      "fibrosis_before": 0.3252787666784484,
+      "fibrosis_after": 0.3252787666784484,
+      "seconds": 11.8
+    },
+    {
+      "arm": "R_A_roney_native",
+      "cohort": "roney",
+      "subject": "Mesh_44772464.vtk",
+      "inducible": true,
+      "sustained_ms": 999.95,
+      "fibrosis_before": 0.7699765850973415,
+      "fibrosis_after": 0.7699765850973415,
+      "seconds": 17.0
+    },
+    {
+      "arm": "R_A_roney_native",
+      "cohort": "roney",
+      "subject": "Mesh_40849519.vtk",
+      "inducible": true,
+      "sustained_ms": 999.95,
+      "fibrosis_before": 0.4816595546621659,
+      "fibrosis_after": 0.4816595546621659,
+      "seconds": 17.7
+    },
+    {
+      "arm": "R_A_roney_native",
+      "cohort": "roney",
+      "subject": "Mesh_86031279.vtk",
+      "inducible": false,
+      "sustained_ms": 506.70000000000005,
+      "fibrosis_before": 0.25365197535062917,
+      "fibrosis_after": 0.25365197535062917,
+      "seconds": 13.9
+    },
+    {
+      "arm": "R_A_roney_native",
+      "cohort": "roney",
+      "subject": "Mesh_49286233.vtk",
+      "inducible": true,
+      "sustained_ms": 999.95,
+      "fibrosis_before": 0.4716312124567218,
+      "fibrosis_after": 0.4716312124567218,
+      "seconds": 16.7
+    },
+    {
+      "arm": "R_A_roney_native",
+      "cohort": "roney",
+      "subject": "Mesh_26925075.vtk",
+      "inducible": false,
+      "sustained_ms": 292.75,
+      "fibrosis_before": 0.3754472645817558,
+      "fibrosis_after": 0.3754472645817558,
+      "seconds": 11.6
+    },
+    {
+      "arm": "R_A_roney_native",
+      "cohort": "roney",
+      "subject": "Mesh_26572048.vtk",
+      "inducible": false,
+      "sustained_ms": 461.6500000000001,
+      "fibrosis_before": 0.4286764872494669,
+      "fibrosis_after": 0.4286764872494669,
+      "seconds": 14.7
+    },
+    {
+      "arm": "R_A_roney_native",
+      "cohort": "roney",
+      "subject": "Mesh_88859337.vtk",
+      "inducible": true,
+      "sustained_ms": 999.95,
+      "fibrosis_before": 0.31165760139839643,
+      "fibrosis_after": 0.31165760139839643,
+      "seconds": 15.8
+    },
+    {
+      "arm": "R_A_roney_native",
+      "cohort": "roney",
+      "subject": "Mesh_85161463.vtk",
+      "inducible": false,
+      "sustained_ms": 237.4000000000001,
+      "fibrosis_before": 0.2506532412233763,
+      "fibrosis_after": 0.2506532412233763,
+      "seconds": 11.4
+    },
+    {
+      "arm": "R_A_roney_native",
+      "cohort": "roney",
+      "subject": "Mesh_77855463.vtk",
+      "inducible": true,
+      "sustained_ms": 999.95,
+      "fibrosis_before": 0.42216515373638075,
+      "fibrosis_after": 0.42216515373638075,
+      "seconds": 15.8
+    },
+    {
+      "arm": "R_A_roney_native",
+      "cohort": "roney",
+      "subject": "Mesh_45275287.vtk",
+      "inducible": false,
+      "sustained_ms": 232.95000000000005,
+      "fibrosis_before": 0.10470140312419786,
+      "fibrosis_after": 0.10470140312419786,
+      "seconds": 11.8
+    },
+    {
+      "arm": "R_A_roney_native",
+      "cohort": "roney",
+      "subject": "Mesh_90918124.vtk",
+      "inducible": false,
+      "sustained_ms": 235.9000000000001,
+      "fibrosis_before": 0.26864288038879464,
+      "fibrosis_after": 0.26864288038879464,
+      "seconds": 11.0
+    },
+    {
+      "arm": "R_A_roney_native",
+      "cohort": "roney",
+      "subject": "Mesh_41949257.vtk",
+      "inducible": false,
+      "sustained_ms": 268.0,
+      "fibrosis_before": 0.1996688902663094,
+      "fibrosis_after": 0.1996688902663094,
+      "seconds": 11.4
+    },
+    {
+      "arm": "R_A_roney_native",
+      "cohort": "roney",
+      "subject": "Mesh_13711934.vtk",
+      "inducible": false,
+      "sustained_ms": 221.9000000000001,
+      "fibrosis_before": 0.14883933202277405,
+      "fibrosis_after": 0.14883933202277405,
+      "seconds": 12.2
+    },
+    {
+      "arm": "R_A_roney_native",
+      "cohort": "roney",
+      "subject": "Mesh_71206673.vtk",
+      "inducible": false,
+      "sustained_ms": 226.70000000000005,
+      "fibrosis_before": 0.3050167993348866,
+      "fibrosis_after": 0.3050167993348866,
+      "seconds": 12.4
+    },
+    {
+      "arm": "R_A_roney_native",
+      "cohort": "roney",
+      "subject": "Mesh_79851394.vtk",
+      "inducible": false,
+      "sustained_ms": 226.10000000000002,
+      "fibrosis_before": 0.19139910550696815,
+      "fibrosis_after": 0.19139910550696815,
+      "seconds": 11.7
+    },
+    {
+      "arm": "R_A_roney_native",
+      "cohort": "roney",
+      "subject": "Mesh_15589148.vtk",
+      "inducible": false,
+      "sustained_ms": 284.6500000000001,
+      "fibrosis_before": 0.2748018617859724,
+      "fibrosis_after": 0.2748018617859724,
+      "seconds": 13.7
+    },
+    {
+      "arm": "R_A_roney_native",
+      "cohort": "roney",
+      "subject": "Mesh_61961067.vtk",
+      "inducible": false,
+      "sustained_ms": 292.29999999999995,
+      "fibrosis_before": 0.17657108428482637,
+      "fibrosis_after": 0.17657108428482637,
+      "seconds": 12.8
+    },
+    {
+      "arm": "R_A_roney_native",
+      "cohort": "roney",
+      "subject": "Mesh_31977459.vtk",
+      "inducible": true,
+      "sustained_ms": 999.95,
+      "fibrosis_before": 0.36423485852199267,
+      "fibrosis_after": 0.36423485852199267,
+      "seconds": 21.0
+    },
+    {
+      "arm": "R_A_roney_native",
+      "cohort": "roney",
+      "subject": "Mesh_45708510.vtk",
+      "inducible": false,
+      "sustained_ms": 439.1500000000001,
+      "fibrosis_before": 0.28826482134563175,
+      "fibrosis_after": 0.28826482134563175,
+      "seconds": 14.8
+    },
+    {
+      "arm": "R_A_roney_native",
+      "cohort": "roney",
+      "subject": "Mesh_14451346.vtk",
+      "inducible": false,
+      "sustained_ms": 274.70000000000005,
+      "fibrosis_before": 0.20001699852257337,
+      "fibrosis_after": 0.20001699852257337,
+      "seconds": 14.9
+    },
+    {
+      "arm": "R_A_roney_native",
+      "cohort": "roney",
+      "subject": "Mesh_70843325.vtk",
+      "inducible": true,
+      "sustained_ms": 999.95,
+      "fibrosis_before": 0.5678580180368871,
+      "fibrosis_after": 0.5678580180368871,
+      "seconds": 21.2
+    },
+    {
+      "arm": "R_A_roney_native",
+      "cohort": "roney",
+      "subject": "Mesh_57863767.vtk",
+      "inducible": false,
+      "sustained_ms": 288.70000000000005,
+      "fibrosis_before": 0.28196022622418554,
+      "fibrosis_after": 0.28196022622418554,
+      "seconds": 16.4
+    },
+    {
+      "arm": "R_A_roney_native",
+      "cohort": "roney",
+      "subject": "Mesh_12305955.vtk",
+      "inducible": false,
+      "sustained_ms": 369.4000000000001,
+      "fibrosis_before": 0.2575268884936945,
+      "fibrosis_after": 0.2575268884936945,
+      "seconds": 16.7
+    },
+    {
+      "arm": "R_A_roney_native",
+      "cohort": "roney",
+      "subject": "Mesh_37026619.vtk",
+      "inducible": false,
+      "sustained_ms": 271.55000000000007,
+      "fibrosis_before": 0.2489430009343494,
+      "fibrosis_after": 0.2489430009343494,
+      "seconds": 16.9
+    },
+    {
+      "arm": "R_A_roney_native",
+      "cohort": "roney",
+      "subject": "Mesh_10954794.vtk",
+      "inducible": false,
+      "sustained_ms": 430.1500000000001,
+      "fibrosis_before": 0.31140474810107205,
+      "fibrosis_after": 0.31140474810107205,
+      "seconds": 16.1
+    },
+    {
+      "arm": "R_A_roney_native",
+      "cohort": "roney",
+      "subject": "Mesh_28914168.vtk",
+      "inducible": false,
+      "sustained_ms": 291.20000000000005,
+      "fibrosis_before": 0.23734526399338213,
+      "fibrosis_after": 0.23734526399338213,
+      "seconds": 15.6
+    },
+    {
+      "arm": "R_A_roney_native",
+      "cohort": "roney",
+      "subject": "Mesh_42412446.vtk",
+      "inducible": false,
+      "sustained_ms": 261.1500000000001,
+      "fibrosis_before": 0.2072400740102586,
+      "fibrosis_after": 0.2072400740102586,
+      "seconds": 15.8
+    },
+    {
+      "arm": "R_A_roney_native",
+      "cohort": "roney",
+      "subject": "Mesh_82949971.vtk",
+      "inducible": false,
+      "sustained_ms": 328.6500000000001,
+      "fibrosis_before": 0.2837968075747433,
+      "fibrosis_after": 0.2837968075747433,
+      "seconds": 17.2
+    },
+    {
+      "arm": "R_A_roney_native",
+      "cohort": "roney",
+      "subject": "Mesh_48373495.vtk",
+      "inducible": false,
+      "sustained_ms": 287.25,
+      "fibrosis_before": 0.22985550717034306,
+      "fibrosis_after": 0.22985550717034306,
+      "seconds": 16.2
+    },
+    {
+      "arm": "R_A_roney_native",
+      "cohort": "roney",
+      "subject": "Mesh_29613176.vtk",
+      "inducible": true,
+      "sustained_ms": 999.95,
+      "fibrosis_before": 0.39810547357375076,
+      "fibrosis_after": 0.39810547357375076,
+      "seconds": 25.3
+    },
+    {
+      "arm": "R_A_roney_native",
+      "cohort": "roney",
+      "subject": "Mesh_64966753.vtk",
+      "inducible": false,
+      "sustained_ms": 257.55000000000007,
+      "fibrosis_before": 0.23187763763757951,
+      "fibrosis_after": 0.23187763763757951,
+      "seconds": 16.2
+    },
+    {
+      "arm": "R_A_roney_native",
+      "cohort": "roney",
+      "subject": "Mesh_42551385.vtk",
+      "inducible": false,
+      "sustained_ms": 258.0,
+      "fibrosis_before": 0.1489753425524807,
+      "fibrosis_after": 0.1489753425524807,
+      "seconds": 16.1
+    },
+    {
+      "arm": "R_A_roney_native",
+      "cohort": "roney",
+      "subject": "Mesh_13013612.vtk",
+      "inducible": true,
+      "sustained_ms": 999.95,
+      "fibrosis_before": 0.19927774750972987,
+      "fibrosis_after": 0.19927774750972987,
+      "seconds": 22.2
+    },
+    {
+      "arm": "R_A_roney_native",
+      "cohort": "roney",
+      "subject": "Mesh_55927776.vtk",
+      "inducible": false,
+      "sustained_ms": 472.60000000000014,
+      "fibrosis_before": 0.4075162412234992,
+      "fibrosis_after": 0.4075162412234992,
+      "seconds": 18.5
+    },
+    {
+      "arm": "R_A_roney_native",
+      "cohort": "roney",
+      "subject": "Mesh_92326261.vtk",
+      "inducible": false,
+      "sustained_ms": 343.4000000000001,
+      "fibrosis_before": 0.3967816860542475,
+      "fibrosis_after": 0.3967816860542475,
+      "seconds": 16.7
+    },
+    {
+      "arm": "R_A_roney_native",
+      "cohort": "roney",
+      "subject": "Mesh_95775921.vtk",
+      "inducible": false,
+      "sustained_ms": 319.70000000000005,
+      "fibrosis_before": 0.32577757774400545,
+      "fibrosis_after": 0.32577757774400545,
+      "seconds": 15.8
+    },
+    {
+      "arm": "R_A_roney_native",
+      "cohort": "roney",
+      "subject": "Mesh_75204275.vtk",
+      "inducible": false,
+      "sustained_ms": 293.60000000000014,
+      "fibrosis_before": 0.2590695515133671,
+      "fibrosis_after": 0.2590695515133671,
+      "seconds": 17.5
+    },
+    {
+      "arm": "R_A_roney_native",
+      "cohort": "roney",
+      "subject": "Mesh_99978327.vtk",
+      "inducible": true,
+      "sustained_ms": 719.3500000000001,
+      "fibrosis_before": 0.4335171261383815,
+      "fibrosis_after": 0.4335171261383815,
+      "seconds": 20.4
+    },
+    {
+      "arm": "R_A_roney_native",
+      "cohort": "roney",
+      "subject": "Mesh_88422001.vtk",
+      "inducible": true,
+      "sustained_ms": 999.95,
+      "fibrosis_before": 0.18979852942909262,
+      "fibrosis_after": 0.18979852942909262,
+      "seconds": 20.3
+    },
+    {
+      "arm": "R_A_roney_native",
+      "cohort": "roney",
+      "subject": "Mesh_44771637.vtk",
+      "inducible": false,
+      "sustained_ms": 308.6500000000001,
+      "fibrosis_before": 0.26188294045049604,
+      "fibrosis_after": 0.26188294045049604,
+      "seconds": 17.5
+    },
+    {
+      "arm": "R_A_roney_native",
+      "cohort": "roney",
+      "subject": "Mesh_66899331.vtk",
+      "inducible": true,
+      "sustained_ms": 999.95,
+      "fibrosis_before": 0.5276525272313665,
+      "fibrosis_after": 0.5276525272313665,
+      "seconds": 24.5
+    },
+    {
+      "arm": "R_A_roney_native",
+      "cohort": "roney",
+      "subject": "Mesh_31333640.vtk",
+      "inducible": false,
+      "sustained_ms": 311.4000000000001,
+      "fibrosis_before": 0.2547858653470286,
+      "fibrosis_after": 0.2547858653470286,
+      "seconds": 17.6
+    },
+    {
+      "arm": "R_B_roney_at_uw",
+      "cohort": "roney",
+      "subject": "Mesh_83815278.vtk",
+      "inducible": false,
+      "sustained_ms": 219.85000000000002,
+      "fibrosis_before": 0.33933044699110154,
+      "fibrosis_after": 0.244,
+      "seconds": 13.2
+    },
+    {
+      "arm": "R_B_roney_at_uw",
+      "cohort": "roney",
+      "subject": "Mesh_49769496.vtk",
+      "inducible": false,
+      "sustained_ms": 236.60000000000002,
+      "fibrosis_before": 0.5785584005903607,
+      "fibrosis_after": 0.244,
+      "seconds": 16.1
+    },
+    {
+      "arm": "R_B_roney_at_uw",
+      "cohort": "roney",
+      "subject": "Mesh_56611509.vtk",
+      "inducible": false,
+      "sustained_ms": 224.35000000000002,
+      "fibrosis_before": 0.23694501431674986,
+      "fibrosis_after": 0.24356650313772824,
+      "seconds": 41.9
+    },
+    {
+      "arm": "R_B_roney_at_uw",
+      "cohort": "roney",
+      "subject": "Mesh_31475951.vtk",
+      "inducible": false,
+      "sustained_ms": 242.10000000000002,
+      "fibrosis_before": 0.20110217703806557,
+      "fibrosis_after": 0.24313050604208117,
+      "seconds": 41.0
+    },
+    {
+      "arm": "R_B_roney_at_uw",
+      "cohort": "roney",
+      "subject": "Mesh_12928433.vtk",
+      "inducible": false,
+      "sustained_ms": 270.5,
+      "fibrosis_before": 0.49100709834520184,
+      "fibrosis_after": 0.24400000000000002,
+      "seconds": 40.1
+    },
+    {
+      "arm": "R_B_roney_at_uw",
+      "cohort": "roney",
+      "subject": "Mesh_99895768.vtk",
+      "inducible": false,
+      "sustained_ms": 201.60000000000002,
+      "fibrosis_before": 0.3800564467275557,
+      "fibrosis_after": 0.24399999999999997,
+      "seconds": 40.3
+    },
+    {
+      "arm": "R_B_roney_at_uw",
+      "cohort": "roney",
+      "subject": "Mesh_32198120.vtk",
+      "inducible": false,
+      "sustained_ms": 240.1500000000001,
+      "fibrosis_before": 0.3694893207058757,
+      "fibrosis_after": 0.24400000000000002,
+      "seconds": 16.0
+    },
+    {
+      "arm": "R_B_roney_at_uw",
+      "cohort": "roney",
+      "subject": "Mesh_40112384.vtk",
+      "inducible": false,
+      "sustained_ms": 229.25,
+      "fibrosis_before": 0.46526990342057173,
+      "fibrosis_after": 0.24399999999999997,
+      "seconds": 13.9
+    },
+    {
+      "arm": "R_B_roney_at_uw",
+      "cohort": "roney",
+      "subject": "Mesh_83335866.vtk",
+      "inducible": false,
+      "sustained_ms": 248.95000000000005,
+      "fibrosis_before": 0.6681006441326224,
+      "fibrosis_after": 0.2440000000000001,
+      "seconds": 13.8
+    },
+    {
+      "arm": "R_B_roney_at_uw",
+      "cohort": "roney",
+      "subject": "Mesh_58105145.vtk",
+      "inducible": false,
+      "sustained_ms": 250.5,
+      "fibrosis_before": 0.5139592263300419,
+      "fibrosis_after": 0.24399999999999997,
+      "seconds": 16.0
+    },
+    {
+      "arm": "R_B_roney_at_uw",
+      "cohort": "roney",
+      "subject": "Mesh_48813898.vtk",
+      "inducible": false,
+      "sustained_ms": 223.0,
+      "fibrosis_before": 0.6141442218047588,
+      "fibrosis_after": 0.24399999999999997,
+      "seconds": 15.9
+    },
+    {
+      "arm": "R_B_roney_at_uw",
+      "cohort": "roney",
+      "subject": "Mesh_46906197.vtk",
+      "inducible": false,
+      "sustained_ms": 251.0,
+      "fibrosis_before": 0.06672589912744309,
+      "fibrosis_after": 0.21998413849723464,
+      "seconds": 15.4
+    },
+    {
+      "arm": "R_B_roney_at_uw",
+      "cohort": "roney",
+      "subject": "Mesh_94908860.vtk",
+      "inducible": false,
+      "sustained_ms": 225.85000000000002,
+      "fibrosis_before": 0.31874335536713166,
+      "fibrosis_after": 0.244,
+      "seconds": 16.0
+    },
+    {
+      "arm": "R_B_roney_at_uw",
+      "cohort": "roney",
+      "subject": "Mesh_16736494.vtk",
+      "inducible": false,
+      "sustained_ms": 232.80000000000007,
+      "fibrosis_before": 0.07583142299800155,
+      "fibrosis_after": 0.21655697937364388,
+      "seconds": 14.5
+    },
+    {
+      "arm": "R_B_roney_at_uw",
+      "cohort": "roney",
+      "subject": "Mesh_13142315.vtk",
+      "inducible": false,
+      "sustained_ms": 222.4000000000001,
+      "fibrosis_before": 0.4070393972404391,
+      "fibrosis_after": 0.244,
+      "seconds": 17.5
+    },
+    {
+      "arm": "R_B_roney_at_uw",
+      "cohort": "roney",
+      "subject": "Mesh_92062041.vtk",
+      "inducible": false,
+      "sustained_ms": 266.35,
+      "fibrosis_before": 0.2788842830792184,
+      "fibrosis_after": 0.24399999999999997,
+      "seconds": 16.4
+    },
+    {
+      "arm": "R_B_roney_at_uw",
+      "cohort": "roney",
+      "subject": "Mesh_68827202.vtk",
+      "inducible": false,
+      "sustained_ms": 226.35000000000002,
+      "fibrosis_before": 0.5277679224317231,
+      "fibrosis_after": 0.24400000000000005,
+      "seconds": 16.2
+    },
+    {
+      "arm": "R_B_roney_at_uw",
+      "cohort": "roney",
+      "subject": "Mesh_84215961.vtk",
+      "inducible": false,
+      "sustained_ms": 263.0,
+      "fibrosis_before": 0.48846484003106283,
+      "fibrosis_after": 0.24399999999999997,
+      "seconds": 15.4
+    },
+    {
+      "arm": "R_B_roney_at_uw",
+      "cohort": "roney",
+      "subject": "Mesh_26694297.vtk",
+      "inducible": false,
+      "sustained_ms": 250.45000000000005,
+      "fibrosis_before": 0.33634412575156014,
+      "fibrosis_after": 0.24400000000000002,
+      "seconds": 17.2
+    },
+    {
+      "arm": "R_B_roney_at_uw",
+      "cohort": "roney",
+      "subject": "Mesh_28678406.vtk",
+      "inducible": false,
+      "sustained_ms": 251.4000000000001,
+      "fibrosis_before": 0.3252787666784484,
+      "fibrosis_after": 0.24399999999999994,
+      "seconds": 15.1
+    },
+    {
+      "arm": "R_B_roney_at_uw",
+      "cohort": "roney",
+      "subject": "Mesh_44772464.vtk",
+      "inducible": false,
+      "sustained_ms": 233.6500000000001,
+      "fibrosis_before": 0.7699765850973415,
+      "fibrosis_after": 0.24399999999999997,
+      "seconds": 16.1
+    },
+    {
+      "arm": "R_B_roney_at_uw",
+      "cohort": "roney",
+      "subject": "Mesh_40849519.vtk",
+      "inducible": false,
+      "sustained_ms": 268.30000000000007,
+      "fibrosis_before": 0.4816595546621659,
+      "fibrosis_after": 0.24399999999999997,
+      "seconds": 16.0
+    },
+    {
+      "arm": "R_B_roney_at_uw",
+      "cohort": "roney",
+      "subject": "Mesh_86031279.vtk",
+      "inducible": false,
+      "sustained_ms": 500.60000000000014,
+      "fibrosis_before": 0.25365197535062917,
+      "fibrosis_after": 0.24399999999999997,
+      "seconds": 18.8
+    },
+    {
+      "arm": "R_B_roney_at_uw",
+      "cohort": "roney",
+      "subject": "Mesh_49286233.vtk",
+      "inducible": false,
+      "sustained_ms": 263.1500000000001,
+      "fibrosis_before": 0.4716312124567218,
+      "fibrosis_after": 0.24400000000000002,
+      "seconds": 16.5
+    },
+    {
+      "arm": "R_B_roney_at_uw",
+      "cohort": "roney",
+      "subject": "Mesh_26925075.vtk",
+      "inducible": false,
+      "sustained_ms": 224.95000000000005,
+      "fibrosis_before": 0.3754472645817558,
+      "fibrosis_after": 0.24399999999999994,
+      "seconds": 14.9
+    },
+    {
+      "arm": "R_B_roney_at_uw",
+      "cohort": "roney",
+      "subject": "Mesh_26572048.vtk",
+      "inducible": false,
+      "sustained_ms": 272.9000000000001,
+      "fibrosis_before": 0.4286764872494669,
+      "fibrosis_after": 0.244,
+      "seconds": 16.6
+    },
+    {
+      "arm": "R_B_roney_at_uw",
+      "cohort": "roney",
+      "subject": "Mesh_88859337.vtk",
+      "inducible": false,
+      "sustained_ms": 268.35,
+      "fibrosis_before": 0.31165760139839643,
+      "fibrosis_after": 0.24399999999999994,
+      "seconds": 15.9
+    },
+    {
+      "arm": "R_B_roney_at_uw",
+      "cohort": "roney",
+      "subject": "Mesh_85161463.vtk",
+      "inducible": false,
+      "sustained_ms": 236.80000000000007,
+      "fibrosis_before": 0.2506532412233763,
+      "fibrosis_after": 0.24400000000000002,
+      "seconds": 14.6
+    },
+    {
+      "arm": "R_B_roney_at_uw",
+      "cohort": "roney",
+      "subject": "Mesh_77855463.vtk",
+      "inducible": false,
+      "sustained_ms": 259.45000000000005,
+      "fibrosis_before": 0.42216515373638075,
+      "fibrosis_after": 0.244,
+      "seconds": 15.1
+    },
+    {
+      "arm": "R_B_roney_at_uw",
+      "cohort": "roney",
+      "subject": "Mesh_45275287.vtk",
+      "inducible": false,
+      "sustained_ms": 254.45000000000005,
+      "fibrosis_before": 0.10470140312419786,
+      "fibrosis_after": 0.22182182341511728,
+      "seconds": 15.2
+    },
+    {
+      "arm": "R_B_roney_at_uw",
+      "cohort": "roney",
+      "subject": "Mesh_90918124.vtk",
+      "inducible": false,
+      "sustained_ms": 233.25,
+      "fibrosis_before": 0.26864288038879464,
+      "fibrosis_after": 0.24400000000000002,
+      "seconds": 14.0
+    },
+    {
+      "arm": "R_B_roney_at_uw",
+      "cohort": "roney",
+      "subject": "Mesh_41949257.vtk",
+      "inducible": false,
+      "sustained_ms": 272.4000000000001,
+      "fibrosis_before": 0.1996688902663094,
+      "fibrosis_after": 0.23970166677999172,
+      "seconds": 15.0
+    },
+    {
+      "arm": "R_B_roney_at_uw",
+      "cohort": "roney",
+      "subject": "Mesh_13711934.vtk",
+      "inducible": false,
+      "sustained_ms": 269.95000000000005,
+      "fibrosis_before": 0.14883933202277405,
+      "fibrosis_after": 0.22977259402584727,
+      "seconds": 15.4
+    },
+    {
+      "arm": "R_B_roney_at_uw",
+      "cohort": "roney",
+      "subject": "Mesh_71206673.vtk",
+      "inducible": false,
+      "sustained_ms": 220.30000000000007,
+      "fibrosis_before": 0.3050167993348866,
+      "fibrosis_after": 0.244,
+      "seconds": 15.1
+    },
+    {
+      "arm": "R_B_roney_at_uw",
+      "cohort": "roney",
+      "subject": "Mesh_79851394.vtk",
+      "inducible": false,
+      "sustained_ms": 230.55000000000007,
+      "fibrosis_before": 0.19139910550696815,
+      "fibrosis_after": 0.24040949415598858,
+      "seconds": 14.3
+    },
+    {
+      "arm": "R_B_roney_at_uw",
+      "cohort": "roney",
+      "subject": "Mesh_15589148.vtk",
+      "inducible": false,
+      "sustained_ms": 352.95000000000005,
+      "fibrosis_before": 0.2748018617859724,
+      "fibrosis_after": 0.244,
+      "seconds": 16.3
+    },
+    {
+      "arm": "R_B_roney_at_uw",
+      "cohort": "roney",
+      "subject": "Mesh_61961067.vtk",
+      "inducible": false,
+      "sustained_ms": 541.5,
+      "fibrosis_before": 0.17657108428482637,
+      "fibrosis_after": 0.22125777964150453,
+      "seconds": 18.6
+    },
+    {
+      "arm": "R_B_roney_at_uw",
+      "cohort": "roney",
+      "subject": "Mesh_31977459.vtk",
+      "inducible": false,
+      "sustained_ms": 255.20000000000005,
+      "fibrosis_before": 0.36423485852199267,
+      "fibrosis_after": 0.24400000000000002,
+      "seconds": 14.8
+    },
+    {
+      "arm": "R_B_roney_at_uw",
+      "cohort": "roney",
+      "subject": "Mesh_45708510.vtk",
+      "inducible": false,
+      "sustained_ms": 234.9000000000001,
+      "fibrosis_before": 0.28826482134563175,
+      "fibrosis_after": 0.244,
+      "seconds": 15.5
+    },
+    {
+      "arm": "R_B_roney_at_uw",
+      "cohort": "roney",
+      "subject": "Mesh_14451346.vtk",
+      "inducible": false,
+      "sustained_ms": 279.04999999999995,
+      "fibrosis_before": 0.20001699852257337,
+      "fibrosis_after": 0.24298044479072675,
+      "seconds": 17.0
+    },
+    {
+      "arm": "R_B_roney_at_uw",
+      "cohort": "roney",
+      "subject": "Mesh_70843325.vtk",
+      "inducible": false,
+      "sustained_ms": 301.35000000000014,
+      "fibrosis_before": 0.5678580180368871,
+      "fibrosis_after": 0.244,
+      "seconds": 15.7
+    },
+    {
+      "arm": "R_B_roney_at_uw",
+      "cohort": "roney",
+      "subject": "Mesh_57863767.vtk",
+      "inducible": false,
+      "sustained_ms": 283.25,
+      "fibrosis_before": 0.28196022622418554,
+      "fibrosis_after": 0.24399999999999997,
+      "seconds": 16.6
+    },
+    {
+      "arm": "R_B_roney_at_uw",
+      "cohort": "roney",
+      "subject": "Mesh_12305955.vtk",
+      "inducible": false,
+      "sustained_ms": 271.70000000000005,
+      "fibrosis_before": 0.2575268884936945,
+      "fibrosis_after": 0.24400000000000005,
+      "seconds": 15.4
+    },
+    {
+      "arm": "R_B_roney_at_uw",
+      "cohort": "roney",
+      "subject": "Mesh_37026619.vtk",
+      "inducible": false,
+      "sustained_ms": 267.05000000000007,
+      "fibrosis_before": 0.2489430009343494,
+      "fibrosis_after": 0.24400000000000005,
+      "seconds": 27.1
+    },
+    {
+      "arm": "R_B_roney_at_uw",
+      "cohort": "roney",
+      "subject": "Mesh_10954794.vtk",
+      "inducible": false,
+      "sustained_ms": 284.54999999999995,
+      "fibrosis_before": 0.31140474810107205,
+      "fibrosis_after": 0.244,
+      "seconds": 23.9
+    },
+    {
+      "arm": "R_B_roney_at_uw",
+      "cohort": "roney",
+      "subject": "Mesh_28914168.vtk",
+      "inducible": false,
+      "sustained_ms": 328.29999999999995,
+      "fibrosis_before": 0.23734526399338213,
+      "fibrosis_after": 0.24268998422961935,
+      "seconds": 33.6
+    },
+    {
+      "arm": "R_B_roney_at_uw",
+      "cohort": "roney",
+      "subject": "Mesh_42412446.vtk",
+      "inducible": false,
+      "sustained_ms": 352.0,
+      "fibrosis_before": 0.2072400740102586,
+      "fibrosis_after": 0.242621217141108,
+      "seconds": 32.8
+    },
+    {
+      "arm": "R_B_roney_at_uw",
+      "cohort": "roney",
+      "subject": "Mesh_82949971.vtk",
+      "inducible": false,
+      "sustained_ms": 316.4000000000001,
+      "fibrosis_before": 0.2837968075747433,
+      "fibrosis_after": 0.24399999999999997,
+      "seconds": 25.1
+    },
+    {
+      "arm": "R_B_roney_at_uw",
+      "cohort": "roney",
+      "subject": "Mesh_48373495.vtk",
+      "inducible": false,
+      "sustained_ms": 288.25,
+      "fibrosis_before": 0.22985550717034306,
+      "fibrosis_after": 0.24326913639359507,
+      "seconds": 21.9
+    },
+    {
+      "arm": "R_B_roney_at_uw",
+      "cohort": "roney",
+      "subject": "Mesh_29613176.vtk",
+      "inducible": false,
+      "sustained_ms": 249.45000000000005,
+      "fibrosis_before": 0.39810547357375076,
+      "fibrosis_after": 0.24399999999999997,
+      "seconds": 20.5
+    },
+    {
+      "arm": "R_B_roney_at_uw",
+      "cohort": "roney",
+      "subject": "Mesh_64966753.vtk",
+      "inducible": false,
+      "sustained_ms": 258.6500000000001,
+      "fibrosis_before": 0.23187763763757951,
+      "fibrosis_after": 0.24338624973809708,
+      "seconds": 32.8
+    },
+    {
+      "arm": "R_B_roney_at_uw",
+      "cohort": "roney",
+      "subject": "Mesh_42551385.vtk",
+      "inducible": false,
+      "sustained_ms": 262.85,
+      "fibrosis_before": 0.1489753425524807,
+      "fibrosis_after": 0.23462424465014314,
+      "seconds": 39.2
+    },
+    {
+      "arm": "R_B_roney_at_uw",
+      "cohort": "roney",
+      "subject": "Mesh_13013612.vtk",
+      "inducible": false,
+      "sustained_ms": 545.9000000000001,
+      "fibrosis_before": 0.19927774750972987,
+      "fibrosis_after": 0.23121301962864368,
+      "seconds": 42.4
+    },
+    {
+      "arm": "R_B_roney_at_uw",
+      "cohort": "roney",
+      "subject": "Mesh_55927776.vtk",
+      "inducible": false,
+      "sustained_ms": 244.25,
+      "fibrosis_before": 0.4075162412234992,
+      "fibrosis_after": 0.24400000000000005,
+      "seconds": 34.2
+    },
+    {
+      "arm": "R_B_roney_at_uw",
+      "cohort": "roney",
+      "subject": "Mesh_92326261.vtk",
+      "inducible": false,
+      "sustained_ms": 275.60000000000014,
+      "fibrosis_before": 0.3967816860542475,
+      "fibrosis_after": 0.244,
+      "seconds": 22.0
+    },
+    {
+      "arm": "R_B_roney_at_uw",
+      "cohort": "roney",
+      "subject": "Mesh_95775921.vtk",
+      "inducible": false,
+      "sustained_ms": 280.79999999999995,
+      "fibrosis_before": 0.32577757774400545,
+      "fibrosis_after": 0.244,
+      "seconds": 16.9
+    },
+    {
+      "arm": "R_B_roney_at_uw",
+      "cohort": "roney",
+      "subject": "Mesh_75204275.vtk",
+      "inducible": false,
+      "sustained_ms": 237.60000000000002,
+      "fibrosis_before": 0.2590695515133671,
+      "fibrosis_after": 0.244,
+      "seconds": 17.4
+    },
+    {
+      "arm": "R_B_roney_at_uw",
+      "cohort": "roney",
+      "subject": "Mesh_99978327.vtk",
+      "inducible": false,
+      "sustained_ms": 279.54999999999995,
+      "fibrosis_before": 0.4335171261383815,
+      "fibrosis_after": 0.244,
+      "seconds": 16.0
+    },
+    {
+      "arm": "R_B_roney_at_uw",
+      "cohort": "roney",
+      "subject": "Mesh_88422001.vtk",
+      "inducible": true,
+      "sustained_ms": 999.95,
+      "fibrosis_before": 0.18979852942909262,
+      "fibrosis_after": 0.2298215722649965,
+      "seconds": 24.3
+    },
+    {
+      "arm": "R_B_roney_at_uw",
+      "cohort": "roney",
+      "subject": "Mesh_44771637.vtk",
+      "inducible": false,
+      "sustained_ms": 301.20000000000005,
+      "fibrosis_before": 0.26188294045049604,
+      "fibrosis_after": 0.244,
+      "seconds": 17.4
+    },
+    {
+      "arm": "R_B_roney_at_uw",
+      "cohort": "roney",
+      "subject": "Mesh_66899331.vtk",
+      "inducible": false,
+      "sustained_ms": 281.10000000000014,
+      "fibrosis_before": 0.5276525272313665,
+      "fibrosis_after": 0.24399999999999997,
+      "seconds": 16.5
+    },
+    {
+      "arm": "R_B_roney_at_uw",
+      "cohort": "roney",
+      "subject": "Mesh_31333640.vtk",
+      "inducible": false,
+      "sustained_ms": 310.45000000000005,
+      "fibrosis_before": 0.2547858653470286,
+      "fibrosis_after": 0.24400000000000002,
+      "seconds": 17.8
+    },
+    {
+      "arm": "U_A_uw_native",
+      "cohort": "uw",
+      "subject": "uw_ID001_PreAbl_rev1.vtk",
+      "inducible": false,
+      "sustained_ms": 312.45000000000005,
+      "fibrosis_before": 0.15604572138448966,
+      "fibrosis_after": 0.15604572138448966,
+      "seconds": 15.0
+    },
+    {
+      "arm": "U_A_uw_native",
+      "cohort": "uw",
+      "subject": "uw_ID002_PreAbl_rev1.vtk",
+      "inducible": false,
+      "sustained_ms": 283.70000000000005,
+      "fibrosis_before": 0.15178491096597208,
+      "fibrosis_after": 0.15178491096597208,
+      "seconds": 13.7
+    },
+    {
+      "arm": "U_A_uw_native",
+      "cohort": "uw",
+      "subject": "uw_ID003_PreAbl_rev1.vtk",
+      "inducible": false,
+      "sustained_ms": 273.35000000000014,
+      "fibrosis_before": 0.17833952420921656,
+      "fibrosis_after": 0.17833952420921656,
+      "seconds": 12.9
+    },
+    {
+      "arm": "U_A_uw_native",
+      "cohort": "uw",
+      "subject": "uw_ID004_PreAbl_rev1.vtk",
+      "inducible": false,
+      "sustained_ms": 299.60000000000014,
+      "fibrosis_before": 0.03366637843403167,
+      "fibrosis_after": 0.03366637843403167,
+      "seconds": 14.9
+    },
+    {
+      "arm": "U_A_uw_native",
+      "cohort": "uw",
+      "subject": "uw_ID005_PreAbl_rev1.vtk",
+      "inducible": true,
+      "sustained_ms": 907.5,
+      "fibrosis_before": 0.4596751063516298,
+      "fibrosis_after": 0.4596751063516298,
+      "seconds": 19.7
+    },
+    {
+      "arm": "U_A_uw_native",
+      "cohort": "uw",
+      "subject": "uw_ID006_PreAbl_rev1.vtk",
+      "inducible": false,
+      "sustained_ms": 484.9000000000001,
+      "fibrosis_before": 0.33861692687626305,
+      "fibrosis_after": 0.33861692687626305,
+      "seconds": 16.0
+    },
+    {
+      "arm": "U_A_uw_native",
+      "cohort": "uw",
+      "subject": "uw_ID007_PreAbl_rev1.vtk",
+      "inducible": false,
+      "sustained_ms": 478.95000000000005,
+      "fibrosis_before": 0.3301342999282075,
+      "fibrosis_after": 0.3301342999282075,
+      "seconds": 15.8
+    },
+    {
+      "arm": "U_A_uw_native",
+      "cohort": "uw",
+      "subject": "uw_ID008_PreAbl_rev1.vtk",
+      "inducible": false,
+      "sustained_ms": 281.6500000000001,
+      "fibrosis_before": 0.1833862585519927,
+      "fibrosis_after": 0.1833862585519927,
+      "seconds": 13.6
+    },
+    {
+      "arm": "U_A_uw_native",
+      "cohort": "uw",
+      "subject": "uw_ID009_PreAbl_rev1.vtk",
+      "inducible": false,
+      "sustained_ms": 239.4000000000001,
+      "fibrosis_before": 0.11209282368446233,
+      "fibrosis_after": 0.11209282368446233,
+      "seconds": 13.7
+    },
+    {
+      "arm": "U_A_uw_native",
+      "cohort": "uw",
+      "subject": "uw_ID010_PreAbl_rev1.vtk",
+      "inducible": false,
+      "sustained_ms": 432.95000000000005,
+      "fibrosis_before": 0.26721672677639474,
+      "fibrosis_after": 0.26721672677639474,
+      "seconds": 16.3
+    },
+    {
+      "arm": "U_A_uw_native",
+      "cohort": "uw",
+      "subject": "uw_ID011_PreAbl_rev1.vtk",
+      "inducible": false,
+      "sustained_ms": 585.9000000000001,
+      "fibrosis_before": 0.261630279511868,
+      "fibrosis_after": 0.261630279511868,
+      "seconds": 17.3
+    },
+    {
+      "arm": "U_A_uw_native",
+      "cohort": "uw",
+      "subject": "uw_ID012_PreAbl_rev1.vtk",
+      "inducible": false,
+      "sustained_ms": 449.04999999999995,
+      "fibrosis_before": 0.3065381546677607,
+      "fibrosis_after": 0.3065381546677607,
+      "seconds": 14.2
+    },
+    {
+      "arm": "U_A_uw_native",
+      "cohort": "uw",
+      "subject": "uw_ID013_PreAbl_rev1.vtk",
+      "inducible": false,
+      "sustained_ms": 305.6500000000001,
+      "fibrosis_before": 0.2333160412986836,
+      "fibrosis_after": 0.2333160412986836,
+      "seconds": 13.8
+    },
+    {
+      "arm": "U_A_uw_native",
+      "cohort": "uw",
+      "subject": "uw_ID014_PreAbl_rev1.vtk",
+      "inducible": false,
+      "sustained_ms": 469.45000000000005,
+      "fibrosis_before": 0.3231043348351841,
+      "fibrosis_after": 0.3231043348351841,
+      "seconds": 15.4
+    },
+    {
+      "arm": "U_A_uw_native",
+      "cohort": "uw",
+      "subject": "uw_ID015_PreAbl_rev1.vtk",
+      "inducible": false,
+      "sustained_ms": 228.55000000000007,
+      "fibrosis_before": 0.19143175315522623,
+      "fibrosis_after": 0.19143175315522623,
+      "seconds": 14.1
+    },
+    {
+      "arm": "U_A_uw_native",
+      "cohort": "uw",
+      "subject": "uw_ID021_PreAbl_rev1.vtk",
+      "inducible": false,
+      "sustained_ms": 271.05000000000007,
+      "fibrosis_before": 0.21846622180332406,
+      "fibrosis_after": 0.21846622180332406,
+      "seconds": 12.4
+    },
+    {
+      "arm": "U_A_uw_native",
+      "cohort": "uw",
+      "subject": "uw_ID022_PreAbl_rev1.vtk",
+      "inducible": false,
+      "sustained_ms": 256.55000000000007,
+      "fibrosis_before": 0.4024907171658984,
+      "fibrosis_after": 0.4024907171658984,
+      "seconds": 14.3
+    },
+    {
+      "arm": "U_A_uw_native",
+      "cohort": "uw",
+      "subject": "uw_ID023_PreAbl_rev1.vtk",
+      "inducible": false,
+      "sustained_ms": 536.3500000000001,
+      "fibrosis_before": 0.08116993563755695,
+      "fibrosis_after": 0.08116993563755695,
+      "seconds": 17.4
+    },
+    {
+      "arm": "U_A_uw_native",
+      "cohort": "uw",
+      "subject": "uw_ID024_PreAbl_rev1.vtk",
+      "inducible": false,
+      "sustained_ms": 276.20000000000005,
+      "fibrosis_before": 0.29517817189781864,
+      "fibrosis_after": 0.29517817189781864,
+      "seconds": 16.9
+    },
+    {
+      "arm": "U_A_uw_native",
+      "cohort": "uw",
+      "subject": "uw_ID025_PreAbl_rev1.vtk",
+      "inducible": false,
+      "sustained_ms": 363.95000000000005,
+      "fibrosis_before": 0.16207480918819447,
+      "fibrosis_after": 0.16207480918819447,
+      "seconds": 17.4
+    },
+    {
+      "arm": "U_A_uw_native",
+      "cohort": "uw",
+      "subject": "uw_ID026_PreAbl_rev1.vtk",
+      "inducible": false,
+      "sustained_ms": 288.25,
+      "fibrosis_before": 0.2014478238686566,
+      "fibrosis_after": 0.2014478238686566,
+      "seconds": 20.0
+    },
+    {
+      "arm": "U_A_uw_native",
+      "cohort": "uw",
+      "subject": "uw_ID027_PreAbl_rev1.vtk",
+      "inducible": false,
+      "sustained_ms": 235.75,
+      "fibrosis_before": 0.16082631718455312,
+      "fibrosis_after": 0.16082631718455312,
+      "seconds": 16.4
+    },
+    {
+      "arm": "U_A_uw_native",
+      "cohort": "uw",
+      "subject": "uw_ID028_PreAbl_rev1.vtk",
+      "inducible": false,
+      "sustained_ms": 357.29999999999995,
+      "fibrosis_before": 0.24085854315841032,
+      "fibrosis_after": 0.24085854315841032,
+      "seconds": 17.3
+    },
+    {
+      "arm": "U_A_uw_native",
+      "cohort": "uw",
+      "subject": "uw_ID029_PreAbl_rev1.vtk",
+      "inducible": false,
+      "sustained_ms": 271.75,
+      "fibrosis_before": 0.1886498594207489,
+      "fibrosis_after": 0.1886498594207489,
+      "seconds": 18.1
+    },
+    {
+      "arm": "U_A_uw_native",
+      "cohort": "uw",
+      "subject": "uw_ID030_PreAbl_rev1.vtk",
+      "inducible": false,
+      "sustained_ms": 330.85000000000014,
+      "fibrosis_before": 0.3008418850183336,
+      "fibrosis_after": 0.3008418850183336,
+      "seconds": 14.7
+    },
+    {
+      "arm": "U_A_uw_native",
+      "cohort": "uw",
+      "subject": "uw_ID031_PreAbl_rev1.vtk",
+      "inducible": true,
+      "sustained_ms": 717.9000000000001,
+      "fibrosis_before": 0.32174186431068835,
+      "fibrosis_after": 0.32174186431068835,
+      "seconds": 20.0
+    },
+    {
+      "arm": "U_A_uw_native",
+      "cohort": "uw",
+      "subject": "uw_ID032_PreAbl_rev1.vtk",
+      "inducible": false,
+      "sustained_ms": 293.4000000000001,
+      "fibrosis_before": 0.3248696890770964,
+      "fibrosis_after": 0.3248696890770964,
+      "seconds": 14.2
+    },
+    {
+      "arm": "U_A_uw_native",
+      "cohort": "uw",
+      "subject": "uw_ID033_PreAbl_rev1.vtk",
+      "inducible": false,
+      "sustained_ms": 312.4000000000001,
+      "fibrosis_before": 0.2992804545203525,
+      "fibrosis_after": 0.2992804545203525,
+      "seconds": 13.6
+    },
+    {
+      "arm": "U_A_uw_native",
+      "cohort": "uw",
+      "subject": "uw_ID034_PreAbl_rev1.vtk",
+      "inducible": false,
+      "sustained_ms": 322.04999999999995,
+      "fibrosis_before": 0.08155406817290654,
+      "fibrosis_after": 0.08155406817290654,
+      "seconds": 14.9
+    },
+    {
+      "arm": "U_A_uw_native",
+      "cohort": "uw",
+      "subject": "uw_ID035_PreAbl_rev1.vtk",
+      "inducible": false,
+      "sustained_ms": 304.1500000000001,
+      "fibrosis_before": 0.06393072488065549,
+      "fibrosis_after": 0.06393072488065549,
+      "seconds": 14.8
+    },
+    {
+      "arm": "U_A_uw_native",
+      "cohort": "uw",
+      "subject": "uw_ID036_PreAbl_rev1.vtk",
+      "inducible": false,
+      "sustained_ms": 334.85000000000014,
+      "fibrosis_before": 0.20974250935290686,
+      "fibrosis_after": 0.20974250935290686,
+      "seconds": 13.8
+    },
+    {
+      "arm": "U_A_uw_native",
+      "cohort": "uw",
+      "subject": "uw_ID037_PreAbl_rev1.vtk",
+      "inducible": false,
+      "sustained_ms": 409.1500000000001,
+      "fibrosis_before": 0.3627215796011006,
+      "fibrosis_after": 0.3627215796011006,
+      "seconds": 14.0
+    },
+    {
+      "arm": "U_A_uw_native",
+      "cohort": "uw",
+      "subject": "uw_ID038_PreAbl_rev1.vtk",
+      "inducible": false,
+      "sustained_ms": 388.1500000000001,
+      "fibrosis_before": 0.3561182923627392,
+      "fibrosis_after": 0.3561182923627392,
+      "seconds": 15.6
+    },
+    {
+      "arm": "U_A_uw_native",
+      "cohort": "uw",
+      "subject": "uw_ID039_PreAbl_rev1.vtk",
+      "inducible": false,
+      "sustained_ms": 264.80000000000007,
+      "fibrosis_before": 0.06967722051694089,
+      "fibrosis_after": 0.06967722051694089,
+      "seconds": 13.6
+    },
+    {
+      "arm": "U_A_uw_native",
+      "cohort": "uw",
+      "subject": "uw_ID040_PreAbl_rev1.vtk",
+      "inducible": false,
+      "sustained_ms": 408.6500000000001,
+      "fibrosis_before": 0.31483130801972947,
+      "fibrosis_after": 0.31483130801972947,
+      "seconds": 16.1
+    },
+    {
+      "arm": "U_A_uw_native",
+      "cohort": "uw",
+      "subject": "uw_ID041_PreAbl_rev1.vtk",
+      "inducible": false,
+      "sustained_ms": 319.29999999999995,
+      "fibrosis_before": 0.18505148394807136,
+      "fibrosis_after": 0.18505148394807136,
+      "seconds": 15.3
+    },
+    {
+      "arm": "U_A_uw_native",
+      "cohort": "uw",
+      "subject": "uw_ID042_PreAbl_rev1.vtk",
+      "inducible": true,
+      "sustained_ms": 999.95,
+      "fibrosis_before": 0.41327982909615624,
+      "fibrosis_after": 0.41327982909615624,
+      "seconds": 23.0
+    },
+    {
+      "arm": "U_A_uw_native",
+      "cohort": "uw",
+      "subject": "uw_ID043_PreAbl_rev1.vtk",
+      "inducible": false,
+      "sustained_ms": 299.5,
+      "fibrosis_before": 0.3907802123079629,
+      "fibrosis_after": 0.3907802123079629,
+      "seconds": 14.0
+    },
+    {
+      "arm": "U_A_uw_native",
+      "cohort": "uw",
+      "subject": "uw_ID044_PreAbl_rev1.vtk",
+      "inducible": false,
+      "sustained_ms": 251.0,
+      "fibrosis_before": 0.24748727879355265,
+      "fibrosis_after": 0.24748727879355265,
+      "seconds": 13.6
+    },
+    {
+      "arm": "U_A_uw_native",
+      "cohort": "uw",
+      "subject": "uw_ID045_PreAbl_rev1.vtk",
+      "inducible": true,
+      "sustained_ms": 715.1000000000001,
+      "fibrosis_before": 0.32035908974508054,
+      "fibrosis_after": 0.32035908974508054,
+      "seconds": 19.2
+    },
+    {
+      "arm": "U_A_uw_native",
+      "cohort": "uw",
+      "subject": "uw_ID046_PreAbl_rev1.vtk",
+      "inducible": false,
+      "sustained_ms": 361.45000000000005,
+      "fibrosis_before": 0.2972266345782914,
+      "fibrosis_after": 0.2972266345782914,
+      "seconds": 15.0
+    },
+    {
+      "arm": "U_A_uw_native",
+      "cohort": "uw",
+      "subject": "uw_ID047_PreAbl_rev1.vtk",
+      "inducible": false,
+      "sustained_ms": 446.60000000000014,
+      "fibrosis_before": 0.327649682693753,
+      "fibrosis_after": 0.327649682693753,
+      "seconds": 16.7
+    },
+    {
+      "arm": "U_A_uw_native",
+      "cohort": "uw",
+      "subject": "uw_ID048_PreAbl_rev1.vtk",
+      "inducible": false,
+      "sustained_ms": 325.0,
+      "fibrosis_before": 0.33109905316872984,
+      "fibrosis_after": 0.33109905316872984,
+      "seconds": 13.5
+    },
+    {
+      "arm": "U_A_uw_native",
+      "cohort": "uw",
+      "subject": "uw_ID049_PreAbl_rev1.vtk",
+      "inducible": false,
+      "sustained_ms": 292.1500000000001,
+      "fibrosis_before": 0.14643005592609382,
+      "fibrosis_after": 0.14643005592609382,
+      "seconds": 13.9
+    },
+    {
+      "arm": "U_A_uw_native",
+      "cohort": "uw",
+      "subject": "uw_ID050_PreAbl_rev1.vtk",
+      "inducible": false,
+      "sustained_ms": 254.9000000000001,
+      "fibrosis_before": 0.21603207120982967,
+      "fibrosis_after": 0.21603207120982967,
+      "seconds": 13.9
+    },
+    {
+      "arm": "U_A_uw_native",
+      "cohort": "uw",
+      "subject": "uw_ID051_PreAbl_rev1.vtk",
+      "inducible": false,
+      "sustained_ms": 358.70000000000005,
+      "fibrosis_before": 0.35666962080521347,
+      "fibrosis_after": 0.35666962080521347,
+      "seconds": 15.4
+    },
+    {
+      "arm": "U_A_uw_native",
+      "cohort": "uw",
+      "subject": "uw_ID052_PreAbl_rev1.vtk",
+      "inducible": false,
+      "sustained_ms": 304.10000000000014,
+      "fibrosis_before": 0.09413486720309912,
+      "fibrosis_after": 0.09413486720309912,
+      "seconds": 14.6
+    },
+    {
+      "arm": "U_A_uw_native",
+      "cohort": "uw",
+      "subject": "uw_ID053_PreAbl_rev1.vtk",
+      "inducible": false,
+      "sustained_ms": 374.6500000000001,
+      "fibrosis_before": 0.14995817578329773,
+      "fibrosis_after": 0.14995817578329773,
+      "seconds": 15.5
+    },
+    {
+      "arm": "U_A_uw_native",
+      "cohort": "uw",
+      "subject": "uw_ID054_PreAbl_rev1.vtk",
+      "inducible": false,
+      "sustained_ms": 299.35000000000014,
+      "fibrosis_before": 0.36688475421389016,
+      "fibrosis_after": 0.36688475421389016,
+      "seconds": 13.4
+    },
+    {
+      "arm": "U_A_uw_native",
+      "cohort": "uw",
+      "subject": "uw_ID055_PreAbl_rev1.vtk",
+      "inducible": false,
+      "sustained_ms": 442.60000000000014,
+      "fibrosis_before": 0.35886216563430445,
+      "fibrosis_after": 0.35886216563430445,
+      "seconds": 14.1
+    },
+    {
+      "arm": "U_A_uw_native",
+      "cohort": "uw",
+      "subject": "uw_ID056_PreAbl_rev1.vtk",
+      "inducible": false,
+      "sustained_ms": 361.6500000000001,
+      "fibrosis_before": 0.3738814437746174,
+      "fibrosis_after": 0.3738814437746174,
+      "seconds": 14.0
+    },
+    {
+      "arm": "U_A_uw_native",
+      "cohort": "uw",
+      "subject": "uw_ID057_PreAbl_rev1.vtk",
+      "inducible": false,
+      "sustained_ms": 343.45000000000005,
+      "fibrosis_before": 0.38061986137509546,
+      "fibrosis_after": 0.38061986137509546,
+      "seconds": 11.4
+    },
+    {
+      "arm": "U_A_uw_native",
+      "cohort": "uw",
+      "subject": "uw_ID058_PreAbl_rev1.vtk",
+      "inducible": false,
+      "sustained_ms": 264.95000000000005,
+      "fibrosis_before": 0.14474449663688305,
+      "fibrosis_after": 0.14474449663688305,
+      "seconds": 11.7
+    },
+    {
+      "arm": "U_A_uw_native",
+      "cohort": "uw",
+      "subject": "uw_ID059_PreAbl_rev1.vtk",
+      "inducible": true,
+      "sustained_ms": 999.95,
+      "fibrosis_before": 0.2702074488044864,
+      "fibrosis_after": 0.2702074488044864,
+      "seconds": 12.2
+    },
+    {
+      "arm": "U_A_uw_native",
+      "cohort": "uw",
+      "subject": "uw_ID060_PreAbl_rev1.vtk",
+      "inducible": false,
+      "sustained_ms": 364.25,
+      "fibrosis_before": 0.18861807563687275,
+      "fibrosis_after": 0.18861807563687275,
+      "seconds": 10.0
+    },
+    {
+      "arm": "U_A_uw_native",
+      "cohort": "uw",
+      "subject": "uw_ID061_PreAbl_rev1.vtk",
+      "inducible": false,
+      "sustained_ms": 341.29999999999995,
+      "fibrosis_before": 0.3097371478212557,
+      "fibrosis_after": 0.3097371478212557,
+      "seconds": 10.6
+    },
+    {
+      "arm": "U_A_uw_native",
+      "cohort": "uw",
+      "subject": "uw_ID062_PreAbl_rev1.vtk",
+      "inducible": false,
+      "sustained_ms": 262.25,
+      "fibrosis_before": 0.06948262470617121,
+      "fibrosis_after": 0.06948262470617121,
+      "seconds": 10.2
+    },
+    {
+      "arm": "U_A_uw_native",
+      "cohort": "uw",
+      "subject": "uw_ID063_PreAbl_rev1.vtk",
+      "inducible": false,
+      "sustained_ms": 370.75,
+      "fibrosis_before": 0.2423467211046743,
+      "fibrosis_after": 0.2423467211046743,
+      "seconds": 10.7
+    },
+    {
+      "arm": "U_A_uw_native",
+      "cohort": "uw",
+      "subject": "uw_ID064_PreAbl_rev1.vtk",
+      "inducible": false,
+      "sustained_ms": 293.20000000000005,
+      "fibrosis_before": 0.27447229193101924,
+      "fibrosis_after": 0.27447229193101924,
+      "seconds": 10.2
+    },
+    {
+      "arm": "U_A_uw_native",
+      "cohort": "uw",
+      "subject": "uw_ID065_PreAbl_rev1.vtk",
+      "inducible": false,
+      "sustained_ms": 575.1000000000001,
+      "fibrosis_before": 0.3908481850798248,
+      "fibrosis_after": 0.3908481850798248,
+      "seconds": 9.7
+    },
+    {
+      "arm": "U_A_uw_native",
+      "cohort": "uw",
+      "subject": "uw_ID066_PreAbl_rev1.vtk",
+      "inducible": false,
+      "sustained_ms": 366.04999999999995,
+      "fibrosis_before": 0.21255679359538748,
+      "fibrosis_after": 0.21255679359538748,
+      "seconds": 10.7
+    },
+    {
+      "arm": "U_A_uw_native",
+      "cohort": "uw",
+      "subject": "uw_ID067_PreAbl_rev1.vtk",
+      "inducible": true,
+      "sustained_ms": 999.95,
+      "fibrosis_before": 0.36759622526487484,
+      "fibrosis_after": 0.36759622526487484,
+      "seconds": 12.5
+    },
+    {
+      "arm": "U_A_uw_native",
+      "cohort": "uw",
+      "subject": "uw_ID068_PreAbl_rev1.vtk",
+      "inducible": false,
+      "sustained_ms": 380.70000000000005,
+      "fibrosis_before": 0.43878708365868896,
+      "fibrosis_after": 0.43878708365868896,
+      "seconds": 9.5
+    },
+    {
+      "arm": "U_A_uw_native",
+      "cohort": "uw",
+      "subject": "uw_ID069_PreAbl_rev1.vtk",
+      "inducible": true,
+      "sustained_ms": 999.95,
+      "fibrosis_before": 0.2327224987234586,
+      "fibrosis_after": 0.2327224987234586,
+      "seconds": 15.9
+    },
+    {
+      "arm": "U_A_uw_native",
+      "cohort": "uw",
+      "subject": "uw_ID070_PreAbl_rev1.vtk",
+      "inducible": false,
+      "sustained_ms": 286.5,
+      "fibrosis_before": 0.259137148873106,
+      "fibrosis_after": 0.259137148873106,
+      "seconds": 10.6
+    },
+    {
+      "arm": "U_A_uw_native",
+      "cohort": "uw",
+      "subject": "uw_ID071_PreAbl_rev1.vtk",
+      "inducible": false,
+      "sustained_ms": 408.54999999999995,
+      "fibrosis_before": 0.2596949616176562,
+      "fibrosis_after": 0.2596949616176562,
+      "seconds": 10.4
+    },
+    {
+      "arm": "U_A_uw_native",
+      "cohort": "uw",
+      "subject": "uw_ID072_PreAbl_rev1.vtk",
+      "inducible": false,
+      "sustained_ms": 423.1500000000001,
+      "fibrosis_before": 0.2200291278866473,
+      "fibrosis_after": 0.2200291278866473,
+      "seconds": 10.2
+    },
+    {
+      "arm": "U_A_uw_native",
+      "cohort": "uw",
+      "subject": "uw_ID073_PreAbl_rev1.vtk",
+      "inducible": true,
+      "sustained_ms": 999.95,
+      "fibrosis_before": 0.5011508217385283,
+      "fibrosis_after": 0.5011508217385283,
+      "seconds": 16.2
+    },
+    {
+      "arm": "U_A_uw_native",
+      "cohort": "uw",
+      "subject": "uw_ID074_PreAbl_rev1.vtk",
+      "inducible": false,
+      "sustained_ms": 445.75,
+      "fibrosis_before": 0.27530298651234303,
+      "fibrosis_after": 0.27530298651234303,
+      "seconds": 11.4
+    },
+    {
+      "arm": "U_A_uw_native",
+      "cohort": "uw",
+      "subject": "uw_ID075_PreAbl_rev1.vtk",
+      "inducible": false,
+      "sustained_ms": 323.85000000000014,
+      "fibrosis_before": 0.11928599978534989,
+      "fibrosis_after": 0.11928599978534989,
+      "seconds": 8.9
+    },
+    {
+      "arm": "U_A_uw_native",
+      "cohort": "uw",
+      "subject": "uw_ID076_PreAbl_rev1.vtk",
+      "inducible": false,
+      "sustained_ms": 312.45000000000005,
+      "fibrosis_before": 0.20046103309354335,
+      "fibrosis_after": 0.20046103309354335,
+      "seconds": 9.0
+    },
+    {
+      "arm": "U_A_uw_native",
+      "cohort": "uw",
+      "subject": "uw_ID077_PreAbl_rev1.vtk",
+      "inducible": false,
+      "sustained_ms": 291.85000000000014,
+      "fibrosis_before": 0.29970525044525936,
+      "fibrosis_after": 0.29970525044525936,
+      "seconds": 8.8
+    },
+    {
+      "arm": "U_A_uw_native",
+      "cohort": "uw",
+      "subject": "uw_ID078_PreAbl_rev1.vtk",
+      "inducible": false,
+      "sustained_ms": 410.1500000000001,
+      "fibrosis_before": 0.2716040681145121,
+      "fibrosis_after": 0.2716040681145121,
+      "seconds": 10.0
+    },
+    {
+      "arm": "U_A_uw_native",
+      "cohort": "uw",
+      "subject": "uw_ID079_PreAbl_rev1.vtk",
+      "inducible": false,
+      "sustained_ms": 390.5,
+      "fibrosis_before": 0.3236585111273268,
+      "fibrosis_after": 0.3236585111273268,
+      "seconds": 9.3
+    },
+    {
+      "arm": "U_A_uw_native",
+      "cohort": "uw",
+      "subject": "uw_ID080_PreAbl_rev1.vtk",
+      "inducible": false,
+      "sustained_ms": 334.60000000000014,
+      "fibrosis_before": 0.106327622173003,
+      "fibrosis_after": 0.106327622173003,
+      "seconds": 10.4
+    },
+    {
+      "arm": "U_A_uw_native",
+      "cohort": "uw",
+      "subject": "uw_ID081_PreAbl_rev1.vtk",
+      "inducible": false,
+      "sustained_ms": 245.80000000000007,
+      "fibrosis_before": 0.20773977261393736,
+      "fibrosis_after": 0.20773977261393736,
+      "seconds": 9.9
+    },
+    {
+      "arm": "U_A_uw_native",
+      "cohort": "uw",
+      "subject": "uw_ID082_PreAbl_rev1.vtk",
+      "inducible": false,
+      "sustained_ms": 286.79999999999995,
+      "fibrosis_before": 0.13560116044743256,
+      "fibrosis_after": 0.13560116044743256,
+      "seconds": 9.5
+    },
+    {
+      "arm": "U_A_uw_native",
+      "cohort": "uw",
+      "subject": "uw_ID083_PreAbl_rev1.vtk",
+      "inducible": false,
+      "sustained_ms": 299.10000000000014,
+      "fibrosis_before": 0.28277090556058265,
+      "fibrosis_after": 0.28277090556058265,
+      "seconds": 10.1
+    },
+    {
+      "arm": "U_A_uw_native",
+      "cohort": "uw",
+      "subject": "uw_ID084_PreAbl_rev1.vtk",
+      "inducible": false,
+      "sustained_ms": 270.30000000000007,
+      "fibrosis_before": 0.1455844429166702,
+      "fibrosis_after": 0.1455844429166702,
+      "seconds": 10.0
+    },
+    {
+      "arm": "U_A_uw_native",
+      "cohort": "uw",
+      "subject": "uw_ID085_PreAbl_rev1.vtk",
+      "inducible": false,
+      "sustained_ms": 266.5,
+      "fibrosis_before": 0.13691518134909136,
+      "fibrosis_after": 0.13691518134909136,
+      "seconds": 9.5
+    },
+    {
+      "arm": "U_A_uw_native",
+      "cohort": "uw",
+      "subject": "uw_ID086_PreAbl_rev1.vtk",
+      "inducible": false,
+      "sustained_ms": 290.10000000000014,
+      "fibrosis_before": 0.22676625007238677,
+      "fibrosis_after": 0.22676625007238677,
+      "seconds": 9.7
+    },
+    {
+      "arm": "U_A_uw_native",
+      "cohort": "uw",
+      "subject": "uw_ID087_PreAbl_rev1.vtk",
+      "inducible": false,
+      "sustained_ms": 246.35000000000002,
+      "fibrosis_before": 0.10259388232137609,
+      "fibrosis_after": 0.10259388232137609,
+      "seconds": 9.4
+    },
+    {
+      "arm": "U_B_uw_at_roney",
+      "cohort": "uw",
+      "subject": "uw_ID001_PreAbl_rev1.vtk",
+      "inducible": false,
+      "sustained_ms": 382.60000000000014,
+      "fibrosis_before": 0.15604572138448966,
+      "fibrosis_after": 0.22913281408735076,
+      "seconds": 10.9
+    },
+    {
+      "arm": "U_B_uw_at_roney",
+      "cohort": "uw",
+      "subject": "uw_ID002_PreAbl_rev1.vtk",
+      "inducible": false,
+      "sustained_ms": 288.75,
+      "fibrosis_before": 0.15178491096597208,
+      "fibrosis_after": 0.2282757341405994,
+      "seconds": 9.4
+    },
+    {
+      "arm": "U_B_uw_at_roney",
+      "cohort": "uw",
+      "subject": "uw_ID003_PreAbl_rev1.vtk",
+      "inducible": false,
+      "sustained_ms": 294.20000000000005,
+      "fibrosis_before": 0.17833952420921656,
+      "fibrosis_after": 0.25425422588189295,
+      "seconds": 9.1
+    },
+    {
+      "arm": "U_B_uw_at_roney",
+      "cohort": "uw",
+      "subject": "uw_ID004_PreAbl_rev1.vtk",
+      "inducible": false,
+      "sustained_ms": 412.1500000000001,
+      "fibrosis_before": 0.03366637843403167,
+      "fibrosis_after": 0.07486553939702344,
+      "seconds": 11.4
+    },
+    {
+      "arm": "U_B_uw_at_roney",
+      "cohort": "uw",
+      "subject": "uw_ID005_PreAbl_rev1.vtk",
+      "inducible": false,
+      "sustained_ms": 433.5,
+      "fibrosis_before": 0.4596751063516298,
+      "fibrosis_after": 0.349,
+      "seconds": 10.5
+    },
+    {
+      "arm": "U_B_uw_at_roney",
+      "cohort": "uw",
+      "subject": "uw_ID006_PreAbl_rev1.vtk",
+      "inducible": false,
+      "sustained_ms": 491.0,
+      "fibrosis_before": 0.33861692687626305,
+      "fibrosis_after": 0.34634290178296195,
+      "seconds": 11.7
+    },
+    {
+      "arm": "U_B_uw_at_roney",
+      "cohort": "uw",
+      "subject": "uw_ID007_PreAbl_rev1.vtk",
+      "inducible": false,
+      "sustained_ms": 498.60000000000014,
+      "fibrosis_before": 0.3301342999282075,
+      "fibrosis_after": 0.3408882489172973,
+      "seconds": 11.7
+    },
+    {
+      "arm": "U_B_uw_at_roney",
+      "cohort": "uw",
+      "subject": "uw_ID008_PreAbl_rev1.vtk",
+      "inducible": true,
+      "sustained_ms": 999.95,
+      "fibrosis_before": 0.1833862585519927,
+      "fibrosis_after": 0.24649906514843034,
+      "seconds": 13.4
+    },
+    {
+      "arm": "U_B_uw_at_roney",
+      "cohort": "uw",
+      "subject": "uw_ID009_PreAbl_rev1.vtk",
+      "inducible": false,
+      "sustained_ms": 249.75,
+      "fibrosis_before": 0.11209282368446233,
+      "fibrosis_after": 0.18769786010056733,
+      "seconds": 9.8
+    },
+    {
+      "arm": "U_B_uw_at_roney",
+      "cohort": "uw",
+      "subject": "uw_ID010_PreAbl_rev1.vtk",
+      "inducible": true,
+      "sustained_ms": 999.95,
+      "fibrosis_before": 0.26721672677639474,
+      "fibrosis_after": 0.30771314858832627,
+      "seconds": 14.1
+    },
+    {
+      "arm": "U_B_uw_at_roney",
+      "cohort": "uw",
+      "subject": "uw_ID011_PreAbl_rev1.vtk",
+      "inducible": false,
+      "sustained_ms": 504.95000000000005,
+      "fibrosis_before": 0.261630279511868,
+      "fibrosis_after": 0.30832896467464593,
+      "seconds": 11.2
+    },
+    {
+      "arm": "U_B_uw_at_roney",
+      "cohort": "uw",
+      "subject": "uw_ID012_PreAbl_rev1.vtk",
+      "inducible": false,
+      "sustained_ms": 497.5500000000002,
+      "fibrosis_before": 0.3065381546677607,
+      "fibrosis_after": 0.33357543826008135,
+      "seconds": 10.7
+    },
+    {
+      "arm": "U_B_uw_at_roney",
+      "cohort": "uw",
+      "subject": "uw_ID013_PreAbl_rev1.vtk",
+      "inducible": false,
+      "sustained_ms": 325.60000000000014,
+      "fibrosis_before": 0.2333160412986836,
+      "fibrosis_after": 0.28291019828314296,
+      "seconds": 10.0
+    },
+    {
+      "arm": "U_B_uw_at_roney",
+      "cohort": "uw",
+      "subject": "uw_ID014_PreAbl_rev1.vtk",
+      "inducible": false,
+      "sustained_ms": 460.6500000000001,
+      "fibrosis_before": 0.3231043348351841,
+      "fibrosis_after": 0.33922571857391665,
+      "seconds": 11.0
+    },
+    {
+      "arm": "U_B_uw_at_roney",
+      "cohort": "uw",
+      "subject": "uw_ID015_PreAbl_rev1.vtk",
+      "inducible": false,
+      "sustained_ms": 341.79999999999995,
+      "fibrosis_before": 0.19143175315522623,
+      "fibrosis_after": 0.24600987852481412,
+      "seconds": 10.6
+    },
+    {
+      "arm": "U_B_uw_at_roney",
+      "cohort": "uw",
+      "subject": "uw_ID021_PreAbl_rev1.vtk",
+      "inducible": false,
+      "sustained_ms": 416.45000000000005,
+      "fibrosis_before": 0.21846622180332406,
+      "fibrosis_after": 0.2833988129498345,
+      "seconds": 9.4
+    },
+    {
+      "arm": "U_B_uw_at_roney",
+      "cohort": "uw",
+      "subject": "uw_ID022_PreAbl_rev1.vtk",
+      "inducible": false,
+      "sustained_ms": 246.0,
+      "fibrosis_before": 0.4024907171658984,
+      "fibrosis_after": 0.3489999999999999,
+      "seconds": 9.5
+    },
+    {
+      "arm": "U_B_uw_at_roney",
+      "cohort": "uw",
+      "subject": "uw_ID023_PreAbl_rev1.vtk",
+      "inducible": false,
+      "sustained_ms": 288.35000000000014,
+      "fibrosis_before": 0.08116993563755695,
+      "fibrosis_after": 0.12978552738373703,
+      "seconds": 9.5
+    },
+    {
+      "arm": "U_B_uw_at_roney",
+      "cohort": "uw",
+      "subject": "uw_ID024_PreAbl_rev1.vtk",
+      "inducible": false,
+      "sustained_ms": 296.5,
+      "fibrosis_before": 0.29517817189781864,
+      "fibrosis_after": 0.32962126516263274,
+      "seconds": 10.6
+    },
+    {
+      "arm": "U_B_uw_at_roney",
+      "cohort": "uw",
+      "subject": "uw_ID025_PreAbl_rev1.vtk",
+      "inducible": false,
+      "sustained_ms": 398.70000000000005,
+      "fibrosis_before": 0.16207480918819447,
+      "fibrosis_after": 0.24947650738809124,
+      "seconds": 10.7
+    },
+    {
+      "arm": "U_B_uw_at_roney",
+      "cohort": "uw",
+      "subject": "uw_ID026_PreAbl_rev1.vtk",
+      "inducible": false,
+      "sustained_ms": 401.04999999999995,
+      "fibrosis_before": 0.2014478238686566,
+      "fibrosis_after": 0.25923724451866803,
+      "seconds": 11.0
+    },
+    {
+      "arm": "U_B_uw_at_roney",
+      "cohort": "uw",
+      "subject": "uw_ID027_PreAbl_rev1.vtk",
+      "inducible": false,
+      "sustained_ms": 249.45000000000005,
+      "fibrosis_before": 0.16082631718455312,
+      "fibrosis_after": 0.251104760306273,
+      "seconds": 9.3
+    },
+    {
+      "arm": "U_B_uw_at_roney",
+      "cohort": "uw",
+      "subject": "uw_ID028_PreAbl_rev1.vtk",
+      "inducible": true,
+      "sustained_ms": 999.95,
+      "fibrosis_before": 0.24085854315841032,
+      "fibrosis_after": 0.3039622433837646,
+      "seconds": 12.4
+    },
+    {
+      "arm": "U_B_uw_at_roney",
+      "cohort": "uw",
+      "subject": "uw_ID029_PreAbl_rev1.vtk",
+      "inducible": false,
+      "sustained_ms": 284.35000000000014,
+      "fibrosis_before": 0.1886498594207489,
+      "fibrosis_after": 0.27671538892155634,
+      "seconds": 10.4
+    },
+    {
+      "arm": "U_B_uw_at_roney",
+      "cohort": "uw",
+      "subject": "uw_ID030_PreAbl_rev1.vtk",
+      "inducible": true,
+      "sustained_ms": 999.95,
+      "fibrosis_before": 0.3008418850183336,
+      "fibrosis_after": 0.33102012121581625,
+      "seconds": 13.3
+    },
+    {
+      "arm": "U_B_uw_at_roney",
+      "cohort": "uw",
+      "subject": "uw_ID031_PreAbl_rev1.vtk",
+      "inducible": true,
+      "sustained_ms": 999.95,
+      "fibrosis_before": 0.32174186431068835,
+      "fibrosis_after": 0.3422249304878033,
+      "seconds": 14.7
+    },
+    {
+      "arm": "U_B_uw_at_roney",
+      "cohort": "uw",
+      "subject": "uw_ID032_PreAbl_rev1.vtk",
+      "inducible": false,
+      "sustained_ms": 296.04999999999995,
+      "fibrosis_before": 0.3248696890770964,
+      "fibrosis_after": 0.342685101833074,
+      "seconds": 9.7
+    },
+    {
+      "arm": "U_B_uw_at_roney",
+      "cohort": "uw",
+      "subject": "uw_ID033_PreAbl_rev1.vtk",
+      "inducible": false,
+      "sustained_ms": 371.20000000000005,
+      "fibrosis_before": 0.2992804545203525,
+      "fibrosis_after": 0.33252571322598484,
+      "seconds": 9.9
+    },
+    {
+      "arm": "U_B_uw_at_roney",
+      "cohort": "uw",
+      "subject": "uw_ID034_PreAbl_rev1.vtk",
+      "inducible": true,
+      "sustained_ms": 999.95,
+      "fibrosis_before": 0.08155406817290654,
+      "fibrosis_after": 0.15206854402106787,
+      "seconds": 12.9
+    },
+    {
+      "arm": "U_B_uw_at_roney",
+      "cohort": "uw",
+      "subject": "uw_ID035_PreAbl_rev1.vtk",
+      "inducible": true,
+      "sustained_ms": 999.95,
+      "fibrosis_before": 0.06393072488065549,
+      "fibrosis_after": 0.11872132141871028,
+      "seconds": 16.1
+    },
+    {
+      "arm": "U_B_uw_at_roney",
+      "cohort": "uw",
+      "subject": "uw_ID036_PreAbl_rev1.vtk",
+      "inducible": true,
+      "sustained_ms": 999.95,
+      "fibrosis_before": 0.20974250935290686,
+      "fibrosis_after": 0.29168157095058234,
+      "seconds": 12.1
+    },
+    {
+      "arm": "U_B_uw_at_roney",
+      "cohort": "uw",
+      "subject": "uw_ID037_PreAbl_rev1.vtk",
+      "inducible": false,
+      "sustained_ms": 377.60000000000014,
+      "fibrosis_before": 0.3627215796011006,
+      "fibrosis_after": 0.34900000000000003,
+      "seconds": 9.6
+    },
+    {
+      "arm": "U_B_uw_at_roney",
+      "cohort": "uw",
+      "subject": "uw_ID038_PreAbl_rev1.vtk",
+      "inducible": false,
+      "sustained_ms": 382.4000000000001,
+      "fibrosis_before": 0.3561182923627392,
+      "fibrosis_after": 0.349,
+      "seconds": 10.3
+    },
+    {
+      "arm": "U_B_uw_at_roney",
+      "cohort": "uw",
+      "subject": "uw_ID039_PreAbl_rev1.vtk",
+      "inducible": false,
+      "sustained_ms": 450.25,
+      "fibrosis_before": 0.06967722051694089,
+      "fibrosis_after": 0.12022729323447896,
+      "seconds": 10.9
+    },
+    {
+      "arm": "U_B_uw_at_roney",
+      "cohort": "uw",
+      "subject": "uw_ID040_PreAbl_rev1.vtk",
+      "inducible": true,
+      "sustained_ms": 999.95,
+      "fibrosis_before": 0.31483130801972947,
+      "fibrosis_after": 0.33781190260850735,
+      "seconds": 14.1
+    },
+    {
+      "arm": "U_B_uw_at_roney",
+      "cohort": "uw",
+      "subject": "uw_ID041_PreAbl_rev1.vtk",
+      "inducible": false,
+      "sustained_ms": 511.5,
+      "fibrosis_before": 0.18505148394807136,
+      "fibrosis_after": 0.28295802333075143,
+      "seconds": 11.8
+    },
+    {
+      "arm": "U_B_uw_at_roney",
+      "cohort": "uw",
+      "subject": "uw_ID042_PreAbl_rev1.vtk",
+      "inducible": false,
+      "sustained_ms": 333.04999999999995,
+      "fibrosis_before": 0.41327982909615624,
+      "fibrosis_after": 0.34900000000000003,
+      "seconds": 10.4
+    },
+    {
+      "arm": "U_B_uw_at_roney",
+      "cohort": "uw",
+      "subject": "uw_ID043_PreAbl_rev1.vtk",
+      "inducible": false,
+      "sustained_ms": 287.60000000000014,
+      "fibrosis_before": 0.3907802123079629,
+      "fibrosis_after": 0.349,
+      "seconds": 9.5
+    },
+    {
+      "arm": "U_B_uw_at_roney",
+      "cohort": "uw",
+      "subject": "uw_ID044_PreAbl_rev1.vtk",
+      "inducible": true,
+      "sustained_ms": 999.95,
+      "fibrosis_before": 0.24748727879355265,
+      "fibrosis_after": 0.3087232554221026,
+      "seconds": 12.6
+    },
+    {
+      "arm": "U_B_uw_at_roney",
+      "cohort": "uw",
+      "subject": "uw_ID045_PreAbl_rev1.vtk",
+      "inducible": true,
+      "sustained_ms": 999.95,
+      "fibrosis_before": 0.32035908974508054,
+      "fibrosis_after": 0.34122492141798044,
+      "seconds": 14.1
+    },
+    {
+      "arm": "U_B_uw_at_roney",
+      "cohort": "uw",
+      "subject": "uw_ID046_PreAbl_rev1.vtk",
+      "inducible": true,
+      "sustained_ms": 999.95,
+      "fibrosis_before": 0.2972266345782914,
+      "fibrosis_after": 0.32658299862580986,
+      "seconds": 15.3
+    },
+    {
+      "arm": "U_B_uw_at_roney",
+      "cohort": "uw",
+      "subject": "uw_ID047_PreAbl_rev1.vtk",
+      "inducible": true,
+      "sustained_ms": 999.95,
+      "fibrosis_before": 0.327649682693753,
+      "fibrosis_after": 0.3406302694383154,
+      "seconds": 16.8
+    },
+    {
+      "arm": "U_B_uw_at_roney",
+      "cohort": "uw",
+      "subject": "uw_ID048_PreAbl_rev1.vtk",
+      "inducible": false,
+      "sustained_ms": 343.54999999999995,
+      "fibrosis_before": 0.33109905316872984,
+      "fibrosis_after": 0.3462522947808546,
+      "seconds": 9.4
+    },
+    {
+      "arm": "U_B_uw_at_roney",
+      "cohort": "uw",
+      "subject": "uw_ID049_PreAbl_rev1.vtk",
+      "inducible": false,
+      "sustained_ms": 348.4000000000001,
+      "fibrosis_before": 0.14643005592609382,
+      "fibrosis_after": 0.23067854035654237,
+      "seconds": 10.0
+    },
+    {
+      "arm": "U_B_uw_at_roney",
+      "cohort": "uw",
+      "subject": "uw_ID050_PreAbl_rev1.vtk",
+      "inducible": false,
+      "sustained_ms": 289.4000000000001,
+      "fibrosis_before": 0.21603207120982967,
+      "fibrosis_after": 0.2940661962820254,
+      "seconds": 9.9
+    },
+    {
+      "arm": "U_B_uw_at_roney",
+      "cohort": "uw",
+      "subject": "uw_ID051_PreAbl_rev1.vtk",
+      "inducible": false,
+      "sustained_ms": 356.0,
+      "fibrosis_before": 0.35666962080521347,
+      "fibrosis_after": 0.349,
+      "seconds": 10.8
+    },
+    {
+      "arm": "U_B_uw_at_roney",
+      "cohort": "uw",
+      "subject": "uw_ID052_PreAbl_rev1.vtk",
+      "inducible": false,
+      "sustained_ms": 325.75,
+      "fibrosis_before": 0.09413486720309912,
+      "fibrosis_after": 0.15885035009629042,
+      "seconds": 10.3
+    },
+    {
+      "arm": "U_B_uw_at_roney",
+      "cohort": "uw",
+      "subject": "uw_ID053_PreAbl_rev1.vtk",
+      "inducible": false,
+      "sustained_ms": 450.20000000000005,
+      "fibrosis_before": 0.14995817578329773,
+      "fibrosis_after": 0.20060353725790492,
+      "seconds": 10.8
+    },
+    {
+      "arm": "U_B_uw_at_roney",
+      "cohort": "uw",
+      "subject": "uw_ID054_PreAbl_rev1.vtk",
+      "inducible": false,
+      "sustained_ms": 296.25,
+      "fibrosis_before": 0.36688475421389016,
+      "fibrosis_after": 0.349,
+      "seconds": 9.3
+    },
+    {
+      "arm": "U_B_uw_at_roney",
+      "cohort": "uw",
+      "subject": "uw_ID055_PreAbl_rev1.vtk",
+      "inducible": false,
+      "sustained_ms": 385.25,
+      "fibrosis_before": 0.35886216563430445,
+      "fibrosis_after": 0.349,
+      "seconds": 10.3
+    },
+    {
+      "arm": "U_B_uw_at_roney",
+      "cohort": "uw",
+      "subject": "uw_ID056_PreAbl_rev1.vtk",
+      "inducible": false,
+      "sustained_ms": 354.95000000000005,
+      "fibrosis_before": 0.3738814437746174,
+      "fibrosis_after": 0.3489999999999999,
+      "seconds": 10.3
+    },
+    {
+      "arm": "U_B_uw_at_roney",
+      "cohort": "uw",
+      "subject": "uw_ID057_PreAbl_rev1.vtk",
+      "inducible": false,
+      "sustained_ms": 293.9000000000001,
+      "fibrosis_before": 0.38061986137509546,
+      "fibrosis_after": 0.349,
+      "seconds": 8.6
+    },
+    {
+      "arm": "U_B_uw_at_roney",
+      "cohort": "uw",
+      "subject": "uw_ID058_PreAbl_rev1.vtk",
+      "inducible": false,
+      "sustained_ms": 305.95000000000005,
+      "fibrosis_before": 0.14474449663688305,
+      "fibrosis_after": 0.21493505918844993,
+      "seconds": 10.2
+    },
+    {
+      "arm": "U_B_uw_at_roney",
+      "cohort": "uw",
+      "subject": "uw_ID059_PreAbl_rev1.vtk",
+      "inducible": true,
+      "sustained_ms": 999.95,
+      "fibrosis_before": 0.2702074488044864,
+      "fibrosis_after": 0.3096751855133255,
+      "seconds": 12.5
+    },
+    {
+      "arm": "U_B_uw_at_roney",
+      "cohort": "uw",
+      "subject": "uw_ID060_PreAbl_rev1.vtk",
+      "inducible": false,
+      "sustained_ms": 505.60000000000014,
+      "fibrosis_before": 0.18861807563687275,
+      "fibrosis_after": 0.25288189003060013,
+      "seconds": 10.9
+    },
+    {
+      "arm": "U_B_uw_at_roney",
+      "cohort": "uw",
+      "subject": "uw_ID061_PreAbl_rev1.vtk",
+      "inducible": true,
+      "sustained_ms": 999.95,
+      "fibrosis_before": 0.3097371478212557,
+      "fibrosis_after": 0.33752630476569767,
+      "seconds": 13.0
+    },
+    {
+      "arm": "U_B_uw_at_roney",
+      "cohort": "uw",
+      "subject": "uw_ID062_PreAbl_rev1.vtk",
+      "inducible": false,
+      "sustained_ms": 284.25,
+      "fibrosis_before": 0.06948262470617121,
+      "fibrosis_after": 0.13476555451688893,
+      "seconds": 9.7
+    },
+    {
+      "arm": "U_B_uw_at_roney",
+      "cohort": "uw",
+      "subject": "uw_ID063_PreAbl_rev1.vtk",
+      "inducible": false,
+      "sustained_ms": 540.6500000000001,
+      "fibrosis_before": 0.2423467211046743,
+      "fibrosis_after": 0.3014788782722919,
+      "seconds": 11.2
+    },
+    {
+      "arm": "U_B_uw_at_roney",
+      "cohort": "uw",
+      "subject": "uw_ID064_PreAbl_rev1.vtk",
+      "inducible": false,
+      "sustained_ms": 306.0,
+      "fibrosis_before": 0.27447229193101924,
+      "fibrosis_after": 0.312010304427091,
+      "seconds": 10.0
+    },
+    {
+      "arm": "U_B_uw_at_roney",
+      "cohort": "uw",
+      "subject": "uw_ID065_PreAbl_rev1.vtk",
+      "inducible": true,
+      "sustained_ms": 999.95,
+      "fibrosis_before": 0.3908481850798248,
+      "fibrosis_after": 0.349,
+      "seconds": 12.3
+    },
+    {
+      "arm": "U_B_uw_at_roney",
+      "cohort": "uw",
+      "subject": "uw_ID066_PreAbl_rev1.vtk",
+      "inducible": true,
+      "sustained_ms": 999.95,
+      "fibrosis_before": 0.21255679359538748,
+      "fibrosis_after": 0.2854995405607355,
+      "seconds": 15.5
+    },
+    {
+      "arm": "U_B_uw_at_roney",
+      "cohort": "uw",
+      "subject": "uw_ID067_PreAbl_rev1.vtk",
+      "inducible": true,
+      "sustained_ms": 999.95,
+      "fibrosis_before": 0.36759622526487484,
+      "fibrosis_after": 0.349,
+      "seconds": 12.5
+    },
+    {
+      "arm": "U_B_uw_at_roney",
+      "cohort": "uw",
+      "subject": "uw_ID068_PreAbl_rev1.vtk",
+      "inducible": false,
+      "sustained_ms": 291.4000000000001,
+      "fibrosis_before": 0.43878708365868896,
+      "fibrosis_after": 0.349,
+      "seconds": 9.0
+    },
+    {
+      "arm": "U_B_uw_at_roney",
+      "cohort": "uw",
+      "subject": "uw_ID069_PreAbl_rev1.vtk",
+      "inducible": false,
+      "sustained_ms": 419.54999999999995,
+      "fibrosis_before": 0.2327224987234586,
+      "fibrosis_after": 0.2893539378347456,
+      "seconds": 11.3
+    },
+    {
+      "arm": "U_B_uw_at_roney",
+      "cohort": "uw",
+      "subject": "uw_ID070_PreAbl_rev1.vtk",
+      "inducible": false,
+      "sustained_ms": 332.10000000000014,
+      "fibrosis_before": 0.259137148873106,
+      "fibrosis_after": 0.3115024758336642,
+      "seconds": 10.9
+    },
+    {
+      "arm": "U_B_uw_at_roney",
+      "cohort": "uw",
+      "subject": "uw_ID071_PreAbl_rev1.vtk",
+      "inducible": false,
+      "sustained_ms": 448.0,
+      "fibrosis_before": 0.2596949616176562,
+      "fibrosis_after": 0.3149435103116637,
+      "seconds": 10.6
+    },
+    {
+      "arm": "U_B_uw_at_roney",
+      "cohort": "uw",
+      "subject": "uw_ID072_PreAbl_rev1.vtk",
+      "inducible": true,
+      "sustained_ms": 999.95,
+      "fibrosis_before": 0.2200291278866473,
+      "fibrosis_after": 0.2880839029707874,
+      "seconds": 15.2
+    },
+    {
+      "arm": "U_B_uw_at_roney",
+      "cohort": "uw",
+      "subject": "uw_ID073_PreAbl_rev1.vtk",
+      "inducible": false,
+      "sustained_ms": 380.5,
+      "fibrosis_before": 0.5011508217385283,
+      "fibrosis_after": 0.3490000000000001,
+      "seconds": 10.8
+    },
+    {
+      "arm": "U_B_uw_at_roney",
+      "cohort": "uw",
+      "subject": "uw_ID074_PreAbl_rev1.vtk",
+      "inducible": false,
+      "sustained_ms": 505.75,
+      "fibrosis_before": 0.27530298651234303,
+      "fibrosis_after": 0.31760918247506814,
+      "seconds": 11.7
+    },
+    {
+      "arm": "U_B_uw_at_roney",
+      "cohort": "uw",
+      "subject": "uw_ID075_PreAbl_rev1.vtk",
+      "inducible": false,
+      "sustained_ms": 347.4000000000001,
+      "fibrosis_before": 0.11928599978534989,
+      "fibrosis_after": 0.19308324990000306,
+      "seconds": 9.0
+    },
+    {
+      "arm": "U_B_uw_at_roney",
+      "cohort": "uw",
+      "subject": "uw_ID076_PreAbl_rev1.vtk",
+      "inducible": true,
+      "sustained_ms": 999.95,
+      "fibrosis_before": 0.20046103309354335,
+      "fibrosis_after": 0.26352256657184686,
+      "seconds": 14.0
+    },
+    {
+      "arm": "U_B_uw_at_roney",
+      "cohort": "uw",
+      "subject": "uw_ID077_PreAbl_rev1.vtk",
+      "inducible": false,
+      "sustained_ms": 297.6500000000001,
+      "fibrosis_before": 0.29970525044525936,
+      "fibrosis_after": 0.33120225010166315,
+      "seconds": 8.9
+    },
+    {
+      "arm": "U_B_uw_at_roney",
+      "cohort": "uw",
+      "subject": "uw_ID078_PreAbl_rev1.vtk",
+      "inducible": false,
+      "sustained_ms": 593.7,
+      "fibrosis_before": 0.2716040681145121,
+      "fibrosis_after": 0.32123914490153505,
+      "seconds": 11.1
+    },
+    {
+      "arm": "U_B_uw_at_roney",
+      "cohort": "uw",
+      "subject": "uw_ID079_PreAbl_rev1.vtk",
+      "inducible": false,
+      "sustained_ms": 420.60000000000014,
+      "fibrosis_before": 0.3236585111273268,
+      "fibrosis_after": 0.3401508876470957,
+      "seconds": 9.6
+    },
+    {
+      "arm": "U_B_uw_at_roney",
+      "cohort": "uw",
+      "subject": "uw_ID080_PreAbl_rev1.vtk",
+      "inducible": true,
+      "sustained_ms": 999.95,
+      "fibrosis_before": 0.106327622173003,
+      "fibrosis_after": 0.15899549476503044,
+      "seconds": 13.6
+    },
+    {
+      "arm": "U_B_uw_at_roney",
+      "cohort": "uw",
+      "subject": "uw_ID081_PreAbl_rev1.vtk",
+      "inducible": false,
+      "sustained_ms": 264.1,
+      "fibrosis_before": 0.20773977261393736,
+      "fibrosis_after": 0.270300408280543,
+      "seconds": 9.9
+    },
+    {
+      "arm": "U_B_uw_at_roney",
+      "cohort": "uw",
+      "subject": "uw_ID082_PreAbl_rev1.vtk",
+      "inducible": false,
+      "sustained_ms": 308.70000000000005,
+      "fibrosis_before": 0.13560116044743256,
+      "fibrosis_after": 0.2270914358075095,
+      "seconds": 9.6
+    },
+    {
+      "arm": "U_B_uw_at_roney",
+      "cohort": "uw",
+      "subject": "uw_ID083_PreAbl_rev1.vtk",
+      "inducible": false,
+      "sustained_ms": 330.85000000000014,
+      "fibrosis_before": 0.28277090556058265,
+      "fibrosis_after": 0.33229142773521486,
+      "seconds": 10.4
+    },
+    {
+      "arm": "U_B_uw_at_roney",
+      "cohort": "uw",
+      "subject": "uw_ID084_PreAbl_rev1.vtk",
+      "inducible": false,
+      "sustained_ms": 304.6500000000001,
+      "fibrosis_before": 0.1455844429166702,
+      "fibrosis_after": 0.24896291463534348,
+      "seconds": 10.3
+    },
+    {
+      "arm": "U_B_uw_at_roney",
+      "cohort": "uw",
+      "subject": "uw_ID085_PreAbl_rev1.vtk",
+      "inducible": false,
+      "sustained_ms": 278.20000000000005,
+      "fibrosis_before": 0.13691518134909136,
+      "fibrosis_after": 0.2071383182761511,
+      "seconds": 9.5
+    },
+    {
+      "arm": "U_B_uw_at_roney",
+      "cohort": "uw",
+      "subject": "uw_ID086_PreAbl_rev1.vtk",
+      "inducible": false,
+      "sustained_ms": 319.85000000000014,
+      "fibrosis_before": 0.22676625007238677,
+      "fibrosis_after": 0.3038250928175423,
+      "seconds": 9.9
+    },
+    {
+      "arm": "U_B_uw_at_roney",
+      "cohort": "uw",
+      "subject": "uw_ID087_PreAbl_rev1.vtk",
+      "inducible": false,
+      "sustained_ms": 379.25,
+      "fibrosis_before": 0.10259388232137609,
+      "fibrosis_after": 0.1736400566673423,
+      "seconds": 10.2
+    }
+  ]
+}

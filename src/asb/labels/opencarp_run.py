@@ -104,6 +104,11 @@ class OpenCARPConfig:
     #: Solver timestep in MICROseconds, and output sampling in milliseconds.
     dt_us: int = 25
     out_dt_ms: float = 5.0
+    #: Reentry-vs-block discrimination (see :func:`detect_reentry`). The tissue must
+    #: repolarise below this depolarised fraction at some point in the window, and at
+    #: least this share of nodes must cross threshold upward twice or more.
+    max_depol_fraction: float = 0.95
+    min_reactivating_nodes: float = 0.05
 
 
 def find_opencarp(explicit: Optional[str] = None) -> Optional[str]:
@@ -261,25 +266,58 @@ def read_igb(path: str) -> np.ndarray:
 
 
 def detect_reentry(vm: np.ndarray, cfg: OpenCARPConfig, thresh: float = 0.5) -> Dict:
-    """Sustained supra-threshold activity after the last stimulus, mirroring the
-    monodomain criterion: inducible iff activity persists >= ``reentry_min_ms``."""
+    """Verdict on the post-pacing window, separating reentry from rate-dependent block.
+
+    Sustained supra-threshold activity alone is not sufficient. Because the burst cycle
+    length (150 ms) is shorter than the action-potential duration (openCARP's default
+    MitchellSchaeffer gives APD90 = 246 ms), tissue can simply fail to repolarise, which
+    a duration-only criterion scores as inducible. Three conditions are therefore required
+    together:
+
+    1. activity persists for at least ``reentry_min_ms`` after the last stimulus;
+    2. the tissue REPOLARISES -- the depolarised fraction drops below
+       ``max_depol_fraction`` at some point, so a wavefront is moving rather than the
+       sheet sitting depolarised;
+    3. tissue REACTIVATES -- a non-trivial share of nodes cross threshold upward at least
+       twice, which a single decaying wave cannot produce.
+
+    Condition 1 alone reproduces the monodomain criterion; 2 and 3 are what the monodomain
+    labeller did not need and this solver does.
+    """
     n_frames = vm.shape[0]
     dt = cfg.out_dt_ms
     last_stim_ms = 1.0 + cfg.n_burst * cfg.burst_cl_ms
     first = int(np.ceil(last_stim_ms / dt))
-    active = (vm > thresh).sum(axis=1)
     if first >= n_frames:
-        return {"inducible": False, "sustained_ms": 0.0, "reason": "window shorter than pacing"}
-    tail = active[first:]
-    # longest consecutive run of frames with any activation
+        return {"inducible": False, "sustained_ms": 0.0,
+                "reason": "observation window shorter than the pacing train"}
+
+    post = vm[first:]
+    above = post > thresh
+    active = above.sum(axis=1)
+
     best = run = 0
-    for a in tail:
+    for a in active:
         run = run + 1 if a > 0 else 0
         best = max(best, run)
-    sustained = best * dt
-    return {"inducible": bool(sustained >= cfg.reentry_min_ms),
-            "sustained_ms": float(sustained),
-            "max_active_nodes": int(tail.max()) if tail.size else 0}
+    sustained = float(best * dt)
+
+    depol_frac = above.mean(axis=1)
+    min_depol = float(depol_frac.min()) if depol_frac.size else 0.0
+    repolarises = min_depol < cfg.max_depol_fraction
+
+    ups = ((~above[:-1]) & above[1:]).sum(axis=0) if above.shape[0] > 1 else np.zeros(1)
+    n_reactivating = int((ups >= 2).sum())
+    reactivates = n_reactivating >= cfg.min_reactivating_nodes * vm.shape[1]
+
+    inducible = bool(sustained >= cfg.reentry_min_ms and repolarises and reactivates)
+    return {"inducible": inducible,
+            "sustained_ms": sustained,
+            "max_active_nodes": int(active.max()) if active.size else 0,
+            "min_depolarised_fraction": min_depol,
+            "repolarises": bool(repolarises),
+            "n_nodes_reactivating": n_reactivating,
+            "reactivates": bool(reactivates)}
 
 
 def label_with_opencarp(

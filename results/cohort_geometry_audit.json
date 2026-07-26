@@ -1,0 +1,808 @@
+{
+  "description": "cohort geometry and fibrosis-burden comparison",
+  "coarsen_nodes": 2000,
+  "roney": {
+    "summary": {
+      "area_mm2": {
+        "mean": 12303.51274468549,
+        "sd": 1064.4989402533308,
+        "min": 9395.737700283005,
+        "max": 14177.376390481437
+      },
+      "n_nodes": {
+        "mean": 2142.325,
+        "sd": 85.62633575600441,
+        "min": 1999.0,
+        "max": 2295.0
+      },
+      "mean_edge_mm": {
+        "mean": 2.9123703830925534,
+        "sd": 0.14513020490486558,
+        "min": 2.4836509001282123,
+        "max": 3.1587670904888765
+      },
+      "fibrosis_mean": {
+        "mean": 0.34926800059922736,
+        "sd": 0.15782132873184748,
+        "min": 0.06672589912744309,
+        "max": 0.7699765850973415
+      },
+      "fibrosis_p90": {
+        "mean": 0.8005544413374096,
+        "sd": 0.22929813802292487,
+        "min": 0.2352526930894309,
+        "max": 1.0
+      },
+      "frac_above_half": {
+        "mean": 0.3101348812363807,
+        "sd": 0.18906712098843195,
+        "min": 0.0028971511347175277,
+        "max": 0.8360507246376812
+      }
+    },
+    "rows": [
+      {
+        "subject": "Mesh_83815278.vtk",
+        "area_mm2": 9395.737700283005,
+        "n_nodes": 2023,
+        "mean_edge_mm": 2.6294780046530395,
+        "fibrosis_mean": 0.33933044699110154,
+        "fibrosis_p90": 0.9707605555555553,
+        "frac_above_half": 0.268413247652002
+      },
+      {
+        "subject": "Mesh_49769496.vtk",
+        "area_mm2": 9569.040969508476,
+        "n_nodes": 2277,
+        "mean_edge_mm": 2.4836509001282123,
+        "fibrosis_mean": 0.5785584005903607,
+        "fibrosis_p90": 1.0,
+        "frac_above_half": 0.5911286780851999
+      },
+      {
+        "subject": "Mesh_56611509.vtk",
+        "area_mm2": 10442.561675812005,
+        "n_nodes": 2197,
+        "mean_edge_mm": 2.6186455254129366,
+        "fibrosis_mean": 0.23694501431674986,
+        "fibrosis_p90": 0.5834774298665752,
+        "frac_above_half": 0.15020482476103778
+      },
+      {
+        "subject": "Mesh_31475951.vtk",
+        "area_mm2": 10856.936909049804,
+        "n_nodes": 2175,
+        "mean_edge_mm": 2.6777812414573994,
+        "fibrosis_mean": 0.20110217703806557,
+        "fibrosis_p90": 0.49655141729138585,
+        "frac_above_half": 0.09379310344827586
+      },
+      {
+        "subject": "Mesh_12928433.vtk",
+        "area_mm2": 10503.77621978796,
+        "n_nodes": 2179,
+        "mean_edge_mm": 2.644594959578888,
+        "fibrosis_mean": 0.49100709834520184,
+        "fibrosis_p90": 1.0,
+        "frac_above_half": 0.4846259752179899
+      },
+      {
+        "subject": "Mesh_99895768.vtk",
+        "area_mm2": 11397.871445733896,
+        "n_nodes": 2223,
+        "mean_edge_mm": 2.7858046361417936,
+        "fibrosis_mean": 0.3800564467275557,
+        "fibrosis_p90": 0.824379141953441,
+        "frac_above_half": 0.3148897885739991
+      },
+      {
+        "subject": "Mesh_32198120.vtk",
+        "area_mm2": 11308.882219152536,
+        "n_nodes": 2271,
+        "mean_edge_mm": 2.7121596281703853,
+        "fibrosis_mean": 0.3694893207058757,
+        "fibrosis_p90": 0.999997870879121,
+        "frac_above_half": 0.3333333333333333
+      },
+      {
+        "subject": "Mesh_40112384.vtk",
+        "area_mm2": 11532.224783482194,
+        "n_nodes": 2015,
+        "mean_edge_mm": 2.91158047676922,
+        "fibrosis_mean": 0.46526990342057173,
+        "fibrosis_p90": 1.0,
+        "frac_above_half": 0.47642679900744417
+      },
+      {
+        "subject": "Mesh_83335866.vtk",
+        "area_mm2": 11593.40094912218,
+        "n_nodes": 2045,
+        "mean_edge_mm": 2.899065345520239,
+        "fibrosis_mean": 0.6681006441326224,
+        "fibrosis_p90": 1.0,
+        "frac_above_half": 0.6836185819070905
+      },
+      {
+        "subject": "Mesh_58105145.vtk",
+        "area_mm2": 12132.015322709432,
+        "n_nodes": 2295,
+        "mean_edge_mm": 2.8390942182549703,
+        "fibrosis_mean": 0.5139592263300419,
+        "fibrosis_p90": 1.0,
+        "frac_above_half": 0.5054466230936819
+      },
+      {
+        "subject": "Mesh_48813898.vtk",
+        "area_mm2": 12240.772384313485,
+        "n_nodes": 2110,
+        "mean_edge_mm": 2.963242908492478,
+        "fibrosis_mean": 0.6141442218047588,
+        "fibrosis_p90": 1.0,
+        "frac_above_half": 0.6345971563981042
+      },
+      {
+        "subject": "Mesh_46906197.vtk",
+        "area_mm2": 12233.829300230831,
+        "n_nodes": 2071,
+        "mean_edge_mm": 3.0146503509510216,
+        "fibrosis_mean": 0.06672589912744309,
+        "fibrosis_p90": 0.2352526930894309,
+        "frac_above_half": 0.0028971511347175277
+      },
+      {
+        "subject": "Mesh_94908860.vtk",
+        "area_mm2": 12291.131202809094,
+        "n_nodes": 2144,
+        "mean_edge_mm": 2.9586197347053074,
+        "fibrosis_mean": 0.31874335536713166,
+        "fibrosis_p90": 0.7493693761474911,
+        "frac_above_half": 0.2593283582089552
+      },
+      {
+        "subject": "Mesh_16736494.vtk",
+        "area_mm2": 11925.186073355135,
+        "n_nodes": 2012,
+        "mean_edge_mm": 2.9434737018088333,
+        "fibrosis_mean": 0.07583142299800155,
+        "fibrosis_p90": 0.2699381587256031,
+        "frac_above_half": 0.011928429423459244
+      },
+      {
+        "subject": "Mesh_13142315.vtk",
+        "area_mm2": 12372.001775641587,
+        "n_nodes": 2269,
+        "mean_edge_mm": 2.831337352063732,
+        "fibrosis_mean": 0.4070393972404391,
+        "fibrosis_p90": 1.0,
+        "frac_above_half": 0.38122520934332305
+      },
+      {
+        "subject": "Mesh_92062041.vtk",
+        "area_mm2": 11782.293063523082,
+        "n_nodes": 2066,
+        "mean_edge_mm": 2.9235967570571915,
+        "fibrosis_mean": 0.2788842830792184,
+        "fibrosis_p90": 0.7154093749999999,
+        "frac_above_half": 0.2095837366892546
+      },
+      {
+        "subject": "Mesh_68827202.vtk",
+        "area_mm2": 12534.294623662692,
+        "n_nodes": 2137,
+        "mean_edge_mm": 2.997908891761608,
+        "fibrosis_mean": 0.5277679224317231,
+        "fibrosis_p90": 1.0,
+        "frac_above_half": 0.528310715956949
+      },
+      {
+        "subject": "Mesh_84215961.vtk",
+        "area_mm2": 11706.196881655756,
+        "n_nodes": 2038,
+        "mean_edge_mm": 2.920111315978881,
+        "fibrosis_mean": 0.48846484003106283,
+        "fibrosis_p90": 0.928794374912611,
+        "frac_above_half": 0.4646712463199215
+      },
+      {
+        "subject": "Mesh_26694297.vtk",
+        "area_mm2": 12907.965277219373,
+        "n_nodes": 2283,
+        "mean_edge_mm": 2.890256278751059,
+        "fibrosis_mean": 0.33634412575156014,
+        "fibrosis_p90": 0.9539494563008133,
+        "frac_above_half": 0.278580814717477
+      },
+      {
+        "subject": "Mesh_28678406.vtk",
+        "area_mm2": 12183.730130372083,
+        "n_nodes": 2050,
+        "mean_edge_mm": 2.9668386959964477,
+        "fibrosis_mean": 0.3252787666784484,
+        "fibrosis_p90": 0.8145345664062489,
+        "frac_above_half": 0.26439024390243904
+      },
+      {
+        "subject": "Mesh_44772464.vtk",
+        "area_mm2": 12442.800768191613,
+        "n_nodes": 2208,
+        "mean_edge_mm": 2.8769549645977732,
+        "fibrosis_mean": 0.7699765850973415,
+        "fibrosis_p90": 1.0,
+        "frac_above_half": 0.8360507246376812
+      },
+      {
+        "subject": "Mesh_40849519.vtk",
+        "area_mm2": 13008.25537512145,
+        "n_nodes": 2126,
+        "mean_edge_mm": 3.015724351689481,
+        "fibrosis_mean": 0.4816595546621659,
+        "fibrosis_p90": 1.0,
+        "frac_above_half": 0.4614299153339605
+      },
+      {
+        "subject": "Mesh_86031279.vtk",
+        "area_mm2": 13449.066658575604,
+        "n_nodes": 2202,
+        "mean_edge_mm": 2.9549534013571304,
+        "fibrosis_mean": 0.25365197535062917,
+        "fibrosis_p90": 1.0,
+        "frac_above_half": 0.24613987284287012
+      },
+      {
+        "subject": "Mesh_49286233.vtk",
+        "area_mm2": 11855.017837589472,
+        "n_nodes": 2191,
+        "mean_edge_mm": 2.8303068341230992,
+        "fibrosis_mean": 0.4716312124567218,
+        "fibrosis_p90": 1.0,
+        "frac_above_half": 0.4710178000912825
+      },
+      {
+        "subject": "Mesh_26925075.vtk",
+        "area_mm2": 12476.060676662237,
+        "n_nodes": 2071,
+        "mean_edge_mm": 2.9673558901752757,
+        "fibrosis_mean": 0.3754472645817558,
+        "fibrosis_p90": 0.9837885416666667,
+        "frac_above_half": 0.34524384355383875
+      },
+      {
+        "subject": "Mesh_26572048.vtk",
+        "area_mm2": 13087.127700468734,
+        "n_nodes": 2186,
+        "mean_edge_mm": 2.9817744277773945,
+        "fibrosis_mean": 0.4286764872494669,
+        "fibrosis_p90": 1.0,
+        "frac_above_half": 0.43275388838060386
+      },
+      {
+        "subject": "Mesh_88859337.vtk",
+        "area_mm2": 12830.51802695436,
+        "n_nodes": 2222,
+        "mean_edge_mm": 2.8933982178554825,
+        "fibrosis_mean": 0.31165760139839643,
+        "fibrosis_p90": 0.8925585755813948,
+        "frac_above_half": 0.27992799279927993
+      },
+      {
+        "subject": "Mesh_85161463.vtk",
+        "area_mm2": 12866.74634793891,
+        "n_nodes": 2166,
+        "mean_edge_mm": 3.01089918764554,
+        "fibrosis_mean": 0.2506532412233763,
+        "fibrosis_p90": 0.6372409128289472,
+        "frac_above_half": 0.1791320406278855
+      },
+      {
+        "subject": "Mesh_77855463.vtk",
+        "area_mm2": 13424.859546033049,
+        "n_nodes": 2076,
+        "mean_edge_mm": 3.09936709729236,
+        "fibrosis_mean": 0.42216515373638075,
+        "fibrosis_p90": 0.9509733749428047,
+        "frac_above_half": 0.3945086705202312
+      },
+      {
+        "subject": "Mesh_45275287.vtk",
+        "area_mm2": 13124.963418468307,
+        "n_nodes": 2143,
+        "mean_edge_mm": 2.98465944266947,
+        "fibrosis_mean": 0.10470140312419786,
+        "fibrosis_p90": 0.368183324074074,
+        "frac_above_half": 0.050396640223985066
+      },
+      {
+        "subject": "Mesh_90918124.vtk",
+        "area_mm2": 13127.849742147937,
+        "n_nodes": 1999,
+        "mean_edge_mm": 3.1118859389450404,
+        "fibrosis_mean": 0.26864288038879464,
+        "fibrosis_p90": 0.6419175096376739,
+        "frac_above_half": 0.1745872936468234
+      },
+      {
+        "subject": "Mesh_41949257.vtk",
+        "area_mm2": 12503.33917804138,
+        "n_nodes": 2044,
+        "mean_edge_mm": 2.970994758216947,
+        "fibrosis_mean": 0.1996688902663094,
+        "fibrosis_p90": 0.6131280348058552,
+        "frac_above_half": 0.15900195694716243
+      },
+      {
+        "subject": "Mesh_13711934.vtk",
+        "area_mm2": 14177.376390481437,
+        "n_nodes": 2120,
+        "mean_edge_mm": 3.1587670904888765,
+        "fibrosis_mean": 0.14883933202277405,
+        "fibrosis_p90": 0.44744999999999985,
+        "frac_above_half": 0.07641509433962264
+      },
+      {
+        "subject": "Mesh_71206673.vtk",
+        "area_mm2": 13227.953711203747,
+        "n_nodes": 2081,
+        "mean_edge_mm": 3.038829993205199,
+        "fibrosis_mean": 0.3050167993348866,
+        "fibrosis_p90": 0.7104773437499999,
+        "frac_above_half": 0.2513214800576646
+      },
+      {
+        "subject": "Mesh_79851394.vtk",
+        "area_mm2": 13103.095358006707,
+        "n_nodes": 2077,
+        "mean_edge_mm": 3.050999480317237,
+        "fibrosis_mean": 0.19139910550696815,
+        "fibrosis_p90": 0.5320823744279176,
+        "frac_above_half": 0.11458834857968224
+      },
+      {
+        "subject": "Mesh_15589148.vtk",
+        "area_mm2": 13066.632936064301,
+        "n_nodes": 2209,
+        "mean_edge_mm": 2.922413544511967,
+        "fibrosis_mean": 0.2748018617859724,
+        "fibrosis_p90": 0.6024859574468084,
+        "frac_above_half": 0.17926663648709823
+      },
+      {
+        "subject": "Mesh_61961067.vtk",
+        "area_mm2": 13100.312292465795,
+        "n_nodes": 2104,
+        "mean_edge_mm": 2.9782641293947285,
+        "fibrosis_mean": 0.17657108428482637,
+        "fibrosis_p90": 0.6595218437499999,
+        "frac_above_half": 0.15019011406844107
+      },
+      {
+        "subject": "Mesh_31977459.vtk",
+        "area_mm2": 13022.441818956213,
+        "n_nodes": 2195,
+        "mean_edge_mm": 2.951855492789938,
+        "fibrosis_mean": 0.36423485852199267,
+        "fibrosis_p90": 0.9926272674116424,
+        "frac_above_half": 0.3034168564920273
+      },
+      {
+        "subject": "Mesh_45708510.vtk",
+        "area_mm2": 13840.121520783152,
+        "n_nodes": 2104,
+        "mean_edge_mm": 3.122710553885141,
+        "fibrosis_mean": 0.28826482134563175,
+        "fibrosis_p90": 0.9169015103776532,
+        "frac_above_half": 0.24334600760456274
+      },
+      {
+        "subject": "Mesh_14451346.vtk",
+        "area_mm2": 13496.121575840541,
+        "n_nodes": 2289,
+        "mean_edge_mm": 2.960809603110409,
+        "fibrosis_mean": 0.20001699852257337,
+        "fibrosis_p90": 0.5304266666666667,
+        "frac_above_half": 0.11926605504587157
+      }
+    ]
+  },
+  "uw": {
+    "summary": {
+      "area_mm2": {
+        "mean": 14514.206632131452,
+        "sd": 3762.417064419557,
+        "min": 9503.097124675292,
+        "max": 30575.692146259466
+      },
+      "n_nodes": {
+        "mean": 2151.35,
+        "sd": 77.7160054300271,
+        "min": 1999.0,
+        "max": 2291.0
+      },
+      "mean_edge_mm": {
+        "mean": 3.1168393414922986,
+        "sd": 0.38526275995339243,
+        "min": 2.5607700769750266,
+        "max": 4.507099736701736
+      },
+      "fibrosis_mean": {
+        "mean": 0.24351022824202043,
+        "sd": 0.10446323091598109,
+        "min": 0.03366637843403167,
+        "max": 0.4596751063516298
+      },
+      "fibrosis_p90": {
+        "mean": 0.7886059438734082,
+        "sd": 0.25161314044102134,
+        "min": 0.0,
+        "max": 1.0
+      },
+      "frac_above_half": {
+        "mean": 0.23867784077780793,
+        "sd": 0.10811521172308296,
+        "min": 0.02886323268206039,
+        "max": 0.47368421052631576
+      }
+    },
+    "rows": [
+      {
+        "subject": "ID001_PreAbl_rev1.vtk",
+        "area_mm2": 14120.711479245569,
+        "n_nodes": 2177,
+        "mean_edge_mm": 3.0665883907475107,
+        "fibrosis_mean": 0.15604572138448966,
+        "fibrosis_p90": 0.6943508343508347,
+        "frac_above_half": 0.14790996784565916
+      },
+      {
+        "subject": "ID002_PreAbl_rev1.vtk",
+        "area_mm2": 11886.06308064067,
+        "n_nodes": 2151,
+        "mean_edge_mm": 2.840359063396985,
+        "fibrosis_mean": 0.15178491096597208,
+        "fibrosis_p90": 0.686123511904762,
+        "frac_above_half": 0.1413296141329614
+      },
+      {
+        "subject": "ID003_PreAbl_rev1.vtk",
+        "area_mm2": 11070.908820801473,
+        "n_nodes": 2058,
+        "mean_edge_mm": 2.8339067475812136,
+        "fibrosis_mean": 0.17833952420921656,
+        "fibrosis_p90": 0.7550982142857141,
+        "frac_above_half": 0.17249757045675412
+      },
+      {
+        "subject": "ID004_PreAbl_rev1.vtk",
+        "area_mm2": 17125.758702678017,
+        "n_nodes": 2252,
+        "mean_edge_mm": 3.346259372695538,
+        "fibrosis_mean": 0.03366637843403167,
+        "fibrosis_p90": 0.0,
+        "frac_above_half": 0.02886323268206039
+      },
+      {
+        "subject": "ID005_PreAbl_rev1.vtk",
+        "area_mm2": 17920.309627260882,
+        "n_nodes": 2090,
+        "mean_edge_mm": 3.537456352644686,
+        "fibrosis_mean": 0.4596751063516298,
+        "fibrosis_p90": 1.0,
+        "frac_above_half": 0.47368421052631576
+      },
+      {
+        "subject": "ID006_PreAbl_rev1.vtk",
+        "area_mm2": 18030.1944316718,
+        "n_nodes": 2182,
+        "mean_edge_mm": 3.46409474920733,
+        "fibrosis_mean": 0.33861692687626305,
+        "fibrosis_p90": 0.9695228091236495,
+        "frac_above_half": 0.34326306141154905
+      },
+      {
+        "subject": "ID007_PreAbl_rev1.vtk",
+        "area_mm2": 11394.623675093475,
+        "n_nodes": 2146,
+        "mean_edge_mm": 2.793712620226829,
+        "fibrosis_mean": 0.3301342999282075,
+        "fibrosis_p90": 1.0,
+        "frac_above_half": 0.33084808946877914
+      },
+      {
+        "subject": "ID008_PreAbl_rev1.vtk",
+        "area_mm2": 11384.041262143968,
+        "n_nodes": 2131,
+        "mean_edge_mm": 2.7921789669438466,
+        "fibrosis_mean": 0.1833862585519927,
+        "fibrosis_p90": 0.8243271221532092,
+        "frac_above_half": 0.17972782731112155
+      },
+      {
+        "subject": "ID009_PreAbl_rev1.vtk",
+        "area_mm2": 10331.341003313853,
+        "n_nodes": 2264,
+        "mean_edge_mm": 2.5607700769750266,
+        "fibrosis_mean": 0.11209282368446233,
+        "fibrosis_p90": 0.519189814814815,
+        "frac_above_half": 0.10379858657243816
+      },
+      {
+        "subject": "ID010_PreAbl_rev1.vtk",
+        "area_mm2": 16698.659999819785,
+        "n_nodes": 2272,
+        "mean_edge_mm": 3.25496780822403,
+        "fibrosis_mean": 0.26721672677639474,
+        "fibrosis_p90": 0.9732854147948486,
+        "frac_above_half": 0.26452464788732394
+      },
+      {
+        "subject": "ID011_PreAbl_rev1.vtk",
+        "area_mm2": 17299.045415836343,
+        "n_nodes": 2135,
+        "mean_edge_mm": 3.43655084745778,
+        "fibrosis_mean": 0.261630279511868,
+        "fibrosis_p90": 0.9266060606060607,
+        "frac_above_half": 0.2529274004683841
+      },
+      {
+        "subject": "ID012_PreAbl_rev1.vtk",
+        "area_mm2": 15146.463833773663,
+        "n_nodes": 2054,
+        "mean_edge_mm": 3.2879595236337584,
+        "fibrosis_mean": 0.3065381546677607,
+        "fibrosis_p90": 0.9541993366993368,
+        "frac_above_half": 0.3028237585199611
+      },
+      {
+        "subject": "ID013_PreAbl_rev1.vtk",
+        "area_mm2": 11272.35718369957,
+        "n_nodes": 2199,
+        "mean_edge_mm": 2.7137411306042725,
+        "fibrosis_mean": 0.2333160412986836,
+        "fibrosis_p90": 0.9394296918767507,
+        "frac_above_half": 0.23419736243747158
+      },
+      {
+        "subject": "ID014_PreAbl_rev1.vtk",
+        "area_mm2": 11610.745208467783,
+        "n_nodes": 2205,
+        "mean_edge_mm": 2.7838997119030213,
+        "fibrosis_mean": 0.3231043348351841,
+        "fibrosis_p90": 0.9879188712522047,
+        "frac_above_half": 0.32154195011337866
+      },
+      {
+        "subject": "ID015_PreAbl_rev1.vtk",
+        "area_mm2": 11363.384531605641,
+        "n_nodes": 2243,
+        "mean_edge_mm": 2.7037847563987554,
+        "fibrosis_mean": 0.19143175315522623,
+        "fibrosis_p90": 0.8865873015873016,
+        "frac_above_half": 0.18724921979491752
+      },
+      {
+        "subject": "ID021_PreAbl_rev1.vtk",
+        "area_mm2": 12755.199935639754,
+        "n_nodes": 2014,
+        "mean_edge_mm": 3.049000279077361,
+        "fibrosis_mean": 0.21846622180332406,
+        "fibrosis_p90": 0.8439749879749879,
+        "frac_above_half": 0.21747765640516387
+      },
+      {
+        "subject": "ID022_PreAbl_rev1.vtk",
+        "area_mm2": 10383.903023855622,
+        "n_nodes": 2247,
+        "mean_edge_mm": 2.5799801516972822,
+        "fibrosis_mean": 0.4024907171658984,
+        "fibrosis_p90": 1.0,
+        "frac_above_half": 0.4054294615042279
+      },
+      {
+        "subject": "ID023_PreAbl_rev1.vtk",
+        "area_mm2": 9503.097124675292,
+        "n_nodes": 2194,
+        "mean_edge_mm": 2.5839038283041025,
+        "fibrosis_mean": 0.08116993563755695,
+        "fibrosis_p90": 0.33178864649308,
+        "frac_above_half": 0.07702825888787602
+      },
+      {
+        "subject": "ID024_PreAbl_rev1.vtk",
+        "area_mm2": 11609.703580840334,
+        "n_nodes": 2291,
+        "mean_edge_mm": 2.745007702273596,
+        "fibrosis_mean": 0.29517817189781864,
+        "fibrosis_p90": 0.9411764705882352,
+        "frac_above_half": 0.2863378437363597
+      },
+      {
+        "subject": "ID025_PreAbl_rev1.vtk",
+        "area_mm2": 16293.145464049674,
+        "n_nodes": 2175,
+        "mean_edge_mm": 3.291184201507123,
+        "fibrosis_mean": 0.16207480918819447,
+        "fibrosis_p90": 0.6785344137655063,
+        "frac_above_half": 0.14620689655172414
+      },
+      {
+        "subject": "ID026_PreAbl_rev1.vtk",
+        "area_mm2": 12918.20407777128,
+        "n_nodes": 2219,
+        "mean_edge_mm": 2.898300660626226,
+        "fibrosis_mean": 0.2014478238686566,
+        "fibrosis_p90": 0.8620488788107837,
+        "frac_above_half": 0.1996394772420009
+      },
+      {
+        "subject": "ID027_PreAbl_rev1.vtk",
+        "area_mm2": 11300.731161191608,
+        "n_nodes": 2099,
+        "mean_edge_mm": 2.8142722686340464,
+        "fibrosis_mean": 0.16082631718455312,
+        "fibrosis_p90": 0.6471428571428572,
+        "frac_above_half": 0.1500714626012387
+      },
+      {
+        "subject": "ID028_PreAbl_rev1.vtk",
+        "area_mm2": 18356.26319891213,
+        "n_nodes": 1999,
+        "mean_edge_mm": 3.6716596768562906,
+        "fibrosis_mean": 0.24085854315841032,
+        "fibrosis_p90": 0.8463211600429646,
+        "frac_above_half": 0.2351175587793897
+      },
+      {
+        "subject": "ID029_PreAbl_rev1.vtk",
+        "area_mm2": 12757.790828069956,
+        "n_nodes": 2225,
+        "mean_edge_mm": 2.8806423809664277,
+        "fibrosis_mean": 0.1886498594207489,
+        "fibrosis_p90": 0.7149567099567101,
+        "frac_above_half": 0.1703370786516854
+      },
+      {
+        "subject": "ID030_PreAbl_rev1.vtk",
+        "area_mm2": 13997.753945695156,
+        "n_nodes": 2172,
+        "mean_edge_mm": 3.079662707779701,
+        "fibrosis_mean": 0.3008418850183336,
+        "fibrosis_p90": 0.9637735765321972,
+        "frac_above_half": 0.2974217311233886
+      },
+      {
+        "subject": "ID031_PreAbl_rev1.vtk",
+        "area_mm2": 30575.692146259466,
+        "n_nodes": 2164,
+        "mean_edge_mm": 4.507099736701736,
+        "fibrosis_mean": 0.32174186431068835,
+        "fibrosis_p90": 0.9288191763191763,
+        "frac_above_half": 0.31931608133086875
+      },
+      {
+        "subject": "ID032_PreAbl_rev1.vtk",
+        "area_mm2": 13363.172795755432,
+        "n_nodes": 2122,
+        "mean_edge_mm": 2.999161547386057,
+        "fibrosis_mean": 0.3248696890770964,
+        "fibrosis_p90": 0.9424858187789223,
+        "frac_above_half": 0.32139491046182844
+      },
+      {
+        "subject": "ID033_PreAbl_rev1.vtk",
+        "area_mm2": 12462.565627779244,
+        "n_nodes": 2018,
+        "mean_edge_mm": 2.979520662378536,
+        "fibrosis_mean": 0.2992804545203525,
+        "fibrosis_p90": 0.9271356421356421,
+        "frac_above_half": 0.2874132804757185
+      },
+      {
+        "subject": "ID034_PreAbl_rev1.vtk",
+        "area_mm2": 16401.250617452002,
+        "n_nodes": 2147,
+        "mean_edge_mm": 3.322454582246696,
+        "fibrosis_mean": 0.08155406817290654,
+        "fibrosis_p90": 0.33204761904761926,
+        "frac_above_half": 0.07452258965999069
+      },
+      {
+        "subject": "ID035_PreAbl_rev1.vtk",
+        "area_mm2": 16838.90146033564,
+        "n_nodes": 2207,
+        "mean_edge_mm": 3.383739446655966,
+        "fibrosis_mean": 0.06393072488065549,
+        "fibrosis_p90": 0.19283988957902023,
+        "frac_above_half": 0.05573176257362936
+      },
+      {
+        "subject": "ID036_PreAbl_rev1.vtk",
+        "area_mm2": 16902.297770171237,
+        "n_nodes": 2002,
+        "mean_edge_mm": 3.5239223536196844,
+        "fibrosis_mean": 0.20974250935290686,
+        "fibrosis_p90": 0.7445812447786134,
+        "frac_above_half": 0.1893106893106893
+      },
+      {
+        "subject": "ID037_PreAbl_rev1.vtk",
+        "area_mm2": 15825.72335886499,
+        "n_nodes": 2003,
+        "mean_edge_mm": 3.3718320602863088,
+        "fibrosis_mean": 0.3627215796011006,
+        "fibrosis_p90": 0.9760544217687075,
+        "frac_above_half": 0.3604593110334498
+      },
+      {
+        "subject": "ID038_PreAbl_rev1.vtk",
+        "area_mm2": 16079.613163333564,
+        "n_nodes": 2078,
+        "mean_edge_mm": 3.364365327608551,
+        "fibrosis_mean": 0.3561182923627392,
+        "fibrosis_p90": 0.9544171626984128,
+        "frac_above_half": 0.35081809432146294
+      },
+      {
+        "subject": "ID039_PreAbl_rev1.vtk",
+        "area_mm2": 14096.58213312547,
+        "n_nodes": 2112,
+        "mean_edge_mm": 3.1073661890604556,
+        "fibrosis_mean": 0.06967722051694089,
+        "fibrosis_p90": 0.19996336996336997,
+        "frac_above_half": 0.06912878787878787
+      },
+      {
+        "subject": "ID040_PreAbl_rev1.vtk",
+        "area_mm2": 15789.746359971936,
+        "n_nodes": 2170,
+        "mean_edge_mm": 3.258186516362,
+        "fibrosis_mean": 0.31483130801972947,
+        "fibrosis_p90": 0.9583333333333333,
+        "frac_above_half": 0.31981566820276497
+      },
+      {
+        "subject": "ID041_PreAbl_rev1.vtk",
+        "area_mm2": 17188.26600196623,
+        "n_nodes": 2206,
+        "mean_edge_mm": 3.3577431175561405,
+        "fibrosis_mean": 0.18505148394807136,
+        "fibrosis_p90": 0.6758333333333333,
+        "frac_above_half": 0.16817769718948322
+      },
+      {
+        "subject": "ID042_PreAbl_rev1.vtk",
+        "area_mm2": 15659.659476691571,
+        "n_nodes": 2199,
+        "mean_edge_mm": 3.197255647976212,
+        "fibrosis_mean": 0.41327982909615624,
+        "fibrosis_p90": 0.9953132832080201,
+        "frac_above_half": 0.4279217826284675
+      },
+      {
+        "subject": "ID043_PreAbl_rev1.vtk",
+        "area_mm2": 11728.019002129164,
+        "n_nodes": 2143,
+        "mean_edge_mm": 2.846832874031822,
+        "fibrosis_mean": 0.3907802123079629,
+        "fibrosis_p90": 0.9814814814814814,
+        "frac_above_half": 0.3793747083527765
+      },
+      {
+        "subject": "ID044_PreAbl_rev1.vtk",
+        "area_mm2": 10700.8463556456,
+        "n_nodes": 2169,
+        "mean_edge_mm": 2.7152257668866087,
+        "fibrosis_mean": 0.24748727879355265,
+        "fibrosis_p90": 0.850124716553288,
+        "frac_above_half": 0.23743660673121253
+      },
+      {
+        "subject": "ID045_PreAbl_rev1.vtk",
+        "area_mm2": 20425.528419023227,
+        "n_nodes": 2120,
+        "mean_edge_mm": 3.7290238545724232,
+        "fibrosis_mean": 0.32035908974508054,
+        "fibrosis_p90": 0.9384505772005772,
+        "frac_above_half": 0.3160377358490566
+      }
+    ]
+  }
+}

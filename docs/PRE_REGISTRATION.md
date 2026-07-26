@@ -249,10 +249,14 @@ prediction from baseline substrate; the post-ablation mesh encodes the delivered
   outcome, so it contributes no tuning degrees of freedom.
 
 ### 8.5 Pre-specified secondary analyses (fixed list, no additions later)
-1. **Publisher's split, honoured.** Fit on `ID021–087` (n = 67), evaluate **once** on the
-   untouched `ID001–015` (n = 15). With 8 events this is **descriptive only** — reported with
-   a confidence interval and explicitly not powered. Its value is that the split was chosen
-   by someone else, before we existed.
+1. **Publisher's split, as a sensitivity analysis.** Fit on `ID021–087` (n = 67), evaluate
+   **once** on `ID001–015` (n = 15). With 8 events this is **descriptive only** — reported
+   with a confidence interval and explicitly not powered. Its value is that the split was
+   chosen by someone else, before we existed.
+   *(Amended 2026-07-25 (h.2): this is **not** an independent holdout. The same 15 patients
+   also enter the §8.4 primary, which cross-validates over all 82, so the two analyses share
+   data and it must not be presented as external validation. It sits outside the confirmatory
+   family; see §8.7.)*
 2. **Ablation-induced spectral change.** Δ(SFI) = post-ablation − pre-ablation, testing
    whether the lesion set's effect on spectral fragility predicts recurrence. This is the
    SFI-native analogue of the source study's finding that post-ablation substrate carries
@@ -373,6 +377,51 @@ prediction from baseline substrate; the post-ablation mesh encodes the delivered
   problem. No further explanation will be offered in any document without a control
   behind it.
 
+- **Amendment 2026-07-25 (h): the multiplicity plan and the holdout are both fixed, before
+  any label is joined.** An audit found two internal inconsistencies in §8.5/§8.7. Both are
+  resolved here, with the rejected options recorded so the choice is auditable rather than
+  convenient. Nothing below has been informed by the outcome column, which still has never
+  been joined to a feature.
+
+  **(h.1) §8.7 counted three confirmatory tests while §8.5.1 called itself "descriptive
+  only".** A test cannot both spend family-wise alpha and disclaim inference.
+
+  | option | effect on the §8.4 primary | verdict |
+  |---|---|---|
+  | Holm over 3 (keep §8.5.1 confirmatory) | primary faces α = 0.0167 worst case; minimum detectable effect rises from ΔAUC ≈ 0.10–0.15 to roughly 0.12–0.17 | rejected — spends alpha on an 8-event test that cannot reach significance under any effect size |
+  | Holm over 2 (demote §8.5.1) | primary faces α = 0.025 worst case | workable, but pays a penalty it need not |
+  | make §8.5.1 the primary | n = 15, 8 events | rejected outright |
+  | **fixed-sequence (hierarchical) gatekeeping** | **primary tested at the full α = 0.05, no correction** | **adopted** |
+
+  **Adopted:** a pre-specified fixed sequence — test (1) the §8.4 primary, then (2) §8.5.2
+  (ablation-induced ΔSFI), stopping at the first non-rejection. Fixed-sequence testing
+  controls the family-wise error rate in the strong sense at α = 0.05 without adjusting the
+  first test, provided the order is fixed in advance and testing halts on failure, both of
+  which this amendment fixes. The primary therefore keeps its full power, which matters more
+  here than anywhere else given §8.3. §8.5.1 leaves the confirmatory family and becomes
+  descriptive, which is what its own text always said. §8.5.3 stays exploratory and unadjusted.
+
+  **(h.2) §8.5.1's "held-out" 15 patients are not held out.** They are `ID001–015`, and the
+  §8.4 primary runs patient-held-out cross-validation over all 82, so those 15 contribute
+  there too. Reporting the split as external validation would double-count them.
+
+  | option | cost | verdict |
+  |---|---|---|
+  | exclude ID001–015 from the primary | primary drops to n = 67 / 40 events, ≈18 % of the sample | rejected — see below |
+  | two-stage lock: primary on 67, unlock the 15 only if it passes | same power cost, and the primary is unlikely to pass, so the 15 would likely never be used | rejected |
+  | use the publisher's split as one designated CV fold | keeps all 82 but is still not external | unnecessary once §8.5.1 is descriptive |
+  | **keep the primary on all 82; relabel §8.5.1 a non-independent sensitivity analysis** | loses an "external validation" claim that was never valid | **adopted** |
+
+  **Adopted:** the primary uses all 82 at full power. §8.5.1 is reported as a sensitivity
+  analysis on the data provider's own split, labelled explicitly as **not independent** (its
+  patients also enter the primary) and **not powered** (8 events). The reasoning is
+  quantitative, not stylistic: an AUC estimated on 15 patients with 8 events carries a
+  standard error of roughly ±0.15, wider than the entire effect range this study is arguing
+  about. Sacrificing 18 % of an already underpowered sample to protect a test that cannot
+  resolve anything is ritual rather than rigour. What the split still buys — that someone
+  else chose it, before this project existed — survives by reporting it; what it never
+  bought was independence.
+
 - **Amendment 2026-07-25 (g): openCARP is now installable, and the substitution is no longer
   forced.** §7.1 recorded openCARP as uninstallable on the then-current container, which is
   why the monodomain Mitchell–Schaeffer solver was substituted. On the current machine a WSL
@@ -437,8 +486,15 @@ prediction from baseline substrate; the post-ablation mesh encodes the delivered
   that model, and will not present our mesh-only AUC as if it were comparable.
 
 ### 8.7 Multiplicity, stopping rule, and accepted null
-- **Three** confirmatory tests are pre-specified (§8.4 primary, §8.5.1, §8.5.2). Holm
-  correction across those three. §8.5.3 is exploratory and reported unadjusted, labelled.
+- **Two** confirmatory tests are pre-specified, in a fixed sequence: (1) the §8.4 primary,
+  then (2) §8.5.2. Testing stops at the first non-rejection, which controls the family-wise
+  error rate at α = 0.05 in the strong sense with **no adjustment to the primary**. §8.5.1 is
+  a descriptive sensitivity analysis outside the family, and §8.5.3 is exploratory and
+  reported unadjusted; both are labelled as such.
+  *(Amended 2026-07-25 (h.1). This section previously specified three confirmatory tests with
+  a Holm correction, which contradicted §8.5.1's own "descriptive only" framing and would
+  have charged the primary an alpha penalty for a test that cannot reach significance on
+  8 events. The rejected alternatives are recorded in amendment (h).)*
 - **The confirmatory analysis is run once.** The pipeline will be built, unit-tested, and
   dry-run end-to-end on *shuffled* labels before the real column is ever joined. Any change
   after the real join is a logged, dated deviation in `notebooks/lab_notebook.md` and
