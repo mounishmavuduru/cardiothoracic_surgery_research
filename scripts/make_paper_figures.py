@@ -187,12 +187,14 @@ def fig_substrate_audit():
     ab = _load("results/uw_substrate_ablation.json")
     fc = _load("results/roney_fibre_control.json")
     qz = _load("results/roney_fibrosis_quantization.json")
+    bs = _load("results/fibrosis_burden_swap.json")
     if not ab:
         print("(substrate ablation not ready - skipping substrate-audit figure)")
         return
 
     RONEY_REF = 20 / 62
-    fig, axes = plt.subplots(1, 3, figsize=(12.6, 4.3))
+    fig, axes = plt.subplots(2, 2, figsize=(11.0, 8.6))
+    axes = axes.ravel()
 
     def _bar(ax, x, c, color, hatch=None, width=0.32):
         ax.bar(x, 100 * c["inducible_fraction"], width, color=color, hatch=hatch, zorder=3,
@@ -253,13 +255,38 @@ def fig_substrate_audit():
         ax.set_xticklabels(["continuous" + "\n" + "(as shipped)",
                             "binary" + "\n" + r"$f>0.5$",
                             "binary" + "\n" + "burden matched"], fontsize=9)
-        ax.set_ylim(0, 44)
+        ax.set_ylim(0, 75)   # panel (c) reaches 64.5%; a 44% ceiling clipped it
         ax.set_ylabel("inducible (%)")
         ax.set_title("(c) fibrosis gradation on Roney" + "\n"
                      + "coarsening the fibrosis field", fontsize=10.5)
     else:
         ax.set_axis_off()
         ax.set_title("(c) fibrosis gradation" + "\n" + "(pending)", fontsize=10.5)
+
+    # (d) fibrosis burden swap -- the control that resolves the anomaly
+    ax = axes[3]
+    if bs:
+        B = bs["summary"]
+        keys = ("R_A_roney_native", "R_B_roney_at_uw", "U_A_uw_native", "U_B_uw_at_roney")
+        cols = (BLUE, ORANGE, BLUE, ORANGE)
+        hats = (None, "//", None, "//")
+        for i, k in enumerate(keys):
+            _bar(ax, i, B[k], cols[i], hats[i], width=0.6)
+        ax.set_xticks([0, 1, 2, 3])
+        ax.set_xticklabels(["Roney" + "\n" + "native", "Roney at" + "\n" + "UW burden",
+                            "UW" + "\n" + "native", "UW at" + "\n" + "Roney burden"],
+                           fontsize=8.5)
+        ax.set_ylim(0, 44)
+        ax.set_ylabel("inducible (%)")
+        ax.set_title("(d) fibrosis burden swap" + "\n"
+                     + "moves the rate in both directions", fontsize=10.5)
+        ax.legend([plt.Rectangle((0, 0), 1, 1, color=BLUE),
+                   plt.Rectangle((0, 0), 1, 1, color=ORANGE, hatch="//")],
+                  ["native burden", "burden swapped"], fontsize=8.2,
+                  frameon=False, loc="upper right")
+    else:
+        ax.set_axis_off()
+        ax.set_title("(d) fibrosis burden swap" + "\n" + "(pending)", fontsize=10.5)
 
     fig.tight_layout()
     fig.savefig(f"{OUT}/fig_substrate_audit.png")
