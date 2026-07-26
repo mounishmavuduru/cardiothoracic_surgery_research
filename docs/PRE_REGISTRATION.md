@@ -452,6 +452,38 @@ prediction from baseline substrate; the post-ablation mesh encodes the delivered
   precisely the artefact we just characterised. Any openCARP labeller must use enough
   bins to approximate the continuous field, and must demonstrate insensitivity to the bin
   count before its labels are used for anything.
+
+- **Amendment 2026-07-26 (i): openCARP runs ALONGSIDE the monodomain labeller, not in
+  place of it.** §7.1 substituted monodomain Mitchell–Schaeffer because openCARP would not
+  install; amendment (g) removed that constraint. The obvious move would be to switch the
+  ground truth back. We are not doing that, and the reason is recorded here so the choice
+  is not mistaken for inertia.
+
+  Switching would invalidate every in-silico number in the manuscript at once, and would do
+  so on the strength of a solver whose protocol has just been shown to need calibration.
+  Running the two side by side instead yields something a switch would destroy: a
+  **measured agreement rate between an independent standard solver and the phenomenological
+  stand-in every result rests on**. Given the per-subject instability already documented in
+  amendment (e), that number is worth more than a cleaner provenance claim would be.
+  Every existing result therefore stands as reported, with openCARP as a robustness check.
+
+  **Preconditions, unchanged and binding.** openCARP labels may not enter any endpoint until
+  (1) the §7.4 calibration gate is re-passed on that solver — inducible fraction in the
+  10–40 % band and a *positive* fibrosis/verdict rank correlation — and (2) insensitivity to
+  the fibrosis bin count is demonstrated. Failing either, the concordance is still reported,
+  as a statement about the protocol rather than about the tissue.
+
+  **First calibration attempt FAILED, and the diagnosis is recorded.** Run 1 gave 90 %
+  inducible on both cohorts with rank correlations of −0.261 (Roney) and −0.162 (UW), and
+  18.3 % concordance with monodomain. A negative correlation is the signature of
+  rate-dependent block rather than reentry. The cause was not the burst cycle length: it was
+  that the openCARP configuration let fibrosis reduce *conductivity* only, while
+  `FROZEN_MONO` also shortens the action potential (`fibrosis_erp_shortening = 0.5`). With
+  ERP fixed at a long value, added fibrosis could only add block. Measured on this build,
+  `tau_close` 150 → APD90 277 ms, 110 → 209 ms, 55 → 113 ms, so
+  `tau_close = 115 × (1 − 0.5 f)` reproduces the frozen 218 ms healthy / 121 ms fibrotic
+  within about 2 %. The per-bin membrane parameters are now emitted accordingly and the gate
+  is being re-run.
 - **Amendment 2026-07-24 (e): the fibre hypothesis is REFUTED by direct control, and the
   label is noisy per subject.** `scripts/roney_fibre_control.py` destroyed only the fibre
   field on the Roney cohort — which ships a real one — holding anatomy, fibrosis and every
