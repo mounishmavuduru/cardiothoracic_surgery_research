@@ -6,7 +6,7 @@ solver and reads an inducibility verdict back out.
 
 Three details are easy to get wrong and are handled explicitly:
 
-**THE PROTOCOL IS NOT YET CALIBRATED. DO NOT USE THESE LABELS FOR ANY ENDPOINT.**
+**CALIBRATION STATUS: see `results/opencarp_calibration.json`.**
 The plumbing is verified end to end -- a 2177-node atrial mesh labels in ~14 s with real
 propagation (up to 1028 of 2177 nodes active) -- but a verdict of "inducible" is not yet
 trustworthy. openCARP's default MitchellSchaeffer gives APD90 = 246 ms while the burst
@@ -104,6 +104,21 @@ class OpenCARPConfig:
     #: Solver timestep in MICROseconds, and output sampling in milliseconds.
     dt_us: int = 25
     out_dt_ms: float = 5.0
+    #: MitchellSchaeffer membrane parameters, matched to ``asb.labels.monodomain``'s
+    #: frozen values so a switch of solver is not also a change of physics. openCARP's
+    #: own defaults are tau_close 150 / tau_out 5, which give APD90 = 277 ms.
+    #: Calibrated on this build: tau_close 110 -> 209 ms, 55 -> 113 ms, so
+    #: tau_close = 115 x (1 - 0.5 f) reproduces the in-house 218 ms healthy / 121 ms
+    #: fibrotic within about 2 %.
+    ms_tau_close: float = 115.0
+    ms_tau_out: float = 6.0
+    ms_tau_in: float = 0.3
+    ms_tau_open: float = 120.0
+    ms_v_gate: float = 0.13
+    #: Fibrosis shortens the action potential as well as slowing conduction. Omitting
+    #: this was the calibration failure: with ERP fixed, more fibrosis produced only more
+    #: block, giving 90 % "inducible" and a NEGATIVE fibrosis-verdict correlation.
+    fibrosis_erp_shortening: float = 0.5
     #: Reentry-vs-block discrimination (see :func:`detect_reentry`). The tissue must
     #: repolarise below this depolarised fraction at some point in the window, and at
     #: least this share of nodes must cross threshold upward twice or more.
@@ -224,7 +239,15 @@ def build_par(export: Dict, cfg: OpenCARPConfig, stim_centres_um: Sequence[np.nd
 
     lines += ["", f"num_imp_regions = {len(tags)}"]
     for k, t in enumerate(tags):
+        f = centres[t - 1]
+        # Fibrosis shortens the action potential, exactly as fibrosis_erp_shortening does
+        # in the monodomain solver. Without this the two solvers are not comparable.
+        tau_close = cfg.ms_tau_close * (1.0 - cfg.fibrosis_erp_shortening * f)
+        params = (f"tau_close={tau_close:.4f},tau_out={cfg.ms_tau_out},"
+                  f"tau_in={cfg.ms_tau_in},tau_open={cfg.ms_tau_open},"
+                  f"V_gate={cfg.ms_v_gate}")
         lines += [f"imp_region[{k}].im = {cfg.imp}",
+                  f'imp_region[{k}].im_param = "{params}"',
                   f"imp_region[{k}].num_IDs = 1",
                   f"imp_region[{k}].ID[0] = {t}"]
 
