@@ -103,14 +103,36 @@ def main() -> None:
     rates = [summary[b]["inducible_fraction"] for b in summary]
     spread = (max(rates) - min(rates)) if rates else 0.0
     stable = spread <= 0.10
-    print(f"\nrate spread across bin counts: {spread:.1%}  -> "
-          f"{'STABLE (<=10 pp)' if stable else 'UNSTABLE (>10 pp): labels track the binning'}")
+    print(f"\nraw spread across ALL bin counts: {spread:.1%}  -> "
+          f"{'STABLE (<=10 pp)' if stable else 'UNSTABLE (>10 pp) by the raw test'}")
+
+    # The raw spread is a crude proxy and is reported above exactly as it was
+    # pre-specified, pass or fail. But the question a discretisation study actually asks
+    # is whether the answer CONVERGES under refinement, and a coarse-limit outlier does
+    # not bear on that -- the mesh-convergence study has the same shape, with its 1500-node
+    # tier far off the rest. So the refinement-limit reading is reported alongside, never
+    # instead: it is only meaningful if the finer settings agree with each other.
+    refined = [b for b in sorted(summary) if b >= 10]
+    conv = False
+    if len(refined) >= 2:
+        r_rates = [summary[b]["inducible_fraction"] for b in refined]
+        r_spread = max(r_rates) - min(r_rates)
+        agree = min(summary[b]["agreement_vs_finest"] for b in refined)
+        conv = r_spread <= 0.05 and agree >= 0.95
+        print(f"refinement limit (bins >= 10): spread {r_spread:.1%}, "
+              f"worst per-subject agreement {agree:.1%}  -> "
+              f"{'CONVERGED' if conv else 'NOT CONVERGED'}")
+        print(f"operating point is {20} bins, which is "
+              f"{'inside' if conv and 20 in refined else 'NOT inside'} the converged regime")
 
     os.makedirs("results", exist_ok=True)
     with open(a.out, "w", encoding="utf-8") as fh:
         json.dump({"description": "openCARP verdict sensitivity to the fibrosis bin count",
                    "bin_counts": list(BIN_COUNTS), "rate_spread": spread,
-                   "stable": bool(stable), "summary": {str(k): v for k, v in summary.items()},
+                   "stable_raw_spread_test": bool(stable),
+                   "converged_above_10_bins": bool(conv),
+                   "operating_bins": 20,
+                   "summary": {str(k): v for k, v in summary.items()},
                    "rows": rows}, fh, indent=2)
     print(f"\nwrote {a.out}   total {(time.time()-t0)/60:.1f} min")
 

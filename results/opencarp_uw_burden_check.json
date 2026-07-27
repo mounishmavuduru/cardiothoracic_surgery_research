@@ -1,0 +1,444 @@
+{
+  "description": "does raising UW fibrosis to Roney's burden recover openCARP inducibility?",
+  "roney_reference": {
+    "n": 30,
+    "n_inducible": 10,
+    "rate": 0.3333333333333333
+  },
+  "summary": {
+    "native": {
+      "n": 30,
+      "n_inducible": 0,
+      "inducible_fraction": 0.0,
+      "mean_burden": 0.22901201086455253
+    },
+    "at_roney_burden": {
+      "n": 30,
+      "n_inducible": 0,
+      "inducible_fraction": 0.0,
+      "mean_burden": 0.27087557395260214
+    }
+  },
+  "rows": [
+    {
+      "arm": "native",
+      "subject": "uw_ID001_PreAbl_rev1.vtk",
+      "inducible": false,
+      "burden_before": 0.15604572138448966,
+      "burden_after": 0.15604572138448966
+    },
+    {
+      "arm": "native",
+      "subject": "uw_ID002_PreAbl_rev1.vtk",
+      "inducible": false,
+      "burden_before": 0.15178491096597208,
+      "burden_after": 0.15178491096597208
+    },
+    {
+      "arm": "native",
+      "subject": "uw_ID003_PreAbl_rev1.vtk",
+      "inducible": false,
+      "burden_before": 0.17833952420921656,
+      "burden_after": 0.17833952420921656
+    },
+    {
+      "arm": "native",
+      "subject": "uw_ID004_PreAbl_rev1.vtk",
+      "inducible": false,
+      "burden_before": 0.03366637843403167,
+      "burden_after": 0.03366637843403167
+    },
+    {
+      "arm": "native",
+      "subject": "uw_ID005_PreAbl_rev1.vtk",
+      "inducible": false,
+      "burden_before": 0.4596751063516298,
+      "burden_after": 0.4596751063516298
+    },
+    {
+      "arm": "native",
+      "subject": "uw_ID006_PreAbl_rev1.vtk",
+      "inducible": false,
+      "burden_before": 0.33861692687626305,
+      "burden_after": 0.33861692687626305
+    },
+    {
+      "arm": "native",
+      "subject": "uw_ID007_PreAbl_rev1.vtk",
+      "inducible": false,
+      "burden_before": 0.3301342999282075,
+      "burden_after": 0.3301342999282075
+    },
+    {
+      "arm": "native",
+      "subject": "uw_ID008_PreAbl_rev1.vtk",
+      "inducible": false,
+      "burden_before": 0.1833862585519927,
+      "burden_after": 0.1833862585519927
+    },
+    {
+      "arm": "native",
+      "subject": "uw_ID009_PreAbl_rev1.vtk",
+      "inducible": false,
+      "burden_before": 0.11209282368446233,
+      "burden_after": 0.11209282368446233
+    },
+    {
+      "arm": "native",
+      "subject": "uw_ID010_PreAbl_rev1.vtk",
+      "inducible": false,
+      "burden_before": 0.26721672677639474,
+      "burden_after": 0.26721672677639474
+    },
+    {
+      "arm": "native",
+      "subject": "uw_ID011_PreAbl_rev1.vtk",
+      "inducible": false,
+      "burden_before": 0.261630279511868,
+      "burden_after": 0.261630279511868
+    },
+    {
+      "arm": "native",
+      "subject": "uw_ID012_PreAbl_rev1.vtk",
+      "inducible": false,
+      "burden_before": 0.3065381546677607,
+      "burden_after": 0.3065381546677607
+    },
+    {
+      "arm": "native",
+      "subject": "uw_ID013_PreAbl_rev1.vtk",
+      "inducible": false,
+      "burden_before": 0.2333160412986836,
+      "burden_after": 0.2333160412986836
+    },
+    {
+      "arm": "native",
+      "subject": "uw_ID014_PreAbl_rev1.vtk",
+      "inducible": false,
+      "burden_before": 0.3231043348351841,
+      "burden_after": 0.3231043348351841
+    },
+    {
+      "arm": "native",
+      "subject": "uw_ID015_PreAbl_rev1.vtk",
+      "inducible": false,
+      "burden_before": 0.19143175315522623,
+      "burden_after": 0.19143175315522623
+    },
+    {
+      "arm": "native",
+      "subject": "uw_ID021_PreAbl_rev1.vtk",
+      "inducible": false,
+      "burden_before": 0.21846622180332406,
+      "burden_after": 0.21846622180332406
+    },
+    {
+      "arm": "native",
+      "subject": "uw_ID022_PreAbl_rev1.vtk",
+      "inducible": false,
+      "burden_before": 0.4024907171658984,
+      "burden_after": 0.4024907171658984
+    },
+    {
+      "arm": "native",
+      "subject": "uw_ID023_PreAbl_rev1.vtk",
+      "inducible": false,
+      "burden_before": 0.08116993563755695,
+      "burden_after": 0.08116993563755695
+    },
+    {
+      "arm": "native",
+      "subject": "uw_ID024_PreAbl_rev1.vtk",
+      "inducible": false,
+      "burden_before": 0.29517817189781864,
+      "burden_after": 0.29517817189781864
+    },
+    {
+      "arm": "native",
+      "subject": "uw_ID025_PreAbl_rev1.vtk",
+      "inducible": false,
+      "burden_before": 0.16207480918819447,
+      "burden_after": 0.16207480918819447
+    },
+    {
+      "arm": "native",
+      "subject": "uw_ID026_PreAbl_rev1.vtk",
+      "inducible": false,
+      "burden_before": 0.2014478238686566,
+      "burden_after": 0.2014478238686566
+    },
+    {
+      "arm": "native",
+      "subject": "uw_ID027_PreAbl_rev1.vtk",
+      "inducible": false,
+      "burden_before": 0.16082631718455312,
+      "burden_after": 0.16082631718455312
+    },
+    {
+      "arm": "native",
+      "subject": "uw_ID028_PreAbl_rev1.vtk",
+      "inducible": false,
+      "burden_before": 0.24085854315841032,
+      "burden_after": 0.24085854315841032
+    },
+    {
+      "arm": "native",
+      "subject": "uw_ID029_PreAbl_rev1.vtk",
+      "inducible": false,
+      "burden_before": 0.1886498594207489,
+      "burden_after": 0.1886498594207489
+    },
+    {
+      "arm": "native",
+      "subject": "uw_ID030_PreAbl_rev1.vtk",
+      "inducible": false,
+      "burden_before": 0.3008418850183336,
+      "burden_after": 0.3008418850183336
+    },
+    {
+      "arm": "native",
+      "subject": "uw_ID031_PreAbl_rev1.vtk",
+      "inducible": false,
+      "burden_before": 0.32174186431068835,
+      "burden_after": 0.32174186431068835
+    },
+    {
+      "arm": "native",
+      "subject": "uw_ID032_PreAbl_rev1.vtk",
+      "inducible": false,
+      "burden_before": 0.3248696890770964,
+      "burden_after": 0.3248696890770964
+    },
+    {
+      "arm": "native",
+      "subject": "uw_ID033_PreAbl_rev1.vtk",
+      "inducible": false,
+      "burden_before": 0.2992804545203525,
+      "burden_after": 0.2992804545203525
+    },
+    {
+      "arm": "native",
+      "subject": "uw_ID034_PreAbl_rev1.vtk",
+      "inducible": false,
+      "burden_before": 0.08155406817290654,
+      "burden_after": 0.08155406817290654
+    },
+    {
+      "arm": "native",
+      "subject": "uw_ID035_PreAbl_rev1.vtk",
+      "inducible": false,
+      "burden_before": 0.06393072488065549,
+      "burden_after": 0.06393072488065549
+    },
+    {
+      "arm": "at_roney_burden",
+      "subject": "uw_ID001_PreAbl_rev1.vtk",
+      "inducible": false,
+      "burden_before": 0.15604572138448966,
+      "burden_after": 0.22913281408735076
+    },
+    {
+      "arm": "at_roney_burden",
+      "subject": "uw_ID002_PreAbl_rev1.vtk",
+      "inducible": false,
+      "burden_before": 0.15178491096597208,
+      "burden_after": 0.2282757341405994
+    },
+    {
+      "arm": "at_roney_burden",
+      "subject": "uw_ID003_PreAbl_rev1.vtk",
+      "inducible": false,
+      "burden_before": 0.17833952420921656,
+      "burden_after": 0.25425422588189295
+    },
+    {
+      "arm": "at_roney_burden",
+      "subject": "uw_ID004_PreAbl_rev1.vtk",
+      "inducible": false,
+      "burden_before": 0.03366637843403167,
+      "burden_after": 0.07486553939702344
+    },
+    {
+      "arm": "at_roney_burden",
+      "subject": "uw_ID005_PreAbl_rev1.vtk",
+      "inducible": false,
+      "burden_before": 0.4596751063516298,
+      "burden_after": 0.349
+    },
+    {
+      "arm": "at_roney_burden",
+      "subject": "uw_ID006_PreAbl_rev1.vtk",
+      "inducible": false,
+      "burden_before": 0.33861692687626305,
+      "burden_after": 0.34634290178296195
+    },
+    {
+      "arm": "at_roney_burden",
+      "subject": "uw_ID007_PreAbl_rev1.vtk",
+      "inducible": false,
+      "burden_before": 0.3301342999282075,
+      "burden_after": 0.3408882489172973
+    },
+    {
+      "arm": "at_roney_burden",
+      "subject": "uw_ID008_PreAbl_rev1.vtk",
+      "inducible": false,
+      "burden_before": 0.1833862585519927,
+      "burden_after": 0.24649906514843034
+    },
+    {
+      "arm": "at_roney_burden",
+      "subject": "uw_ID009_PreAbl_rev1.vtk",
+      "inducible": false,
+      "burden_before": 0.11209282368446233,
+      "burden_after": 0.18769786010056733
+    },
+    {
+      "arm": "at_roney_burden",
+      "subject": "uw_ID010_PreAbl_rev1.vtk",
+      "inducible": false,
+      "burden_before": 0.26721672677639474,
+      "burden_after": 0.30771314858832627
+    },
+    {
+      "arm": "at_roney_burden",
+      "subject": "uw_ID011_PreAbl_rev1.vtk",
+      "inducible": false,
+      "burden_before": 0.261630279511868,
+      "burden_after": 0.30832896467464593
+    },
+    {
+      "arm": "at_roney_burden",
+      "subject": "uw_ID012_PreAbl_rev1.vtk",
+      "inducible": false,
+      "burden_before": 0.3065381546677607,
+      "burden_after": 0.33357543826008135
+    },
+    {
+      "arm": "at_roney_burden",
+      "subject": "uw_ID013_PreAbl_rev1.vtk",
+      "inducible": false,
+      "burden_before": 0.2333160412986836,
+      "burden_after": 0.28291019828314296
+    },
+    {
+      "arm": "at_roney_burden",
+      "subject": "uw_ID014_PreAbl_rev1.vtk",
+      "inducible": false,
+      "burden_before": 0.3231043348351841,
+      "burden_after": 0.33922571857391665
+    },
+    {
+      "arm": "at_roney_burden",
+      "subject": "uw_ID015_PreAbl_rev1.vtk",
+      "inducible": false,
+      "burden_before": 0.19143175315522623,
+      "burden_after": 0.24600987852481412
+    },
+    {
+      "arm": "at_roney_burden",
+      "subject": "uw_ID021_PreAbl_rev1.vtk",
+      "inducible": false,
+      "burden_before": 0.21846622180332406,
+      "burden_after": 0.2833988129498345
+    },
+    {
+      "arm": "at_roney_burden",
+      "subject": "uw_ID022_PreAbl_rev1.vtk",
+      "inducible": false,
+      "burden_before": 0.4024907171658984,
+      "burden_after": 0.3489999999999999
+    },
+    {
+      "arm": "at_roney_burden",
+      "subject": "uw_ID023_PreAbl_rev1.vtk",
+      "inducible": false,
+      "burden_before": 0.08116993563755695,
+      "burden_after": 0.12978552738373703
+    },
+    {
+      "arm": "at_roney_burden",
+      "subject": "uw_ID024_PreAbl_rev1.vtk",
+      "inducible": false,
+      "burden_before": 0.29517817189781864,
+      "burden_after": 0.32962126516263274
+    },
+    {
+      "arm": "at_roney_burden",
+      "subject": "uw_ID025_PreAbl_rev1.vtk",
+      "inducible": false,
+      "burden_before": 0.16207480918819447,
+      "burden_after": 0.24947650738809124
+    },
+    {
+      "arm": "at_roney_burden",
+      "subject": "uw_ID026_PreAbl_rev1.vtk",
+      "inducible": false,
+      "burden_before": 0.2014478238686566,
+      "burden_after": 0.25923724451866803
+    },
+    {
+      "arm": "at_roney_burden",
+      "subject": "uw_ID027_PreAbl_rev1.vtk",
+      "inducible": false,
+      "burden_before": 0.16082631718455312,
+      "burden_after": 0.251104760306273
+    },
+    {
+      "arm": "at_roney_burden",
+      "subject": "uw_ID028_PreAbl_rev1.vtk",
+      "inducible": false,
+      "burden_before": 0.24085854315841032,
+      "burden_after": 0.3039622433837646
+    },
+    {
+      "arm": "at_roney_burden",
+      "subject": "uw_ID029_PreAbl_rev1.vtk",
+      "inducible": false,
+      "burden_before": 0.1886498594207489,
+      "burden_after": 0.27671538892155634
+    },
+    {
+      "arm": "at_roney_burden",
+      "subject": "uw_ID030_PreAbl_rev1.vtk",
+      "inducible": false,
+      "burden_before": 0.3008418850183336,
+      "burden_after": 0.33102012121581625
+    },
+    {
+      "arm": "at_roney_burden",
+      "subject": "uw_ID031_PreAbl_rev1.vtk",
+      "inducible": false,
+      "burden_before": 0.32174186431068835,
+      "burden_after": 0.3422249304878033
+    },
+    {
+      "arm": "at_roney_burden",
+      "subject": "uw_ID032_PreAbl_rev1.vtk",
+      "inducible": false,
+      "burden_before": 0.3248696890770964,
+      "burden_after": 0.342685101833074
+    },
+    {
+      "arm": "at_roney_burden",
+      "subject": "uw_ID033_PreAbl_rev1.vtk",
+      "inducible": false,
+      "burden_before": 0.2992804545203525,
+      "burden_after": 0.33252571322598484
+    },
+    {
+      "arm": "at_roney_burden",
+      "subject": "uw_ID034_PreAbl_rev1.vtk",
+      "inducible": false,
+      "burden_before": 0.08155406817290654,
+      "burden_after": 0.15206854402106787
+    },
+    {
+      "arm": "at_roney_burden",
+      "subject": "uw_ID035_PreAbl_rev1.vtk",
+      "inducible": false,
+      "burden_before": 0.06393072488065549,
+      "burden_after": 0.11872132141871028
+    }
+  ]
+}
