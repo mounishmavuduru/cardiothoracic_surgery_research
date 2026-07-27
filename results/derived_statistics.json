@@ -1,0 +1,72 @@
+{
+  "description": "statistics quoted in the manuscript that are derived from, rather than stored in, the primary result files",
+  "convergence_binomial_intervals": {
+    "1500": {
+      "n": 24,
+      "n_inducible": 14,
+      "rate": 0.583,
+      "ci95_low": 0.36643064565636235,
+      "ci95_high": 0.7789030946533215
+    },
+    "3000": {
+      "n": 24,
+      "n_inducible": 4,
+      "rate": 0.167,
+      "ci95_low": 0.04735362660725712,
+      "ci95_high": 0.37384171348868267
+    },
+    "6000": {
+      "n": 24,
+      "n_inducible": 6,
+      "rate": 0.25,
+      "ci95_low": 0.097730409474533,
+      "ci95_high": 0.46711280242266934
+    },
+    "12000": {
+      "n": 24,
+      "n_inducible": 5,
+      "rate": 0.208,
+      "ci95_low": 0.07131861719805496,
+      "ci95_high": 0.42151284363725267
+    },
+    "24000": {
+      "n": 24,
+      "n_inducible": 6,
+      "rate": 0.25,
+      "ci95_low": 0.097730409474533,
+      "ci95_high": 0.46711280242266934
+    },
+    "48000": {
+      "n": 24,
+      "n_inducible": 9,
+      "rate": 0.375,
+      "ci95_low": 0.18799292819600225,
+      "ci95_high": 0.594063615992056
+    }
+  },
+  "validity_radius_dispersion": {
+    "n_meshes": 12,
+    "median": 2422.45,
+    "iqr_low": 1081.5500000000002,
+    "iqr_high": 7384.375,
+    "min": 816.9,
+    "max": 16554.1,
+    "rho_star": 3.0,
+    "min_over_rho_star": 272.3,
+    "all_exceed_rho_star": true
+  },
+  "opencarp_concordance_count": {
+    "n_compared": 182,
+    "n_agree": 156,
+    "agreement": 0.8571428571428571,
+    "both_inducible": 21,
+    "only_opencarp": 5,
+    "only_monodomain": 21
+  },
+  "fibre_control_dynamics": {
+    "n_subjects": 62,
+    "n_changed": 50,
+    "max_abs_change_ms": 661.2,
+    "median_abs_change_ms": 26.5
+  }
+}

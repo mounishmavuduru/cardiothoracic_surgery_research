@@ -51,10 +51,24 @@ grep -cE '^(Overfull|Underfull)' docs/paper/manuscript.log   # bad boxes -> 0
 grep -cE 'LaTeX Warning' docs/paper/manuscript.log  # warnings          -> 0
 ```
 
-Note that tectonic drives **XeTeX**, whereas Overleaf and `latexmk` below default to
-**pdfTeX**. The content is identical but line breaking differs slightly, so the page
-count can differ by one between engines. Overleaf's pdfTeX build is the one to treat
-as authoritative for submission.
+Note that tectonic drives **XeTeX**, whereas Overleaf defaults to **pdfTeX**. Both
+engines have been verified on this manuscript and both give 22 pages with zero errors,
+zero warnings and zero over/underfull boxes, but "clean on XeTeX" is not by itself
+evidence for the engine you submit through, so check the one you will actually use.
+
+### Verifying the pdfTeX build without root
+
+If no system TeX is available, TinyTeX installs a user-mode TeX Live under `$HOME`
+with no administrator rights (on Windows, run this inside WSL):
+
+```
+curl -sL "https://yihui.org/tinytex/install-bin-unix.sh" | sh
+export PATH="$HOME/.TinyTeX/bin/x86_64-linux:$PATH"
+cd docs/paper && for i in 1 2 3; do pdflatex -interaction=nonstopmode manuscript.tex; done
+```
+
+Three passes are needed for the table of contents and cross-references to settle; a
+single pass reports 21 pages and unresolved references, which is not a real failure.
 
 ## Option C — local, Linux/macOS (full TeX Live)
 
@@ -70,7 +84,7 @@ make paper
 cd docs/paper && latexmk -pdf manuscript.tex
 ```
 
-The compiled `docs/paper/manuscript.pdf` (14 pages) is committed for convenience;
+The compiled `docs/paper/manuscript.pdf` (22 pages) is committed for convenience;
 `make paper` regenerates it. Intermediate files (`.aux`, `.log`, `.out`, `.toc`,
 `.fls`, `.fdb_latexmk`) are git-ignored.
 
@@ -100,5 +114,15 @@ The convergence figure is produced separately by
 | §4.8 resolution convergence     | `results/convergence_summary_roney.json`       |
 | Appendix A (Coq theorems)       | `formal/sfi_edge_identity_Q.v`                 |
 
-Every number in the manuscript traces to one of these files; the narrative
-mirror is `PREPRINT.md`.
+Every number in the manuscript traces to one of these files, and that claim is
+checked mechanically rather than asserted: `python scripts/verify_manuscript_numbers.py`
+extracts every numeric literal from the LaTeX and matches it against the stored
+results and the design constants. It currently reports 265 of 265 traced. Values
+that are derived rather than measured (binomial intervals, the validity-radius
+dispersion, the concordance count) are computed and stored by
+`python scripts/derived_statistics.py` so they trace too.
+
+`manuscript.tex` is the single canonical source. A Markdown mirror, `PREPRINT.md`,
+was maintained alongside it until 2026-07-26 and was removed: the two copies
+diverged, and the stale one went on presenting withdrawn results as current for
+several days before the divergence was noticed. Git history retains it.

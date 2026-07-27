@@ -11,7 +11,7 @@ cohort → feature → inducibility-classifier pipeline.
 
 The pre-registered primary endpoint (SFI adds ΔAUC ≥ 0.05 with DeLong p<0.05) is **not met** —
 and per `docs/PRE_REGISTRATION.md` §1, reporting this null is an *accepted success of the protocol*.
-The full writeup is **`docs/paper/PREPRINT.md`**; every number traces to `results/*.json`.
+The full writeup is **`docs/paper/manuscript.tex`**; every number traces to `results/*.json`.
 
 - **Predictive result:** *clean null at synthetic scale* (up to **100,000** networks; SFI ΔAUC ≈ +0.003,
   needing ~4,150 cases to detect — clinically undetectable *there*), with the mechanism being **feature
@@ -34,8 +34,8 @@ The full writeup is **`docs/paper/PREPRINT.md`**; every number traces to `result
   pre-registered guards correctly reject it.
 
 **Honest limitations:** labels are a monodomain simulator (not clinical, not the deferred openCARP
-gold standard); see `docs/paper/PREPRINT.md` §4 and the openCARP validation in `ROADMAP.md` §3.1.
-Read order: `docs/PRE_REGISTRATION.md` → `docs/SFI_THEORY.md` → `docs/paper/PREPRINT.md` →
+gold standard); see `docs/paper/manuscript.tex` §4 and the openCARP validation in `ROADMAP.md` §3.1.
+Read order: `docs/PRE_REGISTRATION.md` → `docs/SFI_THEORY.md` → `docs/paper/manuscript.tex` →
 `notebooks/lab_notebook.md`. Reproduce via `docs/paper/REPRODUCE.md`.
 
 ## The protected novel seed

@@ -45,6 +45,6 @@ Re-running any script is idempotent where a cache/output exists.
 
 1. `docs/PRE_REGISTRATION.md` — the frozen, falsifiable hypothesis and endpoints.
 2. `docs/SFI_THEORY.md` — the mathematics, validity radius (§9), ρ scaling law (§10), protocol (§11).
-3. `docs/paper/PREPRINT.md` — the writeup; every number traces to `results/*.json`.
+3. `docs/paper/manuscript.tex` — the writeup; every number traces to `results/*.json`.
 4. `notebooks/lab_notebook.md` — the dated record, including the corrected GM4 audit and the honest
    negative for novelty experiment 1.

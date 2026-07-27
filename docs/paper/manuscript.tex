@@ -262,7 +262,12 @@ vector rotates by $\sin\angle(\phii_2,\phii_2')\leq\sqrt{2}\,\rhoval$
 (Davis--Kahan). Empirically the error is $1\%$ at $\rhoval=0.3$, crosses $10\%$
 at $\rhoval^\ast\approx 3$, and reaches $92\%$ at $\rhoval=28$, with Weyl holding
 throughout. On real excitable media the gap is tiny, so $\rhoval$ is
-enormous: atrial-cohort median $\rhoval\approx 2422$, about $10^3\times$ past
+enormous. Over the $12$ scanned meshes the median is $\rhoval\approx2422$ with an
+interquartile range of $[1082,\,7384]$ and a full range of $[817,\,16554]$; the
+spread is wide because $\rhoval$ inherits the near-degenerate gap in its
+denominator, but every mesh exceeds $\rhoval^\ast$ and even the smallest does so
+by a factor of $272$, so the conclusion does not rest on the median. That is about
+$10^3\times$ past
 $\rhoval^\ast$.
 
 The criterion $\rhoval$ proves that the
@@ -407,6 +412,21 @@ rotational/torus-shift spatial null for localization, tie-robust permutation
 nulls, and a keep/delete rule deciding each sub-claim by \emph{measured}
 correlation. Effect sizes are gated, not just $p$-values. The primary endpoint
 requires \emph{both} grouped $\dAUC\geq 0.05$ \emph{and} DeLong $p<0.05$.
+
+\paragraph{Synthetic media, generative model.} The synthetic cohorts are random
+geometric graphs, which give a two-dimensional excitable sheet with the
+degree heterogeneity of real tissue and none of its anatomy. Each network draws
+$n$ points uniformly on the unit square and connects every pair within a fixed
+radius; if that radius leaves the graph too sparse the construction falls back to
+a symmetric $6$-nearest-neighbour graph, and in either case only the largest
+connected component is retained, so the medium is a single sheet rather than
+several. Lesion burden is swept uniformly over $[0.05,\,0.45]$ across the cohort,
+which is what makes both classes appear: at the low end the network is stable and
+at the high end it is not, mirroring the mild-to-severe fibrosis gradient of the
+atrial cohorts. Because the topology is generated rather than measured, these
+cohorts carry no fibre field and no anatomical coordinates, and they are used
+only where those are irrelevant --- for the scale behaviour of the null and for
+the cross-medium transfer of the localizer.
 
 \paragraph{Transfer media.} The identical calculus is applied to
 FitzHugh--Nagumo (FHN) excitable networks and Kuramoto phase-oscillator networks
@@ -892,7 +912,14 @@ weighted degree, deleted by measured correlation) and holds across media.
 
 \begin{table}[H]
 \centering
-\caption{Fiedler-gradient origin-rank localization across dynamical media
+\caption{Fiedler-gradient origin-rank localization across dynamical media.
+\emph{Origin rank} is the fraction of nodes whose localizer value is at least the
+value at the true reentry origin, so $0$ means the origin is the global maximum of
+the field, $0.5$ is chance, and $1$ means it is the minimum; it is
+scale-free and comparable across media of different size. The companion metric
+used on real anatomy, \emph{argmax-geodesic error}, is the shortest-path distance
+in millimetres along the surface from the localizer's argmax to the simulator's
+reentry origin
 (\code{results/\allowbreak gm4\allowbreak\_*\allowbreak\_metrics.json}). Lower rank is better; a perfect localizer
 would place the origin at rank $0$. The null-draw column counts resampled
 random-origin draws whose mean origin-rank is at or below the observed one; it is
@@ -995,18 +1022,34 @@ Our own convergence study is the project's single weakest point, and we state it
 before a reader finds it. On a completed six-tier study (Roney, $n=24$ at each of
 1500/\allowbreak 3000/\allowbreak 6000/\allowbreak 12000/\allowbreak 24000/\allowbreak 48000 nodes; $144$ simulations,
 \code{results/\allowbreak convergence\_summary\_roney.json}), the inducibility rate crashes
-from the coarse mesh ($58.3\%$ at $1500$) to $16.7\%$ at $3000$, then is
-\emph{non-monotone} across the fine tiers ($25.0\%$, $20.8\%$, $25.0\%$) and rises
-again to $37.5\%$ at the finest affordable tier ($\sim\!50$k nodes), a
+from the coarse mesh ($58.3\%$ at $1500$) to $16.7\%$ at $3000$, then appears
+non-monotone across the fine tiers ($25.0\%$, $20.8\%$, $25.0\%$) and rises again
+to $37.5\%$ at the finest affordable tier ($\sim\!50$k nodes), a
 $17$-percentage-point spread over the last three tiers, so it has \emph{not}
 settled.
+
+How much of that pattern is real deserves stating, because $n=24$ per tier buys
+little precision. Exact binomial intervals are
+$[36.6,77.9]$, $[4.7,37.4]$, $[9.8,46.7]$, $[7.1,42.2]$, $[9.8,46.7]$ and
+$[18.8,59.4]$ percent across the six tiers. Every tier from $3000$ nodes upward
+overlaps every other, so the apparent wiggle among the fine tiers is
+\emph{not} distinguishable from sampling noise and we do not claim it is a real
+non-monotonicity. Only the drop from the coarsest tier is close to resolvable,
+its interval meeting the next tier's over a $0.8$-point sliver. What the study
+establishes is therefore the weaker and sufficient claim: at this sample size the
+rate cannot be shown to have converged anywhere in the tested window, and no tier
+can be declared the settled value. A study that could distinguish these tiers
+would need several hundred subjects per tier, which is roughly two orders of
+magnitude more simulation than the $144$ runs here.
 
 \begin{table}[H]
 \centering
 \caption{Inducibility rate vs.\ mesh resolution (Roney, $n=24$ per tier). The
 rate does not converge in the tested window; adjacent-tier per-subject verdict
 agreement is itself non-monotone ($50\%$, $75\%$, $71\%$, $63\%$, $79\%$) and the
-rate keeps drifting.}
+rate keeps drifting. At $n=24$ per tier the exact binomial intervals overlap for
+every tier from $3000$ nodes upward, so the ordering among the fine tiers is not
+resolvable; the claim supported is non-convergence, not a specific shape.}
 \label{tab:convergence}
 \small
 \begin{tabular}{@{}lcccccc@{}}
