@@ -300,6 +300,69 @@ Full detail is in the pre-registration (\code{docs/\allowbreak PRE\_REGISTRATION
 theory note (\code{docs/\allowbreak SFI\_THEORY.md}); the endpoints, cross-validation scheme,
 baseline set, and accepted null were frozen before any labels were inspected.
 
+\paragraph{The edge weight.} Everything downstream --- $\lam_2$, the Fiedler
+vector, the spectral gap, $\rhoval$ and the SFI itself --- is a function of the
+conduction graph's edge weights, so we give their form explicitly. For an edge
+$(i,j)$ let $\hat{e}_{ij}$ be the unit vector along it, $\bar{f}_{ij}$ the
+normalised mean of the two endpoint fibre directions, and
+$a_{ij}=\lvert\hat{e}_{ij}\cdot\bar{f}_{ij}\rvert$ their absolute alignment. With
+$\phi_{ij}=\tfrac12(\phi_i+\phi_j)$ the mean endpoint fibrosis,
+\begin{equation}
+w_{ij}=\underbrace{\bigl[c_\perp+(c_\parallel-c_\perp)\,a_{ij}^{2}\bigr]}_{\text{anisotropy}}
+\cdot\underbrace{\mathrm{clip}\bigl(1-\phi_{ij},\,\varepsilon,\,1\bigr)}_{\text{fibrosis}},
+\label{eq:weight}
+\end{equation}
+with $c_\parallel=1.0$ along fibre, $c_\perp=0.3$ across, and a floor
+$\varepsilon=0.05$ so dense scar retains a small residual conductance rather than
+disconnecting the graph. The $a^{2}$ dependence makes the weight a function of
+alignment rather than of direction, so it is invariant to fibre sign, which is
+the only property of $\bar{f}$ that is identifiable. Note that both factors are
+bounded, so $w_{ij}\in[\varepsilon c_\perp,\,c_\parallel]$; no edge weight can
+vanish and the graph stays connected by construction.
+
+\paragraph{Cohort flow.} The Roney deposit contains $100$ meshes and all $100$
+are used. The UW deposit contains $164$ meshes, which are $82$ patients imaged
+twice, before and after ablation; the primary analysis uses the $82$
+\emph{pre-ablation} meshes only, since post-ablation geometry encodes the
+delivered treatment. No subject is excluded for any other reason, so the analysed
+cohort is $100+82=182$ and there is no attrition to report. The $164$-mesh figure
+appears in this paper only where a statement concerns the released files
+themselves, such as the fibre-field and element-tag audits.
+
+\paragraph{Inducibility protocol.} Labels come from a monodomain
+Mitchell--Schaeffer solve on the coarsened surface ($2000$ nodes, vertex
+clustering). Membrane parameters, frozen before any label was generated:
+$\tau_{\mathrm{in}}=0.3$, $\tau_{\mathrm{out}}=6.0$, $\tau_{\mathrm{open}}=120$,
+$\tau_{\mathrm{close}}=110$~ms and $v_{\mathrm{gate}}=0.13$, with fibrosis
+shortening $\tau_{\mathrm{close}}$ by up to $50\%$. Diffusion uses an anisotropic
+conductance-weighted cotangent Laplacian with $d_0=0.20$ and $w_{\mathrm{ref}}=0.3$,
+integrated by backward Euler at $\Delta t=0.05$~ms. Induction is burst pacing from
+$2$ randomly chosen sites, $6$ beats at a cycle length of $150$~ms, stimulus
+amplitude $0.15$ over $2$~ms within a $4$~mm radius. A subject is labelled
+inducible if self-sustained supra-threshold activity persists at least $650$~ms
+after the last stimulus, observed over a $1000$~ms window. The protocol was
+verified before use: APD90 $218$~ms healthy and $121$~ms fibrotic, planar
+conduction velocity $0.4$--$1.2$~m/s, and a monotone relationship between fibrosis
+and sustained reentry.
+
+\paragraph{Evaluation pipeline.} Cross-validation is \code{GroupKFold} with the
+group set to the patient, so no subject appears in both training and test folds,
+using $k=\min(5,\,n_{\mathrm{groups}})$ folds. Two classifiers are run. Logistic
+regression is a standardisation-plus-\code{LogisticRegression} pipeline
+(\code{liblinear}, at most $2000$ iterations) whose regularisation $C$ is chosen
+in an \emph{inner} \code{GroupKFold} over $\{0.03,0.1,0.3,1.0,3.0\}$, so tuning
+never sees the outer test fold. Gradient boosting is deliberately \emph{not}
+tuned --- $120$ trees, depth $2$, learning rate $0.05$, subsample $0.8$ --- because
+at these sample sizes a search would fit the folds; this is a fixed, shallow
+reference rather than a competitive model. Out-of-fold predicted probabilities
+are pooled across folds and compared by the DeLong test. Pooling out-of-fold
+scores means the two compared vectors come from $k$ different fitted models
+rather than from two fixed scoring functions, which is DeLong's assumption; the
+paired structure and the leakage-free grouping are preserved, but the resulting
+$p$-values should be read as approximate. The naive comparison reported alongside
+replaces the grouping with shuffled \code{KFold}, which is exactly the leakage
+this design exists to prevent.
+
 \paragraph{Substrate.} Real left-atrial surfaces are loaded into weighted
 conduction graphs from two public cohorts: the Roney LA virtual cohort (Zenodo
 5801337~\cite{roney2022}) and the UW/Boyle LGE-MRI cohort (Dryad
@@ -1159,7 +1222,12 @@ with \code{coqc formal/sfi\_edge\_identity\_Q.v}.
 
 \section{Reproducibility}
 All stochastic steps are seeded; the exact configuration and commit hash
-accompany every reported number. Numeric verification:
+accompany every reported number. Results in this paper were produced on
+Python~$3.12.10$ with NumPy~$2.5.1$, SciPy~$1.18.0$, scikit-learn~$1.9.0$,
+pandas~$3.0.5$ and Matplotlib~$3.11.1$; the openCARP cross-check used
+openCARP~v$19.0$. The per-subject record cache is keyed by a hash of the frozen
+configuration, so changing any frozen constant invalidates it rather than
+silently reusing stale labels. Numeric verification:
 \code{python scripts/verify\_sfi\_identity.py} and
 \code{python scripts/verify\_math\_rigor.py} (sympy symbolic, mpmath 40-digit,
 exact-rational, interval-certified, and cross-solver checks). Convergence:
