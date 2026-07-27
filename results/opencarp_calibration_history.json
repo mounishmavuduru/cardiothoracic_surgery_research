@@ -1,0 +1,45 @@
+{
+  "description": "All three openCARP calibration-gate attempts, preserved. Each run of scripts/opencarp_calibrate.py overwrote results/opencarp_calibration.json, so the two rejected configurations survived only in the commit log and lab notebook. The manuscript cites the rejected rates as evidence the gate could fail, so they need a stored source.",
+  "gate_criteria": {
+    "inducible_fraction_band": [0.10, 0.40],
+    "spearman_fibrosis_verdict": "must be positive",
+    "note": "Band and sign are the section 7.4 calibration gate, defined on the Roney cohort before openCARP was available."
+  },
+  "discipline": "Every change between attempts was anchored to an INDEPENDENT physiological target (APD90, then conduction velocity), never to the gate itself. No endpoint parameter (reentry_min_ms, max_depol_fraction, min_reactivating_nodes) was altered at any stage, which is why the gate remained able to fail.",
+  "attempts": [
+    {
+      "attempt": 1,
+      "configuration": "openCARP defaults: tau_close 150, tau_out 5; g_il 0.174, g_it 0.019; fibrosis reduces CONDUCTIVITY only",
+      "n_per_cohort": 30,
+      "roney": {"n_inducible": 27, "n": 30, "inducible_fraction": 0.900, "spearman_fibrosis": -0.261, "gate_passed": false},
+      "uw": {"n_inducible": 27, "n": 30, "inducible_fraction": 0.900, "spearman_fibrosis": -0.162, "gate_passed": false},
+      "concordance_with_monodomain": {"n_compared": 60, "agree": 11, "agreement": 0.183, "both_inducible": 10, "only_opencarp": 44, "only_monodomain": 5},
+      "diagnosis": "A negative fibrosis-verdict correlation is the signature of rate-dependent block rather than reentry. Fibrosis was reducing conductivity but not shortening the action potential, so added fibrosis could only add block."
+    },
+    {
+      "attempt": 2,
+      "configuration": "fibrosis-dependent ERP added: tau_close = 115 x (1 - 0.5 f), tau_out 6, tau_in 0.3, tau_open 120, V_gate 0.13; conductivity still at openCARP defaults",
+      "n_per_cohort": 30,
+      "roney": {"n_inducible": 23, "n": 30, "inducible_fraction": 0.767, "spearman_fibrosis": -0.244, "gate_passed": false},
+      "uw": {"n_inducible": 28, "n": 30, "inducible_fraction": 0.933, "spearman_fibrosis": -0.033, "gate_passed": false},
+      "concordance_with_monodomain": {"n_compared": 60, "agree": 16, "agreement": 0.267, "both_inducible": 11, "only_opencarp": 40, "only_monodomain": 4},
+      "diagnosis": "Improved but still failing, so the ERP omission was only part of the cause. Conduction velocity had never been calibrated: the shipped conductivity gives CV 0.344 m/s against the frozen 0.4-1.2 m/s band, a ~75 mm wavelength in an atrium of ~110 mm characteristic length, which makes reentry trivially easy."
+    },
+    {
+      "attempt": 3,
+      "configuration": "conduction velocity also calibrated: g_il 1.05, g_it 0.315, g_el 3.78, g_et 1.134 -> CV ~0.87 m/s; transverse at 0.3x longitudinal to match the in-house along/cross weighting",
+      "n_per_cohort": 30,
+      "roney": {"n_inducible": 10, "n": 30, "inducible_fraction": 0.333, "spearman_fibrosis": 0.481, "gate_passed": true},
+      "uw": {"n_inducible": 0, "n": 30, "inducible_fraction": 0.000, "spearman_fibrosis": null, "gate_passed": false, "note": "correlation undefined with no variance in the verdict"},
+      "concordance_with_monodomain": {"n_compared": 60, "agree": 55, "agreement": 0.917, "both_inducible": 10, "only_opencarp": 0, "only_monodomain": 5},
+      "diagnosis": "ACCEPTED for Roney. Rate mid-band and the fibrosis-verdict correlation strongly positive, against the frozen solver's 0.75. openCARP calls inducible where monodomain does not in zero cases, so it is the more conservative solver."
+    }
+  ],
+  "measured_calibration_curves": {
+    "apd90_vs_tau_close_ms": {"150": 277.0, "110": 209.0, "55": 113.0},
+    "apd90_targets_from_frozen_monodomain": {"healthy": 218.0, "fibrotic": 121.0},
+    "conduction_velocity_vs_g_il_m_per_s": {"0.174": 0.344, "0.50": 0.594, "1.00": 0.852, "2.00": 1.307},
+    "conduction_velocity_target_band_m_per_s": [0.4, 1.2],
+    "note": "CV first appeared to saturate because the monodomain conductivity is the harmonic mean of intra- and extracellular values; raising g_il alone asymptotes at g_el. The curve above is with both scaled together."
+  }
+}
