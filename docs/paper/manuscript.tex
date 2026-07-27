@@ -455,7 +455,7 @@ than null; note in particular that their base AUCs differ sharply between the
 competitor and fibrosis-only baselines, which is what inflates the latter's
 apparent increment (Section~\ref{sec:null}).}
 \label{tab:null}
-ootnotesize
+\footnotesize
 \begin{tabularx}{\linewidth}{@{}l r l r X@{}}
 \toprule
 cohort / medium & events/$N$ & model & base AUC & SFI $\dAUC$ (95\% CI); $p$ \\
@@ -478,15 +478,16 @@ Kuramoto networks & \multicolumn{3}{l}{$500$ networks}     & $\leq +0.0036$; $p\
 \centering
 \includegraphics[width=0.86\linewidth]{fig_predictive_null.png}
 \caption{The predictive null. Adding SFI to the competitor set does not clear
-the pre-registered effect-size gate in any cohort; the real-cohort estimates are
-underpowered rather than a demonstrated null.}
+the pre-registered effect-size gate in any cohort, and on real anatomy the
+bootstrap interval excludes the gate as well as containing zero, so the
+real-cohort result is a measured null rather than a shortfall of power.}
 \label{fig:null}
 \end{figure}
 
 The negative is not uniform, and we separate the regimes. On the
 \emph{synthetic} cohorts (up to $100{,}000$ networks) the null is clean: the
 effect converges to $\dAUC\approx+0.003$, statistically resolvable only because
-$N$ is enormous. On the \emph{real} cohorts it is underpowered and inconclusive.
+$N$ is enormous. On the \emph{real} cohorts it is a measured null.
 The combined gradient-boosting point estimate is $+0.012$ (DeLong $p=0.449$,
 bootstrap CI $[-0.017,+0.044]$), roughly a quarter of the pre-registered
 $0.05$ threshold and with an interval that excludes it. An earlier version of
@@ -833,12 +834,15 @@ calibration gate remained able to fail, and it did.
 on Roney: $22/100$ inducible ($22.0\%$, inside the $10$--$40\%$ band) with a
 fibrosis--verdict rank correlation of $+0.404$, against the frozen solver's $0.75$.
 Across all $182$ subjects the two solvers agree on $156$, or $85.7\%$. The
-asymmetry is the substantive part: openCARP calls a subject inducible where the
-monodomain solver does not in \emph{zero} cases, while the reverse happens $21$
-times. The stand-in is therefore not over-calling relative to an independent
-reaction--diffusion solver; if anything it is the more liberal of the two, which
-makes the incremental comparisons reported above conservative rather than
-inflated.
+asymmetry is the substantive part. Of the $26$ subjects the two solvers disagree
+on, openCARP calls only $5$ inducible where the monodomain solver does not, while
+the reverse happens $21$ times; over the whole cohort openCARP labels $26/182$
+against monodomain's $42/182$. The stand-in is therefore not under-calling
+relative to an independent reaction--diffusion solver --- it is the more liberal
+of the two, which makes the incremental comparisons reported above conservative
+rather than inflated. (On the $60$-subject calibration subset the discordance was
+entirely one-way, $0$ against $5$; that does not hold on the full cohort and the
+figure quoted here is the full-cohort one.)
 
 \paragraph{What this check does not establish.} Two limits are worth stating. The
 fibrosis field must be discretised into conductivity classes for openCARP, and the
@@ -1186,9 +1190,12 @@ feature ranks cases usefully, which must still be tested against competitors.
 We are equally explicit about what we do not claim. The mathematics is
 classical; no new theorem.
 $\rhoval$ does \emph{not} prove SFI is non-predictive, only that the
-single-vector estimator is ill-conditioned; the null is separately due to feature
-redundancy. The real-cohort result is \emph{not} a demonstrated null; it is
-underpowered. The localizer is \emph{not} precise (strict endpoint null) and does
+single-vector estimator is ill-conditioned; the predictive null is separate from
+it, and is only partly redundancy (Section~\ref{sec:redundancy}). The real-cohort
+result \emph{is} a measured null in the sense that the interval excludes the
+pre-registered gate, but it does \emph{not} exclude a small effect: the lower
+bound is $-0.017$, so an increment of a few thousandths remains compatible with
+the data and would need a far larger cohort to resolve. The localizer is \emph{not} precise (strict endpoint null) and does
 \emph{not} beat substrate imaging. The $\rhoval$ scaling ``law'' is a clean match
 to Weyl only on the real atrial 2-manifold. Labels are a monodomain simulator,
 not clinical outcomes and not openCARP.
@@ -1230,8 +1237,7 @@ null we report is partly a statement about the labeller and not only about SFI.
 (\code{fibrosis\_vs\_+SFI}, gradient boosting, UW), and that one sits on a base AUC
 of $0.562$ with eight positives, so it is uninformative rather than borderline. An
 earlier version reported this family's combined estimate as the study's one
-positive at $p=0.009$; it is withdrawn (Section~
-ef{sec:corrections}).
+positive at $p=0.009$; it is withdrawn (Section~\ref{sec:corrections}).
 \item $\rhoval^\ast$ and the random-geometric gap exponents are empirical; only
 the real atrial 2-manifold cleanly matches the Weyl exponent.
 \end{enumerate}
@@ -1240,14 +1246,25 @@ the real atrial 2-manifold cleanly matches the Weyl exponent.
 \section{Conclusion}
 %======================================================================
 A closed-form spectral fragility index does not add practically meaningful
-reentry-inducibility prediction beyond existing features at synthetic scale (a
-clean, feature-redundancy null), and on real anatomy the evidence is
-inconclusive rather than a demonstrated null. Independently, the single-vector
-estimator is provably ill-conditioned on real tissue ($\rhoval\gg1$). The core
-result is not a discovery but a carefully-scoped boundary: where a Fiedler-based
-estimator is numerically valid, why real tissue lies far outside it, and how
-easily naive methodology would have mistaken redundant, inconclusive signal for a
-working biomarker. The absolute claims await the openCARP validation.
+reentry-inducibility prediction beyond existing features, either at synthetic
+scale or on $182$ patients of real anatomy, where the combined estimate is
+$+0.012$ with an interval that excludes the pre-registered gate. The mechanism is
+decomposable and only half of it is redundancy: the aggregate SFI summaries are
+reconstructible from the competitor set at $R^2=0.970$, while the order statistics
+carry variance of their own that simply does not predict the label. Independently
+of the predictive question, the single-vector estimator is ill-conditioned on real
+tissue ($\rhoval\gg1$), and lawfully more so as meshes are refined.
+
+The core result is not a discovery but a carefully-scoped boundary: where a
+Fiedler-based estimator is numerically valid, why real tissue lies far outside it,
+and how readily standard methodology would have reported a working biomarker --- a
+false positive this project produced from its own pipeline, at $\dAUC=+0.103$ and
+$p=0.009$, and then withdrew. What the study cannot settle is the absolute
+inducibility rate, which does not converge within the mesh resolutions we could
+afford; the comparative claims, which score identical labels in both arms, do not
+depend on it. An independent solver run alongside the labeller agrees with it on
+$85.7\%$ of subjects and is the more conservative of the two, which bounds how
+much of the null could be an artefact of the stand-in.
 
 %======================================================================
 \appendix
