@@ -153,7 +153,9 @@ positive this protocol catches.
 In brief, a closed-form spectral
 fragility index does \emph{not} add practically meaningful reentry-inducibility
 prediction beyond existing features, either at synthetic scale or on $182$
-patients of real anatomy, and the mechanism is feature redundancy. Independently, the
+patients of real anatomy. The mechanism is partly feature redundancy and partly a
+feature that is genuinely new but unpredictive (Section~\ref{sec:redundancy}).
+Independently, the
 single-vector estimator is provably ill-conditioned on real tissue
 ($\rhoval\gg 1$). What we report is not a discovery but a carefully drawn
 boundary: where a Fiedler-based estimator is numerically valid, why real tissue
@@ -464,6 +466,55 @@ $n=100$) and $+0.012$ (combined, $n=182$), with intervals that contain zero and
 exclude the $0.05$ gate. An earlier version read the then-current
 $+0.036$--$0.051$ as compatible with a detectable effect we were underpowered to
 confirm; those estimates are superseded and that reading no longer holds.
+
+\subsection{Testing the redundancy explanation directly}
+\label{sec:redundancy}
+
+The account above attributes the null to feature redundancy. That explanation was
+inferred from the incremental AUC being zero, which does not establish it: a
+feature that is pure noise also adds nothing, and so does one the classifier
+cannot exploit. Those are three different diagnoses. We therefore measured
+redundancy directly and without reference to the label, by regressing each SFI
+column on the competitor block and by taking the leading canonical correlation
+between the two blocks, with a permuted-SFI control to separate genuine
+redundancy from a degenerate estimator.
+
+The blocks are almost collinear in their dominant direction: the leading
+canonical correlation between the nine SFI columns and the six competitors is
+$0.996$, against $0.289$ for the permuted control. Taken alone that supports the
+redundancy account. Per column it is less uniform, and the structure matters:
+
+\begin{center}
+\small
+\begin{tabular}{@{}lrr@{}}
+\toprule
+SFI column & $R^2$ on competitors & $R^2$ permuted \\
+\midrule
+\code{sfi\_total}, \code{sfi\_region\_mean} & $0.970$ & $0.008$ \\
+\code{sfi\_top3}                            & $0.842$ & $0.022$ \\
+\code{sfi\_top2}                            & $0.665$ & $0.040$ \\
+\code{sfi\_edge\_frag\_max}                 & $0.205$ & $0.010$ \\
+\code{sfi\_edge\_frag\_mean}                & $0.154$ & $0.015$ \\
+\code{sfi\_region\_max}, \code{sfi\_top1}   & $0.138$ & $0.007$ \\
+\code{sfi\_region\_std}                     & $0.098$ & $0.006$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Four of the nine columns are reconstructible from the competitors at
+$R^2\geq0.60$, and the two aggregate summaries almost perfectly so. The remaining
+five keep most of their variance, at $R^2<0.25$, well above the permuted control
+but far from redundant. So the redundancy account holds for the aggregate
+summaries and does not hold for the order statistics.
+
+This qualifies rather than overturns the null, and it sharpens what the null
+means. For \code{sfi\_total} and \code{sfi\_region\_mean} the competitors already
+carry the information, and adding them cannot help. For \code{sfi\_region\_max},
+\code{sfi\_top1} and \code{sfi\_region\_std} there is genuine unique variance in
+the feature, and the finding is the stronger one: that variance exists and does
+not predict the label. A biomarker can fail either by saying nothing new or by
+saying something new that does not matter, and on this evidence SFI does both,
+in different components. We had previously reported only the first.
 
 \subsection{Region definition and the patient-level reduction}
 \label{sec:regions}
@@ -935,8 +986,10 @@ toward zero (Section~\ref{sec:labelnoise}), so that comparison is conservative.
 This work makes four contributions.
 (1)~A pre-registered, leakage-controlled, effect-size-gated evaluation of a
 plausible spectral biomarker: a clean null at synthetic scale ($10^5$ networks)
-with its mechanism (feature redundancy: even the exact $\Delta\lam_2$ SFI adds
-nothing), and a measured null on $182$ patients of real anatomy.
+with its mechanism measured rather than inferred (Section~\ref{sec:redundancy}:
+the aggregate SFI summaries are reconstructible from the competitors at
+$R^2=0.970$, the order statistics are not, and their unique variance is
+unpredictive), and a measured null on $182$ patients of real anatomy.
 (2)~A label-free validity criterion $\rhoval$ for the single-vector estimator:
 it proves $\phii_2$ is ill-conditioned on real tissue ($\rhoval\approx2422\gg
 \rhoval^\ast\approx3$), a portable a priori check for any Fiedler-based marker,

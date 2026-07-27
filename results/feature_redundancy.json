@@ -1,0 +1,72 @@
+{
+  "description": "label-free test of whether competitors already carry SFI's information",
+  "n_subjects": 182,
+  "per_feature": {
+    "sfi_edge_frag_max": {
+      "r2_competitors": 0.20511950976923365,
+      "r2_fibrosis": 0.03734652496929758,
+      "r2_permuted_control": 0.01036404632879151
+    },
+    "sfi_edge_frag_mean": {
+      "r2_competitors": 0.15411435473076784,
+      "r2_fibrosis": 0.13954110060742209,
+      "r2_permuted_control": 0.015092755805225733
+    },
+    "sfi_region_max": {
+      "r2_competitors": 0.13779122887839323,
+      "r2_fibrosis": 0.12081363973699066,
+      "r2_permuted_control": 0.006886662025692658
+    },
+    "sfi_region_mean": {
+      "r2_competitors": 0.9698258982172139,
+      "r2_fibrosis": 0.5868065287796191,
+      "r2_permuted_control": 0.008396969239802488
+    },
+    "sfi_region_std": {
+      "r2_competitors": 0.09780023263829218,
+      "r2_fibrosis": 0.08472728558458698,
+      "r2_permuted_control": 0.006055344069022528
+    },
+    "sfi_top1": {
+      "r2_competitors": 0.13779122887839323,
+      "r2_fibrosis": 0.12081363973699066,
+      "r2_permuted_control": 0.006886662025692658
+    },
+    "sfi_top2": {
+      "r2_competitors": 0.6648791438458083,
+      "r2_fibrosis": 0.38579002426072195,
+      "r2_permuted_control": 0.040043236464888055
+    },
+    "sfi_top3": {
+      "r2_competitors": 0.841525882412224,
+      "r2_fibrosis": 0.46346576435234343,
+      "r2_permuted_control": 0.022371176183465513
+    },
+    "sfi_total": {
+      "r2_competitors": 0.9698258982172139,
+      "r2_fibrosis": 0.5868065287796193,
+      "r2_permuted_control": 0.008396969239802599
+    }
+  },
+  "median_r2_competitors": 0.20511950976923365,
+  "median_r2_permuted_control": 0.008396969239802599,
+  "canoncorr_sfi_competitors": 0.9962875452289907,
+  "canoncorr_sfi_fibrosis": 0.8592670285525659,
+  "canoncorr_permuted_control": 0.2892812403742691,
+  "verdict": "PARTIAL redundancy. Canonical correlation 0.996 vs 0.289 permuted, so the blocks share a dominant direction almost exactly; but only 4 of 9 SFI columns are reconstructible at R^2 >= 0.60, while 5 retain most of their variance at R^2 < 0.25. Redundancy explains the null for the aggregate summaries (sfi_total and sfi_region_mean both at R^2 = 0.970); for the order statistics the null must instead mean their unique variance is unpredictive.",
+  "n_reconstructible_r2_ge_0.60": 4,
+  "n_retaining_variance_r2_lt_0.25": 5,
+  "reconstructible_columns": [
+    "sfi_region_mean",
+    "sfi_top2",
+    "sfi_top3",
+    "sfi_total"
+  ],
+  "independent_columns": [
+    "sfi_edge_frag_max",
+    "sfi_edge_frag_mean",
+    "sfi_region_max",
+    "sfi_region_std",
+    "sfi_top1"
+  ]
+}
