@@ -1,0 +1,137 @@
+{
+  "description": "does openCARP propagate on UW anatomy at all?",
+  "rows": [
+    {
+      "cohort": "roney",
+      "subject": "Mesh_83815278.vtk",
+      "n_nodes": 2023,
+      "mean_edge_mm": 2.6294780046530395,
+      "fibrosis_mean": 0.33933044699110154,
+      "peak_depolarised_fraction": 0.9426594167078596,
+      "mean_depolarised_fraction": 0.21668268975028643,
+      "n_nodes_ever_activated": 2023,
+      "frac_nodes_ever_activated": 1.0
+    },
+    {
+      "cohort": "roney",
+      "subject": "Mesh_49769496.vtk",
+      "n_nodes": 2277,
+      "mean_edge_mm": 2.4836509001282123,
+      "fibrosis_mean": 0.5785584005903607,
+      "peak_depolarised_fraction": 0.639877031181379,
+      "mean_depolarised_fraction": 0.18919538878457057,
+      "n_nodes_ever_activated": 2277,
+      "frac_nodes_ever_activated": 1.0
+    },
+    {
+      "cohort": "roney",
+      "subject": "Mesh_56611509.vtk",
+      "n_nodes": 2197,
+      "mean_edge_mm": 2.6186455254129366,
+      "fibrosis_mean": 0.23694501431674986,
+      "peak_depolarised_fraction": 1.0,
+      "mean_depolarised_fraction": 0.2279068211603272,
+      "n_nodes_ever_activated": 2197,
+      "frac_nodes_ever_activated": 1.0
+    },
+    {
+      "cohort": "roney",
+      "subject": "Mesh_31475951.vtk",
+      "n_nodes": 2175,
+      "mean_edge_mm": 2.6777812414573994,
+      "fibrosis_mean": 0.20110217703806557,
+      "peak_depolarised_fraction": 1.0,
+      "mean_depolarised_fraction": 0.23454188916040664,
+      "n_nodes_ever_activated": 2175,
+      "frac_nodes_ever_activated": 1.0
+    },
+    {
+      "cohort": "roney",
+      "subject": "Mesh_12928433.vtk",
+      "n_nodes": 2179,
+      "mean_edge_mm": 2.644594959578888,
+      "fibrosis_mean": 0.49100709834520184,
+      "peak_depolarised_fraction": 0.8164295548416705,
+      "mean_depolarised_fraction": 0.3334549909118175,
+      "n_nodes_ever_activated": 2179,
+      "frac_nodes_ever_activated": 1.0
+    },
+    {
+      "cohort": "roney",
+      "subject": "Mesh_99895768.vtk",
+      "n_nodes": 2223,
+      "mean_edge_mm": 2.7858046361417936,
+      "fibrosis_mean": 0.3800564467275557,
+      "peak_depolarised_fraction": 0.9604138551506972,
+      "mean_depolarised_fraction": 0.21009182219294117,
+      "n_nodes_ever_activated": 2223,
+      "frac_nodes_ever_activated": 1.0
+    },
+    {
+      "cohort": "uw",
+      "subject": "uw_ID001_PreAbl_rev1.vtk",
+      "n_nodes": 2177,
+      "mean_edge_mm": 3.0665883907475107,
+      "fibrosis_mean": 0.15604572138448966,
+      "peak_depolarised_fraction": 0.951309141019752,
+      "mean_depolarised_fraction": 0.23126168714441245,
+      "n_nodes_ever_activated": 2177,
+      "frac_nodes_ever_activated": 1.0
+    },
+    {
+      "cohort": "uw",
+      "subject": "uw_ID002_PreAbl_rev1.vtk",
+      "n_nodes": 2151,
+      "mean_edge_mm": 2.840359063396985,
+      "fibrosis_mean": 0.15178491096597208,
+      "peak_depolarised_fraction": 1.0,
+      "mean_depolarised_fraction": 0.23041593301534657,
+      "n_nodes_ever_activated": 2151,
+      "frac_nodes_ever_activated": 1.0
+    },
+    {
+      "cohort": "uw",
+      "subject": "uw_ID003_PreAbl_rev1.vtk",
+      "n_nodes": 2058,
+      "mean_edge_mm": 2.8339067475812136,
+      "fibrosis_mean": 0.17833952420921656,
+      "peak_depolarised_fraction": 0.9538386783284742,
+      "mean_depolarised_fraction": 0.22724072756211597,
+      "n_nodes_ever_activated": 2058,
+      "frac_nodes_ever_activated": 1.0
+    },
+    {
+      "cohort": "uw",
+      "subject": "uw_ID004_PreAbl_rev1.vtk",
+      "n_nodes": 2252,
+      "mean_edge_mm": 3.346259372695538,
+      "fibrosis_mean": 0.03366637843403167,
+      "peak_depolarised_fraction": 0.9711367673179396,
+      "mean_depolarised_fraction": 0.25255707379383974,
+      "n_nodes_ever_activated": 2252,
+      "frac_nodes_ever_activated": 1.0
+    },
+    {
+      "cohort": "uw",
+      "subject": "uw_ID005_PreAbl_rev1.vtk",
+      "n_nodes": 2090,
+      "mean_edge_mm": 3.537456352644686,
+      "fibrosis_mean": 0.4596751063516298,
+      "peak_depolarised_fraction": 0.48086124401913877,
+      "mean_depolarised_fraction": 0.18981526830677267,
+      "n_nodes_ever_activated": 2020,
+      "frac_nodes_ever_activated": 0.9665071770334929
+    },
+    {
+      "cohort": "uw",
+      "subject": "uw_ID006_PreAbl_rev1.vtk",
+      "n_nodes": 2182,
+      "mean_edge_mm": 3.46409474920733,
+      "fibrosis_mean": 0.33861692687626305,
+      "peak_depolarised_fraction": 0.6021998166819432,
+      "mean_depolarised_fraction": 0.2100278826283287,
+      "n_nodes_ever_activated": 2176,
+      "frac_nodes_ever_activated": 0.997250229147571
+    }
+  ]
+}

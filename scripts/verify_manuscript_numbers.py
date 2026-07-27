@@ -1,5 +1,10 @@
 r"""Traceability check: is every number in the manuscript backed by a stored result?
 
+Bibliographic and typographic literals are stripped before the check -- citation keys
+(which embed years, e.g. weyl1912), in-text citation years, dataset accession numbers, and
+the LaTeX thousands separator. They are not results and flagging them on every run would
+make a non-empty report meaningless.
+
 The manuscript's own front matter promises that "all numbers trace to results/*.json".
 That promise has never been checked mechanically. This does it: extract every numeric
 literal from the LaTeX, then look for each one in the stored results, in the frozen
@@ -70,6 +75,15 @@ def main() -> None:
     # strip comments and the bibliography, where numbers are page/volume references
     tex = re.sub(r"(?<!\\)%.*", "", tex)
     tex = tex.split(r"\begin{thebibliography}")[0]
+
+    # Three classes of literal are bibliographic or typographic rather than results, and
+    # flagging them every run trains a reader to ignore the whole report. Remove them at
+    # source so a non-empty output always means something.
+    tex = re.sub(r"\\cite\{[^}]*\}", " ", tex)          # citation KEYS carry years (weyl1912)
+    tex = tex.replace("{,}", "")                        # LaTeX thousands separator: 36{,}540
+    # in-text citation years and dataset accessions, e.g. "Fiedler 1973", "Zenodo 5801337"
+    tex = re.sub(r"\b(?:19|20)\d{2}\b", " ", tex)
+    tex = re.sub(r"(?i)\b(?:zenodo|dryad|doi|pmid|pmc)\s*[:\s]\s*[\w./-]*\d[\w./-]*", " ", tex)
 
     stored = stored_numbers()
     lits = re.findall(r"\d+(?:\.\d+)?", tex)

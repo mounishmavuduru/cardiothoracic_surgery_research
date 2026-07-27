@@ -829,12 +829,23 @@ forty ($7/20$, with complete per-subject agreement), so the operating choice of
 twenty sits inside the converged regime but the coarse limit is not benign. More
 importantly, openCARP returns $4/82$ on the UW cohort, and unlike the monodomain
 solver this is \emph{not} recovered by raising that cohort's fibrosis burden:
-rescaling UW upward leaves the rate at $0/30$. The burden explanation for the
-monodomain rate difference (Section~\ref{sec:substrate}) is established in both
-directions on that solver and is unaffected; what is not established is that
-openCARP's near-zero UW rate has the same cause. We report the discrepancy rather
-than resolve it, and restrict the concordance claim to the cohort where both
-solvers are calibrated.
+rescaling UW upward leaves the rate at $0/30$. Two mundane explanations are
+excluded. It is not a propagation failure --- on UW meshes the wave reaches
+$99.4\%$ of nodes and peak depolarisation averages $0.83$, so activation spreads
+across the surface and then dies, rather than never leaving the stimulus site.
+Nor is it the coarser discretisation: UW meshes carry a mean edge of $3.18$~mm
+against Roney's $2.64$~mm at the same node budget, but the convergence study shows
+coarser meshes \emph{over}-call ($58.3\%$ at $1500$ nodes), so that difference
+predicts a higher UW rate, not a near-zero one.
+
+What remains is a genuine substrate difference that the burden rescaling does not
+capture, and we do not know what it is. The monodomain burden result
+(Section~\ref{sec:substrate}) is established in both directions on that solver and
+is unaffected by this; what is not established is that openCARP's near-zero UW rate
+has the same cause. We report the discrepancy rather than resolve it, and restrict
+the concordance claim to the cohort where both solvers are calibrated. It is worth
+noting which way this cuts: a robustness check that agreed everywhere would be less
+informative than one that disagrees somewhere and says so.
 
 \subsection{The labeller is reproducible in aggregate and unstable per subject}
 \label{sec:labelnoise}
