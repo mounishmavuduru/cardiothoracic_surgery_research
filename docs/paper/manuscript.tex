@@ -443,7 +443,10 @@ separate what is a property of the mathematics from an accident of one dataset.
 
 \begin{table}[H]
 \centering
-\caption{Incremental predictive value of SFI over the full competitor set.
+\caption{Incremental predictive value of SFI over the full competitor set
+(\code{results/\allowbreak gm1\allowbreak\_expanded\allowbreak\_metrics.json}; the
+cohort-size-matched comparison is
+\code{results/\allowbreak gm1\allowbreak\_matched\allowbreak\_n.json}).
 $\dAUC$ is grouped (leakage-controlled); logistic regression (lr) /
 gradient-boosted trees (gbt). The endpoint (grouped $\dAUC\geq0.05$ \emph{and}
 DeLong $p<0.05$) is met in no regime, and every interval on real anatomy
@@ -552,6 +555,8 @@ confirm; those estimates are superseded and that reading no longer holds.
 
 \subsection{Testing the redundancy explanation directly}
 \label{sec:redundancy}
+\noindent\emph{Source:}
+\code{results/\allowbreak feature\allowbreak\_redundancy.json}.
 
 The account above attributes the null to feature redundancy. That explanation was
 inferred from the incremental AUC being zero, which does not establish it: a
@@ -647,6 +652,12 @@ null cannot be attributed to a failure of feature selection.
 
 \subsection{A provenance audit of the released substrates, and four controls}
 \label{sec:substrate}
+\noindent\emph{Sources}, all under \code{results/}: the cohort audit is
+\code{cohort\allowbreak\_geometry\allowbreak\_audit.json}, and the four controls are
+\code{uw\allowbreak\_substrate\allowbreak\_ablation.json},
+\code{roney\allowbreak\_fibre\allowbreak\_control.json},
+\code{roney\allowbreak\_fibrosis\allowbreak\_quantization.json} and
+\code{fibrosis\allowbreak\_burden\allowbreak\_swap.json}.
 
 The UW cohort forced this section. Under a protocol frozen before any label was
 generated, and identical in every parameter, the Roney meshes returned $20/62$
@@ -784,6 +795,13 @@ hypothesis about the pipeline, but it is a hypothesis about the inputs first.
 
 \subsection{An independent solver as a robustness check}
 \label{sec:opencarp}
+\noindent\emph{Sources}, all under \code{results/}:
+\code{opencarp\allowbreak\_full\allowbreak\_cohort.json};
+all three calibration attempts, including the two rejected, are in
+\code{opencarp\allowbreak\_calibration\allowbreak\_history.json},
+with the discretisation and propagation checks in
+\code{opencarp\allowbreak\_bin\allowbreak\_sensitivity.json} and
+\code{opencarp\allowbreak\_uw\allowbreak\_propagation.json}.
 
 Every in-silico result above rests on one phenomenological labeller, a monodomain
 Mitchell--Schaeffer solver substituted for the pre-registered openCARP ground
