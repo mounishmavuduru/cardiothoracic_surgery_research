@@ -142,7 +142,8 @@ def sfi_feature_vector(
         ``sfi_`` namespace):
 
         - ``total``           : sum of the per-edge expected :math:`\\lambda_2` drop.
-        - ``region_max``      : largest per-region SFI.
+        - ``region_max``      : largest per-region SFI (identical to ``top1``; see the
+          note in the body -- the block holds eight distinct quantities, not nine).
         - ``region_mean``     : mean per-region SFI.
         - ``region_std``      : standard deviation across regions.
         - ``top1`` .. ``topK``: the ``k`` largest per-region SFI values, descending.
@@ -185,6 +186,18 @@ def sfi_feature_vector(
         "edge_frag_mean": float(frag.mean()) if frag.size else 0.0,
     }
 
+    # NOTE: ``top1`` is the largest per-region SFI, which is exactly ``region_max``
+    # above. The two columns are therefore IDENTICAL by construction -- verified equal
+    # on all 182 real subjects (max absolute difference 0.0). The block that enters the
+    # design matrix consequently holds EIGHT distinct quantities, not nine.
+    #
+    # This is left in place deliberately rather than removed. Every result in the
+    # manuscript was computed with the nine-column form, and dropping a column now would
+    # invalidate them for no gain: an exactly collinear duplicate adds no information a
+    # model can use, and both classifiers here are regularised (logistic regression with
+    # nested C selection, and shallow gradient boosting). Removing it is a change to make
+    # deliberately alongside a full re-run, not silently. The duplication is disclosed in
+    # the manuscript so the "nine columns" figure is not read as nine independent features.
     ranked = np.sort(values)[::-1] if values.size else np.array([], dtype=float)
     for r in range(_SFI_TOP_K):
         out[f"top{r + 1}"] = float(ranked[r]) if r < ranked.size else 0.0
