@@ -1155,10 +1155,13 @@ label most sensitive to diffusion $d_0$ ($\mu^\ast=500.7$), then fibrosis densit
 leave-one-out $R^2=0.35$ (large residual anatomical/label variance beyond the
 screened knobs, a label-noise caveat, not a positive). Across uncoupling
 strengths $\Delta w\in\{0.18,0.36,0.54\}$ the grouped GBT
-increment is $\dAUC=0.033$--$0.036$ with all $p\geq0.26$: below the
-pre-registered $0.05$ gate, but non-significance on its own does not make these
-arms null, and we report no interval for them, so they are indeterminate rather
-than a demonstration that the synthetic null is robust to $\Delta w$.
+increment is $\dAUC=0.033$--$0.036$ with all $p\geq0.26$. This sweep runs on
+\emph{real} anatomy, not the synthetic media --- it is the GM1 cohort, and on
+the original $62$-mesh Roney subset that predates the extension to all $100$ ---
+so it speaks to the real-cohort null and not to the synthetic one. Every arm
+sits below the pre-registered $0.05$ gate, but non-significance on its own does
+not make these arms null, and we report no interval for them, so they are
+indeterminate rather than a demonstration that the null is robust to $\Delta w$.
 
 \subsection{External inducibility-rate anchor (plausibility, not validation)}
 Clinically observed AF inducibility spans $\sim\!5\%$ to $\sim\!85\%$ depending on
