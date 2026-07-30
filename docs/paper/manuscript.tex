@@ -1180,13 +1180,22 @@ precision and discards the pairing, and overlap between two of them is not a
 test of their difference. We use them only for the negative claim. Every tier
 from $3000$ nodes upward overlaps every other, so the apparent wiggle among the
 fine tiers is \emph{not} distinguishable from sampling noise and we do not claim
-it is a real non-monotonicity. Only the drop from the coarsest tier is close to
-resolvable on this reading, its interval meeting the next tier's over a
-$0.8$-point sliver; we do not report the paired comparison that would settle it.
-What the study
-establishes is therefore the weaker and sufficient claim: at this sample size the
-rate cannot be shown to have converged anywhere in the tested window, and no tier
-can be declared the settled value. A study that could distinguish these tiers
+it is a real non-monotonicity.
+
+The paired comparison the intervals cannot make is available, because the same
+$24$ subjects run at every tier: for each adjacent pair the $2\times2$ table is
+fixed by the two marginals and the agreement count, so an exact McNemar test
+follows without any further simulation
+(\code{results/\allowbreak convergence\allowbreak\_paired\allowbreak\_tests.json}).
+It separates the two halves of the pattern cleanly. The coarse-mesh drop is real:
+$11$ subjects lose their verdict between $1500$ and $3000$ nodes against $1$ that
+gains one, $p=0.0063$, and it survives Holm correction across the five adjacent
+comparisons ($p=0.032$). None of the four fine-tier transitions is resolvable
+($p=0.375$ to $1.000$ unadjusted, all $1.000$ after correction). What the study
+establishes is therefore sharper than the intervals alone allow, and still
+sufficient for our purpose: the coarsest tier demonstrably over-calls, while
+across the fine tiers the rate cannot be shown to have converged and no tier can
+be declared the settled value. A study that could distinguish these tiers
 would need several hundred subjects per tier, which is roughly two orders of
 magnitude more simulation than the $144$ runs here.
 
