@@ -64,7 +64,8 @@ Fiedler-value sensitivity $\partial\lam_2/\partial w_{ij}=(\phii_i-\phii_j)^2$
 aggregated under a fibrosis-weighted conduction-uncoupling field. Pre-registered
 before any labels were seen, the primary endpoint was $\dAUC\geq 0.05$ with a
 DeLong paired $p<0.05$ on shape-family-held-out folds. \emph{The endpoint is not
-met, but the strength of the negative differs by regime, and we separate them.} On up to $100{,}000$ synthetic excitable networks SFI adds no practically
+met, but the strength of the negative differs by regime, and we separate them.}
+On up to $100{,}000$ synthetic excitable networks SFI adds no practically
 meaningful predictive value (subspace $\dAUC\approx+0.003$; $\sim\!4{,}150$ cases
 needed at $80\%$ power, resolvable only because $N$ is huge, and so
 \emph{clinically undetectable} there). On two real cohorts ($182$ patients:
@@ -72,28 +73,38 @@ Roney $n=100$, UW/Boyle $n=82$) the combined gradient-boosting estimate is
 $+0.012$ with a bootstrap interval $[-0.017,+0.044]$ that excludes the
 threshold, so the real-anatomy result is a measured null rather than a
 shortfall of power. An earlier version of this work reported $+0.051$ here and
-called the real-cohort evidence inconclusive. That figure was an artefact of a
-defect in one cohort's released substrate, which we found only afterwards. The
-audit that found it, and the four controls that followed, are reported in full;
-the cause turned out not to be any substrate defect but a $30\%$ difference in
-fibrosis burden between the two released cohorts, which reverses the apparent
-anomaly when it is equalised in either direction. Where the
-null is clean, the mechanism is feature
-redundancy: the exact per-region $\Delta\lam_2$ SFI, which has no first-order
-approximation error, also adds nothing over the competitor set. A separate,
+called the real-cohort evidence inconclusive. Correcting a defect in one
+cohort's released substrate, which we found only afterwards, moved that figure
+to $+0.036$ at the original cohort size, and extending the Roney arm from $62$
+to all $100$ released meshes moved it to $+0.012$, so most of the drop was
+sample size rather than substrate. The audit that found the defect, and the four
+controls that followed, are reported in full; the cause of that cohort's
+unusually low inducibility rate turned out not to be any substrate defect but a
+$30\%$ difference in fibrosis burden between the two released cohorts, which
+reverses the apparent anomaly when it is equalised in either direction. Where the
+null is clean, only half the mechanism is feature redundancy: the aggregate SFI
+summaries are reconstructible from the competitor set at $R^2=0.970$, while the extreme
+and edge-level columns retain variance of their own ($R^2<0.25$) and still do
+not predict the label. The exact per-region $\Delta\lam_2$ SFI, which has no
+first-order approximation error, also adds nothing over the competitor set. A separate,
 label-free result explains why the \emph{single-vector} SFI is also
 ill-conditioned on real tissue. It is valid only while
 $\rhoval=\lVert\Delta L\rVert/(\lam_3-\lam_2)=O(1)$, and real atria have
-$\rhoval\approx 2422$ ($\sim\!10^3\times$ past the empirical
-$\rhoval^\ast\approx 3$), so by Davis--Kahan the Fiedler vector is unstable. We do \emph{not} claim $\rhoval$ proves non-predictiveness; it bounds the
+median $\rhoval\approx 2422$, at least $272\times$ past the empirical
+$\rhoval^\ast\approx 3$ on every mesh tested, so by Davis--Kahan the Fiedler
+vector is unstable. We do \emph{not} claim $\rhoval$ proves non-predictiveness;
+it bounds the
 accuracy of the $\Delta\lam_2$ \emph{magnitude}, not the classification content
 of a ranking feature. The spectral gap collapses as $N^{-1.05}$ on the real
 atrial surface (the 2-manifold Weyl exponent), so $\rhoval$ grows lawfully with
 resolution. One component partially survives: the Fiedler-gradient localizer
 $\lvert\nabla\phii_2\rvert$ is a weak but real rank localizer (origin in the top
-$\sim\!18\%$) that beats graph-centrality baselines and transfers across three
-dynamical media, though it \emph{coincides with}, and does not beat, substrate
-imaging, by a mechanism we make precise. Naive methodology (random CV,
+$\sim\!18\%$ on synthetic networks, and weaker on real anatomy, where only
+$\sim\!20$ origins are available) that beats graph-centrality baselines and
+transfers across three dynamical media, though it co-localizes with substrate
+imaging rather than beating it, and substrate imaging is the better localizer in
+the FHN arm ($\sim\!0.10$ against $0.176$), for a reason we make precise. Naive
+methodology (random CV,
 $p$-value thresholds, no effect-size gate) would have reported SFI as working;
 our pre-registered protocol rejects it. Our own convergence study surfaces a key
 limitation: the inducibility labeller is strongly resolution-sensitive and, on a
@@ -141,11 +152,13 @@ file-drawer casualty.
 
 The mathematics we use is classical; we claim no new theorem. Our contributions are
 (i)~a leakage-controlled incremental test of SFI against real competitors and a
-spatial null on real anatomy; (ii)~a label-free validity criterion and a measured gap-scaling exponent that
+spatial null on real anatomy; (ii)~a label-free validity criterion and a
+measured gap-scaling exponent that
 matches the Weyl 2-manifold prediction on real atria, which together explain why
 the \emph{single-vector estimator} is ill-conditioned on real tissue and why any
 first-order Fiedler-based marker faces the same conditioning problem there, and
-which do not explain the predictive null; (iii)~a cross-medium transfer analysis isolating the one
+which do not explain the predictive null; (iii)~a cross-medium transfer analysis
+isolating the one
 component that generalizes; and (iv)~a falsification-protocol demonstration
 showing that standard methodology would have manufactured exactly the false
 positive this protocol catches.
@@ -199,18 +212,19 @@ non-negative per-edge \emph{fragility}. Reducing a conductance $w_{ij}$ by a
 small $\Delta w_{ij}\geq 0$ (uncoupling) lowers $\lam_2$ by
 $\Delta w_{ij}(\phii_{2,i}-\phii_{2,j})^2$ to first order.
 
-The identity is verified in seven independent ways rather than merely asserted.
-Computer algebra: sympy proves Eqs.~\eqref{eq:edge}--\eqref{eq:dL} symbolically,
-and on a concrete $5$-node graph the finite-difference
+The identity is verified in six independent ways rather than merely asserted.
+Computer algebra: (i)~sympy proves Eqs.~\eqref{eq:edge}--\eqref{eq:dL}
+symbolically, and (ii)~on a concrete $5$-node graph the finite-difference
 $\partial\lam_2/\partial w_{ij}$ matches $(\phii_{2,i}-\phii_{2,j})^2$ to
 $\lvert\text{err}\rvert\approx 2\times10^{-17}$ (mpmath, $40$ digits). Exactness:
-the identity holds \emph{exactly} with rational weights (zero floating point);
-an interval-arithmetic enclosure certifies the true $\lam_2$ to within
-$\sim\!4\times10^{-40}$; and $\lam_2/\phii_2$ agree across scipy, networkx, and a
+(iii)~the identity holds \emph{exactly} with rational weights (zero floating
+point); (iv)~an interval-arithmetic enclosure certifies the true $\lam_2$ to
+within $\sim\!4\times10^{-40}$; and (v)~$\lam_2/\phii_2$ agree across scipy,
+networkx, and a
 hand-rolled inverse iteration (spread $2.5\times10^{-15}$). These three
 tolerances are printed at run time by \code{scripts/verify\_sfi\_identity.py} and
 \code{scripts/verify\_math\_rigor.py} rather than stored in \code{results/}, so
-they are reproduced by rerunning those scripts. The
+they are reproduced by rerunning those scripts. Finally, (vi)~the
 algebraic core is kernel-checked in the Coq proof assistant over the
 exact rationals, axiom-free (Appendix~\ref{app:formal}). The analytic
 Hellmann--Feynman step (differentiability of a simple eigenvalue) is the cited
@@ -226,7 +240,8 @@ $\lam_2$ drop contributed by region $R$:
 \begin{equation}
 \SFI(R)=\mathbb{E}[\Delta\lam_2\text{ from }R]
 \approx\underbrace{\sum_{(i,j)\in R}\mathbb{E}[\Delta w_{ij}]\,(\phii_{2,i}-\phii_{2,j})^2}_{\text{first order}}
-+\underbrace{\sum_{k\neq2}\frac{(\phii_k^{\!\top}\Delta L\,\phii_2)^2}{\lam_2-\lam_k}}_{\text{2nd-order resolvent}}
++\underbrace{\sum_{k\neq2}\frac{(\phii_k^{\!\top}\Delta
+L\,\phii_2)^2}{\lam_2-\lam_k}}_{\text{2nd-order resolvent}}
 +O(\lVert\Delta L\rVert^3).
 \label{eq:sfi}
 \end{equation}
@@ -301,8 +316,10 @@ real tissue, and using it to \emph{mechanistically explain} a negative result.
 \section{Methods}
 \label{sec:methods}
 %======================================================================
-Full detail is in the pre-registration (\code{docs/\allowbreak PRE\_REGISTRATION.md}) and
-theory note (\code{docs/\allowbreak SFI\_THEORY.md}); the endpoints, cross-validation scheme,
+Full detail is in the pre-registration (\code{docs/\allowbreak
+PRE\_REGISTRATION.md}) and
+theory note (\code{docs/\allowbreak SFI\_THEORY.md}); the endpoints,
+cross-validation scheme,
 baseline set, and accepted null were frozen before any labels were inspected.
 
 \paragraph{The edge weight.} Everything downstream --- $\lam_2$, the Fiedler
@@ -359,14 +376,20 @@ in an \emph{inner} \code{GroupKFold} over $\{0.03,0.1,0.3,1.0,3.0\}$, so tuning
 never sees the outer test fold. Gradient boosting is deliberately \emph{not}
 tuned --- $120$ trees, depth $2$, learning rate $0.05$, subsample $0.8$ --- because
 at these sample sizes a search would fit the folds; this is a fixed, shallow
-reference rather than a competitive model. Out-of-fold predicted probabilities
+reference rather than a competitive model. We log it as a deviation from the
+pre-registered nested selection, which specifies an inner \code{GroupKFold}
+search for both classifiers. Out-of-fold predicted probabilities
 are pooled across folds and compared by the DeLong test. Pooling out-of-fold
 scores means the two compared vectors come from $k$ different fitted models
 rather than from two fixed scoring functions, which is DeLong's assumption; the
 paired structure and the leakage-free grouping are preserved, but the resulting
 $p$-values should be read as approximate. The naive comparison reported alongside
-replaces the grouping with shuffled \code{KFold}, which is exactly the leakage
-this design exists to prevent.
+replaces the grouping with shuffled \code{KFold}. On the real cohorts each
+patient contributes one row and is its own group, so \code{GroupKFold} there
+coincides with unshuffled \code{KFold} and the grouping is a guarantee rather
+than a correction; the leakage it exists to prevent is demonstrated on the
+replicated synthetic cohort, where resamples of a single shape family have
+several members (Section~\ref{sec:falsify}).
 
 \paragraph{Substrate.} Real left-atrial surfaces are loaded into weighted
 conduction graphs from two public cohorts: the Roney LA virtual cohort (Zenodo
@@ -379,7 +402,8 @@ universal atrial coordinates and per-vertex fibre fields (directional spread
 $0.945$--$0.979$), whereas the UW meshes ship a \code{VECTORS fiber} array that
 is the constant $(1,0,0)$ everywhere (spread $0.000$) and no atrial coordinates,
 for which we substitute a PCA chart, so UW anisotropy is a fixed coordinate bias
-rather than anatomy (Sections~\ref{sec:regions} and~\ref{sec:substrate}). Meshes are coarsened to
+rather than anatomy (Sections~\ref{sec:regions} and~\ref{sec:substrate}). Meshes
+are coarsened to
 $\sim\!2000$-node graphs by field-preserving vertex clustering.
 
 \paragraph{Labels.} Ground truth is a monodomain Mitchell--Schaeffer
@@ -453,7 +477,7 @@ DeLong $p<0.05$) is met in no regime, and every interval on real anatomy
 contains zero. The UW rows rest on eight positives and are uninformative rather
 than null; note in particular that their base AUCs differ sharply between the
 competitor and fibrosis-only baselines, which is what inflates the latter's
-apparent increment (Section~\ref{sec:null}).}
+apparent increment.}
 \label{tab:null}
 \footnotesize
 \begin{tabularx}{\linewidth}{@{}l r l r X@{}}
@@ -467,9 +491,12 @@ UW/Boyle (real)   & 8/82   & lr  & $0.834$ & $+0.000$ $[-0.073,+0.081]$; $1.00$ 
 Combined real     & 42/182 & lr  & $0.884$ & $-0.007$ $[-0.042,+0.029]$; $0.70$ \\
                   &        & gbt & $0.851$ & $+0.012$ $[-0.017,+0.044]$; $0.45$ \\
 \midrule
-FHN networks      & \multicolumn{3}{l}{$2{,}000$ networks} & $\leq +0.003$; $p\geq0.12$ \\
-FHN networks      & \multicolumn{3}{l}{up to $100{,}000$}  & subspace $+0.0028$; $p<10^{-4}$ at $N\geq10^4$ \\
-Kuramoto networks & \multicolumn{3}{l}{$500$ networks}     & $\leq +0.0036$; $p\geq0.38$ \\
+FHN networks      & \multicolumn{3}{l}{$2{,}000$ networks} & $\leq +0.003$;
+$p\geq0.12$ \\
+FHN networks      & \multicolumn{3}{l}{up to $100{,}000$}  & subspace $+0.0028$;
+$p<10^{-4}$ at $N\geq10^4$ \\
+Kuramoto networks & \multicolumn{3}{l}{$500$ networks}     & $\leq +0.0036$;
+$p\geq0.38$ \\
 \bottomrule
 \end{tabularx}
 \end{table}
@@ -496,7 +523,13 @@ missed only on significance. That estimate was an artefact of the sealed UW
 substrate: correcting it drops the figure to $+0.036$ at the original cohort
 size and to $+0.012$ once the Roney arm is extended to all $100$ released
 meshes. With $42$ inducible of $182$ this is the largest real-anatomy arm in
-the study, and the null here is a measurement rather than a shortfall.
+the study, and the null here is a measurement rather than a shortfall. The
+combined row is a single pooled ROC across two cohorts of unequal prevalence
+($34/100$ on Roney, $8/82$ on UW), so its ranking carries between-cohort as well
+as within-cohort separability; that is why the pooled base AUC under logistic
+regression, $0.884$, exceeds both components ($0.870$ and $0.834$), and the
+pooled increment should be read alongside the cohort-specific estimates rather
+than in place of them.
 
 The UW cohort remains the weak arm, though not for the reason we previously
 gave. On eight positives its intervals are wide, the competitor comparison
@@ -516,19 +549,26 @@ approximation error and is immune to the $\rhoval$ argument, also adds nothing
 over the competitor set. Our reading is that SFI's information is already
 present in standard connectivity features ($\lam_2$-alone, min-cut,
 percolation), but an incremental null does not by itself separate that
-redundancy from a feature that carries little predictive information at all;
-the two are distinguished only by the SFI-alone AUC against the same labels,
-which we do not report. Either way the finding is label-dependent and separate
-from $\rhoval$.
+redundancy from a feature that carries little predictive information at all. We
+separate the two in Section~\ref{sec:redundancy}, directly and without reference
+to the label, where the redundancy account holds for the region-level aggregates
+and fails for the extreme and edge-level columns. Either way the incremental null
+is itself a label-dependent finding, separate from $\rhoval$.
 
-\paragraph{Secondary endpoint (pre-specified), and its withdrawal.} An earlier
+\paragraph{Fibrosis-heterogeneity baseline comparison (pre-specified as an
+additional feature-set contrast), and its withdrawal.} This is not the
+pre-registered secondary endpoint, which is the localization test reported in
+Section~\ref{sec:localize}; it was pre-specified as a further feature-set
+comparison alongside the primary one. An earlier
 version of this analysis reported that SFI beat a
 \emph{fibrosis-heterogeneity-only} baseline on the combined real cohort (GBT
 $\dAUC=+0.103$, $p=0.009$) and read that as evidence SFI is not merely
 re-encoded fibrosis but carries connectivity information beyond the substrate.
 That result does not survive, and we withdraw both it and the claim it
 supported. Two changes separate the old number from the new one, and they do
-not contribute equally. Correcting the UW substrate while holding the cohort at
+not contribute equally; both figures below are gradient-boosting $\dAUC$ against
+the same fibrosis-heterogeneity baseline, tested with the paired DeLong
+statistic. Correcting the UW substrate while holding the cohort at
 its original $144$ subjects leaves the estimate largely intact ($+0.093$,
 $p=0.013$), so this was not principally a substrate artefact. Extending the
 Roney arm from $62$ to the full $100$ released meshes is what collapses it, to
@@ -543,6 +583,20 @@ $\dAUC=+0.340$ ($p=0.026$) on six positives, a value no one should have
 believed and which we did not flag at the time; it is that arm which carried
 the combined figure. A large point estimate resting on six events is a warning,
 not a finding.
+
+\paragraph{Naive (ungrouped) comparison.} The pre-registration asks for the naive
+$\dAUC$ beside the grouped one so that leakage is visible, and we give it for
+every real-cohort arm: Roney $+0.017$ (lr) and $-0.011$ (gbt), UW $+0.066$ and
+$-0.160$, combined $-0.011$ and $+0.010$, against the grouped values of
+Table~\ref{tab:null}. The gap has no consistent sign: the naive estimate runs
+above the grouped one in two of the six arms, both logistic regression on a
+single cohort, and below it in the other four including the pooled logistic
+arm, so nothing here reproduces the optimism ungrouped cross-validation is
+expected to show. On these cohorts each patient contributes
+one row and is
+its own group, so the grouping is close to a no-op.
+The leakage effect is demonstrated instead on the replicated synthetic cohort,
+where resampled networks share a parent shape family.
 
 \paragraph{Power analysis.} In the synthetic cohort the subspace effect
 ($+0.0028$) needs $\sim\!4{,}150$ cases for $80\%$ power and the single-vector
@@ -593,8 +647,11 @@ SFI column & $R^2$ on competitors & $R^2$ permuted \\
 Four of the nine columns are reconstructible from the competitors at
 $R^2\geq0.60$, and the two aggregate summaries almost perfectly so. The remaining
 five keep most of their variance, at $R^2<0.25$, well above the permuted control
-but far from redundant. So the redundancy account holds for the aggregate
-summaries and does not hold for the order statistics.
+but far from redundant. The split does not fall along the aggregate versus
+order-statistic line: what the competitors reconstruct is the two region-level
+aggregates and the deeper region order statistics \code{sfi\_top2} and
+\code{sfi\_top3}, and what resists reconstruction is the edge-level pair, the
+region maximum and the region spread.
 
 This qualifies rather than overturns the null, and it sharpens what the null
 means. For \code{sfi\_total} and \code{sfi\_region\_mean} the competitors already
@@ -608,10 +665,15 @@ in different components. We had previously reported only the first.
 \subsection{Region definition and the patient-level reduction}
 \label{sec:regions}
 
-The per-region SFI of Eq.~(2) is stated over a region $R$, and until now we had
+The per-region SFI of Eq.~\eqref{eq:sfi} is stated over a region $R$, and until
+now we had
 left $R$ implicit. Since the partition and the reduction that follows it are
 what actually produce the feature block whose incremental $\dAUC$ is the primary
-endpoint, we give both explicitly.
+endpoint, we give both explicitly. Neither was pre-registered --- the
+pre-registration refers to the per-region SFI throughout without fixing a
+partition or a patient-level reduction --- so both are a logged deviation, fixed
+post hoc but without reference to the outcome, since SFI is closed-form given the
+mesh and is never fitted to the label.
 
 \paragraph{Partition.} Regions are a $3\times3$ grid over the universal atrial
 coordinates. With $(\alpha,\beta)\in[0,1]^2$ per vertex, a vertex is assigned
@@ -641,12 +703,16 @@ values; the three largest region values in descending order,
 over the raw per-edge fragilities $(\phii_{2,i}-\phii_{2,j})^2$. The order
 statistics are included because a fragility biomarker is a claim about the
 \emph{worst} region rather than the average one, and reporting only a mean would
-have made the hypothesis untestable in its own terms.
+have made the hypothesis untestable in its own terms. Two of the nine names
+denote one quantity: \code{region\_max} and \code{top1} are both the maximum over
+the region values, and are identical on all $182$ subjects to zero difference, so
+the block carries eight distinct columns under nine names. That is why they share
+a row of the table in Section~\ref{sec:redundancy}.
 
 Two properties of this construction matter for reading the null. First, the
 competitor features are patient-level scalars already, so no analogous reduction
-is applied to them; the comparison is between a nine-column add-on and a
-six-column baseline, which if anything favours the add-on. Second, none of the
+is applied to them; the comparison is between an add-on of eight distinct columns
+and a six-column baseline, which if anything favours the add-on. Second, none of the
 nine columns is fitted to the outcome. SFI is closed-form given the mesh and the
 frozen uncoupling field, so it contributes no tuning degrees of freedom, and the
 null cannot be attributed to a failure of feature selection.
@@ -658,16 +724,23 @@ null cannot be attributed to a failure of feature selection.
 \code{uw\allowbreak\_substrate\allowbreak\_ablation.json},
 \code{roney\allowbreak\_fibre\allowbreak\_control.json},
 \code{roney\allowbreak\_fibrosis\allowbreak\_quantization.json} and
-\code{fibrosis\allowbreak\_burden\allowbreak\_swap.json}.
+\code{fibrosis\allowbreak\_burden\allowbreak\_swap.json}. Every Roney inducibility
+arm in this section runs on the $62$-mesh subset that predates the extension of
+the predictive cohort to all $100$ released meshes, and was not re-run on the
+full deposit; the predictive results of Section~\ref{sec:null} use all $100$.
 
 The UW cohort forced this section. Under a protocol frozen before any label was
 generated, and identical in every parameter, the Roney meshes returned $20/62$
-subjects inducible ($32.3\%$) while the UW meshes returned $6/82$ ($7.3\%$). A
-fourfold discrepancy on cohorts of comparable fibrosis burden is not a cohort
-property one should accept; it is a hypothesis about the pipeline. We had
+subjects inducible ($32.3\%$) while the UW meshes returned $6/82$ ($7.3\%$) on
+the substrate as released. Three UW rates recur below and are kept distinct
+throughout: $6/82$ as released, $8/82$ after the cap repair --- the substrate
+every predictive result uses --- and $14/82$ after both repairs. A
+fourfold discrepancy on cohorts we had assumed carried comparable fibrosis
+burden --- an assumption Control~4 below overturns --- is not a cohort property
+one should accept; it is a hypothesis about the pipeline. We had
 previously recorded the UW arm as uninformative and moved on, which was the
-error. What follows is what a proper audit found, and then three controls, none
-of which explains the anomaly.
+error. What follows is what a proper audit found, then three controls that do not
+explain the anomaly, and a fourth that does.
 
 \paragraph{The audit.} Two defects sit in the released files. The first is
 ours. The only per-element scalar the UW release carries is \code{elemTag}, the
@@ -707,13 +780,14 @@ Roney.
 \paragraph{Control 1: repairing the substrate.} Opening the orifices and
 supplying a spatially varying fibre field, in a $2\times2$ design over all $82$
 subjects (Fig.~\ref{fig:substrate}a), raises inducibility from $6/82$ to
-$14/82$. The two act super-additively: either repair alone converts two subjects
-($6\to8$ in both single-factor arms), yet together they convert eight, so the
-interaction term is $+4$ and is larger than either simple effect. We resist the
-obvious mechanistic reading of that interaction --- that reentry needs both an
-anatomical obstacle and anisotropic heterogeneity --- because Control~2 below
-shows the fibre factor does not move the rate at all on a cohort that has a real
-fibre field. We do not present this as a fix. The
+$14/82$. Either repair alone converts two subjects ($6\to8$ in both single-factor arms)
+and together they convert eight, so on these four cells the averaged main effect
+of a repair and the interaction contrast are both $+4$ subjects and cannot be
+told apart; we do not claim the two act super-additively. The mechanistic reading
+an interaction would invite --- that reentry needs both an anatomical obstacle
+and anisotropic heterogeneity --- is in any case undercut by Control~2 below,
+which shows the fibre factor does not move the rate at all on a cohort that has a
+real fibre field. We do not present this as a fix. The
 strongest contrast does not reach paired significance (McNemar exact
 $p=0.077$), it closes only $39\%$ of the distance to Roney, and only two of the
 original six positives survive the repair. The varying fibre field is moreover a
@@ -751,8 +825,10 @@ that is inducible \emph{too rarely}.
 inducibility but not significantly, and not to the reference level. (b)
 Destroying the fibre field on a cohort that has one leaves the rate exactly
 unchanged. (c) Destroying the fibrosis gradation while holding mean burden fixed
-roughly doubles the rate, the opposite of the predicted direction. Panels (a)--(c)
-therefore exclude every substrate defect. (d) Swapping fibrosis \emph{burden}
+roughly doubles the rate, the opposite of the predicted direction. Panels
+(a)--(c) therefore leave all three substrate hypotheses unsupported, which is
+weaker than excluding them, and none of the three accounts for the anomaly.
+(d) Swapping fibrosis \emph{burden}
 between the cohorts moves the rate in both directions and resolves the anomaly:
 Roney at UW's burden collapses to $1/62$, UW at Roney's rises to $21/82$. The
 dashed line is the Roney reference, $32.3\%$.}
@@ -762,8 +838,10 @@ dashed line is the Roney reference, $32.3\%$.}
 Taken together the three substrate controls leave the anomaly unexplained, and
 they tighten rather than loosen it: of the two defects we can manipulate, one
 does not move the rate at all and the other, imposed deliberately, moves it
-upward. Whatever suppresses reentry in the UW cohort is not a substrate defect.
-That conclusion is what redirected the search.
+upward. None of the three establishes an effect, which is weaker than
+excluding one, and none of them points at a substrate \emph{defect} as the
+cause. That is what redirected the search: from what might be broken in these
+meshes to what they contain.
 
 \paragraph{Control 4: the cohorts do not carry comparable fibrosis.} Having
 exhausted the defects, we measured what the solver is actually given. Coarsened
@@ -783,13 +861,16 @@ $8/82$ to $21/82$ ($p=0.013$). Both control arms reproduce their native rates
 exactly. The effect is large, symmetric, and an order of magnitude better
 supported than any of the three substrate hypotheses.
 
-One detail is worth stating because it inverts the original question. At
-matched burden the ordering reverses: Roney at $0.241$ gives $1.6\%$ while UW at
-$0.248$ gives $9.8\%$. So the UW cohort is not intrinsically resistant to
-reentry --- given comparable fibrosis it is somewhat \emph{more} inducible than
-Roney. The entire apparent anomaly was a difference in how much fibrosis the two
-released datasets contain, and the three substrate defects, real as they are,
-were never the explanation. We had spent three controls looking for something
+One detail is worth stating because it bears on the original question. At
+matched burden the point estimates invert: Roney rescaled to $0.241$ gives
+$1/62$ while UW at $0.248$ gives $8/82$. On one and eight events that contrast
+does not establish a reversal and we do not claim one; what it does show is that
+the UW cohort is not intrinsically resistant to reentry. Most of the apparent
+anomaly is accounted for by a difference in how much fibrosis the two released
+datasets contain, and the three substrate defects, real as they are, were never
+the explanation; what the burden account does not cover is openCARP's UW rate,
+which the same rescaling leaves at $0/30$ (Section~\ref{sec:opencarp}). We had
+spent three controls looking for something
 broken before checking whether the two cohorts were comparable in the first
 place, which is the more general lesson: an out-of-range aggregate is a
 hypothesis about the pipeline, but it is a hypothesis about the inputs first.
@@ -833,7 +914,13 @@ calibration gate remained able to fail, and it did.
 \paragraph{Result.} On the calibrated configuration the pre-registered gate is met
 on Roney: $22/100$ inducible ($22.0\%$, inside the $10$--$40\%$ band) with a
 fibrosis--verdict rank correlation of $+0.404$, against the frozen solver's $0.75$.
-Across all $182$ subjects the two solvers agree on $156$, or $85.7\%$. The
+It is not met on UW, where openCARP returns $4/82$ inducible ($4.9\%$, below the
+band) with a rank correlation of only $+0.079$.
+Across all $182$ subjects the two solvers agree on $156$, or $85.7\%$. That figure
+is raw rather than chance-corrected: on an outcome this imbalanced most of the
+agreement is shared negatives, and the two solvers agree on only $21$ positives.
+It also pools a cohort on which the calibration gate failed, so we report it as a
+statement about the protocol across both cohorts rather than about the tissue. The
 asymmetry is the substantive part. Of the $26$ subjects the two solvers disagree
 on, openCARP calls only $5$ inducible where the monodomain solver does not, while
 the reverse happens $21$ times; over the whole cohort openCARP labels $26/182$
@@ -937,8 +1024,12 @@ combinatorial Laplacian.}
 \subsection{Localization transfers across three media (weakly)}
 \label{sec:localize}
 The \emph{strict} pre-registered localization endpoint is null for every field,
-including $\lvert\nabla\phii_2\rvert$ (median argmax-geodesic error $0.472$ is
-\emph{not} below the spatial-null 5th percentile $0.406$). What survives is
+including $\lvert\nabla\phii_2\rvert$: its median argmax-geodesic error is
+$0.472$ of the maximum geodesic extent ($48.3$~mm), with a bootstrap $95\%$ CI
+of $[0.350,0.656]$, and it is \emph{not} below the spatial-null 5th percentile
+$0.406$ (rotational/torus-shift permutation $p=0.229$). The interval straddles
+that threshold, so on the $20$ localized subjects the endpoint is not met and is
+also not resolved. What survives is
 weaker: $\lvert\nabla\phii_2\rvert$ is a \emph{rank} localizer (the true origin
 sits in its top $\sim\!18\%$) that beats graph-centrality baselines (Perron,
 weighted degree, deleted by measured correlation) and holds across media.
@@ -951,9 +1042,10 @@ value at the true reentry origin, so $0$ means the origin is the global maximum 
 the field, $0.5$ is chance, and $1$ means it is the minimum; it is
 scale-free and comparable across media of different size. The companion metric
 used on real anatomy, \emph{argmax-geodesic error}, is the shortest-path distance
-in millimetres along the surface from the localizer's argmax to the simulator's
-reentry origin
-(\code{results/\allowbreak gm4\allowbreak\_*\allowbreak\_metrics.json}). Lower rank is better; a perfect localizer
+along the surface from the localizer's argmax to the simulator's reentry origin,
+expressed as a fraction of the mesh's maximum geodesic extent rather than in
+millimetres (median $0.472$, or $48.3$~mm in absolute terms;
+\code{results/\allowbreak gm2\allowbreak\_metrics.json}). Lower rank is better; a perfect localizer
 would place the origin at rank $0$. The null-draw column counts resampled
 random-origin draws whose mean origin-rank is at or below the observed one; it is
 zero in every arm, which bounds the permutation $p$ by the resolution of the draw
@@ -962,7 +1054,8 @@ count rather than establishing a magnitude.}
 \small
 \begin{tabularx}{\linewidth}{@{}l c c c X@{}}
 \toprule
-medium & $\lvert\nabla\phii_2\rvert$ origin-rank & null draws $\le$ obs. & fibrosis rank & $n$ origins \\
+medium & $\lvert\nabla\phii_2\rvert$ origin-rank & null draws $\le$ obs. &
+fibrosis rank & $n$ origins \\
 \midrule
 FHN networks (100k)      & 0.176 & $0$ & $\sim0.10$ & 36{,}540 \\
 Kuramoto oscillators (500) & 0.091 & $0$ & 0.147 & 243 \\
@@ -986,18 +1079,21 @@ cardiac monodomain       & $\sim0.28$ & $0$ & (co-localizes) & only $\sim\!20$ \
 null, so $\lvert\nabla\phii_2\rvert$ is \emph{not} a precise localizer; (ii)~the
 substrate field co-localizes, and a controlled dissociation experiment shows
 why (in a diffusively-coupled medium the Fiedler bottleneck \emph{is} the
-low-conduction lesion), so $\lvert\nabla\phii_2\rvert$ matches, and does not
-beat, substrate imaging; (iii)~the cardiac arm rests on only $\sim\!20$ origins.}
+low-conduction lesion), so $\lvert\nabla\phii_2\rvert$ matches substrate imaging
+rather than beating it, and substrate is the better localizer in the FHN arm;
+(iii)~the cardiac arm rests on only $\sim\!20$ origins.}
 \label{fig:localize}
 \end{figure}
 
 \subsection{The falsification protocol: what caught the false positive}
 \label{sec:falsify}
 Each guard, removed, manufactures a specific false positive
-(\code{results/\allowbreak falsification\_\allowbreak protocol.json}). Shape-family leakage inflates AUC
+(\code{results/\allowbreak falsification\_\allowbreak protocol.json}).
+Shape-family leakage inflates AUC
 by $+0.117$ (naive random-CV $0.756$ vs.\ grouped $0.640$ on a
 controlled replicated cohort); the effect-size gate catches the $p$-value
-trap (subspace-SFI $p\approx2\times10^{-24}$ at $N=55{,}000$, yet
+trap (subspace-SFI over the competitor set, paired DeLong
+$p\approx2\times10^{-24}$ at $N=55{,}000$, yet
 $\dAUC=+0.003$ needs $\sim\!4{,}150$ cases to detect: statistically
 significant, practically useless).
 
@@ -1022,9 +1118,12 @@ Morris elementary-effects screening (\code{results/e6\_metrics.json}) finds the
 label most sensitive to diffusion $d_0$ ($\mu^\ast=500.7$), then fibrosis density
 ($147.8$) and transverse conductivity ($146.3$). A Gaussian-process surrogate has
 leave-one-out $R^2=0.35$ (large residual anatomical/label variance beyond the
-screened knobs, a label-noise caveat, not a positive). The synthetic null is
-robust across uncoupling strengths $\Delta w\in\{0.18,0.36,0.54\}$ (grouped GBT
-$\dAUC=0.033$--$0.036$, all $p\geq0.26$).
+screened knobs, a label-noise caveat, not a positive). Across uncoupling
+strengths $\Delta w\in\{0.18,0.36,0.54\}$ the grouped GBT
+increment is $\dAUC=0.033$--$0.036$ with all $p\geq0.26$: below the
+pre-registered $0.05$ gate, but non-significance on its own does not make these
+arms null, and we report no interval for them, so they are indeterminate rather
+than a demonstration that the synthetic null is robust to $\Delta w$.
 
 \subsection{External inducibility-rate anchor (plausibility, not validation)}
 Clinically observed AF inducibility spans $\sim\!5\%$ to $\sim\!85\%$ depending on
@@ -1053,7 +1152,8 @@ responsible for any of it. This is a base-rate
 \label{sec:convergence}
 Our own convergence study is the project's single weakest point, and we state it
 before a reader finds it. On a completed six-tier study (Roney, $n=24$ at each of
-1500/\allowbreak 3000/\allowbreak 6000/\allowbreak 12000/\allowbreak 24000/\allowbreak 48000 nodes; $144$ simulations,
+1500/\allowbreak 3000/\allowbreak 6000/\allowbreak 12000/\allowbreak
+24000/\allowbreak 48000 nodes; $144$ simulations,
 \code{results/\allowbreak convergence\_summary\_roney.json}), the inducibility rate crashes
 from the coarse mesh ($58.3\%$ at $1500$) to $16.7\%$ at $3000$, then appears
 non-monotone across the fine tiers ($25.0\%$, $20.8\%$, $25.0\%$) and rises again
@@ -1064,11 +1164,16 @@ settled.
 How much of that pattern is real deserves stating, because $n=24$ per tier buys
 little precision. Exact binomial intervals are
 $[36.6,77.9]$, $[4.7,37.4]$, $[9.8,46.7]$, $[7.1,42.2]$, $[9.8,46.7]$ and
-$[18.8,59.4]$ percent across the six tiers. Every tier from $3000$ nodes upward
-overlaps every other, so the apparent wiggle among the fine tiers is
-\emph{not} distinguishable from sampling noise and we do not claim it is a real
-non-monotonicity. Only the drop from the coarsest tier is close to resolvable,
-its interval meeting the next tier's over a $0.8$-point sliver. What the study
+$[18.8,59.4]$ percent across the six tiers. These are marginal intervals: the
+same $24$ subjects are simulated at every tier, so each describes one tier's own
+precision and discards the pairing, and overlap between two of them is not a
+test of their difference. We use them only for the negative claim. Every tier
+from $3000$ nodes upward overlaps every other, so the apparent wiggle among the
+fine tiers is \emph{not} distinguishable from sampling noise and we do not claim
+it is a real non-monotonicity. Only the drop from the coarsest tier is close to
+resolvable on this reading, its interval meeting the next tier's over a
+$0.8$-point sliver; we do not report the paired comparison that would settle it.
+What the study
 establishes is therefore the weaker and sufficient claim: at this sample size the
 rate cannot be shown to have converged anywhere in the tested window, and no tier
 can be declared the settled value. A study that could distinguish these tiers
@@ -1124,11 +1229,12 @@ toward zero (Section~\ref{sec:labelnoise}), so that comparison is conservative.
 %======================================================================
 This work makes four contributions.
 (1)~A pre-registered, leakage-controlled, effect-size-gated evaluation of a
-plausible spectral biomarker: a clean null at synthetic scale ($10^5$ networks)
-with its mechanism measured rather than inferred (Section~\ref{sec:redundancy}:
-the aggregate SFI summaries are reconstructible from the competitors at
-$R^2=0.970$, the order statistics are not, and their unique variance is
-unpredictive), and a measured null on $182$ patients of real anatomy.
+plausible spectral biomarker: a clean null at synthetic scale ($10^5$ networks),
+where the mechanism remains inferred, and a measured null on $182$ patients of
+real anatomy, where it is measured rather than inferred
+(Section~\ref{sec:redundancy}, on those same $182$ subjects: the aggregate SFI
+summaries are reconstructible from the competitors at $R^2=0.970$, the extreme and
+edge-level columns are not, and their unique variance is unpredictive).
 (2)~A label-free validity criterion $\rhoval$ for the single-vector estimator:
 it proves $\phii_2$ is ill-conditioned on real tissue ($\rhoval\approx2422\gg
 \rhoval^\ast\approx3$), a portable a priori check for any Fiedler-based marker,
@@ -1141,14 +1247,15 @@ null.
 (4)~A demonstration that standard methodology manufactures the exact false
 positives this protocol catches (leakage $+0.117$ AUC; the $p$-value trap).
 
-\subsection{Three corrections, and what caught each}
+\subsection{Four corrections, and what caught each}
 \label{sec:corrections}
 
-Three claims in earlier versions of this work did not survive, and because they
+Four claims in earlier versions of this work did not survive, and because they
 are referred to individually where they arise, we set them out together here.
 
-The first was a positive result. A pre-specified secondary endpoint reported that
-SFI beat a fibrosis-heterogeneity baseline on the combined real cohort
+The first was a positive result. A pre-specified additional feature-set
+comparison reported that SFI beat a fibrosis-heterogeneity baseline on the
+combined real cohort
 ($\dAUC=+0.103$, $p=0.009$), which we read as showing SFI is not merely
 re-encoded fibrosis. Extending the Roney arm from $62$ to all $100$ released
 meshes reduced it to $+0.017$ ($p=0.452$). What caught it was more data, and what
@@ -1168,6 +1275,14 @@ characteristic $-3$ on removal. All three were generalised from a single mesh or
 from a rounded mean. What caught them was writing regression tests over the whole
 cohort, two of which failed on first run. The identification of tag $164$ itself
 survived and is better supported by the census than by the original figures.
+
+The fourth was the primary endpoint itself. An earlier version reported a
+combined real-cohort $\dAUC$ of $+0.051$ and read the endpoint as missed only on
+significance. Correcting the UW substrate at the original $144$ subjects brought
+that to $+0.036$; extending the Roney arm from $62$ to all $100$ released meshes
+brought it to $+0.012$, so the larger share of the drop was sample size rather
+than substrate. What caught it was the substrate audit followed by the cohort
+extension (Section~\ref{sec:null}).
 
 We note the pattern rather than each instance. Every one was caught by a control,
 a larger sample, or a test that this project designed and ran against its own
@@ -1195,7 +1310,8 @@ it, and is only partly redundancy (Section~\ref{sec:redundancy}). The real-cohor
 result \emph{is} a measured null in the sense that the interval excludes the
 pre-registered gate, but it does \emph{not} exclude a small effect: the lower
 bound is $-0.017$, so an increment of a few thousandths remains compatible with
-the data and would need a far larger cohort to resolve. The localizer is \emph{not} precise (strict endpoint null) and does
+the data and would need a far larger cohort to resolve. The localizer is
+\emph{not} precise (strict endpoint null) and does
 \emph{not} beat substrate imaging. The $\rhoval$ scaling ``law'' is a clean match
 to Weyl only on the real atrial 2-manifold. Labels are a monodomain simulator,
 not clinical outcomes and not openCARP.
@@ -1206,10 +1322,12 @@ not clinical outcomes and not openCARP.
 \begin{enumerate}[leftmargin=1.5em]
 \item The labeller is strongly resolution-sensitive and does not converge in the
 tested window (Section~\ref{sec:convergence}):
-the rate drops from $58\%$ at $1500$ nodes to $17\%$ at $3000$, is non-monotone
-across the fine tiers, and rises to $37.5\%$ at $\sim\!50$k nodes, above the
+the rate drops from $58\%$ at $1500$ nodes to $17\%$ at $3000$ and rises to
+$37.5\%$ at $\sim\!50$k nodes, above the
 $34.0\%$ rate at the $2{,}000$-node operating resolution, so the direction of the
-residual bias there is not established; only $7/24$
+residual bias there is not established. At $n=24$ per tier the intervals overlap
+for every tier from $3000$ nodes upward, so no ordering among the fine tiers is
+resolvable and we do not claim the wiggle there is real; only $7/24$
 subjects are fully consistent across all six tiers. All \emph{absolute} rates and
 AUCs are coarse-mesh-provisional; the \emph{relative} comparison scores the same
 labels in both arms, so the shift is common to them, though per-subject label
@@ -1220,11 +1338,15 @@ was substituted with monodomain Mitchell--Schaeffer, a logged deviation.
 controls in Section~\ref{sec:substrate}: a fibre field that is a constant vector
 in all $164$ meshes, and element tag $164$, which is the caps over the atrial
 orifices and which we had been treating as half-fibrotic tissue. Repairing both
-raises inducibility only from $6/82$ to $14/82$, and all three candidate
-explanations for the cohort's low rate are now excluded by direct control. Its
-regions additionally rest on a PCA surrogate rather than registered atrial
-coordinates. The cohort's predictive test is uninformative about SFI, and why it
-is so rarely inducible is an open problem rather than a solved one.
+raises inducibility only from $6/82$ to $14/82$, and none of the three
+substrate explanations for the cohort's low rate is supported by direct
+control; Control~4 attributes the low rate instead to a fibrosis burden
+roughly $30\%$ lower
+($0.244$ against Roney's $0.349$), reproduced by swapping the burden in either
+direction. Its regions additionally rest on a PCA surrogate rather than
+registered atrial coordinates. The cohort's predictive test is uninformative
+about SFI, and what remains open is narrower: openCARP returns $4/82$ here and
+the same rescaling does not recover it ($0/30$, Section~\ref{sec:opencarp}).
 \item The inducibility label is stable in aggregate but noisy per subject, which
 attenuates every $\dAUC$ we report. Destroying the Roney fibre field holds the rate
 at $20/62$ yet flips $10/62$ individual verdicts; repairing the UW substrate retains
@@ -1232,8 +1354,10 @@ only $2$ of its $6$ original positives. That compounds the mesh-convergence
 instability above, where just $7/24$ subjects were consistent across six
 resolutions. Non-differential label noise biases incremental AUC toward zero, so the
 null we report is partly a statement about the labeller and not only about SFI.
-\item $\sim\!30$ DeLong comparisons were run and, on the corrected substrate,
-\emph{none} is significant at any threshold. The smallest is $p=0.121$
+\item $\sim\!30$ DeLong comparisons were run on the real cohorts. The
+pre-registration provides no multiplicity plan for that family, so every
+$p$-value we report is unadjusted; on the full $182$-subject corrected analysis
+none reaches the pre-registered $\alpha=0.05$. The smallest is $p=0.121$
 (\code{fibrosis\_vs\_+SFI}, gradient boosting, UW), and that one sits on a base AUC
 of $0.562$ with eight positives, so it is uninformative rather than borderline. An
 earlier version reported this family's combined estimate as the study's one
@@ -1250,8 +1374,9 @@ reentry-inducibility prediction beyond existing features, either at synthetic
 scale or on $182$ patients of real anatomy, where the combined estimate is
 $+0.012$ with an interval that excludes the pre-registered gate. The mechanism is
 decomposable and only half of it is redundancy: the aggregate SFI summaries are
-reconstructible from the competitor set at $R^2=0.970$, while the order statistics
-carry variance of their own that simply does not predict the label. Independently
+reconstructible from the competitor set at $R^2=0.970$, while the extreme and
+edge-level columns carry variance of their own that simply does not predict
+the label. Independently
 of the predictive question, the single-vector estimator is ill-conditioned on real
 tissue ($\rhoval\gg1$), and lawfully more so as meshes are refined.
 
@@ -1303,7 +1428,8 @@ name & statement & meaning \\
 Combined with the classical Hellmann--Feynman theorem
 $\partial\lam_2/\partial w_{ij}=\phii_2^{\!\top}(\partial L/\partial w_{ij})\phii_2$
 (Ghosh--Boyd 2006~\cite{ghosh2006}, an analysis result we cite, not re-prove),
-T3 is exactly the closed form $\partial\lam_2/\partial w_{ij}=(\phii_{2,i}-\phii_{2,j})^2$.
+T3 is exactly the closed form $\partial\lam_2/\partial
+w_{ij}=(\phii_{2,i}-\phii_{2,j})^2$.
 Lean/Mathlib was attempted; its toolchain binaries are distributed only as
 GitHub release assets, which the compute environment's egress policy blocks with
 a hard 403, so Coq provides the equivalent kernel-checked guarantee. Reproduce
@@ -1335,7 +1461,8 @@ public and de-identified.
 \emph{Proc.\ 45th IEEE Conference on Decision and Control (CDC)}, 6605--6611, 2006.
 
 \bibitem{pecora1998} L.~M.~Pecora and T.~L.~Carroll. Master stability functions
-for synchronized coupled systems. \emph{Physical Review Letters}, 80(10):2109--2112, 1998.
+for synchronized coupled systems. \emph{Physical Review Letters},
+80(10):2109--2112, 1998.
 
 \bibitem{barahona2002} M.~Barahona and L.~M.~Pecora. Synchronization in
 small-world systems. \emph{Physical Review Letters}, 89(5):054101, 2002.
@@ -1345,7 +1472,8 @@ inference and detection of disruptive EEG networks for epileptic seizures.
 \emph{Scientific Reports}, 10:8653, 2020.
 
 \bibitem{weyl1912} H.~Weyl. Das asymptotische Verteilungsgesetz der Eigenwerte
-linearer partieller Differentialgleichungen. \emph{Mathematische Annalen},
+linearer partieller Differentialgleichungen (mit einer Anwendung auf die Theorie
+der Hohlraumstrahlung). \emph{Mathematische Annalen},
 71(4):441--479, 1912.
 
 \bibitem{daviskahan1970} C.~Davis and W.~M.~Kahan. The rotation of eigenvectors
@@ -1357,7 +1485,8 @@ characteristic curves: a nonparametric approach. \emph{Biometrics},
 44(3):837--845, 1988.
 
 \bibitem{sunxu2014} X.~Sun and W.~Xu. Fast implementation of DeLong's algorithm
-for comparing the areas under correlated ROC curves. \emph{IEEE Signal
+for comparing the areas under correlated receiver operating characteristic
+curves. \emph{IEEE Signal
 Processing Letters}, 21(11):1389--1393, 2014.
 
 \bibitem{mitchell2003} C.~C.~Mitchell and D.~G.~Schaeffer. A two-current model
@@ -1365,11 +1494,11 @@ for the dynamics of cardiac membrane. \emph{Bulletin of Mathematical Biology},
 65(5):767--793, 2003.
 
 \bibitem{roney2022} C.~H.~Roney et al. Predicting atrial fibrillation recurrence
-by combining population data and virtual cohorts of patient-specific left-atrial
+by combining population data and virtual cohorts of patient-specific left atrial
 models. \emph{Circulation: Arrhythmia and Electrophysiology}, 15(2):e010253, 2022.
 doi:10.1161/CIRCEP.121.010253. Data: Zenodo 5801337.
 
-\bibitem{uwboyle2025} S.~Bifulco, P.~M.~Boyle, et al. Predicting arrhythmia
+\bibitem{uwboyle2025} S.~Bifulco et al. Predicting arrhythmia
 recurrence post-ablation in atrial fibrillation using explainable machine
 learning. \emph{Communications Medicine}, 2025.
 doi:10.1038/s43856-025-01058-4. Data: Dryad \code{10.5061/dryad.kkwh70sg0}.
@@ -1399,7 +1528,7 @@ atrial burst pacing with regard to long-term recurrence after ablation in
 persistent atrial fibrillation. \emph{Journal of Arrhythmia}, 35(2):223--229,
 2019. PMID 31007786.
 
-\bibitem{liu2020} X.~Liu et al. Is atrial fibrillation noninducibility by burst
+\bibitem{liu2020} H.~Liu et al. Is atrial fibrillation noninducibility by burst
 pacing after catheter ablation associated with reduced clinical recurrence? A
 systematic review and meta-analysis. \emph{Journal of the American Heart
 Association}, 9(14):e015260, 2020. PMID 32654581.
