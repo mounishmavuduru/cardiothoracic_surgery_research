@@ -81,7 +81,8 @@ sample size rather than substrate. The audit that found the defect, and the four
 controls that followed, are reported in full; the cause of that cohort's
 unusually low inducibility rate turned out not to be any substrate defect but a
 $30\%$ difference in fibrosis burden between the two released cohorts, which
-reverses the apparent anomaly when it is equalised in either direction. Where the
+accounts for the apparent anomaly and reproduces it in either direction when the
+burden is swapped. Where the
 null is clean, only half the mechanism is feature redundancy: the aggregate SFI
 summaries are reconstructible from the competitor set at $R^2=0.970$, while the extreme
 and edge-level columns retain variance of their own ($R^2<0.25$) and still do
@@ -293,7 +294,8 @@ $\Delta\lam_2$} on real tissue, and that $\phii_2$ is ill-conditioned
 $\Delta\lam_2$ \emph{magnitude}, not the classification content of a monotone
 ranking feature; indeed the \emph{exact} $\Delta\lam_2$ SFI (no $\rhoval$
 limitation) is \emph{also} non-predictive (Section~\ref{sec:null}), so the
-predictive null is separately due to feature redundancy. Two caveats:
+predictive null has a separate cause, which Section~\ref{sec:redundancy} measures
+and finds to be only half redundancy. Two caveats:
 (i)~$\rhoval$'s numerator carries the fibrosis-weighted $\Delta w$ field, so only
 its denominator $\lam_3-\lam_2$ is truly label-free; (ii)~$\rhoval^\ast\approx3$
 is calibrated on a $16$-node path graph with a problem-dependent constant, so
@@ -505,9 +507,11 @@ $p\geq0.38$ \\
 \centering
 \includegraphics[width=0.86\linewidth]{fig_predictive_null.png}
 \caption{The predictive null. Adding SFI to the competitor set does not clear
-the pre-registered effect-size gate in any cohort, and on real anatomy the
-bootstrap interval excludes the gate as well as containing zero, so the
-real-cohort result is a measured null rather than a shortfall of power.}
+the pre-registered effect-size gate in any cohort. On Roney and on the combined
+cohort the bootstrap interval excludes the gate as well as containing zero, so
+those are measured nulls rather than a shortfall of power; the two UW intervals
+reach past the gate ($[-0.073,+0.081]$ and $[-0.095,+0.203]$ on eight positives)
+and are uninformative rather than null.}
 \label{fig:null}
 \end{figure}
 
@@ -867,7 +871,7 @@ $1/62$ while UW at $0.248$ gives $8/82$. On one and eight events that contrast
 does not establish a reversal and we do not claim one; what it does show is that
 the UW cohort is not intrinsically resistant to reentry. Most of the apparent
 anomaly is accounted for by a difference in how much fibrosis the two released
-datasets contain, and the three substrate defects, real as they are, were never
+datasets contain, and the two released defects, real as they are, were never
 the explanation; what the burden account does not cover is openCARP's UW rate,
 which the same rescaling leaves at $0/30$ (Section~\ref{sec:opencarp}). We had
 spent three controls looking for something
@@ -993,8 +997,9 @@ The relative error of the first-order SFI scales as $\Theta(\rhoval)$ and crosse
 $10\%$ at $\rhoval^\ast\approx3$; real atria sit at median $\rhoval\approx2422$.
 This proves the single-vector estimator is numerically invalid on real tissue
 and $\phii_2$ is ill-conditioned, but (as boxed in Section~\ref{sec:validity})
-it does not by itself prove non-predictiveness; the feature-redundancy null of
-Section~\ref{sec:null} is the separate, label-dependent reason.
+it does not by itself prove non-predictiveness; the predictive null of
+Section~\ref{sec:null} is a separate, label-dependent finding, and
+Section~\ref{sec:redundancy} shows redundancy accounts for only part of it.
 
 \subsection{The \texorpdfstring{$\rhoval$}{rho} scaling law}
 \label{sec:scaling}
@@ -1353,6 +1358,23 @@ labels in both arms, so the shift is common to them, though per-subject label
 noise still attenuates the incremental $\dAUC$ toward zero.
 \item Simulator, not clinical, labels: the pre-registered openCARP ground truth
 was substituted with monodomain Mitchell--Schaeffer, a logged deviation.
+\item A clinical endpoint family \emph{is} pre-registered and is deliberately not
+reported here. Per-patient two-year post-ablation recurrence outcomes for the $82$
+UW patients were shared with us after the simulator analysis was complete, and
+\S8 of the pre-registration was frozen and tagged before any feature was placed
+alongside the outcome column; at the time of writing no such association has been
+computed. Two things follow that we state now rather than after seeing an answer.
+The outcome column is restricted-use human-subject data, not covered by the
+CC0 that applies to the meshes, so it is not redistributed with this work and
+only aggregate statistics derived from it may be published. And the study is
+underpowered for that endpoint by construction: on the observed $48/82$ event
+rate, power at the $\dAUC\geq0.05$ gate used for the simulator endpoint is
+$0.24$ at best and $0.13$ under a weaker shared-noise assumption, so that gate
+is \emph{not} reused there. The minimum detectable effect is $\dAUC\approx0.10$
+to $0.15$, and $80\%$ power at $0.05$ would need $371$ to $859$ patients
+(\code{results/\allowbreak power\allowbreak\_real\allowbreak\_outcomes.json}).
+A null below that band will be reported as inconclusive, never as evidence that
+SFI adds nothing clinically.
 \item The UW cohort's released substrate carries two defects, detailed with their
 controls in Section~\ref{sec:substrate}: a fibre field that is a constant vector
 in all $164$ meshes, and element tag $164$, which is the caps over the atrial

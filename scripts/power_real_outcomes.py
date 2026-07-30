@@ -15,10 +15,16 @@ Usage:  python scripts/power_real_outcomes.py
 """
 from __future__ import annotations
 
+import json
+import os
+from typing import Dict
+
 import numpy as np
 from scipy.stats import norm
 
 from asb.evaluation import delong_test
+
+OUT = "results/power_real_outcomes.json"
 
 #: Marginals from the UW/Boyle 2-year recurrence file (see pre-registration section 8.2).
 N_EVENTS = 48
@@ -105,11 +111,15 @@ def main() -> None:
     print(f"n_events={N_EVENTS}  n_nonevents={N_NONEVENTS}  total={N_EVENTS + N_NONEVENTS}"
           f"  alpha={ALPHA}  nsim={NSIM}")
     print("power = P[DeLong two-sided p < alpha] for baseline+SFI vs baseline\n")
+
+    grid: Dict[str, Dict[str, Dict[str, float]]] = {}
     for r in CORRELATIONS:
         print(f"--- shared-noise correlation r={r:.2f} ---")
         print(f"{'base AUC':>9} " + " ".join(f"{'d=+%.2f' % d:>8}" for d in DELTAS))
+        grid[f"{r:.2f}"] = {}
         for auc_base in BASE_AUCS:
             row = [power(auc_base, d, r, rng) for d in DELTAS]
+            grid[f"{r:.2f}"][f"{auc_base:.2f}"] = {f"{d:.2f}": v for d, v in zip(DELTAS, row)}
             print(f"{auc_base:>9.2f} " + " ".join(f"{v:>8.2f}" for v in row))
         print()
 
@@ -117,10 +127,41 @@ def main() -> None:
           f"({N_EVENTS}/{N_EVENTS + N_NONEVENTS} = "
           f"{N_EVENTS / (N_EVENTS + N_NONEVENTS):.1%}) fixed:")
     print(f"{'target dAUC':>12} {'r=0.80':>10} {'r=0.50':>10}")
+    required: Dict[str, Dict[str, int]] = {}
     for d in (0.05, 0.07, 0.10):
         row = [required_n(d, r, rng) for r in (0.80, 0.50)]
+        required[f"{d:.2f}"] = {"r_0.80": int(row[0]), "r_0.50": int(row[1])}
         print(f"{d:>12.2f} {row[0]:>10,} {row[1]:>10,}")
     print(f"\n(this study has n = {N_EVENTS + N_NONEVENTS})")
+
+    # Aggregate statistics only. The per-patient outcome column is restricted-use
+    # human-subject data (pre-registration section 8.1) and is never written here.
+    out = {
+        "description": (
+            "Power for the pre-registered clinical endpoint (pre-registration section 8.3), "
+            "computed from the marginal event counts alone. No feature-outcome association "
+            "is computed, inspected, or stored. Aggregate statistics only; the per-patient "
+            "outcome column is restricted-use and is not written to this file."
+        ),
+        "n_events": N_EVENTS,
+        "n_nonevents": N_NONEVENTS,
+        "n_total": N_EVENTS + N_NONEVENTS,
+        "event_rate": N_EVENTS / (N_EVENTS + N_NONEVENTS),
+        "alpha": ALPHA,
+        "n_simulations": NSIM,
+        "seed": SEED,
+        "power_grid": grid,
+        "n_required_for_80pct_power": required,
+        "power_at_prereg_gate_0.05": {
+            "r_0.80_base_0.70": grid["0.80"]["0.70"]["0.05"],
+            "r_0.50_base_0.70": grid["0.50"]["0.70"]["0.05"],
+        },
+        "minimum_detectable_dauc": [0.10, 0.15],
+    }
+    os.makedirs("results", exist_ok=True)
+    with open(OUT, "w", encoding="utf-8") as fh:
+        json.dump(out, fh, indent=2)
+    print(f"\nwrote {OUT}")
 
 
 if __name__ == "__main__":

@@ -1,0 +1,80 @@
+{
+  "description": "Power for the pre-registered clinical endpoint (pre-registration section 8.3), computed from the marginal event counts alone. No feature-outcome association is computed, inspected, or stored. Aggregate statistics only; the per-patient outcome column is restricted-use and is not written to this file.",
+  "n_events": 48,
+  "n_nonevents": 34,
+  "n_total": 82,
+  "event_rate": 0.5853658536585366,
+  "alpha": 0.05,
+  "n_simulations": 4000,
+  "seed": 20260724,
+  "power_grid": {
+    "0.80": {
+      "0.65": {
+        "0.03": 0.10125,
+        "0.05": 0.2255,
+        "0.07": 0.39625,
+        "0.10": 0.70475,
+        "0.15": 0.97175
+      },
+      "0.70": {
+        "0.03": 0.10825,
+        "0.05": 0.238,
+        "0.07": 0.42575,
+        "0.10": 0.7485,
+        "0.15": 0.9865
+      },
+      "0.75": {
+        "0.03": 0.121,
+        "0.05": 0.267,
+        "0.07": 0.4895,
+        "0.10": 0.8155,
+        "0.15": 0.99375
+      }
+    },
+    "0.50": {
+      "0.65": {
+        "0.03": 0.08075,
+        "0.05": 0.13,
+        "0.07": 0.19775,
+        "0.10": 0.374,
+        "0.15": 0.709
+      },
+      "0.70": {
+        "0.03": 0.0875,
+        "0.05": 0.131,
+        "0.07": 0.222,
+        "0.10": 0.41375,
+        "0.15": 0.78775
+      },
+      "0.75": {
+        "0.03": 0.08375,
+        "0.05": 0.1425,
+        "0.07": 0.26,
+        "0.10": 0.477,
+        "0.15": 0.8675
+      }
+    }
+  },
+  "n_required_for_80pct_power": {
+    "0.05": {
+      "r_0.80": 371,
+      "r_0.50": 859
+    },
+    "0.07": {
+      "r_0.80": 190,
+      "r_0.50": 442
+    },
+    "0.10": {
+      "r_0.80": 91,
+      "r_0.50": 205
+    }
+  },
+  "power_at_prereg_gate_0.05": {
+    "r_0.80_base_0.70": 0.238,
+    "r_0.50_base_0.70": 0.131
+  },
+  "minimum_detectable_dauc": [
+    0.1,
+    0.15
+  ]
+}
