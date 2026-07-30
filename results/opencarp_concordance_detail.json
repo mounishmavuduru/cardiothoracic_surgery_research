@@ -1,0 +1,51 @@
+{
+  "description": "openCARP vs monodomain concordance, split by cohort and chance-corrected. The pooled figure spans the UW cohort, on which the openCARP calibration gate is not met.",
+  "pooled": {
+    "n": 182,
+    "both_inducible": 21,
+    "only_opencarp": 5,
+    "only_monodomain": 21,
+    "both_not_inducible": 135,
+    "n_agree": 156,
+    "raw_agreement": 0.8571428571428571,
+    "agreement_on_positives": 0.44680851063829785,
+    "cohens_kappa": 0.5357142857142856,
+    "mcnemar_exact_p": 0.002493917942047119,
+    "opencarp_rate": 0.14285714285714285,
+    "monodomain_rate": 0.23076923076923078
+  },
+  "by_cohort": {
+    "roney": {
+      "n": 100,
+      "both_inducible": 19,
+      "only_opencarp": 3,
+      "only_monodomain": 15,
+      "both_not_inducible": 63,
+      "n_agree": 82,
+      "raw_agreement": 0.82,
+      "agreement_on_positives": 0.5135135135135135,
+      "cohens_kappa": 0.5614035087719297,
+      "mcnemar_exact_p": 0.007537841796875,
+      "opencarp_rate": 0.22,
+      "monodomain_rate": 0.34
+    },
+    "uw": {
+      "n": 82,
+      "both_inducible": 2,
+      "only_opencarp": 2,
+      "only_monodomain": 6,
+      "both_not_inducible": 72,
+      "n_agree": 74,
+      "raw_agreement": 0.9024390243902439,
+      "agreement_on_positives": 0.2,
+      "cohens_kappa": 0.28695652173913083,
+      "mcnemar_exact_p": 0.2890625,
+      "opencarp_rate": 0.04878048780487805,
+      "monodomain_rate": 0.0975609756097561
+    }
+  },
+  "gate_passed": {
+    "roney": true,
+    "uw": false
+  }
+}

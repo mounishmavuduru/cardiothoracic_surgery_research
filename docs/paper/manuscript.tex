@@ -878,7 +878,9 @@ hypothesis about the pipeline, but it is a hypothesis about the inputs first.
 \subsection{An independent solver as a robustness check}
 \label{sec:opencarp}
 \noindent\emph{Sources}, all under \code{results/}:
-\code{opencarp\allowbreak\_full\allowbreak\_cohort.json};
+\code{opencarp\allowbreak\_full\allowbreak\_cohort.json}, with the
+per-cohort and chance-corrected concordance in
+\code{opencarp\allowbreak\_concordance\allowbreak\_detail.json};
 all three calibration attempts, including the two rejected, are in
 \code{opencarp\allowbreak\_calibration\allowbreak\_history.json},
 with the discretisation and propagation checks in
@@ -917,14 +919,22 @@ fibrosis--verdict rank correlation of $+0.404$, against the frozen solver's $0.7
 It is not met on UW, where openCARP returns $4/82$ inducible ($4.9\%$, below the
 band) with a rank correlation of only $+0.079$.
 Across all $182$ subjects the two solvers agree on $156$, or $85.7\%$. That figure
-is raw rather than chance-corrected: on an outcome this imbalanced most of the
-agreement is shared negatives, and the two solvers agree on only $21$ positives.
-It also pools a cohort on which the calibration gate failed, so we report it as a
-statement about the protocol across both cohorts rather than about the tissue. The
+is raw rather than chance-corrected, and on an outcome this imbalanced the
+correction matters: Cohen's $\kappa$ is $0.536$, and the two solvers agree on
+only $21$ positives. Splitting it by cohort shows why the pooled number should
+not be read as a tissue-level result. On Roney, where the gate is met, raw
+agreement is $82/100$ ($82.0\%$) at $\kappa=0.561$; on UW, where it is not, raw
+agreement is \emph{higher} at $74/82$ ($90.2\%$) but $\kappa$ falls to $0.287$,
+because at a $4.9\%$ and $9.8\%$ event rate almost all of that agreement is
+shared negatives. The pooled figure is therefore a statement about the protocol
+across both cohorts rather than about the tissue, and the arm that looks most
+concordant is the one carrying the least information. The
 asymmetry is the substantive part. Of the $26$ subjects the two solvers disagree
 on, openCARP calls only $5$ inducible where the monodomain solver does not, while
 the reverse happens $21$ times; over the whole cohort openCARP labels $26/182$
-against monodomain's $42/182$. The stand-in is therefore not under-calling
+against monodomain's $42/182$. That imbalance is systematic rather than sampling
+noise (McNemar exact $p=0.0025$), so the two solvers differ in level and not only
+in which subjects they pick. The stand-in is therefore not under-calling
 relative to an independent reaction--diffusion solver --- it is the more liberal
 of the two, which makes the incremental comparisons reported above conservative
 rather than inflated. (On the $60$-subject calibration subset the discordance was
