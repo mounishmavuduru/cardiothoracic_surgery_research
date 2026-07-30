@@ -679,6 +679,23 @@ partition or a patient-level reduction --- so both are a logged deviation, fixed
 post hoc but without reference to the outcome, since SFI is closed-form given the
 mesh and is never fitted to the label.
 
+One further deviation belongs here because it bears directly on the validity
+argument. Every real-cohort number in this paper is computed from the
+\emph{first-order} per-region SFI (\code{asb.sfi.sfi\_region}). The
+pre-registration also specifies a gap-triggered switch to the subspace variant
+when the validity radius is exceeded, and that switch is not wired into the
+real-cohort feature path: the subspace estimator is used only in the synthetic
+validity experiments of Section~\ref{sec:validity}. Since real atria sit at
+median $\rhoval\approx2422$, the switch would have fired on every mesh had it
+been applied. We report the first-order numbers rather than silently
+re-deriving the table, for two reasons: the ranking a classifier consumes is
+invariant to the global $\Delta w$ magnitude that drives $\rhoval$, and the
+question the switch exists to answer is settled directly in
+Section~\ref{sec:null}, where the \emph{exact} per-region $\Delta\lam_2$ ---
+which carries no first-order error at any $\lVert\Delta L\rVert$ --- also adds
+nothing over the competitor set. The reader should nonetheless know that the
+primary endpoint was scored with the estimator the validity argument indicts.
+
 \paragraph{Partition.} Regions are a $3\times3$ grid over the universal atrial
 coordinates. With $(\alpha,\beta)\in[0,1]^2$ per vertex, a vertex is assigned
 $r=3\lfloor 3\beta\rfloor+\lfloor 3\alpha\rfloor \in\{0,\dots,8\}$, so every mesh
