@@ -1062,9 +1062,12 @@ expressed as a fraction of the mesh's maximum geodesic extent rather than in
 millimetres (median $0.472$, or $48.3$~mm in absolute terms;
 \code{results/\allowbreak gm2\allowbreak\_metrics.json}). Lower rank is better; a perfect localizer
 would place the origin at rank $0$. The null-draw column counts resampled
-random-origin draws whose mean origin-rank is at or below the observed one; it is
-zero in every arm, which bounds the permutation $p$ by the resolution of the draw
-count rather than establishing a magnitude.}
+random-origin draws whose mean origin-rank is at or below the observed one, out
+of $300$ draws per arm (each subject contributes up to $300$ random nodes, and
+the pooled null is resampled to the smallest such sample). It is zero in every
+arm, which bounds the permutation $p$ below $1/300\approx0.003$ but does not
+establish a magnitude: the resolution of the draw count, not the strength of the
+effect, is what the zero reports.}
 \label{tab:localize}
 \small
 \begin{tabularx}{\linewidth}{@{}l c c c X@{}}
