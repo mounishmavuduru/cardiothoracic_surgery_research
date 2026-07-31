@@ -484,6 +484,39 @@ prediction from baseline substrate; the post-ablation mesh encodes the delivered
   `tau_close = 115 × (1 − 0.5 f)` reproduces the frozen 218 ms healthy / 121 ms fibrotic
   within about 2 %. The per-bin membrane parameters are now emitted accordingly and the gate
   is being re-run.
+- **Amendment 2026-07-30 (j): four post-hoc analyses, all label-free or explicitly
+  exploratory, logged here because the protocol requires post-hoc work to be dated rather
+  than absorbed silently.** None changes an endpoint, a feature, or a stored result; each
+  answers a question a referee would otherwise be entitled to ask.
+
+  1. `scripts/opencarp_concordance_detail.py` — splits the openCARP/monodomain concordance
+     by cohort and chance-corrects it. The manuscript had asserted, without measuring it,
+     that most of the pooled 85.7 % was shared negatives. Pooled κ = 0.536; Roney 82.0 % at
+     κ = 0.561, UW 90.2 % at κ = 0.287. The arm with the *highest* raw agreement carries the
+     least information, which is why the pooled figure is reported as a protocol statement.
+     Reproduces the previously stored 156/182 exactly, which validates the subject join.
+  2. `scripts/convergence_paired_tests.py` — exact McNemar between adjacent resolution
+     tiers. No new simulation: the same 24 subjects run at every tier, so each 2×2 is fixed
+     by the two marginals and the agreement count already stored. The 1500 → 3000 drop is
+     real (11 verdicts lost against 1 gained, p = 0.0063, Holm 0.032); none of the four
+     fine-tier transitions is resolvable. This *sharpens* §7.6's non-convergence statement
+     rather than weakening it, and the direction was not chosen after seeing the answer —
+     the manuscript already said the drop was "close to resolvable" on the marginal reading.
+  3. `scripts/uw_euler_census.py` — recomputes the tag-164 Euler census over all 82 meshes
+     with nothing excluded. The stored figure ("median 7, range 2–12") covered the 80 meshes
+     where removal opens the surface; ID040 and ID049 move the other way (χ −16 → −8 and
+     −18 → −5), so the full-cohort range of the change is −13 to 12. Logged because the
+     paragraph this corrects is itself a correction for over-generalising from one mesh.
+  4. `scripts/gm1_opencarp_labels.py` — the GM1 comparison re-scored with the outcome column
+     swapped to openCARP's verdicts, features and evaluation identical. **This is
+     exploratory and cannot become an endpoint**: the precondition in amendment (i) bars
+     openCARP labels from any endpoint until the §7.4 gate is re-passed on that solver, and
+     the gate failed on UW (4/82, 4.9 %, below the 10–40 % band). It is run and reported
+     because the Conclusion previously claimed the *concordance rate* bounded how much of
+     the null could be a labeller artefact, which it does not — agreement on a label says
+     nothing about an incremental AUC. The null holds under the independent solver
+     (combined ΔAUC = +0.028, p = 0.328; no arm clears 0.05 at p < 0.05), on 26 positives
+     against the stand-in's 42, so with wider intervals throughout.
 - **Amendment 2026-07-24 (e): the fibre hypothesis is REFUTED by direct control, and the
   label is noisy per subject.** `scripts/roney_fibre_control.py` destroyed only the fibre
   field on the Roney cohort — which ships a real one — holding anatomy, fibrosis and every

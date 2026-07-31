@@ -981,12 +981,17 @@ rather than inflated. (On the $60$-subject calibration subset the discordance wa
 entirely one-way, $0$ against $5$; that does not hold on the full cohort and the
 figure quoted here is the full-cohort one.)
 
-\paragraph{The endpoint re-scored against openCARP.} Agreement on the label does
-not by itself bound the incremental $\dAUC$, so we ran the comparison rather than
-inferring it: the identical GM1 evaluation, on identical features, with the
-outcome column swapped from the monodomain verdict to openCARP's
+\paragraph{The comparison re-scored against openCARP (exploratory).} Agreement on
+the label does not by itself bound the incremental $\dAUC$, so we ran the
+comparison rather than inferring it: the identical GM1 evaluation, on identical
+features, with the outcome column swapped from the monodomain verdict to
+openCARP's
 (\code{results/\allowbreak gm1\allowbreak\_opencarp\allowbreak\_labels.json}).
-The null holds. The combined competitor-baseline increment is $\dAUC=+0.028$
+This is \emph{not} an endpoint and cannot become one. The pre-registration binds
+openCARP labels out of any endpoint until the calibration gate is re-passed on
+that solver, and the gate failed on UW; the arm is reported as an exploratory
+sensitivity analysis under that precondition, which is also why no gate verdict
+is claimed from it. The null holds. The combined competitor-baseline increment is $\dAUC=+0.028$
 ($p=0.328$), against $+0.012$ under the stand-in; per cohort it is $+0.033$ on
 Roney ($p=0.211$) and $+0.067$ on UW ($p=0.445$), and no arm in either family
 clears the pre-registered $0.05$ gate at $p<0.05$. Two cautions. This arm is less
@@ -1454,8 +1459,10 @@ instability above, where just $7/24$ subjects were consistent across six
 resolutions. Non-differential label noise biases incremental AUC toward zero, so the
 null we report is partly a statement about the labeller and not only about SFI.
 \item $\sim\!30$ DeLong comparisons were run on the real cohorts. The
-pre-registration provides no multiplicity plan for that family, so every
-$p$-value we report is unadjusted; on the full $182$-subject corrected analysis
+pre-registration fixes a multiplicity plan only for the clinical family of
+\S8 --- fixed-sequence gatekeeping, so that its primary is tested at the full
+$\alpha=0.05$ --- and none for this simulator family, so every $p$-value we
+report here is unadjusted; on the full $182$-subject corrected analysis
 none reaches the pre-registered $\alpha=0.05$. The smallest is $p=0.121$
 (\code{fibrosis\_vs\_+SFI}, gradient boosting, UW), and that one sits on a base AUC
 of $0.562$ with eight positives, so it is uninformative rather than borderline. An
@@ -1487,9 +1494,11 @@ $p=0.009$, and then withdrew. What the study cannot settle is the absolute
 inducibility rate, which does not converge within the mesh resolutions we could
 afford; the comparative claims, which score identical labels in both arms, do not
 depend on it. Whether the null is an artefact of the stand-in labeller is
-answered directly rather than inferred from concordance: re-scoring the primary
-endpoint against an independent solver's verdicts leaves it in place, with a
-combined increment of $+0.028$ and no arm clearing the pre-registered gate
+addressed directly rather than inferred from concordance: re-scoring the same
+comparison against an independent solver's verdicts leaves it in place, with a
+combined increment of $+0.028$ and no arm clearing the pre-registered threshold
+--- an exploratory check, since the pre-registration bars those labels from any
+endpoint until their calibration gate passes on both cohorts, which it does not
 (Section~\ref{sec:opencarp}).
 
 %======================================================================
