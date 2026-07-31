@@ -178,8 +178,7 @@ fragility index does \emph{not} add practically meaningful reentry-inducibility
 prediction beyond existing features, either at synthetic scale or on $182$
 patients of real anatomy. The mechanism is partly feature redundancy and partly a
 feature that is genuinely new but unpredictive (Section~\ref{sec:redundancy}).
-Independently, the
-single-vector estimator is provably ill-conditioned on real tissue
+Independently of that null, the estimator's own conditioning fails there
 ($\rhoval\gg 1$). What we report is not a discovery but a carefully drawn
 boundary: where a Fiedler-based estimator is numerically valid, why real tissue
 lies far outside it, and how readily naive methodology mistakes redundant,
@@ -613,11 +612,10 @@ Table~\ref{tab:null}. The gap has no consistent sign: the naive estimate runs
 above the grouped one in two of the six arms, both logistic regression on a
 single cohort, and below it in the other four including the pooled logistic
 arm, so nothing here reproduces the optimism ungrouped cross-validation is
-expected to show. On these cohorts each patient contributes
-one row and is
-its own group, so the grouping is close to a no-op.
-The leakage effect is demonstrated instead on the replicated synthetic cohort,
-where resampled networks share a parent shape family.
+expected to show. That is expected rather than reassuring: as the Methods note,
+patient-level grouping is close to a no-op on real anatomy, so these six numbers
+are not a leakage demonstration. The demonstration is on the replicated synthetic
+cohort, where resampled networks share a parent shape family.
 
 \paragraph{Power analysis.} In the synthetic cohort the subspace effect
 ($+0.0028$) needs $\sim\!4{,}150$ cases for $80\%$ power and the single-vector
@@ -1449,10 +1447,8 @@ This work makes four contributions.
 (1)~A pre-registered, leakage-controlled, effect-size-gated evaluation of a
 plausible spectral biomarker: a clean null at synthetic scale ($10^5$ networks),
 where the mechanism remains inferred, and a measured null on $182$ patients of
-real anatomy, where it is measured rather than inferred
-(Section~\ref{sec:redundancy}, on those same $182$ subjects: the aggregate SFI
-summaries are reconstructible from the competitors at $R^2=0.970$, the extreme and
-edge-level columns are not, and their unique variance is unpredictive).
+real anatomy, where it is measured directly and label-free
+(Section~\ref{sec:redundancy}).
 (2)~A label-free validity criterion $\rhoval$ for the single-vector estimator:
 it proves $\phii_2$ is ill-conditioned on real tissue ($\rhoval\approx2422\gg
 \rhoval^\ast\approx3$), a portable a priori check for any Fiedler-based marker,
@@ -1469,20 +1465,23 @@ $p=0.009$, one on real patient outcomes at $p=0.0061$
 (Section~\ref{sec:clinical}), the second caught by a mitigation fixed in writing
 before the outcomes were joined.
 
-\subsection{Four corrections, and what caught each}
+\subsection{Three corrections, and what caught each}
 \label{sec:corrections}
 
-Four claims in earlier versions of this work did not survive, and because they
+Three claims in earlier versions of this work did not survive, and because they
 are referred to individually where they arise, we set them out together here.
 
-The first was a positive result. A pre-specified additional feature-set
-comparison reported that SFI beat a fibrosis-heterogeneity baseline on the
-combined real cohort
-($\dAUC=+0.103$, $p=0.009$), which we read as showing SFI is not merely
-re-encoded fibrosis. Extending the Roney arm from $62$ to all $100$ released
-meshes reduced it to $+0.017$ ($p=0.452$). What caught it was more data, and what
-made the original vulnerable was that it rested largely on one cohort's
-$+0.340$ over a near-chance baseline on six events.
+The first moved two numbers at once, since both rested on the same cohort. An
+earlier version reported a combined real-cohort $\dAUC$ of $+0.051$ and read the
+primary endpoint as missed only on significance; separately, a pre-specified
+fibrosis-heterogeneity comparison reported $\dAUC=+0.103$ at $p=0.009$, which we
+read as showing SFI is not merely re-encoded fibrosis. Correcting the UW
+substrate at the original $144$ subjects took the first to $+0.036$; extending
+the Roney arm from $62$ to all $100$ released meshes then took it to $+0.012$ and
+the second to $+0.017$ ($p=0.452$). What caught both was more data, and for the
+primary the larger share of the drop was sample size rather than substrate. What
+made the withdrawn positive vulnerable in the first place was that it rested
+largely on one cohort's $+0.340$ over a near-chance baseline on six events.
 
 The second was a causal attribution. We reported that the degenerate fibre field
 in the UW release was the likely reason that cohort is so rarely inducible. What
@@ -1497,14 +1496,6 @@ characteristic $-3$ on removal. All three were generalised from a single mesh or
 from a rounded mean. What caught them was writing regression tests over the whole
 cohort, two of which failed on first run. The identification of tag $164$ itself
 survived and is better supported by the census than by the original figures.
-
-The fourth was the primary endpoint itself. An earlier version reported a
-combined real-cohort $\dAUC$ of $+0.051$ and read the endpoint as missed only on
-significance. Correcting the UW substrate at the original $144$ subjects brought
-that to $+0.036$; extending the Roney arm from $62$ to all $100$ released meshes
-brought it to $+0.012$, so the larger share of the drop was sample size rather
-than substrate. What caught it was the substrate audit followed by the cohort
-extension (Section~\ref{sec:null}).
 
 We note the pattern rather than each instance. Every one was caught by a control,
 a larger sample, or a test that this project designed and ran against its own
