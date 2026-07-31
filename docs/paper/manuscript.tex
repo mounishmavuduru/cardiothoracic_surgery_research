@@ -71,13 +71,13 @@ $\sim\!4{,}150$ cases needed at $80\%$ power, resolvable only because $N$ is
 huge, and so clinically undetectable there). On two real cohorts ($182$
 patients: Roney $n=100$, UW/Boyle $n=82$) the combined gradient-boosting
 estimate is $+0.012$ with a bootstrap interval $[-0.017,+0.044]$ that excludes
-the threshold, so the real-anatomy result is a measured null rather than a
+the threshold, so the real-anatomy result is a measured null and not a
 shortfall of power. An earlier version of this work reported $+0.051$ here and
 called the real-cohort evidence inconclusive. Correcting a defect in one
 cohort's released substrate, which we found only afterwards, moved that figure
 to $+0.036$ at the original cohort size, and extending the Roney arm from $62$
 to all $100$ released meshes moved it to $+0.012$, so most of the drop was
-sample size rather than substrate. The audit that found the defect, and the four
+sample size, not substrate. The audit that found the defect, and the four
 controls that followed, are reported in full; the cause of that cohort's
 unusually low inducibility rate proved to be a $25\%$ difference in fibrosis
 burden between the two released cohorts rather than any substrate defect, and
@@ -347,9 +347,9 @@ w_{ij}=\underbrace{\bigl[c_\perp+(c_\parallel-c_\perp)\,a_{ij}^{2}\bigr]}_{\text
 \label{eq:weight}
 \end{equation}
 with $c_\parallel=1.0$ along fibre, $c_\perp=0.3$ across, and a floor
-$\varepsilon=0.05$ so dense scar retains a small residual conductance rather than
+$\varepsilon=0.05$ so dense scar retains a small residual conductance instead of
 disconnecting the graph. The $a^{2}$ dependence makes the weight a function of
-alignment rather than of direction, so it is invariant to fibre sign, which is
+alignment and not of direction, so it is invariant to fibre sign, which is
 the only property of $\bar{f}$ that is identifiable. Both factors are bounded, so
 $w_{ij}\in[\varepsilon c_\perp,\,c_\parallel]$; no edge weight can vanish and the
 graph stays connected by construction.
@@ -388,12 +388,12 @@ in an inner \code{GroupKFold} over $\{0.03,0.1,0.3,1.0,3.0\}$, so that tuning
 never sees the outer test fold, whereas gradient boosting is deliberately
 \emph{not} tuned ($120$ trees, depth $2$, learning rate $0.05$, subsample $0.8$)
 because at these sample sizes a search would fit the folds; it is a fixed,
-shallow reference rather than a competitive model. We log it as a deviation from
+shallow reference and not a competitive model. We log it as a deviation from
 the pre-registered nested selection, which specifies an inner \code{GroupKFold}
 search for both classifiers. Out-of-fold predicted probabilities
 are pooled across folds and compared by the DeLong test. Pooling out-of-fold
-scores means the two compared vectors come from $k$ different fitted models
-rather than from two fixed scoring functions, as DeLong's test assumes; the
+scores means the two compared vectors come from $k$ different fitted models,
+not from the two fixed scoring functions that DeLong's test assumes; the
 paired structure and the leakage-free grouping are preserved, but the resulting
 $p$-values should be read as approximate. The naive comparison reported alongside
 replaces the grouping with shuffled \code{KFold}. On the real cohorts each
@@ -465,7 +465,7 @@ degree heterogeneity of real tissue and none of its anatomy. Each network draws
 $n$ points uniformly on the unit square and connects every pair within a fixed
 radius; if that radius leaves the graph too sparse the construction falls back to
 a symmetric $6$-nearest-neighbour graph, and in either case only the largest
-connected component is retained, so the medium is a single sheet rather than
+connected component is retained, so the medium is a single sheet, not
 several. Lesion burden is swept uniformly over $[0.05,\,0.45]$ across the cohort
 so that both classes appear, the network being stable at the low end and unstable
 at the high end, mirroring the mild-to-severe fibrosis gradient of the
@@ -529,9 +529,9 @@ $p\geq0.38$ \\
 \caption{The predictive null. Adding SFI to the competitor set does not clear
 the pre-registered effect-size gate in any cohort. On Roney and on the combined
 cohort the bootstrap interval excludes the gate as well as containing zero, so
-those are measured nulls rather than a shortfall of power; the two UW intervals
+those are measured nulls and not a shortfall of power; the two UW intervals
 reach past the gate ($[-0.073,+0.081]$ and $[-0.095,+0.203]$ on eight positives)
-and are uninformative rather than null.}
+and are uninformative, not null.}
 \label{fig:null}
 \end{figure}
 
@@ -547,13 +547,13 @@ significance; that estimate was an artefact of the sealed UW substrate, and
 correcting it drops the figure to $+0.036$ at the original cohort size and to
 $+0.012$ once the Roney arm is extended to all $100$ released meshes. With $42$
 inducible of $182$ this is the largest real-anatomy arm in the study, and the
-null here is a measurement rather than a shortfall. The combined row is a single
+null here is a measurement and not a shortfall. The combined row is a single
 pooled ROC across two cohorts of unequal prevalence ($34/100$ on Roney, $8/82$
 on UW), so its ranking carries between-cohort as well as within-cohort
 separability; the pooled base AUC under logistic regression, $0.884$,
 consequently exceeds both components ($0.870$ and $0.834$), and the pooled
-increment should be read alongside the cohort-specific estimates rather than in
-place of them.
+increment should be read alongside the cohort-specific estimates, which it does
+not replace.
 
 The UW cohort remains the weak arm, though not for the reason we previously
 gave. On eight positives its intervals are wide, the competitor comparison
@@ -603,7 +603,7 @@ The failure mode of the discarded estimate is worth recording. Under the sealed
 substrate the UW arm alone returned $\dAUC=+0.340$ ($p=0.026$) on six positives,
 a value no one should have believed and which we did not flag at the time, and
 it was that arm which carried the combined figure; a large point estimate
-resting on six events is a warning rather than a finding.
+resting on six events is a warning, not a finding.
 
 \paragraph{Naive (ungrouped) comparison.} The pre-registration asks for the naive
 $\dAUC$ beside the grouped one so that leakage is visible, and it is reported
@@ -613,7 +613,7 @@ values of Table~\ref{tab:null}. The gap has no consistent sign: the naive
 estimate runs above the grouped one in two of the six arms, both logistic
 regression on a single cohort, and below it in the other four including the
 pooled logistic arm, so nothing here reproduces the optimism ungrouped
-cross-validation is expected to show. That is expected rather than reassuring:
+cross-validation is expected to show. That is expected and offers no reassurance:
 as the Methods note, patient-level grouping is close to a no-op on real anatomy,
 so these six numbers are not a leakage demonstration, and the demonstration
 instead rests on the replicated synthetic cohort, where resampled networks share
@@ -649,11 +649,11 @@ simulator endpoint is \emph{not} reused here: at $n=82$ with $48$ events, power 
 $\dAUC=0.05$ is $0.24$, so that gate would be unfalsifiable, and the minimum
 detectable effect was fixed at $\dAUC\approx0.10$--$0.15$. Second, testing follows
 a fixed sequence and halts at the first non-rejection. Third, and decisively here,
-\S8.6 anticipated that UW fibrosis is categorical rather than continuous, warned
+\S8.6 anticipated that UW fibrosis is categorical, not continuous, and warned
 in writing that this ``biases the comparison toward SFI, because a degraded
 baseline is easier to beat,'' and pre-committed that if our baseline came out
 materially weaker than the source study's published performance, any $\dAUC$ would
-be reported as \emph{confounded by baseline degradation} rather than as a win for
+be reported as \emph{confounded by baseline degradation} and not as a win for
 SFI.
 
 Under logistic regression the competitor baseline gives an out-of-fold AUC of
@@ -664,15 +664,15 @@ below $0.05$.
 
 The increment is nonetheless an artefact, and the pre-registered protocol
 classified it as one before we reached that judgement ourselves. A baseline AUC of
-$0.250$ is anti-predictive rather than weak, and adding SFI reaches only $0.447$,
-still below chance. Three checks confirm the reading: every one of the fifteen
+$0.250$ is anti-predictive, not weak; adding SFI reaches only $0.447$, still
+below chance. Three checks confirm the reading: every one of the fifteen
 features, competitor and SFI alike, is univariately at chance on this outcome
 ($0.435$--$0.547$); the gradient-boosting arm, whose baseline sits at chance
 ($0.516$), gives $\dAUC=+0.021$ at $p=0.738$; and when the nine SFI columns are
 replaced by nine columns of standard Gaussian noise and the identical pipeline is
 re-run, the increment reproduces, the noise gaining $+0.137$ on average across
 twenty draws, with $6$ of $20$ matching or exceeding SFI's $+0.197$ (empirical
-$p=0.333$). The logistic arm therefore measures dilution rather than prediction:
+$p=0.333$). The logistic arm therefore measures dilution instead of prediction:
 padding an over-fitted, anti-predictive baseline with any nine columns pulls its
 AUC back toward $0.5$.
 
@@ -683,7 +683,7 @@ prevalence is the complement of test prevalence: the correlation between the two
 is $+0.995$, so the fold with fewest events receives the highest predicted
 probabilities. Pooling out-of-fold probabilities across such folds inverts the
 ranking. Scoring within folds and averaging removes most of it ($0.250\to0.345$
-for the baseline), which serves as a diagnostic and not as a re-analysis.
+for the baseline), which is a diagnostic and not a re-analysis.
 
 The clinical primary endpoint is \textbf{not met}, and per \S8.6 the observed
 increment is reported as confounded by baseline degradation. Under the \S8.7
@@ -873,10 +873,11 @@ is also ablation-invariant, holding at $20.0\%$ of elements before the procedure
 and $19.9\%$ after, while every other class moves. Tag $164$ is the set of caps
 sealing the pulmonary veins and the mitral valve. Removing it opens the surface:
 on $80$ of the $82$ meshes the Euler characteristic falls, by a median of $7$
-(range $2$--$12$). We report the \emph{change} rather than an opening count,
+(range $2$--$12$). We report the \emph{change}, not an opening count,
 because $\chi=2-k$ presumes a clean closed surface and these do not start as
-one: $\chi$ before removal spans $-18$ to $5$. The two exceptions move the
-other way rather than merely starting oddly: on ID040 removal takes $\chi$
+one: $\chi$ before removal spans $-18$ to $5$. The two exceptions differ in the
+direction of the change, not only in their starting value: on ID040 removal
+takes $\chi$
 from $-16$ to $-8$ and on ID049 from $-18$ to $-5$, so the full-cohort range
 of the change is $-13$ to $12$
 (\code{results/\allowbreak uw\allowbreak\_euler\allowbreak\_census.json}).
@@ -916,8 +917,8 @@ $2000$-node coarsening.
 
 Here too the cohort's authors have since supplied the explanation, and it is the
 benign one: fibre orientations are withheld under the same IRB as the intensity
-ratios, and are meant to be regenerated with published tools rather than read off
-the release. The constant array is a placeholder. Nothing is wrong with the
+ratios, and are meant to be regenerated with published tools, not read off the
+release. The constant array is a placeholder, and nothing is wrong with the
 deposit; what was wrong was our reading it as anatomy, the same failure as the
 tag mapping and with the same root in an undocumented file used without asking.
 Both were caught by measurement rather than by correspondence (the degeneracy is
@@ -1077,7 +1078,7 @@ values; scaling both gives $0.852$~m/s at $g_{il}=1.00$, and we adopt $1.05$.
 
 Two configurations were rejected before this one, at $90\%$ and $76.7\%$
 inducible with \emph{negative} fibrosis--verdict correlations, the signature of
-rate-dependent block rather than reentry. We record that because it is the
+rate-dependent block and not of reentry. We record that because it is the
 protocol working: no endpoint parameter was adjusted at any stage, so the
 calibration gate remained able to fail, and on those two configurations it did.
 
@@ -1087,7 +1088,7 @@ with a fibrosis--verdict rank correlation of $+0.404$, against the frozen
 solver's $0.75$, whereas on UW openCARP returns $4/82$ inducible ($4.9\%$, below
 the band) with a rank correlation of only $+0.079$.
 Across all $182$ subjects the two solvers agree on $156$, or $85.7\%$. That figure
-is raw rather than chance-corrected, and on an outcome this imbalanced the
+is raw and has not been corrected for chance. On an outcome this imbalanced the
 correction matters: Cohen's $\kappa$ is $0.536$, and the two solvers agree on
 only $21$ positives. The cohort-level split shows why the pooled number should
 not be read as a tissue-level result. On Roney, where the gate is met, raw
@@ -1095,14 +1096,14 @@ agreement is $82/100$ ($82.0\%$) at $\kappa=0.561$; on UW, where it is not, raw
 agreement is higher at $74/82$ ($90.2\%$) but $\kappa$ falls to $0.287$,
 because at a $4.9\%$ and $9.8\%$ event rate almost all of that agreement is
 shared negatives. The pooled figure is therefore a statement about the protocol
-across both cohorts rather than about the tissue, and the arm that looks most
+across both cohorts, not about the tissue, and the arm that looks most
 concordant is the one carrying the least information. The substantive part is
 the asymmetry: of the $26$ subjects the two solvers disagree
 on, openCARP calls only $5$ inducible where the monodomain solver does not, while
 the reverse happens $21$ times; over the whole cohort openCARP labels $26/182$
-against monodomain's $42/182$. That imbalance is systematic rather than sampling
-noise (McNemar exact $p=0.0025$), so the two solvers differ in level and not only
-in which subjects they pick. Relative to an independent reaction--diffusion
+against monodomain's $42/182$. Sampling noise does not explain that imbalance
+(McNemar exact $p=0.0025$); it is systematic, so the two solvers differ in level
+and not only in which subjects they pick. Relative to an independent reaction--diffusion
 solver, then, the stand-in is the more liberal of the two and does not
 under-call, so the incremental comparisons reported above are conservative
 rather than inflated. (On the $60$-subject calibration subset the discordance was
@@ -1111,7 +1112,7 @@ figure quoted here is the full-cohort one.)
 
 \paragraph{The comparison re-scored against openCARP (exploratory).} Agreement on
 the label does not by itself bound the incremental $\dAUC$, so we ran the
-comparison rather than inferring it: the identical GM1 evaluation, on identical
+comparison instead of inferring it: the identical GM1 evaluation, on identical
 features, with the outcome column swapped from the monodomain verdict to
 openCARP's
 (\code{results/\allowbreak gm1\allowbreak\_opencarp\allowbreak\_labels.json}).
@@ -1138,9 +1139,9 @@ twenty sits inside the converged regime while the coarse limit is not benign. Th
 larger bound is openCARP's $4/82$ on the UW cohort, which unlike the monodomain
 solver is \emph{not} recovered by raising that cohort's fibrosis burden:
 rescaling UW upward leaves the rate at $0/30$. The mundane explanations do not
-survive. Propagation failure is ruled out, because on UW meshes the wave reaches
+survive: propagation failure is ruled out, because on UW meshes the wave reaches
 $99.4\%$ of nodes and peak depolarisation averages $0.83$, so activation spreads
-across the surface and then dies, rather than never leaving the stimulus site.
+across the surface and then dies; it is not confined to the stimulus site.
 The coarser discretisation is ruled out as well: UW meshes carry a mean edge of
 $3.18$~mm against Roney's $2.64$~mm at the same node budget, but the convergence
 study shows coarser meshes \emph{over}-call ($58.3\%$ at $1500$ nodes), so that
