@@ -80,7 +80,7 @@ to all $100$ released meshes moved it to $+0.012$, so most of the drop was
 sample size rather than substrate. The audit that found the defect, and the four
 controls that followed, are reported in full; the cause of that cohort's
 unusually low inducibility rate turned out not to be any substrate defect but a
-$30\%$ difference in fibrosis burden between the two released cohorts, which
+$25\%$ difference in fibrosis burden between the two released cohorts, which
 accounts for the apparent anomaly and reproduces it in either direction when the
 burden is swapped. Where the
 null is clean, only half the mechanism is feature redundancy: the aggregate SFI
@@ -401,7 +401,7 @@ Each mesh carries an image-intensity-ratio (IIR) fibrosis proxy mapped to a
 fibrosis field by the Khurram healthy-to-scar ramp~\cite{khurram2014}. The two
 cohorts differ in what else they carry: the Roney meshes ship registered
 universal atrial coordinates and per-vertex fibre fields (directional spread
-$0.945$--$0.979$), whereas the UW meshes ship a \code{VECTORS fiber} array that
+$0.922$--$0.987$), whereas the UW meshes ship a \code{VECTORS fiber} array that
 is the constant $(1,0,0)$ everywhere (spread $0.000$) and no atrial coordinates,
 for which we substitute a PCA chart, so UW anisotropy is a fixed coordinate bias
 rather than anatomy (Sections~\ref{sec:regions} and~\ref{sec:substrate}). Meshes
@@ -778,10 +778,17 @@ incompatible with reading it as a fibrosis border zone. And it is
 ablation-invariant, holding at $20.0\%$ of elements before the procedure and
 $19.9\%$ after, while every other class moves. Tag $164$ is the set of caps
 sealing the pulmonary veins and the mitral valve. Removing it opens the surface:
-the Euler characteristic falls by a median of $7$ (range $2$--$12$). We report
-the \emph{change} rather than an opening count, because $\chi=2-k$ presumes a
-clean closed surface and two of these meshes, ID040 and ID049, arrive at
-$\chi=-16$ and $-18$ before anything is removed.
+on $80$ of the $82$ meshes the Euler characteristic falls, by a median of $7$
+(range $2$--$12$). We report the \emph{change} rather than an opening count,
+because $\chi=2-k$ presumes a clean closed surface and these do not start as
+one: $\chi$ before removal spans $-18$ to $5$. The two exceptions move the
+other way rather than merely starting oddly --- on ID040 removal takes $\chi$
+from $-16$ to $-8$ and on ID049 from $-18$ to $-5$, so the full-cohort range
+of the change is $-13$ to $12$
+(\code{results/\allowbreak uw\allowbreak\_euler\allowbreak\_census.json}).
+We state the split because the census in this paragraph replaces an earlier
+claim generalised from one mesh, and quoting the $80$-mesh figure over $82$
+would repeat that error in the correction itself.
 
 Treating those caps as half-conducting tissue does more than inflate fibrosis.
 It seals the atrium's orifices, so simulated activation crosses the mitral valve
@@ -790,13 +797,14 @@ orifices, a principal mechanism of atrial fibrillation, cannot form.
 
 The second defect is upstream. A \code{VECTORS fiber} array is present in all
 $164$ released meshes, but it equals the constant $(1,0,0)$: the measured mean
-directional spread is exactly $0.000$. The Roney cohort, by contrast, gives
-$0.945$--$0.979$, with roughly one distinct direction per vertex. Conduction
+directional spread is exactly $0.000$. The Roney cohort, by contrast, spans
+$0.922$--$0.987$ across its $62$ meshes (mean $0.954$), with roughly one
+distinct direction per vertex. Conduction
 anisotropy is applied relative to the \emph{local} fibre direction, so a single
 global direction reduces it to a fixed coordinate bias carrying no anatomy. The
 same cardinality argument applies to fibrosis: three distinct levels in the UW
-release, effectively two once the caps are dropped, against $276$--$1071$ in
-Roney.
+release, effectively two once the caps are dropped, against $700$--$1646$
+(mean $1318$) in Roney at the same $2000$-node coarsening.
 
 \paragraph{Control 1: repairing the substrate.} Opening the orifices and
 supplying a spatially varying fibre field, in a $2\times2$ design over all $82$
@@ -866,9 +874,18 @@ meshes to what they contain.
 
 \paragraph{Control 4: the cohorts do not carry comparable fibrosis.} Having
 exhausted the defects, we measured what the solver is actually given. Coarsened
-to the same $2000$ nodes, mean fibrosis is $0.349$ on Roney and $0.244$ on UW,
-and the fraction of tissue above half-fibrotic is $0.310$ against $0.239$. The
-UW cohort carries roughly $30\%$ less fibrosis. The frozen protocol's own
+to the same $2000$ nodes, mean fibrosis over the meshes these controls simulate
+is $0.333$ on Roney's $62$ against $0.248$ on UW's $82$: the UW cohort carries
+about $25\%$ less. (A separate $40$-mesh-per-cohort geometry audit gives $0.349$
+against $0.244$, with the fraction of tissue above half-fibrotic at $0.310$
+against $0.239$; we quote the simulated meshes here because those are what
+produced the rates.) One qualification matters for reading the history: that
+deficit is measured on the cap-repaired substrate. As released, with the caps
+still counted as half-fibrotic, UW measured $0.307$ against Roney's $0.333$ ---
+only about $8\%$ lower --- so the cap defect was itself masking most of the
+burden difference, and the $6/82$ that opened this section was produced under
+that masking. Every predictive result in the paper uses the repaired substrate,
+where the deficit is the full $25\%$. The frozen protocol's own
 calibration reports a rank correlation of $0.75$ between fibrosis and sustained
 reentry, so a cohort with less of it should be less inducible. That is not an
 anomaly; it is the labeller behaving as specified.
@@ -901,7 +918,9 @@ hypothesis about the pipeline, but it is a hypothesis about the inputs first.
 \noindent\emph{Sources}, all under \code{results/}:
 \code{opencarp\allowbreak\_full\allowbreak\_cohort.json}, with the
 per-cohort and chance-corrected concordance in
-\code{opencarp\allowbreak\_concordance\allowbreak\_detail.json};
+\code{opencarp\allowbreak\_concordance\allowbreak\_detail.json} and the endpoint
+re-scored against openCARP's verdicts in
+\code{gm1\allowbreak\_opencarp\allowbreak\_labels.json};
 all three calibration attempts, including the two rejected, are in
 \code{opencarp\allowbreak\_calibration\allowbreak\_history.json},
 with the discretisation and propagation checks in
@@ -961,6 +980,22 @@ of the two, which makes the incremental comparisons reported above conservative
 rather than inflated. (On the $60$-subject calibration subset the discordance was
 entirely one-way, $0$ against $5$; that does not hold on the full cohort and the
 figure quoted here is the full-cohort one.)
+
+\paragraph{The endpoint re-scored against openCARP.} Agreement on the label does
+not by itself bound the incremental $\dAUC$, so we ran the comparison rather than
+inferring it: the identical GM1 evaluation, on identical features, with the
+outcome column swapped from the monodomain verdict to openCARP's
+(\code{results/\allowbreak gm1\allowbreak\_opencarp\allowbreak\_labels.json}).
+The null holds. The combined competitor-baseline increment is $\dAUC=+0.028$
+($p=0.328$), against $+0.012$ under the stand-in; per cohort it is $+0.033$ on
+Roney ($p=0.211$) and $+0.067$ on UW ($p=0.445$), and no arm in either family
+clears the pre-registered $0.05$ gate at $p<0.05$. Two cautions. This arm is less
+powered by construction --- openCARP calls $26$ subjects inducible against the
+stand-in's $42$, and UW contributes only $4$ --- so the intervals are wider and
+the combined one, $[-0.027,+0.085]$, no longer excludes the gate the way the
+stand-in's does. And the UW arm here sits on the cohort whose calibration gate
+failed. The result is therefore that the null is not an artefact of the
+labeller, not that openCARP independently establishes it.
 
 \paragraph{What this check does not establish.} Two limits are worth stating. The
 fibrosis field must be discretised into conductivity classes for openCARP, and the
@@ -1404,9 +1439,9 @@ in all $164$ meshes, and element tag $164$, which is the caps over the atrial
 orifices and which we had been treating as half-fibrotic tissue. Repairing both
 raises inducibility only from $6/82$ to $14/82$, and none of the three
 substrate explanations for the cohort's low rate is supported by direct
-control; Control~4 attributes the low rate instead to a fibrosis burden
-roughly $30\%$ lower
-($0.244$ against Roney's $0.349$), reproduced by swapping the burden in either
+control; Control~4 attributes the low rate instead to a fibrosis burden about
+$25\%$ lower on the meshes it simulates
+($0.248$ against Roney's $0.333$), reproduced by swapping the burden in either
 direction. Its regions additionally rest on a PCA surrogate rather than
 registered atrial coordinates. The cohort's predictive test is uninformative
 about SFI, and what remains open is narrower: openCARP returns $4/82$ here and
@@ -1451,9 +1486,11 @@ false positive this project produced from its own pipeline, at $\dAUC=+0.103$ an
 $p=0.009$, and then withdrew. What the study cannot settle is the absolute
 inducibility rate, which does not converge within the mesh resolutions we could
 afford; the comparative claims, which score identical labels in both arms, do not
-depend on it. An independent solver run alongside the labeller agrees with it on
-$85.7\%$ of subjects and is the more conservative of the two, which bounds how
-much of the null could be an artefact of the stand-in.
+depend on it. Whether the null is an artefact of the stand-in labeller is
+answered directly rather than inferred from concordance: re-scoring the primary
+endpoint against an independent solver's verdicts leaves it in place, with a
+combined increment of $+0.028$ and no arm clearing the pre-registered gate
+(Section~\ref{sec:opencarp}).
 
 %======================================================================
 \appendix

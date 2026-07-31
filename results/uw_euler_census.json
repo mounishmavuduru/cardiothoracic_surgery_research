@@ -1,0 +1,529 @@
+{
+  "description": "Euler characteristic before and after removing tag 164, over every UW pre-ablation mesh with nothing excluded. chi_before is the surface as released; delta_chi = chi_before - chi_after, so a positive value means removal opened the surface.",
+  "drop_tag": 164,
+  "n_meshes": 82,
+  "all_meshes": {
+    "delta_chi_median": 7.0,
+    "delta_chi_min": -13,
+    "delta_chi_max": 12
+  },
+  "n_falls": 80,
+  "n_rises": 2,
+  "n_unchanged": 0,
+  "falling_subset": {
+    "n": 80,
+    "delta_chi_median": 7.0,
+    "delta_chi_min": 2,
+    "delta_chi_max": 12
+  },
+  "exceptions": [
+    {
+      "subject": "ID040_PreAbl_rev1.vtk",
+      "chi_before": -16,
+      "chi_after": -8,
+      "delta_chi": -8
+    },
+    {
+      "subject": "ID049_PreAbl_rev1.vtk",
+      "chi_before": -18,
+      "chi_after": -5,
+      "delta_chi": -13
+    }
+  ],
+  "chi_before_min": -18,
+  "chi_before_max": 5,
+  "rows": [
+    {
+      "subject": "ID001_PreAbl_rev1.vtk",
+      "chi_before": 3,
+      "chi_after": -3,
+      "delta_chi": 6
+    },
+    {
+      "subject": "ID002_PreAbl_rev1.vtk",
+      "chi_before": 1,
+      "chi_after": -5,
+      "delta_chi": 6
+    },
+    {
+      "subject": "ID003_PreAbl_rev1.vtk",
+      "chi_before": 0,
+      "chi_after": -7,
+      "delta_chi": 7
+    },
+    {
+      "subject": "ID004_PreAbl_rev1.vtk",
+      "chi_before": 2,
+      "chi_after": -5,
+      "delta_chi": 7
+    },
+    {
+      "subject": "ID005_PreAbl_rev1.vtk",
+      "chi_before": 2,
+      "chi_after": -7,
+      "delta_chi": 9
+    },
+    {
+      "subject": "ID006_PreAbl_rev1.vtk",
+      "chi_before": 2,
+      "chi_after": -10,
+      "delta_chi": 12
+    },
+    {
+      "subject": "ID007_PreAbl_rev1.vtk",
+      "chi_before": 0,
+      "chi_after": -4,
+      "delta_chi": 4
+    },
+    {
+      "subject": "ID008_PreAbl_rev1.vtk",
+      "chi_before": 0,
+      "chi_after": -3,
+      "delta_chi": 3
+    },
+    {
+      "subject": "ID009_PreAbl_rev1.vtk",
+      "chi_before": 1,
+      "chi_after": -10,
+      "delta_chi": 11
+    },
+    {
+      "subject": "ID010_PreAbl_rev1.vtk",
+      "chi_before": -4,
+      "chi_after": -14,
+      "delta_chi": 10
+    },
+    {
+      "subject": "ID011_PreAbl_rev1.vtk",
+      "chi_before": -1,
+      "chi_after": -5,
+      "delta_chi": 4
+    },
+    {
+      "subject": "ID012_PreAbl_rev1.vtk",
+      "chi_before": -13,
+      "chi_after": -18,
+      "delta_chi": 5
+    },
+    {
+      "subject": "ID013_PreAbl_rev1.vtk",
+      "chi_before": 2,
+      "chi_after": -4,
+      "delta_chi": 6
+    },
+    {
+      "subject": "ID014_PreAbl_rev1.vtk",
+      "chi_before": 0,
+      "chi_after": -6,
+      "delta_chi": 6
+    },
+    {
+      "subject": "ID015_PreAbl_rev1.vtk",
+      "chi_before": 2,
+      "chi_after": -4,
+      "delta_chi": 6
+    },
+    {
+      "subject": "ID021_PreAbl_rev1.vtk",
+      "chi_before": 3,
+      "chi_after": -7,
+      "delta_chi": 10
+    },
+    {
+      "subject": "ID022_PreAbl_rev1.vtk",
+      "chi_before": 2,
+      "chi_after": -5,
+      "delta_chi": 7
+    },
+    {
+      "subject": "ID023_PreAbl_rev1.vtk",
+      "chi_before": -4,
+      "chi_after": -7,
+      "delta_chi": 3
+    },
+    {
+      "subject": "ID024_PreAbl_rev1.vtk",
+      "chi_before": 2,
+      "chi_after": -8,
+      "delta_chi": 10
+    },
+    {
+      "subject": "ID025_PreAbl_rev1.vtk",
+      "chi_before": 1,
+      "chi_after": -9,
+      "delta_chi": 10
+    },
+    {
+      "subject": "ID026_PreAbl_rev1.vtk",
+      "chi_before": -1,
+      "chi_after": -8,
+      "delta_chi": 7
+    },
+    {
+      "subject": "ID027_PreAbl_rev1.vtk",
+      "chi_before": 3,
+      "chi_after": -8,
+      "delta_chi": 11
+    },
+    {
+      "subject": "ID028_PreAbl_rev1.vtk",
+      "chi_before": 1,
+      "chi_after": -8,
+      "delta_chi": 9
+    },
+    {
+      "subject": "ID029_PreAbl_rev1.vtk",
+      "chi_before": 5,
+      "chi_after": -4,
+      "delta_chi": 9
+    },
+    {
+      "subject": "ID030_PreAbl_rev1.vtk",
+      "chi_before": 1,
+      "chi_after": -5,
+      "delta_chi": 6
+    },
+    {
+      "subject": "ID031_PreAbl_rev1.vtk",
+      "chi_before": -9,
+      "chi_after": -13,
+      "delta_chi": 4
+    },
+    {
+      "subject": "ID032_PreAbl_rev1.vtk",
+      "chi_before": 0,
+      "chi_after": -6,
+      "delta_chi": 6
+    },
+    {
+      "subject": "ID033_PreAbl_rev1.vtk",
+      "chi_before": -1,
+      "chi_after": -8,
+      "delta_chi": 7
+    },
+    {
+      "subject": "ID034_PreAbl_rev1.vtk",
+      "chi_before": 2,
+      "chi_after": -5,
+      "delta_chi": 7
+    },
+    {
+      "subject": "ID035_PreAbl_rev1.vtk",
+      "chi_before": 4,
+      "chi_after": -3,
+      "delta_chi": 7
+    },
+    {
+      "subject": "ID036_PreAbl_rev1.vtk",
+      "chi_before": 2,
+      "chi_after": -9,
+      "delta_chi": 11
+    },
+    {
+      "subject": "ID037_PreAbl_rev1.vtk",
+      "chi_before": -2,
+      "chi_after": -9,
+      "delta_chi": 7
+    },
+    {
+      "subject": "ID038_PreAbl_rev1.vtk",
+      "chi_before": -2,
+      "chi_after": -5,
+      "delta_chi": 3
+    },
+    {
+      "subject": "ID039_PreAbl_rev1.vtk",
+      "chi_before": 2,
+      "chi_after": -3,
+      "delta_chi": 5
+    },
+    {
+      "subject": "ID040_PreAbl_rev1.vtk",
+      "chi_before": -16,
+      "chi_after": -8,
+      "delta_chi": -8
+    },
+    {
+      "subject": "ID041_PreAbl_rev1.vtk",
+      "chi_before": 2,
+      "chi_after": -6,
+      "delta_chi": 8
+    },
+    {
+      "subject": "ID042_PreAbl_rev1.vtk",
+      "chi_before": 1,
+      "chi_after": -9,
+      "delta_chi": 10
+    },
+    {
+      "subject": "ID043_PreAbl_rev1.vtk",
+      "chi_before": 2,
+      "chi_after": -9,
+      "delta_chi": 11
+    },
+    {
+      "subject": "ID044_PreAbl_rev1.vtk",
+      "chi_before": -8,
+      "chi_after": -17,
+      "delta_chi": 9
+    },
+    {
+      "subject": "ID045_PreAbl_rev1.vtk",
+      "chi_before": 1,
+      "chi_after": -8,
+      "delta_chi": 9
+    },
+    {
+      "subject": "ID046_PreAbl_rev1.vtk",
+      "chi_before": -3,
+      "chi_after": -11,
+      "delta_chi": 8
+    },
+    {
+      "subject": "ID047_PreAbl_rev1.vtk",
+      "chi_before": 3,
+      "chi_after": -2,
+      "delta_chi": 5
+    },
+    {
+      "subject": "ID048_PreAbl_rev1.vtk",
+      "chi_before": 3,
+      "chi_after": -4,
+      "delta_chi": 7
+    },
+    {
+      "subject": "ID049_PreAbl_rev1.vtk",
+      "chi_before": -18,
+      "chi_after": -5,
+      "delta_chi": -13
+    },
+    {
+      "subject": "ID050_PreAbl_rev1.vtk",
+      "chi_before": 2,
+      "chi_after": -3,
+      "delta_chi": 5
+    },
+    {
+      "subject": "ID051_PreAbl_rev1.vtk",
+      "chi_before": 0,
+      "chi_after": -12,
+      "delta_chi": 12
+    },
+    {
+      "subject": "ID052_PreAbl_rev1.vtk",
+      "chi_before": 1,
+      "chi_after": -6,
+      "delta_chi": 7
+    },
+    {
+      "subject": "ID053_PreAbl_rev1.vtk",
+      "chi_before": -1,
+      "chi_after": -8,
+      "delta_chi": 7
+    },
+    {
+      "subject": "ID054_PreAbl_rev1.vtk",
+      "chi_before": -1,
+      "chi_after": -11,
+      "delta_chi": 10
+    },
+    {
+      "subject": "ID055_PreAbl_rev1.vtk",
+      "chi_before": 5,
+      "chi_after": -7,
+      "delta_chi": 12
+    },
+    {
+      "subject": "ID056_PreAbl_rev1.vtk",
+      "chi_before": 2,
+      "chi_after": -4,
+      "delta_chi": 6
+    },
+    {
+      "subject": "ID057_PreAbl_rev1.vtk",
+      "chi_before": -1,
+      "chi_after": -7,
+      "delta_chi": 6
+    },
+    {
+      "subject": "ID058_PreAbl_rev1.vtk",
+      "chi_before": -1,
+      "chi_after": -9,
+      "delta_chi": 8
+    },
+    {
+      "subject": "ID059_PreAbl_rev1.vtk",
+      "chi_before": 1,
+      "chi_after": -8,
+      "delta_chi": 9
+    },
+    {
+      "subject": "ID060_PreAbl_rev1.vtk",
+      "chi_before": 2,
+      "chi_after": -5,
+      "delta_chi": 7
+    },
+    {
+      "subject": "ID061_PreAbl_rev1.vtk",
+      "chi_before": 2,
+      "chi_after": -6,
+      "delta_chi": 8
+    },
+    {
+      "subject": "ID062_PreAbl_rev1.vtk",
+      "chi_before": -4,
+      "chi_after": -6,
+      "delta_chi": 2
+    },
+    {
+      "subject": "ID063_PreAbl_rev1.vtk",
+      "chi_before": 2,
+      "chi_after": -4,
+      "delta_chi": 6
+    },
+    {
+      "subject": "ID064_PreAbl_rev1.vtk",
+      "chi_before": 1,
+      "chi_after": -8,
+      "delta_chi": 9
+    },
+    {
+      "subject": "ID065_PreAbl_rev1.vtk",
+      "chi_before": 0,
+      "chi_after": -8,
+      "delta_chi": 8
+    },
+    {
+      "subject": "ID066_PreAbl_rev1.vtk",
+      "chi_before": -4,
+      "chi_after": -7,
+      "delta_chi": 3
+    },
+    {
+      "subject": "ID067_PreAbl_rev1.vtk",
+      "chi_before": 1,
+      "chi_after": -7,
+      "delta_chi": 8
+    },
+    {
+      "subject": "ID068_PreAbl_rev1.vtk",
+      "chi_before": 0,
+      "chi_after": -9,
+      "delta_chi": 9
+    },
+    {
+      "subject": "ID069_PreAbl_rev1.vtk",
+      "chi_before": 0,
+      "chi_after": -9,
+      "delta_chi": 9
+    },
+    {
+      "subject": "ID070_PreAbl_rev1.vtk",
+      "chi_before": 2,
+      "chi_after": -6,
+      "delta_chi": 8
+    },
+    {
+      "subject": "ID071_PreAbl_rev1.vtk",
+      "chi_before": 2,
+      "chi_after": -6,
+      "delta_chi": 8
+    },
+    {
+      "subject": "ID072_PreAbl_rev1.vtk",
+      "chi_before": 3,
+      "chi_after": -7,
+      "delta_chi": 10
+    },
+    {
+      "subject": "ID073_PreAbl_rev1.vtk",
+      "chi_before": 1,
+      "chi_after": -8,
+      "delta_chi": 9
+    },
+    {
+      "subject": "ID074_PreAbl_rev1.vtk",
+      "chi_before": -13,
+      "chi_after": -18,
+      "delta_chi": 5
+    },
+    {
+      "subject": "ID075_PreAbl_rev1.vtk",
+      "chi_before": 2,
+      "chi_after": -6,
+      "delta_chi": 8
+    },
+    {
+      "subject": "ID076_PreAbl_rev1.vtk",
+      "chi_before": 2,
+      "chi_after": -2,
+      "delta_chi": 4
+    },
+    {
+      "subject": "ID077_PreAbl_rev1.vtk",
+      "chi_before": -4,
+      "chi_after": -9,
+      "delta_chi": 5
+    },
+    {
+      "subject": "ID078_PreAbl_rev1.vtk",
+      "chi_before": 2,
+      "chi_after": -7,
+      "delta_chi": 9
+    },
+    {
+      "subject": "ID079_PreAbl_rev1.vtk",
+      "chi_before": 0,
+      "chi_after": -4,
+      "delta_chi": 4
+    },
+    {
+      "subject": "ID080_PreAbl_rev1.vtk",
+      "chi_before": 1,
+      "chi_after": -7,
+      "delta_chi": 8
+    },
+    {
+      "subject": "ID081_PreAbl_rev1.vtk",
+      "chi_before": 1,
+      "chi_after": -6,
+      "delta_chi": 7
+    },
+    {
+      "subject": "ID082_PreAbl_rev1.vtk",
+      "chi_before": 1,
+      "chi_after": -6,
+      "delta_chi": 7
+    },
+    {
+      "subject": "ID083_PreAbl_rev1.vtk",
+      "chi_before": -1,
+      "chi_after": -8,
+      "delta_chi": 7
+    },
+    {
+      "subject": "ID084_PreAbl_rev1.vtk",
+      "chi_before": 1,
+      "chi_after": -8,
+      "delta_chi": 9
+    },
+    {
+      "subject": "ID085_PreAbl_rev1.vtk",
+      "chi_before": 3,
+      "chi_after": -7,
+      "delta_chi": 10
+    },
+    {
+      "subject": "ID086_PreAbl_rev1.vtk",
+      "chi_before": 1,
+      "chi_after": -5,
+      "delta_chi": 6
+    },
+    {
+      "subject": "ID087_PreAbl_rev1.vtk",
+      "chi_before": 3,
+      "chi_after": -5,
+      "delta_chi": 8
+    }
+  ]
+}
