@@ -1,0 +1,211 @@
+{
+  "description": "Pre-registered CLINICAL endpoint (PRE_REGISTRATION.md section 8), run once on real 2-year post-ablation recurrence outcomes. Features are from the pre-ablation mesh only and are never fitted to the outcome.",
+  "protocol": {
+    "primary": "section 8.4 competitors vs competitors+SFI, all 82, patient-grouped CV",
+    "gate": {
+      "delta_auc_min": 0.1,
+      "delong_p_max": 0.05
+    },
+    "multiplicity": "section 8.7 fixed-sequence gatekeeping; stop at first non-rejection",
+    "power_note": "section 8.3: power ~0.24 at dAUC 0.05, MDE dAUC ~0.10-0.15. A null below that band is INCONCLUSIVE (underpowered), not evidence of no effect."
+  },
+  "cohort": {
+    "n": 82,
+    "n_recurrence": 48,
+    "n_no_recurrence": 34,
+    "event_rate": 0.5853658536585366,
+    "endpoint_definition": ">=30 s documented AF/AFL after a 90-day blanking period, within 2 years; all 82 followed the full 2 years (cohort authors, 2026-07-30)"
+  },
+  "config": {
+    "n_splits": 5,
+    "seed": 0,
+    "n_boot": 10000
+  },
+  "dry_run_shuffled_labels": {
+    "runs": [
+      {
+        "shuffle": 0,
+        "lr_auc_base": 0.5545343137254902,
+        "lr_delta": -0.01715686274509809,
+        "gbt_auc_base": 0.5723039215686274,
+        "gbt_delta": 0.09068627450980404
+      },
+      {
+        "shuffle": 1,
+        "lr_auc_base": 0.5128676470588236,
+        "lr_delta": 0.053308823529411686,
+        "gbt_auc_base": 0.5018382352941176,
+        "gbt_delta": -0.05453431372549017
+      },
+      {
+        "shuffle": 2,
+        "lr_auc_base": 0.5465686274509804,
+        "lr_delta": 0.10906862745098034,
+        "gbt_auc_base": 0.5349264705882353,
+        "gbt_delta": 0.08210784313725483
+      }
+    ],
+    "max_abs_auc": 0.5723039215686274,
+    "verdict": "PASS -- no shuffled-label baseline approaches a usable AUC"
+  },
+  "primary_section_8_4": {
+    "result": {
+      "lr": {
+        "grouped_auc_base": 0.25,
+        "grouped_auc_sfi": 0.44669117647058826,
+        "grouped_delta_auc": 0.19669117647058826,
+        "naive_auc_base": 0.3033088235294118,
+        "naive_auc_sfi": 0.3517156862745098,
+        "naive_delta_auc": 0.04840686274509798,
+        "delong_p": 0.006088447367639176,
+        "delong_z": 2.7429795682250853,
+        "bootstrap": {
+          "delta_mean": 0.1960677083333333,
+          "ci_low": 0.05390624999999999,
+          "ci_high": 0.33394607843137253,
+          "p_delta_le_0": 0.0023,
+          "n_boot_valid": 10000
+        },
+        "endpoint_met": true
+      },
+      "gbt": {
+        "grouped_auc_base": 0.5159313725490197,
+        "grouped_auc_sfi": 0.5367647058823529,
+        "grouped_delta_auc": 0.02083333333333326,
+        "naive_auc_base": 0.5962009803921569,
+        "naive_auc_sfi": 0.5784313725490196,
+        "naive_delta_auc": -0.017769607843137303,
+        "delong_p": 0.7380213609664918,
+        "delong_z": 0.3344747240756535,
+        "bootstrap": {
+          "delta_mean": 0.02039546568627451,
+          "ci_low": -0.10049019607843135,
+          "ci_high": 0.14155943627450962,
+          "p_delta_le_0": 0.3709,
+          "n_boot_valid": 10000
+        },
+        "endpoint_met": false
+      }
+    },
+    "gate_met_per_classifier": {
+      "lr": true,
+      "gbt": false
+    },
+    "gate_met": true
+  },
+  "baseline_degradation_section_8_6": {
+    "fibrosis_only_auc": {
+      "lr": 0.3118872549019608,
+      "gbt": 0.6029411764705882
+    },
+    "competitor_auc": {
+      "lr": 0.25,
+      "gbt": 0.5159313725490197
+    },
+    "source_study_auc": 0.8,
+    "source_study_sd": 0.04,
+    "source_study_note": "89 features including EHR/clinical risk factors not held here; this is NOT a like-for-like comparison and no claim is made against that model",
+    "baseline_materially_weaker": true,
+    "consequence": "Per section 8.6, any positive dAUC must be reported as confounded by baseline degradation rather than as a win for SFI."
+  },
+  "diagnostic_pooled_oof_prevalence": {
+    "note": "POST-HOC. The section 8.4 estimator pools out-of-fold probabilities across folds, which DeLong's assumption already strains (see the manuscript's Methods). Here the folds carry very unequal event rates and the model calibrates to its TRAINING-fold prevalence, which is the complement of the test fold's. Pooling then inverts the ranking.",
+    "train_fold_prevalence": [
+      0.6,
+      0.5384615384615384,
+      0.5909090909090909,
+      0.5303030303030303,
+      0.6666666666666666
+    ],
+    "mean_predicted_prob_on_test_fold": [
+      0.5965731629520598,
+      0.4970622023629678,
+      0.5951301825832906,
+      0.5060098918910552,
+      0.705139562922497
+    ],
+    "pearson_r": 0.9945760838492778,
+    "mean_within_fold_auc": {
+      "base": 0.3445207570207571,
+      "sfi": 0.5378663003663003
+    }
+  },
+  "diagnostic_noise_control": {
+    "note": "POST-HOC, and decisive. When a baseline is ANTI-predictive, adding any columns that dilute the overfit moves its AUC toward chance. This replaces the 9 SFI columns with 9 draws of standard Gaussian noise and re-runs the identical pipeline, so the only thing the SFI block has to beat is arbitrary padding of the same width.",
+    "observed_sfi_delta_auc": 0.19669117647058826,
+    "n_draws": 20,
+    "noise_delta_mean": 0.13725490196078433,
+    "noise_delta_sd": 0.10704185105265213,
+    "noise_delta_max": 0.3174019607843137,
+    "n_noise_ge_sfi": 6,
+    "empirical_p_noise_ge_sfi": 0.3333333333333333
+  },
+  "secondary_section_8_5_2": {
+    "status": "NOT TESTED",
+    "reason": "section 8.7 fixes a hierarchical sequence and halts at the first non-rejection. The arithmetic gate of section 8.4 did fire on the logistic arm, but section 8.6 -- fixed before any label was joined -- pre-specifies that a materially degraded baseline makes any observed dAUC a report of baseline degradation rather than a win for SFI, and the noise control shows arbitrary padding of the same width reproduces it. Continuing the sequence on an artefactual rejection would be worse than stopping. The ablation-induced dSFI test is therefore not performed and was not computed: running it and then declining to report it would spend the alpha the sequence exists to protect."
+  },
+  "sensitivity_section_8_5_1": {
+    "n_train": 67,
+    "n_test": 15,
+    "n_events_test": 8,
+    "caveat": "amendment h.2: these 15 patients also enter the section 8.4 primary, so this is a sensitivity analysis on someone else's split, NOT external validation. With 8 events the AUC standard error is roughly +/-0.15, wider than the entire effect range at issue.",
+    "lr": {
+      "auc_base": 0.375,
+      "auc_sfi": 0.5714285714285715,
+      "delta_auc": 0.1964285714285715
+    },
+    "gbt": {
+      "auc_base": 0.5357142857142857,
+      "auc_sfi": 0.42857142857142855,
+      "delta_auc": -0.10714285714285715
+    }
+  },
+  "exploratory_section_8_5_3": {
+    "n": 48,
+    "n_af": 35,
+    "n_afl": 13,
+    "note": "exploratory and unadjusted (section 8.7). A negative result is mechanistically informative: flutter is typically macro-reentrant and often right-atrial, so a left-atrial distributed-fragility index is not expected to separate it.",
+    "result": {
+      "lr": {
+        "grouped_auc_base": 0.5076923076923077,
+        "grouped_auc_sfi": 0.49890109890109885,
+        "grouped_delta_auc": -0.008791208791208815,
+        "naive_auc_base": 0.4967032967032967,
+        "naive_auc_sfi": 0.4571428571428571,
+        "naive_delta_auc": -0.03956043956043964,
+        "delong_p": 0.8909778967436454,
+        "delong_z": -0.13706692368381662,
+        "bootstrap": {
+          "delta_mean": -0.008265934065934072,
+          "ci_low": -0.13631868131868127,
+          "ci_high": 0.11873626373626346,
+          "p_delta_le_0": 0.566,
+          "n_boot_valid": 2000
+        },
+        "endpoint_met": false
+      },
+      "gbt": {
+        "grouped_auc_base": 0.5384615384615384,
+        "grouped_auc_sfi": 0.4945054945054945,
+        "grouped_delta_auc": -0.04395604395604391,
+        "naive_auc_base": 0.5758241758241759,
+        "naive_auc_sfi": 0.37362637362637363,
+        "naive_delta_auc": -0.20219780219780226,
+        "delong_p": 0.31349090879084673,
+        "delong_z": -1.0079240836454275,
+        "bootstrap": {
+          "delta_mean": -0.04498131868131868,
+          "ci_low": -0.1384615384615384,
+          "ci_high": 0.04401098901098877,
+          "p_delta_le_0": 0.8365,
+          "n_boot_valid": 2000
+        },
+        "endpoint_met": false
+      }
+    }
+  },
+  "verdict": "NOT MET -- the gate fired on an artefact, and section 8.6 pre-specified this case. The logistic arm clears both thresholds arithmetically (dAUC +0.197, p=0.0061), but its baseline AUC is 0.250 -- BELOW CHANCE -- and even with SFI it reaches only 0.447, still below chance. Adding any nine columns to an anti-predictive baseline pulls it toward 0.5; nine columns of pure noise reproduce the increment (empirical p=0.333). The gradient-boosting arm, whose baseline sits at chance, shows +0.021 (p=0.738). No individual feature, competitor or SFI, separates the outcome. This is reported as confounded by baseline degradation, exactly as section 8.6 required in advance, and NOT as evidence that SFI predicts recurrence.",
+  "endpoint_met": false,
+  "gate_fired_arithmetically": true,
+  "max_delta_auc": 0.19669117647058826
+}

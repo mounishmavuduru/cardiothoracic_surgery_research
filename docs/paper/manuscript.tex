@@ -112,10 +112,17 @@ limitation: the inducibility labeller is strongly resolution-sensitive and, on a
 completed six-tier study ($1500$--$48000$ nodes, $n=24$), does not converge
 within the tested window; the direction of the residual bias at the
 $2{,}000$-node operating resolution is not established, since the finest tier
-($37.5\%$) sits above the operating-resolution rate ($34.0\%$). Our contribution is a carefully
+($37.5\%$) sits above the operating-resolution rate ($34.0\%$). A pre-registered
+\emph{clinical} endpoint on two-year recurrence outcomes for the $82$ UW patients
+completes the picture and supplies the study's sharpest illustration: its gate
+fired, at $\dAUC=+0.197$ with $p=0.0061$, and the analysis plan frozen before the
+outcomes were joined identifies the result as an artefact of an anti-predictive
+baseline (AUC $0.250$), which nine columns of random noise reproduce
+(empirical $p=0.333$). The endpoint is not met. Our contribution is a carefully
 bounded negative result: the mechanism behind it, a label-free criterion for the
 estimator's validity, a characterization of how it scales, and a demonstration of
-the false positives that standard methodology produces.
+the false positives that standard methodology produces --- including one this
+protocol caught on real patients.
 \end{abstract}
 
 \noindent\textbf{Keywords:} algebraic connectivity; Fiedler value; spectral
@@ -123,9 +130,11 @@ graph theory; atrial fibrillation; reentry; biomarker; perturbation theory;
 validity radius; pre-registration; negative result.
 
 \medskip
-\noindent\emph{This is a 100\% in-silico computational study. Ground-truth
-labels are electrophysiology-simulator inducibility verdicts, never clinical
-outcomes. All numbers trace to \code{results/*.json} and
+\noindent\emph{Ground-truth labels are electrophysiology-simulator inducibility
+verdicts throughout, with one exception: the pre-registered clinical endpoint of
+Section~\ref{sec:clinical}, which is scored against real two-year
+post-ablation recurrence outcomes for the $82$ UW patients. Every claim outside
+that section is in-silico. All numbers trace to \code{results/*.json} and
 \code{notebooks/lab\_notebook.md} in the project repository.}
 
 \tableofcontents
@@ -619,6 +628,82 @@ $n=100$) and $+0.012$ (combined, $n=182$), with intervals that contain zero and
 exclude the $0.05$ gate. An earlier version read the then-current
 $+0.036$--$0.051$ as compatible with a detectable effect we were underpowered to
 confirm; those estimates are superseded and that reading no longer holds.
+
+\subsection{The clinical endpoint, and the false positive its own protocol caught}
+\label{sec:clinical}
+\noindent\emph{Source:}
+\code{results/\allowbreak clinical\allowbreak\_endpoint.json}.
+
+Every endpoint above is scored against a simulator's verdict. This one is not. The
+cohort's authors supplied per-patient two-year post-ablation outcomes for all $82$
+UW patients --- recurrence being at least $30$~s of documented atrial fibrillation
+or flutter after a $90$-day blanking period, with every patient followed the full
+two years --- and \S8 of the pre-registration, which governs this analysis, was
+frozen and git-tagged before any feature was placed beside that column. It is run
+once, and reported whatever it said.
+
+\paragraph{What the protocol fixed in advance.} Three commitments matter for
+reading what follows, and all three predate the data join. First, the $0.05$
+effect-size gate used for the simulator endpoint is \emph{not} reused here: at
+$n=82$ with $48$ events, power at $\dAUC=0.05$ is $0.24$, so that gate would be
+unfalsifiable, and the minimum detectable effect was fixed at
+$\dAUC\approx0.10$--$0.15$. Second, testing follows a fixed sequence and halts at
+the first non-rejection. Third, and decisively here, \S8.6 anticipated that UW
+fibrosis is categorical rather than continuous, warned in writing that this
+``biases the comparison toward SFI, because a degraded baseline is easier to
+beat,'' and pre-committed that if our baseline came out materially weaker than the
+source study's published performance, any $\dAUC$ would be reported as
+\emph{confounded by baseline degradation} rather than as a win for SFI.
+
+\paragraph{Result.} The arithmetic gate fired. Under logistic regression the
+competitor baseline gives an out-of-fold AUC of $0.250$, adding SFI gives $0.447$,
+and the increment is $\dAUC=+0.197$ with a bootstrap interval $[+0.054,+0.334]$
+and a paired DeLong $p=0.0061$ --- past both pre-registered thresholds, on real
+patients, with a $p$-value an order of magnitude below $0.05$.
+
+It is an artefact, and the paper's own protocol says so before we do. A baseline
+AUC of $0.250$ is not weak but \emph{anti-predictive}, and adding SFI reaches only
+$0.447$, still below chance. Three checks settle it. Every one of the fifteen
+features, competitor and SFI alike, is univariately at chance on this outcome
+($0.435$--$0.547$). The gradient-boosting arm, whose baseline sits at chance
+($0.516$), gives $\dAUC=+0.021$ at $p=0.738$. And when the nine SFI columns are
+replaced by nine columns of standard Gaussian noise and the identical pipeline is
+re-run, the increment reproduces: across twenty draws the noise gains
+$+0.137$ on average, and $6$ of $20$ match or exceed SFI's $+0.197$ (empirical
+$p=0.333$). What the logistic arm measures is not prediction but dilution ---
+padding an over-fitted, anti-predictive baseline with any nine columns pulls its
+AUC back toward $0.5$.
+
+The inversion itself has a mechanism worth naming, because it is a property of
+the estimator rather than of these patients. The folds carry very unequal event
+rates ($25\%$ to $81\%$), the model calibrates to its \emph{training}-fold
+prevalence, and training prevalence is the complement of test prevalence: the
+correlation between the two is $+0.995$, so the fold with fewest events receives
+the highest predicted probabilities. Pooling out-of-fold probabilities across
+such folds inverts the ranking. Scoring within folds and averaging removes most
+of it ($0.250\to0.345$ for the baseline), which is the diagnostic, not a
+re-analysis.
+
+\paragraph{Verdict.} The clinical primary endpoint is \textbf{not met}, and per
+\S8.6 the observed increment is reported as confounded by baseline degradation.
+Under the \S8.7 stopping rule the ablation-induced $\Delta$SFI test is therefore
+not performed; it was not computed, since running it and then declining to report
+it would spend the very $\alpha$ the sequence protects. Two analyses outside the
+confirmatory family are reported for completeness: on the data provider's own
+$67/15$ split --- explicitly \emph{not} independent, since those $15$ patients also
+enter the primary, and not powered, with $8$ events --- the two classifiers
+disagree in sign ($+0.196$ and $-0.107$); and among the $48$ recurrers, SFI does
+not separate the $35$ who presented with fibrillation from the $13$ who presented
+with flutter ($\dAUC=-0.009$ and $-0.044$), which is the expected direction, since
+flutter is typically macro-reentrant and often right-atrial.
+
+We report this at length because it is the paper's thesis instantiated on real
+clinical outcomes rather than on simulated ones. A naive analysis --- a
+$p<0.05$ threshold, no effect-size gate, no baseline-quality check, no noise
+control --- would have published $\dAUC=+0.197$ at $p=0.0061$ as evidence that a
+spectral biomarker predicts atrial-fibrillation recurrence in patients. The
+guard that caught it was written into \S8.6 on the day the data arrived, before
+any feature met the outcome column, by authors who expected to be the ones fooled.
 
 \subsection{Testing the redundancy explanation directly}
 \label{sec:redundancy}
@@ -1467,24 +1552,21 @@ labels in both arms, so the shift is common to them, though per-subject label
 noise still attenuates the incremental $\dAUC$ toward zero.
 \item Simulator, not clinical, labels: the pre-registered openCARP ground truth
 was substituted with monodomain Mitchell--Schaeffer, a logged deviation.
-\item A clinical endpoint family \emph{is} pre-registered and is deliberately not
-reported here. Per-patient two-year post-ablation recurrence outcomes for the $82$
-UW patients were shared with us after the simulator analysis was complete, and
-\S8 of the pre-registration was frozen and tagged before any feature was placed
-alongside the outcome column; at the time of writing no such association has been
-computed. The endpoint is defined by the cohort's authors as at least $30$~s of
-documented atrial fibrillation or flutter after a $90$-day blanking period and
-within the two-year window; all $82$ patients were followed for the full two
-years, so there is no censoring to model. We state one thing now rather than
-after seeing an answer: the study is
-underpowered for that endpoint by construction: on the observed $48/82$ event
+\item The clinical endpoint (Section~\ref{sec:clinical}) is underpowered by
+construction, and its headline number is an artefact we report rather than a
+result we defend. On the observed $48/82$ event
 rate, power at the $\dAUC\geq0.05$ gate used for the simulator endpoint is
 $0.24$ at best and $0.13$ under a weaker shared-noise assumption, so that gate
 is \emph{not} reused there. The minimum detectable effect is $\dAUC\approx0.10$
 to $0.15$, and $80\%$ power at $0.05$ would need $371$ to $859$ patients
 (\code{results/\allowbreak power\allowbreak\_real\allowbreak\_outcomes.json}).
-A null below that band will be reported as inconclusive, never as evidence that
-SFI adds nothing clinically.
+We therefore do \emph{not} report the clinical null as evidence that SFI adds
+nothing to recurrence prediction; the study cannot resolve an effect of the size
+that would matter. A further limitation is specific to this cohort and was
+disclosed before the analysis: UW fibrosis is categorical rather than continuous,
+which weakens the very baseline SFI must beat, and the baseline duly came out
+below chance. A cleaner test of the clinical question needs a cohort with
+continuous fibrosis imaging and several hundred patients, not this one.
 \item Our first pass over the UW release was wrong in two ways, detailed with their
 controls in Section~\ref{sec:substrate}: a fibre field that is a constant vector
 in all $164$ meshes, which is a placeholder rather than data (fibre orientations
@@ -1536,11 +1618,20 @@ the label. Independently
 of the predictive question, the single-vector estimator is ill-conditioned on real
 tissue ($\rhoval\gg1$), and lawfully more so as meshes are refined.
 
+On real clinical outcomes the same conclusion holds and arrives with a warning
+attached. The pre-registered endpoint on two-year recurrence in the $82$ UW
+patients returned $\dAUC=+0.197$ at $p=0.0061$, past both of its thresholds, and
+is not met: the baseline it improves on is anti-predictive at AUC $0.250$, no
+feature on either side separates the outcome univariately, and nine columns of
+random noise reproduce the increment. The analysis plan had committed in writing
+to that reading before the outcomes were joined.
+
 The core result is not a discovery but a carefully-scoped boundary: where a
 Fiedler-based estimator is numerically valid, why real tissue lies far outside it,
-and how readily standard methodology would have reported a working biomarker --- a
-false positive this project produced from its own pipeline, at $\dAUC=+0.103$ and
-$p=0.009$, and then withdrew. What the study cannot settle is the absolute
+and how readily standard methodology would have reported a working biomarker ---
+twice, from this project's own pipeline. Once in silico, at $\dAUC=+0.103$ and
+$p=0.009$, withdrawn on more data; once on real patients, at $\dAUC=+0.197$ and
+$p=0.0061$, caught by a guard written before the data arrived. What the study cannot settle is the absolute
 inducibility rate, which does not converge within the mesh resolutions we could
 afford; the comparative claims, which score identical labels in both arms, do not
 depend on it. Whether the null is an artefact of the stand-in labeller is

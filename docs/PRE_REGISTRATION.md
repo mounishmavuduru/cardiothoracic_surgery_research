@@ -501,6 +501,67 @@ prediction from baseline substrate; the post-ablation mesh encodes the delivered
   `tau_close = 115 × (1 − 0.5 f)` reproduces the frozen 218 ms healthy / 121 ms fibrotic
   within about 2 %. The per-bin membrane parameters are now emitted accordingly and the gate
   is being re-run.
+- **Amendment 2026-07-30 (l): THE CONFIRMATORY CLINICAL ANALYSIS WAS RUN. Primary endpoint
+  NOT met; the gate fired on an artefact and §8.6 caught it.** `scripts/clinical_endpoint.py`,
+  `results/clinical_endpoint.json`. The §8.6 blocker — "the confirmatory analysis will not be
+  run until the tag semantics are confirmed with the data provider" — was cleared by
+  amendment (k). Run once, seed 0, deterministic.
+
+  **§8.7 dry run, first.** Three shuffled-label passes before the real column was analysed;
+  worst shuffled baseline AUC 0.572, i.e. no leakage. Recorded in the output.
+
+  **§8.4 primary, as frozen.** Competitors vs competitors+SFI, pre-ablation features only,
+  patient-grouped CV over all 82, 10 000 bootstrap resamples.
+
+  | classifier | baseline AUC | +SFI AUC | ΔAUC | 95 % CI | DeLong p |
+  |---|---|---|---|---|---|
+  | logistic | **0.250** | 0.447 | **+0.197** | [+0.054, +0.334] | **0.0061** |
+  | gradient boosting | 0.516 | 0.537 | +0.021 | [−0.100, +0.142] | 0.738 |
+
+  The logistic arm clears both pre-registered thresholds (ΔAUC ≥ 0.10, p < 0.05). **It is
+  not a result.** The baseline is not weak but *anti-predictive*: AUC 0.250, and 0.447 even
+  with SFI — still below chance. §8.6, written on 2026-07-24 before any label was joined,
+  pre-committed that a materially degraded baseline makes any ΔAUC a report of baseline
+  degradation rather than a win for SFI. The check fires: best fibrosis-only AUC 0.603
+  against the source study's 0.80 ± 0.04.
+
+  **Two post-hoc diagnostics, labelled as such, both decisive.**
+  1. *Noise control.* Replacing the 9 SFI columns with 9 standard Gaussian columns and
+     re-running the identical pipeline gives ΔAUC +0.137 on average over 20 draws, with
+     **6/20 matching or exceeding SFI's +0.197** (empirical p = 0.333). Padding an
+     over-fitted anti-predictive baseline with *any* nine columns pulls it toward 0.5.
+     SFI does so no better than noise.
+  2. *Mechanism of the inversion.* Fold event rates span 25–81 %; the model calibrates to
+     its training-fold prevalence, which is the complement of the test fold's, and
+     corr(train prevalence, mean predicted probability) = **+0.995**. Pooling out-of-fold
+     probabilities across such folds inverts the ranking. Within-fold scoring recovers
+     0.250 → 0.345. This is a property of the estimator, not of these patients, and it is
+     the same pooled-OOF caution the manuscript already raises for the combined cohort.
+
+  Every one of the 15 features is univariately at chance on this outcome (AUC 0.435–0.547).
+
+  **§8.7 stopping rule applied.** Because the rejection is artefactual under a
+  pre-specified rule, the sequence halts: **§8.5.2 (ablation-induced ΔSFI) was NOT tested
+  and was NOT computed.** Computing it and then declining to report it would spend the α
+  the sequence exists to protect. §8.5.1 (provider's split, descriptive, not independent,
+  8 events) gives +0.196 (lr) and −0.107 (gbt) — the classifiers disagree in sign. §8.5.3
+  (exploratory) finds SFI does not separate AF from AFL among the 48 recurrers (−0.009,
+  −0.044), the expected direction for a left-atrial index against a typically
+  right-atrial macro-reentrant arrhythmia.
+
+  **Verdict: the clinical primary endpoint is NOT met**, and the accepted reportable null of
+  §8.7 applies — with the qualification §8.3 fixed in advance, that at this sample size the
+  study cannot resolve an effect of the size that would matter, so this is *not* evidence
+  that SFI has no clinical value.
+
+  **One process note, recorded because it is the kind of thing that should not be quietly
+  fixed.** The first execution of the script printed "PRIMARY ENDPOINT MET": the verdict
+  logic applied the §8.4 arithmetic gate without applying the §8.6 mitigation, which the
+  protocol makes binding. The estimates were correct; the interpretation was not. The
+  script was corrected and re-run, and every primary estimate is byte-identical across the
+  two runs (verified field by field), so "run once" is preserved — what changed was the
+  conclusion drawn from fixed numbers, not the numbers.
+
 - **Amendment 2026-07-30 (k): the cohort authors answer five questions, and the answers
   touch the substrate, the custody terms and the endpoint definition.** P. M. Boyle
   replied to the queries raised by the audit of §4.4. Recorded here in full because two
