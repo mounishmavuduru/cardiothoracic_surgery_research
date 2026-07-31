@@ -189,16 +189,33 @@ has been placed alongside the outcome column.
 
 ### 8.1 Data provenance and custody
 - **Labels:** `Patient_ID, Recurrence_Rhythm_2yr` ∈ {`NR`, `AF`, `AFL`}, n = 82,
-  IDs 1–15 and 21–87. `NR` = no recurrence within the 2-year follow-up; `AF`/`AFL` = first
-  documented recurrence rhythm was fibrillation / flutter respectively.
+  IDs 1–15 and 21–87.
+- **Endpoint definition (from the cohort authors, 2026-07-30).** Recurrence is **at least
+  30 s of documented atrial arrhythmia (fibrillation or flutter), after a 90-day blanking
+  period and within the 2-year follow-up.** `AF`/`AFL` records which arrhythmia was
+  documented *first* after the blanking period ended. `NR` patients **may** have had
+  arrhythmia during the blanking period but were arrhythmia-free for the remainder of the
+  2 years. **All 82 patients were followed for the full 2 years**, so the binary endpoint
+  of §8.4 has no censoring and no competing-risk structure to model; a time-to-event
+  analysis would add nothing here and is not planned.
 - **Anatomy:** the matching public Dryad meshes (`ID001–ID015` holdout, `ID021–ID087`
   training; pre- and post-ablation per patient). The ID sets match the label file exactly.
-- **Custody:** the label file is **human-subject outcome data shared under restricted
-  terms**, not covered by the CC0 that applies to the meshes. It lives under the gitignored
-  `data/` tree and is additionally protected by explicit `.gitignore` rules. It **will not be
-  committed, redistributed, or included in any release artifact** unless Prof. Boyle
-  explicitly permits it in writing. Derived aggregate statistics may be published; the
-  per-patient column may not.
+- **Custody — REVISED 2026-07-30, restriction lifted.** This section previously recorded
+  the label file as human-subject data under restricted terms that could not be
+  redistributed. That is no longer the operative position. Prof. Boyle has confirmed in
+  writing that **no confidentiality attaches to the individual patient outcomes**: the data
+  is already a public release from a bioethics standpoint, and 15 of the 82 patients'
+  outcomes were published with the source study. The redistribution bar is therefore
+  lifted, and the per-patient column may be released alongside this work.
+  *(The conservative handling that preceded this was correct while the position was
+  unknown, and nothing was published under it. It is recorded rather than deleted so the
+  sequence — assume restricted, ask, relax only on a written answer — stays legible.)*
+- **Still withheld, and not obtainable:** the LGE **image-intensity ratios** and the
+  **fibre orientations** are both barred by the cohort's IRB and will not be released.
+  Fibres can be regenerated with published tools (see that study's Supplemental Methods);
+  the constant `(1,0,0)` array in the deposit is a placeholder, not measured anatomy.
+  This is why UW fibrosis here is derived from `elemTag` rather than from intensity, and
+  why the UW and Roney burdens in §4.4 of the manuscript are not constructed alike.
 
 ### 8.2 Observed marginals (the only thing inspected pre-freeze)
 
@@ -484,6 +501,51 @@ prediction from baseline substrate; the post-ablation mesh encodes the delivered
   `tau_close = 115 × (1 − 0.5 f)` reproduces the frozen 218 ms healthy / 121 ms fibrotic
   within about 2 %. The per-bin membrane parameters are now emitted accordingly and the gate
   is being re-run.
+- **Amendment 2026-07-30 (k): the cohort authors answer five questions, and the answers
+  touch the substrate, the custody terms and the endpoint definition.** P. M. Boyle
+  replied to the queries raised by the audit of §4.4. Recorded here in full because two
+  of the answers change what the manuscript may claim and one confirms a finding that
+  had been inferred rather than known.
+
+  1. **The `elemTag` legend, which the Dryad README omits:** 111 atrial non-fibrotic,
+     115 atrial fibrotic (disease-associated remodeling), 164 veins/valves ("we treat
+     these as electrically non-conductive/dead"), 199 ablation scar ("also electrically
+     non-conductive/dead"). **This confirms the tag-164 identification of amendment (d),
+     which was derived from geometry alone before any legend existed.** The census was
+     right, and the correction it forced — dropping 164 rather than scoring it
+     half-fibrotic — is what the authors themselves do.
+  2. **Tag 199 was mis-mapped and nobody had noticed**, because it never occurs in the
+     pre-ablation meshes this study uses. `TAG_FIBROSIS[199] = 1.0` treats ablation scar
+     as maximally fibrotic *but still conducting* (the conduction ramp floors at
+     `eps = 0.05`), where it should be dead. No result is affected — a census over all 82
+     pre-ablation meshes finds only {111, 115, 164} — and `DROP_TAGS` is deliberately
+     **not** changed, because `uw_drop_tags` is in the frozen-config hash and altering it
+     would invalidate both label caches to reproduce an identical answer. Instead
+     `DEAD_TAGS = (164, 199)` records the semantic truth and `load_uw_mesh` now raises if
+     a mesh carries a dead tag that `drop_tags` does not remove, so a post-ablation mesh
+     cannot be simulated with scar as living tissue. Guarded by two new tests.
+  3. **LGE intensity ratios are IRB-withheld.** The manuscript's Methods stated that
+     *each* mesh carries an IIR fibrosis proxy mapped by the Khurram ramp. That is true of
+     Roney and false of UW, whose fibrosis is derived from `elemTag` and is two-valued
+     once the non-myocardial class is removed. Corrected, and the consequence stated where
+     it bites: the §4.4 burden comparison (0.333 against 0.248) is between a continuous
+     severity mean and what is closer to a fibrotic-area fraction. Both enter the solver
+     through the same conductance ramp, so the comparison is operationally sound, but the
+     25 % deficit is not a claim about imaging. **The burden *swap* is unaffected**, being
+     internal to each cohort's own field.
+  4. **Fibre orientations are IRB-withheld too**, and are meant to be regenerated with
+     published tools. The constant `(1,0,0)` array is a placeholder. The "degenerate fibre
+     field" of amendment (e) is therefore not a defect in the deposit but a placeholder we
+     read as anatomy. The manuscript's framing is corrected accordingly: neither of the two
+     UW problems is a defect in the released data, both are consequences of an undocumented
+     release being used without asking.
+  5. **The clinical endpoint is now defined precisely** and §8.1 is updated: ≥30 s of
+     documented AF/AFL, after a 90-day blanking period, within 2 years, with all 82
+     patients followed the full 2 years. No censoring.
+
+  **Custody:** the redistribution restriction in §8.1 is lifted on the authors' written
+  confirmation. See that section.
+
 - **Amendment 2026-07-30 (j): four post-hoc analyses, all label-free or explicitly
   exploratory, logged here because the protocol requires post-hoc work to be dated rather
   than absorbed silently.** None changes an endpoint, a feature, or a stored result; each

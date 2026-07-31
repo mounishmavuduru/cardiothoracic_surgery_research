@@ -23,13 +23,27 @@ Format differences from the Roney loader (``asb.substrate.roney``)
   =======  =========================  ======================================
   elemTag  tissue                     evidence
   =======  =========================  ======================================
-  111      healthy myocardium         dominant; 59.0 % → 47.3 % post-ablation
-  115      dense (LGE) fibrosis       high inter-patient variance; 20.9 % → 14.9 %
-  164      **not myocardium** — the   4–6 large components (5 in 75/82), each a disc
-           caps over the pulmonary    (χ=1), 11–42 mm; borders tag 115 on ~0.08 %
-           veins and mitral valve     of edges vs 14–20 % by chance; 20.0 % → 19.9 %
-  199      ablation scar              post-ablation only, 17.9 %
+  111      atrial, non-fibrotic       dominant; 59.0 % → 47.3 % post-ablation
+  115      atrial, fibrotic           high inter-patient variance; 20.9 % → 14.9 %
+  164      **veins/valves** — not     4–6 large components (5 in 75/82), each a disc
+           myocardium, and            (χ=1), 11–42 mm; borders tag 115 on ~0.08 %
+           electrically dead          of edges vs 14–20 % by chance; 20.0 % → 19.9 %
+  199      **ablation scar** — also   post-ablation only, 17.9 %; ABSENT from all 82
+           electrically dead          pre-ablation meshes (verified by census)
   =======  =========================  ======================================
+
+  CONFIRMED BY THE COHORT AUTHORS, 2026-07-30. P. M. Boyle supplied the tag legend
+  in correspondence: "111: atrial, non-fibrotic / 115: atrial, fibrotic (i.e.,
+  disease-associated remodeling) / 164: veins/valves (we treat these as electrically
+  non-conductive/dead) / 199: ablation scar (also electrically non-conductive/dead
+  in our simulations)". The tag-164 identification above was derived here from
+  geometry alone, before that legend existed, and it is correct. Two consequences:
+  164 is not "half-fibrotic tissue" but dead structure, which is what
+  :data:`DROP_TAGS` already implements; and 199 must be dead too, which the old
+  ``TAG_FIBROSIS[199] = 1.0`` did NOT implement -- fibrosis 1.0 still conducts at
+  the ``eps`` floor of the conduction ramp. 199 is absent from every pre-ablation
+  mesh, so no published result is affected, but anyone reaching for the
+  post-ablation meshes would have hit it. It is now in :data:`DROP_TAGS`.
 
   An earlier revision of this file read tag 164 as "remodelled / patchy tissue,
   distributed (least compact)" and :data:`TAG_FIBROSIS` still maps it to 0.5.
@@ -79,6 +93,11 @@ __all__ = [
 MICRON_TO_MM: float = 1.0e-3
 
 #: Frozen per-cell ``elemTag`` -> fibrosis-fraction map (see module docstring).
+#: Retained ONLY so the discredited pre-2026-07-30 mapping can be reproduced via
+#: ``drop_tags=()``. Both 164 and 199 are electrically dead per the cohort authors'
+#: legend, so neither has a meaningful fibrosis value; they are removed by
+#: :data:`DROP_TAGS` rather than assigned one. The 0.5 and 1.0 below are the values
+#: this project used before the legend was available, kept for the record.
 TAG_FIBROSIS: Dict[int, float] = {111: 0.0, 115: 1.0, 164: 0.5, 199: 1.0}
 
 #: Mean per-vertex deviation from the mean fibre direction, below which the field is
@@ -112,6 +131,20 @@ DEGENERATE_FIBRE_SPREAD: float = 1.0e-6
 #: ostia instead of travelling around them. Reentry anchored on those orifices -- a
 #: principal atrial-fibrillation mechanism -- then cannot form at all.
 DROP_TAGS: Tuple[int, ...] = (164,)
+
+#: Every tag the cohort authors treat as electrically dead: veins/valves and ablation
+#: scar. This is the semantic truth (Boyle, 2026-07-30); :data:`DROP_TAGS` is what this
+#: study actually removes, and the two differ by 199 alone.
+#:
+#: 199 is deliberately NOT in ``DROP_TAGS``. It occurs only in the post-ablation meshes,
+#: and a census over all 82 pre-ablation meshes -- the only ones any result here uses --
+#: finds tags {111, 115, 164} and nothing else. Adding 199 would therefore change no
+#: number, while ``uw_drop_tags`` is part of the frozen-config hash in
+#: ``realcohort._config_tag``, so it WOULD invalidate both label caches and force a full
+#: 182-subject re-label to reproduce the identical answer. :func:`load_uw_mesh` raises if
+#: a mesh ever contains a dead tag that ``drop_tags`` does not remove, so the assumption
+#: cannot rot silently: reach for the post-ablation meshes and it fails loudly.
+DEAD_TAGS: Tuple[int, ...] = (164, 199)
 
 
 # --------------------------------------------------------------------------- #
@@ -275,6 +308,26 @@ def load_uw_mesh(
 
     tags = np.asarray(cs.get("elemTag", np.full(faces.shape[0], 111.0)))
     fib_cell_raw = cv.get("fiber", None)
+
+    # Guard: every tag the cohort authors call electrically dead must be removed.
+    # DROP_TAGS omits 199 because it never occurs in the pre-ablation meshes this study
+    # uses, and adding it would invalidate the label cache to reproduce the identical
+    # answer (see DEAD_TAGS). That reasoning holds only while 199 really is absent, so
+    # it is checked rather than assumed -- loading a post-ablation mesh fails here
+    # instead of silently simulating ablation scar as living tissue.
+    # drop_tags=() is the explicit "give me the substrate exactly as released" path used
+    # to reproduce the pre-fix results, so it is exempt: the caller has asked for the raw
+    # mesh and the docstring says what that means.
+    present = set(np.unique(tags.astype(int)).tolist())
+    unhandled = sorted(present.intersection(DEAD_TAGS).difference(set(int(t) for t in drop_tags)))
+    if len(drop_tags) and unhandled:
+        raise ValueError(
+            f"{os.path.basename(path)} contains electrically dead element tag(s) "
+            f"{unhandled} that drop_tags={tuple(drop_tags)} does not remove. These are "
+            f"non-conductive per the cohort authors' legend (164 veins/valves, 199 "
+            f"ablation scar); simulating them as tissue is not meaningful. Pass "
+            f"drop_tags=DEAD_TAGS for post-ablation meshes."
+        )
 
     # Drop non-myocardial elements (the caps over the PV and mitral-valve openings)
     # BEFORE deriving any field, then compact the vertex indexing.

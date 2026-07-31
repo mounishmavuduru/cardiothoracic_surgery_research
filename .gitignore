@@ -7,9 +7,12 @@ outputs/
 .ipynb_checkpoints/
 data/
 
-# Human-subject outcome data (shared under restricted terms; never redistribute).
-# data/ is already ignored above; these are belt-and-braces rules so a stray copy
-# anywhere in the tree cannot be committed.
+# Per-patient outcome data. The redistribution restriction was LIFTED 2026-07-30 --
+# the cohort authors confirmed in writing that no confidentiality attaches to these
+# outcomes (PRE_REGISTRATION.md §8.1) -- so committing this file is now permitted.
+# The rules are kept anyway: permission to redistribute is not a decision to, and
+# publishing patient-level data should be a deliberate act, not a side effect of
+# `git add -A`. Remove these lines when that release is actually intended.
 **/af_recurrence_outcomes*.csv
 **/*_outcomes_shareable.csv
 

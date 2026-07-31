@@ -50,8 +50,16 @@ Real over SSM/Variant (100 000 variants of one shape ≈ 1 effective group — s
 > patients (`NR` / `AF` / `AFL`, keyed to the public Dryad mesh IDs). The verdict below —
 > "no public dataset ties usable atrial geometry to a real clinical outcome" — remains true
 > of *public downloads*, but is no longer true of this project: the author-request path (1)
-> worked. The labels are restricted-use and are **not** redistributable; see
-> `docs/PRE_REGISTRATION.md` §8 for the custody terms and the frozen analysis plan.
+> worked. See `docs/PRE_REGISTRATION.md` §8 for the frozen analysis plan.
+>
+> **UPDATE 2026-07-30 — the redistribution restriction is lifted.** Prof. Boyle has confirmed
+> in writing that no confidentiality attaches to the individual outcomes: the data is already
+> a public release from a bioethics standpoint, and 15 of the 82 patients' outcomes were
+> published with the source study. This supersedes the "restricted-use, not redistributable"
+> wording above and in the table below, which was the correct handling only while the position
+> was unknown. Two things *are* withheld under the cohort's IRB and will not be released: the
+> **LGE image-intensity ratios** and the **fibre orientations** (regenerable with published
+> tools; the constant `(1,0,0)` array in the deposit is a placeholder, not anatomy).
 
 **Verdict: no public dataset ties usable atrial geometry to a real clinical outcome label in a
 single open deposit.** Mesh deposits are released *because* outcome labels were stripped for

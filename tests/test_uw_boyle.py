@@ -23,7 +23,8 @@ import pytest
 from scipy.sparse import coo_matrix
 from scipy.sparse.csgraph import connected_components
 
-from asb.substrate.uw_boyle import (DEGENERATE_FIBRE_SPREAD, DROP_TAGS, TAG_FIBROSIS,
+from asb.substrate.uw_boyle import (DEAD_TAGS, DEGENERATE_FIBRE_SPREAD, DROP_TAGS,
+                                    TAG_FIBROSIS,
                                     load_uw_mesh, read_vtk_unstructured_bin,
                                     tags_to_fibrosis)
 
@@ -175,3 +176,42 @@ def test_tags_to_fibrosis_averages_cell_tags_onto_vertices():
     assert fib[3] == pytest.approx(1.0)   # only in the fibrotic triangle
     assert fib[1] == pytest.approx(0.5)   # shared
     assert fib[2] == pytest.approx(0.5)   # shared
+
+
+def test_dead_tags_match_the_cohort_authors_legend():
+    """Pure logic: 164 and 199 are both electrically dead per the legend of 2026-07-30.
+
+    P. M. Boyle supplied the elemTag legend in correspondence: 111 atrial non-fibrotic,
+    115 atrial fibrotic, 164 veins/valves "electrically non-conductive/dead", 199 ablation
+    scar "also electrically non-conductive/dead". ``DEAD_TAGS`` records that; ``DROP_TAGS``
+    records what this study removes, and the two differ by 199 alone because 199 never
+    occurs in the pre-ablation meshes (see the next test).
+    """
+    assert DEAD_TAGS == (164, 199)
+    assert 164 in DROP_TAGS
+    assert 199 not in DROP_TAGS
+    assert set(DROP_TAGS).issubset(set(DEAD_TAGS))
+
+
+@needs_data
+def test_no_pre_ablation_mesh_contains_ablation_scar():
+    """The assumption that lets DROP_TAGS omit 199 without changing any result.
+
+    If this ever fails, ``DROP_TAGS`` must gain 199 and every label cache must be
+    rebuilt -- ``uw_drop_tags`` is part of the frozen-config hash, so the change is not
+    free. Checked over the whole cohort rather than a sample, because the cost of the
+    assumption being wrong is that ablation scar gets simulated as living tissue.
+    """
+    for path in MESHES:
+        tags = np.asarray(read_vtk_unstructured_bin(path)["cell_scalars"]["elemTag"]).astype(int)
+        present = set(np.unique(tags).tolist())
+        assert 199 not in present, f"{path} contains ablation scar (tag 199)"
+        assert present <= {111, 115, 164}, f"{path} has unexpected tags {present - {111, 115, 164}}"
+
+
+@needs_data
+@pytest.mark.parametrize("path", MESHES[:2])
+def test_loading_a_mesh_with_unremoved_dead_tags_raises(path):
+    """The guard that stops post-ablation meshes being simulated as if scar were tissue."""
+    with pytest.raises(ValueError, match="electrically dead"):
+        load_uw_mesh(path, drop_tags=(199,))     # 164 present but not removed

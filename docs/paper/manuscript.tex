@@ -397,14 +397,22 @@ several members (Section~\ref{sec:falsify}).
 conduction graphs from two public cohorts: the Roney LA virtual cohort (Zenodo
 5801337~\cite{roney2022}) and the UW/Boyle LGE-MRI cohort (Dryad
 \code{10.5061/dryad.kkwh70sg0}, $82$ distinct AF patients~\cite{uwboyle2025}).
-Each mesh carries an image-intensity-ratio (IIR) fibrosis proxy mapped to a
-fibrosis field by the Khurram healthy-to-scar ramp~\cite{khurram2014}. The two
-cohorts differ in what else they carry: the Roney meshes ship registered
+The two encode fibrosis differently, which matters wherever their burdens are
+compared. Each Roney mesh ships an image-intensity-ratio (IIR) field, mapped to a
+continuous fibrosis fraction by the Khurram healthy-to-scar
+ramp~\cite{khurram2014}. The UW release ships no IIR --- the intensity ratios are
+withheld under that cohort's IRB --- so its fibrosis is derived instead from the
+per-element tissue tags, which the cohort's authors define as atrial
+non-fibrotic, atrial fibrotic, veins and valves, and ablation scar. On the
+pre-ablation meshes analysed here only the first three occur, so UW fibrosis is
+two-valued once the non-myocardial class is removed, where Roney's is continuous.
+The cohorts differ in what else they carry: the Roney meshes ship registered
 universal atrial coordinates and per-vertex fibre fields (directional spread
-$0.922$--$0.987$), whereas the UW meshes ship a \code{VECTORS fiber} array that
-is the constant $(1,0,0)$ everywhere (spread $0.000$) and no atrial coordinates,
-for which we substitute a PCA chart, so UW anisotropy is a fixed coordinate bias
-rather than anatomy (Sections~\ref{sec:regions} and~\ref{sec:substrate}). Meshes
+$0.922$--$0.987$), whereas the UW meshes ship no atrial coordinates, for which we
+substitute a PCA chart, and no fibre orientations --- withheld likewise --- so
+that the \code{VECTORS fiber} array they do ship is the constant $(1,0,0)$
+everywhere (spread $0.000$) and UW anisotropy is a fixed coordinate bias rather
+than anatomy (Sections~\ref{sec:regions} and~\ref{sec:substrate}). Meshes
 are coarsened to
 $\sim\!2000$-node graphs by field-preserving vertex clustering.
 
@@ -763,8 +771,10 @@ previously recorded the UW arm as uninformative and moved on, which was the
 error. What follows is what a proper audit found, then three controls that do not
 explain the anomaly, and a fourth that does.
 
-\paragraph{The audit.} Two defects sit in the released files. The first is
-ours. The only per-element scalar the UW release carries is \code{elemTag}, the
+\paragraph{The audit.} Two problems sit between the release and our use of it,
+and neither is a defect in the data. Both are consequences of an undocumented
+release being read by someone who guessed. The first guess is ours. The only
+per-element scalar the UW release carries is \code{elemTag}, the
 Dryad README does not define its values, and we had been mapping tag $164$ to
 half-fibrotic tissue. Four measurements say it is not tissue at all. It resolves
 into four to six large connected components in every one of the $82$ meshes,
@@ -795,7 +805,21 @@ It seals the atrium's orifices, so simulated activation crosses the mitral valve
 and the vein ostia instead of circling them, and reentry anchored on those
 orifices, a principal mechanism of atrial fibrillation, cannot form.
 
-The second defect is upstream. A \code{VECTORS fiber} array is present in all
+That identification was made from geometry alone, before any legend for the tags
+existed. It has since been confirmed by the cohort's authors, who define $164$ as
+veins and valves and treat them, as we now do, as electrically dead. The same
+correspondence settles a tag this study never encounters: $199$ is ablation scar
+and is likewise dead, where our mapping had it as maximally fibrotic \emph{but
+still conducting}. It occurs only in the post-ablation meshes and a census
+confirms it is absent from all $82$ pre-ablation meshes, so no result here is
+affected; the code now refuses to load any mesh carrying a dead tag it has not
+been told to remove, so the assumption cannot rot quietly. We record the
+confirmation because a census that agrees with the ground truth is worth more as
+evidence than the same census standing alone, and because the audit below rests
+on it.
+
+The second problem is upstream, and it is a placeholder mistaken for data. A
+\code{VECTORS fiber} array is present in all
 $164$ released meshes, but it equals the constant $(1,0,0)$: the measured mean
 directional spread is exactly $0.000$. The Roney cohort, by contrast, spans
 $0.922$--$0.987$ across its $62$ meshes (mean $0.954$), with roughly one
@@ -805,6 +829,17 @@ global direction reduces it to a fixed coordinate bias carrying no anatomy. The
 same cardinality argument applies to fibrosis: three distinct levels in the UW
 release, effectively two once the caps are dropped, against $700$--$1646$
 (mean $1318$) in Roney at the same $2000$-node coarsening.
+
+Here too the cohort's authors have since supplied the explanation, and it is the
+benign one: fibre orientations are withheld under the same IRB as the intensity
+ratios, and are meant to be regenerated with published tools rather than read off
+the release. The constant array is a placeholder. Nothing is wrong with the
+deposit; what was wrong was our reading it as anatomy, which is the same failure
+as the tag mapping and has the same root, an undocumented file used without
+asking. Both were caught by measurement rather than by correspondence --- the
+degeneracy is visible in the array itself --- but neither would have occurred had
+we asked first, and that is the transferable lesson rather than anything about
+these particular meshes.
 
 \paragraph{Control 1: repairing the substrate.} Opening the orifices and
 supplying a spatially varying fibre field, in a $2\times2$ design over all $82$
@@ -885,7 +920,18 @@ still counted as half-fibrotic, UW measured $0.307$ against Roney's $0.333$ ---
 only about $8\%$ lower --- so the cap defect was itself masking most of the
 burden difference, and the $6/82$ that opened this section was produced under
 that masking. Every predictive result in the paper uses the repaired substrate,
-where the deficit is the full $25\%$. The frozen protocol's own
+where the deficit is the full $25\%$. A second qualification limits how the
+deficit should be read, and we state it because it is the obvious objection: the
+two burdens are not measured the same way. Roney's is the mean of a continuous
+IIR-derived ramp; UW's, whose intensity ratios are withheld, is the mean of a
+two-valued tag classification, so it is closer to a fibrotic-area fraction than
+to a mean severity. Both enter the solver through the identical conductance ramp,
+so the comparison is operationally sound --- the solver sees the same kind of
+field either way --- but $25\%$ is a difference between two differently
+constructed quantities and should not be read as a claim that these patients
+carry a quarter less fibrosis in any imaging sense. What does not depend on the
+comparison is the swap below, which rescales each cohort's own field and is
+therefore internal to it. The frozen protocol's own
 calibration reports a rank correlation of $0.75$ between fibrosis and sustained
 reentry, so a cohort with less of it should be less inducible. That is not an
 anomaly; it is the labeller behaving as specified.
@@ -1426,10 +1472,11 @@ reported here. Per-patient two-year post-ablation recurrence outcomes for the $8
 UW patients were shared with us after the simulator analysis was complete, and
 \S8 of the pre-registration was frozen and tagged before any feature was placed
 alongside the outcome column; at the time of writing no such association has been
-computed. Two things follow that we state now rather than after seeing an answer.
-The outcome column is restricted-use human-subject data, not covered by the
-CC0 that applies to the meshes, so it is not redistributed with this work and
-only aggregate statistics derived from it may be published. And the study is
+computed. The endpoint is defined by the cohort's authors as at least $30$~s of
+documented atrial fibrillation or flutter after a $90$-day blanking period and
+within the two-year window; all $82$ patients were followed for the full two
+years, so there is no censoring to model. We state one thing now rather than
+after seeing an answer: the study is
 underpowered for that endpoint by construction: on the observed $48/82$ event
 rate, power at the $\dAUC\geq0.05$ gate used for the simulator endpoint is
 $0.24$ at best and $0.13$ under a weaker shared-noise assumption, so that gate
@@ -1438,10 +1485,13 @@ to $0.15$, and $80\%$ power at $0.05$ would need $371$ to $859$ patients
 (\code{results/\allowbreak power\allowbreak\_real\allowbreak\_outcomes.json}).
 A null below that band will be reported as inconclusive, never as evidence that
 SFI adds nothing clinically.
-\item The UW cohort's released substrate carries two defects, detailed with their
+\item Our first pass over the UW release was wrong in two ways, detailed with their
 controls in Section~\ref{sec:substrate}: a fibre field that is a constant vector
-in all $164$ meshes, and element tag $164$, which is the caps over the atrial
-orifices and which we had been treating as half-fibrotic tissue. Repairing both
+in all $164$ meshes, which is a placeholder rather than data (fibre orientations
+are IRB-withheld and meant to be regenerated), and element tag $164$, which is
+the caps over the atrial orifices and which we had been treating as
+half-fibrotic tissue on an undocumented release. Both readings have since been
+corrected against the cohort authors' own tag legend. Repairing both
 raises inducibility only from $6/82$ to $14/82$, and none of the three
 substrate explanations for the cohort's low rate is supported by direct
 control; Control~4 attributes the low rate instead to a fibrosis burden about
