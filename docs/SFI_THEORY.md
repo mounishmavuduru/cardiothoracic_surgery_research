@@ -151,22 +151,49 @@ s_ijᵀ P s_ij = Σ_c (φ_c,ᵢ − φ_c,ⱼ)²  ,   s_ij = e_i − e_j ,
 the first-order contribution to the drop in the **sum** of the clustered eigenvalues
 (`asb.sfi.subspace_sfi`).
 
-> **What GM3 does and does not establish here (corrected 2026-08-06).** The subspace SFI is
-> the well-defined object under near-degeneracy *by construction* — the trace over the
-> invariant subspace is basis-independent, so unlike `edge_fragility` it does not depend on
-> an arbitrary rotation of `φ₂`. That is an algebraic guarantee and it stands. What this
-> section previously also claimed — that "GM3 confirms the subspace prediction stays accurate
-> as the gap closes where the single vector is erratic" — is **withdrawn**: the stored
-> degeneracy sweep does not show it. Across the six bridge values the single-vector relative
-> errors run 0.085, 0.074, 0.142, 0.076, 0.142, 0.0069 and the subspace errors 0.068, 0.071,
-> 0.0028, 0.075, 0.00034, 0.100 (`results/gm3_metrics.json`); neither series is monotone in
-> the gap, and in the most degenerate row the ordering reverses. Two defects in the sweep are
-> responsible and are corrected in `gm3.py` (see the note there): the relative-error floor
-> `max(|exact|, 1e-12)` reported a 0.69 % error where the true error is ~100 %, and the
-> perturbation mask was redrawn per bridge value rather than held fixed as the docstring
-> stated, so the comparison was not controlled across the gap sweep. The stored JSON predates
-> both fixes and the sweep must be re-run before any accuracy claim is restored. No result
-> reported in the manuscript depends on this sweep.
+> **What GM3 establishes here — restated on corrected measurements, 2026-08-06.** The subspace
+> SFI is the well-defined object under near-degeneracy *by construction*: the trace over the
+> invariant subspace is basis-independent, so unlike `edge_fragility` it does not depend on an
+> arbitrary rotation of `φ₂`. That is algebra and needs no experiment.
+>
+> The *accuracy* claim previously made here — "GM3 confirms the subspace prediction stays
+> accurate as the gap closes where the single vector is erratic" — rested on a sweep with two
+> defects, both now fixed in `gm3.py`: a relative-error floor `max(|exact|, 1e-12)` that
+> reported a ~100 % error as 0.69 %, and a perturbation mask redrawn per bridge value rather
+> than held fixed, so the perturbation moved together with the gap and the comparison was never
+> controlled. Re-run with both fixed (the `bridge = 1.0` control row reproduces the stored value
+> exactly, which validates the setup):
+>
+> | bridge | gap `λ₃−λ₂` | single-vector rel. err | subspace rel. err |
+> |---|---|---|---|
+> | 1.0 | 0.16733 | 0.0846 | **0.0681** |
+> | 0.3 | 0.06600 | 0.0887 | **0.0733** |
+> | 0.1 | 0.02394 | 0.0900 | **0.0751** |
+> | 0.03 | 0.00740 | 0.0904 | **0.0757** |
+> | 0.01 | 0.00249 | 0.0905 | **0.0759** |
+> | 0.003 | 0.00075 | 0.0906 | **0.0760** |
+>
+> **What this supports:** the subspace estimator is more accurate than the single-vector one at
+> *every* gap tested, and both series are now smooth and monotone rather than the erratic
+> 0.085/0.074/0.142/0.076/0.142/0.0069 the defective sweep produced. **What it does not
+> support, and what is therefore withdrawn:** that the single-vector error "blows up" as the gap
+> closes. It does not — it converges to about 0.091. The honest statement is that the subspace
+> form is *better conditioned and consistently more accurate*, not that the single-vector form
+> diverges here.
+>
+> The same correction shows up in the §4 validity sweep, where the subspace column was being
+> scored against the wrong target (it predicts the drop in `λ₂+λ₃`, and was compared to the
+> exact `λ₂` drop alone). Corrected, its relative error rises monotonically with ρ — 0.011 at
+> ρ = 0.3, 0.105 at ρ = 3, 0.763 at ρ = 28.5 — tracking the first-order estimator at small ρ and
+> beating it substantially at large ρ (0.763 against 0.919). The stored series ran *downward*
+> from 11.9 to 0.06, which was the artefact.
+>
+> `results/gm3_metrics.json` still carries the pre-fix values for these two columns. It is not
+> regenerated here because the Roney arm has since grown from 62 to 100 subjects, so a full
+> re-run would not be a like-for-like replacement of the file the manuscript was written
+> against. Every other column in that file — ρ, ρ\*, `exact_dlam2`, `pred_first`,
+> `rel_err_first`, `weyl_ok` — reproduces **bit-identically** on re-run, and no manuscript
+> number depends on either corrected column.
 
 ## 6. Discrete cuts → exact recompute
 

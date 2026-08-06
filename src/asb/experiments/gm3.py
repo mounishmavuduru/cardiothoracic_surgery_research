@@ -318,15 +318,22 @@ def degeneracy_sweep(
     against the 2-D subspace prediction of the drop in the *sum* λ2+λ3 (the
     degeneracy-robust invariant), each scored against its own exact target.
 
-    What this sweep does and does not show (stated honestly, 2026-08-06): the
-    subspace SFI is basis-independent and therefore well *defined* as the gap
-    closes, which is an algebraic property and not something this sweep needs to
-    establish. It does **not** currently demonstrate a measured accuracy advantage
-    — neither error series is monotone in the gap, and in the tightest row the
-    ordering reverses. Two defects were responsible and are fixed here (the
-    per-bridge redraw below, and the relative-error floor in :func:`_rel_err`);
-    ``results/gm3_metrics.json`` predates both, so the sweep must be re-run before
-    any accuracy claim is made from it. No manuscript number depends on it.
+    What this sweep shows, measured 2026-08-06 after fixing the two defects below
+    (the per-bridge mask redraw, and the relative-error floor in :func:`_rel_err`):
+    the subspace error is lower than the single-vector error at every gap tested —
+    0.0681 vs 0.0846 at gap 0.167, falling through to 0.0760 vs 0.0906 at gap
+    0.00075 — and both series are smooth and monotone. The ``bridge = 1.0`` control
+    row reproduces the previously stored value exactly, which validates the setup.
+
+    What it does **not** show, and what was withdrawn from ``SFI_THEORY.md`` §5:
+    that the single-vector error blows up as the gap closes. It converges to about
+    0.091. The defensible statement is that the subspace form is better conditioned
+    and consistently more accurate, not that the single-vector form diverges here.
+
+    ``results/gm3_metrics.json`` still holds the pre-fix values for the two affected
+    columns; it is not regenerated because the Roney arm has grown from 62 to 100
+    subjects, so a full re-run is not a like-for-like replacement. No manuscript
+    number depends on either column.
     """
     rng = np.random.default_rng(seed)
     n = 3 * n_clust

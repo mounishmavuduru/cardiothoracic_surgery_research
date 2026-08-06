@@ -1100,3 +1100,76 @@ scripts have been read back line by line, but the suite has **not** been run aga
 the three gm3 fixes are unexercised. Running `pytest -q`, then `verify_repo_consistency.py`
 and `verify_manuscript_numbers.py`, and then regenerating `results/gm3_metrics.json`, is the
 first thing to do on a machine with a working interpreter.
+
+## 2026-08-06 (later) — The environment was not broken after all; the audit's fixes are now measured
+
+The earlier entry today closed by saying no interpreter was available and the three `gm3.py`
+fixes were unexercised. **That was wrong, and the error was mine.** A working CPython 3.12.10
+was present all along at `C:\Users\mouni\AppData\Local\Programs\Python\Python312`; it is simply
+not on `PATH`, where the Windows Store `python.exe` stub shadows it, and an earlier directory
+probe returned empty inside a PowerShell pipeline that had already errored. The conclusion "no
+Python on this account" was drawn from two weak signals and should have been checked directly
+before being reported twice.
+
+Rebuilt the environment against it (`.venv` recreated; the old one, which pointed at the
+`vijay` account's interpreter, was moved out of the tree rather than deleted since it may still
+be valid for that account). Then ran what the earlier entry said could not be run.
+
+**Everything passes.**
+
+- `pytest -q` — **exit 0**, 129 tests, no failures.
+- `verify_repo_consistency.py` — **7/7**, now validating 17 cited results files, up from 15
+  because the (m) amendment cites `fibrosis_burden_swap.json` and
+  `roney_fibrosis_quantization.json`.
+- `verify_manuscript_numbers.py` — **310 distinct numerals, 0 untraced**, unchanged. The
+  scaling-law caption edit really did add no numbers, now confirmed by the tool rather than by
+  reading.
+- `tools/tectonic.exe` rebuilt `manuscript.pdf` from corrected source: 28 pages, no LaTeX
+  errors, no undefined references.
+
+### The three gm3 fixes, measured against the stored file
+
+The control arm is the point. Re-running `validity_radius_sweep()` reproduces **bit-identically**
+every column the fixes do not touch — `rho`, `exact_dlam2`, `pred_first`, `rel_err_first`,
+`weyl_ok`, and ρ\* to all 16 digits (2.9998846240069104). So this environment reproduces the
+original numbers, and the fixes changed only what they were meant to change.
+
+*Part B, the wrongly-targeted subspace column.* Stored, it ran **downward** — 11.91 at ρ=0.3 to
+0.06 at ρ=28.5 — which is backwards for a perturbation error and was the tell nobody read.
+Corrected to score against the `λ₂+λ₃` drop it predicts, it rises monotonically: 0.011 at ρ=0.3,
+0.105 at ρ=3, 0.763 at ρ=28.5. It now tracks the first-order estimator at small ρ and beats it
+at large ρ (0.763 against 0.919), which is the behaviour theory predicts and the old column
+concealed. The downward drift was mechanical: as the perturbation grows the λ₂-only exact drop
+climbs toward the sum, so a mismatched denominator shrinks the apparent error.
+
+*The degeneracy sweep.* With the mask drawn once and the floor removed, the erratic stored
+series resolve into smooth monotone ones, and the `bridge = 1.0` control row reproduces exactly:
+
+    bridge   gap      single-vector   subspace     (stored single / stored sub)
+    1.0      0.16733  0.0846          0.0681       0.0846 / 0.0681   <- control, exact match
+    0.3      0.06600  0.0887          0.0733       0.0740 / 0.0713
+    0.1      0.02394  0.0900          0.0751       0.1421 / 0.0028
+    0.03     0.00740  0.0904          0.0757       0.0760 / 0.0754
+    0.01     0.00249  0.0905          0.0759       0.1417 / 0.0003
+    0.003    0.00075  0.0906          0.0760       0.0069 / 0.1004
+
+The 6.9e-15 exact drop that the floor turned into a fake 0.69 % error was itself an artefact of
+the redrawn mask: with the perturbation held fixed, that row's exact drop is 9.66e-09 against a
+prediction of 8.78e-09, a genuine 0.0905.
+
+**Consequence for the claim.** The withdrawal recorded earlier today is partly reinstated, in a
+weaker and now-defensible form. Supported: the subspace estimator is more accurate than the
+single-vector one at every gap tested. **Not** supported, and still withdrawn: that the
+single-vector error blows up as the gap closes — it converges to ~0.091. `SFI_THEORY.md` §5 and
+the `degeneracy_sweep` docstring now say exactly that and no more.
+
+### What is deliberately left alone
+
+`results/gm3_metrics.json` keeps its pre-fix values for the two corrected columns. A full
+`run_gm3()` is **not** a like-for-like regeneration any more: the Roney label cache now holds
+**100** subjects (34 inducible) where the stored file is **62** (20 inducible), because the
+Roney arm was extended to all released meshes after GM3 was last run. Overwriting would silently
+swap the cohort underneath a file the manuscript was written against. Since no manuscript number
+reads either corrected column, and every column that *is* read reproduces bit-identically, the
+right move is to leave it and say so. Regenerating GM3 at the current cohort is a deliberate
+re-run with its own entry, not a cleanup.
