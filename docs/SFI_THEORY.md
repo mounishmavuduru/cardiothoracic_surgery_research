@@ -90,12 +90,23 @@ local fibrosis; calibrated to literature perioperative CV slowing, **Δw ≈ 0.3
 
 ```
 SFI(R) = E[Δλ₂ from R] ≈ Σ_{(i,j)∈R} E[Δw_ij] (φ₂,ᵢ − φ₂,ⱼ)²
-                          + Σ_{k≠2} (φ_kᵀ ΔL φ₂)² / (λ₂ − λ_k)  +  O(‖ΔL‖³).
+                          − Σ_{k≠2} (φ_kᵀ ΔL φ₂)² / (λ₂ − λ_k)  +  O(‖ΔL‖³).
 ```
 
 The first term is `asb.sfi.sfi_region` (analytic expectation); `asb.sfi.sfi_monte_carlo`
 recomputes `λ₂` exactly per sampled field as the ground-truth check. The second term is the
 **second-order resolvent correction** — the source of the validity radius below.
+
+> **Sign convention (corrected 2026-08-06).** This section states the *drop*
+> `Δλ₂ = λ₂(L) − λ₂(L − ΔL)`, so the resolvent term carries a **minus**: expanding
+> `λ₂(L − ΔL)` gives `λ₂ − φ₂ᵀΔLφ₂ + Σ_{k≠2}(φ_kᵀΔLφ₂)²/(λ₂ − λ_k)`, hence the drop is the
+> first-order term *minus* that sum. Because the dominant `k = 3` denominator `λ₂ − λ₃` is
+> negative, the subtracted quantity is negative and the true drop therefore *exceeds* the
+> first-order estimate — which is what the GM3 sweep measures (`exact_dlam2 > pred_first` in
+> every row of `results/gm3_metrics.json`). §9.2 below states the same expansion for the
+> **signed** change under `+ΔL` and is written with a plus; both are correct for their own
+> convention. This section previously carried the §9.2 sign, which was inconsistent with the
+> drop convention used everywhere in the code.
 
 ## 4. The validity radius (the honest core)
 
@@ -138,8 +149,24 @@ s_ijᵀ P s_ij = Σ_c (φ_c,ᵢ − φ_c,ⱼ)²  ,   s_ij = e_i − e_j ,
 ```
 
 the first-order contribution to the drop in the **sum** of the clustered eigenvalues
-(`asb.sfi.subspace_sfi`). GM3 confirms the subspace prediction stays accurate as the gap
-closes where the single vector is erratic.
+(`asb.sfi.subspace_sfi`).
+
+> **What GM3 does and does not establish here (corrected 2026-08-06).** The subspace SFI is
+> the well-defined object under near-degeneracy *by construction* — the trace over the
+> invariant subspace is basis-independent, so unlike `edge_fragility` it does not depend on
+> an arbitrary rotation of `φ₂`. That is an algebraic guarantee and it stands. What this
+> section previously also claimed — that "GM3 confirms the subspace prediction stays accurate
+> as the gap closes where the single vector is erratic" — is **withdrawn**: the stored
+> degeneracy sweep does not show it. Across the six bridge values the single-vector relative
+> errors run 0.085, 0.074, 0.142, 0.076, 0.142, 0.0069 and the subspace errors 0.068, 0.071,
+> 0.0028, 0.075, 0.00034, 0.100 (`results/gm3_metrics.json`); neither series is monotone in
+> the gap, and in the most degenerate row the ordering reverses. Two defects in the sweep are
+> responsible and are corrected in `gm3.py` (see the note there): the relative-error floor
+> `max(|exact|, 1e-12)` reported a 0.69 % error where the true error is ~100 %, and the
+> perturbation mask was redrawn per bridge value rather than held fixed as the docstring
+> stated, so the comparison was not controlled across the gap sweep. The stored JSON predates
+> both fixes and the sweep must be re-run before any accuracy claim is restored. No result
+> reported in the manuscript depends on this sweep.
 
 ## 6. Discrete cuts → exact recompute
 
@@ -255,6 +282,18 @@ medium is meshed finer** (the opposite of "more resolution helps"). The real 2-m
 than PDE discretization error, (ii) measuring the gap-scaling exponent across independent media, and
 (iii) the counterintuitive corollary that higher-fidelity meshes are *further* past the validity radius.
 Only the real manifold matches the Weyl exponent exactly; we do not claim more.
+
+**Measurement scope (stated 2026-08-06).** All three exponents are measured on the **unweighted**
+combinatorial Laplacian (`scripts/rho_scaling.py`, `_laplacian_gap` builds the adjacency from
+`np.ones`), not on the fibre-anisotropic fibrosis-attenuated weighted graph the biomarker itself
+runs on; and the atrial arm is **one** released mesh resampled across five coarsenings, not a
+cohort. The claim these numbers support is therefore "the spectral gap of a diffusively-coupled
+2-manifold collapses with resolution at the Weyl rate," which is what §10 needs — not "the weighted
+operator's gap does." Two further limits worth stating rather than discovering later: the fits are
+five points over four seeds, and `_laplacian_gap` uses `eigsh(which='SM')` without the shift-invert
+(`sigma = -1e-8`) that `asb.spectral` and `asb.sfi` both use deliberately, because `'SM'` converges
+poorly on near-singular Laplacians. Re-running on the weighted operator, with shift-invert and more
+seeds, is the obvious strengthening and has not been done.
 
 ## 11. The falsification protocol (what actually caught the false positive)
 

@@ -10,7 +10,9 @@ neither survives as the explanation:
 
 The remaining structural difference is the fibrosis representation. After the cap elements
 are dropped, UW carries only tags 111 and 115, i.e. a BINARY fibrotic/not field averaged onto
-vertices. Roney carries a continuous LGE intensity ratio with 276-1071 distinct levels. Graded
+vertices. Roney carries a continuous LGE intensity ratio with 700-1646 distinct levels per mesh
+(mean 1318, measured in ``results/roney_fibrosis_quantization.json``; an earlier "276-1071"
+figure quoted here and in the pre-registration is not what the run records). Graded
 border zones -- partially coupled tissue between healthy and dense scar -- are exactly where
 slow conduction and unidirectional block arise, so losing them is a mechanistically plausible
 reason for reentry to stop forming.

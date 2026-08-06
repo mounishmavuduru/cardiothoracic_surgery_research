@@ -176,7 +176,7 @@ half-field cross-field inducer (anchors substrate-independent geometric reentry)
 
 **What changed.** On 2026-07-24 Prof. Patrick M. Boyle (UW) shared per-patient 2-year
 post-ablation arrhythmia-recurrence outcomes for the 82-patient UW cohort whose LA meshes
-are public on Dryad (`10.5061/dryad.kkwh70sg0`). `docs/DATASETS.md:49` had recorded these
+are public on Dryad (`10.5061/dryad.kkwh70sg0`). `docs/DATASETS.md:70` had recorded these
 labels as **withheld**; that is no longer true. Sections 1–7 govern *simulator* endpoints
 and are unchanged. This section governs the **clinical** endpoint and is written before any
 feature↔outcome association has been computed, inspected, or plotted.
@@ -285,7 +285,7 @@ prediction from baseline substrate; the post-ablation mesh encodes the delivered
 
 ### 8.6 Known substrate limitations of the UW meshes — disclosed before analysis
 - **Fibrosis is categorical, not continuous.** UW files carry a per-*cell* `elemTag`
-  (`{111:0.0, 115:1.0, 164:0.5, 199:1.0}`, `uw_boyle.py:82`) averaged onto vertices, whereas
+  (`{111:0.0, 115:1.0, 164:0.5, 199:1.0}`, `uw_boyle.py:101`) averaged onto vertices, whereas
   the Roney cohort carries continuous LGE `IIR`. The fibrosis competitors are therefore
   **measured more coarsely here than in §7.5**.
 - **This biases the comparison toward SFI**, because a degraded baseline is easier to beat.
@@ -293,7 +293,7 @@ prediction from baseline substrate; the post-ablation mesh encodes the delivered
   compare it against the source study's published fibrosis-derived performance. If our
   baseline is materially weaker than theirs, any ΔAUC we observe will be reported as
   **confounded by baseline degradation**, not as a win for SFI.
-- **UAC is a PCA surrogate**, not anatomical (`uw_boyle.py:226-238`), so any region-based or
+- **UAC is a PCA surrogate**, not anatomical (`uw_boyle.py:259-271`), so any region-based or
   localization claim on this cohort is weaker than on Roney and will be labelled as such.
 - **Amendment 2026-07-24 (same day, still before any label join): the tag map is probably
   wrong, and this blocks the analysis.** Having downloaded the meshes, they contain a per-cell
@@ -304,12 +304,12 @@ prediction from baseline substrate; the post-ablation mesh encodes the delivered
   14.9 %, 199 absent → 17.9 %, and **164 20.0 % → 19.9 %**. Tag 164 is untouched by ablation,
   which is not fibrosis behaviour; it is far more consistent with a non-myocardial structure
   (mitral annulus / PV sleeves). The loader at the time nevertheless assigned it
-  `fibrosis = 0.5` (`uw_boyle.py:82`), injecting a near-constant ~20 % pseudo-fibrosis into
+  `fibrosis = 0.5` (`uw_boyle.py:101`), injecting a near-constant ~20 % pseudo-fibrosis into
   every patient — which both inflates `fibrosis_burden` and *shrinks its between-patient
   variance*, weakening the very baseline SFI must beat, and corrupts the Δw field SFI is
   computed from.
   *(Superseded by amendment (d): tag 164 is now dropped by default
-  (`DROP_TAGS = (164,)`, `uw_boyle.py:114`) before any field is derived, so it no longer
+  (`DROP_TAGS = (164,)`, `uw_boyle.py:133`) before any field is derived, so it no longer
   contributes fibrosis; the 0.5 mapping is retained only so the discredited behaviour can be
   reproduced with `drop_tags=()`. The identification of tag 164 is also no longer merely
   "probably wrong" — amendment (d) reports it as better supported than before.)*
@@ -349,7 +349,8 @@ prediction from baseline substrate; the post-ablation mesh encodes the delivered
   (i) **the change is not significant** — the strongest contrast, sealed/constant vs
   open/varying, gives McNemar exact **p = 0.077**; (ii) it closes only **39 %** of the gap to
   Roney's 32.3 %, so most of the discrepancy is still unexplained, with the categorical
-  three-level fibrosis (against Roney's continuous 276–1071-level IIR) the obvious remaining
+  three-level fibrosis (against Roney's continuous IIR, measured at 700–1646 distinct levels
+  per mesh, mean 1318, in `results/roney_fibrosis_quantization.json`) the obvious remaining
   suspect; (iii) **only 2 of the original 6 positives survive the repair** while 12 new ones
   appear, i.e. per-subject verdicts churn heavily — consistent with the labeller instability
   already documented in the mesh-convergence study (only 7/24 subjects consistent across six
@@ -393,6 +394,48 @@ prediction from baseline substrate; the post-ablation mesh encodes the delivered
   cohort, would *raise* the rate. The anomaly is unexplained and is reported as an open
   problem. No further explanation will be offered in any document without a control
   behind it.
+  *(Superseded by amendment (m) 2026-07-26: the anomaly is no longer open. It was a
+  fibrosis-burden difference between the two released cohorts — a property of the inputs,
+  which none of the three substrate hypotheses tested. The commitment made in the last
+  sentence was kept: the explanation arrived with a two-directional control behind it.)*
+
+- **Amendment 2026-07-26 (m): the UW anomaly is SOLVED, and it was never a substrate defect.**
+  Amendment (f) closed with all three candidate explanations dead and the anomaly open. It is
+  now closed, and the answer was in the inputs rather than the pipeline. Recorded here because
+  §8.6 is the section that pre-committed the UW substrate's known limitations, and it should
+  not be left asserting an open problem that a control has since settled.
+
+  `scripts/cohort_geometry_audit.py` measured what none of the three hypotheses covered: at the
+  frozen 2000-node coarsening, mean fibrosis is **0.349 on Roney against 0.244 on UW** (a
+  40-mesh-per-cohort audit), with the fraction above half-fibrotic 0.310 against 0.239. The
+  frozen protocol's own calibration reports Spearman(fibrosis, sustained reentry) = 0.75, so
+  less fibrosis *should* mean less inducibility. That is the labeller working, not failing.
+
+  `scripts/fibrosis_burden_swap.py` then tested it in both directions, rescaling each cohort's
+  fibrosis multiplicatively so spatial pattern and gradation are preserved and only the level
+  moves (`results/fibrosis_burden_swap.json`):
+
+  | arm | inducible | rate | burden | |
+  |---|---|---|---|---|
+  | R_A Roney native (control) | **20/62** | 32.3 % | 0.333 | reproduces the recorded rate |
+  | R_B Roney at UW burden | 1/62 | 1.6 % | 0.241 | Fisher p = 4.0e-06 |
+  | U_A UW native (control) | **8/82** | 9.8 % | 0.248 | reproduces the recorded rate |
+  | U_B UW at Roney burden | 21/82 | 25.6 % | 0.284 | Fisher p = 0.013 |
+
+  Both controls reproduce their native rates exactly. **At matched burden the ordering
+  reverses** — Roney at 0.241 gives 1.6 % while UW at 0.248 gives 9.8 % — so UW is not
+  resistant to reentry; given comparable fibrosis it is slightly *more* inducible. The anomaly
+  was a property of the two released datasets, not of the pipeline or of any defect in the UW
+  deposit.
+
+  **Nothing in §8 changes.** This is a statement about the in-silico substrate and the
+  simulator labeller. The §8.4 clinical endpoint uses real outcomes and no simulator label, so
+  it is untouched. The three withdrawn hypotheses stay withdrawn and their controls stay on the
+  record; what changes is only that the residual "unexplained" is no longer residual.
+
+  **Lesson recorded, since it generalises.** An out-of-range aggregate is a hypothesis about
+  the pipeline, but it is a hypothesis about the *inputs* first. Three controls went hunting
+  for something broken before anyone checked whether the two cohorts were comparable.
 
 - **Amendment 2026-07-25 (h): the multiplicity plan and the holdout are both fixed, before
   any label is joined.** An audit found two internal inconsistencies in §8.5/§8.7. Both are

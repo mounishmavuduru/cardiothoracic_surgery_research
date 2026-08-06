@@ -40,8 +40,12 @@ def fig_validity_radius(out: str) -> Optional[str]:
         return None
     sw = m["validity_radius_sweep"]["sweep"]
     rho = np.array([r["rho"] for r in sw])
-    first = np.array([r["rel_err_first"] for r in sw])
-    sub = np.array([r["rel_err_subspace"] for r in sw])
+    # gm3._rel_err emits None where the exact drop is at solver noise; map it to
+    # NaN so the arrays stay float and matplotlib simply leaves a gap in the line.
+    first = np.array([np.nan if r["rel_err_first"] is None else r["rel_err_first"]
+                      for r in sw], dtype=float)
+    sub = np.array([np.nan if r["rel_err_subspace"] is None else r["rel_err_subspace"]
+                    for r in sw], dtype=float)
     rho_star = m["validity_radius_sweep"].get("rho_star_10pct")
 
     fig, ax = plt.subplots(figsize=(7, 5))

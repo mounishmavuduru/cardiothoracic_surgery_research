@@ -32,6 +32,13 @@ The full writeup is **`docs/paper/manuscript.tex`**; every number traces to `res
   better than substrate imaging, for a reason made precise.
 - **Falsification protocol:** naive methodology would have called SFI a working biomarker; our
   pre-registered guards correctly reject it.
+- **Clinical endpoint (real outcomes, run once 2026-07-30):** on the 82 UW patients' 2-year
+  recurrence the arithmetic gate *fired* — ΔAUC +0.197, DeLong p=0.0061 — and the endpoint is
+  still reported as **not met**, because the guard frozen in §8.6 before any outcome was joined
+  identifies it as an artefact of an anti-predictive baseline (AUC 0.250, below chance) that
+  nine columns of Gaussian noise reproduce (empirical p=0.333). The protocol caught a false
+  positive on real patients; per §8.3 this is *not* evidence that SFI has no clinical value,
+  since n=82 cannot resolve an effect of the size that would matter.
 
 **Honest limitations:** labels are a monodomain simulator (not clinical, not the deferred openCARP
 gold standard); see `docs/paper/manuscript.tex` §4 and the openCARP validation in `ROADMAP.md` §3.1.
@@ -67,10 +74,16 @@ generalization keeps SFI well-defined when λ₂ is near-degenerate.
 
 The simulation work is **100% in silico**: no patient is simulated from identifiable data (only a
 documented human-data *exemption* determination for public de-identified geometries). Since
-2026-07-24 the project additionally holds **restricted-use, non-redistributable** 2-year
-recurrence outcomes for the 82 UW patients (48 events: 34 NR / 35 AF / 13 AFL) under a
-data-custody agreement (see `docs/PRE_REGISTRATION.md` §8); those labels are gitignored, must
-never be committed, and the pre-registered analysis has not yet been run. Ground-truth
+2026-07-24 the project additionally holds per-patient 2-year recurrence outcomes for the 82 UW
+patients — 34 `NR`, 35 `AF`, 13 `AFL`, i.e. **48 recurrence events** out of 82 (58.5 %), since
+`AF` and `AFL` both count as events and `NR` does not (see `docs/PRE_REGISTRATION.md` §8).
+These were obtained by author request and were initially handled as restricted-use and
+non-redistributable; **that restriction was lifted on 2026-07-30** on the cohort authors'
+written confirmation that no confidentiality attaches to the individual outcomes
+(§8.1). The **pre-registered clinical analysis has been run** (2026-07-30, amendment (l)):
+the primary endpoint is **not met**, the arithmetic gate fired on an anti-predictive
+baseline, and the §8.6 baseline-degradation guard correctly identified it as an artefact.
+Ground-truth
 inducibility labels come from the in-repo **monodomain Mitchell–Schaeffer** solver
 (`source='monodomain_ms'`); openCARP is validated as runnable here but is **not yet used as
 ground truth** — the substitution is a logged deviation — and `mock_ep` is a development-only

@@ -1218,8 +1218,12 @@ real atrial surface (2-manifold) & $N^{-1.05}$ & Weyl 2-manifold $-1.0$ (within 
 \emph{more}, predictably, as the medium is meshed finer, the opposite of the
 expectation that ``more resolution helps.'' Only the real atrial 2-manifold
 cleanly matches the Weyl exponent ($-1.05$ vs.\ $-1.0$); the random-geometric
-exponents are reported as ``at least as fast as Weyl,'' not law confirmations,
-and use the unweighted combinatorial Laplacian.}
+exponents are reported as ``at least as fast as Weyl,'' not law confirmations.
+All three fits use the unweighted combinatorial Laplacian rather than the
+fibre-anisotropic weighted graph the biomarker itself runs on, and the atrial
+arm is one released mesh resampled across five coarsenings, so the exponents
+describe how the gap scales with resolution rather than a property of the
+weighted operator.}
 \label{fig:scaling}
 \end{figure}
 
@@ -1227,7 +1231,10 @@ and use the unweighted combinatorial Laplacian.}
 \subsection{Localization transfers across three media (weakly)}
 \label{sec:localize}
 The \emph{strict} pre-registered localization endpoint is null for every field,
-including $\lvert\nabla\phii_2\rvert$: its median argmax-geodesic error is
+including $\lvert\nabla\phii_2\rvert$: its median \emph{argmax-geodesic error}
+---the shortest-path distance along the surface from the localizer's argmax to
+the simulator's reentry origin, expressed as a fraction of the mesh's maximum
+geodesic extent rather than in millimetres---is
 $0.472$ of the maximum geodesic extent ($48.3$~mm), with a bootstrap $95\%$ CI
 of $[0.350,0.656]$, and it is \emph{not} below the spatial-null 5th percentile
 $0.406$ (rotational/torus-shift permutation $p=0.229$). Because the interval
@@ -1239,23 +1246,16 @@ degree, deleted by measured correlation) and holds across media.
 
 \begin{table}[H]
 \centering
-\caption{Fiedler-gradient origin-rank localization across dynamical media.
-\emph{Origin rank} is the fraction of nodes whose localizer value is at least the
-value at the true reentry origin, so $0$ means the origin is the global maximum of
-the field, $0.5$ is chance, and $1$ means it is the minimum; it is
-scale-free and comparable across media of different size. The companion metric
-used on real anatomy, \emph{argmax-geodesic error}, is the shortest-path distance
-along the surface from the localizer's argmax to the simulator's reentry origin,
-expressed as a fraction of the mesh's maximum geodesic extent rather than in
-millimetres (median $0.472$, or $48.3$~mm in absolute terms;
-\code{results/\allowbreak gm2\allowbreak\_metrics.json}). Lower rank is better; a perfect localizer
-would place the origin at rank $0$. The null-draw column counts resampled
+\caption{Fiedler-gradient origin-rank localization across dynamical media
+(\code{results/\allowbreak gm2\allowbreak\_metrics.json}). \emph{Origin rank} is
+the fraction of nodes whose localizer value is at least the value at the true
+reentry origin, so $0$ marks a perfect localizer and $0.5$ chance; it is
+scale-free across media of different size. \emph{Null draws} counts resampled
 random-origin draws whose mean origin-rank is at or below the observed one, out
-of $300$ draws per arm (each subject contributes up to $300$ random nodes, and
-the pooled null is resampled to the smallest such sample). The count is zero in
-every arm, which bounds the permutation $p$ below $1/300\approx0.003$ but does
-not establish a magnitude, since a zero count reports the resolution of the draw
-count rather than the strength of the effect.}
+of $300$ per arm, the pooled null being resampled to the smallest per-subject
+sample. The count is zero in every arm, which bounds the permutation $p$ below
+$1/300\approx0.003$ but reports the resolution of the draw count rather than the
+strength of the effect.}
 \label{tab:localize}
 \small
 \begin{tabularx}{\linewidth}{@{}l c c c X@{}}

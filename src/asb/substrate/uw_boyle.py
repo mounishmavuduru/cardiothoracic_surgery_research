@@ -364,7 +364,19 @@ def load_uw_mesh(
     # field and inducibility is 20/62 either way (McNemar p=1.0), so the fibre field does
     # not drive the aggregate rate at all -- though per-subject dynamics do move (sustained
     # duration differs on 50/62 subjects, 10/62 verdicts flip). The degenerate fibres are a
-    # fidelity defect, not an established cause of the low UW rate, which remains open.
+    # fidelity defect, not a cause of the low UW rate.
+    #
+    # RESOLVED 2026-07-26 (this comment previously ended "which remains open"). The low UW
+    # inducibility rate is a fibrosis-BURDEN difference between the two released cohorts, not
+    # any substrate defect. results/fibrosis_burden_swap.json rescales each cohort's fibrosis
+    # multiplicatively to the other's level, preserving spatial pattern and gradation: Roney
+    # 20/62 (32.3%) native falls to 1/62 (1.6%) at UW burden (Fisher p=4.0e-06), and UW 8/82
+    # (9.8%) native rises to 21/82 (25.6%) at Roney burden (p=0.013). Both control arms
+    # reproduce their native rates exactly. At MATCHED burden the ordering reverses, so UW is
+    # not resistant to reentry -- given comparable fibrosis it is slightly more inducible.
+    # Note also that amendment (k) established the released fibre array is a PLACEHOLDER the
+    # authors expect to be regenerated, not a defect in the deposit: the real orientations are
+    # IRB-withheld. See PRE_REGISTRATION.md 8.6 amendment (m).
     fib_cell = fib_cell_raw
     if fib_cell is None:
         fibres = np.tile(np.array([1.0, 0.0, 0.0]), (n, 1))

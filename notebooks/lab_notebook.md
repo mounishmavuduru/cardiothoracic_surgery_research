@@ -1007,3 +1007,96 @@ openCARP runs **alongside** monodomain as a robustness check, never replacing it
 on the strength of a just-recalibrated solver, and would destroy the one thing running both
 produces: a measured agreement rate. openCARP labels remain barred from every endpoint until
 the bin-sensitivity sweep also passes.
+
+## 2026-08-06 — Post-submission audit: three code defects, four stale documents, one paper edit
+
+The manuscript had already gone out to journals. This entry records an audit run against the
+repository afterwards, and everything it changed. Nothing here alters a reported result; the
+one manuscript edit narrows a claim rather than restating a number, and no number in
+`docs/paper/manuscript.tex` moved. `verify_manuscript_numbers.py` (310 distinct numbers, 0
+untraced) and `verify_repo_consistency.py` (7/7) both passed *before* this audit, which is
+why none of the defects below had been caught: neither checker can see any of them.
+
+### The one change that touches the paper
+
+`sec:scaling`'s figure caption carried the caveat "the random-geometric exponents ... use the
+unweighted combinatorial Laplacian", which reads as though the headline atrial exponent did
+not. It does. `scripts/rho_scaling.py::_laplacian_gap` builds its adjacency from `np.ones`
+for **every** medium, and the atrial arm is a single released mesh resampled across five
+coarsenings rather than a cohort. The caption now says so for all three fits. The exponent
+itself (`-1.05` against Weyl's `-1.0`) is unchanged and still supports what §10 claims — how
+the gap of a diffusively-coupled 2-manifold scales with resolution — but not the stronger
+reading that the *weighted* operator was measured. Scope note added to `SFI_THEORY.md` §10,
+along with two limits that should not have to be rediscovered: five-point fits over four
+seeds, and `eigsh(which='SM')` without the shift-invert both `asb.spectral` and `asb.sfi`
+deliberately use.
+
+### Three defects in `gm3.py`
+
+1. **The Part B subspace column scored the wrong target.** `subspace_sfi(k_dim=2)` predicts
+   the drop in the *sum* λ2+λ3; the sweep compared it against the exact λ2 drop alone,
+   producing a relative error near 12 that read as though the subspace estimator were a
+   thousand times worse than the first-order one. `degeneracy_sweep`, sixty lines below, had
+   always used the correct target — so one file contained both the right and the wrong
+   comparison. Fixed: `k=3` eigenpairs, scored against `exact_sum_dlam23`.
+2. **The relative-error floor manufactured a small error.** `max(abs(exact), 1e-12)` was not
+   guarding a division by zero. In the tightest degeneracy row the exact λ2 drop is ~7e-15
+   against a single-vector prediction of ~4e-31 — a true relative error of essentially 100 %
+   — which the floor reported as **0.69 %**, making the single-vector estimator look most
+   accurate exactly where it had failed completely. Replaced by `_rel_err`, which returns
+   `None` below solver noise. "Not measurable here" is the truth; a ratio against a floor is
+   not.
+3. **The degeneracy sweep was not controlled.** The perturbation mask was drawn *inside* the
+   loop over bridge values, so the perturbation moved together with the gap — while both the
+   docstring and the inline comment said "at a fixed diffuse perturbation". The sweep varies
+   the gap on purpose and nothing else, so this made its two error series unattributable.
+   Mask now drawn once, outside the loop.
+
+**Consequence, stated plainly.** The claim in `SFI_THEORY.md` §5 that "GM3 confirms the
+subspace prediction stays accurate as the gap closes where the single vector is erratic" is
+**withdrawn**. The stored series are 0.085, 0.074, 0.142, 0.076, 0.142, 0.0069 (single) and
+0.068, 0.071, 0.0028, 0.075, 0.00034, 0.100 (subspace): neither is monotone in the gap and the
+ordering reverses in the tightest row. What survives, and needs no sweep, is the algebraic
+guarantee — the trace over the invariant subspace is basis-independent, so the subspace SFI is
+well *defined* where the single vector is not. `results/gm3_metrics.json` predates all three
+fixes and **must be re-run** before any accuracy claim is restored from it. No manuscript
+number depends on that sweep, which is why the paper needs no correction on this point.
+
+### Four documents that had drifted
+
+- `README.md` still described the UW outcomes as restricted-use and non-redistributable, and
+  said the pre-registered analysis "has not yet been run". Both were overtaken on 2026-07-30:
+  custody was lifted on the authors' written confirmation (§8.1) and the endpoint was run and
+  not met (amendment (l)). It also rendered the marginals as "48 events: 34 NR / 35 AF / 13
+  AFL", which reads as though NR were an event. Corrected, and the clinical endpoint added to
+  the headline results, where its absence was conspicuous.
+- **Amendment (m) added to §8.6.** Amendment (f) closed with the UW anomaly "unexplained and
+  reported as an open problem", and the 2026-07-26 burden swap that solved it never
+  superseded it. It does now, with the two-directional control tabulated. The comment at
+  `uw_boyle.py` ending "which remains open" is corrected in the same way. Note (f)'s closing
+  commitment — no further explanation without a control behind it — was kept.
+- **Stale file:line citations in the pre-registration**, all silently wrong after the loader
+  grew: `uw_boyle.py:82` → `:101` (TAG_FIBROSIS, twice), `:226-238` → `:259-271` (the PCA UAC
+  surrogate), `:114` → `:133` (DROP_TAGS), `docs/DATASETS.md:49` → `:70`.
+- **"276–1071 distinct levels"** for the Roney IIR field, quoted in two scripts and the
+  pre-registration, is not what the run records. Measured over the 186 stored rows of
+  `results/roney_fibrosis_quantization.json`: **700–1646, mean 1318**. The qualitative point
+  (continuous against three-level) is untouched; the quoted range was wrong.
+- `docs/DATASETS.md`'s table cell still read "restricted use, not redistributable" inline,
+  relying on the update note above it to correct the reader. Now corrected in place.
+
+### What was deliberately NOT changed
+
+`TAG_FIBROSIS[164] = 0.5` and `DROP_TAGS` omitting 199 both look like bugs and are neither —
+they are frozen so `drop_tags=()` reproduces the discredited substrate exactly, and so the
+`uw_drop_tags` config hash stays stable. The duplicated `sfi_region_max` / `sfi_top1` columns
+stay for the same reason, disclosed in `features.py` and in the manuscript. Deleting any of
+them would invalidate cached labels to reproduce an identical answer.
+
+**Environment note.** None of this could be executed: this checkout's `.venv` points at a
+Python belonging to a different Windows account and there is no interpreter available to the
+current user, so every change above is a static edit. `gm3.py`, `make_figures.py` and the two
+scripts have been read back line by line, but the suite has **not** been run against them and
+the three gm3 fixes are unexercised. Running `pytest -q`, then `verify_repo_consistency.py`
+and `verify_manuscript_numbers.py`, and then regenerating `results/gm3_metrics.json`, is the
+first thing to do on a machine with a working interpreter.

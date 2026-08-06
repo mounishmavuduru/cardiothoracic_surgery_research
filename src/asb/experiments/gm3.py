@@ -46,6 +46,27 @@ from asb.substrate.roney import coarsen_mesh, load_roney_mesh
 
 __all__ = ["run_gm3", "validity_radius_sweep", "gm3_extra_features"]
 
+#: Below this magnitude an exact eigenvalue drop is at solver noise, so a *relative*
+#: error against it carries no information. Rows at or under it report ``None``.
+_EXACT_NOISE_FLOOR = 1e-12
+
+
+def _rel_err(pred: float, exact: float) -> float | None:
+    """Relative error of ``pred`` against ``exact``, or ``None`` at solver noise.
+
+    Corrected 2026-08-06. The previous form divided by ``max(abs(exact), 1e-12)``.
+    That floor did not guard a division by zero so much as manufacture a small
+    error: in the most degenerate row of :func:`degeneracy_sweep` the exact λ2 drop
+    is ~7e-15 against a single-vector prediction of ~4e-31 — a true relative error
+    of essentially 100 % — which the floor reported as 0.7 %, making the
+    single-vector estimator look most accurate exactly where it had failed
+    completely. Returning ``None`` says "not measurable here", which is the truth.
+    """
+    if abs(exact) < _EXACT_NOISE_FLOOR:
+        return None
+    return abs(pred - exact) / abs(exact)
+
+
 _SFI_TOP_K = 3
 
 
@@ -260,18 +281,27 @@ def validity_radius_sweep(
         rho = dLnorm / gap
         pred_first = float(np.sum(dw * frag))
         pred_sub = float(np.sum(subspace_sfi(L, edges, dw, k_dim=2)))
-        vex, _ = smallest_eigpairs((L - dL).tocsr(), k=2)
+        vex, _ = smallest_eigpairs((L - dL).tocsr(), k=3)
         exact = float(lam2 - vex[1])
-        rel_first = abs(pred_first - exact) / max(abs(exact), 1e-12)
-        rel_sub = abs(pred_sub - exact) / max(abs(exact), 1e-12)
+        # ``subspace_sfi(k_dim=2)`` predicts the drop in the SUM λ2+λ3, not in λ2
+        # alone, so it must be scored against that sum. Corrected 2026-08-06: this
+        # row previously compared it to the exact λ2 drop, an apples-to-oranges
+        # target that reported a relative error near 12 and read as though the
+        # subspace estimator were a thousand times worse than the first-order one.
+        # ``degeneracy_sweep`` below always used the correct target.
+        exact_sum = float((lam2 + lam3) - (vex[1] + vex[2]))
+        rel_first = _rel_err(pred_first, exact)
+        rel_sub = _rel_err(pred_sub, exact_sum)
         rows.append({
             "t": float(t), "rho": float(rho), "dL_norm": float(dLnorm),
-            "exact_dlam2": exact, "pred_first": pred_first, "pred_subspace": pred_sub,
-            "rel_err_first": float(rel_first), "rel_err_subspace": float(rel_sub),
+            "exact_dlam2": exact, "exact_sum_dlam23": exact_sum,
+            "pred_first": pred_first, "pred_subspace": pred_sub,
+            "rel_err_first": rel_first, "rel_err_subspace": rel_sub,
             "weyl_ok": bool(abs(exact) <= dLnorm + 1e-9),
         })
 
-    rho_star = next((r["rho"] for r in rows if r["rel_err_first"] > 0.10), None)
+    rho_star = next((r["rho"] for r in rows
+                     if r["rel_err_first"] is not None and r["rel_err_first"] > 0.10), None)
     return {"lam2": lam2, "lam3": lam3, "gap": gap, "rho_star_10pct": rho_star,
             "sweep": rows}
 
@@ -284,10 +314,19 @@ def degeneracy_sweep(
 
     Three equal cliques on a path of two bridges; shrinking ``bridges`` drives the
     two lowest non-trivial modes together (λ2 → λ3, near-degenerate). At a fixed
-    diffuse perturbation we compare the single-vector and 2-D subspace predictions
-    of the exact drop in the *sum* λ2+λ3 (the degeneracy-robust invariant). As the
-    gap closes the single Fiedler vector rotates arbitrarily and its error blows
-    up, while the subspace prediction stays accurate.
+    diffuse perturbation we compare the single-vector prediction of the λ2 drop
+    against the 2-D subspace prediction of the drop in the *sum* λ2+λ3 (the
+    degeneracy-robust invariant), each scored against its own exact target.
+
+    What this sweep does and does not show (stated honestly, 2026-08-06): the
+    subspace SFI is basis-independent and therefore well *defined* as the gap
+    closes, which is an algebraic property and not something this sweep needs to
+    establish. It does **not** currently demonstrate a measured accuracy advantage
+    — neither error series is monotone in the gap, and in the tightest row the
+    ordering reverses. Two defects were responsible and are fixed here (the
+    per-bridge redraw below, and the relative-error floor in :func:`_rel_err`);
+    ``results/gm3_metrics.json`` predates both, so the sweep must be re-run before
+    any accuracy claim is made from it. No manuscript number depends on it.
     """
     rng = np.random.default_rng(seed)
     n = 3 * n_clust
@@ -298,16 +337,20 @@ def degeneracy_sweep(
             for d in range(a + 1, n_clust):
                 base_edges.append((b + a, b + d))
     bridge_pairs = [(0, n_clust), (n_clust, 2 * n_clust)]
+    edges = np.array(base_edges + bridge_pairs, np.int64)
+    # Drawn ONCE, outside the sweep. Until 2026-08-06 this was redrawn inside the
+    # loop, so the perturbation moved together with the gap and the two error
+    # series could not be attributed to the gap at all -- which is the only thing
+    # the sweep varies on purpose. The docstring already said "at a fixed diffuse
+    # perturbation"; now the code does that.
+    mask = rng.random(edges.shape[0]) < perturb_frac
     rows = []
     for br in bridges:
-        edges = np.array(base_edges + bridge_pairs, np.int64)
         w = np.ones(edges.shape[0]); w[-2:] = br
         L = _lap(n, edges, w)
         vals, vecs = smallest_eigpairs(L, k=5)
         lam2, lam3, lam4 = float(vals[1]), float(vals[2]), float(vals[3])
         gap23 = lam3 - lam2
-        # Fixed diffuse perturbation on a random subset of intra-cluster edges.
-        mask = rng.random(edges.shape[0]) < perturb_frac
         dw = np.where(mask, perturb_frac * w, 0.0)
         i, j = edges[:, 0], edges[:, 1]
         rr = np.concatenate([i, j]); cc = np.concatenate([j, i]); dd = np.concatenate([dw, dw])
@@ -315,20 +358,21 @@ def degeneracy_sweep(
         dL = (sp.diags(np.asarray(Wd.sum(1)).ravel()) - Wd).tocsr()
         vex, _ = smallest_eigpairs((L - dL).tocsr(), k=3)
         # (i) single-vector predicts the λ2 drop; compare to the exact λ2 drop —
-        # this is the ill-posed target under degeneracy and its error blows up.
+        # the ill-posed target under degeneracy. Whether its error grows with the
+        # gap is what the sweep measures, not something to assert here.
         exact_lam2_drop = float(lam2 - vex[1])
         frag2 = edge_fragility(vecs[:, 1], edges)
         pred_single = float(np.sum(dw * frag2))
-        err_single = abs(pred_single - exact_lam2_drop) / max(abs(exact_lam2_drop), 1e-12)
+        err_single = _rel_err(pred_single, exact_lam2_drop)
         # (ii) subspace predicts the degeneracy-invariant λ2+λ3 drop; compare to exact.
         exact_sum_drop = float((lam2 + lam3) - (vex[1] + vex[2]))
         pred_sub = float(np.sum(subspace_sfi(L, edges, dw, k_dim=2)))
-        err_sub = abs(pred_sub - exact_sum_drop) / max(abs(exact_sum_drop), 1e-12)
+        err_sub = _rel_err(pred_sub, exact_sum_drop)
         rows.append({
             "bridge": float(br), "lam2": lam2, "lam3": lam3, "gap23": float(gap23),
             "exact_lam2_drop": exact_lam2_drop, "exact_sum_drop": exact_sum_drop,
             "pred_single": pred_single, "pred_subspace": pred_sub,
-            "err_single_vec": float(err_single), "err_subspace": float(err_sub),
+            "err_single_vec": err_single, "err_subspace": err_sub,
         })
     return {"sweep": rows}
 
@@ -398,6 +442,10 @@ def run_gm3(
 
 
 def _fmt(x) -> str:
+    # ``None`` now reaches here from :func:`_rel_err`, meaning "not measurable at
+    # solver noise" rather than "missing"; both render as n/a in the report.
+    if x is None:
+        return "n/a"
     try:
         xf = float(x)
     except (TypeError, ValueError):

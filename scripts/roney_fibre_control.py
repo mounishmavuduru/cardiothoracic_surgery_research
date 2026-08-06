@@ -12,7 +12,7 @@ Measured contrast between the two cohorts' released substrates:
       spread
     distinct fibre directions   ~one per vertex             ONE, mesh-wide
     fibrosis                    continuous IIR,             categorical elemTag,
-                                276-1071 distinct levels    3 levels
+                                700-1646 distinct levels    3 levels
 
 Arms::
 
