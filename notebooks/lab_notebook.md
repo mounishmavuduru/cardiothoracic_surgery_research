@@ -1173,3 +1173,55 @@ swap the cohort underneath a file the manuscript was written against. Since no m
 reads either corrected column, and every column that *is* read reproduces bit-identically, the
 right move is to leave it and say so. Regenerating GM3 at the current cohort is a deliberate
 re-run with its own entry, not a cleanup.
+
+## 2026-08-06 (later still) — GM3 re-run on the full 100-subject Roney arm: the null holds, and hardens
+
+Post-hoc and unplanned, logged because the protocol requires it. Having rebuilt the
+environment, the GM3 pipeline was re-run end to end with the corrected `gm3.py` against the
+current Roney label cache. That cache now holds **100** subjects (34 inducible, 0.340) where
+the GM3 in the manuscript ran on **62** (20 inducible, 0.323), because the arm was extended to
+all released meshes afterwards. So this is a **different cohort, not a regeneration**, and it
+is stored separately as `results/gm3_n100_20260806.json` with a provenance block saying so.
+`results/gm3_metrics.json` remains the manuscript's GM3 and is untouched.
+
+    comparison / classifier        stored n=62 (20 ind)     re-run n=100 (34 ind)
+    comp vs +single_vector / lr    dAUC -0.0286 p=0.656     dAUC -0.0152 p=0.430
+    comp vs +single_vector / gbt   dAUC -0.0000 p=1.000     dAUC -0.0042 p=0.693
+    fib  vs +single_vector / lr    dAUC +0.0298 p=0.307     dAUC +0.0120 p=0.726
+    fib  vs +single_vector / gbt   dAUC +0.0179 p=0.445     dAUC +0.0038 p=0.865
+    comp vs +subspace      / lr    dAUC -0.0214 p=0.447     dAUC -0.0080 p=0.543
+    comp vs +subspace      / gbt   dAUC +0.0107 p=0.812     dAUC +0.0138 p=0.476
+    fib  vs +subspace      / lr    dAUC +0.0286 p=0.637     dAUC +0.0236 p=0.488
+    fib  vs +subspace      / gbt   dAUC +0.0524 p=0.283     dAUC +0.0129 p=0.676
+    comp vs +exact         / lr    dAUC -0.0274 p=0.330     dAUC -0.0423 p=0.060
+    comp vs +exact         / gbt   dAUC -0.0107 p=0.640     dAUC -0.0203 p=0.178
+    fib  vs +exact         / lr    dAUC +0.0464 p=0.403     dAUC -0.0058 p=0.854
+    fib  vs +exact         / gbt   dAUC +0.0298 p=0.322     dAUC -0.0287 p=0.221
+
+**None of the twelve cells meets the endpoint**, as at n=62. Three things are worth recording.
+
+1. **The exact-Δλ₂ arm gets *more* negative with more data** — competitors vs +exact goes
+   −0.0274 (p=0.330) to −0.0423 (p=0.060) under logistic regression. This is the arm that
+   forecloses "the null is just an invalid estimator", since the exact recompute carries no
+   first-order error and no ρ limitation. At the full cohort it does not merely fail to help;
+   the point estimate says adding it *hurts*, and it is the closest thing to significant in the
+   table — in the wrong direction for the biomarker.
+2. **The largest n=62 positive shrinks toward zero.** Fibrosis vs +subspace under GBT was the
+   friendliest cell at +0.0524; at n=100 it is +0.0129. That is the same pattern the manuscript
+   already documents for the headline real-cohort estimate (+0.051 to +0.012 on extending the
+   Roney arm), reproduced independently in GM3. More data shrinks these, which is what a null
+   with sampling noise around it looks like, and not what a real effect looks like.
+3. **Baselines are healthy**, grouped AUC ≈ 0.856–0.870, so this is not the anti-predictive
+   baseline regime that invalidated the clinical gate in amendment (l). The null here is
+   measured against a competitor set that works.
+
+**Status.** Exploratory and post-hoc. It does not enter any endpoint, does not change a
+reported number, and is not a correction to the manuscript — the paper's GM3 is n=62 and stays
+n=62. Its value is corroborative: the GM3 conclusion was not a small-sample artefact, and if a
+referee asks what happens on all 100 released meshes, the answer is now measured rather than
+asserted.
+
+*One integrity note on storage.* Adding a results file enlarges the pool that
+`verify_manuscript_numbers.py` matches manuscript numerals against, which in principle could
+mask a future untraced number. Checked after adding: still 310 distinct, 0 untraced, and
+`verify_repo_consistency.py` still 7/7. Flagged so the trade-off is visible rather than silent.
