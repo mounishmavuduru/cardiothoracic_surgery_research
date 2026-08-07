@@ -1225,3 +1225,60 @@ asserted.
 `verify_manuscript_numbers.py` matches manuscript numerals against, which in principle could
 mask a future untraced number. Checked after adding: still 310 distinct, 0 untraced, and
 `verify_repo_consistency.py` still 7/7. Flagged so the trade-off is visible rather than silent.
+
+## 2026-08-06 (later still) — PermeaFlow removed from this repository
+
+AtrialSpectralBench is one project: the Spectral Fragility Index as a candidate biomarker for
+atrial fibrillation. PermeaFlow — the TAVR paravalvular-leak work — is a separate project and
+had leaked into this tree. Removed.
+
+**Tracked, and therefore actually part of this project's published record:**
+
+- `artifacts/` — all 14 files, entirely PermeaFlow: `accuracy_campaign.json`, `conformal/`,
+  `gci/`, `grounding/`, `operator_gpu/` (a 
+  neural-operator checkpoint), `pinn_poiseuille/`, `slice_demo/`, `verify_analytic/`,
+  `vv40_gate/`. Nothing in `src/`, `scripts/`, `tests/`, `docs/`, `README.md`, `Makefile` or
+  `ROADMAP.md` referenced the directory at all, so it was dead weight as well as off-topic.
+- `accuracy_campaign.err` — PermeaFlow's stderr capture.
+
+**Untracked ghosts, moved out rather than destroyed** (to
+`C:\Users\mouni\PermeaFlow-strays-from-AtrialSpectralBench`): `.scratch_src110/` (a full copy of
+the `permeaflow` package), `.scratch_verify_thresh.py` (a PermeaFlow GAP_SCALE check),
+`accuracy_campaign.log`, `item5_floor.log`.
+
+**Two ghosts worth naming, because they were actively harmful rather than merely untidy:**
+
+1. `src/permeaflow/` still existed, containing **49 stale `.pyc` files and no source at all**.
+   Deleted. This is exactly the failure mode the second-idea branch logged on 2026-08-02 as
+   "a stale-bytecode hole that made the numbers untrustworthy while I measured them", sitting
+   in the other project's tree.
+2. Because that directory was present, the editable install had registered **`permeaflow` as a
+   top-level package of `atrialspectralbench`** — `src/atrialspectralbench.egg-info/top_level.txt`
+   read `asb` and `permeaflow`. Regenerated; it now reads `asb` alone, and `permeaflow` is no
+   longer importable from the venv. Also cleared every `__pycache__` outside `.venv`, which
+   removed stale bytecode for three PermeaFlow scripts (`conformal_validation`,
+   `deepxde_crosscheck`, `multiseed_headlines`) whose `.py` files do not exist here.
+
+**Nothing of PermeaFlow's was destroyed.** Every removed artifact directory has a counterpart in
+`C:\Users\mouni\PermeaFlow\artifacts\`, which holds ten more besides, so the copy committed here
+was a stale subset; and the deletions remain recoverable from this branch's history regardless.
+
+**Verified after removal:** `pytest` exit 0 (129 passed), `verify_repo_consistency` 7/7,
+`verify_manuscript_numbers` 310 distinct / 0 untraced. Removing `artifacts/` changed no result
+and broke no reference.
+
+**Deliberately NOT done, both needing a decision rather than a cleanup:**
+
+- `data/` holds roughly **13 GB of aortic/TAVR datasets** that belong to PermeaFlow —
+  `zenodo_thoracic_aorta_cohort_3000` (6.3 G), `zenodo_tavi_aortic_root_segmentation` (4.3 G),
+  `zenodo_piv_aortic_valve` (1.1 G), `zenodo_hasler_obrist_piv_1163562` (309 M),
+  `zenodo_coronary_4dct_stl`, `vmr_0157_aorta_healthy_adult`, `vmr_0008_aorta_inlet_cap`.
+  No tracked file references any of them, and `data/` is gitignored so none of it is in the
+  repository. Left in place: deleting 13 GB of downloaded research data is not a side effect
+  to take unasked, and `C:\Users\mouni\PermeaFlow\data` is a **dangling symlink** pointing at
+  `C:\Users\vijay\cardiothoracic_surgery_research\data`, which suggests this directory was
+  meant to be shared between the two projects in the first place.
+- The `claude/second-idea-generational-n0p02n` branch is PermeaFlow living in this GitHub
+  repository. Deleting it would remove 56 commits of another project's research from the
+  remote, which is a destructive act and the opposite of what was asked earlier the same day.
+  Not touched.

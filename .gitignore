@@ -42,5 +42,5 @@ docs/paper/*_overleaf.zip
 # Local TeX toolchain (tectonic.exe, ~20 MB binary; see docs/paper/README_BUILD.md)
 tools/
 
-# Transient stderr captures from script runs (e.g. accuracy_campaign.err)
+# Transient stderr captures from long script runs
 *.err
