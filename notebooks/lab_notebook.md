@@ -1334,3 +1334,31 @@ than quoted at a precision they do not have.
 
 Gates after all edits: pytest exit 0 (129 passed), repo consistency 7/7, manuscript numbers 310
 distinct / 0 untraced — the added prose introduces no untraceable numeral.
+
+## 2026-08-07 (later) — Two Limitations items closing the reporting-guideline gaps
+
+Two TRIPOD+AI items were recorded as unmet in the checklist, and both were unmet for the same
+structural reason rather than through oversight. Added as Limitations items so a reader meets the
+explanation in the paper rather than only in a supplement.
+
+- **Sociodemographic characterisation (item 3c).** Neither cohort deposit ships a single
+  demographic or clinical variable: both are de-identified releases of anatomy, plus an outcome
+  column for the UW cohort. So the clinical cohort cannot be described demographically, performance
+  cannot be reported within sociodemographic subgroups, and representativeness against any target
+  ablation population is unknown. This is a limitation of the deposits, not of the analysis --
+  obtaining those variables would mean returning to the originating centres under their governance.
+  Checklist status moves Not reported -> Partially reported: the paper now explains why the data are
+  absent, but still does not review known health inequalities in ablation outcomes, so the item is
+  met only in part and is recorded that way.
+- **Patient and public involvement (item 19).** None, and the item is explicitly satisfied by saying
+  so. This is a secondary analysis of previously published deposits with no participant contact at
+  any stage; the endpoint definition came from the originating study. Status moves Not reported ->
+  Reported, since TRIPOD+AI item 19 asks for involvement to be described *or* its absence stated.
+
+Distribution is now 11 Reported, 27 Partially, 7 Not reported, 7 n/a, from 10/26/9/7.
+
+Counts re-derived again: the two items add 218 words, so the title page reads main text 12,770 and
+combined 13,456 (abstract unchanged at 686, references still 19). Master manuscript is 30 pages, the
+JAMA build 31, the checklist supplement 13, all compiling with zero errors and zero undefined
+references. Manuscript number trace still 310 distinct / 0 untraced -- neither item introduces a
+numeral that does not already trace.
