@@ -44,3 +44,6 @@ tools/
 
 # Transient stderr captures from long script runs
 *.err
+
+# Journal submission bundles (regenerate from docs/paper/jama/; duplicates tracked files)
+docs/paper/*Manuscript.zip

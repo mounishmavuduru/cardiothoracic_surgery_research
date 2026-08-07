@@ -40,20 +40,105 @@
 % Tolerate imperceptible looseness (badness < 2500) around long verbatim paths/DOIs.
 \hbadness=2500
 
-\title{\textbf{AtrialSpectralBench}: incremental predictive value and
-perturbation-theoretic validity of a spectral fragility index for atrial
-reentry\\[4pt]
-\large A pre-registered evaluation on $182$ patient-derived left-atrial meshes
-and $10^{5}$ synthetic excitable networks}
-
-\author{Mounish Mavuduru\thanks{Independent, unaffiliated in-silico
-computational-cardiology project. Correspondence and full source: see the
-project repository.}}
-
-\date{July 2026 (working preprint)}
-
 \begin{document}
-\maketitle
+
+%======================================================================
+% TITLE PAGE
+%======================================================================
+\thispagestyle{empty}
+
+\begin{center}
+{\Large\bfseries AtrialSpectralBench: incremental predictive value and
+perturbation-theoretic validity of a spectral fragility index for atrial
+reentry\par}
+\vspace{8pt}
+{\large Evaluated on $182$ patient-derived left-atrial meshes and $10^{5}$
+synthetic excitable networks\par}
+\end{center}
+
+\vspace{1.2em}
+\noindent\textbf{Running title.} SPECTRAL FRAGILITY INDEX FOR ATRIAL REENTRY
+
+\vspace{0.9em}
+\noindent\textbf{Author.} Mounish Mavuduru
+
+\smallskip
+\noindent\textbf{Affiliation.} Independent researcher (unaffiliated). This is an
+independent, unaffiliated in-silico computational-cardiology project.
+
+\smallskip
+\noindent\textbf{ORCID.} Mounish Mavuduru: 0009-0009-4102-6075
+
+\vspace{0.9em}
+\noindent\textbf{Corresponding author.}\\
+Mounish Mavuduru\\
+4912 Spanish Oaks Dr\\
+McKinney, TX 75070, USA\\
+Telephone: (+1) 945-527-6483\\
+E-mail: \href{mailto:mounishmavuduru@gmail.com}{mounishmavuduru@gmail.com}
+
+\vspace{1.2em}
+\noindent\textbf{Scope.} This is a computational (in-silico) study. All
+ground-truth labels are electrophysiology-simulator inducibility verdicts, with a
+single exception: the pre-registered clinical endpoint, which is scored against
+real two-year post-ablation recurrence outcomes in the $82$ University of
+Washington patients. No surgical lesion, and no post-operative atrial
+fibrillation outcome, was simulated or analysed.
+
+\smallskip
+\noindent\textbf{Reporting guideline.} The pre-registered clinical endpoint is
+reported in accordance with \textbf{TRIPOD+AI}; a completed checklist is provided
+as a supplement. Adherence is claimed for that analysis only, because it is the
+only one scored against a real patient outcome. See Methods, ``Reporting
+guideline''.
+
+\smallskip
+\noindent\textbf{Funding.} This work received no funding from any public,
+commercial, or not-for-profit body.
+
+\smallskip
+\noindent\textbf{Conflicts of interest.} The author declares no conflicts of
+interest.
+
+\smallskip
+\noindent\textbf{Data and code availability.} Both patient cohorts are public,
+de-identified deposits: the Roney left-atrial virtual cohort (Zenodo 5801337) and
+the University of Washington/Boyle LGE-MRI cohort (Dryad
+10.5061/dryad.kkwh70sg0). The two-year recurrence outcomes were supplied by the
+latter cohort's authors, who confirm they carry no confidentiality restriction.
+Source code, the frozen pre-registration, and all results files are publicly
+available.
+
+\smallskip
+\noindent\textbf{Ethics.} No new human or animal data were collected. Analyses
+use previously published, de-identified, publicly deposited datasets.
+
+\smallskip
+\noindent\textbf{Prior dissemination.} The project repository is publicly
+available.
+
+\vspace{1.2em}
+\noindent\textbf{Word count, figures and tables}
+
+\smallskip
+\begin{tabular}{@{}ll@{}}
+\toprule
+Word count (main text)            & 12{,}552 \\
+Word count (abstract)             & 686 \\
+Word count (main text + abstract) & 13{,}238 \\
+Number of figures                 & 6 \\
+Number of tables                  & 5 \\
+Number of references              & 19 \\
+\bottomrule
+\end{tabular}
+
+\smallskip
+\noindent\footnotesize Figures 1--6 and Tables 1--5 are numbered floats.
+Section~4.3 additionally contains one unnumbered in-line tabulation of per-column
+$R^{2}$ values, which is not counted above; number it as a table if the journal
+requires all tabulations to be numbered.\normalsize
+
+\newpage
 
 \begin{abstract}
 \noindent
@@ -136,7 +221,6 @@ post-ablation recurrence outcomes for the $82$ UW patients. Every claim outside
 that section is in-silico. All numbers trace to \code{results/*.json} and
 \code{notebooks/lab\_notebook.md} in the project repository.}
 
-\tableofcontents
 
 %======================================================================
 \section{Introduction}

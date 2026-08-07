@@ -1282,3 +1282,55 @@ and broke no reference.
   repository. Deleting it would remove 56 commits of another project's research from the
   remote, which is a destructive act and the opposite of what was asked earlier the same day.
   Not touched.
+
+## 2026-08-07 — JAMA Cardiology: TRIPOD+AI reporting statement, integrated title page, checklist
+
+JAMA Cardiology requires a Diagnostic/Prognostic Study to state adherence to STARD or TRIPOD.
+
+**TRIPOD, not STARD, and specifically TRIPOD+AI.** STARD governs diagnostic *accuracy* studies — an
+index test against a reference standard, reported as sensitivity and specificity at a threshold.
+This work reports the incremental discrimination of a multivariable prediction model and no
+threshold-based accuracy at all, which is TRIPOD's remit. TRIPOD+AI (Collins et al., BMJ
+2024;385:e078378) is the applicable version: it explicitly covers models built with regression *or*
+machine learning, which is exactly the logistic-regression-plus-gradient-boosting pair reported
+here, and its authors state it supersedes TRIPOD 2015, which "should no longer be used."
+
+**Adherence is scoped to the clinical endpoint, deliberately.** The statement added to Methods
+claims TRIPOD+AI adherence for the two-year recurrence analysis in the 82 UW patients and for
+nothing else, because that is the only endpoint in the paper scored against a real patient outcome.
+Every other endpoint is an electrophysiology simulator's inducibility verdict, which is outside
+TRIPOD+AI's remit; claiming blanket adherence would have overstated exactly the thing this project
+spends its credibility being careful about. The statement says so in the paper rather than leaving
+a reader to infer it, and records that STARD was considered and why it was rejected.
+
+**The checklist is honest rather than padded.** All 52 sub-items (items 1–27) were mapped against
+the manuscript. The distribution is 10 Reported, 26 Partially reported, 9 Not reported, 7 Not
+applicable. The nine "Not reported" are real gaps, and most share one cause: **neither public
+deposit released patient-level demographic or clinical data**, so items on sociodemographic
+characteristics (3c), accrual dates (5b), health-inequality context, fairness (14) and PPI (19)
+cannot be answered from what exists. Recording them as gaps is the correct answer; a checklist
+claiming otherwise would not survive an editor opening the paper.
+
+**Word counts were re-derived, not copied.** The stated main-text count was measured before this
+session's reporting-guideline paragraph. Counting the same way on the pre-edit and post-edit source
+gives +229 words, and the pre-edit measurement (12,340) sits within 17 words of the figure on the
+author's title page (12,323), so the methods are comparable and the delta is trustworthy. Title page
+now reads main text 12,552, abstract 686 (unchanged), combined 13,238, references 19 (was 18; the
+TRIPOD+AI citation is the nineteenth).
+
+**Deliverables.** `docs/paper/jama/JAMACardio_manuscript.tex` is the master manuscript with the
+title-page details from the author's `title_page.docx` typeset as page 1 and the table of contents
+dropped (journals do not want one); the body is otherwise byte-identical to `manuscript.tex`.
+`docs/paper/jama/Supplement1_TRIPOD_AI_checklist.tex` is the checklist. Both compile clean under
+tectonic — 30 and 13 pages, zero errors, zero undefined references — and are bundled as
+`docs/paper/JAMACardio Manuscript.zip` for Overleaf. The zip is gitignored under the same convention
+as the existing Overleaf bundle, since it duplicates tracked files and regenerates from `jama/`.
+
+**One caveat recorded rather than hidden.** The checklist's location column cites *section names*,
+not `.tex` line numbers. The mapping agents read the manuscript while the reporting-guideline
+paragraph was being inserted, so their raw line numbers are inconsistent by about 27 lines. Section
+names are stable and are what an editor reading a PDF needs; the line numbers were dropped rather
+than quoted at a precision they do not have.
+
+Gates after all edits: pytest exit 0 (129 passed), repo consistency 7/7, manuscript numbers 310
+distinct / 0 untraced — the added prose introduces no untraceable numeral.
