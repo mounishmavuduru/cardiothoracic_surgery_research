@@ -1362,3 +1362,83 @@ combined 13,456 (abstract unchanged at 686, references still 19). Master manuscr
 JAMA build 31, the checklist supplement 13, all compiling with zero errors and zero undefined
 references. Manuscript number trace still 310 distinct / 0 untraced -- neither item introduces a
 numeral that does not already trace.
+
+## 2026-08-07 (later) — Adversarial accuracy audit of the manuscript: 12 defects found and fixed
+
+Two multi-agent audits ran against the manuscript, 54 agents total, zero agent errors. The first
+re-derived every quantitative claim against the specific results file its sentence credits; the
+second checked the prose against the code, figures, protocol record and cited prior art. Every
+alleged defect then went through an adversarial refuter instructed to default to REFUTED. 510
+quantitative claims were checked. Twelve distinct defects survived refutation; none was rated
+UNCERTAIN. Each was independently re-verified here before being applied.
+
+Why the existing gates missed all twelve: verify_manuscript_numbers.py reports "310 distinct
+numerals, 0 untraced" and did so throughout. It only asks whether each numeral appears somewhere in
+some results file at some rounding, so a value that drifted from its true source, or is credited to
+the wrong file, or means something other than what the sentence says, passes silently whenever it
+coincides with any unrelated field. That is exactly the class of defect found.
+
+THE MOST SERIOUS: the displayed SFI equation carried the wrong sign. Eq. (eq:sfi) ADDED the
+second-order resolvent term where, under the drop convention its own left-hand side and first-order
+term use, it must be SUBTRACTED. This is the same defect corrected in docs/SFI_THEORY.md section 3
+on 2026-08-06; the manuscript was never updated with it. The refuter confirmed numerically on an
+8-node weighted graph with a non-proportional perturbation: true drop 0.32399, first order 0.32201,
+resolvent sum -0.00198; "first - S" recovers the truth to 2.5e-6 (third order), while "first + S"
+errs by 4.0e-3, worse than applying no correction at all and in the wrong direction. The project's
+own stored data agrees: exact_dlam2 > pred_first in all nine rows of the GM3 validity sweep, which
+requires the subtracted sum to be negative. A proportional perturbation would have hidden this,
+since then dL commutes with L and the term vanishes identically. Conclusions are unaffected, as the
+validity-radius argument uses only the term's magnitude Theta(rho). The equation now carries the
+minus, plus a sentence tying its sign to the measured exact-vs-first-order gap.
+
+ONE DEFECT WAS MINE, introduced 2026-08-07. The new Limitations item asserted the UW deposit ships
+"an outcome column". It does not: docs/DATASETS.md line 70 records the recurrence labels as absent
+from the public download, withheld to protect confidential patient information, and obtained
+2026-07-24 by direct author request. Corrected to say neither deposit contains an outcome label,
+and where the outcomes actually came from. Worth recording that the audit caught an error
+introduced by the very session that commissioned it.
+
+The other ten, each verified before applying:
+
+1. GroupKFold "coincides with unshuffled KFold" is false. With singleton groups scikit-learn
+   assigns groups round-robin, giving strided folds rather than contiguous ones; verified at
+   n = 62, 82, 100, 144 and 182, where the partitions differ at every size. The point of the
+   sentence -- that the constraint is non-binding -- is correct and is retained. No number moves.
+2. The synthetic fallback graph was described as 6-nearest-neighbour. network.py:113-115 queries
+   k=6 then slices off the self-match, so it is 5-nearest-neighbour (mean degree about 6 after
+   symmetrisation). The branch is unreachable at the radii used, so nothing numerical depends on it.
+3. Roney GBT DeLong p printed as 0.63; the stored value is 0.6249, which rounds to 0.62. Every
+   other p in that table rounds correctly, so this was an isolated transcription slip.
+4. The +0.051 -> +0.036 -> +0.012 collapse was attributed to the substrate correction. The numbers
+   in the same sentence say otherwise: the substrate fix at fixed n leaves +0.036, and the larger
+   share of the drop is the Roney extension. The abstract already read it that way, so the Results
+   text contradicted the abstract. Now consistent.
+5. The +0.995 correlation was attributed to training-vs-test prevalence. It is training prevalence
+   against mean predicted probability on the held-out fold; clinical_endpoint.json has no
+   test_fold_prevalence key at all, and complements would correlate negatively, so the sentence
+   contradicted its own premise.
+6. Mean edge lengths of 3.18 and 2.64 mm were quoted as cohort properties but come from a 6-mesh
+   propagation spot-check. The purpose-built 40-mesh-per-cohort geometry audit gives 3.12 and
+   2.91 mm at the same node budget; the quoted pair more than doubled the true gap.
+7. Table tab:localize credited all three arms to gm2_metrics.json, which contains only the cardiac
+   arm; the FHN and Kuramoto rows live in gm4_100k_metrics.json and gm4_kuramoto_metrics.json. The
+   values were right, the provenance was not.
+8. That table's caption stated 300 null draws "per arm". Verified directly in the code: cardiac 300
+   (gm2.py:159), Kuramoto 300 (gm4.py:208), FHN 100k ladder 200 (gm4_scale.py:60). Note the
+   auditing agent's own suggested fix contradicted its own analysis here, placing Kuramoto at 200;
+   reading the code settled it. The caption now states both counts.
+9. "Correcting a defect in one cohort's released substrate" conflicts with amendment (k), which
+   concluded neither UW problem was a defect in the released data -- both were consequences of an
+   undocumented release being read without asking. Reworded to a misreading on our side.
+10. "the exact configuration and commit hash accompany every reported number" -- no mechanism
+    records a commit hash anywhere; grep for rev-parse, GIT_COMMIT and git_sha over all code
+    returns nothing. The configuration half is true and is kept; the commit-hash half is withdrawn.
+
+Also: the corrections section implied its three entries were exhaustive when the notebook logs
+more, and is now scoped to corrections that moved a reported result; and REPRODUCE.md gave results/
+as the GM1 output path when run_gm1() defaults outputs_dir='outputs'.
+
+Gates after all fixes: pytest exit 0 (129 passed), repo consistency 7/7, manuscript numbers 310
+distinct / 0 untraced. Master 30 pages, JAMA build 31, both with zero errors and zero undefined
+references. Counts re-derived again: title page now 13,052 main text, 687 abstract, 13,739
+combined, 19 references.

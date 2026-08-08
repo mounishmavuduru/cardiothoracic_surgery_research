@@ -73,11 +73,11 @@ patients: Roney $n=100$, UW/Boyle $n=82$) the combined gradient-boosting
 estimate is $+0.012$ with a bootstrap interval $[-0.017,+0.044]$ that excludes
 the threshold, so the real-anatomy result is a measured null and not a
 shortfall of power. An earlier version of this work reported $+0.051$ here and
-called the real-cohort evidence inconclusive. Correcting a defect in one
+called the real-cohort evidence inconclusive. Correcting how we had read one
 cohort's released substrate, which we found only afterwards, moved that figure
 to $+0.036$ at the original cohort size, and extending the Roney arm from $62$
 to all $100$ released meshes moved it to $+0.012$, so most of the drop was
-sample size, not substrate. The audit that found the defect, and the four
+sample size, not substrate. The audit that found the misreading, and the four
 controls that followed, are reported in full; the cause of that cohort's
 unusually low inducibility rate proved to be a $25\%$ difference in fibrosis
 burden between the two released cohorts rather than any substrate defect, and
@@ -250,11 +250,16 @@ $\lam_2$ drop contributed by region $R$:
 \begin{equation}
 \SFI(R)=\mathbb{E}[\Delta\lam_2\text{ from }R]
 \approx\underbrace{\sum_{(i,j)\in R}\mathbb{E}[\Delta w_{ij}]\,(\phii_{2,i}-\phii_{2,j})^2}_{\text{first order}}
-+\underbrace{\sum_{k\neq2}\frac{(\phii_k^{\!\top}\Delta
+-\underbrace{\sum_{k\neq2}\frac{(\phii_k^{\!\top}\Delta
 L\,\phii_2)^2}{\lam_2-\lam_k}}_{\text{2nd-order resolvent}}
 +O(\lVert\Delta L\rVert^3).
 \label{eq:sfi}
 \end{equation}
+The resolvent term is \emph{subtracted} because the left-hand side is a drop,
+under $L'=L-\Delta L$; since the dominant $k=3$ denominator $\lam_2-\lam_3$ is
+negative, that subtracted sum is itself negative, so the true drop \emph{exceeds}
+the first-order estimate --- which is what the validity sweep measures, with the
+exact $\Delta\lam_2$ above the first-order prediction at every $\rhoval$.
 The second-order term is the source of the validity radius developed below. Near
 eigenvalue degeneracy ($\lam_2\approx\lam_3$) the single $\phii_2$ is an
 arbitrary rotation in the low invariant subspace, so we use a basis-independent
@@ -422,10 +427,15 @@ not from the two fixed scoring functions that DeLong's test assumes; the
 paired structure and the leakage-free grouping are preserved, but the resulting
 $p$-values should be read as approximate. The naive comparison reported alongside
 replaces the grouping with shuffled \code{KFold}. On the real cohorts each
-patient contributes one row and is its own group, so \code{GroupKFold} there
-coincides with unshuffled \code{KFold} and the grouping is a guarantee rather
-than a correction; the leakage it exists to prevent is demonstrated on the
-replicated synthetic cohort, where resamples of a single shape family have
+patient contributes one row and is its own group, so the grouping constraint is
+never binding --- no partition of the rows can place a patient in both training
+and test --- and \code{GroupKFold} degenerates into a deterministic split; the
+grouping is a guarantee rather than a correction. (It does not reduce to
+\emph{unshuffled} \code{KFold}: with equally sized groups \code{scikit-learn}
+assigns them round-robin, so the folds are strided rather than contiguous. The
+distinction does not affect any reported number, since no unshuffled-\code{KFold}
+arm is reported.) The leakage the grouping exists to prevent is demonstrated on
+the replicated synthetic cohort, where resamples of a single shape family have
 several members (Section~\ref{sec:falsify}).
 
 \paragraph{Substrate.} Real left-atrial surfaces are loaded into weighted
@@ -488,8 +498,10 @@ $p<0.05$.
 geometric graphs, which give a two-dimensional excitable sheet with the
 degree heterogeneity of real tissue and none of its anatomy. Each network draws
 $n$ points uniformly on the unit square and connects every pair within a fixed
-radius; if that radius leaves the graph too sparse the construction falls back to
-a symmetric $6$-nearest-neighbour graph, and in either case only the largest
+radius; if that radius leaves the graph with no edges at all the construction
+falls back to a symmetric $5$-nearest-neighbour graph (each node joined to its
+five nearest neighbours, mean degree $\approx 6$ after symmetrisation, though at
+the radii used this branch is never taken), and in either case only the largest
 connected component is retained, so the medium is a single sheet, not
 several. Lesion burden is swept uniformly over $[0.05,\,0.45]$ across the cohort
 so that both classes appear, the network being stable at the low end and unstable
@@ -532,7 +544,7 @@ increment.}
 cohort / medium & events/$N$ & model & base AUC & SFI $\dAUC$ (95\% CI); $p$ \\
 \midrule
 Roney (real)      & 34/100 & lr  & $0.870$ & $-0.021$ $[-0.075,+0.033]$; $0.44$ \\
-                  &        & gbt & $0.856$ & $+0.009$ $[-0.029,+0.046]$; $0.63$ \\
+                  &        & gbt & $0.856$ & $+0.009$ $[-0.029,+0.046]$; $0.62$ \\
 UW/Boyle (real)   & 8/82   & lr  & $0.834$ & $+0.000$ $[-0.073,+0.081]$; $1.00$ \\
                   &        & gbt & $0.748$ & $+0.035$ $[-0.095,+0.203]$; $0.67$ \\
 Combined real     & 42/182 & lr  & $0.884$ & $-0.007$ $[-0.042,+0.029]$; $0.70$ \\
@@ -568,9 +580,13 @@ gradient-boosting point estimate is $+0.012$ (DeLong $p=0.449$, bootstrap CI
 $[-0.017,+0.044]$), roughly a quarter of the pre-registered $0.05$ threshold and
 with an interval that excludes it. An earlier version of this analysis reported
 $+0.051$ here and had to argue that the endpoint was missed only on
-significance; that estimate was an artefact of the sealed UW substrate, and
-correcting it drops the figure to $+0.036$ at the original cohort size and to
-$+0.012$ once the Roney arm is extended to all $100$ released meshes. With $42$
+significance. That reading does not survive, and the two corrections behind its
+collapse weigh unequally. Correcting the sealed UW substrate while holding the
+cohort at its original size takes the estimate to $+0.036$ --- already below the
+pre-registered gate, but with most of the old figure intact, so it was not
+principally a substrate artefact; extending the Roney arm to all $100$ released
+meshes then takes it to $+0.012$. The larger share of the drop is sample size
+rather than substrate, which is the same reading the abstract gives. With $42$
 inducible of $182$ this is the largest real-anatomy arm in the study, and the
 null here is a measurement and not a shortfall. The combined row is a single
 pooled ROC across two cohorts of unequal prevalence ($34/100$ on Roney, $8/82$
@@ -704,9 +720,9 @@ AUC back toward $0.5$.
 The inversion itself follows from a property of the estimator rather than from
 anything about these patients. The folds carry very unequal event rates ($25\%$ to
 $81\%$), the model calibrates to its \emph{training}-fold prevalence, and training
-prevalence is the complement of test prevalence: the correlation between the two
-is $+0.995$, so the fold with fewest events receives the highest predicted
-probabilities. Pooling out-of-fold probabilities across such folds inverts the
+prevalence is the complement of test prevalence: the mean predicted probability on
+a held-out fold tracks that fold's \emph{training} prevalence at $r=+0.995$, so the
+fold with fewest events receives the highest predicted probabilities. Pooling out-of-fold probabilities across such folds inverts the
 ranking. Scoring within folds and averaging removes most of it ($0.250\to0.345$
 for the baseline), which is a diagnostic and not a re-analysis.
 
@@ -1167,8 +1183,9 @@ rescaling UW upward leaves the rate at $0/30$. The mundane explanations do not
 survive: propagation failure is ruled out, because on UW meshes the wave reaches
 $99.4\%$ of nodes and peak depolarisation averages $0.83$, so activation spreads
 across the surface and then dies; it is not confined to the stimulus site.
-The coarser discretisation is ruled out as well: UW meshes carry a mean edge of
-$3.18$~mm against Roney's $2.64$~mm at the same node budget, but the convergence
+The coarser discretisation is ruled out as well: at the same node budget the
+$40$-mesh-per-cohort geometry audit gives UW a mean edge of $3.12$~mm against
+Roney's $2.91$~mm, but the convergence
 study shows coarser meshes \emph{over}-call ($58.3\%$ at $1500$ nodes), so that
 difference predicts a higher UW rate, not a near-zero one.
 
@@ -1272,14 +1289,18 @@ degree, deleted by measured correlation) and holds across media.
 \begin{table}[H]
 \centering
 \caption{Fiedler-gradient origin-rank localization across dynamical media
-(\code{results/\allowbreak gm2\allowbreak\_metrics.json}). \emph{Origin rank} is
+(cardiac monodomain arm: \code{results/\allowbreak gm2\allowbreak\_metrics.json};
+FHN arm: \code{results/\allowbreak gm4\allowbreak\_100k\allowbreak\_metrics.json};
+Kuramoto arm: \code{results/\allowbreak gm4\allowbreak\_kuramoto\allowbreak\_metrics.json}).
+\emph{Origin rank} is
 the fraction of nodes whose localizer value is at least the value at the true
 reentry origin, so $0$ marks a perfect localizer and $0.5$ chance; it is
 scale-free across media of different size. \emph{Null draws} counts resampled
-random-origin draws whose mean origin-rank is at or below the observed one, out
-of $300$ per arm, the pooled null being resampled to the smallest per-subject
-sample. The count is zero in every arm, which bounds the permutation $p$ below
-$1/300\approx0.003$ but reports the resolution of the draw count rather than the
+random-origin draws whose mean origin-rank is at or below the observed one, the
+pooled null being resampled to the smallest per-subject sample: $300$ draws in
+the cardiac and Kuramoto arms, $200$ in the FHN arm. The count is zero in every
+arm, which bounds the permutation $p$ below $1/300\approx0.003$ and $1/200$
+respectively, but reports the resolution of the draw count rather than the
 strength of the effect.}
 \label{tab:localize}
 \small
@@ -1492,8 +1513,10 @@ before the outcomes were joined.
 \subsection{Three corrections, and what caught each}
 \label{sec:corrections}
 
-Three claims in earlier versions of this work did not survive, and because they
-are referred to individually where they arise, we set them out together here.
+Three substantive claims in earlier versions of this work did not survive, and
+because they are referred to individually where they arise, we set them out
+together here. They are the corrections that moved a reported result; smaller
+ones are logged, dated, in the project notebook rather than repeated here.
 
 The first correction moved two numbers at once, since both rested on the same
 cohort. An earlier version reported a combined real-cohort $\dAUC$ of $+0.051$
@@ -1629,9 +1652,11 @@ study's one positive at $p=0.009$; it is withdrawn (Section~\ref{sec:corrections
 the real atrial 2-manifold cleanly matches the Weyl exponent.
 \item \textbf{No sociodemographic characterisation of the clinical cohort is
 possible from the released data.} Both cohorts are de-identified public deposits
-of anatomy: they ship meshes with per-vertex tissue fields and, for the
-University of Washington cohort, an outcome column, but no age, sex, race,
-ethnicity, comorbidity or socioeconomic variable accompanies either release. We
+of anatomy: they ship meshes carrying a tissue field and nothing else, and no
+age, sex, race, ethnicity, comorbidity or socioeconomic variable accompanies
+either release. Neither deposit contains an outcome label --- the two-year
+recurrence outcomes were withheld from the public download and obtained by
+direct request to the cohort's authors (Section~\ref{sec:clinical}). We
 therefore cannot describe the clinical cohort demographically, cannot report
 model performance within sociodemographic subgroups, and cannot assess whether
 discrimination differs across them --- the fairness and health-inequality items
@@ -1735,8 +1760,11 @@ a hard 403; Coq provides the equivalent kernel-checked guarantee. Reproduce
 with \code{coqc formal/sfi\_edge\_identity\_Q.v}.
 
 \section{Reproducibility}
-All stochastic steps are seeded, and the exact configuration and commit hash
-accompany every reported number. Results in this paper were produced on
+All stochastic steps are seeded, and the exact frozen configuration accompanies
+every reported number: the per-subject record cache is keyed by a hash of that
+configuration, so a result and the settings that produced it cannot drift apart.
+Commit provenance is carried by the repository history rather than stamped into
+the result files. Results in this paper were produced on
 Python~$3.12.10$ with NumPy~$2.5.1$, SciPy~$1.18.0$, scikit-learn~$1.9.0$,
 pandas~$3.0.5$ and Matplotlib~$3.11.1$; the openCARP cross-check used
 openCARP~v$19.0$. The per-subject record cache is keyed by a hash of the frozen

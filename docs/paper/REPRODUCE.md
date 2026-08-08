@@ -23,7 +23,7 @@ pip install -e .           # numpy, scipy, scikit-learn, pandas, meshio; matplot
 
 | experiment | command | output |
 |---|---|---|
-| GM1 predictive test (real cohorts) + expanded/UW | `python -m asb.experiments.gm1` ; `python scripts/run_uw_cohort.py` | `results/gm1_*_metrics.json` |
+| GM1 predictive test (real cohorts) + expanded/UW | `python -c "from asb.experiments.gm1 import run_gm1; run_gm1(outputs_dir='results')"` ; `python scripts/run_uw_cohort.py` | `results/gm1_*_metrics.json` (note: `run_gm1()` defaults `outputs_dir='outputs'`, so pass `results` explicitly to land the files where the paper cites them) |
 | GM3 validity radius | `python -m asb.experiments.gm3` | `results/gm3_metrics.json` |
 | GM4 transfer (FHN) + 100k scale-up | `python scripts/run_gm4_100k.py` | `results/gm4_100k_metrics.json`, `outputs/scaled100k/` |
 | GM4 third medium (Kuramoto) | `python scripts/run_gm4_kuramoto.py` | `results/gm4_kuramoto_metrics.json` |
