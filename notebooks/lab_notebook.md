@@ -1442,3 +1442,89 @@ Gates after all fixes: pytest exit 0 (129 passed), repo consistency 7/7, manuscr
 distinct / 0 untraced. Master 30 pages, JAMA build 31, both with zero errors and zero undefined
 references. Counts re-derived again: title page now 13,052 main text, 687 abstract, 13,739
 combined, 19 references.
+
+## 2026-08-08 — The rho scaling exponent was doubly stale; and a gate that laundered its own failures
+
+Two follow-ups from the accuracy audit: re-measuring the scaling law on the operator the biomarker
+actually uses, and putting the twelve audit fixes through their own adversarial reading. Both found
+real defects. Nineteen agents on the reading pass, zero agent errors.
+
+### The headline: rho scaling was measured on the superseded substrate
+
+Section 10's exponent was reported as N^-1.05 from results/rho_scaling.json. A 2x2 re-measurement
+(unweighted/weighted x SM/shift-invert) began with the original path as a control, and the control
+DID NOT REPRODUCE: it gave -1.0943 with different node counts. Chasing that:
+
+    load_uw_mesh(path, drop_tags=())  -> n = 424, 811, 1728, 3424, 7020, exponent -1.0471
+    stored rho_scaling.json           -> n = 424, 811, 1728, 3424, 7020, exponent -1.0471
+
+An exact reproduction, node count for node count, on the PRE-FIX substrate. The stored scaling law
+was computed with the tag-164 cap elements still present -- the substrate amendment (d) established
+is not tissue, and which section 4.6 spends several pages correcting. The correction never reached
+this measurement.
+
+Correcting both problems (results/rho_scaling_weighted.json):
+
+    corrected substrate, unweighted             -1.0943
+    corrected substrate, WEIGHTED (what rho uses)  -1.0045   <- Weyl -1.0 to 0.45%
+
+The weighted operator is the right one: rho = ||dL||/(lam3-lam2) is computed from the weighted
+conduction Laplacian, not the unweighted one. So the corrected number is both more appropriate and
+a closer match to Weyl than the figure it replaces -- "within 5%" becomes "within 0.5%". The
+manuscript, the abstract and SFI_THEORY section 10 now report -1.00.
+
+**A suspicion that measurement killed.** The 2026-08-06 note flagged eigsh(which='SM') as an
+untrusted solver carrying a headline number. It is not: 'SM' and shift-invert agree to every printed
+digit in every arm, atrial and random-geometric alike. That concern is withdrawn rather than left
+hedging the result. results/rho_scaling.json is untouched, as the record of what was measured before.
+
+### A flaw in verify_manuscript_numbers.py: it laundered its own failures
+
+Mid-check the gate reported 1 untraced, then 0 on an identical re-run with nothing changed between.
+Cause: it writes every untraced literal into results/manuscript_number_trace.json, then reads
+results/*.json -- including its own output -- as the pool of stored numbers. Any genuine failure
+therefore passes on the second run. Fixed by excluding its own output; the gate is now idempotent
+(310/310/0 on consecutive runs). The literal that exposed it was a date, 20260807, in a filename I
+had introduced and cited; the results file is now named without a date.
+
+### Nine defects in the audit's own fixes
+
+The twelve fixes from 2026-08-07 were themselves adversarially read. Nine objections survived
+refutation, which is a useful reminder that a correction is not automatically an improvement:
+
+1. **The sign explanation had a logical gap.** I wrote that the subtracted sum is negative "since
+   the dominant k=3 denominator is negative". The sum runs over all k != 2, which includes k=1,
+   whose denominator lam2-lam1 = lam2 is POSITIVE. The conclusion holds only because every k>=3
+   denominator is negative AND the k=1 term vanishes exactly, dL annihilating the constant vector.
+   A referee checking k=1 would have found the argument stalls. Now stated correctly.
+2. **My own null-draw fix was wrong.** I had corrected the caption to "300 in the cardiac and
+   Kuramoto arms, 200 in the FHN arm", having verified gm4.py:208. But gm4_kuramoto_metrics.json is
+   written by scripts/run_gm4_kuramoto.py, whose line 41 draws min(200, n) -- a different code path
+   from the one I checked. Truth: 300 cardiac, 200 FHN, 200 Kuramoto. Verifying the wrong file is
+   exactly the failure this project keeps rediscovering.
+3. **"training prevalence is the complement of test prevalence" is arithmetically false** -- stored
+   training prevalences 0.600/0.538/0.591/0.530/0.667 against test rates that are not their
+   complements. They move in opposition, which is all the argument needs, and that is what it now says.
+4. **"meshes carrying a tissue field and nothing else" is false for Roney**, which also ships UAC
+   coordinates and fibre directions, both consumed downstream. This was my sentence, written
+   yesterday to fix a different error in the same sentence.
+5. **The Reproducibility fix overclaimed and duplicated.** "the exact frozen configuration
+   accompanies every reported number: the per-subject record cache is keyed by a hash of that
+   configuration" both overstates what _config_tag() does (a 10-character filename suffix, not
+   something that accompanies a number) and near-verbatim duplicated a sentence two sentences later.
+6. **A changelog sentence leaked into the paper**: "which is the same reading the abstract gives"
+   was the notebook's reconciliation note restated in the paper's voice. A Results section does not
+   cite its own abstract as corroboration -- the abstract is derived from Results. Replaced with
+   pointers to the two sections that actually carry the audit and the correction.
+7. "two corrections" collided with the manuscript's own use of that noun 45 lines later for the
+   same pair of changes, which it calls "two changes". Harmonised.
+8. The corrections section's new dividing line ("corrections that moved a reported result") did not
+   fit its own three items, one of which withdrew an explanation while no number moved. Replaced
+   with a plain statement that the notebook holds the full record.
+9. The TRIPOD+AI checklist supplement still cited the withdrawn commit-hash claim in items 12g and
+   18f; both corrected, and the supplement rebuilt.
+
+Gates after everything: pytest exit 0 (129 passed), repo consistency 7/7, manuscript numbers 310
+distinct / 0 untraced and now idempotent. Master 30 pages, JAMA build 31, checklist supplement 13,
+all zero errors and zero undefined references. Title page recounted: 13,091 main text, 693 abstract,
+13,784 combined, 19 references.

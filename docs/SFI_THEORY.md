@@ -293,13 +293,34 @@ contribution. The gap `λ₃ − λ₂` of a diffusively-coupled medium collapse
 ρ = ‖ΔL‖ / (λ₃ − λ₂)  grows lawfully with resolution.
 ```
 
-**Measured** (`results/rho_scaling.json`, gap-vs-`N` at fixed mean degree):
+**Measured** (gap-vs-`N` at fixed mean degree). The atrial row is on the **weighted** conduction
+Laplacian the biomarker actually uses, on the corrected substrate
+(`results/rho_scaling_weighted.json`); the random-geometric rows are unweighted, those graphs
+carrying no conductances (`results/rho_scaling.json`):
 
 | medium | fitted gap exponent | reference |
 |---|---|---|
-| real atrial surface (2-manifold) | `N^{-1.05}` | Weyl 2-manifold `−1.0` (matched to 5 %) |
+| real atrial surface (2-manifold) | `N^{-1.00}` | Weyl 2-manifold `−1.0` (matched to 0.5 %) |
 | 2-D random-geometric | `N^{-1.81}` | (faster than naive `2/d`) |
 | 3-D random-geometric | `N^{-0.84}` | (faster than naive `2/d`) |
+
+> **Re-measured 2026-08-07, and the earlier number was doubly stale.** §10 previously reported
+> `N^{-1.05}` from `results/rho_scaling.json`. Two things were wrong with that measurement, and a
+> third suspicion turned out to be unfounded.
+> 1. **It was computed on the superseded substrate.** Re-running the stored code path reproduces
+>    `results/rho_scaling.json` *exactly* — node counts 424, 811, 1728, 3424, 7020 and exponent
+>    −1.0471 — only when the UW mesh is loaded with `drop_tags=()`, i.e. with the cap elements that
+>    amendment (d) established are not tissue. On the corrected substrate the same unweighted
+>    measurement gives **−1.0943**.
+> 2. **It used the unweighted Laplacian.** On the corrected substrate, measuring the *weighted*
+>    operator — the one `ρ` is actually computed from — gives **−1.0045**, i.e. Weyl's −1.0 to
+>    0.45 %, a closer match than the number it replaces.
+> 3. **The solver was not the problem.** `eigsh(which='SM')` and shift-invert agree to every printed
+>    digit in every arm, atrial and random-geometric alike. The concern recorded here previously,
+>    that the least-trusted eigensolver path carried a headline number, is withdrawn: it carried it
+>    accurately.
+>
+> `results/rho_scaling.json` is left untouched as the record of what the earlier version measured.
 
 So the biomarker does not fail by accident on one dataset — **it fails *predictably*, and *more* as the
 medium is meshed finer** (the opposite of "more resolution helps"). The real 2-manifold matches Weyl's
@@ -310,17 +331,15 @@ than PDE discretization error, (ii) measuring the gap-scaling exponent across in
 (iii) the counterintuitive corollary that higher-fidelity meshes are *further* past the validity radius.
 Only the real manifold matches the Weyl exponent exactly; we do not claim more.
 
-**Measurement scope (stated 2026-08-06).** All three exponents are measured on the **unweighted**
-combinatorial Laplacian (`scripts/rho_scaling.py`, `_laplacian_gap` builds the adjacency from
-`np.ones`), not on the fibre-anisotropic fibrosis-attenuated weighted graph the biomarker itself
-runs on; and the atrial arm is **one** released mesh resampled across five coarsenings, not a
-cohort. The claim these numbers support is therefore "the spectral gap of a diffusively-coupled
-2-manifold collapses with resolution at the Weyl rate," which is what §10 needs — not "the weighted
-operator's gap does." Two further limits worth stating rather than discovering later: the fits are
-five points over four seeds, and `_laplacian_gap` uses `eigsh(which='SM')` without the shift-invert
-(`sigma = -1e-8`) that `asb.spectral` and `asb.sfi` both use deliberately, because `'SM'` converges
-poorly on near-singular Laplacians. Re-running on the weighted operator, with shift-invert and more
-seeds, is the obvious strengthening and has not been done.
+**Measurement scope (updated 2026-08-07).** The atrial exponent is now measured on the weighted
+conduction Laplacian, so it *is* a statement about the operator `ρ` is computed from. The remaining
+scope limits are real and stated rather than discovered later: the atrial arm is **one** released
+mesh resampled across five coarsenings, not a cohort, so it describes how a diffusively-coupled
+2-manifold's gap scales with resolution rather than a property of any one patient; the
+random-geometric rows stay unweighted, those graphs carrying no conductances; and every fit is five
+points (the random-geometric ones over four seeds). The earlier version of this note flagged
+`eigsh(which='SM')` as an untrusted solver carrying a headline number — that concern is **withdrawn**,
+since `'SM'` and shift-invert agree to every printed digit in every arm.
 
 ## 11. The falsification protocol (what actually caught the false positive)
 

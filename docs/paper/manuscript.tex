@@ -95,9 +95,10 @@ median $\rhoval\approx 2422$, at least $272\times$ past the empirical
 $\rhoval^\ast\approx 3$ on every mesh tested, so by Davis--Kahan the Fiedler
 vector is unstable. We do \emph{not} claim $\rhoval$ proves non-predictiveness;
 it bounds the accuracy of the $\Delta\lam_2$ \emph{magnitude}, not the
-classification content of a ranking feature. The spectral gap collapses as
-$N^{-1.05}$ on the real atrial surface (the 2-manifold Weyl exponent), so
-$\rhoval$ grows lawfully with resolution. One component partially survives: the
+classification content of a ranking feature. The spectral gap of the weighted
+conduction Laplacian collapses as $N^{-1.00}$ on the real atrial surface,
+matching the 2-manifold Weyl exponent, so $\rhoval$ grows lawfully with
+resolution. One component partially survives: the
 Fiedler-gradient localizer $\lvert\nabla\phii_2\rvert$ is a weak but real rank
 localizer (origin in the top $\sim\!18\%$ on synthetic networks, and weaker on
 real anatomy, where only $\sim\!20$ origins are available) that beats
@@ -256,9 +257,10 @@ L\,\phii_2)^2}{\lam_2-\lam_k}}_{\text{2nd-order resolvent}}
 \label{eq:sfi}
 \end{equation}
 The resolvent term is \emph{subtracted} because the left-hand side is a drop,
-under $L'=L-\Delta L$; since the dominant $k=3$ denominator $\lam_2-\lam_3$ is
-negative, that subtracted sum is itself negative, so the true drop \emph{exceeds}
-the first-order estimate --- which is what the validity sweep measures, with the
+under $L'=L-\Delta L$; since every denominator $\lam_2-\lam_k$ with $k\geq3$ is
+negative and the $k=1$ term vanishes ($\Delta L$ annihilates the constant vector
+$\phii_1$), that subtracted sum is itself negative, so the true drop
+\emph{exceeds} the first-order estimate --- which is what the validity sweep measures, with the
 exact $\Delta\lam_2$ above the first-order prediction at every $\rhoval$.
 The second-order term is the source of the validity radius developed below. Near
 eigenvalue degeneracy ($\lam_2\approx\lam_3$) the single $\phii_2$ is an
@@ -580,13 +582,15 @@ gradient-boosting point estimate is $+0.012$ (DeLong $p=0.449$, bootstrap CI
 $[-0.017,+0.044]$), roughly a quarter of the pre-registered $0.05$ threshold and
 with an interval that excludes it. An earlier version of this analysis reported
 $+0.051$ here and had to argue that the endpoint was missed only on
-significance. That reading does not survive, and the two corrections behind its
+significance. That reading does not survive, and the two changes behind its
 collapse weigh unequally. Correcting the sealed UW substrate while holding the
 cohort at its original size takes the estimate to $+0.036$ --- already below the
 pre-registered gate, but with most of the old figure intact, so it was not
 principally a substrate artefact; extending the Roney arm to all $100$ released
 meshes then takes it to $+0.012$. The larger share of the drop is sample size
-rather than substrate, which is the same reading the abstract gives. With $42$
+rather than substrate. The provenance audit that found the substrate misreading
+is Section~\ref{sec:substrate}, and the correction is set out alongside the other
+two in Section~\ref{sec:corrections}. With $42$
 inducible of $182$ this is the largest real-anatomy arm in the study, and the
 null here is a measurement and not a shortfall. The combined row is a single
 pooled ROC across two cohorts of unequal prevalence ($34/100$ on Roney, $8/82$
@@ -719,10 +723,11 @@ AUC back toward $0.5$.
 
 The inversion itself follows from a property of the estimator rather than from
 anything about these patients. The folds carry very unequal event rates ($25\%$ to
-$81\%$), the model calibrates to its \emph{training}-fold prevalence, and training
-prevalence is the complement of test prevalence: the mean predicted probability on
-a held-out fold tracks that fold's \emph{training} prevalence at $r=+0.995$, so the
-fold with fewest events receives the highest predicted probabilities. Pooling out-of-fold probabilities across such folds inverts the
+$81\%$), and because each training set is what remains once its test fold is
+removed, the two prevalences move in opposition. The model calibrates to its
+\emph{training}-fold prevalence: the mean predicted probability on a held-out fold
+tracks that fold's \emph{training} prevalence at $r=+0.995$, so the fold with
+fewest events receives the highest predicted probabilities. Pooling out-of-fold probabilities across such folds inverts the
 ranking. Scoring within folds and averaging removes most of it ($0.250\to0.345$
 for the baseline), which is a diagnostic and not a re-analysis.
 
@@ -1239,14 +1244,18 @@ so $\rhoval$ grows lawfully with resolution.
 \begin{table}[H]
 \centering
 \caption{Fitted gap-scaling exponents (gap vs.\ $N$ at fixed mean degree,
-\code{results/\allowbreak rho\_scaling.json}, five-point fits).}
+five-point fits). The atrial row is measured on the \emph{weighted} conduction
+Laplacian the biomarker itself uses, on the corrected substrate
+(\code{results/\allowbreak rho\_scaling\allowbreak\_weighted.json});
+the random-geometric rows are unweighted, those graphs carrying no conductances
+(\code{results/\allowbreak rho\_scaling.json}).}
 \label{tab:scaling}
 \small
 \begin{tabularx}{\linewidth}{@{}l l X@{}}
 \toprule
 medium & fitted gap exponent & reference \\
 \midrule
-real atrial surface (2-manifold) & $N^{-1.05}$ & Weyl 2-manifold $-1.0$ (within $5\%$) \\
+real atrial surface (2-manifold) & $N^{-1.00}$ & Weyl 2-manifold $-1.0$ (within $0.5\%$) \\
 2-D random-geometric & $N^{-1.81}$ & faster than naive $2/d$ \\
 3-D random-geometric & $N^{-0.84}$ & faster than naive $2/d$ (non-monotone series) \\
 \bottomrule
@@ -1259,13 +1268,16 @@ real atrial surface (2-manifold) & $N^{-1.05}$ & Weyl 2-manifold $-1.0$ (within 
 \caption{The gap collapses with mesh resolution, so the estimator degrades
 \emph{more}, predictably, as the medium is meshed finer, the opposite of the
 expectation that ``more resolution helps.'' Only the real atrial 2-manifold
-cleanly matches the Weyl exponent ($-1.05$ vs.\ $-1.0$); the random-geometric
-exponents are reported as ``at least as fast as Weyl,'' not law confirmations.
-All three fits use the unweighted combinatorial Laplacian rather than the
-fibre-anisotropic weighted graph the biomarker itself runs on, and the atrial
-arm is one released mesh resampled across five coarsenings, so the exponents
-describe how the gap scales with resolution rather than a property of the
-weighted operator.}
+cleanly matches the Weyl exponent ($-1.00$ vs.\ $-1.0$); the random-geometric
+exponents are reported as ``at least as fast as Weyl,'' not law confirmations,
+and are measured on the unweighted combinatorial Laplacian, those graphs
+carrying no conductances. The atrial arm is one released mesh resampled across
+five coarsenings, so it describes how the gap of a diffusively coupled
+2-manifold scales with resolution rather than a property of any one patient.
+An earlier version measured this arm on the unweighted Laplacian and on the
+superseded substrate of Section~\ref{sec:substrate}, giving $-1.05$; correcting
+both moves it to $-1.00$, and the solver plays no part --- shift-invert and the
+original path agree to every digit in every arm.}
 \label{fig:scaling}
 \end{figure}
 
@@ -1298,10 +1310,10 @@ reentry origin, so $0$ marks a perfect localizer and $0.5$ chance; it is
 scale-free across media of different size. \emph{Null draws} counts resampled
 random-origin draws whose mean origin-rank is at or below the observed one, the
 pooled null being resampled to the smallest per-subject sample: $300$ draws in
-the cardiac and Kuramoto arms, $200$ in the FHN arm. The count is zero in every
-arm, which bounds the permutation $p$ below $1/300\approx0.003$ and $1/200$
-respectively, but reports the resolution of the draw count rather than the
-strength of the effect.}
+the cardiac arm and $200$ in the FHN and Kuramoto arms. The count is zero in
+every arm, which bounds the permutation $p$ below $1/300\approx0.003$ in the
+cardiac arm and $1/200$ in the other two, but reports the resolution of the draw
+count rather than the strength of the effect.}
 \label{tab:localize}
 \small
 \begin{tabularx}{\linewidth}{@{}l c c c X@{}}
@@ -1515,8 +1527,9 @@ before the outcomes were joined.
 
 Three substantive claims in earlier versions of this work did not survive, and
 because they are referred to individually where they arise, we set them out
-together here. They are the corrections that moved a reported result; smaller
-ones are logged, dated, in the project notebook rather than repeated here.
+together here. This is not the complete list: the project notebook holds the
+full dated record, including further corrections that moved individual reported
+numbers.
 
 The first correction moved two numbers at once, since both rested on the same
 cohort. An earlier version reported a combined real-cohort $\dAUC$ of $+0.051$
@@ -1652,9 +1665,10 @@ study's one positive at $p=0.009$; it is withdrawn (Section~\ref{sec:corrections
 the real atrial 2-manifold cleanly matches the Weyl exponent.
 \item \textbf{No sociodemographic characterisation of the clinical cohort is
 possible from the released data.} Both cohorts are de-identified public deposits
-of anatomy: they ship meshes carrying a tissue field and nothing else, and no
-age, sex, race, ethnicity, comorbidity or socioeconomic variable accompanies
-either release. Neither deposit contains an outcome label --- the two-year
+of anatomy: they ship anatomical fields only --- a tissue or image-intensity
+field, plus fibre directions and universal atrial coordinates in the Roney case
+--- and no age, sex, race, ethnicity, comorbidity or socioeconomic variable
+accompanies either release. Neither deposit contains an outcome label --- the two-year
 recurrence outcomes were withheld from the public download and obtained by
 direct request to the cohort's authors (Section~\ref{sec:clinical}). We
 therefore cannot describe the clinical cohort demographically, cannot report
@@ -1760,11 +1774,10 @@ a hard 403; Coq provides the equivalent kernel-checked guarantee. Reproduce
 with \code{coqc formal/sfi\_edge\_identity\_Q.v}.
 
 \section{Reproducibility}
-All stochastic steps are seeded, and the exact frozen configuration accompanies
-every reported number: the per-subject record cache is keyed by a hash of that
-configuration, so a result and the settings that produced it cannot drift apart.
-Commit provenance is carried by the repository history rather than stamped into
-the result files. Results in this paper were produced on
+All stochastic steps are seeded, and the frozen configuration behind every
+reported number is fixed as module-level constants in the source rather than
+supplied at run time. Commit provenance is carried by the repository history
+rather than stamped into the result files. Results in this paper were produced on
 Python~$3.12.10$ with NumPy~$2.5.1$, SciPy~$1.18.0$, scikit-learn~$1.9.0$,
 pandas~$3.0.5$ and Matplotlib~$3.11.1$; the openCARP cross-check used
 openCARP~v$19.0$. The per-subject record cache is keyed by a hash of the frozen

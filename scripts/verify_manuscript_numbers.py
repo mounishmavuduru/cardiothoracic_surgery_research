@@ -50,7 +50,14 @@ def stored_numbers() -> set:
                 out.add(m.lstrip("0") or "0")
                 out.add(m)
 
+    # This script's OWN output must not be a source. It records every untraced
+    # literal in its `untraced` list, so reading results/ back on a second run
+    # finds them there and reports 0 -- laundering a genuine failure into a pass.
+    # Observed 2026-08-07: a filename date `20260807` failed once, then "passed".
+    self_output = os.path.normpath("results/manuscript_number_trace.json")
     for path in sorted(glob.glob("results/*.json")):
+        if os.path.normpath(path) == self_output:
+            continue
         try:
             walk(json.load(open(path, encoding="utf-8")))
         except Exception:
