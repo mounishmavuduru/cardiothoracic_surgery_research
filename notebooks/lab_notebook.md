@@ -1528,3 +1528,60 @@ Gates after everything: pytest exit 0 (129 passed), repo consistency 7/7, manusc
 distinct / 0 untraced and now idempotent. Master 30 pages, JAMA build 31, checklist supplement 13,
 all zero errors and zero undefined references. Title page recounted: 13,091 main text, 693 abstract,
 13,784 combined, 19 references.
+
+## 2026-08-08 (later) — Final polish pass on the JAMA Cardiology package
+
+Two independent proofreaders over the whole manuscript, plus mechanical scans and PDF-level checks.
+Thirty-four fixes applied to the master; three defects fixed in the build; two proposed
+"corrections" rejected because applying them would have meant inventing data.
+
+**PDF-level defects, all in the JAMA build rather than the science.**
+- The PDF carried **no Title or Author metadata**. Replacing \title/\author with a manual title page
+  left hyperref nothing to populate from, and it does not derive them automatically without
+  `pdfusetitle`. That is the field a submission system reads, and it was blank. Now set on both the
+  manuscript and the checklist supplement, with subject and keywords.
+- The **title page overflowed onto a second page**, stranding a three-line footnote on an otherwise
+  blank sheet. Vertical spacing tightened; the title page is now one page, the abstract starts on
+  page 2, and the document is 30 pages rather than 31.
+- The **checklist supplement was stale**, still citing the commit-hash claim withdrawn from the
+  manuscript on 2026-08-07 (items 12g and 18f). Both corrected and the supplement rebuilt.
+
+**Thirty-four prose fixes.** The ones that changed meaning rather than style:
+- `so it is invariant to fibre sign, which is the only property of $\bar f$ that is identifiable` --
+  the relative clause attached to *fibre sign*, asserting the reverse of the argument.
+- `the pre-registered openCARP ground truth, substituted here for a monodomain Mitchell--Schaeffer
+  solver` -- reverses the substitution, and contradicted the two other places in the paper that
+  state it correctly (monodomain was substituted for openCARP, not the other way round).
+- `by authors who expected to be the ones fooled` -- this is a single-author paper.
+- `an anti-predictive baseline (AUC 0.250), which nine columns of random noise reproduce` -- in the
+  abstract; "which" attached to the baseline, but what the noise reproduces is the increment.
+- `and adding them cannot help` -- nearest plural antecedent was "the competitors", meaning was the
+  two SFI columns.
+- `(zero floating point)`, `followed the full two years`, `the fold with fewest events`, `both are a
+  logged deviation`, `Coarsened to the same 2000 nodes, mean fibrosis ... is` (dangling modifier),
+  `The Limitations document two substrate defects` (garden path).
+Plus notation (the abstract dropped the eigenvector index from
+$(\varphi_i-\varphi_j)^2$), unit ties, serial commas, em-dash spacing, `a priori` italics, one
+`characterization` in a paper that otherwise spells it `-isation`, and `\sim\!` thin spaces.
+
+**Two proposed fixes REJECTED, and why.** A reader suggested adding issue numbers to the two
+bibliography entries that lack them -- `Sci Rep 10:8653` and `BMJ 385:e078378`. Both are correct as
+they stand: those journals use article numbers without issues, and inventing `(1)` would fabricate
+a citation detail. The same reader suggested adding a PMID to `khurram2014` that I could not verify.
+Neither was applied. A proofreader proposing a plausible-looking identifier is exactly the failure
+this project guards against everywhere else.
+
+**Also checked and found clean:** zero overfull/underfull boxes, zero LaTeX warnings, zero
+unresolved cross-references; all 19 bibitems cited and all citations resolving; all 21 \ref targets
+present; all eight figures genuinely embedded (16 image markers, matching the master -- an initial
+check reported zero, which was a library limitation, not a missing figure); no doubled words, no
+straight quotes, no unescaped specials, no non-ASCII in source. Two apparent spelling
+inconsistencies were false positives: the single `analyze` is inside a `\code{}` filename that must
+not change, and every `center` is a LaTeX command, the prose being consistently British.
+
+The JAMA build differs from the master only where intended: 13 lines removed (title block,
+\maketitle, \tableofcontents), 113 added (metadata and title page), body byte-identical.
+
+Gates: pytest exit 0 (129), consistency 7/7, numbers 310 / 0 untraced. Master 31 pages, JAMA build
+30, supplement 13, all zero errors. Title page recounted: 13,108 main text, 695 abstract, 13,803
+combined, 19 references.
