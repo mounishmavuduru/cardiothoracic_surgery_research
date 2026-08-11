@@ -17,7 +17,7 @@ label, placed it partly in feature redundancy: the leading canonical correlation
 between the nine SFI columns and the six competitors was $0.996$, against
 $0.289$ for a permuted control, and the two aggregate summaries were
 reconstructible from the competitors at $R^2=0.970$. The region maximum, the
-region spread and the edge-level columns retained most of their variance
+region spread, and the edge-level columns retained most of their variance
 ($R^2<0.25$), so they carry variance the competitors do not, and that variance
 does not predict the label.
 
@@ -35,11 +35,10 @@ and says nothing about how well a feature ranks cases, which must still be
 tested against competitors.
 
 The methodological result is that ordinary practice would have reported this
-biomarker as working. Removing the shape-family grouping inflated AUC by
-$+0.117$ ($0.756$ under random cross-validation against $0.640$ grouped), and
-removing the effect-size gate allowed a $\dAUC$ of $+0.003$ to pass at
-$p\approx2\times10^{-24}$ on $55{,}000$ networks (Figure~3). Both failure modes
-occurred in this project's own pipeline. In silico, a $\dAUC$ of $+0.103$ at
+biomarker as working. Dropping the shape-family grouping inflates AUC by
+$+0.117$, and dropping the effect-size gate lets an increment of $+0.003$ pass at
+$p\approx2\times10^{-24}$ (Figure~3). Both failure modes occurred in this
+project's own pipeline. In silico, a $\dAUC$ of $+0.103$ at
 $p=0.009$ was withdrawn once $38$ further released meshes were added. On real
 patients, the clinical endpoint returned $\dAUC=+0.197$ at DeLong $p=0.0061$,
 clearing both of its thresholds. The analysis plan, frozen before the outcomes
@@ -53,7 +52,7 @@ after the result was seen.
 
 \subsection*{Limitations}
 
-The in-silico labels are a monodomain simulator's reentry-inducibility verdict,
+The in-silico labels are a simulator's reentry-inducibility verdict,
 not clinical atrial fibrillation; monodomain Mitchell--Schaeffer was substituted
 for the pre-registered openCARP ground truth and logged as a deviation. That
 labeller is strongly resolution-sensitive and does not converge in the tested

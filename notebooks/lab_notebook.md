@@ -1717,3 +1717,22 @@ at once" no longer had three visibly separated requirements to count after the t
 Wording only again. `numdiff.py`: 201 distinct numerals before and after, none added, none altered.
 `verify_oi.py` 136 of 136 traced. Main text 2942 of 3000, abstract 350, Key Points 97, 5 floats,
 19 references, 13 pages, compile clean with 0 undefined references.
+
+
+## 2026-08-10 (fourth pass) --- Last read-through
+
+Three fixes found by reading the built file end to end rather than scanning it.
+
+The Discussion was restating the falsification numbers verbatim from the Results: $0.756$ against
+$0.640$, and $55{,}000$ networks, all of which the reader had met four paragraphs earlier. A
+Discussion should interpret the result, not reprint it. Compressed to the two numbers that carry the
+argument ($+0.117$ and $+0.003$ at $p\approx2\times10^{-24}$); the dropped values still appear once
+each in the Results, so nothing left the paper. The clinical paragraph keeps its restatement on
+purpose --- that one is the thesis, and the numbers are the argument.
+
+Missing serial comma in "the region maximum, the region spread and the edge-level columns", against
+serial commas everywhere else in the paper. "Monodomain" appeared twice in one Limitations sentence.
+
+Main text 2930 of 3000. `numdiff.py` reports 201 distinct numerals before and after, none added or
+altered; the three dropped counts are duplicate mentions. `verify_oi.py` 136 of 136 traced. Compile
+clean, 13 pages.
