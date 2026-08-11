@@ -43,7 +43,7 @@ Known and intentional `claims_oi.py` reports:
 
 | item | JAMA limit | this article |
 |---|---|---|
-| main text | 3000 words | 2978 |
+| main text | 3000 words | 2942 |
 | abstract | 350 words, structured | 350, seven headings |
 | Key Points | 75--100 words | 97 |
 | tables + figures | 5 | 5 (2 tables, 3 figures) |
@@ -56,6 +56,19 @@ The reference count is below the range JAMA describes as typical. It is not
 padded: the argument cites the identities, the datasets, the statistical
 methods, and the inducibility literature it actually uses. Supplement 2 carries
 the full technical report.
+
+`ai_tells.py` scans the body against the checklist at
+<https://en.wikipedia.org/wiki/Wikipedia:Signs_of_AI_writing>, restricted to the
+items that can apply to a journal manuscript: overused vocabulary, copula
+avoidance, significance inflation, negative parallelism, em-dash and boldface
+overuse, curly quotes, and elegant variation. `style_scan.py` covers cadence:
+recycled contrast frames, adverb openers, cleft closers, tricolons, repeated
+sentence openers, sentence length, punctuation density.
+
+Standing hits that are not tells: `late-gadolinium-enhancement` (the imaging
+sequence), `robustness check` (openCARP), and two uses of `rather than` where the
+contrast is the finding itself. Boldface appears only in the Abstract, Key Points
+and Article Information labels, which the journal's structure requires.
 
 ## House style
 

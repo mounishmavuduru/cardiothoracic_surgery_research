@@ -21,13 +21,11 @@ Whether such an index carries information beyond the substrate features already
 in use has not been established. Fibrosis burden, fibrosis spatial
 heterogeneity, fibrosis patch size, and connectivity measures such as the global
 minimum cut, the percolation threshold, and $\lam_2$ itself are computed from
-the same meshes at negligible cost. Three conditions decide whether a spectral
-index earns a place beside them. It has to improve discrimination when added to
-those features. The improvement must be large enough to matter, judged against a
-threshold fixed in advance and not against a $p$ value alone. And it must
-survive cross-validation that holds out whole patients and shape families, so
-that anatomy cannot leak between training and test folds. Evaluations meeting
-all three conditions have not been reported.
+the same meshes at negligible cost. A spectral index earns a place beside them
+only if it improves discrimination when added to them, by a margin fixed in
+advance as the one that would matter, under cross-validation that holds out
+whole patients and shape families so anatomy cannot leak between training and
+test folds. Evaluations imposing all of this at once have not been reported.
 
 This study evaluated SFI as a strict add-on to six competitor features,
 predicting simulator reentry inducibility in $182$ patient-derived left-atrial

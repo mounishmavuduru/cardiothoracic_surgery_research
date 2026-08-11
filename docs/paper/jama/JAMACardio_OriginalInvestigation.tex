@@ -84,7 +84,7 @@ patients. No post-operative atrial fibrillation outcome was simulated.
 \smallskip
 \begin{tabular}{@{}ll@{}}
 \toprule
-Word count (main text)  & 2978 \\
+Word count (main text)  & 2942 \\
 Word count (abstract)   & 350 \\
 Key Points              & 97 \\
 Tables and figures      & 5 (2 tables, 3 figures) \\
@@ -110,7 +110,7 @@ pre-registered clinical endpoint in $82$ patients was also not met.
 
 \paragraph{Meaning.} The index added nothing beyond established fibrosis and
 connectivity features. The interval excludes the pre-specified effect size, so
-the finding is a measured null and not an underpowered one.
+the study measured the effect rather than failing to detect it.
 
 \newpage
 
@@ -195,13 +195,11 @@ Whether such an index carries information beyond the substrate features already
 in use has not been established. Fibrosis burden, fibrosis spatial
 heterogeneity, fibrosis patch size, and connectivity measures such as the global
 minimum cut, the percolation threshold, and $\lam_2$ itself are computed from
-the same meshes at negligible cost. Three conditions decide whether a spectral
-index earns a place beside them. It has to improve discrimination when added to
-those features. The improvement must be large enough to matter, judged against a
-threshold fixed in advance and not against a $p$ value alone. And it must
-survive cross-validation that holds out whole patients and shape families, so
-that anatomy cannot leak between training and test folds. Evaluations meeting
-all three conditions have not been reported.
+the same meshes at negligible cost. A spectral index earns a place beside them
+only if it improves discrimination when added to them, by a margin fixed in
+advance as the one that would matter, under cross-validation that holds out
+whole patients and shape families so anatomy cannot leak between training and
+test folds. Evaluations imposing all of this at once have not been reported.
 
 This study evaluated SFI as a strict add-on to six competitor features,
 predicting simulator reentry inducibility in $182$ patient-derived left-atrial
@@ -223,9 +221,9 @@ pre-registration governing the clinical analysis was frozen before any feature w
 placed beside the outcome column; that analysis was run once and is reported as it
 came out.
 
-\paragraph{Reporting guideline.} The clinical endpoint --- prediction of two-year
-post-ablation arrhythmia recurrence in the $82$ University of Washington (UW)
-patients, the only analysis in this work scored against a real patient outcome ---
+\paragraph{Reporting guideline.} One analysis here is scored against a real
+patient outcome: prediction of two-year post-ablation arrhythmia recurrence in
+the $82$ University of Washington (UW) patients. That endpoint
 is reported in accordance with TRIPOD+AI~\cite{tripodai2024}, and a completed checklist accompanies
 this article. Adherence is claimed for that endpoint alone. Every other outcome
 here is an electrophysiology simulator's verdict on reentry inducibility, which
@@ -316,7 +314,7 @@ results.
 
 The pre-registered primary endpoint, a grouped $\dAUC\geq0.05$ with DeLong
 $p<0.05$ when \SFI{} was added to the six published competitor features, was
-\textbf{not met} in any cohort or by either classifier. On the combined real
+not met in any cohort or by either classifier. On the combined real
 cohort the competitor baseline reached an out-of-fold AUC of $0.884$ under
 logistic regression and $0.851$ under gradient boosting; adding the \SFI{} block
 changed discrimination by $\dAUC=-0.007$ ($95\%$ CI $-0.042$ to $+0.029$;
@@ -349,11 +347,11 @@ against $0.289$ for a permuted-\SFI{} control, so the two blocks are almost
 collinear in their dominant direction. The per-column picture was less uniform.
 The total and region-mean summaries were reconstructible from the competitors at
 $R^{2}=0.970$, and four of the nine columns reached $R^{2}\geq0.60$. The
-remaining five --- the region maximum, the region standard deviation, the top
-single region, and both edge-level columns --- retained most of their variance at
-$R^{2}<0.25$, well above the permuted control. Redundancy therefore accounts for
-part of the null and not all of it. Where the competitors already carry the
-information, there is nothing left for \SFI{} to add; where unique variance
+remaining five (the region maximum, the region standard deviation, the top
+single region, and both edge-level columns) retained most of their variance at
+$R^{2}<0.25$, well above the permuted control. Redundancy therefore explains
+part of the null; the rest lies elsewhere. Where the competitors already carry
+the information, there is nothing left for \SFI{} to add; where unique variance
 survives, it does not predict the label. The \emph{exact} per-region
 $\Delta\lam_2$ variant, which carries no first-order approximation error, also
 added nothing over the competitor set, so the approximation is not what failed.
@@ -365,7 +363,7 @@ relative error is $1\%$ at $\rhoval=0.3$ and crosses $10\%$ at
 $\rhoval^\ast\approx3$. Across the $12$ scanned real atrial meshes the median was
 $\rhoval\approx2422$ (interquartile range $[1082,7384]$; full range
 $[817,16554]$), so every mesh exceeded $\rhoval^\ast$ and even the smallest did so
-by a factor of $272$. The spectral gap in the denominator collapses lawfully with
+by a factor of $272$. The spectral gap in the denominator collapses with
 resolution: measured on the weighted conduction Laplacian the biomarker itself
 uses, the atrial surface fitted $N^{-1.00}$, within $0.5\%$ of the Weyl
 2-manifold exponent~\cite{weyl1912} of $-1.0$. Refining the mesh over the same anatomy therefore
@@ -381,31 +379,31 @@ power at $\dAUC=0.05$ was $0.24$. The analysis plan, frozen and tagged before an
 feature was placed beside the outcome column, therefore fixed the minimum
 detectable effect at $\dAUC\approx0.10$--$0.15$ and specified a fixed-sequence
 stopping rule. It also pre-committed that a materially degraded baseline would be
-reported as confounding and not as a win for \SFI{}. Under logistic
+reported as confounding. Under logistic
 regression the competitor baseline gave an out-of-fold AUC of $0.250$, adding
 \SFI{} gave $0.447$, and the increment was $\dAUC=+0.197$ ($95\%$ CI $+0.054$ to
 $+0.334$; DeLong $p=0.0061$), clearing both arithmetic thresholds. The
 pre-specified reading is that the increment is an artefact. A baseline AUC of
-$0.250$ is not weak; it is anti-predictive, and $0.447$ remains below chance.
-Three checks agree. All $15$ features, competitor and \SFI{} alike, were
-univariately at chance ($0.435$--$0.547$). The gradient-boosting arm, whose
-baseline sat at $0.516$, gave $\dAUC=+0.021$ ($p=0.738$). And replacing the nine
-\SFI{} columns with nine columns of standard Gaussian noise, then re-running the
-identical pipeline, reproduced the increment: the noise gained $+0.137$ on
+$0.250$ is anti-predictive, and $0.447$ remains below chance. All $15$ features,
+competitor and \SFI{} alike, were univariately at chance ($0.435$--$0.547$). The
+gradient-boosting arm, whose baseline sat at $0.516$, gave $\dAUC=+0.021$
+($p=0.738$). Replacing the nine \SFI{} columns with nine columns of standard
+Gaussian noise and re-running the identical pipeline reproduced the increment:
+the noise gained $+0.137$ on
 average across $20$ draws, with $6$ of $20$ matching or exceeding $+0.197$
 (empirical $p=0.333$). The mechanism is visible in the folds. Their event rates
 ranged from $25\%$ to $81\%$, and mean predicted probability on a held-out fold
 tracked that fold's training prevalence at $r=+0.995$, so pooling out-of-fold
 probabilities inverted the ranking; scoring within folds and averaging returned
-the baseline to $0.345$. That primary endpoint was \textbf{not met}, the
+the baseline to $0.345$. That primary endpoint was not met, the
 observed increment is reported as confounded by baseline degradation, and under
 the stopping rule the ablation-induced $\Delta$\SFI{} test was neither performed
 nor computed.
 
 Removing any single pre-registered guard manufactured a specific false positive
 (Figure~3). On a controlled replicated cohort, replacing shape-family grouping
-with naive random cross-validation inflated AUC from $0.640$ to $0.756$, a gain
-of $+0.117$. Removing the effect-size gate admitted the $p$-value trap: at
+with naive random cross-validation inflated AUC from $0.640$ to $0.756$, an
+increment of $+0.117$. Removing the effect-size gate admitted the $p$-value trap: at
 $N=55{,}000$ networks the subspace \SFI{} reached a paired DeLong
 $p\approx2\times10^{-24}$ over the competitor set while its $\dAUC$ of $+0.003$
 would require approximately $4150$ cases to detect at $80\%$ power.
@@ -417,10 +415,9 @@ competitor features under leakage-controlled grouping, SFI left the combined
 real-cohort gradient-boosting increment at $\dAUC=+0.012$, with a bootstrap
 interval $[-0.017,+0.044]$ that excludes the pre-registered $0.05$ gate as well
 as containing zero (Table~1, Figure~1). On $182$ patient-derived anatomies the
-effect was measured and came out small; power is not the limiting factor. Small
-is not zero. The lower bound of $-0.017$ leaves an increment of a few
-thousandths compatible with these data, and only a far larger cohort could
-resolve one. The synthetic arm behaved the same way, the effect converging
+effect was measured and came out small; power is not the limiting factor. The
+lower bound of $-0.017$ still leaves room for an increment of a few thousandths,
+which only a far larger cohort could resolve. The synthetic arm behaved the same way, the effect converging
 to $\dAUC\approx+0.003$ across up to $100{,}000$ networks.
 
 How SFI was computed does not explain the null. The exact per-region $\Delta\lam_2$
@@ -492,11 +489,11 @@ from any endpoint, its calibration gate passing on one cohort and not the other.
 
 A closed-form spectral fragility index did not add practically meaningful
 reentry-inducibility prediction beyond existing features, at synthetic scale or
-on $182$ patients of real anatomy. The single-vector estimator is additionally
-ill-conditioned on real tissue and lawfully more so as meshes are refined. The
-clinical endpoint was not met, and it could not have resolved an effect of the
-size that would matter. We report a bounded negative and a portable, label-free
-validity screen.
+on $182$ patients of real anatomy. The single-vector estimator is also
+ill-conditioned on real tissue, and more so as meshes are refined. The clinical
+endpoint was not met, and it could not have resolved an effect of the size that
+would matter. The validity radius, which needs no outcome label, can be applied
+to other Fiedler-based markers before they are tested.
 
 %% ===================== ARTICLE INFORMATION =====================
 \section*{Article Information}

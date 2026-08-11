@@ -5,10 +5,9 @@ competitor features under leakage-controlled grouping, SFI left the combined
 real-cohort gradient-boosting increment at $\dAUC=+0.012$, with a bootstrap
 interval $[-0.017,+0.044]$ that excludes the pre-registered $0.05$ gate as well
 as containing zero (Table~1, Figure~1). On $182$ patient-derived anatomies the
-effect was measured and came out small; power is not the limiting factor. Small
-is not zero. The lower bound of $-0.017$ leaves an increment of a few
-thousandths compatible with these data, and only a far larger cohort could
-resolve one. The synthetic arm behaved the same way, the effect converging
+effect was measured and came out small; power is not the limiting factor. The
+lower bound of $-0.017$ still leaves room for an increment of a few thousandths,
+which only a far larger cohort could resolve. The synthetic arm behaved the same way, the effect converging
 to $\dAUC\approx+0.003$ across up to $100{,}000$ networks.
 
 How SFI was computed does not explain the null. The exact per-region $\Delta\lam_2$
@@ -80,8 +79,8 @@ from any endpoint, its calibration gate passing on one cohort and not the other.
 
 A closed-form spectral fragility index did not add practically meaningful
 reentry-inducibility prediction beyond existing features, at synthetic scale or
-on $182$ patients of real anatomy. The single-vector estimator is additionally
-ill-conditioned on real tissue and lawfully more so as meshes are refined. The
-clinical endpoint was not met, and it could not have resolved an effect of the
-size that would matter. We report a bounded negative and a portable, label-free
-validity screen.
+on $182$ patients of real anatomy. The single-vector estimator is also
+ill-conditioned on real tissue, and more so as meshes are refined. The clinical
+endpoint was not met, and it could not have resolved an effect of the size that
+would matter. The validity radius, which needs no outcome label, can be applied
+to other Fiedler-based markers before they are tested.

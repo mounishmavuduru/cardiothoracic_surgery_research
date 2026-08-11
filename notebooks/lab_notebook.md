@@ -1677,3 +1677,43 @@ Final state: main text 2978 of 3000, abstract 350 of 350, Key Points 97 of 100, 
 19 references, 13 pages. Compile clean, 0 undefined references, 0 overfull boxes past 10pt.
 `verify_oi.py` 136 of 136 numerals traced; `claims_oi.py` 3 of 61 reported, the same three known and
 benign. Package rebuilt.
+
+
+## 2026-08-10 (third pass) --- Scrubbing machine cadence against an external checklist
+
+Ran the article against the Wikipedia "Signs of AI writing" checklist, restricted to the items that
+can apply to a journal manuscript, via a new `docs/paper/jama/src/ai_tells.py`. What it caught, and
+what happened to each:
+
+* **Negative parallelism.** The listed tell "it is not X; it is Y" appeared verbatim: "A baseline AUC
+  of $0.250$ is not weak; it is anti-predictive." Now states the fact directly. Seven uses of "and
+  not" reduced to three, the survivors being places where the negation is the finding (a simulator
+  verdict and not clinical atrial fibrillation) or the pre-registered wording of section 8.6.
+* **Rule of three.** Two rhetorical triads were mine, added in the previous pass while breaking long
+  sentences: "Three conditions decide whether a spectral index earns a place beside them" and "Three
+  checks agree", each followed by three parallel sentences. Both are now prose. The eleven remaining
+  tricolons are genuine enumerations -- six competitor features, five SFI columns, the contents of
+  Supplement 2 -- and stay.
+* **Em dashes.** Four to zero. The five-column parenthetical took ordinary parentheses; the reporting
+  guideline sentence was recast so it no longer needs a pair.
+* **Boldface for emphasis.** `\textbf{not met}` twice in running prose, removed. The fourteen
+  remaining are Abstract, Key Points and Article Information labels, which the journal's structure
+  requires.
+* **Overused vocabulary.** One "additionally" (now "also"). The scanner also flags
+  `late-gadolinium-enhancement` and `robustness check`; both are the correct technical terms and stay.
+* **Elegant variation.** "a gain of $+0.117$" in a sentence that had already said "inflated AUC by
+  $+0.117$"; now "an increment", matching the nineteen other uses of that word.
+* **Copula avoidance, significance inflation, vague attribution, curly quotes.** Zero hits.
+
+Four further fixes from reading the built file rather than scanning it. "It also pre-committed that a
+materially degraded baseline would be reported as confounding, per the frozen plan" was circular --
+the plan pre-committing per the plan. "Collapses lawfully with resolution" used jargon the same
+sentence then explains properly by naming the Weyl exponent. The Conclusions ended on a summary
+flourish, "We report a bounded negative and a portable, label-free validity screen", replaced with
+what a reader can actually use: the validity radius needs no outcome label and can be applied to
+other Fiedler-based markers before they are tested. And "Evaluations imposing all three requirements
+at once" no longer had three visibly separated requirements to count after the triad was dissolved.
+
+Wording only again. `numdiff.py`: 201 distinct numerals before and after, none added, none altered.
+`verify_oi.py` 136 of 136 traced. Main text 2942 of 3000, abstract 350, Key Points 97, 5 floats,
+19 references, 13 pages, compile clean with 0 undefined references.
