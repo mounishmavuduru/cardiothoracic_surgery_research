@@ -1,0 +1,110 @@
+\section{Results}
+
+The Roney deposit contributed $100$ left-atrial meshes and all $100$ were
+analysed. The University of Washington (UW)/Boyle deposit contained $164$
+meshes, being $82$ patients imaged before and after ablation; the $82$
+pre-ablation meshes were analysed, since post-ablation geometry encodes the
+delivered treatment. No subject was excluded for any other reason, so the
+analysed real-anatomy cohort was $100+82=182$ with no attrition. The
+electrophysiology simulator returned a reentry-inducible verdict in $34$ of
+$100$ Roney subjects ($34.0\%$) and in $8$ of $82$ UW subjects ($9.8\%$), $42$
+of $182$ combined; the UW rate sits far below the moderate-burst band expected
+for a cohort of atrial fibrillation patients and is flagged as anomalous. Up to
+$100{,}000$ synthetic excitable networks supplied the scale arm. Table~1 gives
+cohort composition, event counts, baseline discrimination, and the incremental
+results.
+
+The pre-registered primary endpoint, a grouped $\dAUC\geq0.05$ with DeLong
+$p<0.05$ when \SFI{} was added to the six published competitor features, was
+\textbf{not met} in any cohort or by either classifier. On the combined real
+cohort the competitor baseline reached an out-of-fold AUC of $0.884$ under
+logistic regression and $0.851$ under gradient boosting; adding the \SFI{} block
+changed discrimination by $\dAUC=-0.007$ ($95\%$ CI $-0.042$ to $+0.029$;
+$p=0.70$) and $+0.012$ ($95\%$ CI $-0.017$ to $+0.044$; DeLong $p=0.449$),
+respectively. The gradient-boosting point estimate is roughly a quarter of the
+pre-registered threshold and its interval excludes that threshold as well as
+containing zero, so the combined result is a measured null rather than a
+shortfall of power. Cohort-specific increments were $-0.021$ and $+0.009$ on
+Roney and $+0.000$ and $+0.035$ on UW. The UW arm rests on eight positives and
+its intervals ($[-0.073,+0.081]$ and $[-0.095,+0.203]$) reach past the
+effect-size gate, so that arm is uninformative rather than null (Figure~1). The
+pooled row is a single ROC across two cohorts of unequal prevalence, so it
+carries between-cohort as well as within-cohort separability and does not
+replace the cohort-specific estimates.
+
+The null held at scale. On $2{,}000$ FitzHugh--Nagumo networks the increment was
+$\leq+0.003$ with $p\geq0.12$, and on $500$ Kuramoto phase-oscillator networks
+$\leq+0.0036$ with $p\geq0.38$. Extending the FitzHugh--Nagumo cohort to
+$100{,}000$ networks resolved the effect statistically without enlarging it: the
+subspace variant added $+0.0028$ at $p<10^{-4}$ once $N\geq10^{4}$. Detecting an
+increment of that size at $80\%$ power would require approximately $4{,}150$
+cases, and the single-vector variant's $+0.0007$ approximately $23{,}000$. That
+characterisation was not transported to the real cohorts, a separate regime.
+
+Because a zero increment is equally consistent with redundancy, with an
+uninformative feature, and with one the classifier cannot exploit, redundancy was
+measured directly and without reference to the label. The leading canonical
+correlation between the nine \SFI{} columns and the six competitors was $0.996$,
+against $0.289$ for a permuted-\SFI{} control, so the two blocks are almost
+collinear in their dominant direction. The per-column picture was less uniform:
+the total and region-mean summaries were reconstructible from the competitors at
+$R^{2}=0.970$, four of the nine columns reached $R^{2}\geq0.60$, and the
+remaining five --- the region maximum, the region standard deviation, the top
+single region, and both edge-level columns --- retained most of their variance at
+$R^{2}<0.25$, well above the permuted control. Redundancy therefore accounts for
+part of the null but not all of it: for some columns the competitors already
+carry the information, while for others unique variance exists and does not
+predict the label. Decisively, the \emph{exact} per-region $\Delta\lam_2$
+variant, which carries no first-order approximation error, also added nothing
+over the competitor set, so the null is not a failure of the approximation.
+
+Estimator validity was assessed without reference to any label. The
+single-vector first-order form is trustworthy only while
+$\rhoval=\lVert\Delta L\rVert/(\lam_3-\lam_2)$ is $O(1)$; empirically its
+relative error is $1\%$ at $\rhoval=0.3$ and crosses $10\%$ at
+$\rhoval^\ast\approx3$. Across the $12$ scanned real atrial meshes the median was
+$\rhoval\approx2422$ (interquartile range $[1082,7384]$; full range
+$[817,16554]$), so every mesh exceeded $\rhoval^\ast$ and even the smallest did so
+by a factor of $272$. The spectral gap in the denominator collapses lawfully with
+resolution: measured on the weighted conduction Laplacian the biomarker itself
+uses, the atrial surface fitted $N^{-1.00}$, within $0.5\%$ of the Weyl
+2-manifold exponent of $-1.0$, so meshing the same anatomy more finely degrades
+the estimator further rather than improving it (Figure~2). This establishes that
+the single-vector estimator is numerically invalid on real tissue and that
+$\phii_2$ is ill-conditioned; it does not by itself establish
+non-predictiveness.
+
+The only endpoint scored against patient outcomes was two-year post-ablation
+arrhythmia recurrence in the $82$ UW patients, $48$ of whom recurred, with every
+patient followed for the full two years (Table~2). At $n=82$ with $48$ events,
+power at $\dAUC=0.05$ was $0.24$, so the analysis plan --- frozen and tagged
+before any feature was placed beside the outcome column --- fixed the minimum
+detectable effect at $\dAUC\approx0.10$--$0.15$, specified a fixed-sequence
+stopping rule, and pre-committed that a materially degraded baseline would be
+reported as confounding rather than as a win for \SFI{}. Under logistic
+regression the competitor baseline gave an out-of-fold AUC of $0.250$, adding
+\SFI{} gave $0.447$, and the increment was $\dAUC=+0.197$ ($95\%$ CI $+0.054$ to
+$+0.334$; DeLong $p=0.0061$), clearing both arithmetic thresholds. The
+pre-specified reading is that the increment is an artefact. A baseline AUC of
+$0.250$ is anti-predictive rather than weak, and $0.447$ remains below chance.
+All $15$ features, competitor and \SFI{} alike, were univariately at chance
+($0.435$--$0.547$); the gradient-boosting arm, whose baseline sat at $0.516$,
+gave $\dAUC=+0.021$ ($p=0.738$); and replacing the nine \SFI{} columns with nine
+columns of standard Gaussian noise and re-running the identical pipeline
+reproduced the increment, the noise gaining $+0.137$ on average across $20$ draws
+with $6$ of $20$ matching or exceeding $+0.197$ (empirical $p=0.333$). Fold event
+rates ranged from $25\%$ to $81\%$, and mean predicted probability on a held-out
+fold tracked that fold's training prevalence at $r=+0.995$, so pooling
+out-of-fold probabilities inverted the ranking; scoring within folds and
+averaging returned the baseline to $0.345$. The clinical primary endpoint was
+\textbf{not met}, the observed increment is reported as confounded by baseline
+degradation, and under the stopping rule the ablation-induced $\Delta$\SFI{} test
+was neither performed nor computed.
+
+Removing any single pre-registered guard manufactured a specific false positive
+(Figure~3). On a controlled replicated cohort, replacing shape-family grouping
+with naive random cross-validation inflated AUC from $0.640$ to $0.756$, a gain
+of $+0.117$. Removing the effect-size gate admitted the $p$-value trap: at
+$N=55{,}000$ networks the subspace \SFI{} reached a paired DeLong
+$p\approx2\times10^{-24}$ over the competitor set while its $\dAUC$ of $+0.003$
+would require approximately $4{,}150$ cases to detect at $80\%$ power.

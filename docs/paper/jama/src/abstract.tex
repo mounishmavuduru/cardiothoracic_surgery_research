@@ -1,0 +1,52 @@
+\noindent\textbf{Importance.} Algebraic connectivity $\lam_2$ and its
+closed-form per-edge sensitivity govern stability in coupled excitable networks,
+motivating a biomarker of atrial reentry that aggregates that sensitivity over a
+fibrosis-weighted conduction-uncoupling field. Whether it adds information
+beyond established fibrosis and connectivity features was unknown.
+
+\medskip
+\noindent\textbf{Objective.} To determine, under a protocol pre-registered
+before any label was inspected, whether the Spectral Fragility Index (\SFI)
+adds incremental discrimination for atrial reentry beyond published features.
+
+\medskip
+\noindent\textbf{Design, Setting, and Participants.} Pre-registered in-silico
+evaluation on $182$ patient-derived left-atrial meshes from two
+de-identified public deposits (Roney virtual cohort, $n=100$; University of Washington
+late-gadolinium-enhancement cohort, $n=82$; no attrition) and up to $100{,}000$
+synthetic excitable networks, with a pre-registered clinical arm in those $82$
+patients, all followed two years after ablation.
+
+\medskip
+\noindent\textbf{Exposures.} \SFI, computed from pre-ablation anatomy and
+entered only as an add-on to six competitor features (fibrosis burden, spatial
+entropy, patch size, minimum cut, percolation threshold, $\lam_2$).
+
+\medskip
+\noindent\textbf{Main Outcomes and Measures.} In-silico, a simulator's
+reentry-inducibility verdict, not clinical atrial fibrillation; clinically,
+two-year post-ablation arrhythmia recurrence. Penalised logistic regression and
+gradient-boosted trees were fitted under patient- and shape-family-held-out
+\code{GroupKFold} and compared by paired DeLong test with $\geq10^{4}$ bootstrap
+resamples. The primary endpoint required grouped $\dAUC\geq0.05$ with $p<0.05$;
+the clinical arm pre-specified a minimum detectable $\dAUC$ of $0.10$--$0.15$
+and fixed-sequence stopping.
+
+\medskip
+\noindent\textbf{Results.} The primary endpoint was not met. Across the combined
+real cohorts ($42$ inducible of $182$), gradient boosting gave $\dAUC=+0.012$
+(bootstrap CI $[-0.017,+0.044]$; $p=0.449$), excluding the $0.05$ threshold, a
+measured null rather than low power; synthetic-network $\dAUC$ converged to
+$+0.003$. The clinical gate fired ($\dAUC=+0.197$; $p=0.0061$), but the plan
+frozen before outcomes were joined identified an artefact of an anti-predictive
+baseline (AUC $0.250$) that nine columns of Gaussian noise reproduced (empirical
+$p=0.333$); that endpoint was not met and testing halted. \SFI\ aggregates were
+reconstructible from the competitors ($R^{2}=0.970$), an exact-recompute variant
+added nothing, and the estimator was ill-conditioned on real tissue (median
+$\rhoval\approx2422$; limit $\rhoval^{\ast}\approx3$).
+
+\medskip
+\noindent\textbf{Conclusions and Relevance.} \SFI\ added no practically
+meaningful predictive value for atrial reentry beyond existing features, and its
+one nominally positive patient-outcome result was a false positive its own
+pre-registered guards caught. These findings do not support clinical use.

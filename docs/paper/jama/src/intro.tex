@@ -1,0 +1,40 @@
+\section{Introduction}
+Atrial fibrillation is sustained on a remodelled conduction substrate:
+interstitial fibrosis slows and disorganises propagation, and the resulting
+wavelength shortening, source--sink mismatch, and unidirectional block permit
+reentry. Because that substrate is a network of coupled excitable elements,
+graph-theoretic and spectral summaries of the atrial conduction network have
+been proposed as substrate biomarkers. Algebraic connectivity $\lam_2$, the
+second-smallest Laplacian eigenvalue (Fiedler,
+1973)~\cite{fiedler1973}, governs the stability of synchronised states in
+coupled excitable and oscillator networks through the master-stability function
+(Pecora and Carroll, 1998)~\cite{pecora1998} and the synchronizability
+eigenratio $\lam_N/\lam_2$~\cite{barahona2002}, and has been applied as a
+real-time seizure detector~\cite{bomela2020}. The sensitivity of $\lam_2$ to a
+single conduction weight has a classical closed form,
+$\partial\lam_2/\partial w_{ij}=(\phii_{2,i}-\phii_{2,j})^2$ (Ghosh and Boyd,
+2006)~\cite{ghosh2006}, where $\phii_2$ is the Fiedler vector. Aggregating that
+sensitivity over a fibrosis-weighted conduction-uncoupling field yields a
+per-region Spectral Fragility Index (SFI). The identity is classical; the
+contribution here is its evaluation.
+
+What has not been established is whether such an index carries information
+beyond the substrate features already in use. Fibrosis burden, fibrosis spatial
+heterogeneity, fibrosis patch size, and connectivity measures such as the global
+minimum cut, the percolation threshold, and $\lam_2$ itself are computed from
+the same meshes at negligible cost. A spectral index is worth adopting only if
+it improves discrimination when added to those features; only if the improvement
+is large enough to matter, judged against a threshold fixed in advance rather
+than a $p$ value alone; and only if it survives cross-validation that holds out
+whole patients and shape families, so that anatomy cannot leak between training
+and test folds. Evaluations meeting all three conditions have not been reported.
+
+This study evaluated SFI as a strict add-on to six competitor features for the
+prediction of simulator reentry inducibility in $182$ patient-derived
+left-atrial meshes ($100$ Roney~\cite{roney2022}, $82$ University of
+Washington~\cite{uwboyle2025}) and up to $100{,}000$ synthetic excitable
+networks, together with a pre-registered clinical endpoint of two-year
+post-ablation arrhythmia recurrence in the $82$ University of Washington
+patients. The endpoints, cross-validation scheme, baseline feature set,
+effect-size threshold ($\dAUC\geq 0.05$), and the accepted null that SFI merely
+re-encodes fibrosis were frozen before any label was inspected.

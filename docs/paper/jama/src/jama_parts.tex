@@ -1,0 +1,222 @@
+%% ===================== PREAMBLE =====================
+\documentclass[11pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[letterpaper,margin=1in]{geometry}
+\usepackage{amsmath,amssymb,mathtools}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{caption}
+\usepackage{float}
+\usepackage{enumitem}
+\usepackage{xcolor}
+\usepackage{microtype}
+\usepackage{setspace}
+\usepackage[colorlinks=true,linkcolor=black,citecolor=black,urlcolor=blue!55!black]{hyperref}
+\hypersetup{
+  pdftitle={Incremental predictive value of a spectral fragility index for atrial
+            reentry: a pre-registered in-silico evaluation with a clinical
+            recurrence endpoint},
+  pdfauthor={Mounish Mavuduru},
+  pdfsubject={Original Investigation submitted to JAMA Cardiology},
+  pdfkeywords={atrial fibrillation; reentry; biomarker; prediction model;
+               spectral graph theory; algebraic connectivity; negative result;
+               pre-registration; TRIPOD+AI}
+}
+\graphicspath{{figures/}}
+\newcommand{\lam}{\lambda}
+\newcommand{\phii}{\varphi}
+\newcommand{\rhoval}{\rho}
+\newcommand{\SFI}{\ensuremath{\mathrm{SFI}}}
+\newcommand{\dAUC}{\ensuremath{\Delta\mathrm{AUC}}}
+\newcommand{\code}[1]{\texttt{#1}}
+\emergencystretch=2em
+\hbadness=2500
+\captionsetup{font=small,labelfont=bf}
+
+%% ===================== TITLE PAGE =====================
+\begin{document}
+\thispagestyle{empty}
+
+\begin{center}
+{\Large\bfseries Incremental predictive value of a spectral fragility index for
+atrial reentry: a pre-registered in-silico evaluation with a clinical
+recurrence endpoint\par}
+\end{center}
+
+\vspace{0.7em}
+\noindent\textbf{Running title.} SPECTRAL FRAGILITY INDEX FOR ATRIAL REENTRY
+
+\smallskip
+\noindent\textbf{Article type.} Original Investigation. \textbf{Study type.}
+Diagnostic/Prognostic Study.
+
+\smallskip
+\noindent\textbf{Author.} Mounish Mavuduru
+
+\smallskip
+\noindent\textbf{Affiliation.} Independent researcher (unaffiliated).
+
+\smallskip
+\noindent\textbf{ORCID.} 0009-0009-4102-6075
+
+\smallskip
+\noindent\textbf{Corresponding author.} Mounish Mavuduru, 4912 Spanish Oaks Dr,
+McKinney, TX 75070, USA. Telephone (+1) 945-527-6483. E-mail:
+\href{mailto:mounishmavuduru@gmail.com}{mounishmavuduru@gmail.com}
+
+\vspace{0.7em}
+\noindent\textbf{Reporting guideline.} TRIPOD+AI, for the clinical endpoint;
+completed checklist in Supplement~1.
+
+\smallskip
+\noindent\textbf{Scope.} Computational (in-silico) study. All ground-truth labels
+are electrophysiology-simulator inducibility verdicts with a single exception:
+the pre-registered clinical endpoint, scored against real two-year
+post-ablation arrhythmia recurrence in the $82$ University of Washington
+patients. No post-operative atrial fibrillation outcome was simulated.
+
+\vspace{0.7em}
+\noindent\textbf{Word count, tables and figures}
+
+\smallskip
+\begin{tabular}{@{}ll@{}}
+\toprule
+Word count (main text)  & WCMAIN \\
+Word count (abstract)   & WCABS \\
+Key Points              & WCKP \\
+Tables and figures      & 5 (2 tables, 3 figures) \\
+References              & NREFS \\
+Online-only material    & Supplement 1, Supplement 2 \\
+\bottomrule
+\end{tabular}
+
+\newpage
+
+%% ===================== FLOATS =====================
+\begin{table}[H]
+\centering
+\caption{Incremental predictive value of the Spectral Fragility Index added to
+the published competitor feature set. $\dAUC$ is leakage-controlled
+(patient-held-out cross-validation); lr, penalised logistic regression; gbt,
+gradient-boosted trees. The pre-registered endpoint (grouped $\dAUC\geq0.05$
+\emph{and} DeLong $p<0.05$) is met in no regime, and every interval on real
+anatomy contains zero. The UW/Boyle rows rest on eight positives and are
+uninformative rather than null.}
+\label{tab:primary}
+\footnotesize
+\begin{tabularx}{\linewidth}{@{}l r l r X@{}}
+\toprule
+cohort / medium & events/$N$ & model & base AUC & SFI $\dAUC$ (95\% CI); $p$ \\
+\midrule
+Roney (real)      & 34/100 & lr  & $0.870$ & $-0.021$ $[-0.075,+0.033]$; $0.44$ \\
+                  &        & gbt & $0.856$ & $+0.009$ $[-0.029,+0.046]$; $0.62$ \\
+UW/Boyle (real)   & 8/82   & lr  & $0.834$ & $+0.000$ $[-0.073,+0.081]$; $1.00$ \\
+                  &        & gbt & $0.748$ & $+0.035$ $[-0.095,+0.203]$; $0.67$ \\
+Combined real     & 42/182 & lr  & $0.884$ & $-0.007$ $[-0.042,+0.029]$; $0.70$ \\
+                  &        & gbt & $0.851$ & $+0.012$ $[-0.017,+0.044]$; $0.45$ \\
+\midrule
+FHN networks      & \multicolumn{3}{l}{up to $100{,}000$}  & subspace $+0.0028$;
+$p<10^{-4}$ at $N\geq10^4$ \\
+Kuramoto networks & \multicolumn{3}{l}{$500$ networks}     & $\leq +0.0036$;
+$p\geq0.38$ \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\begin{table}[H]
+\centering
+\caption{Pre-registered clinical endpoint: two-year post-ablation arrhythmia
+recurrence in $82$ University of Washington patients ($48$ events). The
+arithmetic gate fired under logistic regression, and the analysis plan frozen
+before outcomes were joined identifies the increment as an artefact of an
+anti-predictive baseline: nine columns of Gaussian noise substituted for the
+nine SFI columns reproduce it. The endpoint is \emph{not} met.
+$^{\dagger}$The source study's model uses $89$ features including electronic-health-record
+and clinical risk factors not held here; the comparison establishes only that this
+baseline is materially weaker, and no claim is made against that model.}
+\label{tab:clinical}
+\footnotesize
+\begin{tabularx}{\linewidth}{@{}l r r r r X@{}}
+\toprule
+analysis & base AUC & +SFI AUC & $\dAUC$ & 95\% CI & DeLong $p$ \\
+\midrule
+Logistic regression      & $0.250$ & $0.447$ & $+0.197$ & $[+0.054,+0.334]$ & $0.0061$ \\
+Gradient-boosted trees   & $0.516$ & $0.537$ & $+0.021$ & $[-0.100,+0.142]$ & $0.738$ \\
+\midrule
+\multicolumn{6}{@{}l}{\emph{Pre-specified guard and post-hoc diagnostics}}\\
+Noise control ($20$ draws) & \multicolumn{4}{l}{mean $\dAUC$ $+0.137$; $6/20$ draws
+$\geq$ observed} & empirical $0.333$ \\
+Fibrosis-only baseline     & \multicolumn{5}{l}{best AUC $0.603$, against the source study's
+$0.80$$^{\dagger}$} \\
+Within-fold scoring        & \multicolumn{5}{l}{recovers base AUC $0.250\to0.345$} \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.86\linewidth]{fig_predictive_null.png}
+\caption{The predictive null. Adding the Spectral Fragility Index to the
+competitor set does not clear the pre-registered effect-size gate in any cohort;
+on the combined real cohort the bootstrap interval excludes the gate as well as
+containing zero.}
+\label{fig:null}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.82\linewidth]{fig_rho_scaling.png}
+\caption{The estimator-validity boundary. The spectral gap collapses with mesh
+resolution, so $\rhoval$ grows lawfully and the first-order estimator degrades
+\emph{more}, predictably, as the medium is meshed finer.}
+\label{fig:rho}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\linewidth]{fig_falsification.png}
+\caption{What the pre-registered guards caught. Removing shape-family grouping
+inflates AUC by $+0.117$; removing the effect-size gate lets an increment of
+$+0.003$ pass at $p=2\times10^{-24}$ on $55{,}000$ networks.}
+\label{fig:falsify}
+\end{figure}
+
+%% ===================== ARTICLE INFORMATION =====================
+\section*{Article Information}
+\noindent\textbf{Author Contributions.} Mr Mavuduru is the sole author and had
+full access to all of the data in the study and takes responsibility for the
+integrity of the data and the accuracy of the data analysis.
+
+\smallskip
+\noindent\textbf{Conflict of Interest Disclosures.} None reported.
+
+\smallskip
+\noindent\textbf{Funding/Support.} This work received no funding from any public,
+commercial, or not-for-profit body.
+
+\smallskip
+\noindent\textbf{Ethics.} No new human or animal data were collected. Analyses
+use previously published, de-identified, publicly deposited datasets under a
+documented human-data exemption determination; no institutional review board
+approval or informed consent was required.
+
+\smallskip
+\noindent\textbf{Data Sharing Statement.} Both anatomical cohorts are public,
+de-identified deposits: the Roney left-atrial virtual cohort (Zenodo 5801337)
+and the University of Washington/Boyle cohort (Dryad
+\code{10.5061/dryad.kkwh70sg0}). Neither deposit contains an outcome label; the
+two-year recurrence outcomes were withheld from the public download and obtained
+by direct request to the cohort's authors, who have confirmed in writing that no
+confidentiality attaches to them. Analysis code, the frozen pre-registration,
+and all result files are publicly available in the project repository.
+
+\smallskip
+\noindent\textbf{Additional Information.} Supplement~1 is the completed TRIPOD+AI
+checklist. Supplement~2 is the full technical report, containing the complete
+methods, the substrate provenance audit and its four controls, the independent
+solver cross-check, the resolution-convergence study, the cross-medium
+localization results, the power analyses, and the record of every correction
+made during this work.

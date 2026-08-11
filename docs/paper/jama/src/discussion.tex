@@ -1,0 +1,87 @@
+\section{Discussion}
+
+The pre-registered primary endpoint was not met. Added to six published
+competitor features under leakage-controlled grouping, SFI left the combined
+real-cohort gradient-boosting increment at $\dAUC=+0.012$, with a bootstrap
+interval $[-0.017,+0.044]$ that excludes the pre-registered $0.05$ gate as well
+as containing zero (Table~1, Figure~1). On $182$ patient-derived anatomies this
+is a measured null rather than a shortfall of power. It does not exclude a small
+effect: the lower bound of $-0.017$ leaves an increment of a few thousandths
+compatible with these data, resolvable only in a far larger cohort. The
+synthetic arm behaved the same way, the
+effect converging to $\dAUC\approx+0.003$ across up to $100{,}000$ networks.
+
+The null is not a computation failure. The exact per-region $\Delta\lam_2$ SFI,
+which carries no first-order approximation error, also added nothing over the
+competitor set. Measuring the mechanism directly and without reference to the
+label placed it partly in feature redundancy: the leading canonical correlation
+between the nine SFI columns and the six competitors was $0.996$, against
+$0.289$ for a permuted control, and the two aggregate summaries were
+reconstructible from the competitors at $R^2=0.970$. The region maximum, the
+region spread and the edge-level columns retained most of their variance
+($R^2<0.25$), so they carry variance the competitors do not, and that variance
+does not predict the label.
+
+Independently of the predictive question, the validity radius
+$\rhoval=\lVert\Delta L\rVert/(\lam_3-\lam_2)$ is a label-free precondition that
+any Fiedler-based fragility marker can be screened against before an outcome is
+seen. First-order relative error scales as $\Theta(\rhoval)$ and crosses $10\%$
+at $\rhoval^\ast\approx3$, while real atria sit at median $\rhoval\approx2422$,
+every mesh past the threshold (Figure~2). The spectral gap collapses as
+$N^{-1.00}$ on the weighted conduction Laplacian, matching the Weyl 2-manifold
+exponent to within $0.5\%$, so finer meshing degrades the single-vector
+estimator predictably rather than improving it. The screen is portable to
+spectral fragility markers used outside cardiology, but it bounds estimator
+accuracy only; it does not establish that a feature ranks cases poorly, which
+must still be tested against competitors.
+
+The methodological result is that ordinary practice would have reported this
+biomarker as working. Removing the shape-family grouping inflated AUC by
+$+0.117$ ($0.756$ under random cross-validation against $0.640$ grouped), and
+removing the effect-size gate allowed a $\dAUC$ of $+0.003$ to pass at
+$p\approx2\times10^{-24}$ on $55{,}000$ networks (Figure~3). Both failure modes
+occurred in this project's own pipeline. In silico, a $\dAUC$ of $+0.103$ at
+$p=0.009$ was withdrawn once $38$ further released meshes were added. On real
+patients, the clinical endpoint returned $\dAUC=+0.197$ at DeLong $p=0.0061$,
+clearing both of its thresholds; the analysis plan, frozen before the outcomes
+were joined, identified this as an artefact of baseline degradation, the
+baseline being anti-predictive at AUC $0.250$ and reaching only $0.447$ with SFI
+added, and nine columns of Gaussian noise reproduced the increment, gaining
+$+0.137$ on average with $6$ of $20$ draws matching or exceeding SFI (empirical
+$p=0.333$; Table~2). The fixed-sequence stopping rule then halted testing. The
+guard that caught the false positive was written before the outcome column was
+opened, not after the result was seen.
+
+\subsection*{Limitations}
+
+The in-silico labels are a monodomain simulator's reentry-inducibility verdict,
+not clinical atrial fibrillation; monodomain Mitchell--Schaeffer was substituted
+for the pre-registered openCARP ground truth and logged as a deviation. That
+labeller is strongly resolution-sensitive and does not converge in the tested
+window, the inducibility rate falling from $58\%$ at $1500$ nodes to $17\%$ at
+$3000$ and rising to $37.5\%$ at $\sim\!50$k, against $34.0\%$ at the
+$2{,}000$-node operating resolution, with only $7/24$ subjects consistent across
+all six tiers. Per-subject label noise is non-differential and biases every
+reported increment toward zero, so the null is partly a statement about the
+labeller. The clinical arm is underpowered by construction: with $48/82$ events,
+power at the $0.05$ gate is $0.24$, the minimum detectable effect is
+$\dAUC\approx0.10$ to $0.15$, and $80\%$ power at $0.05$ would require $371$ to
+$859$ patients, so its null is not evidence of no effect. Neither public deposit
+released any demographic or clinical variable; both ship anatomical fields only.
+No sociodemographic characterisation, subgroup analysis, or assessment of
+whether discrimination differs across subgroups is therefore possible, and the
+representativeness of these patients relative to any ablation population is
+unknown. There was no patient or public involvement, this being a secondary
+analysis of de-identified deposits. Each cohort derives from a single
+originating centre. openCARP was run only as a robustness check and is barred
+from any endpoint, its calibration gate passing on one cohort and not the other.
+
+\subsection*{Conclusions}
+
+A closed-form spectral fragility index did not add practically meaningful
+reentry-inducibility prediction beyond existing features, at synthetic scale or
+on $182$ patients of real anatomy. The single-vector estimator is additionally
+ill-conditioned on real tissue and lawfully more so as meshes are refined. The
+clinical endpoint was not met and could not have resolved an effect of the size
+that would matter. What is offered is a bounded negative and a portable,
+label-free validity screen.

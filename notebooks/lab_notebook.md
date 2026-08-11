@@ -1585,3 +1585,49 @@ The JAMA build differs from the master only where intended: 13 lines removed (ti
 Gates: pytest exit 0 (129), consistency 7/7, numbers 310 / 0 untraced. Master 31 pages, JAMA build
 30, supplement 13, all zero errors. Title page recounted: 13,108 main text, 695 abstract, 13,803
 combined, 19 references.
+
+
+## 2026-08-10 --- Condensed JAMA Cardiology Original Investigation
+
+The JAMA build shipped so far was the full 13,108-word manuscript with 11 floats, an unstructured
+abstract and no Key Points box. That is a format mismatch with the Original Investigation category,
+not a science problem, so the fix was a second, condensed article carrying the same claims, with the
+full technical report demoted to Supplement 2.
+
+Built `docs/paper/jama/JAMACardio_OriginalInvestigation.tex` (13 pages) from fragments now stored in
+`docs/paper/jama/src/`. Generated, not hand-edited: `assemble_oi.py` concatenates the fragments,
+injects citations by exact string match (aborting without writing if any pattern misses), counts the
+words and substitutes those counts into the title page, so the declared counts cannot drift from the
+text.
+
+Limits, all met exactly: main text 2980 of 3000; abstract 350 of 350 under the full seven JAMA
+headings (Importance, Objective, Design/Setting/Participants, Exposures, Main Outcomes and Measures,
+Results, Conclusions and Relevance); Key Points 95, inside 75--100; 5 floats of 5 (2 tables,
+3 figures). References 19, below the 50--75 JAMA calls typical -- left unpadded on purpose.
+
+Verification, since the automated verify pass had died on a usage limit and had to be redone by
+hand. `verify_oi.py`: 136 distinct numerals in the article body, 0 untraced against the audited
+master plus `results/*.json`. `claims_oi.py`, the stronger check, requires each substantive number to
+appear in the master *near its own subject*, so a numeral that survives paraphrase but changes
+referent is caught: 61 claims, 3 reports, all three run down by hand and benign --- `0.5\%` is
+escaped LaTeX the literal matcher cannot see (master line 1259), and `0.603` / `0.537` are stated in
+the master as prose without the numeral, both traced to `results/clinical_endpoint.json`
+(`fibrosis_only_auc.gbt` = 0.6029, `gbt.grouped_auc_sfi` = 0.5368).
+
+Three defects fixed during that pass, all mine, none in the master:
+
+1. The methods fragment wrote `10\,000` bootstrap resamples where the master and the abstract write
+   `$\geq10^{4}$`. Same value, but re-expressing a number is how a discrepancy is born; matched to
+   the master.
+2. Table 2 compared the fibrosis-only baseline (0.603) against the source study's 0.80 with no
+   caveat. `results/clinical_endpoint.json` records that the source model uses 89 features including
+   EHR and clinical risk factors not held here and that no claim is made against it. Added as a
+   footnote; the comparison now establishes only that the baseline is materially weaker.
+3. `\SFI` and `\dAUC` were defined as bare `\mathrm{...}`, which fails outside math mode. The Key
+   Points box was the first text to use them and the compile died on line 101. Both are now
+   `\ensuremath`.
+
+Compile clean: 0 errors, 0 undefined references or citations, 0 overfull boxes past 10pt, no
+non-ASCII, no doubled words. Package rebuilt as `docs/paper/JAMACardio Submission.zip` (article,
+both supplements, all eight figures). The earlier `JAMACardio Manuscript.zip` holds the 13,108-word
+build and is superseded for JAMA Cardiology; it remains valid for journals with no such limit.
