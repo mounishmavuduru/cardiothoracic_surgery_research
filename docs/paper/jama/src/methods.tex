@@ -9,30 +9,30 @@ placed beside the outcome column; that analysis was run once and is reported as 
 came out.
 
 \paragraph{Reporting guideline.} The clinical endpoint --- prediction of two-year
-post-ablation arrhythmia recurrence in the 82 University of Washington (UW)
+post-ablation arrhythmia recurrence in the $82$ University of Washington (UW)
 patients, the only analysis in this work scored against a real patient outcome ---
 is reported in accordance with TRIPOD+AI, and a completed checklist accompanies
-this article. Adherence is claimed for that endpoint alone: every other outcome
-here is an electrophysiology simulator's reentry-inducibility verdict rather than a
-patient outcome, so those analyses lie outside the statement's remit and no claim
-of adherence is made for them, though they follow the same frozen protocol.
+this article. Adherence is claimed for that endpoint alone. Every other outcome
+here is an electrophysiology simulator's verdict on reentry inducibility, which
+falls outside the statement's remit, though those analyses follow the same
+frozen protocol.
 
 \paragraph{Cohorts.} Two public patient-derived left-atrial mesh deposits were
-used. The Roney virtual cohort (Zenodo 5801337) contains 100 meshes and all 100
-were analysed; fibrosis is a continuous fraction mapped from the shipped
+used. The Roney virtual cohort (Zenodo 5801337) contains $100$ meshes and all
+$100$ were analysed; fibrosis is a continuous fraction mapped from the shipped
 image-intensity ratio. The UW/Boyle late-gadolinium-enhancement cohort (Dryad
-10.5061/dryad.kkwh70sg0) contains 164 meshes, being 82 patients imaged before and
-after ablation; the primary analysis used the 82 pre-ablation meshes only, because
-post-ablation geometry encodes the delivered treatment. That release ships no
-intensity ratios (withheld under its institutional review board), so its fibrosis
-was derived from the per-element tissue tags and is two-valued. No subject was
-excluded for any other reason, giving 182 analysed meshes with no attrition. Both
-deposits are de-identified and carry anatomy only, with no age, sex, race,
-ethnicity, or comorbidity variables. The per-patient two-year recurrence outcomes
-were supplied on request by the UW cohort's authors, who confirmed they carry no
-confidentiality restriction. Synthetic excitable networks (up to 100\,000 random
-geometric graphs) were used only for the scale behaviour of the null and for
-cross-medium transfer.
+\code{10.5061/dryad.kkwh70sg0}) contains $164$ meshes, being $82$ patients imaged
+before and after ablation; the primary analysis used the $82$ pre-ablation meshes
+only, because post-ablation geometry encodes the delivered treatment. That
+release ships no intensity ratios (withheld under its institutional review
+board), so its fibrosis was derived from the per-element tissue tags and is
+two-valued. No subject was excluded for any other reason, giving $182$ analysed
+meshes with no attrition. Both deposits are de-identified and carry anatomy only,
+with no age, sex, race, ethnicity, or comorbidity variables. The per-patient
+two-year recurrence outcomes were supplied on request by the UW cohort's authors,
+who confirmed they carry no confidentiality restriction. Synthetic excitable
+networks (up to $100{,}000$ random geometric graphs) were used only for the scale
+behaviour of the null and for cross-medium transfer.
 
 \paragraph{Conduction graph and index.} Nodes were mesh vertices and edges
 triangle edges, with weight
@@ -49,37 +49,39 @@ gives, to first order,
 \frac{\partial\lam_2}{\partial w_{ij}}=(\phii_{2,i}-\phii_{2,j})^{2},
 \end{equation}
 a classical identity. First-order, basis-independent subspace, and
-exact-recompute variants were all computed on $\sim$2000-node coarsened graphs.
+exact-recompute variants were all computed on $\sim\!2000$-node coarsened graphs.
 
 \paragraph{Comparator features and outcomes.} SFI was evaluated strictly as an
 add-on to six published competitor features it had to beat: fibrosis burden,
 fibrosis spatial entropy, fibrosis patch size, deterministic global min-cut
 (Stoer--Wagner), percolation threshold, and $\lam_2$ alone. The in-silico outcome
 was a monodomain Mitchell--Schaeffer inducibility verdict (self-sustained reentry
-$\geq650$~ms after burst pacing at a cycle length of 150~ms from random sites),
-42 of 182 meshes inducible; this is a simulator verdict and not clinical atrial
-fibrillation. The clinical outcome was recurrence, defined as at least 30 seconds
-of documented atrial fibrillation or flutter after a 90-day blanking period and
-within two years; all 82 patients were followed the full two years, with no
-censoring, and 48 had events.
+$\geq650$~ms after burst pacing at a cycle length of $150$~ms from random sites),
+$42$ of $182$ meshes inducible; this is a simulator verdict and not clinical
+atrial fibrillation. Clinically, the outcome was recurrence, defined as at least
+$30$ seconds of documented atrial fibrillation or flutter after a $90$-day
+blanking period and within two years; all $82$ patients were followed the full
+two years, with no censoring, and $48$ had events.
 
-\paragraph{Statistical analysis.} Two classifiers were used: a standardised,
-penalised logistic regression whose regularisation was chosen in an inner
-\code{GroupKFold} over $\{0.03,0.1,0.3,1.0,3.0\}$, and a deliberately untuned,
-frozen gradient-boosted tree ensemble (120 trees, depth 2, learning rate 0.05,
-subsample 0.8), the latter logged as a deviation from the pre-registered nested
-selection. Cross-validation was \code{GroupKFold} with the group set to the
-patient, so no patient appeared in both training and test folds, using
-$k=\min(5,n_{\mathrm{groups}})$ folds; a naive shuffled-fold arm was reported
-alongside so that leakage is visible. Out-of-fold predicted probabilities were
-pooled and compared by the paired DeLong test in its fast midrank form; because
-pooled scores come from $k$ fitted models rather than two fixed scoring functions,
-these $p$ values are approximate. Intervals came from at least $10^{4}$ stratified
-bootstrap resamples. The primary endpoint required \emph{both} grouped
-$\dAUC\geq0.05$ and DeLong $p<0.05$. That effect-size gate was not reused for the
-clinical arm, where power at $\dAUC=0.05$ with 82 patients and 48 events is 0.24;
-the minimum detectable effect was instead fixed at $\dAUC\approx0.10$--$0.15$, and
-the plan pre-committed that a baseline materially weaker than the source study's
-published performance would make any increment confounded by baseline degradation.
-Testing followed a fixed sequence halting at the first non-rejection. Full methods
-appear in eMethods in Supplement 2.
+\paragraph{Statistical analysis.} Two classifiers were used. The first was a
+standardised, penalised logistic regression whose regularisation was chosen in
+an inner \code{GroupKFold} over $\{0.03,0.1,0.3,1.0,3.0\}$. The second was a
+deliberately untuned, frozen gradient-boosted tree ensemble ($120$ trees, depth
+$2$, learning rate $0.05$, subsample $0.8$), whose fixed hyperparameters are
+logged as a deviation from the pre-registered nested selection. Cross-validation
+was \code{GroupKFold} with the group set to the patient, so no patient appeared
+in both training and test folds, using $k=\min(5,n_{\mathrm{groups}})$ folds; a
+naive shuffled-fold arm was reported alongside so that leakage is visible.
+Out-of-fold predicted probabilities were pooled and
+compared by the paired DeLong test in its fast midrank form;
+because pooled scores come from $k$ fitted models
+rather than two fixed scoring functions, these $p$ values are approximate.
+Intervals came from at least $10^{4}$ stratified bootstrap resamples. The primary
+endpoint required \emph{both} grouped $\dAUC\geq0.05$ and DeLong $p<0.05$. That
+effect-size gate was not reused for the clinical arm. With $82$ patients and $48$
+events, power at $\dAUC=0.05$ is $0.24$, so the minimum detectable effect was
+fixed at $\dAUC\approx0.10$--$0.15$. The plan also pre-committed that if the
+baseline came out materially weaker than the source study's published
+performance, any increment would be reported as confounded by baseline
+degradation and not as a win for SFI. Testing followed a fixed sequence halting
+at the first non-rejection. Full methods appear in eMethods in Supplement 2.

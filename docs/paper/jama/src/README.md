@@ -43,16 +43,29 @@ Known and intentional `claims_oi.py` reports:
 
 | item | JAMA limit | this article |
 |---|---|---|
-| main text | 3000 words | 2980 |
+| main text | 3000 words | 2978 |
 | abstract | 350 words, structured | 350, seven headings |
-| Key Points | 75--100 words | 95 |
+| Key Points | 75--100 words | 97 |
 | tables + figures | 5 | 5 (2 tables, 3 figures) |
 | references | 50--75 typical | 19 |
+
+The counts come from `assemble_oi.py`, which treats each `$...$` span as one
+word --- the convention a copy editor applies to an inline symbol.
 
 The reference count is below the range JAMA describes as typical. It is not
 padded: the argument cites the identities, the datasets, the statistical
 methods, and the inducibility literature it actually uses. Supplement 2 carries
 the full technical report.
+
+## House style
+
+* Every numeral in the body is set in math mode, so `$82$` and never `82`.
+* Thousands separators (`{,}`) from five digits up; four-digit mesh and network
+  sizes are written solid (`$2000$`, `$4150$`). The one exception is the full
+  $\rho$ range `$[817,16554]$`, where a separator would collide with the comma
+  that divides the interval.
+* British `-ise` spelling, except `localization` and `synchronizability`, which
+  the master and the cited literature spell with a z.
 
 ## Relationship to the other files here
 

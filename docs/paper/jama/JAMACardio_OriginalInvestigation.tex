@@ -84,9 +84,9 @@ patients. No post-operative atrial fibrillation outcome was simulated.
 \smallskip
 \begin{tabular}{@{}ll@{}}
 \toprule
-Word count (main text)  & 2980 \\
+Word count (main text)  & 2978 \\
 Word count (abstract)   & 350 \\
-Key Points              & 95 \\
+Key Points              & 97 \\
 Tables and figures      & 5 (2 tables, 3 figures) \\
 References              & 19 \\
 Online-only material    & Supplement 1, Supplement 2 \\
@@ -105,12 +105,12 @@ inducibility beyond published competitor features?
 \paragraph{Findings.} In a pre-registered evaluation of $182$ patient-derived
 left-atrial meshes, the incremental $\dAUC$ for simulator-determined reentry
 inducibility was $+0.012$ (bootstrap interval, $-0.017$ to $+0.044$), excluding
-the pre-registered $0.05$ threshold; the primary endpoint was not met. The
-clinical endpoint in $82$ patients was also not met.
+the pre-registered $0.05$ threshold; the primary endpoint was not met. A
+pre-registered clinical endpoint in $82$ patients was also not met.
 
 \paragraph{Meaning.} The index added nothing beyond established fibrosis and
-connectivity features. Because the interval excludes the pre-specified effect
-size, this is an informative null rather than an underpowered study.
+connectivity features. The interval excludes the pre-specified effect size, so
+the finding is a measured null and not an underpowered one.
 
 \newpage
 
@@ -153,8 +153,8 @@ and fixed-sequence stopping.
 \medskip
 \noindent\textbf{Results.} The primary endpoint was not met. Across the combined
 real cohorts ($42$ inducible of $182$), gradient boosting gave $\dAUC=+0.012$
-(bootstrap CI $[-0.017,+0.044]$; $p=0.449$), excluding the $0.05$ threshold, a
-measured null rather than low power; synthetic-network $\dAUC$ converged to
+(bootstrap CI $[-0.017,+0.044]$; $p=0.449$), excluding the $0.05$ threshold, so
+power was not the limiting factor; synthetic-network $\dAUC$ converged to
 $+0.003$. The clinical gate fired ($\dAUC=+0.197$; $p=0.0061$), but the plan
 frozen before outcomes were joined identified an artefact of an anti-predictive
 baseline (AUC $0.250$) that nine columns of Gaussian noise reproduced (empirical
@@ -173,45 +173,45 @@ pre-registered guards caught. These findings do not support clinical use.
 
 %% ===================== MAIN TEXT =====================
 \section{Introduction}
-Atrial fibrillation is sustained on a remodelled conduction substrate:
-interstitial fibrosis slows and disorganises propagation, and the resulting
+Atrial fibrillation is sustained on a remodelled conduction substrate.
+Interstitial fibrosis slows and disorganises propagation, and the resulting
 wavelength shortening, source--sink mismatch, and unidirectional block permit
 reentry. Because that substrate is a network of coupled excitable elements,
 graph-theoretic and spectral summaries of the atrial conduction network have
-been proposed as substrate biomarkers. Algebraic connectivity $\lam_2$, the
-second-smallest Laplacian eigenvalue (Fiedler,
-1973)~\cite{fiedler1973}, governs the stability of synchronised states in
+been proposed as substrate biomarkers. One such summary is algebraic
+connectivity $\lam_2$, the second-smallest Laplacian eigenvalue (Fiedler,
+1973)~\cite{fiedler1973}. It governs the stability of synchronised states in
 coupled excitable and oscillator networks through the master-stability function
 (Pecora and Carroll, 1998)~\cite{pecora1998} and the synchronizability
-eigenratio $\lam_N/\lam_2$~\cite{barahona2002}, and has been applied as a
-real-time seizure detector~\cite{bomela2020}. The sensitivity of $\lam_2$ to a
-single conduction weight has a classical closed form,
+eigenratio $\lam_N/\lam_2$~\cite{barahona2002}, and it has been fielded as a
+real-time seizure detector~\cite{bomela2020}. Its sensitivity to a single
+conduction weight has a classical closed form,
 $\partial\lam_2/\partial w_{ij}=(\phii_{2,i}-\phii_{2,j})^2$ (Ghosh and Boyd,
 2006)~\cite{ghosh2006}, where $\phii_2$ is the Fiedler vector. Aggregating that
 sensitivity over a fibrosis-weighted conduction-uncoupling field yields a
-per-region Spectral Fragility Index (SFI). The identity is classical; the
-contribution here is its evaluation.
+per-region Spectral Fragility Index (SFI).
 
-What has not been established is whether such an index carries information
-beyond the substrate features already in use. Fibrosis burden, fibrosis spatial
+Whether such an index carries information beyond the substrate features already
+in use has not been established. Fibrosis burden, fibrosis spatial
 heterogeneity, fibrosis patch size, and connectivity measures such as the global
 minimum cut, the percolation threshold, and $\lam_2$ itself are computed from
-the same meshes at negligible cost. A spectral index is worth adopting only if
-it improves discrimination when added to those features; only if the improvement
-is large enough to matter, judged against a threshold fixed in advance rather
-than a $p$ value alone; and only if it survives cross-validation that holds out
-whole patients and shape families, so that anatomy cannot leak between training
-and test folds. Evaluations meeting all three conditions have not been reported.
+the same meshes at negligible cost. Three conditions decide whether a spectral
+index earns a place beside them. It has to improve discrimination when added to
+those features. The improvement must be large enough to matter, judged against a
+threshold fixed in advance and not against a $p$ value alone. And it must
+survive cross-validation that holds out whole patients and shape families, so
+that anatomy cannot leak between training and test folds. Evaluations meeting
+all three conditions have not been reported.
 
-This study evaluated SFI as a strict add-on to six competitor features for the
-prediction of simulator reentry inducibility in $182$ patient-derived
-left-atrial meshes ($100$ Roney~\cite{roney2022}, $82$ University of
-Washington~\cite{uwboyle2025}) and up to $100{,}000$ synthetic excitable
-networks, together with a pre-registered clinical endpoint of two-year
-post-ablation arrhythmia recurrence in the $82$ University of Washington
-patients. The endpoints, cross-validation scheme, baseline feature set,
-effect-size threshold ($\dAUC\geq 0.05$), and the accepted null that SFI merely
-re-encodes fibrosis were frozen before any label was inspected.
+This study evaluated SFI as a strict add-on to six competitor features,
+predicting simulator reentry inducibility in $182$ patient-derived left-atrial
+meshes ($100$ Roney~\cite{roney2022}, $82$ University of
+Washington~\cite{uwboyle2025}) and in up to $100{,}000$ synthetic excitable
+networks. A pre-registered clinical endpoint followed: two-year post-ablation
+arrhythmia recurrence in the $82$ University of Washington patients. The
+endpoints, cross-validation scheme, baseline feature set, effect-size threshold
+($\dAUC\geq 0.05$), and the accepted null that SFI merely re-encodes fibrosis
+were frozen before any label was inspected.
 
 \section{Methods}
 
@@ -224,30 +224,30 @@ placed beside the outcome column; that analysis was run once and is reported as 
 came out.
 
 \paragraph{Reporting guideline.} The clinical endpoint --- prediction of two-year
-post-ablation arrhythmia recurrence in the 82 University of Washington (UW)
+post-ablation arrhythmia recurrence in the $82$ University of Washington (UW)
 patients, the only analysis in this work scored against a real patient outcome ---
 is reported in accordance with TRIPOD+AI~\cite{tripodai2024}, and a completed checklist accompanies
-this article. Adherence is claimed for that endpoint alone: every other outcome
-here is an electrophysiology simulator's reentry-inducibility verdict rather than a
-patient outcome, so those analyses lie outside the statement's remit and no claim
-of adherence is made for them, though they follow the same frozen protocol.
+this article. Adherence is claimed for that endpoint alone. Every other outcome
+here is an electrophysiology simulator's verdict on reentry inducibility, which
+falls outside the statement's remit, though those analyses follow the same
+frozen protocol.
 
 \paragraph{Cohorts.} Two public patient-derived left-atrial mesh deposits were
-used. The Roney virtual cohort~\cite{roney2022} (Zenodo 5801337) contains 100 meshes and all 100
-were analysed; fibrosis is a continuous fraction mapped from the shipped
+used. The Roney virtual cohort~\cite{roney2022} (Zenodo 5801337) contains $100$ meshes and all
+$100$ were analysed; fibrosis is a continuous fraction mapped from the shipped
 image-intensity ratio~\cite{khurram2014}. The UW/Boyle late-gadolinium-enhancement cohort~\cite{uwboyle2025} (Dryad
-10.5061/dryad.kkwh70sg0) contains 164 meshes, being 82 patients imaged before and
-after ablation; the primary analysis used the 82 pre-ablation meshes only, because
-post-ablation geometry encodes the delivered treatment. That release ships no
-intensity ratios (withheld under its institutional review board), so its fibrosis
-was derived from the per-element tissue tags and is two-valued. No subject was
-excluded for any other reason, giving 182 analysed meshes with no attrition. Both
-deposits are de-identified and carry anatomy only, with no age, sex, race,
-ethnicity, or comorbidity variables. The per-patient two-year recurrence outcomes
-were supplied on request by the UW cohort's authors, who confirmed they carry no
-confidentiality restriction. Synthetic excitable networks (up to 100\,000 random
-geometric graphs) were used only for the scale behaviour of the null and for
-cross-medium transfer.
+\code{10.5061/dryad.kkwh70sg0}) contains $164$ meshes, being $82$ patients imaged
+before and after ablation; the primary analysis used the $82$ pre-ablation meshes
+only, because post-ablation geometry encodes the delivered treatment. That
+release ships no intensity ratios (withheld under its institutional review
+board), so its fibrosis was derived from the per-element tissue tags and is
+two-valued. No subject was excluded for any other reason, giving $182$ analysed
+meshes with no attrition. Both deposits are de-identified and carry anatomy only,
+with no age, sex, race, ethnicity, or comorbidity variables. The per-patient
+two-year recurrence outcomes were supplied on request by the UW cohort's authors,
+who confirmed they carry no confidentiality restriction. Synthetic excitable
+networks (up to $100{,}000$ random geometric graphs) were used only for the scale
+behaviour of the null and for cross-medium transfer.
 
 \paragraph{Conduction graph and index.} Nodes were mesh vertices and edges
 triangle edges, with weight
@@ -264,53 +264,52 @@ gives, to first order,
 \frac{\partial\lam_2}{\partial w_{ij}}=(\phii_{2,i}-\phii_{2,j})^{2},
 \end{equation}
 a classical identity. First-order, basis-independent subspace, and
-exact-recompute variants were all computed on $\sim$2000-node coarsened graphs.
+exact-recompute variants were all computed on $\sim\!2000$-node coarsened graphs.
 
 \paragraph{Comparator features and outcomes.} SFI was evaluated strictly as an
 add-on to six published competitor features it had to beat: fibrosis burden,
 fibrosis spatial entropy, fibrosis patch size, deterministic global min-cut
 (Stoer--Wagner), percolation threshold, and $\lam_2$ alone. The in-silico outcome
 was a monodomain Mitchell--Schaeffer~\cite{mitchell2003} inducibility verdict (self-sustained reentry
-$\geq650$~ms after burst pacing at a cycle length of 150~ms from random sites),
-42 of 182 meshes inducible; this is a simulator verdict and not clinical atrial
-fibrillation. The clinical outcome was recurrence, defined as at least 30 seconds
-of documented atrial fibrillation or flutter after a 90-day blanking period and
-within two years; all 82 patients were followed the full two years, with no
-censoring, and 48 had events.
+$\geq650$~ms after burst pacing at a cycle length of $150$~ms from random sites),
+$42$ of $182$ meshes inducible; this is a simulator verdict and not clinical
+atrial fibrillation. Clinically, the outcome was recurrence, defined as at least
+$30$ seconds of documented atrial fibrillation or flutter after a $90$-day
+blanking period and within two years; all $82$ patients were followed the full
+two years, with no censoring, and $48$ had events.
 
-\paragraph{Statistical analysis.} Two classifiers were used: a standardised,
-penalised logistic regression whose regularisation was chosen in an inner
-\code{GroupKFold} over $\{0.03,0.1,0.3,1.0,3.0\}$, and a deliberately untuned,
-frozen gradient-boosted tree ensemble (120 trees, depth 2, learning rate 0.05,
-subsample 0.8), the latter logged as a deviation from the pre-registered nested
-selection. Cross-validation was \code{GroupKFold} with the group set to the
-patient, so no patient appeared in both training and test folds, using
-$k=\min(5,n_{\mathrm{groups}})$ folds; a naive shuffled-fold arm was reported
-alongside so that leakage is visible. Out-of-fold predicted probabilities were
-pooled and compared by the paired DeLong test~\cite{delong1988} in its fast midrank form~\cite{sunxu2014}; because
-pooled scores come from $k$ fitted models rather than two fixed scoring functions,
-these $p$ values are approximate. Intervals came from at least $10^{4}$ stratified
-bootstrap resamples. The primary endpoint required \emph{both} grouped
-$\dAUC\geq0.05$ and DeLong $p<0.05$. That effect-size gate was not reused for the
-clinical arm, where power at $\dAUC=0.05$ with 82 patients and 48 events is 0.24;
-the minimum detectable effect was instead fixed at $\dAUC\approx0.10$--$0.15$, and
-the plan pre-committed that a baseline materially weaker than the source study's
-published performance would make any increment confounded by baseline degradation.
-Testing followed a fixed sequence halting at the first non-rejection. Full methods
-appear in eMethods in Supplement 2.
+\paragraph{Statistical analysis.} Two classifiers were used. The first was a
+standardised, penalised logistic regression whose regularisation was chosen in
+an inner \code{GroupKFold} over $\{0.03,0.1,0.3,1.0,3.0\}$. The second was a
+deliberately untuned, frozen gradient-boosted tree ensemble ($120$ trees, depth
+$2$, learning rate $0.05$, subsample $0.8$), whose fixed hyperparameters are
+logged as a deviation from the pre-registered nested selection. Cross-validation
+was \code{GroupKFold} with the group set to the patient, so no patient appeared
+in both training and test folds, using $k=\min(5,n_{\mathrm{groups}})$ folds; a
+naive shuffled-fold arm was reported alongside so that leakage is visible.
+Out-of-fold predicted probabilities were pooled and
+compared by the paired DeLong test~\cite{delong1988} in its fast midrank form~\cite{sunxu2014};
+because pooled scores come from $k$ fitted models
+rather than two fixed scoring functions, these $p$ values are approximate.
+Intervals came from at least $10^{4}$ stratified bootstrap resamples. The primary
+endpoint required \emph{both} grouped $\dAUC\geq0.05$ and DeLong $p<0.05$. That
+effect-size gate was not reused for the clinical arm. With $82$ patients and $48$
+events, power at $\dAUC=0.05$ is $0.24$, so the minimum detectable effect was
+fixed at $\dAUC\approx0.10$--$0.15$. The plan also pre-committed that if the
+baseline came out materially weaker than the source study's published
+performance, any increment would be reported as confounded by baseline
+degradation and not as a win for SFI. Testing followed a fixed sequence halting
+at the first non-rejection. Full methods appear in eMethods in Supplement 2.
 
 \section{Results}
 
-The Roney deposit contributed $100$ left-atrial meshes and all $100$ were
-analysed. The University of Washington (UW)/Boyle deposit contained $164$
-meshes, being $82$ patients imaged before and after ablation; the $82$
-pre-ablation meshes were analysed, since post-ablation geometry encodes the
-delivered treatment. No subject was excluded for any other reason, so the
-analysed real-anatomy cohort was $100+82=182$ with no attrition. The
+All $100$ Roney meshes and all $82$ pre-ablation University of Washington (UW)
+meshes entered the analysis, $182$ in total, with no attrition and no exclusion
+on any other ground. The
 electrophysiology simulator returned a reentry-inducible verdict in $34$ of
 $100$ Roney subjects ($34.0\%$) and in $8$ of $82$ UW subjects ($9.8\%$), $42$
-of $182$ combined; the UW rate sits far below the moderate-burst band expected
-for a cohort of atrial fibrillation patients and is flagged as anomalous~\cite{kumar2012,oral2008,marquardt2018,kawai2019,liu2020}. Up to
+of $182$ combined. The UW rate sits far below the moderate-burst band expected
+for a cohort of atrial fibrillation patients, and we flag it as anomalous~\cite{kumar2012,oral2008,marquardt2018,kawai2019,liu2020}. Up to
 $100{,}000$ synthetic excitable networks supplied the scale arm. Table~1 gives
 cohort composition, event counts, baseline discrimination, and the incremental
 results.
@@ -323,41 +322,41 @@ logistic regression and $0.851$ under gradient boosting; adding the \SFI{} block
 changed discrimination by $\dAUC=-0.007$ ($95\%$ CI $-0.042$ to $+0.029$;
 $p=0.70$) and $+0.012$ ($95\%$ CI $-0.017$ to $+0.044$; DeLong $p=0.449$),
 respectively. The gradient-boosting point estimate is roughly a quarter of the
-pre-registered threshold and its interval excludes that threshold as well as
-containing zero, so the combined result is a measured null rather than a
-shortfall of power. Cohort-specific increments were $-0.021$ and $+0.009$ on
-Roney and $+0.000$ and $+0.035$ on UW. The UW arm rests on eight positives and
-its intervals ($[-0.073,+0.081]$ and $[-0.095,+0.203]$) reach past the
-effect-size gate, so that arm is uninformative rather than null (Figure~1). The
-pooled row is a single ROC across two cohorts of unequal prevalence, so it
-carries between-cohort as well as within-cohort separability and does not
-replace the cohort-specific estimates.
+pre-registered threshold, and its interval excludes that threshold as well as
+containing zero. On the combined cohort, then, power is not what limits the
+answer: the effect was measured, and it was small. Cohort-specific increments
+were $-0.021$ and $+0.009$ on Roney and $+0.000$ and $+0.035$ on UW. The UW arm
+rests on eight positives and its intervals ($[-0.073,+0.081]$ and
+$[-0.095,+0.203]$) reach past the effect-size gate, so that arm settles nothing
+either way (Figure~1). The pooled row is a single ROC across two cohorts of
+unequal prevalence, so it carries between-cohort as well as within-cohort
+separability and does not replace the cohort-specific estimates.
 
-The null held at scale. On $2{,}000$ FitzHugh--Nagumo networks the increment was
+The null held at scale. On $2000$ FitzHugh--Nagumo networks the increment was
 $\leq+0.003$ with $p\geq0.12$, and on $500$ Kuramoto phase-oscillator networks
 $\leq+0.0036$ with $p\geq0.38$. Extending the FitzHugh--Nagumo cohort to
 $100{,}000$ networks resolved the effect statistically without enlarging it: the
 subspace variant added $+0.0028$ at $p<10^{-4}$ once $N\geq10^{4}$. Detecting an
-increment of that size at $80\%$ power would require approximately $4{,}150$
+increment of that size at $80\%$ power would require approximately $4150$
 cases, and the single-vector variant's $+0.0007$ approximately $23{,}000$. That
 characterisation was not transported to the real cohorts, a separate regime.
 
-Because a zero increment is equally consistent with redundancy, with an
-uninformative feature, and with one the classifier cannot exploit, redundancy was
-measured directly and without reference to the label. The leading canonical
+A zero increment admits three readings: the feature is redundant, it carries no
+information, or it carries information the classifier cannot exploit. Redundancy
+was therefore measured on its own, without reference to the label. The leading canonical
 correlation between the nine \SFI{} columns and the six competitors was $0.996$,
 against $0.289$ for a permuted-\SFI{} control, so the two blocks are almost
-collinear in their dominant direction. The per-column picture was less uniform:
-the total and region-mean summaries were reconstructible from the competitors at
-$R^{2}=0.970$, four of the nine columns reached $R^{2}\geq0.60$, and the
+collinear in their dominant direction. The per-column picture was less uniform.
+The total and region-mean summaries were reconstructible from the competitors at
+$R^{2}=0.970$, and four of the nine columns reached $R^{2}\geq0.60$. The
 remaining five --- the region maximum, the region standard deviation, the top
 single region, and both edge-level columns --- retained most of their variance at
 $R^{2}<0.25$, well above the permuted control. Redundancy therefore accounts for
-part of the null but not all of it: for some columns the competitors already
-carry the information, while for others unique variance exists and does not
-predict the label. Decisively, the \emph{exact} per-region $\Delta\lam_2$
-variant, which carries no first-order approximation error, also added nothing
-over the competitor set, so the null is not a failure of the approximation.
+part of the null and not all of it. Where the competitors already carry the
+information, there is nothing left for \SFI{} to add; where unique variance
+survives, it does not predict the label. The \emph{exact} per-region
+$\Delta\lam_2$ variant, which carries no first-order approximation error, also
+added nothing over the competitor set, so the approximation is not what failed.
 
 Estimator validity was assessed without reference to any label. The
 single-vector first-order form is trustworthy only while
@@ -369,38 +368,39 @@ $[817,16554]$), so every mesh exceeded $\rhoval^\ast$ and even the smallest did 
 by a factor of $272$. The spectral gap in the denominator collapses lawfully with
 resolution: measured on the weighted conduction Laplacian the biomarker itself
 uses, the atrial surface fitted $N^{-1.00}$, within $0.5\%$ of the Weyl
-2-manifold exponent~\cite{weyl1912} of $-1.0$, so meshing the same anatomy more finely degrades
-the estimator further rather than improving it (Figure~2). This establishes that
-the single-vector estimator is numerically invalid on real tissue and that
-$\phii_2$ is ill-conditioned; it does not by itself establish
-non-predictiveness.
+2-manifold exponent~\cite{weyl1912} of $-1.0$. Refining the mesh over the same anatomy therefore
+drives the estimator further out of its valid range (Figure~2). The finding here
+is numerical: on real tissue the single-vector estimator is invalid and
+$\phii_2$ is ill-conditioned. Whether the feature ranks cases well is a separate
+question, settled only against competitors.
 
 The only endpoint scored against patient outcomes was two-year post-ablation
 arrhythmia recurrence in the $82$ UW patients, $48$ of whom recurred, with every
 patient followed for the full two years (Table~2). At $n=82$ with $48$ events,
-power at $\dAUC=0.05$ was $0.24$, so the analysis plan --- frozen and tagged
-before any feature was placed beside the outcome column --- fixed the minimum
-detectable effect at $\dAUC\approx0.10$--$0.15$, specified a fixed-sequence
-stopping rule, and pre-committed that a materially degraded baseline would be
-reported as confounding rather than as a win for \SFI{}. Under logistic
+power at $\dAUC=0.05$ was $0.24$. The analysis plan, frozen and tagged before any
+feature was placed beside the outcome column, therefore fixed the minimum
+detectable effect at $\dAUC\approx0.10$--$0.15$ and specified a fixed-sequence
+stopping rule. It also pre-committed that a materially degraded baseline would be
+reported as confounding and not as a win for \SFI{}. Under logistic
 regression the competitor baseline gave an out-of-fold AUC of $0.250$, adding
 \SFI{} gave $0.447$, and the increment was $\dAUC=+0.197$ ($95\%$ CI $+0.054$ to
 $+0.334$; DeLong $p=0.0061$), clearing both arithmetic thresholds. The
 pre-specified reading is that the increment is an artefact. A baseline AUC of
-$0.250$ is anti-predictive rather than weak, and $0.447$ remains below chance.
-All $15$ features, competitor and \SFI{} alike, were univariately at chance
-($0.435$--$0.547$); the gradient-boosting arm, whose baseline sat at $0.516$,
-gave $\dAUC=+0.021$ ($p=0.738$); and replacing the nine \SFI{} columns with nine
-columns of standard Gaussian noise and re-running the identical pipeline
-reproduced the increment, the noise gaining $+0.137$ on average across $20$ draws
-with $6$ of $20$ matching or exceeding $+0.197$ (empirical $p=0.333$). Fold event
-rates ranged from $25\%$ to $81\%$, and mean predicted probability on a held-out
-fold tracked that fold's training prevalence at $r=+0.995$, so pooling
-out-of-fold probabilities inverted the ranking; scoring within folds and
-averaging returned the baseline to $0.345$. The clinical primary endpoint was
-\textbf{not met}, the observed increment is reported as confounded by baseline
-degradation, and under the stopping rule the ablation-induced $\Delta$\SFI{} test
-was neither performed nor computed.
+$0.250$ is not weak; it is anti-predictive, and $0.447$ remains below chance.
+Three checks agree. All $15$ features, competitor and \SFI{} alike, were
+univariately at chance ($0.435$--$0.547$). The gradient-boosting arm, whose
+baseline sat at $0.516$, gave $\dAUC=+0.021$ ($p=0.738$). And replacing the nine
+\SFI{} columns with nine columns of standard Gaussian noise, then re-running the
+identical pipeline, reproduced the increment: the noise gained $+0.137$ on
+average across $20$ draws, with $6$ of $20$ matching or exceeding $+0.197$
+(empirical $p=0.333$). The mechanism is visible in the folds. Their event rates
+ranged from $25\%$ to $81\%$, and mean predicted probability on a held-out fold
+tracked that fold's training prevalence at $r=+0.995$, so pooling out-of-fold
+probabilities inverted the ranking; scoring within folds and averaging returned
+the baseline to $0.345$. That primary endpoint was \textbf{not met}, the
+observed increment is reported as confounded by baseline degradation, and under
+the stopping rule the ablation-induced $\Delta$\SFI{} test was neither performed
+nor computed.
 
 Removing any single pre-registered guard manufactured a specific false positive
 (Figure~3). On a controlled replicated cohort, replacing shape-family grouping
@@ -408,7 +408,7 @@ with naive random cross-validation inflated AUC from $0.640$ to $0.756$, a gain
 of $+0.117$. Removing the effect-size gate admitted the $p$-value trap: at
 $N=55{,}000$ networks the subspace \SFI{} reached a paired DeLong
 $p\approx2\times10^{-24}$ over the competitor set while its $\dAUC$ of $+0.003$
-would require approximately $4{,}150$ cases to detect at $80\%$ power.
+would require approximately $4150$ cases to detect at $80\%$ power.
 
 \section{Discussion}
 
@@ -416,17 +416,17 @@ The pre-registered primary endpoint was not met. Added to six published
 competitor features under leakage-controlled grouping, SFI left the combined
 real-cohort gradient-boosting increment at $\dAUC=+0.012$, with a bootstrap
 interval $[-0.017,+0.044]$ that excludes the pre-registered $0.05$ gate as well
-as containing zero (Table~1, Figure~1). On $182$ patient-derived anatomies this
-is a measured null rather than a shortfall of power. It does not exclude a small
-effect: the lower bound of $-0.017$ leaves an increment of a few thousandths
-compatible with these data, resolvable only in a far larger cohort. The
-synthetic arm behaved the same way, the
-effect converging to $\dAUC\approx+0.003$ across up to $100{,}000$ networks.
+as containing zero (Table~1, Figure~1). On $182$ patient-derived anatomies the
+effect was measured and came out small; power is not the limiting factor. Small
+is not zero. The lower bound of $-0.017$ leaves an increment of a few
+thousandths compatible with these data, and only a far larger cohort could
+resolve one. The synthetic arm behaved the same way, the effect converging
+to $\dAUC\approx+0.003$ across up to $100{,}000$ networks.
 
-The null is not a computation failure. The exact per-region $\Delta\lam_2$ SFI,
-which carries no first-order approximation error, also added nothing over the
-competitor set. Measuring the mechanism directly and without reference to the
-label placed it partly in feature redundancy: the leading canonical correlation
+How SFI was computed does not explain the null. The exact per-region $\Delta\lam_2$
+SFI, which carries no first-order approximation error, also added nothing over
+the competitor set. Measuring the mechanism directly, without reference to the
+label, placed it partly in feature redundancy: the leading canonical correlation
 between the nine SFI columns and the six competitors was $0.996$, against
 $0.289$ for a permuted control, and the two aggregate summaries were
 reconstructible from the competitors at $R^2=0.970$. The region maximum, the
@@ -442,10 +442,10 @@ at $\rhoval^\ast\approx3$, while real atria sit at median $\rhoval\approx2422$,
 every mesh past the threshold (Figure~2). The spectral gap collapses as
 $N^{-1.00}$ on the weighted conduction Laplacian, matching the Weyl 2-manifold
 exponent to within $0.5\%$, so finer meshing degrades the single-vector
-estimator predictably rather than improving it. The screen is portable to
-spectral fragility markers used outside cardiology, but it bounds estimator
-accuracy only; it does not establish that a feature ranks cases poorly, which
-must still be tested against competitors.
+estimator in a predictable direction. The screen is portable to spectral
+fragility markers used outside cardiology. It bounds estimator accuracy only,
+and says nothing about how well a feature ranks cases, which must still be
+tested against competitors.
 
 The methodological result is that ordinary practice would have reported this
 biomarker as working. Removing the shape-family grouping inflated AUC by
@@ -455,14 +455,14 @@ $p\approx2\times10^{-24}$ on $55{,}000$ networks (Figure~3). Both failure modes
 occurred in this project's own pipeline. In silico, a $\dAUC$ of $+0.103$ at
 $p=0.009$ was withdrawn once $38$ further released meshes were added. On real
 patients, the clinical endpoint returned $\dAUC=+0.197$ at DeLong $p=0.0061$,
-clearing both of its thresholds; the analysis plan, frozen before the outcomes
-were joined, identified this as an artefact of baseline degradation, the
-baseline being anti-predictive at AUC $0.250$ and reaching only $0.447$ with SFI
-added, and nine columns of Gaussian noise reproduced the increment, gaining
-$+0.137$ on average with $6$ of $20$ draws matching or exceeding SFI (empirical
-$p=0.333$; Table~2). The fixed-sequence stopping rule then halted testing. The
-guard that caught the false positive was written before the outcome column was
-opened, not after the result was seen.
+clearing both of its thresholds. The analysis plan, frozen before the outcomes
+were joined, identified that increment as an artefact of baseline degradation:
+the baseline was anti-predictive at AUC $0.250$ and reached only $0.447$ with SFI
+added. Nine columns of Gaussian noise then reproduced it, gaining $+0.137$ on
+average with $6$ of $20$ draws matching or exceeding SFI (empirical $p=0.333$;
+Table~2), and the fixed-sequence stopping rule halted testing. The guard that
+caught the false positive was written before the outcome column was opened, not
+after the result was seen.
 
 \subsection*{Limitations}
 
@@ -470,12 +470,12 @@ The in-silico labels are a monodomain simulator's reentry-inducibility verdict,
 not clinical atrial fibrillation; monodomain Mitchell--Schaeffer was substituted
 for the pre-registered openCARP ground truth and logged as a deviation. That
 labeller is strongly resolution-sensitive and does not converge in the tested
-window, the inducibility rate falling from $58\%$ at $1500$ nodes to $17\%$ at
-$3000$ and rising to $37.5\%$ at $\sim\!50$k, against $34.0\%$ at the
-$2{,}000$-node operating resolution, with only $7/24$ subjects consistent across
-all six tiers. Per-subject label noise is non-differential and biases every
+window. The inducibility rate falls from $58\%$ at $1500$ nodes to $17\%$ at
+$3000$, then rises to $37.5\%$ at $\sim\!50$k, against $34.0\%$ at the
+$2000$-node operating resolution, and only $7/24$ subjects are consistent
+across all six tiers. Per-subject label noise is non-differential and biases every
 reported increment toward zero, so the null is partly a statement about the
-labeller. The clinical arm is underpowered by construction: with $48/82$ events,
+labeller. By construction the clinical arm is underpowered: with $48/82$ events,
 power at the $0.05$ gate is $0.24$, the minimum detectable effect is
 $\dAUC\approx0.10$ to $0.15$, and $80\%$ power at $0.05$ would require $371$ to
 $859$ patients, so its null is not evidence of no effect. Neither public deposit
@@ -494,9 +494,9 @@ A closed-form spectral fragility index did not add practically meaningful
 reentry-inducibility prediction beyond existing features, at synthetic scale or
 on $182$ patients of real anatomy. The single-vector estimator is additionally
 ill-conditioned on real tissue and lawfully more so as meshes are refined. The
-clinical endpoint was not met and could not have resolved an effect of the size
-that would matter. What is offered is a bounded negative and a portable,
-label-free validity screen.
+clinical endpoint was not met, and it could not have resolved an effect of the
+size that would matter. We report a bounded negative and a portable, label-free
+validity screen.
 
 %% ===================== ARTICLE INFORMATION =====================
 \section*{Article Information}
@@ -636,8 +636,8 @@ the published competitor feature set. $\dAUC$ is leakage-controlled
 (patient-held-out cross-validation); lr, penalised logistic regression; gbt,
 gradient-boosted trees. The pre-registered endpoint (grouped $\dAUC\geq0.05$
 \emph{and} DeLong $p<0.05$) is met in no regime, and every interval on real
-anatomy contains zero. The UW/Boyle rows rest on eight positives and are
-uninformative rather than null.}
+anatomy contains zero. The UW/Boyle rows rest on eight positives and settle
+nothing either way.}
 \label{tab:primary}
 \footnotesize
 \begin{tabularx}{\linewidth}{@{}l r l r X@{}}

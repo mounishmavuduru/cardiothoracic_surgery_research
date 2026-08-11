@@ -1631,3 +1631,49 @@ Compile clean: 0 errors, 0 undefined references or citations, 0 overfull boxes p
 non-ASCII, no doubled words. Package rebuilt as `docs/paper/JAMACardio Submission.zip` (article,
 both supplements, all eight figures). The earlier `JAMACardio Manuscript.zip` holds the 13,108-word
 build and is superseded for JAMA Cardiology; it remains valid for journals with no such limit.
+
+
+## 2026-08-10 (later) --- Final pass on the condensed article: prose and consistency
+
+Two things needed doing: a genuine end-to-end check of the condensed Original Investigation, and
+removal of the cadences that mark machine-drafted prose. The fragments had been written by drafting
+agents and read like it.
+
+Wrote `style_scan.py` to count what a reader notices: recycled contrast frames, stock adverb
+openers, cleft closers, tricolons, repeated sentence openers, sentence length, punctuation density.
+The first run on the condensed article, 3876 words:
+
+    rather than 12, stock adverb 1, cleft closer 1, does-not-by-itself 1, meta framing 1
+    21 sentences over 45 words (longest 77), 43 semicolons in 157 sentences
+    "The clinical" opening 7 sentences
+
+After the rewrite: `rather than` 1, no stock adverbs, no cleft closers, 8 long sentences (and the
+scanner counts several of those as long only because stripping `\SFI` leaves a lowercase word that
+defeats its sentence splitter), openers varied.
+
+The rewrite touched wording only. `numdiff.py` compares the numeral multiset of the old and new
+builds and reported no number added and none altered. Three duplicate mentions were dropped on
+purpose -- the Results opener had been restating the Methods cohort description, `164` meshes and
+`100+82=182` included, so it collapsed to one sentence. Every distinct value survives; 201 distinct
+numerals before and after.
+
+Also unified house style, which the fragments had been inconsistent about. Numerals in the Methods
+were plain where the rest of the article set them in math mode. Thousands separators were applied at
+four digits in some places and not others, once inside a single sentence. Both are now consistent:
+math mode everywhere, separators from five digits up, with the full $\rho$ range `$[817,16554]$` left
+solid because a separator there would collide with the interval comma. Recorded in
+`docs/paper/jama/src/README.md` so the next edit does not undo it.
+
+Two content fixes found on the final read. The Discussion said the effect "came out small" and then
+"that does not exclude a small effect", which reads as a contradiction; it now says "Small is not
+zero." And "Nothing about the computation explains this" left "this" pointing at nothing definite,
+now "How SFI was computed does not explain the null."
+
+The assembler's abort guard earned its keep: changing "is flagged as anomalous" to "we flag it as
+anomalous" broke a citation anchor, and the build refused to write rather than silently dropping five
+references.
+
+Final state: main text 2978 of 3000, abstract 350 of 350, Key Points 97 of 100, 5 floats of 5,
+19 references, 13 pages. Compile clean, 0 undefined references, 0 overfull boxes past 10pt.
+`verify_oi.py` 136 of 136 numerals traced; `claims_oi.py` 3 of 61 reported, the same three known and
+benign. Package rebuilt.
