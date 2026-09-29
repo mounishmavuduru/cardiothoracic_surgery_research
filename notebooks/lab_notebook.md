@@ -1736,3 +1736,38 @@ serial commas everywhere else in the paper. "Monodomain" appeared twice in one L
 Main text 2930 of 3000. `numdiff.py` reports 201 distinct numerals before and after, none added or
 altered; the three dropped counts are duplicate mentions. `verify_oi.py` 136 of 136 traced. Compile
 clean, 13 pages.
+
+
+## 2026-09-29 --- Visual page check; Figure 2 exponent corrected
+
+The article was rendered page by page (pymupdf, 105 dpi) and read as images for the first time.
+Every earlier check had been text-only, and the image check found what those could not.
+
+**Correction.** Figure 2 was labelling the real-atrial gap-scaling curve `N^-1.05`. The text
+states $N^{-1.00}$, and that value is the correct one: $-1.0045$ on the weighted conduction
+Laplacian the biomarker uses. The cause was `scripts/make_paper_figures.py`, which still read
+`results/rho_scaling.json` (the superseded unweighted fit, $-1.0471$) instead of
+`results/rho_scaling_weighted.json`. The script now prefers the weighted file. This bug affected
+the figure only. No number in the text of any version was wrong, but **every version submitted
+before this date carries the stale `N^-1.05` label in Figure 2, which disagrees with its own
+text**. Editors still holding one of those versions should be sent the corrected figure.
+
+Presentation fixes found the same way: sections had been numbered, which JAMA does not do;
+references were not in first-citation order; citations were bracketed instead of AMA superscript.
+Figure 1's legend covered the Kuramoto bars. It now sits beneath the axes, and the cohort labels
+read Roney, UW/Boyle and Combined to match the text. Log-axis tick labels on Figure 2 overlapped.
+Wording edits to the Introduction, Methods, Discussion and Abstract; the Discussion's second
+paragraph now interprets the result rather than reprinting it.
+
+A stray `JAMA_OriginalInvestigation.pdf`, text-identical to the build and referenced nowhere, was
+moved to `docs/paper/_to_delete/` for review. `docs/paper/exports/tables/table2.tex` (untracked)
+still carries $N^{-1.05}$ "within 5%"; it is not in any submission and is left for review.
+
+Verification: main text 2914 of 3000, abstract 350, Key Points 97, 5 floats, 19 references,
+13 pages. `verify_oi.py` 133 distinct numerals, 0 unmatched. `claims_oi.py` 61 checked, 3 reported,
+all three the documented known-benign cases. `numdiff.py` shows only intended drops (author-year
+years now held in the bibliography, plus duplicate mentions). `verify_repo_consistency.py` 7/7;
+its first run of the day reported the module-import check failing, and the immediate rerun passed,
+so that check is flaky rather than broken. `verify_manuscript_numbers.py` 0 UNTRACED. `pytest`
+129 passed. Rebuilt the article, master, Supplement 2 and JAMACardio_manuscript PDFs, and the
+14-member submission zip; each member was hash-checked against the file on disk.

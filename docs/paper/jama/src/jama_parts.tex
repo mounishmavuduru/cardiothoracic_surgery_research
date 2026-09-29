@@ -32,6 +32,13 @@
 \newcommand{\SFI}{\ensuremath{\mathrm{SFI}}}
 \newcommand{\dAUC}{\ensuremath{\Delta\mathrm{AUC}}}
 \newcommand{\code}[1]{\texttt{#1}}
+% the journal does not number sections
+\setcounter{secnumdepth}{0}
+% AMA citation style: superscript numerals, no brackets; bibliography numbered "1."
+\makeatletter
+\renewcommand\@cite[2]{\textsuperscript{#1\if@tempswa , #2\fi}}
+\renewcommand\@biblabel[1]{#1.}
+\makeatother
 \emergencystretch=2em
 \hbadness=2500
 \captionsetup{font=small,labelfont=bf}
@@ -169,9 +176,11 @@ containing zero.}
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.82\linewidth]{fig_rho_scaling.png}
-\caption{The estimator-validity boundary. The spectral gap collapses with mesh
-resolution, so $\rhoval$ grows lawfully and the first-order estimator degrades
-\emph{more}, predictably, as the medium is meshed finer.}
+\caption{The estimator-validity boundary. The spectral gap collapses as the mesh
+is refined, at an exponent within $0.5\%$ of the Weyl 2-manifold value, so
+$\rhoval$ grows and the first-order estimator degrades \emph{more} on a finer
+mesh of the same anatomy. The atrial curve is measured on the weighted
+conduction Laplacian the biomarker itself uses.}
 \label{fig:rho}
 \end{figure}
 

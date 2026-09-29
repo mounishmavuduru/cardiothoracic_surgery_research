@@ -13,13 +13,12 @@ to $\dAUC\approx+0.003$ across up to $100{,}000$ networks.
 How SFI was computed does not explain the null. The exact per-region $\Delta\lam_2$
 SFI, which carries no first-order approximation error, also added nothing over
 the competitor set. Measuring the mechanism directly, without reference to the
-label, placed it partly in feature redundancy: the leading canonical correlation
-between the nine SFI columns and the six competitors was $0.996$, against
-$0.289$ for a permuted control, and the two aggregate summaries were
-reconstructible from the competitors at $R^2=0.970$. The region maximum, the
-region spread, and the edge-level columns retained most of their variance
-($R^2<0.25$), so they carry variance the competitors do not, and that variance
-does not predict the label.
+label, placed it partly in feature redundancy: the SFI block is nearly collinear
+with the competitor block in its dominant direction, and the two aggregate
+summaries can be reconstructed from the competitors almost exactly. The account
+is incomplete, though, because the region maximum, the region spread and the
+edge-level columns keep most of their variance. Those columns carry information
+the competitors do not, and it does not predict the label.
 
 Independently of the predictive question, the validity radius
 $\rhoval=\lVert\Delta L\rVert/(\lam_3-\lam_2)$ is a label-free precondition that

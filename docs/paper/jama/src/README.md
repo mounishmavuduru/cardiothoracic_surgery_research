@@ -43,7 +43,7 @@ Known and intentional `claims_oi.py` reports:
 
 | item | JAMA limit | this article |
 |---|---|---|
-| main text | 3000 words | 2942 |
+| main text | 3000 words | 2914 |
 | abstract | 350 words, structured | 350, seven headings |
 | Key Points | 75--100 words | 97 |
 | tables + figures | 5 | 5 (2 tables, 3 figures) |

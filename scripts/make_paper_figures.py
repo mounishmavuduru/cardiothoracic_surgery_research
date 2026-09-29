@@ -19,26 +19,49 @@ def _load(p):
 
 
 def fig_rho_scaling():
-    d = _load("results/rho_scaling.json")
+    """Prefer the weighted rerun: the biomarker is computed on the weighted
+    conduction Laplacian, so the atrial curve has to be the weighted one. The
+    unweighted file is superseded and is read only if the rerun is missing."""
+    d = _load("results/rho_scaling_weighted.json")
+    weighted = d is not None
+    if d is None:
+        d = _load("results/rho_scaling.json")
     if not d:
         return
+
+    def series(blk, size_key):
+        """Return (sizes, gaps, exponent) from either schema."""
+        if "rows" in blk:                                   # superseded layout
+            rows = blk["rows"]
+            return ([r[size_key] for r in rows], [r["gap"] for r in rows],
+                    blk["fitted_exponent"])
+        gap_key = ("gap_weighted_shiftinvert" if "gap_weighted_shiftinvert" in blk
+                   else "gap_unweighted_shiftinvert")
+        exp_key = gap_key.replace("gap_", "exponent_")
+        return blk[size_key], blk[gap_key], blk[exp_key]
+
     fig, ax = plt.subplots(figsize=(6, 4.2))
     rg = d.get("random_geometric", {})
     for key, col, lab in (("d2", BLUE, "2-D random-geometric"), ("d3", GREEN, "3-D random-geometric")):
         blk = rg.get(key)
         if not blk:
             continue
-        Ns = [r["N"] for r in blk["rows"]]; gaps = [r["gap"] for r in blk["rows"]]
-        ax.loglog(Ns, gaps, "o-", color=col, label=f"{lab}  (N^{blk['fitted_exponent']:.2f})")
+        Ns, gaps, exponent = series(blk, "N")
+        ax.loglog(Ns, gaps, "o-", color=col, label=f"{lab}  (N^{exponent:.2f})")
     am = d.get("atrial_mesh", {})
-    if am.get("rows"):
-        Ns = [r["n"] for r in am["rows"]]; gaps = [r["gap"] for r in am["rows"]]
+    if am:
+        Ns, gaps, exponent = series(am, "n")
+        note = "weighted conduction Laplacian" if weighted else "unweighted"
         ax.loglog(Ns, gaps, "s-", color=RED, lw=2.5,
-                  label=f"real atrial mesh  (N^{am['fitted_exponent']:.2f}; Weyl −1.0)")
+                  label=f"real atrial mesh, {note}\n  (N^{exponent:.2f}; Weyl −1.0)")
     ax.set_xlabel("system size N (nodes)")
     ax.set_ylabel(r"spectral gap  $\lambda_3-\lambda_2$")
     ax.set_title("Spectral gap collapses with mesh size\n"
-                 r"($\rho$ grows lawfully with resolution)", fontsize=10.5)
+                 r"($\rho$ grows as the mesh is refined)", fontsize=10.5)
+    # default log minor ticks collide at this width; label decades only
+    ax.xaxis.set_major_locator(matplotlib.ticker.LogLocator(base=10.0, subs=(1.0, 3.0)))
+    ax.xaxis.set_minor_formatter(matplotlib.ticker.NullFormatter())
+    ax.xaxis.set_major_formatter(matplotlib.ticker.LogFormatterSciNotation())
     ax.legend(fontsize=8.5, frameon=False)
     fig.tight_layout(); fig.savefig(f"{OUT}/fig_rho_scaling.png"); plt.close(fig)
     print("wrote fig_rho_scaling.png")
@@ -52,7 +75,8 @@ def fig_predictive_null():
             c = ge["cohorts"].get(name, {})
             r = c.get("competitors_vs_+SFI", {})
             if r:
-                rows.append((f"{name} (real, n={c.get('n_subjects','?')})",
+                label = {"roney": "Roney", "uw": "UW/Boyle", "combined": "Combined"}[name]
+            rows.append((f"{label} (real, n={c.get('n_subjects','?')})",
                              r["lr"]["grouped_delta_auc"], r["gbt"]["grouped_delta_auc"]))
     ku = _load("results/gm4_kuramoto_metrics.json")
     if ku and ku.get("predict"):
@@ -71,8 +95,11 @@ def fig_predictive_null():
     ax.set_xlabel("SFI incremental ΔAUC vs full competitor set")
     ax.set_title("Incremental predictive value of SFI\n"
                  "(pre-registered endpoint not met)", fontsize=11)
-    ax.legend(fontsize=8, frameon=False, loc="lower right")
-    fig.tight_layout(); fig.savefig(f"{OUT}/fig_predictive_null.png"); plt.close(fig)
+    # every corner inside the axes collides with a bar or the 0.05 rule
+    ax.legend(fontsize=8, frameon=False, loc="upper center",
+              bbox_to_anchor=(0.5, -0.16), ncol=3)
+    fig.tight_layout()
+    fig.savefig(f"{OUT}/fig_predictive_null.png", bbox_inches="tight"); plt.close(fig)
     print("wrote fig_predictive_null.png")
 
 

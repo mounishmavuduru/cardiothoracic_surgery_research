@@ -1,4 +1,4 @@
-"""Assemble the condensed JAMA Cardiology Original Investigation.
+﻿"""Assemble the condensed JAMA Cardiology Original Investigation.
 
 Sections come verbatim from the drafted fragments; citations are injected by
 exact string match and the script aborts without writing if any pattern does not
@@ -13,7 +13,7 @@ DST = sys.argv[1]
 
 
 def read(name):
-    return open(os.path.join(SP, name), encoding="utf-8-sig").read().replace("﻿", "")
+    return open(os.path.join(SP, name), encoding="utf-8-sig").read().replace("ï»¿", "")
 
 
 parts = read("jama_parts.tex")
@@ -33,19 +33,19 @@ bib = read("bib.tex")
 CITES = [
     ("methods",
      "is reported in accordance with TRIPOD+AI, and a completed checklist",
-     "is reported in accordance with TRIPOD+AI~\\cite{tripodai2024}, and a completed checklist",
+     "is reported in accordance with TRIPOD+AI\\cite{tripodai2024}, and a completed checklist",
      1, "reporting guideline"),
     ("methods",
      "The Roney virtual cohort (Zenodo 5801337)",
-     "The Roney virtual cohort~\\cite{roney2022} (Zenodo 5801337)",
+     "The Roney virtual cohort\\cite{roney2022} (Zenodo 5801337)",
      1, "cohort 1"),
     ("methods",
      "The UW/Boyle late-gadolinium-enhancement cohort (Dryad",
-     "The UW/Boyle late-gadolinium-enhancement cohort~\\cite{uwboyle2025} (Dryad",
+     "The UW/Boyle late-gadolinium-enhancement cohort\\cite{uwboyle2025} (Dryad",
      1, "cohort 2"),
     ("methods",
      "mapped from the shipped\nimage-intensity ratio",
-     "mapped from the shipped\nimage-intensity ratio~\\cite{khurram2014}",
+     "mapped from the shipped\nimage-intensity ratio\\cite{khurram2014}",
      1, "IIR definition"),
     ("methods",
      "$\\partial\\lam_2/\\partial w_{ij}=(\\phii_{2,i}-\\phii_{2,j})^{2},",
@@ -53,29 +53,29 @@ CITES = [
      0, "no-op placeholder"),
     ("methods",
      "was a monodomain Mitchell--Schaeffer inducibility verdict",
-     "was a monodomain Mitchell--Schaeffer~\\cite{mitchell2003} inducibility verdict",
+     "was a monodomain Mitchell--Schaeffer\\cite{mitchell2003} inducibility verdict",
      1, "solver"),
     ("methods",
      "compared by the paired DeLong test in its fast midrank form",
-     "compared by the paired DeLong test~\\cite{delong1988} in its fast midrank"
-     " form~\\cite{sunxu2014}",
+     "compared by the paired DeLong test\\cite{delong1988} in its fast midrank"
+     " form\\cite{sunxu2014}",
      1, "test + implementation"),
     ("results",
      "and we flag it as anomalous",
-     "and we flag it as anomalous~\\cite{kumar2012,oral2008,marquardt2018,kawai2019,liu2020}",
+     "and we flag it as anomalous\\cite{kumar2012,oral2008,marquardt2018,kawai2019,liu2020}",
      1, "inducibility literature"),
     ("results",
      "$\\rhoval=\\lVert\\Delta L\\rVert/(\\lam_3-\\lam_2)$ is $O(1)$",
      "$\\rhoval=\\lVert\\Delta L\\rVert/(\\lam_3-\\lam_2)$, the Davis--Kahan"
-     " ratio~\\cite{daviskahan1970}, is $O(1)$",
+     " ratio\\cite{daviskahan1970}, is $O(1)$",
      1, "validity radius provenance"),
     ("results",
      "within $0.5\\%$ of the Weyl\n2-manifold exponent",
-     "within $0.5\\%$ of the Weyl\n2-manifold exponent~\\cite{weyl1912}",
+     "within $0.5\\%$ of the Weyl\n2-manifold exponent\\cite{weyl1912}",
      1, "Weyl law"),
     ("intro",
-     "(Fiedler,\n1973)~\\cite{fiedler1973}",
-     "(Fiedler,\n1973)~\\cite{fiedler1973}",
+     "(Fiedler,\n1973)\\cite{fiedler1973}",
+     "(Fiedler,\n1973)\\cite{fiedler1973}",
      0, "already cited"),
 ]
 
@@ -117,6 +117,47 @@ doc = "".join([
     "\\newpage\n", floats.strip(), "\n\n",
     "\\end{document}\n",
 ])
+
+# ---- references in order of first citation, as a numbered-reference journal
+# requires. The master's bibliography is ordered thematically, which produced
+# groups like [14, 16, 15, 17, 18] in the rendered text.
+CITE_RE = re.compile(r"\\cite\{([^}]*)\}")
+body_only = doc.split(r"\begin{thebibliography}")[0]
+order = []
+for m in CITE_RE.finditer(body_only):
+    for k in (x.strip() for x in m.group(1).split(",")):
+        if k not in order:
+            order.append(k)
+
+items = re.split(r"(?=\\bibitem\{)", bib.split(r"\begin{thebibliography}{99}")[1]
+                 .split(r"\end{thebibliography}")[0])
+items = [i for i in items if i.strip().startswith(r"\bibitem{")]
+by_key = {re.match(r"\\bibitem\{([^}]*)\}", i).group(1): i.rstrip() + "\n\n" for i in items}
+
+uncited = [k for k in by_key if k not in order]
+if uncited:
+    print(f"ABORTED -- bibliography entries never cited: {uncited}")
+    sys.exit(1)
+missing = [k for k in order if k not in by_key]
+if missing:
+    print(f"ABORTED -- cited but absent from the bibliography: {missing}")
+    sys.exit(1)
+
+bib_sorted = ("\\begin{thebibliography}{99}\n"
+              + "".join(by_key[k] for k in order).rstrip()
+              + "\n\\end{thebibliography}")
+doc = doc.replace(bib.strip(), bib_sorted)
+
+# and put each multi-key \cite group in ascending numeric order
+rank = {k: i for i, k in enumerate(order)}
+
+
+def _sort_group(m):
+    keys = sorted((x.strip() for x in m.group(1).split(",")), key=lambda k: rank[k])
+    return "\\cite{" + ",".join(keys) + "}"
+
+
+doc = CITE_RE.sub(_sort_group, doc)
 
 # ---- word counts (JAMA counts main text only: Introduction..Conclusions) ----
 

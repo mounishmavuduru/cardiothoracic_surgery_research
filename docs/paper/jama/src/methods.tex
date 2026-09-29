@@ -1,4 +1,4 @@
-\section{Methods}
+﻿\section{Methods}
 
 \paragraph{Design and pre-registration.} The endpoints, cross-validation scheme,
 baseline feature set, and the accepted null were frozen and git-tagged before any
@@ -52,7 +52,7 @@ a classical identity. First-order, basis-independent subspace, and
 exact-recompute variants were all computed on $\sim\!2000$-node coarsened graphs.
 
 \paragraph{Comparator features and outcomes.} SFI was evaluated strictly as an
-add-on to six published competitor features it had to beat: fibrosis burden,
+add-on to six published competitor features: fibrosis burden,
 fibrosis spatial entropy, fibrosis patch size, deterministic global min-cut
 (Stoer--Wagner), percolation threshold, and $\lam_2$ alone. The in-silico outcome
 was a monodomain Mitchell--Schaeffer inducibility verdict (self-sustained reentry
@@ -65,11 +65,11 @@ two years, with no censoring, and $48$ had events.
 
 \paragraph{Statistical analysis.} Two classifiers were used. The first was a
 standardised, penalised logistic regression whose regularisation was chosen in
-an inner \code{GroupKFold} over $\{0.03,0.1,0.3,1.0,3.0\}$. The second was a
+an inner GroupKFold over $\{0.03,0.1,0.3,1.0,3.0\}$. The second was a
 deliberately untuned, frozen gradient-boosted tree ensemble ($120$ trees, depth
 $2$, learning rate $0.05$, subsample $0.8$), whose fixed hyperparameters are
 logged as a deviation from the pre-registered nested selection. Cross-validation
-was \code{GroupKFold} with the group set to the patient, so no patient appeared
+was GroupKFold with the group set to the patient, so no patient appeared
 in both training and test folds, using $k=\min(5,n_{\mathrm{groups}})$ folds; a
 naive shuffled-fold arm was reported alongside so that leakage is visible.
 Out-of-fold predicted probabilities were pooled and

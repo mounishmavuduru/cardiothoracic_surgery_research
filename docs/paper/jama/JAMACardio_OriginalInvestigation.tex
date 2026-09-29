@@ -32,6 +32,13 @@
 \newcommand{\SFI}{\ensuremath{\mathrm{SFI}}}
 \newcommand{\dAUC}{\ensuremath{\Delta\mathrm{AUC}}}
 \newcommand{\code}[1]{\texttt{#1}}
+% the journal does not number sections
+\setcounter{secnumdepth}{0}
+% AMA citation style: superscript numerals, no brackets; bibliography numbered "1."
+\makeatletter
+\renewcommand\@cite[2]{\textsuperscript{#1\if@tempswa , #2\fi}}
+\renewcommand\@biblabel[1]{#1.}
+\makeatother
 \emergencystretch=2em
 \hbadness=2500
 \captionsetup{font=small,labelfont=bf}
@@ -84,7 +91,7 @@ patients. No post-operative atrial fibrillation outcome was simulated.
 \smallskip
 \begin{tabular}{@{}ll@{}}
 \toprule
-Word count (main text)  & 2930 \\
+Word count (main text)  & 2914 \\
 Word count (abstract)   & 350 \\
 Key Points              & 97 \\
 Tables and figures      & 5 (2 tables, 3 figures) \\
@@ -145,7 +152,7 @@ entropy, patch size, minimum cut, percolation threshold, $\lam_2$).
 reentry-inducibility verdict, not clinical atrial fibrillation; clinically,
 two-year post-ablation arrhythmia recurrence. Penalised logistic regression and
 gradient-boosted trees were fitted under patient- and shape-family-held-out
-\code{GroupKFold} and compared by paired DeLong test with $\geq10^{4}$ bootstrap
+cross-validation and compared by paired DeLong test with $\geq10^{4}$ bootstrap
 resamples. The primary endpoint required grouped $\dAUC\geq0.05$ with $p<0.05$;
 the clinical arm pre-specified a minimum detectable $\dAUC$ of $0.10$--$0.15$
 and fixed-sequence stopping.
@@ -179,15 +186,15 @@ wavelength shortening, source--sink mismatch, and unidirectional block permit
 reentry. Because that substrate is a network of coupled excitable elements,
 graph-theoretic and spectral summaries of the atrial conduction network have
 been proposed as substrate biomarkers. One such summary is algebraic
-connectivity $\lam_2$, the second-smallest Laplacian eigenvalue (Fiedler,
-1973)~\cite{fiedler1973}. It governs the stability of synchronised states in
-coupled excitable and oscillator networks through the master-stability function
-(Pecora and Carroll, 1998)~\cite{pecora1998} and the synchronizability
-eigenratio $\lam_N/\lam_2$~\cite{barahona2002}, and it has been fielded as a
-real-time seizure detector~\cite{bomela2020}. Its sensitivity to a single
+connectivity $\lam_2$, the second-smallest Laplacian
+eigenvalue.\cite{fiedler1973} It governs the stability of synchronised states in
+coupled excitable and oscillator networks through the master-stability
+function\cite{pecora1998} and the synchronizability
+eigenratio $\lam_N/\lam_2$,\cite{barahona2002} and it has been fielded as a
+real-time seizure detector.\cite{bomela2020} Its sensitivity to a single
 conduction weight has a classical closed form,
-$\partial\lam_2/\partial w_{ij}=(\phii_{2,i}-\phii_{2,j})^2$ (Ghosh and Boyd,
-2006)~\cite{ghosh2006}, where $\phii_2$ is the Fiedler vector. Aggregating that
+$\partial\lam_2/\partial w_{ij}=(\phii_{2,i}-\phii_{2,j})^2$,\cite{ghosh2006}
+where $\phii_2$ is the Fiedler vector. Aggregating that
 sensitivity over a fibrosis-weighted conduction-uncoupling field yields a
 per-region Spectral Fragility Index (SFI).
 
@@ -203,8 +210,8 @@ test folds. Evaluations imposing all of this at once have not been reported.
 
 This study evaluated SFI as a strict add-on to six competitor features,
 predicting simulator reentry inducibility in $182$ patient-derived left-atrial
-meshes ($100$ Roney~\cite{roney2022}, $82$ University of
-Washington~\cite{uwboyle2025}) and in up to $100{,}000$ synthetic excitable
+meshes ($100$ Roney\cite{roney2022}, $82$ University of
+Washington\cite{uwboyle2025}) and in up to $100{,}000$ synthetic excitable
 networks. A pre-registered clinical endpoint followed: two-year post-ablation
 arrhythmia recurrence in the $82$ University of Washington patients. The
 endpoints, cross-validation scheme, baseline feature set, effect-size threshold
@@ -224,16 +231,16 @@ came out.
 \paragraph{Reporting guideline.} One analysis here is scored against a real
 patient outcome: prediction of two-year post-ablation arrhythmia recurrence in
 the $82$ University of Washington (UW) patients. That endpoint
-is reported in accordance with TRIPOD+AI~\cite{tripodai2024}, and a completed checklist accompanies
+is reported in accordance with TRIPOD+AI\cite{tripodai2024}, and a completed checklist accompanies
 this article. Adherence is claimed for that endpoint alone. Every other outcome
 here is an electrophysiology simulator's verdict on reentry inducibility, which
 falls outside the statement's remit, though those analyses follow the same
 frozen protocol.
 
 \paragraph{Cohorts.} Two public patient-derived left-atrial mesh deposits were
-used. The Roney virtual cohort~\cite{roney2022} (Zenodo 5801337) contains $100$ meshes and all
+used. The Roney virtual cohort\cite{roney2022} (Zenodo 5801337) contains $100$ meshes and all
 $100$ were analysed; fibrosis is a continuous fraction mapped from the shipped
-image-intensity ratio~\cite{khurram2014}. The UW/Boyle late-gadolinium-enhancement cohort~\cite{uwboyle2025} (Dryad
+image-intensity ratio\cite{khurram2014}. The UW/Boyle late-gadolinium-enhancement cohort\cite{uwboyle2025} (Dryad
 \code{10.5061/dryad.kkwh70sg0}) contains $164$ meshes, being $82$ patients imaged
 before and after ablation; the primary analysis used the $82$ pre-ablation meshes
 only, because post-ablation geometry encodes the delivered treatment. That
@@ -265,10 +272,10 @@ a classical identity. First-order, basis-independent subspace, and
 exact-recompute variants were all computed on $\sim\!2000$-node coarsened graphs.
 
 \paragraph{Comparator features and outcomes.} SFI was evaluated strictly as an
-add-on to six published competitor features it had to beat: fibrosis burden,
+add-on to six published competitor features: fibrosis burden,
 fibrosis spatial entropy, fibrosis patch size, deterministic global min-cut
 (Stoer--Wagner), percolation threshold, and $\lam_2$ alone. The in-silico outcome
-was a monodomain Mitchell--Schaeffer~\cite{mitchell2003} inducibility verdict (self-sustained reentry
+was a monodomain Mitchell--Schaeffer\cite{mitchell2003} inducibility verdict (self-sustained reentry
 $\geq650$~ms after burst pacing at a cycle length of $150$~ms from random sites),
 $42$ of $182$ meshes inducible; this is a simulator verdict and not clinical
 atrial fibrillation. Clinically, the outcome was recurrence, defined as at least
@@ -278,15 +285,15 @@ two years, with no censoring, and $48$ had events.
 
 \paragraph{Statistical analysis.} Two classifiers were used. The first was a
 standardised, penalised logistic regression whose regularisation was chosen in
-an inner \code{GroupKFold} over $\{0.03,0.1,0.3,1.0,3.0\}$. The second was a
+an inner GroupKFold over $\{0.03,0.1,0.3,1.0,3.0\}$. The second was a
 deliberately untuned, frozen gradient-boosted tree ensemble ($120$ trees, depth
 $2$, learning rate $0.05$, subsample $0.8$), whose fixed hyperparameters are
 logged as a deviation from the pre-registered nested selection. Cross-validation
-was \code{GroupKFold} with the group set to the patient, so no patient appeared
+was GroupKFold with the group set to the patient, so no patient appeared
 in both training and test folds, using $k=\min(5,n_{\mathrm{groups}})$ folds; a
 naive shuffled-fold arm was reported alongside so that leakage is visible.
 Out-of-fold predicted probabilities were pooled and
-compared by the paired DeLong test~\cite{delong1988} in its fast midrank form~\cite{sunxu2014};
+compared by the paired DeLong test\cite{delong1988} in its fast midrank form\cite{sunxu2014};
 because pooled scores come from $k$ fitted models
 rather than two fixed scoring functions, these $p$ values are approximate.
 Intervals came from at least $10^{4}$ stratified bootstrap resamples. The primary
@@ -307,7 +314,7 @@ on any other ground. The
 electrophysiology simulator returned a reentry-inducible verdict in $34$ of
 $100$ Roney subjects ($34.0\%$) and in $8$ of $82$ UW subjects ($9.8\%$), $42$
 of $182$ combined. The UW rate sits far below the moderate-burst band expected
-for a cohort of atrial fibrillation patients, and we flag it as anomalous~\cite{kumar2012,oral2008,marquardt2018,kawai2019,liu2020}. Up to
+for a cohort of atrial fibrillation patients, and we flag it as anomalous\cite{kumar2012,oral2008,marquardt2018,kawai2019,liu2020}. Up to
 $100{,}000$ synthetic excitable networks supplied the scale arm. Table~1 gives
 cohort composition, event counts, baseline discrimination, and the incremental
 results.
@@ -358,7 +365,7 @@ added nothing over the competitor set, so the approximation is not what failed.
 
 Estimator validity was assessed without reference to any label. The
 single-vector first-order form is trustworthy only while
-$\rhoval=\lVert\Delta L\rVert/(\lam_3-\lam_2)$, the Davis--Kahan ratio~\cite{daviskahan1970}, is $O(1)$; empirically its
+$\rhoval=\lVert\Delta L\rVert/(\lam_3-\lam_2)$, the Davis--Kahan ratio\cite{daviskahan1970}, is $O(1)$; empirically its
 relative error is $1\%$ at $\rhoval=0.3$ and crosses $10\%$ at
 $\rhoval^\ast\approx3$. Across the $12$ scanned real atrial meshes the median was
 $\rhoval\approx2422$ (interquartile range $[1082,7384]$; full range
@@ -366,7 +373,7 @@ $[817,16554]$), so every mesh exceeded $\rhoval^\ast$ and even the smallest did 
 by a factor of $272$. The spectral gap in the denominator collapses with
 resolution: measured on the weighted conduction Laplacian the biomarker itself
 uses, the atrial surface fitted $N^{-1.00}$, within $0.5\%$ of the Weyl
-2-manifold exponent~\cite{weyl1912} of $-1.0$. Refining the mesh over the same anatomy therefore
+2-manifold exponent\cite{weyl1912} of $-1.0$. Refining the mesh over the same anatomy therefore
 drives the estimator further out of its valid range (Figure~2). The finding here
 is numerical: on real tissue the single-vector estimator is invalid and
 $\phii_2$ is ill-conditioned. Whether the feature ranks cases well is a separate
@@ -423,13 +430,12 @@ to $\dAUC\approx+0.003$ across up to $100{,}000$ networks.
 How SFI was computed does not explain the null. The exact per-region $\Delta\lam_2$
 SFI, which carries no first-order approximation error, also added nothing over
 the competitor set. Measuring the mechanism directly, without reference to the
-label, placed it partly in feature redundancy: the leading canonical correlation
-between the nine SFI columns and the six competitors was $0.996$, against
-$0.289$ for a permuted control, and the two aggregate summaries were
-reconstructible from the competitors at $R^2=0.970$. The region maximum, the
-region spread, and the edge-level columns retained most of their variance
-($R^2<0.25$), so they carry variance the competitors do not, and that variance
-does not predict the label.
+label, placed it partly in feature redundancy: the SFI block is nearly collinear
+with the competitor block in its dominant direction, and the two aggregate
+summaries can be reconstructed from the competitors almost exactly. The account
+is incomplete, though, because the region maximum, the region spread and the
+edge-level columns keep most of their variance. Those columns carry information
+the competitors do not, and it does not predict the label.
 
 Independently of the predictive question, the validity radius
 $\rhoval=\lVert\Delta L\rVert/(\lam_3-\lam_2)$ is a label-free precondition that
@@ -534,12 +540,8 @@ made during this work.
 %% ===================== REFERENCES =====================
 \begingroup\small
 \begin{thebibliography}{99}
-%======================================================================
 \bibitem{fiedler1973} M.~Fiedler. Algebraic connectivity of graphs.
 \emph{Czechoslovak Mathematical Journal}, 23(2):298--305, 1973.
-
-\bibitem{ghosh2006} A.~Ghosh and S.~Boyd. Growing well-connected graphs. In
-\emph{Proc.\ 45th IEEE Conference on Decision and Control (CDC)}, 6605--6611, 2006.
 
 \bibitem{pecora1998} L.~M.~Pecora and T.~L.~Carroll. Master stability functions
 for synchronized coupled systems. \emph{Physical Review Letters},
@@ -552,27 +554,8 @@ small-world systems. \emph{Physical Review Letters}, 89(5):054101, 2002.
 inference and detection of disruptive EEG networks for epileptic seizures.
 \emph{Scientific Reports}, 10:8653, 2020.
 
-\bibitem{weyl1912} H.~Weyl. Das asymptotische Verteilungsgesetz der Eigenwerte
-linearer partieller Differentialgleichungen (mit einer Anwendung auf die Theorie
-der Hohlraumstrahlung). \emph{Mathematische Annalen},
-71(4):441--479, 1912.
-
-\bibitem{daviskahan1970} C.~Davis and W.~M.~Kahan. The rotation of eigenvectors
-by a perturbation.\ III. \emph{SIAM Journal on Numerical Analysis}, 7(1):1--46, 1970.
-
-\bibitem{delong1988} E.~R.~DeLong, D.~M.~DeLong, and D.~L.~Clarke-Pearson.
-Comparing the areas under two or more correlated receiver operating
-characteristic curves: a nonparametric approach. \emph{Biometrics},
-44(3):837--845, 1988.
-
-\bibitem{sunxu2014} X.~Sun and W.~Xu. Fast implementation of DeLong's algorithm
-for comparing the areas under correlated receiver operating characteristic
-curves. \emph{IEEE Signal
-Processing Letters}, 21(11):1389--1393, 2014.
-
-\bibitem{mitchell2003} C.~C.~Mitchell and D.~G.~Schaeffer. A two-current model
-for the dynamics of cardiac membrane. \emph{Bulletin of Mathematical Biology},
-65(5):767--793, 2003.
+\bibitem{ghosh2006} A.~Ghosh and S.~Boyd. Growing well-connected graphs. In
+\emph{Proc.\ 45th IEEE Conference on Decision and Control (CDC)}, 6605--6611, 2006.
 
 \bibitem{roney2022} C.~H.~Roney et al. Predicting atrial fibrillation recurrence
 by combining population data and virtual cohorts of patient-specific left atrial
@@ -586,9 +569,28 @@ learning. \emph{Communications Medicine}, 5(1):421, 2025.
 doi:10.1038/s43856-025-01058-4. PMID 41087542.
 Data: Dryad \code{10.5061/dryad.kkwh70sg0}.
 
+\bibitem{tripodai2024} G.~S.~Collins, K.~G.~M.~Moons, P.~Dhiman et al.
+TRIPOD+AI statement: updated guidance for reporting clinical prediction models
+that use regression or machine learning methods. \emph{BMJ}, 385:e078378, 2024.
+PMID 38626948.
+
 \bibitem{khurram2014} I.~M.~Khurram et al. Magnetic resonance image intensity
 ratio, a normalized measure to enable interpatient comparability of left atrial
 fibrosis. \emph{Heart Rhythm}, 11(1):85--92, 2014.
+
+\bibitem{mitchell2003} C.~C.~Mitchell and D.~G.~Schaeffer. A two-current model
+for the dynamics of cardiac membrane. \emph{Bulletin of Mathematical Biology},
+65(5):767--793, 2003.
+
+\bibitem{delong1988} E.~R.~DeLong, D.~M.~DeLong, and D.~L.~Clarke-Pearson.
+Comparing the areas under two or more correlated receiver operating
+characteristic curves: a nonparametric approach. \emph{Biometrics},
+44(3):837--845, 1988.
+
+\bibitem{sunxu2014} X.~Sun and W.~Xu. Fast implementation of DeLong's algorithm
+for comparing the areas under correlated receiver operating characteristic
+curves. \emph{IEEE Signal
+Processing Letters}, 21(11):1389--1393, 2014.
 
 \bibitem{kumar2012} S.~Kumar et al. Atrial fibrillation inducibility in the
 absence of structural heart disease or clinical atrial fibrillation: critical
@@ -596,15 +598,15 @@ dependence on induction protocol, inducibility definition, and number of
 inductions. \emph{Circulation: Arrhythmia and Electrophysiology}, 5(3):531--536,
 2012. PMID 22528047.
 
-\bibitem{marquardt2018} J.~Marquardt et al. Prognostic value of atrial
-fibrillation inducibility in patients without history of clinical atrial
-fibrillation. \emph{Journal of Atrial Fibrillation}, 11(1):1837, 2018.
-PMID 30455834.
-
 \bibitem{oral2008} H.~Oral et al. Inducibility of paroxysmal atrial fibrillation
 by isoproterenol and its relation to the mode of onset of atrial fibrillation.
 \emph{Journal of Cardiovascular Electrophysiology}, 19(5):466--470, 2008.
 PMID 18266669.
+
+\bibitem{marquardt2018} J.~Marquardt et al. Prognostic value of atrial
+fibrillation inducibility in patients without history of clinical atrial
+fibrillation. \emph{Journal of Atrial Fibrillation}, 11(1):1837, 2018.
+PMID 30455834.
 
 \bibitem{kawai2019} S.~Kawai et al. Predictive value of the induction test with
 atrial burst pacing with regard to long-term recurrence after ablation in
@@ -616,10 +618,13 @@ pacing after catheter ablation associated with reduced clinical recurrence? A
 systematic review and meta-analysis. \emph{Journal of the American Heart
 Association}, 9(14):e015260, 2020. PMID 32654581.
 
-\bibitem{tripodai2024} G.~S.~Collins, K.~G.~M.~Moons, P.~Dhiman et al.
-TRIPOD+AI statement: updated guidance for reporting clinical prediction models
-that use regression or machine learning methods. \emph{BMJ}, 385:e078378, 2024.
-PMID 38626948.
+\bibitem{daviskahan1970} C.~Davis and W.~M.~Kahan. The rotation of eigenvectors
+by a perturbation.\ III. \emph{SIAM Journal on Numerical Analysis}, 7(1):1--46, 1970.
+
+\bibitem{weyl1912} H.~Weyl. Das asymptotische Verteilungsgesetz der Eigenwerte
+linearer partieller Differentialgleichungen (mit einer Anwendung auf die Theorie
+der Hohlraumstrahlung). \emph{Mathematische Annalen},
+71(4):441--479, 1912.
 \end{thebibliography}
 \endgroup
 
@@ -698,9 +703,11 @@ containing zero.}
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.82\linewidth]{fig_rho_scaling.png}
-\caption{The estimator-validity boundary. The spectral gap collapses with mesh
-resolution, so $\rhoval$ grows lawfully and the first-order estimator degrades
-\emph{more}, predictably, as the medium is meshed finer.}
+\caption{The estimator-validity boundary. The spectral gap collapses as the mesh
+is refined, at an exponent within $0.5\%$ of the Weyl 2-manifold value, so
+$\rhoval$ grows and the first-order estimator degrades \emph{more} on a finer
+mesh of the same anatomy. The atrial curve is measured on the weighted
+conduction Laplacian the biomarker itself uses.}
 \label{fig:rho}
 \end{figure}
 
