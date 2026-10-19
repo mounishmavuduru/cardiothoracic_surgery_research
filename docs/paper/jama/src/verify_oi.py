@@ -12,7 +12,9 @@ master = open(MASTER, encoding="utf-8").read()
 # main article only: drop preamble/title page (word counts, phone, ORCID, address)
 # and the bibliography (page/volume numbers, DOIs, PMIDs) -- both are checked
 # separately by eye.
-body = oi.split("%% ===================== KEY POINTS =====================")[1]
+# (the IJC Heart & Vasculature build has no Key Points box and starts at the abstract)
+start = "KEY POINTS" if "%% ===================== KEY POINTS" in oi else "ABSTRACT"
+body = oi.split(f"%% ===================== {start} =====================")[1]
 body = body.split("%% ===================== REFERENCES =====================")[0] + \
     oi.split("%% ===================== FLOATS =====================")[-1]
 body = re.sub(r"(?<!\\)%.*", "", body)

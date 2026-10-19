@@ -1,0 +1,33 @@
+\noindent\textbf{Background.} Algebraic connectivity $\lam_2$ and its closed-form
+per-edge sensitivity govern stability in coupled excitable networks, motivating
+a biomarker of atrial reentry, the Spectral Fragility Index (\SFI). Whether it
+adds information beyond established fibrosis and connectivity features was
+unknown.
+
+\medskip
+\noindent\textbf{Methods.} Under a protocol pre-registered before any label was
+inspected, \SFI\ was added to six competitor features on $182$ patient-derived
+left-atrial meshes from two public cohorts (Roney, $n=100$; University of
+Washington, $n=82$) and up to $100{,}000$ synthetic excitable networks. The
+in-silico outcome was a simulator's reentry-inducibility verdict; a clinical arm
+used two-year post-ablation arrhythmia recurrence in the $82$ Washington
+patients. Models were fitted under patient- and shape-family-held-out
+cross-validation and compared by paired DeLong test. The primary endpoint
+required grouped $\dAUC\geq0.05$ with $p<0.05$.
+
+\medskip
+\noindent\textbf{Results.} The primary endpoint was not met. On the combined
+cohorts ($42$ inducible of $182$), gradient boosting gave $\dAUC=+0.012$
+(bootstrap CI $-0.017$ to $+0.044$; $p=0.449$), an interval that excludes the
+$0.05$ threshold; synthetic-network $\dAUC$ converged to $+0.003$. The clinical
+gate fired ($\dAUC=+0.197$; $p=0.0061$), but the pre-specified plan identified
+an artefact of an anti-predictive baseline (AUC $0.250$) that nine columns of
+Gaussian noise reproduced (empirical $p=0.333$); that endpoint was not met. The
+estimator was ill-conditioned on real tissue (median $\rhoval\approx2422$;
+validity limit $\rhoval^{\ast}\approx3$).
+
+\medskip
+\noindent\textbf{Conclusions.} \SFI\ added no practically meaningful predictive
+value for atrial reentry beyond existing features, and its one nominally
+positive patient-outcome result was a false positive its own pre-registered
+guards caught. These findings do not support clinical use.

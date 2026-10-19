@@ -1771,3 +1771,18 @@ its first run of the day reported the module-import check failing, and the immed
 so that check is flaky rather than broken. `verify_manuscript_numbers.py` 0 UNTRACED. `pytest`
 129 passed. Rebuilt the article, master, Supplement 2 and JAMACardio_manuscript PDFs, and the
 14-member submission zip; each member was hash-checked against the file on disk.
+
+
+## 2026-10-19 --- IJC Heart & Vasculature version
+
+Built `docs/paper/ijchv/` from the verified JAMA article. The main text, tables, figures and
+bibliography come from the JAMA build. A new 236-word abstract under Background/Methods/Results/
+Conclusions reuses only numerals already in the master. The title page, back matter and citation
+style were changed; the rho ranges are now written with dashes so they cannot be read as citation
+numbers. `verify_oi.py` reports 133 distinct numerals, 0 unmatched against the master.
+
+Found during this pass: the TRIPOD+AI checklist (JAMA Supplement 1) contains garbled location stubs
+("cited atis used", "noted at ---", "Clinical endpoint,and 688-692"), a stray header fragment in
+item 3c, and comments written as an internal audit rather than as a submission checklist. That file
+was already in earlier submission packages. It is left out of the IJC package and needs rewriting
+before it is sent anywhere again.

@@ -1,0 +1,7 @@
+Highlights
+
+- A spectral fragility index added no useful prediction of atrial reentry
+- In 182 patient-derived atria the gain was +0.012 AUC, below the pre-registered 0.05 gate
+- A positive clinical result was an artefact that Gaussian noise reproduced
+- The first-order estimator is ill-conditioned on real atrial meshes
+- Removing any single pre-registered guard admitted a specific false positive
